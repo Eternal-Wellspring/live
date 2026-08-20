@@ -1,0 +1,680 @@
+refs
+id	book	ch_start	vs_start	ch_end	vs_end	title	description	source	status	seq	topic_ids
+1	Dan	9	24	9	26	Seventy weeks decreed	Seventy weeks decreed for Israel and Jerusalem; last week is the covenant week.	HFW	Validated		3
+4	Dan	9	27	9	27	Covenant for one week	He confirms a covenant with many for one week; in the middle he ends sacrifice. HFW: 6. Statue and Stone — The Beast and Tribulation; 7. Tribulation and Wrath — The Beast’s Plan	HFW	Validated		4|5|6|7|8
+5	Dan	8	11	8	14	Daily sacrifice taken away	Daily sacrifice runs until the midpoint, when it is taken away.	HFW	Not-Validated		6|7
+6	Dan	11	31	11	31	Forces profane the sanctuary	Forces take away the daily sacrifice and set up the abomination. HFW: 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		6|7|10
+7	Mat	24	15	24	16	Abomination in the holy place	When you see the abomination of desolation standing in the holy place, flee. HFW: 7. Tribulation and Wrath — During Great Tribulation; 10. The Word Conquers — The Messiah Returns	HFW	Not-Validated		7|8|10
+8	Mrk	13	14	13	14	Abomination — Mark	When you see the abomination standing where it ought not, flee to the mountains. HFW: 6. Statue and Stone — Prophecies; 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		7|10
+9	2Th	2	3	2	4	Man of sin in the temple	The day of the Lord is not until the falling away and the man of sin sits as God in the temple. HFW: 10. The Word Conquers	HFW	Not-Validated		7
+10	Mat	24	15	24	22	Great tribulation, shortened	Abomination, flight, unequalled tribulation shortened for the elect. HFW: 10. The Word Conquers	HFW	Not-Validated		7|8|10
+11	Mrk	13	19	13	20	Unequalled tribulation — Mark	Tribulation such as has not been; days shortened for the elect. HFW: 7. Tribulation and Wrath — The Messiah brings an end to great Tribulation	HFW	Not-Validated		8
+12	Mat	24	9	24	14	Hated by all nations	Persecution, falling away, false prophets, gospel preached to nations, then the end. HFW: 7. Tribulation and Wrath — The start and end of the great Tribulation	HFW	Not-Validated		8
+13	Rev	13	1	13	8	Beast authority forty-two months	The beast is given authority forty-two months, blasphemes God, makes war with the saints.	HFW	Not-Validated		8
+14	Rev	13	11	13	18	Second beast and the mark	The second beast enforces worship of the first and the mark.	HFW	Not-Validated		8
+15	Dan	7	21	7	25	Little horn prevails	The little horn prevails against the saints for a time, times and half a time.	HFW	Validated		8
+16	Dan	12	1	12	1	Time of trouble	A time of trouble such as never was; Michael stands up; your people delivered. HFW: 10. The Word Conquers	HFW	Not-Validated		8
+17	Dan	12	7	12	7	Time, times and half a time	It shall be for 3½ years; when the power of the holy people is shattered. HFW: 7. Tribulation and Wrath — Believers who understand	HFW	Not-Validated		8
+18	Dan	12	10	12	10	Many purified	Many shall purify themselves and the wicked shall act wickedly. HFW: 10. The Word Conquers	HFW	Not-Validated		8
+19	Rev	12	6	12	6	Woman flees 1,260 days	The woman flees into the wilderness, where she is nourished 1,260 days. HFW: 7. Tribulation and Wrath — Great Tribulation starts with the abomination of desolation	HFW	Not-Validated		7|8
+20	Rev	12	13	12	17	Dragon wars with the remnant	The dragon persecutes the woman and wars with the rest of her offspring. HFW: 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		8|10
+21	Zec	13	8	13	9	A third refined	Two thirds cut off; a third refined as silver and gold. HFW: 10. The Word Conquers	HFW	Not-Validated		8|10
+22	Rev	7	13	7	17	Out of the great tribulation	These are the ones coming out of the great tribulation; they washed their robes in the blood of the Lamb. HFW: 7. Tribulation and Wrath — Great Tribulation produces Good Fruit	HFW	Not-Validated		8
+23	Rev	8	13	9	21	Woes on the earth	Three woes; a third of mankind killed; the rest did not repent.	HFW	Not-Validated		9
+24	Rev	15	1	15	1	Seven last plagues	Seven angels with seven plagues, which are the last, for with them the wrath of God is finished. HFW: 7. Tribulation and Wrath — God’s Wrath	HFW	Not-Validated		9
+25	Rev	16	1	16	21	Bowls of wrath	The seven bowls of the wrath of God poured out on the earth. HFW: 2. God's Word Creates — Plagues in the Last Days; 5. Son of God and Man — Messiah Judges the Rebellious Wicked; 7. Tribulation and Wrath — God’s Wrath; 10. The Word Conquers — Extra Study – The Word Conquers	HFW	Not-Validated		7|9|13
+26	Rev	14	6	14	11	Eternal gospel and the mark warning	Gospel to the nations; warning not to worship the beast or receive the mark. HFW: 7. Tribulation and Wrath — Before His wrath falls, God calls Everyone to Repent; 8. Gospel of the Kingdom — Further studies; 9. The Word is Worthy — Before the Messiah Returns	HFW	Not-Validated		7|9|10
+27	1Th	5	9	5	9	Not appointed to wrath	God has not destined us for wrath, but to obtain salvation through our Lord Jesus Christ. HFW: 7. Tribulation and Wrath — Judgement by God:	HFW	Not-Validated		9
+28	Jhn	3	36	3	36	Wrath remains	Whoever does not obey the Son shall not see life, but the wrath of God remains on him. HFW: 7. Tribulation and Wrath — Wrath of God:	HFW	Not-Validated		9
+29	Mat	24	14	24	14	Hated by all nations	This gospel of the kingdom will be proclaimed throughout the whole world as a testimony to all nations, and then the end will come. HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		8|9|16
+30	Rev	5	1	5	10	The Lamb is worthy	The Lamb who was slain is worthy to take the scroll and open its seals.	HFW	Validated		11
+31	Mat	24	29	24	31	Immediately after the tribulation	Sun darkened; the Son of Man appears; angels gather the elect. HFW: 8. Gospel of the Kingdom; 9. The Word is Worthy; 10. The Word Conquers	HFW	Not-Validated		8|10|12|13|16
+32	Rev	19	11	19	16	The Word of God rides out	Heaven opened; He judges and makes war; King of kings and Lord of lords. HFW: 1. Before Creation; 2. God's Word Creates; 8. Gospel of the Kingdom; 9. The Word is Worthy; 10. The Word Conquers	HFW	Validated		10|12|16
+33	Act	1	11	1	11	This Jesus will come	This Jesus, who was taken up from you into heaven, will come in the same way as you saw him go. HFW: 5. Son of God and Man — The Messiah Returns to the Earth	HFW	Not-Validated		12
+34	1Th	3	13	3	13	Coming with all his saints	The coming of our Lord Jesus with all his saints. HFW: 10. The Word Conquers	HFW	Not-Validated		12|16
+35	1Th	4	14	4	17	Dead in Christ rise	The dead in Christ will rise first; then we who are alive will be caught up together with them. HFW: 9. The Word is Worthy	HFW	Not-Validated		16|31
+36	Rev	19	6	19	9	Marriage of the Lamb	The marriage of the Lamb has come, and his Bride has made herself ready. HFW: 1. Before Creation; 9. The Word is Worthy	HFW	Not-Validated		10|12|16
+37	Rev	19	19	19	21	Beast and false prophet taken	The beast and the kings of the earth gather; the beast and the false prophet are thrown into the lake of fire. HFW: 9. The Word is Worthy; 10. The Word Conquers; 11. The Kingdom Comes	HFW	Not-Validated		10|11|13|16|20
+38	Rev	16	12	16	16	Kings gathered to Armageddon	Kings of the whole world gathered for battle on the great day of God the Almighty, to Armageddon.	HFW	Not-Validated		13
+39	Zec	14	1	14	5	Feet on the Mount of Olives	The day of the Lord; His feet stand on the Mount of Olives; the Lord my God will come, and all the holy ones with him. HFW: 7. Tribulation and Wrath — Great Tribulation starts with the abomination of desolation; 11. The Kingdom Comes — What happens during the 1,000 years	HFW	Not-Validated		7|8|10|16
+40	Jol	3	1	3	2	Valley of Jehoshaphat	I will gather all the nations and bring them down to the Valley of Jehoshaphat. HFW: 8. Gospel of the Kingdom; 10. The Word Conquers	HFW	Not-Validated		9|13|16
+41	Ezk	38	16	38	16	Gog against my people	Gog comes up against my people Israel, so that the nations may know me. HFW: 7. Tribulation and Wrath — During Wrath	HFW	Not-Validated		9|13
+42	Ezk	39	1	39	8	Gog falls on the mountains	I will strike the bow from your left hand; you shall fall on the mountains of Israel. HFW: 10. The Word Conquers	HFW	Not-Validated		13|16
+43	Ezk	39	11	39	13	Burial of Gog	A place for burial in Israel; the house of Israel will bury them, to cleanse the land. HFW: 10. The Word Conquers	HFW	Not-Validated		13|16|19
+44	Jer	23	3	23	8	I will gather the remnant	I will gather the remnant of my flock out of all the countries; they shall dwell in their own land.	HFW	Not-Validated		14
+45	Isa	11	11	11	12	Second time the remnant	The Lord will extend his hand a second time to recover the remnant; he will assemble the banished of Israel. HFW: 11. The Kingdom Comes	HFW	Not-Validated		14|16|18
+46	Jer	31	31	31	34	New covenant with Israel	I will make a new covenant with the house of Israel and the house of Judah; I will write it on their hearts. HFW: 11. The Kingdom Comes	HFW	Not-Validated		14|15|18
+47	Rev	20	1	20	6	Satan bound; saints reign	Satan bound a thousand years; those who share the first resurrection reign with Christ.	HFW	Not-Validated		17
+48	Dan	7	13	7	14	Dominion given to the Son of Man	One like a son of man; to him was given dominion and a kingdom that shall not be destroyed. HFW: 9. The Word is Worthy; 10. The Word Conquers	HFW	Not-Validated		11|16
+49	Dan	7	26	7	27	Kingdom to the saints	The court sits; the kingdom and the dominion shall be given to the people of the saints of the Most High. HFW: 9. The Word is Worthy; 10. The Word Conquers; 11. The Kingdom Comes; 12. Eternal Kingdom	HFW	Not-Validated		8|10|16|17
+50	Rev	5	9	5	10	A kingdom and priests	You have made them a kingdom and priests to our God, and they shall reign on the earth. HFW: 8. Gospel of the Kingdom; 9. The Word is Worthy; 11. The Kingdom Comes	HFW	Validated		11|15|16|17|24
+51	Mat	19	28	19	28	Twelve thrones	In the new world, when the Son of Man sits on his glorious throne, you will sit on twelve thrones judging the twelve tribes of Israel. HFW: 8. Gospel of the Kingdom; 9. The Word is Worthy	HFW	Not-Validated		16|17|24
+52	Luk	22	28	22	30	Eat and drink at my table	I assign to you a kingdom; you will sit on thrones judging the twelve tribes of Israel. HFW: 11. The Kingdom Comes	HFW	Not-Validated		15|17
+53	Ezk	36	24	36	28	Gathered and given a new heart	I will take you from the nations; I will sprinkle clean water; a new heart and a new spirit. HFW: 10. The Word Conquers; 11. The Kingdom Comes	HFW	Not-Validated		14|15|16|18
+54	Ezk	36	33	36	36	The land rebuilt	On the day I cleanse you, I will cause the cities to be inhabited and the waste places rebuilt. HFW: 11. The Kingdom Comes	HFW	Not-Validated		16|18
+55	Ezk	37	12	37	14	I will open your graves	I will bring you into the land of Israel and put my Spirit within you, and you shall live.	HFW	Not-Validated		18
+56	Ezk	37	24	37	28	David my servant	My servant David shall be king over them; I will make a covenant of peace, an everlasting covenant. HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		10|16|18
+57	Deu	30	1	30	5	Return and gather	The Lord your God will restore your fortunes and gather you again from all the peoples. HFW: 11. The Kingdom Comes	HFW	Not-Validated		14|15|18
+58	Hos	1	10	1	11	Judah and Israel together	The children of Judah and the children of Israel shall be gathered together and appoint one head. HFW: 11. The Kingdom Comes	HFW	Not-Validated		14|15|18
+59	Rom	11	25	11	27	All Israel will be saved	A partial hardening has come upon Israel, until the fullness of the Gentiles; the Deliverer will come from Zion. HFW: 9. The Word is Worthy; 11. The Kingdom Comes	HFW	Not-Validated		11|15|18
+60	Isa	2	2	2	4	Nations stream to the mountain	The mountain of the house of the Lord; they shall beat swords into ploughshares. HFW: 8. Gospel of the Kingdom; 9. The Word is Worthy; 10. The Word Conquers; 11. The Kingdom Comes; 12. Eternal Kingdom	HFW	Not-Validated		16|18|19|24
+61	Mic	4	1	4	4	Each under his vine	Many nations come to the mountain of the Lord; nation shall not lift up sword against nation. HFW: 11. The Kingdom Comes	HFW	Not-Validated		16|19
+62	Zec	14	16	14	19	Tabernacles year by year	The nations that are left go up year after year to keep the Feast of Booths.	HFW	Not-Validated		19
+63	Isa	11	6	11	9	The wolf with the lamb	The earth shall be full of the knowledge of the Lord as the waters cover the sea. HFW: 8. Gospel of the Kingdom; 11. The Kingdom Comes	HFW	Not-Validated		16|19|24
+64	Isa	9	6	9	7	Of the increase of his government	The government shall be upon his shoulder; of the increase of his government and of peace there will be no end. HFW: 2. God's Word Creates; 4. Yahweh's 10 Words; 8. Gospel of the Kingdom; 11. The Kingdom Comes	HFW	Not-Validated		16|19|24|27
+65	Psa	72	1	72	20	The king's son	May he have dominion from sea to sea; all nations serve him; the prayers of David are ended.	HFW	Not-Validated		19
+66	Rev	20	7	20	10	Satan released	After the thousand years Satan is released, deceives the nations, and is thrown into the lake of fire.	HFW	Not-Validated		20
+67	Rev	20	11	20	15	Great white throne	Great white throne; dead judged from the books; anyone not found in the book of life is thrown into the lake of fire. HFW: 2. God's Word Creates; 11. The Kingdom Comes	HFW	Not-Validated		16|21|22
+68	Mat	13	47	13	50	The net at the end of the age	The net gathers fish of every kind; at the end of the age the angels separate the evil from the righteous. HFW: 11. The Kingdom Comes	HFW	Not-Validated		21|22
+69	Mat	25	31	25	34	Nations separated	When the Son of Man comes in his glory he will separate the nations; come, you who are blessed, inherit the kingdom.	HFW	Not-Validated		22
+70	1Co	15	23	15	28	Kingdom delivered to the Father	Then the end: he puts down all rule; last enemy death; the kingdom delivered to the Father.	HFW	Not-Validated		23
+71	Rev	21	1	21	4	New heaven and new earth	First heaven and earth passed away; he will dwell with them; death shall be no more. HFW: 8. Gospel of the Kingdom — When does Yahweh’s kingdom come?; 10. The Word Conquers — Eternity – God dwells with mankind on earth; 11. The Kingdom Comes — Following the Judgement; 12. Eternal Kingdom	HFW	Not-Validated		25|26
+72	2Pe	3	10	3	13	We wait for new heavens	The day of the Lord; we wait for new heavens and a new earth in which righteousness dwells.	HFW	Not-Validated		25
+73	Isa	65	17	65	19	I create new heavens	I create new heavens and a new earth; the former things shall not be remembered. HFW: 11. The Kingdom Comes; 12. Eternal Kingdom	HFW	Not-Validated		25|27
+74	Isa	66	22	66	23	The new heavens remain	The new heavens and the new earth that I make shall remain before me; all flesh shall come to worship.	HFW	Not-Validated		25
+75	Rev	21	22	21	24	No temple in the city	Its temple is the Lord God and the Lamb; the nations walk by its light. HFW: 12. Eternal Kingdom	HFW	Not-Validated		26|27
+76	Rev	21	2	21	5	The dwelling place of God	Holy city coming down; the dwelling place of God is with man; he is making all things new. HFW: 2. God's Word Creates; 11. The Kingdom Comes	HFW	Not-Validated		16|24|26
+77	Rev	22	3	22	5	They will see his face	No more curse; they will see his face; they will reign forever and ever. HFW: 2. God's Word Creates; 8. Gospel of the Kingdom; 10. The Word Conquers; 12. Eternal Kingdom	HFW	Not-Validated		16|24|25|27
+78	Rev	21	27	21	27	Only those in the book	Nothing unclean will ever enter, but only those who are written in the Lamb's book of life. HFW: 8. Gospel of the Kingdom; 12. Eternal Kingdom	HFW	Not-Validated		16|23|27
+79	Rev	2	7	2	7	The tree of life	To the one who conquers I will grant to eat of the tree of life, which is in the paradise of God. HFW: 2. God's Word Creates; 10. The Word Conquers; 12. Eternal Kingdom	HFW	Not-Validated		24|25|27
+80	Ezk	37	12	37	14	The valley of dry bones come to life	Yahweh brings His own people from their grave into the land of Israel. HFW: 9. The Word is Worthy	HFW	Validated	10	16|30
+81	2Th	2	8	2	8	2Th  2:8	HFW: 6. Statue and Stone — The final King	HFW	Not-Validated		5
+82	Dan	11	21	11	21	Dan  11:21	HFW: 6. Statue and Stone — The final King	HFW	Not-Validated		5
+83	Dan	8	23	8	23	Dan  8:23	HFW: 6. Statue and Stone — The final King; 7. Tribulation and Wrath — Characteristics:	HFW	Not-Validated		5
+84	1Jn	2	18	2	18	1Jn  2:18	HFW: 6. Statue and Stone — The final King; 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		5|10
+85	Dan	8	21	8	22	Dan 8:21-22	HFW: 6. Statue and Stone — The meaning of Horns	HFW	Not-Validated		32
+86	Luk	1	35	1	35	Luk  1:35	HFW: 9. The Word is Worthy — Timing	HFW	Not-Validated		32
+87	Mat	25	34	25	34	Mat  25:34	HFW: 8. Gospel of the Kingdom — God’s Presence manifested in the Flesh	HFW	Not-Validated		10
+88	1Ti	6	14	6	16	1Ti 6:14-16	HFW: 5. Son of God and Man — Son of Man: Ascension	HFW	Not-Validated		10
+89	1Jn	3	8	3	8	1Jn  3:8	HFW: 5. Son of God and Man — Son of God and Son of Man – Background	HFW	Not-Validated		32
+90	Gal	4	4	4	5	Gal 4:4-5	HFW: 5. Son of God and Man — Son of God and Son of Man – Background	HFW	Not-Validated		32
+91	2Pe	1	4	1	4	2Pe  1:4	HFW: 5. Son of God and Man — Yet to be Finished	HFW	Not-Validated		10
+92	2Ch	31	10	31	10	2Ch 31:10	HFW: 11. The Kingdom Comes	HFW	Not-Validated		16
+93	Rom	5	3	5	5	Rom 5:3-5	HFW: 7. Tribulation and Wrath — Great Tribulation produces Good Fruit	HFW	Not-Validated		8
+94	Jas	1	2	1	4	Jas 1:2-4	HFW: 7. Tribulation and Wrath — Great Tribulation produces Good Fruit	HFW	Not-Validated		8
+95	Rev	19	20	19	20	Rev  19:20	HFW: 7. Tribulation and Wrath — Before His wrath falls, God calls Everyone to Repent	HFW	Not-Validated		7|9
+96	Heb	10	23	10	25	Heb 10:23-25	HFW: 7. Tribulation and Wrath — Take Heart – Remember these truths	HFW	Not-Validated		32
+97	Act	14	22	14	22	Act  14:22	HFW: 7. Tribulation and Wrath — Take Heart – Remember these truths	HFW	Not-Validated		32
+98	Luk	12	40	12	48	Luk 12:40-48	HFW: 7. Tribulation and Wrath — Judgement by God:	HFW	Not-Validated		32
+99	Psa	72	1	72	30	Psa 72	HFW: 11. The Kingdom Comes	HFW	Not-Validated		16
+100	Jhn	3	17	3	17	Jhn  3:17	HFW: 7. Tribulation and Wrath — Before His wrath falls, God calls Everyone to Repent	HFW	Not-Validated		9
+101	Psa	83	15	83	18	Psa 83:15-18	HFW: 7. Tribulation and Wrath — God’s Wrath	HFW	Not-Validated		9
+102	Isa	45	4	45	7	Isa 45:4-7	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+103	Exo	8	8	8	10	Exo 8:8-10	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+104	Exo	10	1	10	2	Exo 10:1-2	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+105	Dan	7	21	7	22	Dan 7:21-22	HFW: 7. Tribulation and Wrath — The Great Tribulation – Summary	HFW	Not-Validated		8
+106	Rev	13	5	13	7	Rev 13:5-7	HFW: 7. Tribulation and Wrath — 3½ years of the greatest Tribulation	HFW	Not-Validated		8
+107	Rev	12	14	12	14	Rev  12:14	HFW: 7. Tribulation and Wrath — Great Tribulation starts with the abomination of desolation	HFW	Not-Validated		7|8
+108	Isa	63	1	63	4	Isa 63:1-4	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+109	Mic	2	12	2	12	Mic  2:12	HFW: 7. Tribulation and Wrath — Great Tribulation starts with the abomination of desolation	HFW	Not-Validated		7|8
+110	2Pe	3	17	3	18	2Pe 3:17-18	HFW: 7. Tribulation and Wrath — The start and end of the great Tribulation	HFW	Not-Validated		8
+111	Luk	12	45	12	46	Luk 12:45-46	HFW: 7. Tribulation and Wrath — Wrath of God:	HFW	Not-Validated		9
+112	Rev	14	9	14	10	Rev 14:9-10	HFW: 7. Tribulation and Wrath — Wrath of God:; 10. The Word Conquers — Extra Study – The Word Conquers	HFW	Not-Validated		9
+113	1Pe	4	17	4	19	1Pe 4:17-19	HFW: 7. Tribulation and Wrath — Judgement by God:	HFW	Not-Validated		32
+114	Isa	59	14	59	19	Isa 59:14-19	HFW: 7. Tribulation and Wrath — After Great Tribulation & Wrath; 10. The Word Conquers — Messiah’s 1st Coming	HFW	Not-Validated		8|10
+115	Dan	12	9	12	13	Dan 12:9-13	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		6|7
+116	Isa	24	21	24	23	Isa 24:21-23	HFW: 11. The Kingdom Comes; 12. Eternal Kingdom	HFW	Not-Validated		14
+117	Exo	7	1	7	5	Exo 7:1-5	HFW: 2. God's Word Creates — Darkness, the 9th plague in Egypt	HFW	Not-Validated		32
+118	Exo	7	4	7	5	Exo 7:4-5	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+119	Exo	7	5	7	5	Exo  7:5	HFW: 7. Tribulation and Wrath — God’s Wrath	HFW	Not-Validated		9
+120	Rev	21	23	21	24	Rev 21:23-24	HFW: 2. God's Word Creates	HFW	Not-Validated		24|26
+121	Mal	3	2	3	4	Mal 3:2-4	HFW: 7. Tribulation and Wrath — Tribulation:	HFW	Not-Validated		32
+122	Isa	48	10	48	10	Isa  48:10	HFW: 7. Tribulation and Wrath — Tribulation:	HFW	Not-Validated		32
+123	Ezk	36	33	36	35	Ezk 36:33-35	HFW: 5. Son of God and Man — Messiah Reigns on earth over Israel; 11. The Kingdom Comes — The Kingdom of God extends over the nations; 12. Eternal Kingdom — The Garden of Eden is also compared to the Kingdom of God	HFW	Not-Validated		18|19
+124	Lev	26	5	26	6	Lev 26:5-6	HFW: 12. Eternal Kingdom — Peace and Safety in the Promised Land and Kingdom of God	HFW	Not-Validated		16
+125	Deu	11	11	11	15	Deu 11:11-15	HFW: 12. Eternal Kingdom	HFW	Not-Validated		25
+126	Lev	20	24	20	24	Lev  20:24	HFW: 12. Eternal Kingdom	HFW	Not-Validated		16|25
+127	Gal	5	1	5	1	Gal  5:1	HFW: 12. Eternal Kingdom — Fruitfulness in the Promised Land and the Kingdom of God	HFW	Not-Validated		16
+128	Mat	5	18	5	18	Mat 5:18	HFW: 2. God's Word Creates; 4. Yahweh's 10 Words; 12. Eternal Kingdom	HFW	Not-Validated		16|24|25
+129	Deu	28	11	28	13	Deu 28:11-13	HFW: 2. God's Word Creates; 12. Eternal Kingdom	HFW	Not-Validated		16
+130	Psa	2	6	2	6	Psa  2:6	HFW: 1. Before Creation; 4. Yahweh's 10 Words; 8. Gospel of the Kingdom; 11. The Kingdom Comes	HFW	Not-Validated		10|14|16|23
+131	Mal	3	6	3	7	Mal 3:6-7	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+132	Php	3	20	3	21	Php 3:20-21	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+133	Php	3	18	3	21	Php 3:18-21	HFW: 11. The Kingdom Comes	HFW	Not-Validated		16
+134	Jer	30	7	30	9	Jer 30:7-9	HFW: 10. The Word Conquers	HFW	Not-Validated		8|10
+135	Exo	19	16	19	18	Exo 19:16-18	HFW: 4. Yahweh's 10 Words — The 10 Words / Commandments; 8. Gospel of the Kingdom — God’s Presence in the Tabernacle	HFW	Not-Validated		32
+136	Exo	19	10	19	12	Exo 19:10-12	HFW: 4. Yahweh's 10 Words — The 10 Words / Commandments	HFW	Not-Validated		32
+137	Deu	28	45	28	45	Deu  28:45	HFW: 4. Yahweh's 10 Words — The 10 Words / Commandments	HFW	Not-Validated		32
+138	Deu	28	9	28	10	Deu 28:9-10	HFW: 2. God's Word Creates; 4. Yahweh's 10 Words	HFW	Not-Validated		16
+139	Eph	2	8	2	10	Eph 2:8-10	HFW: 3. Mankind Rebels — Actions:	HFW	Not-Validated		32
+140	Rom	10	9	10	10	Rom 10:9-10	HFW: 3. Mankind Rebels — Actions:	HFW	Not-Validated		32
+141	Exo	19	3	19	6	Exo 19:3-6	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		16
+142	Rom	9	22	9	22	Rom  9:22	HFW: 11. The Kingdom Comes — The great White Throne Judgement	HFW	Not-Validated		21
+143	Php	3	18	3	19	Php 3:18-19	HFW: 11. The Kingdom Comes	HFW	Not-Validated		21
+144	Rom	5	1	5	5	Rom 5:1-5	HFW: 1. Before Creation — The Work of Christ, the Messiah, is Finished; 3. Mankind Rebels — Beliefs; 7. Tribulation and Wrath — Tribulation:; 8. Gospel of the Kingdom — Yesterday’s Good News; 9. The Word is Worthy — Why the Word alone is worthy	HFW	Not-Validated		32
+145	Rom	5	19	5	19	Rom  5:19	HFW: 3. Mankind Rebels — Beliefs; 9. The Word is Worthy — Why the Word alone is worthy	HFW	Not-Validated		32
+146	Isa	59	1	59	2	Isa 59:1-2	HFW: 5. Son of God and Man — Son of Man: Intercession; 7. Tribulation and Wrath — After Great Tribulation & Wrath; 9. The Word is Worthy — Remember the former things of old; 10. The Word Conquers — Messiah’s 1st Coming	HFW	Not-Validated		8|10
+147	Luk	4	5	4	6	Luk 4:5-6	HFW: 10. The Word Conquers	HFW	Not-Validated		16
+148	Eph	2	1	2	7	Eph 2:1-7	HFW: 10. The Word Conquers	HFW	Not-Validated		16
+149	Col	2	15	2	15	Col 2:15	HFW: 10. The Word Conquers	HFW	Not-Validated		12
+150	Eph	1	9	1	10	Eph 1:9-10	HFW: 10. The Word Conquers — The Word of God’s Mission	HFW	Not-Validated		10
+151	Eph	6	11	6	12	Eph 6:11-12	HFW: 10. The Word Conquers	HFW	Not-Validated		12
+152	Mat	5	16	5	16	Mat  5:16	HFW: 2. God's Word Creates — God is Light:	HFW	Not-Validated		32
+153	Ezk	11	23	11	23	Ezk  11:23	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+154	Isa	66	18	66	18	Isa  66:18	HFW: 1. Before Creation	HFW	Not-Validated		16
+155	Rom	5	10	5	10	Rom  5:10	HFW: 1. Before Creation — The Work of Christ, the Messiah, is Finished	HFW	Not-Validated		32
+156	Luk	1	31	1	33	Luk 1:31-33	HFW: 8. Gospel of the Kingdom — Yesterday’s Good News; 9. The Word is Worthy — Timing	HFW	Not-Validated		32
+157	Mat	24	36	24	39	Mat 24:36-39	HFW: 9. The Word is Worthy — Timing	HFW	Not-Validated		32
+158	Rom	8	28	8	30	Rom 8:28-30	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+159	2Pe	3	5	3	5	2Pe  3:5	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+160	Luk	4	17	4	21	Luk 4:17-21	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+161	Isa	61	2	61	2	Isa  61:2	HFW: 5. Son of God and Man — Son of God and Son of Man – Background	HFW	Not-Validated		13
+162	Mat	26	53	26	54	Mat 26:53-54	HFW: 9. The Word is Worthy — The Cross	HFW	Not-Validated		32
+163	Luk	22	42	22	42	Luk  22:42	HFW: 9. The Word is Worthy — The Cross	HFW	Not-Validated		32
+164	Eph	1	3	1	10	Eph 1:3-10	HFW: 1. Before Creation — The Work of Christ, the Messiah, is Finished; 9. The Word is Worthy — Remember the former things of old	HFW	Not-Validated		32
+165	Isa	46	9	46	10	Isa 46:9-10	HFW: 1. Before Creation — God’s Objective; 9. The Word is Worthy — Remember the former things of old	HFW	Not-Validated		32
+166	Psa	47	2	47	8	Psa 47:2-8	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		24
+167	Psa	89	14	89	16	Psa 89:14-16	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		24
+168	Amo	9	13	9	13	Amo  9:13	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		16|24
+169	1Co	15	3	15	4	1Co 15:3-4	HFW: 8. Gospel of the Kingdom — Yesterday’s Good News	HFW	Not-Validated		32
+170	Rom	5	8	5	11	Rom 5:8-11	HFW: 8. Gospel of the Kingdom — Yesterday’s Good News	HFW	Not-Validated		32
+171	Act	2	24	2	24	Act  2:24	HFW: 8. Gospel of the Kingdom — Yesterday’s Good News	HFW	Not-Validated		32
+172	2Sa	7	12	7	16	2Sa 7:12-16	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		27
+173	Psa	110	5	110	6	Psa 110:5-6	HFW: 5. Son of God and Man — Son of Man: Ascension	HFW	Not-Validated		32
+174	Psa	110	1	110	1	Psa  110:1	HFW: 5. Son of God and Man — Son of Man: Ascension	HFW	Not-Validated		32
+175	Psa	17	7	17	7	Psa  17:7	HFW: 5. Son of God and Man — Son of Man: Ascension	HFW	Not-Validated		32
+176	Mat	24	21	24	21	Mat  24:21	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		8
+177	Mat	24	15	24	20	Mat 24:15-20	HFW: 7. Tribulation and Wrath — During Great Tribulation; 10. The Word Conquers — The Messiah Returns	HFW	Not-Validated		7|8|10
+178	Lev	19	19	19	19	Lev  19:19	HFW: 6. Statue and Stone — Is Rome the fourth Gentile Kingdom?	HFW	Not-Validated		32
+179	Isa	65	20	65	23	Isa 65:20-23	HFW: 6. Statue and Stone — The Stone that breaks all 4 kingdoms; 11. The Kingdom Comes — The Messiah’s reign begins in Israel	HFW	Not-Validated		10|18
+180	Psa	72	7	72	11	Psa 72:7-11	HFW: 6. Statue and Stone — The Stone that breaks all 4 kingdoms	HFW	Not-Validated		10
+181	Dan	2	34	2	35	Dan 2:34-35	HFW: 10. The Word Conquers	HFW	Not-Validated		8
+182	Rev	13	4	13	7	Rev 13:4-7	HFW: 6. Statue and Stone — The Beast and Tribulation; 7. Tribulation and Wrath — In the dreadful day of Yahweh,	HFW	Not-Validated		8
+183	Rev	13	8	13	8	Rev  13:8	HFW: 6. Statue and Stone — Is Rome the fourth Gentile Kingdom?	HFW	Not-Validated		32
+184	Dan	7	19	7	20	Dan 7:19-20	HFW: 7. Tribulation and Wrath — Be Prepared	HFW	Not-Validated		32
+185	Dan	7	6	7	6	Dan  7:6	HFW: 6. Statue and Stone — Why was Medo-Persia Destroyed?	HFW	Not-Validated		32
+186	Dan	11	2	11	3	Dan 11:2-3	HFW: 6. Statue and Stone — Why was Medo-Persia Destroyed?	HFW	Not-Validated		32
+187	Dan	10	13	10	20	Dan 10:13-20	HFW: 6. Statue and Stone — The Medo-Persian and Greek Kingdoms	HFW	Not-Validated		32
+188	Dan	10	11	10	20	Dan 10:11-20	HFW: 6. Statue and Stone — Why was Medo-Persia Destroyed?	HFW	Not-Validated		32
+189	Dan	8	2	8	4	Dan 8:2-4	HFW: 6. Statue and Stone — Statue: Silver Upper-body; 7. Tribulation and Wrath — Characteristics:	HFW	Not-Validated		32
+190	Isa	45	13	45	13	Isa  45:13	HFW: 6. Statue and Stone — Purpose:	HFW	Not-Validated		32
+191	Ezr	1	1	1	2	Ezr 1:1-2	HFW: 6. Statue and Stone — Statue: Silver Upper-body	HFW	Not-Validated		32
+192	Isa	45	1	45	6	Isa 45:1-6	HFW: 6. Statue and Stone — Why did Babylon fall?	HFW	Not-Validated		32
+193	Dan	5	23	5	31	Dan 5:23-31	HFW: 6. Statue and Stone — The Medo-Persian and Greek Kingdoms	HFW	Not-Validated		32
+194	Dan	4	37	4	37	Dan  4:37	HFW: 6. Statue and Stone — Statue: Gold Head	HFW	Not-Validated		32
+195	Dan	4	30	4	32	Dan 4:30-32	HFW: 6. Statue and Stone — The Eagle’s Wings are plucked	HFW	Not-Validated		32
+196	Jer	27	6	27	6	Jer  27:6	HFW: 6. Statue and Stone — Statue: Gold Head	HFW	Not-Validated		32
+197	Jer	32	27	32	35	Jer 32:27-35	HFW: 6. Statue and Stone — Purpose:	HFW	Not-Validated		32
+198	Dan	10	20	10	20	Dan  10:20	HFW: 6. Statue and Stone — Daniel Interprets the Dream	HFW	Not-Validated		32
+199	1Pe	5	8	5	9	1Pe 5:8-9	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+200	Neh	2	1	2	6	Neh 2:1-6	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+201	Dan	7	1	7	7	Dan 7:1-7	HFW: 5. Son of God and Man — Messiah Judges the Rebellious Wicked; 7. Tribulation and Wrath — Be Prepared; 9. The Word is Worthy — Then the Messiah Returns and Reigns; 10. The Word Conquers — The Word of God’s Mission	HFW	Not-Validated		11|13
+202	Dan	7	7	7	7	Dan  7:7	HFW: 6. Statue and Stone — The Statue – Four Gentile Kingdoms; 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		10
+203	Zec	12	9	12	10	Zec 12:9-10	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+204	Isa	11	10	11	11	Isa 11:10-11	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+205	Jer	29	10	29	14	Jer 29:10-14	HFW: 4. Yahweh's 10 Words; 8. Gospel of the Kingdom	HFW	Not-Validated		7
+206	Dan	7	4	7	4	Dan  7:4	HFW: 6. Statue and Stone — The Beast: A Lion with Eagle’s wings	HFW	Not-Validated		32
+207	Jer	42	11	42	12	Jer 42:11-12	HFW: 6. Statue and Stone — Purpose:	HFW	Not-Validated		32
+208	Dan	9	1	9	30	Dan 9 prayer	HFW: 6. Statue and Stone — Why was Medo-Persia Destroyed?	HFW	Not-Validated		32
+209	Dan	2	44	2	45	Dan 2:44-45	HFW: 6. Statue and Stone — The Stone that breaks all 4 kingdoms	HFW	Not-Validated		10
+210	Dan	2	36	2	40	Dan 2:36-40	HFW: 6. Statue and Stone — Daniel Interprets the Dream	HFW	Not-Validated		10
+211	Dan	2	37	2	38	Dan 2:37-38	HFW: 6. Statue and Stone — Statue: Gold Head	HFW	Not-Validated		10
+212	Dan	2	35	2	35	Dan  2:35	HFW: 6. Statue and Stone — The Fourth Kingdom is not named	HFW	Not-Validated		32
+213	Dan	2	32	2	35	Dan 2:32-35	HFW: 6. Statue and Stone — The Dream	HFW	Not-Validated		32
+214	Hab	2	14	2	14	Hab 2:14	HFW: 5. Son of God and Man — Messiah Reigns on earth over Gentile Nations	HFW	Not-Validated		19
+215	Mat	26	59	26	60	Mat 26:59-60	HFW: 5. Son of God and Man — The Son of God and Man: the Cross	HFW	Not-Validated		32
+216	1Ti	2	5	2	6	1Ti 2:5-6	HFW: 5. Son of God and Man — Son of Man: Intercession	HFW	Not-Validated		32
+217	2Ch	36	19	36	21	2Ch 36:19-21	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+218	Ezk	5	5	5	9	Ezk 5:5-9	HFW: 6. Statue and Stone — Purpose:	HFW	Not-Validated		7
+219	Gen	1	1	1	5	Gen 1:1-5	HFW: 2. God's Word Creates — God is Light:; 12. Eternal Kingdom — I am the Alpha and the Omega	HFW	Not-Validated		24
+220	Gen	1	1	1	4	Gen 1:1-4	HFW: 2. God's Word Creates — The Restored Garden of Eden; 12. Eternal Kingdom — I am the Alpha and the Omega	HFW	Not-Validated		24
+221	Psa	27	1	27	1	Psa  27:1	HFW: 2. God's Word Creates — God is Light:; 7. Tribulation and Wrath — However, Jesus warns believers:	HFW	Not-Validated		32
+222	Isa	60	19	60	20	Isa 60:19-20	HFW: 2. God's Word Creates — God is Light:; 12. Eternal Kingdom — New Heaven and New Earth	HFW	Not-Validated		25
+223	Rev	22	5	22	5	Rev  22:5	HFW: 2. God's Word Creates	HFW	Not-Validated		24|27
+224	Isa	9	2	9	2	Isa  9:2	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+225	Jhn	1	4	1	5	Jhn 1:4-5	HFW: 2. God's Word Creates — God is Light:	HFW	Not-Validated		32
+226	Jhn	12	46	12	46	Jhn  12:46	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+227	Isa	60	1	60	3	Isa 60:1-3	HFW: 2. God's Word Creates — God is Light:; 12. Eternal Kingdom — New Heaven and New Earth	HFW	Not-Validated		25
+228	Jhn	3	19	3	19	Jhn  3:19	HFW: 2. God's Word Creates — Light and Darkness – Patterns in Yahweh’s Word	HFW	Not-Validated		32
+229	1Co	2	10	2	12	1Co 2:10-12	HFW: 5. Son of God and Man — The Holy Spirit dwells in believers	HFW	Not-Validated		32
+230	Rom	8	26	8	27	Rom 8:26-27	HFW: 5. Son of God and Man — Son of Man: Intercession	HFW	Not-Validated		32
+231	Eph	1	13	1	14	Eph 1:13-14	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+232	Jhn	16	7	16	14	Jhn 16:7-14	HFW: 5. Son of God and Man — The Holy Spirit dwells in believers; 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+233	1Ki	8	30	8	30	1Ki 8:30	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+234	Ezk	8	6	8	6	Eze  8:6	HFW: 8. Gospel of the Kingdom HFW: 4. Yahweh's 10 Words	HFW	Not-Validated		7
+235	Ezk	10	18	10	18	Eze  10:18	HFW: 4. Yahweh's 10 Words — Israel’s history of rebellion; 5. Son of God and Man — The Presence of Yahweh; 8. Gospel of the Kingdom — The Presence of Yahweh left the earth	HFW	Not-Validated		32
+236	2Ch	1	4	1	4	2Ch  1:4	HFW: 8. Gospel of the Kingdom — God’s Presence in the Tabernacle	HFW	Not-Validated		32
+237	1Ch	17	5	17	5	1Ch  17:5	HFW: 8. Gospel of the Kingdom — God’s Presence in the Tabernacle	HFW	Not-Validated		32
+238	Jhn	8	43	8	44	Jhn 8:43-44	HFW: 8. Gospel of the Kingdom — Who is ruling today, before Yahweh returns?	HFW	Not-Validated		32
+239	Mat	6	31	6	33	Mat 6:31-33	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		24
+240	Jhn	14	16	14	17	Jhn 14:16-17,26	HFW: 8. Gospel of the Kingdom — God’s Presence manifested in the Flesh	HFW	Not-Validated		32
+241	Rev	12	9	12	9	Rev 12:9, 17	HFW: 8. Gospel of the Kingdom — Who is ruling today, before Yahweh returns?	HFW	Not-Validated		32
+242	Lev	9	23	9	24	Lev 9:23-24	HFW: 4. Yahweh's 10 Words — Yahweh’s presence descended on Mt Sinai	HFW	Not-Validated		32
+243	Exo	19	5	19	5	Exo 19:5, 18, 24:7	HFW: 4. Yahweh's 10 Words HFW: 3. Mankind Rebels; 4. Yahweh's 10 Words	HFW	Not-Validated		16
+244	Gen	46	26	46	27	Gen 46:26-27	HFW: 3. Mankind Rebels — Egypt	HFW	Not-Validated		32
+245	Isa	48	3	48	3	Isa  48:3	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+246	Act	15	18	15	18	Act  15:18	HFW: 1. Before Creation	HFW	Not-Validated		24
+247	Exo	12	37	12	37	Exo  12:37	HFW: 3. Mankind Rebels — Egypt	HFW	Not-Validated		32
+248	Psa	118	17	118	18	Psa 118:18-17	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+249	Luk	20	34	20	38	Luk 20:34-38	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+250	Nam	1	2	1	3	Nah 1:2-3	HFW: 7. Tribulation and Wrath — God’s Wrath	HFW	Not-Validated		9
+251	Rev	9	18	9	21	Rev 9:18-21	HFW: 7. Tribulation and Wrath — God’s Wrath	HFW	Not-Validated		9
+252	Rev	9	13	9	21	Rev 9:13-21	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+253	Deu	28	15	28	15	Deu  28:15	HFW: 4. Yahweh's 10 Words — Yahweh’s presence descended on Mt Sinai	HFW	Not-Validated		32
+254	Deu	28	1	28	2	Deu 28:1-2	HFW: 2. God's Word Creates — The Kingdom of God is finally Established on Earth; 4. Yahweh's 10 Words — The 10 Words / Commandments; 7. Tribulation and Wrath — Great Tribulation produces Good Fruit; 12. Eternal Kingdom — The Earth is Regenerated	HFW	Not-Validated		8|25
+255	Ecc	12	7	12	7	Ecc  12:7	HFW: 2. God's Word Creates — The serpent deceived mankind	HFW	Not-Validated		32
+256	Gen	2	9	2	9	Gen  2:9	HFW: 2. God's Word Creates — Let there be Light	HFW	Rejected		32
+257	1Pe	1	15	1	16	1Pe 1:15-16	HFW: 1. Before Creation — The Work of Christ, the Messiah, is Finished	HFW	Not-Validated		32
+258	Luk	1	30	1	33	Luk 1:30-33	HFW: 2. God's Word Creates	HFW	Not-Validated		24
+259	Jhn	1	1	1	3	Jhn 1:1-3	HFW: 1. Before Creation — Extra Study – Before Creation; 2. God's Word Creates — Let there be Light; 5. Son of God and Man — Extra Studies; 8. Gospel of the Kingdom — Further studies; 9. The Word is Worthy — Remember the former things of old	HFW	Not-Validated		32
+260	Jhn	1	1	1	5	Jhn 1:1-5	HFW: 1. Before Creation — Extra Study – Before Creation; 2. God's Word Creates — Let there be Light; 5. Son of God and Man — Extra Studies; 8. Gospel of the Kingdom — Further studies; 9. The Word is Worthy — Remember the former things of old	HFW	Not-Validated		32
+261	Exo	3	14	3	14	Exo 3:14	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+262	Mat	24	4	24	5	Mat 24:4-5	HFW: 7. Tribulation and Wrath — Be Prepared; 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+263	Rev	11	3	11	5	Rev 11:3-5	HFW: 9. The Word is Worthy	HFW	Not-Validated		8|11
+264	Psa	27	12	27	14	Psa 27:12-14	HFW: 7. Tribulation and Wrath — However, Jesus warns believers:	HFW	Not-Validated		32
+265	Isa	2	2	2	3	Isa 2:2-3	HFW: 11. The Kingdom Comes	HFW	Not-Validated		16|19
+266	Zec	14	16	14	16	Zec  14:16	HFW: 11. The Kingdom Comes	HFW	Not-Validated		16
+267	Gen	6	5	6	8	Gen 6:5-8	HFW: 3. Mankind Rebels — The Flood and Noah	HFW	Not-Validated		32
+268	2Co	4	6	4	6	2Co  4:6	HFW: 8. Gospel of the Kingdom; 12. Eternal Kingdom	HFW	Not-Validated		23
+269	1Ti	3	16	3	16	1Ti  3:16	HFW: 8. Gospel of the Kingdom — God’s Presence manifested in the Flesh	HFW	Not-Validated		32
+270	Gen	3	17	3	19	Gen 3:17-19	HFW: 8. Gospel of the Kingdom — The Garden of Eden	HFW	Not-Validated		32
+271	Mat	5	17	5	18	Mat 5:17-18	HFW: 9. The Word is Worthy — How did the Messiah become Worthy?	HFW	Not-Validated		11
+272	Jhn	1	14	1	14	Jhn  1:14	HFW: 1. Before Creation — Extra Study – Before Creation; 2. God's Word Creates — In the beginning was the Word; 5. Son of God and Man — Extra Studies; 9. The Word is Worthy — Remember the former things of old	HFW	Not-Validated		32
+273	Rev	19	4	19	4	Rev  19:4	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+274	Rev	19	6	19	8	Rev 19:6-8	HFW: 9. The Word is Worthy; 11. The Kingdom Comes	HFW	Not-Validated		10|11|14
+275	2Ki	21	4	21	7	2Ki 21:4-7	HFW: 4. Yahweh's 10 Words — Israel’s history of rebellion	HFW	Not-Validated		32
+276	Psa	16	9	16	11	Psa 16:9-11	HFW: 9. The Word is Worthy — Resurrection	HFW	Not-Validated		32
+277	Php	2	8	2	11	Php 2:8-11	HFW: 9. The Word is Worthy — The Cross	HFW	Not-Validated		32
+278	Php	2	8	2	8	Php  2:8	HFW: 9. The Word is Worthy — The Cross	HFW	Not-Validated		32
+279	Rev	4	8	4	11	Rev 4:8-11	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+280	Rev	16	1	16	1	Rev  16:1	HFW: 10. The Word Conquers	HFW	Not-Validated		9|13|16
+281	Rev	16	15	16	18	Rev 16:15-18	HFW: 5. Son of God and Man — Messiah Judges the Rebellious Wicked	HFW	Not-Validated		13
+282	Rev	21	3	21	3	Rev  21:3	HFW: 1. Before Creation; 8. Gospel of the Kingdom	HFW	Not-Validated		24|26
+283	Rev	21	3	21	5	Rev 21:3-5	HFW: 1. Before Creation; 8. Gospel of the Kingdom	HFW	Not-Validated		16|24|26
+284	Jhn	20	21	20	22	Jhn 20:21-22	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+285	Rev	12	1	12	3	Rev 12:1-3	HFW: 7. Tribulation and Wrath — The Great Tribulation – Summary; 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		8
+286	Ezr	1	2	1	3	Ezr 1:2-3	HFW: 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+287	Isa	7	14	7	14	Isa  7:14	HFW: 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+288	Jhn	16	7	16	7	Jhn  16:7	HFW: 5. Son of God and Man — The Holy Spirit dwells in believers; 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+289	1Co	3	16	3	16	1Co  3:16	HFW: 5. Son of God and Man — The Holy Spirit dwells in believers; 8. Gospel of the Kingdom — God’s Presence manifested in the Flesh	HFW	Not-Validated		32
+290	Act	3	19	3	21	Act 3:19-21	HFW: 8. Gospel of the Kingdom; 11. The Kingdom Comes; 12. Eternal Kingdom	HFW	Not-Validated		16|25
+291	Mat	6	24	6	24	Mat  6:24	HFW: 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+292	2Co	4	3	4	4	2Co 4:3-4	HFW: 8. Gospel of the Kingdom — Who is ruling today, before Yahweh returns?	HFW	Not-Validated		32
+293	Jhn	12	31	12	31	Jhn 12:31	HFW: 8. Gospel of the Kingdom; 9. The Word is Worthy	HFW	Not-Validated		8|10|13|24
+294	Col	3	4	3	7	Col 3:4-7	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		9
+295	Rom	8	9	8	11	Rom 8:9-11	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+296	Rom	8	11	8	11	Rom  8:11	HFW: 9. The Word is Worthy — Resurrection	HFW	Not-Validated		32
+297	1Co	15	28	15	28	1Co  15:28	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+298	1Jn	3	2	3	2	1Jn  3:2	HFW: 2. God's Word Creates; 8. Gospel of the Kingdom	HFW	Not-Validated		24
+299	Rev	22	12	22	13	Rev 22:12-13	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		24
+300	Rev	21	1	21	2	Rev 21:1-2	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		16|24|25|26
+301	Rev	21	1	21	3	Rev 21:1-3	HFW: 8. Gospel of the Kingdom; 10. The Word Conquers; 11. The Kingdom Comes	HFW	Not-Validated		24|25|26
+302	Jhn	1	11	1	12	Jhn 1:11-12	HFW: 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+303	Rom	1	16	1	16	Rom  1:16	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		10|16|23
+304	Psa	2	6	2	8	Psa 2:6-8	HFW: 8. Gospel of the Kingdom; 11. The Kingdom Comes	HFW	Not-Validated		10|14|16|23
+305	Mat	27	11	27	11	Mat  27:11	HFW: 4. Yahweh's 10 Words — Beliefs; 5. Son of God and Man — The Son of God and Man: the Cross; 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+306	Jhn	18	37	18	37	Jhn  18:37	HFW: 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+307	Eph	1	11	1	14	Eph 1:11-14	HFW: 8. Gospel of the Kingdom — God’s Presence manifested in the Flesh	HFW	Not-Validated		32
+308	2Co	1	21	1	22	2Co 1:21-22	HFW: 8. Gospel of the Kingdom — God’s Presence manifested in the Flesh	HFW	Not-Validated		32
+309	Mat	5	17	5	17	Mat  5:17	HFW: 9. The Word is Worthy — How did the Messiah become Worthy?	HFW	Not-Validated		11
+310	Ezk	34	25	34	27	Ezk 34:25-27	HFW: 5. Son of God and Man — Messiah Reigns on earth over Israel; 8. Gospel of the Kingdom — Further studies; 11. The Kingdom Comes — What happens during the 1,000 years; 12. Eternal Kingdom — Fruitfulness in the Promised Land and the Kingdom of God	HFW	Not-Validated		18
+311	Isa	65	19	65	20	Isa 65:19-20	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		16
+312	Mic	4	3	4	3	Mic 4:3	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		16
+313	Ezk	34	25	34	29	Ezk 34:25-29	HFW: 5. Son of God and Man — Messiah Reigns on earth over Israel; 8. Gospel of the Kingdom — Further studies; 11. The Kingdom Comes — What happens during the 1,000 years; 12. Eternal Kingdom — Fruitfulness in the Promised Land and the Kingdom of God	HFW	Not-Validated		18
+314	Luk	1	32	1	33	Luk 1:32-33	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		16|24
+315	Luk	22	29	22	30	Luk 22:29-30	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		16|24
+316	Mat	24	1	24	2	Mat 24:1-2	HFW: 5. Son of God and Man — The Presence of Yahweh; 6. Statue and Stone — Is Rome the fourth Gentile Kingdom?; 7. Tribulation and Wrath — During Great Tribulation; 8. Gospel of the Kingdom — Further studies; 9. The Word is Worthy — Before the Messiah Returns; 10. The Word Conquers — Actions:	HFW	Not-Validated		8|10
+317	Lev	16	21	16	22	Lev 16:21-22	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+318	Mat	21	12	21	13	Mat 21:12-13	HFW: 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+319	2Ch	36	17	36	19	2Ch 36:17-19	HFW: 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+320	Jer	7	9	7	11	Jer 7:9-11	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		7
+321	Lev	16	24	16	24	Lev 16:24	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		7
+322	Lev	16	30	16	30	Lev  16:30	HFW: 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+323	Rev	16	17	16	17	Rev  16:17	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+324	Jol	2	28	2	32	Joe 2:28-32	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+325	1Co	6	2	6	3	1Co 6:2-3	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+326	Mat	13	13	13	15	Mat 13:13-15	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+327	Act	28	25	28	26	Act 28:25-26	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+328	Isa	6	8	6	11	Isa 6:8-11	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+329	1Th	4	16	4	17	1Th 4:16-17	HFW: 5. Son of God and Man — First Fruits Harvest of Believers	HFW	Not-Validated		31
+330	1Th	4	16	4	18	1Th 4:16-18	HFW: 5. Son of God and Man — First Fruits Harvest of Believers	HFW	Not-Validated		31
+331	1Jn	5	19	5	19	1Jn  5:19	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		10|16
+332	Gen	3	13	3	13	Gen  3:13	HFW: 1. Before Creation; 4. Yahweh's 10 Words; 8. Gospel of the Kingdom	HFW	Rejected		7|16
+333	Gen	3	13	3	15	Gen 3:13-15	HFW: 1. Before Creation	HFW	Not-Validated		16
+334	Psa	90	2	90	2	Psa  90:2	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+335	Gen	11	6	11	7	Gen 11:6-7	HFW: 3. Mankind Rebels — The Tower of Babel	HFW	Not-Validated		32
+336	Gen	11	4	11	4	Gen  11:4	HFW: 3. Mankind Rebels — The Tower of Babel	HFW	Not-Validated		32
+337	Gen	11	9	11	9	Gen  11:9	HFW: 3. Mankind Rebels — God Scatters Mankind over the Earth	HFW	Not-Validated		32
+338	Mat	28	18	28	20	Mat 28:18-20	HFW: 1. Before Creation; 9. The Word is Worthy	HFW	Not-Validated		10
+339	Mat	25	44	25	46	Mat 25:44-46	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+340	Gen	5	5	5	5	Gen 5:5	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+341	Isa	51	3	51	3	Isa  51:3	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+342	Psa	33	6	33	9	Psa 33:6-9	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+343	Isa	45	12	45	12	Isa  45:12	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+344	Gen	3	22	3	23	Gen 3:22-23	HFW: 2. God's Word Creates — The serpent deceived mankind; 4. Yahweh's 10 Words — Extra Study – Yahweh’s 10 Words at Sinai; 5. Son of God and Man — Son of God and Son of Man – Background; 8. Gospel of the Kingdom — The Garden of Eden	HFW	Not-Validated		32
+345	Gen	3	22	3	22	Gen  3:22	HFW: 2. God's Word Creates — The serpent deceived mankind; 4. Yahweh's 10 Words — Extra Study – Yahweh’s 10 Words at Sinai; 5. Son of God and Man — Son of God and Son of Man – Background; 8. Gospel of the Kingdom — The Garden of Eden	HFW	Not-Validated		32
+346	Gen	2	8	2	9	Gen 2:8-9	HFW: not found on a page heading — Unallocated	HFW	Rejected		32
+347	Gen	2	15	2	17	Gen 2:15-17	HFW: 2. God's Word Creates — Further studies	HFW	Rejected		32
+348	Gen	3	22	3	24	Gen 3:22-24	HFW: 2. God's Word Creates — The Restored Garden of Eden; 4. Yahweh's 10 Words — Extra Study – Yahweh’s 10 Words at Sinai; 5. Son of God and Man — Son of God and Son of Man – Background; 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+349	Rev	21	5	21	7	Rev 21:5-7	HFW: 12. Eternal Kingdom	HFW	Not-Validated		25
+350	Isa	60	19	60	21	Isa 60:19-21	HFW: 12. Eternal Kingdom	HFW	Not-Validated		27
+351	Jhn	9	4	9	5	Jhn 9:4-5	HFW: 12. Eternal Kingdom — I am the Alpha and the Omega	HFW	Not-Validated		24
+352	Rev	21	23	21	23	Rev  21:23	HFW: 2. God's Word Creates; 12. Eternal Kingdom	HFW	Not-Validated		24|25
+353	Gen	1	3	1	4	Gen 1:3-4	HFW: 1. Before Creation — Extra Study – Before Creation; 2. God's Word Creates — Light and Darkness – Patterns in Yahweh’s Word; 8. Gospel of the Kingdom — The Garden of Eden; 12. Eternal Kingdom — The Garden of Eden is also compared to the Kingdom of God	HFW	Not-Validated		32
+354	Luk	2	32	2	32	Luk  2:32	HFW: 12. Eternal Kingdom	HFW	Not-Validated		27
+355	Isa	35	5	35	7	Isa 35:5-7	HFW: 11. The Kingdom Comes	HFW	Not-Validated		19
+356	Isa	65	21	65	23	Isa 65:21-23	HFW: 8. Gospel of the Kingdom; 11. The Kingdom Comes	HFW	Not-Validated		16|19
+357	Ezk	34	25	34	28	Eze 34:25-28	HFW: 11. The Kingdom Comes	HFW	Not-Validated		16
+358	Zec	14	17	14	19	Zec 14:17-19	HFW: 11. The Kingdom Comes	HFW	Not-Validated		16|29
+359	Jer	23	5	23	6	Jer 23:5-6	HFW: 8. Gospel of the Kingdom; 9. The Word is Worthy; 11. The Kingdom Comes	HFW	Not-Validated		15|16
+360	Gen	12	2	12	3	Gen 12:2-3	HFW: 11. The Kingdom Comes	HFW	Not-Validated		18
+361	Rev	20	7	20	11	Rev 20:7-11	HFW: 8. Gospel of the Kingdom; 9. The Word is Worthy; 11. The Kingdom Comes	HFW	Not-Validated		13|16|20|21|23|24|29
+362	Rev	20	4	20	4	Rev  20:4	HFW: 8. Gospel of the Kingdom; 11. The Kingdom Comes	HFW	Not-Validated		16
+363	Deu	30	4	30	5	Deu 30:4-5	HFW: 10. The Word Conquers; 11. The Kingdom Comes	HFW	Not-Validated		14|16
+364	Jer	23	3	23	4	Jer 23:3-4	HFW: 11. The Kingdom Comes	HFW	Not-Validated		14|15
+365	Rom	8	19	8	21	Rom 8:19-21	HFW: 11. The Kingdom Comes; 12. Eternal Kingdom	HFW	Not-Validated		25
+366	Isa	65	20	65	22	Isa 65:20-22	HFW: 11. The Kingdom Comes	HFW	Not-Validated		15
+367	Jas	1	18	1	18	Jas  1:18	HFW: 5. Son of God and Man — First Fruits Harvest of Believers	HFW	Not-Validated		31
+368	Tit	3	4	3	7	Tit 3:4-7	HFW: 5. Son of God and Man — First Fruits Harvest of Believers	HFW	Not-Validated		31
+369	Rom	8	23	8	23	Rom  8:23	HFW: 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+370	1Co	15	20	15	21	1Co 15:20-21	HFW: 3. Mankind Rebels	HFW	Not-Validated		31
+371	Rom	6	23	6	23	Rom  6:23	HFW: 3. Mankind Rebels — Beliefs; 5. Son of God and Man — The Son of God and Man: the Resurrection; 8. Gospel of the Kingdom — The Garden of Eden; 9. The Word is Worthy — Resurrection	HFW	Not-Validated		32
+372	Jhn	3	16	3	16	Jhn  3:16	HFW: 3. Mankind Rebels — Beliefs; 4. Yahweh's 10 Words — God’s Plan; 5. Son of God and Man; 8. Gospel of the Kingdom — Further studies; 9. The Word is Worthy — Timing; 10. The Word Conquers — Messiah’s 1st Coming	HFW	Not-Validated		32
+373	Rom	6	9	6	9	Rom  6:9	HFW: 5. Son of God and Man — The Son of God and Man: the Resurrection	HFW	Not-Validated		32
+374	Exo	25	8	25	8	Exo  25:8	HFW: 4. Yahweh's 10 Words — Yahweh’s presence descended on Mt Sinai	HFW	Not-Validated		32
+375	Jos	1	8	1	8	Jos  1:8	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+376	Jas	1	25	1	25	Jas  1:25	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+377	Psa	1	1	1	2	Psa  1:1-2	HFW: 4. Yahweh's 10 Words — Mount Sinai – 10 Commandments	HFW	Not-Validated		32
+378	Rom	13	10	13	10	Rom  13:10	HFW: 4. Yahweh's 10 Words — Mount Sinai – 10 Commandments	HFW	Not-Validated		32
+379	1Jn	5	3	5	3	1Jn  5:3	HFW: 4. Yahweh's 10 Words — Mount Sinai – 10 Commandments	HFW	Not-Validated		32
+380	Jhn	1	29	1	29	Jhn  1:29	HFW: 1. Before Creation — Extra Study – Before Creation; 2. God's Word Creates — The Son of God	HFW	Not-Validated		32
+381	1Ti	6	16	6	16	1Ti  6:16	HFW: 2. God's Word Creates — Further studies	HFW	Not-Validated		32
+382	Isa	25	8	25	8	Isa  25:8	HFW: 1. Before Creation; 8. Gospel of the Kingdom	HFW	Not-Validated		24
+383	Jhn	17	3	17	3	Jhn  17:3	HFW: 1. Before Creation	HFW	Not-Validated		24
+384	Mic	4	2	4	2	Mic  4:2	HFW: 1. Before Creation	HFW	Not-Validated		10|16|19
+385	Mat	24	48	24	51	Mat 24:48-51	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+386	Ezk	36	24	36	30	Ezk 36:24-30	HFW: 5. Son of God and Man — Messiah Reigns on earth over Israel; 8. Gospel of the Kingdom — Further studies; 10. The Word Conquers — 1,000 Years – Establishing the Kingdom on Earth; 11. The Kingdom Comes — The Messiah gathers His people back to the promised land	HFW	Not-Validated		14|18
+387	Jer	31	33	31	34	Jer 31:33-34	HFW: 4. Yahweh's 10 Words — Beliefs; 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+388	Isa	61	1	61	4	Isa 61:1-4	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		7|28
+389	Isa	66	15	66	18	Isa 66:15-18	HFW: 8. Gospel of the Kingdom; 10. The Word Conquers	HFW	Not-Validated		7
+390	Act	7	55	7	55	Act  7:55	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+391	Heb	12	1	12	2	Heb 12:1-2	HFW: 1. Before Creation; 8. Gospel of the Kingdom; 9. The Word is Worthy	HFW	Not-Validated		8
+392	Mat	28	18	28	18	Mat  28:18	HFW: 1. Before Creation; 8. Gospel of the Kingdom; 9. The Word is Worthy	HFW	Not-Validated		10
+393	2Pe	2	1	2	1	2Pe  2:1	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		8
+394	Luk	12	9	12	9	Luk  12:9	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		8
+395	Mat	5	34	5	35	Mat 5:34-35	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		16
+396	Luk	9	1	9	2	Luk 9:1-2	HFW: 7. Tribulation and Wrath — Be Prepared; 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+397	Act	28	23	28	23	Act  28:23	HFW: 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+398	Luk	17	20	17	21	Luk 17:20-21	HFW: 8. Gospel of the Kingdom — God’s Presence manifested in the Flesh	HFW	Not-Validated		32
+399	Jhn	18	36	18	36	Jhn  18:36	HFW: 5. Son of God and Man — The Son of God and Man: the Cross; 8. Gospel of the Kingdom — God’s Presence manifested in the Flesh	HFW	Not-Validated		32
+400	Jhn	18	36	18	37	Jhn 18:36-37	HFW: 5. Son of God and Man — Messiah Reigns on earth over Israel; 8. Gospel of the Kingdom — God’s Presence manifested in the Flesh	HFW	Not-Validated		18
+401	Mat	25	31	25	31	Mat  25:31	HFW: 5. Son of God and Man — The Messiah Returns to the Earth; 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		10
+402	Mat	4	1	4	11	Mat 4:1-11	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+403	Psa	4	3	4	4	Psa 4:3-4	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+404	Luk	4	1	4	13	Luk 4:1-13	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+405	Mrk	2	23	2	28	Mrk 2:23-28	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+406	Heb	2	18	2	18	Heb  2:18	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+407	Heb	4	15	4	15	Heb  4:15	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+408	Jas	1	13	1	15	Jas 1:13-15	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+409	1Pe	5	8	5	8	1Pe  5:8	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+410	Rom	8	1	8	2	Rom 8:1-2	HFW: 7. Tribulation and Wrath — What happens during 3½ years of great Tribulation:; 8. Gospel of the Kingdom — Further studies; 9. The Word is Worthy — Resurrection; 11. The Kingdom Comes — The Kingdom of God extends over the nations; 12. Eternal Kingdom — The Earth is Regenerated	HFW	Not-Validated		8|19|25
+411	1Jn	2	16	2	16	1Jn 2:16	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+412	Gal	5	16	5	17	Gal 5:16-17	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+413	Col	3	5	3	5	Col  3:5	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+414	Rev	2	9	2	10	Rev 2:9-10	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		8
+415	Rom	8	18	8	21	Rom 8:18-21	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		10|24
+416	Rev	22	3	22	4	Rev 22:3-4	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		24|27
+417	Rev	11	15	11	19	Rev 11:15-19	HFW: 10. The Word Conquers	HFW	Not-Validated		9|13|24|27
+418	Ezk	20	6	20	8	Ezk 20:6-8	HFW: 7. Tribulation and Wrath — Be Prepared	HFW	Not-Validated		7
+419	Pro	17	15	17	15	Pro  17:15	HFW: 7. Tribulation and Wrath — Characteristics:	HFW	Not-Validated		7
+420	Isa	5	20	5	20	Isa  5:20	HFW: 10. The Word Conquers	HFW	Not-Validated		16|18
+421	Dan	7	7	7	8	Dan 7:7-8	HFW: 6. Statue and Stone — The final King; 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		5|10
+422	1Ti	6	9	6	10	1Ti 6:9-10	HFW: 7. Tribulation and Wrath — Characteristics:	HFW	Not-Validated		32
+423	Act	19	8	19	8	Act  19:8	HFW: 7. Tribulation and Wrath — Be Prepared	HFW	Not-Validated		32
+424	1Co	15	23	15	26	1Co 15:23-26	HFW: 2. God's Word Creates; 8. Gospel of the Kingdom; 9. The Word is Worthy; 11. The Kingdom Comes	HFW	Not-Validated		16|23|24
+425	2Pe	3	16	3	16	2Pe  3:16	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+426	Isa	25	8	25	9	Isa 25:8-9	HFW: 1. Before Creation — Extra Study – Before Creation; 7. Tribulation and Wrath — Great Tribulation produces Good Fruit; 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		8
+427	Mat	23	38	23	39	Mat 23:38-39	HFW: 9. The Word is Worthy	HFW	Not-Validated		10|11
+428	Ezk	36	23	36	24	Eze 36:23-24	HFW: 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		10
+429	2Co	11	3	11	4	2Co 11:3-4	HFW: 6. Statue and Stone — Is Rome the fourth Gentile Kingdom?; 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:; 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		10
+430	2Ch	7	14	7	14	2Ch  7:14	HFW: 7. Tribulation and Wrath — What happens during 3½ years of great Tribulation:	HFW	Not-Validated		8
+431	Jdg	3	7	3	11	Jdg 3:7-11	HFW: 7. Tribulation and Wrath — What happens during 3½ years of great Tribulation:	HFW	Not-Validated		8
+432	2Ti	3	13	3	13	2Ti  3:13	HFW: 6. Statue and Stone — Is Rome the fourth Gentile Kingdom?; 7. Tribulation and Wrath — Characteristics:	HFW	Not-Validated		32
+433	Rev	13	13	13	14	Rev 13:13-14	HFW: 7. Tribulation and Wrath — Characteristics:	HFW	Not-Validated		32
+434	Mat	24	11	24	11	Mat  24:11	HFW: 8. Gospel of the Kingdom; 9. The Word is Worthy; 10. The Word Conquers	HFW	Not-Validated		8|11
+435	Mat	24	24	24	24	Mat  24:24	HFW: 7. Tribulation and Wrath — Characteristics:	HFW	Not-Validated		32
+436	2Th	2	9	2	12	2Th 2:9-12	HFW: 7. Tribulation and Wrath — The start and end of the great Tribulation	HFW	Not-Validated		5|8
+437	Rev	18	3	18	4	Rev 18:3-4	HFW: 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		10
+438	2Th	2	3	2	3	2Th  2:3	HFW: 8. Gospel of the Kingdom; 10. The Word Conquers	HFW	Not-Validated		8
+439	Dan	8	9	8	9	Dan  8:9	HFW: 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		5|10
+440	Dan	9	26	9	26	Dan  9:26	HFW: 6. Statue and Stone — The final King; 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		5|7|10
+441	Mat	24	15	24	15	Mat  24:15	HFW: 10. The Word Conquers	HFW	Not-Validated		7|8|10
+442	Rev	13	17	13	17	Rev  13:17	HFW: 7. Tribulation and Wrath — Characteristics:	HFW	Not-Validated		7
+443	Mat	7	15	7	16	Mat 7:15-16	HFW: 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		10
+444	Dan	8	9	8	12	Dan 8:9-12	HFW: 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		5|6|8|10
+445	Dan	12	1	12	3	Dan 12:1-3	HFW: 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:; 10. The Word Conquers — The Messiah Returns	HFW	Not-Validated		10
+446	Act	20	28	20	31	Act 20:28-31	HFW: 7. Tribulation and Wrath — Characteristics:	HFW	Not-Validated		32
+447	Rev	20	2	20	3	Rev 20:2-3	HFW: 8. Gospel of the Kingdom; 9. The Word is Worthy	HFW	Not-Validated		10|16|17|20|24
+448	Rev	20	2	20	5	Rev 20:2-5	HFW: 8. Gospel of the Kingdom — Further studies; 9. The Word is Worthy — Then the Messiah Returns and Reigns	HFW	Not-Validated		11|17|20
+449	Ezk	36	27	36	27	Ezk  36:27	HFW: 1. Before Creation; 12. Eternal Kingdom	HFW	Not-Validated		16|24|25
+450	Zec	8	22	8	23	Zec 8:22-23	HFW: 11. The Kingdom Comes	HFW	Not-Validated		18
+451	Mat	24	11	24	14	Mat 24:11-14	HFW: 9. The Word is Worthy; 10. The Word Conquers	HFW	Not-Validated		11
+452	Mat	24	11	24	13	Mat 24:11-13	HFW: 6. Statue and Stone — Is Rome the fourth Gentile Kingdom?; 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:; 8. Gospel of the Kingdom — Further studies; 9. The Word is Worthy — Before the Messiah Returns; 10. The Word Conquers — Actions:	HFW	Not-Validated		10
+453	Isa	55	11	55	11	Isa  55:11	HFW: 8. Gospel of the Kingdom; 10. The Word Conquers	HFW	Not-Validated		10|23
+454	Rev	22	4	22	4	Rev  22:4	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		27
+455	Jhn	8	12	8	12	Jhn  8:12	HFW: 2. God's Word Creates — Light and Darkness – Patterns in Yahweh’s Word	HFW	Not-Validated		32
+456	Gal	5	5	5	5	Gal  5:5	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+457	Exo	3	15	3	15	Exo  3:15	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+458	Col	1	15	1	15	Col  1:15	HFW: 2. God's Word Creates — In the beginning was the Word; 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+459	Luk	11	2	11	2	Luk  11:2	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		24
+460	Exo	19	16	19	22	Exo 19:16-22	HFW: 4. Yahweh's 10 Words — Yahweh’s presence descended on Mt Sinai; 8. Gospel of the Kingdom — God’s Presence in the Tabernacle	HFW	Not-Validated		32
+461	Exo	40	34	40	35	Exo 40:34-35	HFW: 3. Mankind Rebels — Further studies; 4. Yahweh's 10 Words — Extra Study – Yahweh’s 10 Words at Sinai; 8. Gospel of the Kingdom — God’s Presence in the Tabernacle	HFW	Not-Validated		32
+462	Isa	66	1	66	1	Isa  66:1	HFW: 1. Before Creation; 8. Gospel of the Kingdom; 10. The Word Conquers	HFW	Not-Validated		16
+463	Mat	6	33	6	33	Mat  6:33	HFW: 7. Tribulation and Wrath — Be Prepared	HFW	Not-Validated		32
+464	Isa	2	3	2	3	Isa  2:3	HFW: 4. Yahweh's 10 Words; 8. Gospel of the Kingdom	HFW	Not-Validated		16|19|23|24
+465	Pro	13	13	13	14	Pro 13:13-14	HFW: 4. Yahweh's 10 Words — Extra Study – Yahweh’s 10 Words at Sinai	HFW	Not-Validated		32
+466	Jer	31	33	31	33	Jer  31:33	HFW: 4. Yahweh's 10 Words — Beliefs; 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+467	Deu	7	6	7	8	Deu 7:6-8	HFW: 3. Mankind Rebels — Abraham	HFW	Not-Validated		32
+468	Jhn	5	24	5	27	Jhn 5:24-27	HFW: 5. Son of God and Man — Son of Man: Intercession	HFW	Not-Validated		32
+469	Jhn	5	24	5	25	Jhn 5:24-25	HFW: 5. Son of God and Man — Son of Man: Intercession	HFW	Not-Validated		32
+470	Rev	1	3	1	3	Rev  1:3	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+471	2Pe	3	13	3	13	2Pe  3:13	HFW: 8. Gospel of the Kingdom; 12. Eternal Kingdom	HFW	Not-Validated		8|24|25|27
+472	Tit	2	11	2	13	Tit 2:11-13	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		10
+473	Rev	5	5	5	6	Rev 5:5-6	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+474	Rev	21	2	21	3	Rev 21:2-3	HFW: 1. Before Creation; 8. Gospel of the Kingdom; 12. Eternal Kingdom	HFW	Not-Validated		24|25|26
+475	Dan	2	44	2	44	Dan  2:44	HFW: 6. Statue and Stone — The Stone that breaks all 4 kingdoms	HFW	Not-Validated		10
+476	Dan	7	27	7	27	Dan  7:27	HFW: 9. The Word is Worthy; 10. The Word Conquers; 11. The Kingdom Comes	HFW	Not-Validated		16|24|25
+477	Mat	6	9	6	10	Mat 6:9-10	HFW: 11. The Kingdom Comes; 12. Eternal Kingdom	HFW	Not-Validated		16
+478	Mat	4	23	4	23	Mat  4:23	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		24
+479	Mat	24	45	24	47	Mat 24:45-47	HFW: 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+480	1Co	6	14	6	14	1Co  6:14	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+481	Luk	8	11	8	15	Luk 8:11-15	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+482	Rev	14	4	14	5	Rev 14:4-5	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+483	Rev	7	2	7	4	Rev 7:2-4	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+484	Rev	11	3	11	6	Rev 11:3-6	HFW: 7. Tribulation and Wrath — What happens during 3½ years of great Tribulation:; 9. The Word is Worthy — Extra Study – The Word is Worthy	HFW	Not-Validated		8|11|29
+485	Rev	11	3	11	11	Rev 11:3-11	HFW: 7. Tribulation and Wrath — What happens during 3½ years of great Tribulation:; 9. The Word is Worthy — Extra Study – The Word is Worthy	HFW	Not-Validated		8|11|17|29
+486	Rev	3	5	3	5	Rev  3:5	HFW: 7. Tribulation and Wrath — Be Prepared	HFW	Not-Validated		32
+487	Rev	13	15	13	17	Rev 13:15-17	HFW: 7. Tribulation and Wrath — Characteristics:	HFW	Not-Validated		7
+488	Rev	13	15	13	15	Rev  13:15	HFW: 7. Tribulation and Wrath — 3½ years of the greatest Tribulation	HFW	Not-Validated		8
+489	Rev	13	16	13	17	Rev 13:16-17	HFW: 7. Tribulation and Wrath — 3½ years of the greatest Tribulation	HFW	Not-Validated		7|8
+490	Mat	24	4	24	6	Mat 24:4-6	HFW: 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:; 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		10
+491	2Th	2	9	2	10	2Th 2:9-10	HFW: 7. Tribulation and Wrath — Characteristics:	HFW	Not-Validated		5
+492	Dan	11	33	11	36	Dan 11:33-36	HFW: 7. Tribulation and Wrath — Believers who understand	HFW	Not-Validated		32
+493	Dan	11	30	11	32	Dan 11:30-32	HFW: 7. Tribulation and Wrath — However, Jesus warns believers:	HFW	Not-Validated		6|7
+494	Dan	11	36	11	36	Dan  11:36	HFW: 7. Tribulation and Wrath — The 7 Year Covenant	HFW	Not-Validated		5
+495	Dan	7	19	7	19	Dan 7:19 & 25	HFW: 7. Tribulation and Wrath — Be Prepared	HFW	Not-Validated		8
+496	1Jn	2	18	2	19	1Jn 2:18-19	HFW: 6. Statue and Stone — The final King; 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		5|10
+497	Heb	9	13	9	15	Heb 9:13-15	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		15
+498	1Pe	1	3	1	9	1Pe 1:3-9	HFW: 7. Tribulation and Wrath — Take Heart – Remember these truths	HFW	Not-Validated		32
+499	Dan	12	10	12	13	Dan 12:10-13	HFW: 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:; 10. The Word Conquers — The Messiah Returns	HFW	Not-Validated		6|7|10
+500	Rev	12	14	12	17	Rev 12:14-17	HFW: 7. Tribulation and Wrath — Great Tribulation starts with the abomination of desolation	HFW	Not-Validated		7|8
+501	Rev	12	1	12	6	Rev 12:1-6	HFW: 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:; 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		10
+502	Dan	7	23	7	23	Dan  7:23	HFW: 6. Statue and Stone — The Fourth Kingdom is not named; 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:; 8. Gospel of the Kingdom — Who is ruling today, before Yahweh returns?	HFW	Not-Validated		10
+503	Dan	7	23	7	24	Dan 7:23-24	HFW: 6. Statue and Stone — Four Gentile Kingdoms are represented by four beasts:; 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:; 8. Gospel of the Kingdom — Who is ruling today, before Yahweh returns?	HFW	Not-Validated		10
+504	Dan	7	23	7	25	Dan 7:23-25	HFW: 6. Statue and Stone — The final King; 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:; 8. Gospel of the Kingdom — Who is ruling today, before Yahweh returns?	HFW	Not-Validated		5|10
+505	Rev	13	1	13	5	Rev 13:1-5	HFW: 10. The Word Conquers	HFW	Not-Validated		8
+506	Rev	13	1	13	2	Rev 13:1-2	HFW: 6. Statue and Stone — The fourth Gentile Kingdom; 7. Tribulation and Wrath — 3½ years of the greatest Tribulation; 10. The Word Conquers — The Messiah Conquers	HFW	Not-Validated		8|13
+507	Heb	6	19	6	20	Heb 6:19-20	HFW: 8. Gospel of the Kingdom; 9. The Word is Worthy	HFW	Not-Validated		10|25
+508	Rev	17	12	17	13	Rev 17:12-13,17	HFW: 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:; 8. Gospel of the Kingdom — Further studies; 10. The Word Conquers — The Messiah Conquers; 11. The Kingdom Comes — The Messiah exercises His authority on earth.	HFW	Not-Validated		13
+509	Mat	24	4	24	8	Mat 24:4-8	HFW: 7. Tribulation and Wrath — Be Prepared; 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+510	Heb	5	9	5	9	Heb  5:9	HFW: 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+511	Deu	9	4	9	6	Deu 9:4-6	HFW: 3. Mankind Rebels — Further studies	HFW	Not-Validated		32
+512	Psa	2	6	2	9	Psa 2:6-9	HFW: 1. Before Creation; 4. Yahweh's 10 Words	HFW	Not-Validated		10|16
+513	1Co	15	49	15	53	1Co 15:49-53	HFW: 2. God's Word Creates; 8. Gospel of the Kingdom	HFW	Not-Validated		16|24
+514	1Co	15	50	15	53	1Co 15:50-53	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		10
+515	1Co	15	51	15	53	1Co 15:51-53	HFW: 2. God's Word Creates; 8. Gospel of the Kingdom	HFW	Not-Validated		10|13|16
+516	2Co	5	18	5	18	2Co  5:18	HFW: 2. God's Word Creates — Further studies; 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+517	Heb	5	8	5	9	Heb 5:8-9	HFW: 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+518	Deu	13	10	13	11	Deu 13:10-11	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+519	Jud	1	14	1	16	Jud 1:14-16	HFW: 10. The Word Conquers	HFW	Not-Validated		9|13
+520	Ezk	39	21	39	24	Ezk 39:21-24	HFW: 11. The Kingdom Comes	HFW	Not-Validated		13
+521	Ezk	39	25	39	29	Ezk 39:25-29	HFW: 11. The Kingdom Comes	HFW	Not-Validated		15|30
+522	Rev	16	9	16	11	Rev 16:9-11	HFW: 10. The Word Conquers	HFW	Not-Validated		9|13
+523	Rev	16	9	16	9	Rev  16:9	HFW: 10. The Word Conquers	HFW	Not-Validated		9|13
+524	Rev	16	11	16	11	Rev  16:11	HFW: 7. Tribulation and Wrath — The Messiah brings an end to great Tribulation	HFW	Not-Validated		8
+525	Isa	59	20	59	21	Isa 59:20-21	HFW: 11. The Kingdom Comes	HFW	Not-Validated		15
+526	Jer	31	27	31	33	Jer 31:27-33	HFW: 11. The Kingdom Comes	HFW	Not-Validated		15
+527	Ezk	37	21	37	23	Ezk 37:21-23	HFW: 11. The Kingdom Comes	HFW	Not-Validated		15
+528	Luk	13	34	13	35	Luk 13:34-35	HFW: 9. The Word is Worthy	HFW	Not-Validated		8
+529	Dan	7	9	7	12	Dan 7:9-12	HFW: 9. The Word is Worthy	HFW	Not-Validated		10|22
+530	Dan	7	9	7	11	Dan 7:9-11	HFW: 10. The Word Conquers	HFW	Not-Validated		13|22
+531	Rev	9	20	9	21	Rev 9:20-21	HFW: 7. Tribulation and Wrath — God’s wrath falls during great Tribulation	HFW	Not-Validated		8|9
+532	Mrk	16	15	16	15	Mrk  16:15	HFW: 9. The Word is Worthy	HFW	Not-Validated		8
+533	Ezk	44	2	44	6	Ezk 44:2-6	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		7
+534	Ezk	37	16	37	23	Ezk 37:16-23	HFW: 11. The Kingdom Comes	HFW	Not-Validated		15
+535	Ezk	37	24	37	25	Ezk 37:24-25	HFW: 8. Gospel of the Kingdom; 9. The Word is Worthy; 11. The Kingdom Comes	HFW	Not-Validated		15|16
+536	Ezk	37	26	37	28	Ezk 37:26-28	HFW: 9. The Word is Worthy; 11. The Kingdom Comes	HFW	Not-Validated		15
+537	2Th	2	4	2	4	2Th  2:4	HFW: 7. Tribulation and Wrath — Characteristics:	HFW	Not-Validated		7
+538	Mat	24	10	24	12	Mat 24:10-12	HFW: 6. Statue and Stone — Why was the Greek Kingdom Destroyed?; 7. Tribulation and Wrath — Be Prepared	HFW	Not-Validated		32
+539	Rev	3	19	3	19	Rev  3:19	HFW: 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		10
+540	Deu	31	17	31	17	Deu  31:17	HFW: 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		10
+541	Rev	15	3	15	8	Rev 15:3-8	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		9
+542	2Th	2	6	2	12	2Th 2:6-12	HFW: 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		5|10
+543	2Th	2	8	2	12	2Th 2:8-12	HFW: 6. Statue and Stone — The final King	HFW	Not-Validated		5
+544	Luk	24	39	24	39	Luk  24:39	HFW: 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+545	1Co	15	42	15	44	1Co 15:42-44	HFW: 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+546	Rom	8	3	8	3	Rom  8:3	HFW: 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+547	Exo	3	9	3	10	Exo 3:9-10	HFW: 3. Mankind Rebels — Mount Sinai	HFW	Not-Validated		32
+548	Eph	1	19	1	21	Eph 1:19-21	HFW: 5. Son of God and Man — Son of Man: Ascension; 9. The Word is Worthy — Ascension	HFW	Not-Validated		32
+549	Rev	20	5	20	6	Rev 20:5-6	HFW: 8. Gospel of the Kingdom; 9. The Word is Worthy	HFW	Not-Validated		16
+550	Rev	19	11	19	13	Rev 19:11-13	HFW: 2. God's Word Creates; 9. The Word is Worthy	HFW	Not-Validated		16
+551	Jhn	10	30	10	30	Jhn  10:30	HFW: 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+552	Heb	1	3	1	3	Heb  1:3	HFW: 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+553	Hag	2	9	2	9	Hag  2:9	HFW: 4. Yahweh's 10 Words — Extra Study – Yahweh’s 10 Words at Sinai	HFW	Not-Validated		32
+554	Zec	8	3	8	3	Zec  8:3	HFW: 4. Yahweh's 10 Words; 8. Gospel of the Kingdom	HFW	Not-Validated		13|16|19
+555	Mal	3	1	3	1	Mal  3:1	HFW: 4. Yahweh's 10 Words — Extra Study – Yahweh’s 10 Words at Sinai	HFW	Not-Validated		32
+556	2Co	5	21	5	21	2Co  5:21	HFW: 3. Mankind Rebels — Beliefs; 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+557	2Co	5	18	5	21	2Co 5:18-21	HFW: 2. God's Word Creates — Further studies; 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+558	Heb	2	17	2	17	Heb  2:17	HFW: 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+559	Mat	5	18	5	19	Mat 5:18-19	HFW: 2. God's Word Creates — The Restored Garden of Eden; 4. Yahweh's 10 Words — Extra Study – Yahweh’s 10 Words at Sinai; 12. Eternal Kingdom — Eternal Life on Earth	HFW	Not-Validated		27
+560	Mat	22	37	22	40	Mat 22:37-40	HFW: 3. Mankind Rebels — Mount Sinai; 4. Yahweh's 10 Words — Beliefs; 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+561	Mat	23	23	23	23	Mat  23:23	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+562	1Ki	8	10	8	13	1Ki 8:10-13	HFW: 4. Yahweh's 10 Words; 8. Gospel of the Kingdom	HFW	Not-Validated		7
+563	Exo	40	34	40	38	Exo 40:34-38	HFW: 3. Mankind Rebels — Further studies; 4. Yahweh's 10 Words — Extra Study – Yahweh’s 10 Words at Sinai; 8. Gospel of the Kingdom — God’s Presence in the Tabernacle	HFW	Not-Validated		32
+564	Gen	17	5	17	5	Gen  17:5	HFW: 3. Mankind Rebels — Further studies	HFW	Not-Validated		32
+565	Rev	16	2	16	2	Rev  16:2	HFW: 10. The Word Conquers	HFW	Not-Validated		16|18
+566	Isa	5	20	5	24	Isa 5:20-24	HFW: 10. The Word Conquers	HFW	Not-Validated		16|18
+567	Ezk	25	6	25	7	Ezk 25:6-7	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+568	Psa	83	1	83	5	Psa 83:1-5	HFW: 10. The Word Conquers	HFW	Not-Validated		16|18
+569	Oba	1	15	1	16	Oba 1:15-16	HFW: 10. The Word Conquers	HFW	Not-Validated		16
+570	Zec	14	2	14	3	Zec 14:2-3	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		10|13|16
+571	Heb	10	19	10	22	Heb 10:19-22	HFW: 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+572	2Ki	17	16	17	18	2Ki 17:16-18	HFW: 4. Yahweh's 10 Words	HFW	Not-Validated		7
+573	Exo	29	45	29	46	Exo 29:45-46	HFW: 3. Mankind Rebels — Further studies; 4. Yahweh's 10 Words — Extra Study – Yahweh’s 10 Words at Sinai	HFW	Not-Validated		32
+574	Lev	26	11	26	12	Lev 26:11-12	HFW: 3. Mankind Rebels — Further studies; 4. Yahweh's 10 Words — Extra Study – Yahweh’s 10 Words at Sinai	HFW	Not-Validated		32
+575	Exo	33	20	33	20	Exo  33:20	HFW: 2. God's Word Creates — The serpent deceived mankind	HFW	Not-Validated		32
+576	Isa	41	8	41	8	Isa  41:8	HFW: 3. Mankind Rebels — Abraham	HFW	Not-Validated		32
+577	Gen	28	14	28	14	Gen  28:14	HFW: 3. Mankind Rebels — Sin comes into the World	HFW	Not-Validated		32
+578	Rev	22	1	22	7	Rev 22:1-7	HFW: 2. God's Word Creates; 8. Gospel of the Kingdom	HFW	Not-Validated		16|23|24|27
+579	Gen	3	8	3	8	Gen  3:8	HFW: 2. God's Word Creates — Further studies	HFW	Rejected		32
+580	Gen	2	7	2	9	Gen 2:7-9	HFW: 2. God's Word Creates — Further studies	HFW	Rejected		32
+581	Gen	1	31	1	31	Gen  1:31	HFW: 1. Before Creation; 2. God's Word Creates; 8. Gospel of the Kingdom; 12. Eternal Kingdom	HFW	Not-Validated		24
+582	Gen	1	28	1	28	Gen  1:28	HFW: 3. Mankind Rebels; 11. The Kingdom Comes	HFW	Not-Validated		16
+583	Gen	1	27	1	28	Gen 1:27-28	HFW: 1. Before Creation; 2. God's Word Creates; 8. Gospel of the Kingdom	HFW	Not-Validated		23|24
+584	Psa	19	1	19	4	Psa 19:1-4	HFW: 2. God's Word Creates — Further studies	HFW	Not-Validated		32
+585	Rom	1	20	1	20	Rom  1:20	HFW: 2. God's Word Creates — Further studies	HFW	Not-Validated		32
+586	Rev	12	17	12	17	Rev  12:17	HFW: 7. Tribulation and Wrath — The Great Tribulation – Summary	HFW	Not-Validated		8
+587	Eph	1	3	1	6	Eph 1:3-6	HFW: 1. Before Creation — The Work of Christ, the Messiah, is Finished; 9. The Word is Worthy — Remember the former things of old	HFW	Not-Validated		32
+588	Eph	1	4	1	5	Eph 1:4-5	HFW: 1. Before Creation	HFW	Not-Validated		16
+589	Gen	22	18	22	18	Gen  22:18	HFW: 4. Yahweh's 10 Words — Yahweh’s Chosen People; 11. The Kingdom Comes — God’s Kingdom Covenant with Abraham and Israel	HFW	Not-Validated		16
+590	Isa	49	6	49	6	Isa  49:6	HFW: 4. Yahweh's 10 Words — God’s Plan; 11. The Kingdom Comes — Extra Study – The Kingdom Comes	HFW	Not-Validated		32
+591	Jhn	1	14	1	18	Jhn 1:14-18	HFW: 1. Before Creation — Extra Study – Before Creation; 2. God's Word Creates — In the beginning was the Word; 5. Son of God and Man — Extra Studies; 9. The Word is Worthy — Remember the former things of old	HFW	Not-Validated		32
+592	Jhn	1	1	1	1	Jhn 1:1,14	HFW: 1. Before Creation — Extra Study – Before Creation; 2. God's Word Creates — Let there be Light; 5. Son of God and Man — Extra Studies; 8. Gospel of the Kingdom — Further studies; 9. The Word is Worthy — Remember the former things of old	HFW	Not-Validated		32
+593	Mic	5	2	5	2	Mic  5:2	HFW: 4. Yahweh's 10 Words — Extra Study – Yahweh’s 10 Words at Sinai	HFW	Not-Validated		32
+594	Zec	9	9	9	9	Zec  9:9	HFW: 4. Yahweh's 10 Words — Extra Study – Yahweh’s 10 Words at Sinai	HFW	Not-Validated		32
+595	Isa	59	2	59	2	Isa  59:2	HFW: 11. The Kingdom Comes	HFW	Not-Validated		15
+596	Col	1	21	1	21	Col  1:21	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+597	Jer	17	9	17	9	Jer  17:9	HFW: 4. Yahweh's 10 Words	HFW	Not-Validated		7
+598	Isa	53	6	53	6	Isa  53:6	HFW: 4. Yahweh's 10 Words	HFW	Not-Validated		7
+599	1Co	15	24	15	24	1Co  15:24	HFW: 1. Before Creation; 8. Gospel of the Kingdom; 10. The Word Conquers; 11. The Kingdom Comes; 12. Eternal Kingdom	HFW	Not-Validated		16|23|24|25
+600	1Co	15	25	15	27	1Co 15:25-27	HFW: 11. The Kingdom Comes	HFW	Not-Validated		16
+601	1Co	15	24	15	27	1Co 15:24-27	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		16|23|24
+602	1Co	15	24	15	26	1Co 15:24-26	HFW: 1. Before Creation; 8. Gospel of the Kingdom; 10. The Word Conquers; 11. The Kingdom Comes; 12. Eternal Kingdom	HFW	Not-Validated		16|23|24|25
+603	Eph	5	25	5	27	Eph 5:25-27	HFW: 1. Before Creation; 2. God's Word Creates; 8. Gospel of the Kingdom	HFW	Not-Validated		25
+604	Tit	1	2	1	2	Tit  1:2	HFW: 1. Before Creation — God’s Plan from before Time	HFW	Not-Validated		32
+605	1Pe	1	20	1	21	1Pe 1:20-21	HFW: 1. Before Creation — The Work of Christ, the Messiah, is Finished	HFW	Not-Validated		32
+606	Col	1	15	1	17	Col 1:15-17	HFW: 2. God's Word Creates — In the beginning was the Word; 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+607	Gen	2	7	2	7	Gen  2:7	HFW: 2. God's Word Creates — Let there be Light	HFW	Rejected		32
+608	Gen	2	4	2	7	Gen 2:4-7	HFW: 1. Before Creation	HFW	Not-Validated		24
+609	1Co	15	21	15	22	1Co 15:21-22	HFW: 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+610	Rom	5	12	5	12	Rom  5:12	HFW: 3. Mankind Rebels — Beliefs; 8. Gospel of the Kingdom — Yesterday’s Good News	HFW	Not-Validated		32
+611	Gen	3	16	3	19	Gen 3:16-19	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+612	Gen	3	13	3	14	Gen 3:13-14	HFW: 4. Yahweh's 10 Words	HFW	Rejected		7
+613	Gen	3	15	3	15	Gen  3:15	HFW: 2. God's Word Creates — The Son of God; 4. Yahweh's 10 Words — Extra Study – Yahweh’s 10 Words at Sinai; 5. Son of God and Man — Son of God and Son of Man – Background; 8. Gospel of the Kingdom — Yesterday’s Good News	HFW	Not-Validated		32
+614	1Jn	2	1	2	2	1Jn 2:1-2	HFW: 5. Son of God and Man — Extra Studies; 6. Statue and Stone — The final King; 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		5|10
+615	Luk	24	46	24	47	Luk 24:46-47	HFW: 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+616	Mrk	16	19	16	19	Mrk  16:19	HFW: 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+617	Heb	7	24	7	25	Heb 7:24-25	HFW: 9. The Word is Worthy	HFW	Not-Validated		10
+618	Eph	2	4	2	7	Eph 2:4-7	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+619	Isa	59	14	59	18	Isa 59:14-18	HFW: 7. Tribulation and Wrath — After Great Tribulation & Wrath; 10. The Word Conquers — Messiah’s 1st Coming	HFW	Not-Validated		8|10
+620	Isa	59	16	59	16	Isa  59:16	HFW: 5. Son of God and Man — Son of Man: Intercession	HFW	Not-Validated		32
+621	Isa	59	19	59	21	Isa 59:19-21	HFW: 9. The Word is Worthy — Extra Study – The Word is Worthy	HFW	Not-Validated		11
+622	Rev	5	1	5	6	Rev 5:1-6	HFW: 9. The Word is Worthy	HFW	Not-Validated		11
+623	Rev	6	15	6	17	Rev 6:15-17	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		9
+624	Rev	11	15	11	15	Rev  11:15	HFW: 8. Gospel of the Kingdom; 9. The Word is Worthy; 10. The Word Conquers; 11. The Kingdom Comes	HFW	Not-Validated		8|9|13|14|16|24|27
+625	Gal	3	13	3	13	Gal  3:13	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+626	Isa	53	11	53	11	Isa  53:11	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+627	Col	1	18	1	20	Col 1:18-20	HFW: 9. The Word is Worthy — Creation	HFW	Not-Validated		32
+628	Col	1	21	1	23	Col 1:21-23	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+629	1Pe	3	18	3	18	1Pe  3:18	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+630	Act	3	19	3	19	Act  3:19	HFW: 3. Mankind Rebels; 8. Gospel of the Kingdom; 11. The Kingdom Comes; 12. Eternal Kingdom	HFW	Not-Validated		16|25
+631	Jol	2	13	2	13	Joe  2:13	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+632	Rev	14	6	14	6	Rev  14:6	HFW: 8. Gospel of the Kingdom; 9. The Word is Worthy	HFW	Not-Validated		11|16
+633	Rev	14	6	14	7	Rev 14:6-7	HFW: 8. Gospel of the Kingdom; 9. The Word is Worthy	HFW	Not-Validated		11|16
+634	Rev	14	9	14	11	Rev 14:9-11	HFW: 10. The Word Conquers	HFW	Not-Validated		9|18|24
+635	Rev	14	14	14	16	Rev 14:14-16	HFW: 5. Son of God and Man — First Fruits Harvest of Believers	HFW	Not-Validated		31
+636	Rev	14	18	14	20	Rev 14:18-20	HFW: 7. Tribulation and Wrath — What happens during 3½ years of great Tribulation:	HFW	Not-Validated		8|9
+637	Rev	16	14	16	16	Rev 16:14-16	HFW: 10. The Word Conquers	HFW	Not-Validated		13|16
+638	Mat	24	29	24	39	Mat 24:29-39	HFW: 8. Gospel of the Kingdom — Kingdom Prayers Answered – The Messiah Returns; 9. The Word is Worthy — Extra Study – The Word is Worthy; 10. The Word Conquers — The Word of God Returns	HFW	Not-Validated		11
+639	Rev	6	9	6	11	Rev 6:9-11	HFW: 9. The Word is Worthy	HFW	Not-Validated		10|11
+640	Jer	30	4	30	9	Jer 30:4-9	HFW: 7. Tribulation and Wrath — What happens during 3½ years of great Tribulation:; 9. The Word is Worthy — Extra Study – The Word is Worthy	HFW	Not-Validated		8|11
+641	Mat	24	21	24	22	Mat 24:21-22	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		8
+642	Dan	7	25	7	25	Dan   7:25	HFW: 10. The Word Conquers	HFW	Not-Validated		16
+643	Dan	8	23	8	25	Dan 8:23-25	HFW: 6. Statue and Stone — The final King; 7. Tribulation and Wrath — Characteristics:	HFW	Not-Validated		5
+644	Dan	9	24	9	24	Dan  9:24	HFW: 7. Tribulation and Wrath — 7 Year Covenant of the Beast	HFW	Not-Validated		5
+645	Dan	12	6	12	12	Dan 12:6-12	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+646	Rev	13	7	13	7	Rev  13:7	HFW: 7. Tribulation and Wrath — The Great Tribulation – Summary	HFW	Not-Validated		8
+647	Rev	13	4	13	9	Rev 13:4-9	HFW: 6. Statue and Stone — The Beast and Tribulation; 7. Tribulation and Wrath — In the dreadful day of Yahweh,	HFW	Not-Validated		8
+648	Rev	13	11	13	17	Rev 13:11-17	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+649	Rev	17	12	17	14	Rev 17:12-14	HFW: 8. Gospel of the Kingdom; 10. The Word Conquers; 11. The Kingdom Comes	HFW	Not-Validated		8|14
+650	Rev	17	14	17	14	Rev  17:14	HFW: 7. Tribulation and Wrath — The Great Tribulation – Summary	HFW	Not-Validated		8|10
+651	Col	1	19	1	23	Col 1:19-23	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		8
+652	Heb	12	22	12	24	Heb 12:22-24	HFW: 8. Gospel of the Kingdom	HFW	Not-Validated		8|15|25
+653	Jhn	16	33	16	33	Jhn  16:33	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+654	Mat	10	34	10	39	Mat 10:34-39	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+655	Eph	2	11	2	17	Eph 2:11-17	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+656	Hos	5	14	5	15	Hos 5:14-15	HFW: 7. Tribulation and Wrath — What happens when the Messiah, Israel’s Saviour, returns:	HFW	Not-Validated		10
+657	Hos	5	15	6	3	Hos 5:15-6:3	HFW: 7. Tribulation and Wrath — What happens during 3½ years of great Tribulation:	HFW	Not-Validated		8
+658	Mat	23	37	23	39	Mat 23:37-39	HFW: 5. Son of God and Man — The Presence of Yahweh; 7. Tribulation and Wrath — What happens during 3½ years of great Tribulation:	HFW	Not-Validated		8
+659	Rev	5	8	5	9	Rev 5:8-9	HFW: 9. The Word is Worthy	HFW	Not-Validated		10
+660	Rev	5	8	5	10	Rev 5:8-10	HFW: 9. The Word is Worthy	HFW	Not-Validated		11
+661	Rev	19	15	19	16	Rev 19:15-16	HFW: 2. God's Word Creates	HFW	Not-Validated		16
+662	Rev	20	1	20	3	Rev 20:1-3	HFW: 10. The Word Conquers	HFW	Not-Validated		8|16|17|20
+663	Rev	20	4	20	6	Rev 20:4-6	HFW: 11. The Kingdom Comes	HFW	Not-Validated		16
+664	Rev	20	6	20	6	Rev  20:6	HFW: 1. Before Creation; 10. The Word Conquers; 11. The Kingdom Comes	HFW	Not-Validated		16|20
+665	Col	3	1	3	17	Col 3:1-17	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		9
+666	Col	1	17	1	20	Col 1:17-20	HFW: 5. Son of God and Man — Extra Studies	HFW	Not-Validated		32
+667	Deu	26	18	26	19	Deu 26:18-19	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+668	Jer	23	3	23	6	Jer 23:3-6	HFW: 11. The Kingdom Comes — The Messiah gathers His people back to the promised land	HFW	Not-Validated		14
+669	Jer	23	5	23	8	Jer 23:5-8	HFW: 11. The Kingdom Comes	HFW	Not-Validated		15
+670	Psa	33	6	33	6	Psa  33:6	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+671	Isa	28	16	28	19	Isa 28:16-19	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+672	Gen	22	17	22	18	Gen 22:17-18	HFW: 2. God's Word Creates — Let there be Light	HFW	Not-Validated		32
+673	Isa	49	5	49	6	Isa 49:5-6	HFW: 2. God's Word Creates	HFW	Not-Validated		16
+674	Gen	15	18	15	21	Gen 15:18-21	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+675	Gen	17	3	17	8	Gen 17:3-8	HFW: 8. Gospel of the Kingdom; 11. The Kingdom Comes	HFW	Not-Validated		27
+676	Gen	17	7	17	8	Gen 17:7-8	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32
+677	Gen	28	13	28	15	Gen 28:13-15	HFW: 4. Yahweh's 10 Words; 8. Gospel of the Kingdom	HFW	Not-Validated		10
+678	Jer	31	10	31	12	Jer 31:10-12	HFW: 5. Son of God and Man — Messiah Reigns on earth over Israel	HFW	Not-Validated		18
+679	Isa	61	1	61	2	Isa 61:1-2	HFW: 8. Gospel of the Kingdom — Further studies	HFW	Not-Validated		32
+680	Ezk	34	23	34	24	Eze 34:23-24	HFW: not found on a page heading — Unallocated	HFW	Not-Validated		32

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eternal Wellspring</title>
+  <link rel="stylesheet" href="index.css?v=2" />
+</head>
+<body class="hall-page">
+  <header class="hall-top">
+    <a class="ew-mark" href="index.html">
+      <img src="images/Wellspring.JPG?v=3" alt="" width="40" height="40" />
+      <span class="ew-words">Eternal<br />Wellspring</span>
+    </a>
+  </header>
+
+  <section class="hall-hero">
+    <h1>Eternal Wellspring</h1>
+    <p class="tagline">Read the story — Open the Word</p>
+    <p class="tagline-sub">The Word stands forever — living water, one tap away.</p>
+    <div id="doors" class="site-list"></div>
+  </section>
+  <script>
+    fetch("published/doors.json")
+      .then(function (r) { return r.ok ? r.json() : { doors: [] }; })
+      .catch(function () { return { doors: [] }; })
+      .then(function (data) {
+        var box = document.getElementById("doors");
+        (data.doors || []).slice().sort(function (a, b) {
+          return String(a && a.name || "").localeCompare(String(b && b.name || ""), "en", { sensitivity: "base" });
+        }).forEach(function (d) {
+          if (!d || !d.href || !d.name) return;
+          var a = document.createElement("a");
+          a.href = d.href;
+          a.textContent = d.name;
+          box.appendChild(a);
+        });
+      });
+  </script>
+  <script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

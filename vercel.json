@@ -1,0 +1,11 @@
+{
+  "rewrites": [
+    { "source": "/bible", "destination": "/api/bible" },
+    { "source": "/scriptures", "destination": "/api/scriptures" }
+  ],
+  "functions": {
+    "api/scriptures.js": {
+      "includeFiles": "scriptures.json"
+    }
+  }
+}
