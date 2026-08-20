@@ -15,19 +15,19 @@ As you read this story, the Word of God will open up next to it with a single cl
 /* writer format */
 .site, .tag { font-family:Arial, Helvetica, sans-serif; font-size:22px; color:#1f6f78; text-align:center }
 .site { padding:0; margin:0; border:0; background:transparent }
-.brand-row { display:flex; align-items:center; gap:0.85rem }
+.brand-row { display:flex; align-items:center; gap:0.85rem; width:100%; max-width:none; margin:0; box-sizing:border-box }
 .top { justify-content:center }
 .who { align-items:center }
-.top { font-family:Arial, Helvetica, sans-serif; font-size:22px; color:#1f6f78; background:#f6f7eb; border-style:solid; border-color:#c5d0d4; border-width:0px 0px 0px 0px; padding:15px; margin-top:-7px; margin-bottom:-25px; text-align:center }
+.top .brand-row { font-family:Arial, Helvetica, sans-serif; font-size:22px; color:#1f6f78; background:#f6f7eb; border-style:solid; border-color:#c5d0d4; border-width:0px 0px 0px 0px; padding:15px; margin-top:-7px; margin-bottom:-25px; text-align:center }
 .title-bar h1 { font-family:Arial, Helvetica, sans-serif; font-size:26px; color:#004d97; background:#eeeeee; border-style:solid; border-color:#004d97; border-width:0px 0px 2.0px 0px; text-align:center }
-.tab { font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:2.0px 2.0px 2.0px 2.0px; padding:9px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab { font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#1b3a4b; background:#ffffff; border-style:solid; border-color:#c5d0d4; border-width:2.0px 2.0px 2.0px 2.0px; padding:9px; margin-top:0px; margin-bottom:0px; text-align:left }
 h2 { font-family:Arial, Helvetica, sans-serif; font-size:19px; color:#1f6f78; margin-top:19px; margin-bottom:6px; text-align:left }
-.para { font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#1b3a4b; background:#ffffff; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:10px; margin-top:10px; margin-bottom:10px; text-align:left; line-height:1.45; --para-gap:18px }
+.para { font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#1b3a4b; background:#f6f7eb; border-style:solid; border-color:#cecece; border-width:3.0px 0px 0px 3.0px; box-shadow:8px 8px 9px #00000040; padding:10px; margin-top:2px; margin-bottom:19px; text-align:left; line-height:1.45; --para-gap:18px }
 .row-title { font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#1b3a4b; margin-bottom:6px; text-align:left }
 .col-title { font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#1b3a4b; margin-bottom:6px; text-align:left }
-.col { font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#1b3a4b; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.1; --para-gap:16px }
+.col { font-family:Arial, Helvetica, sans-serif; font-size:20px; color:#1b3a4b; background:# f4f7f8; text-align:center; line-height:1.2; --para-gap:3px }
 .ew-verse-body, .ew-verse-body p, .ew-verse-alt, .ew-verse-ref { font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#1b3a4b; text-align:left; line-height:1.45 }
-.ew-chapter-list, .ew-ch-row { font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#1b3a4b; text-align:left; line-height:1.25 }
+.ew-chapter-list, .ew-ch-row { font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#e8eef6; text-align:left; line-height:1.25 }
 .page-nav, .page-nav-word { font-weight:600; font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#5a6a72 }
 .tab[data-sec="s-home-contents"] { font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:6px; text-align:left }
 .tab[data-sec="s-home-contents"] { background:#fefcdd }
@@ -44,14 +44,21 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:19px; color:#1f6f78; ma
 .tab.active { margin-bottom:-1px; position:relative; z-index:1 }
 .tab { border-radius:7px 7px 0 0 }
 .tab-panel { border-radius:0 7px 7px 7px }
-.title-bar { background:#eeeeee }
+.title-bar { background:transparent }
+.title-bar-inner { background:#eeeeee }
 .title-bar h1 { background:transparent; margin-bottom:0 }
 .tabs { margin-top:0 }
-.para[data-para="r-3v542le"] .col[data-col="0"] { font-family:Arial, Helvetica, sans-serif; font-size:20px; color:#1b3a4b; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="r-3v542le"] .col[data-col="0"] { font-family:Arial, Helvetica, sans-serif; font-size:20px; color:#1b3a4b; background:#f6f7eb; border-style:solid; border-color:#e2e2e2; border-width:0px 0px 0px 0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:3px }
 .para[data-para="r-7xst2ia"] .col[data-col="0"] { font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#1b3a4b; text-align:center; line-height:1.45; --para-gap:18px }
 .fn { font-size:.7em; font-weight:700; line-height:0; vertical-align:baseline; position:relative; top:-.45em }
 a.ref .fn { text-decoration:none }
 a.ref, .col a.ref, .col-text a.ref, .para a.ref { color:var(--title); font-weight:700; text-decoration:underline }
+.top,.title-bar,.tab-dock,main{max-width:52rem;margin-left:auto;margin-right:auto;padding-left:1.2rem;padding-right:1.2rem;box-sizing:border-box}
+.top{display:block;background:transparent;border:0}
+.top .brand-row{width:100%;max-width:none;margin:0;box-sizing:border-box}
+.title-bar{background:transparent}
+.title-bar-inner{max-width:none;width:100%;margin:0;padding-left:0;padding-right:0;box-sizing:border-box}
+.tab-dock{background:transparent}
 </style>
 </head>
 <body>
@@ -131,6 +138,6 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
   var home = location.protocol + "//" + location.hostname + ":8766/";
   document.querySelectorAll("a.ew-mark").forEach(function(a){ a.href = home; });
 })();
-</script><script>window.ewFolder="sons-of-god-arise"</script><script src="/ew-bible.js?v=31"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script>
+</script><script>window.ewFolder="sons-of-god-arise"</script><script src="/bible.js?v=32"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
