@@ -13,6 +13,8 @@
   var wisps = [];
   var meteor = null;
   var nextMeteorAt = 0;
+  var comet = null;
+  var nextCometAt = 0;
   var layers = [];
   var front = null;
 
@@ -62,18 +64,9 @@
   }
   function makeField() {
     makeStars(Math.round(cssVar("--ew-sky-stars", 50)));
-    wisps = [
-      { x: 0.18, y: 0.28, rx: 18, ry: 11, a: 0.16, rot: 0.4, lag: 0.84, rgb: "186,198,214" },
-      { x: 0.41, y: 0.16, rx: 26, ry: 14, a: 0.13, rot: -0.7, lag: 0.8, rgb: "176,188,210" },
-      { x: 0.63, y: 0.34, rx: 42, ry: 22, a: 0.11, rot: 0.25, lag: 0.76, rgb: "168,182,205" },
-      { x: 0.82, y: 0.22, rx: 34, ry: 28, a: 0.1, rot: 1.1, lag: 0.78, rgb: "190,176,168" },
-      { x: 0.27, y: 0.58, rx: 70, ry: 36, a: 0.09, rot: -0.35, lag: 0.7, rgb: "160,176,200" },
-      { x: 0.55, y: 0.7, rx: 88, ry: 48, a: 0.08, rot: 0.55, lag: 0.68, rgb: "172,164,188" },
-      { x: 0.12, y: 0.78, rx: 54, ry: 40, a: 0.09, rot: -0.9, lag: 0.74, rgb: "158,174,196" },
-      { x: 0.78, y: 0.62, rx: 160, ry: 78, a: 0.055, rot: 0.2, lag: 0.62, rgb: "150,168,192" },
-      { x: 0.38, y: 0.44, rx: 210, ry: 100, a: 0.04, rot: -0.15, lag: 0.58, rgb: "148,160,186" },
-    ];
+    wisps = [];
     nextMeteorAt = performance.now() + rnd(28000, 80000);
+    nextCometAt = performance.now() + rnd(8000, 18000);
   }
   function spawnMeteor() {
     var edge = Math.floor(rnd(0, 4));
@@ -107,6 +100,107 @@
       born: performance.now(),
       life: rnd(500, 880),
     };
+  }
+  function spawnComet() {
+    var toward = Math.random() < 0.5;
+    var ang = rnd(0, Math.PI * 2);
+    var x = w * rnd(0.12, 0.88);
+    var y = h * rnd(0.12, 0.88);
+    var edge = Math.floor(rnd(0, 4));
+    if (toward) {
+      if (edge === 0) {
+        x = rnd(0.15, 0.85) * w;
+        y = -20;
+      } else if (edge === 1) {
+        x = w + 20;
+        y = rnd(0.15, 0.85) * h;
+      } else if (edge === 2) {
+        x = rnd(0.15, 0.85) * w;
+        y = h + 20;
+      } else {
+        x = -20;
+        y = rnd(0.15, 0.85) * h;
+      }
+      ang = Math.atan2(h * 0.5 - y, w * 0.5 - x) + rnd(-0.35, 0.35);
+    } else {
+      ang = rnd(0, Math.PI * 2);
+      x = w * 0.5 + rnd(-0.2, 0.2) * w;
+      y = h * 0.5 + rnd(-0.2, 0.2) * h;
+    }
+    var sp = rnd(22, 48);
+    comet = {
+      x: x,
+      y: y,
+      vx: Math.cos(ang) * sp,
+      vy: Math.sin(ang) * sp,
+      toward: toward,
+      size: toward ? rnd(1.2, 2) : rnd(4.5, 7),
+      trail: [],
+      born: performance.now(),
+      life: rnd(9000, 18000),
+    };
+  }
+  function drawComet(now, dt) {
+    if (!comet) return;
+    comet.x += comet.vx * dt;
+    comet.y += comet.vy * dt;
+    var age = now - comet.born;
+    var u = age / comet.life;
+    if (u >= 1 || comet.x < -200 || comet.y < -200 || comet.x > w + 200 || comet.y > h + 200) {
+      comet = null;
+      nextCometAt = now + rnd(14000, 38000);
+      return;
+    }
+    var grow = comet.toward ? 1 + u * 2.4 : Math.max(0.25, 1 - u * 0.85);
+    var head = comet.size * grow;
+    var fade = comet.toward ? Math.min(1, 0.35 + u * 0.9) : Math.max(0.2, 1 - u * 0.75);
+    var last = comet.trail[comet.trail.length - 1];
+    if (!last || Math.hypot(comet.x - last.x, comet.y - last.y) >= 1.35) {
+      comet.trail.push({ x: comet.x, y: comet.y });
+    }
+    var dist = 0;
+    var i;
+    for (i = comet.trail.length - 1; i > 0; i--) {
+      dist += Math.hypot(comet.trail[i].x - comet.trail[i - 1].x, comet.trail[i].y - comet.trail[i - 1].y);
+      if (dist > 340) {
+        comet.trail.splice(0, i);
+        break;
+      }
+    }
+    var n = comet.trail.length;
+    if (n > 1) {
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      for (i = 0; i < n - 1; i++) {
+        var k = 1 - i / (n - 1);
+        var a = fade * Math.pow(1 - k, 1.85) * 0.38;
+        if (a < 0.008) continue;
+        ctx.beginPath();
+        ctx.strokeStyle = "rgba(255,236,210," + a.toFixed(3) + ")";
+        ctx.lineWidth = Math.max(0.55, head * (0.9 + k * 1.15));
+        ctx.moveTo(comet.trail[i].x, comet.trail[i].y);
+        ctx.lineTo(comet.trail[i + 1].x, comet.trail[i + 1].y);
+        ctx.stroke();
+      }
+      for (i = 0; i < n; i++) {
+        var k2 = 1 - i / (n - 1);
+        if (k2 > 0.22 && i % 2) continue;
+        var dust = fade * Math.pow(1 - k2, 2.15) * 0.16;
+        if (dust < 0.01) continue;
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(255,242,220," + dust.toFixed(3) + ")";
+        ctx.arc(comet.trail[i].x, comet.trail[i].y, head * (0.55 + k2 * 1.35), 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(255,248,235," + (0.85 * fade).toFixed(3) + ")";
+    ctx.arc(comet.x, comet.y, Math.max(1.1, head), 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(255,255,255," + (0.95 * fade).toFixed(3) + ")";
+    ctx.arc(comet.x, comet.y, Math.max(0.6, head * 0.45), 0, Math.PI * 2);
+    ctx.fill();
   }
   function Layer(urls, rate, alpha, zoomMul) {
     this.urls = urls || [];
@@ -289,18 +383,16 @@
     ctx.fillStyle = "#05070c";
     ctx.fillRect(0, 0, w, h);
     var i;
-    var many = 0;
-    for (i = 0; i < layers.length; i++) if (layers[i].urls.length) many += 1;
     for (i = 0; i < layers.length; i++) {
-      if (i > 0 && many > 1) ctx.globalCompositeOperation = "lighter";
       layers[i].draw(now);
-      ctx.globalCompositeOperation = "source-over";
     }
-    ctx.fillStyle = "rgba(5,7,12,0.22)";
+    ctx.fillStyle = "rgba(5,7,12,0.48)";
     ctx.fillRect(0, 0, w, h);
     var p = front && front.p ? front.p : null;
     drawWisps(p, now);
     if (!reduced) {
+      if (!comet && now >= nextCometAt) spawnComet();
+      drawComet(now, dt);
       if (!meteor && now >= nextMeteorAt) spawnMeteor();
       if (meteor) {
         meteor.x += meteor.vx * dt;
@@ -340,8 +432,8 @@
     var stacked = (near.length ? 1 : 0) + (mid.length ? 1 : 0) + 1;
     layers = [
       new Layer(far, 0.48, 1, 0.92),
-      new Layer(mid, 0.72, stacked > 1 ? 0.55 : 1, 1),
-      new Layer(near, 1.05, stacked > 1 ? 0.42 : 1, 1.12),
+      new Layer(mid, 0.72, stacked > 1 ? 0.22 : 1, 1),
+      new Layer(near, 1.05, stacked > 1 ? 0.16 : 1, 1.12),
     ];
     front = near.length ? layers[2] : mid.length ? layers[1] : layers[0];
   }

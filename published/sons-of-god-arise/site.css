@@ -145,7 +145,7 @@ body {
 }
 .brand-row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) auto max-content;
   align-items: center;
   gap: 0.5rem;
   width: 100%;
@@ -180,12 +180,47 @@ body {
   justify-content: center;
   align-items: flex-start;
   text-align: left;
-  font-weight: 800;
+  font-weight: 400;
   line-height: 1.1;
   letter-spacing: 0.01em;
 }
 .who { display: flex; flex-direction: column; align-items: center; text-align: center; min-width: 0; grid-column: 2; }
-.site { font-weight: 800; color: var(--accent); text-decoration: none; padding: 0; margin: 0; border: 0; background: transparent; }
+.top, .brand-row { overflow: visible; }
+.page-tools {
+  grid-column: 3;
+  justify-self: end;
+  align-self: center;
+  z-index: 0;
+  display: block;
+  text-align: right;
+  min-width: max-content;
+  color: #5a6a72;
+  font: 400 1rem/1.35 Arial, Helvetica, sans-serif;
+}
+.page-tool {
+  display: block;
+  white-space: nowrap;
+}
+.page-tools button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0 0.22em;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}
+.page-tools button:hover:not(:disabled) { color: #1b3a4b; }
+.page-tools button:disabled { opacity: 0.28; cursor: default; }
+.site { font-weight: 400; color: var(--accent); text-decoration: none; padding: 0; margin: 0; border: 0; background: transparent; }
 .tag { margin: 0.2rem 0 0; color: #555; font-size: 0.95rem; outline: none; }
 .tab-dock { padding-top: 0.25rem; padding-bottom: 0; background: transparent; }
 main { padding-top: 0; padding-bottom: 3rem; }
@@ -542,7 +577,7 @@ a.ref, .col a.ref, .col-text a.ref, .para a.ref {
 .ew-pick-verses button.mid { background: #e8f2f3; }
 
 /* writer format */
-.site, .tag, .ew-words { font-family:Arial, Helvetica, sans-serif; font-size:22px; color:#1f6f78 }
+.site, .ew-words { font-family:Arial, Helvetica, sans-serif; font-size:22px; color:#1f6f78; font-weight:400 }
 .site, .tag { text-align:center }
 .site { padding:0; margin:0; border:0; background:transparent }
 .top .brand-row { font-family:Arial, Helvetica, sans-serif; font-size:22px; color:#1f6f78; border-style:solid; border-color:#c5d0d4; border-width:0px 0px 0px 0px; padding:7px; margin-top:-11px; margin-bottom:-18px; text-align:center }
@@ -596,9 +631,11 @@ html, body { background:#05070c }
 .page-frame{max-width:52rem;margin-left:auto;margin-right:auto;border:1px solid #9aa8ae;box-sizing:border-box}
 .top,.title-bar,.tab-dock,main{max-width:none;margin-left:0;margin-right:0;padding-left:1.2rem;padding-right:1.2rem;box-sizing:border-box}
 .top{display:block;background:transparent;border:0}
-.top .brand-row{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;width:100%;max-width:none;margin:0;background:transparent;box-sizing:border-box}
+.top .brand-row{display:grid;grid-template-columns:minmax(0,1fr) auto max-content;align-items:center;width:100%;max-width:none;margin:0;background:transparent;box-sizing:border-box}
 .ew-mark{display:flex;grid-column:1;justify-self:start;align-items:center;align-self:center;gap:0.45rem;min-width:0;text-align:left}
 .ew-mark img{display:block;height:2.35em;width:auto;max-height:3rem;object-fit:contain;flex:0 0 auto}
 .ew-words{text-align:left;align-items:flex-start}
 .who{grid-column:2;align-items:center;text-align:center}
+.page-tools{grid-column:3;justify-self:end;align-self:center;z-index:0}
+.top,.brand-row{overflow:visible}
 .tab-dock{background:transparent}

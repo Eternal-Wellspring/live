@@ -1,7 +1,8 @@
 {
   "rewrites": [
     { "source": "/bible", "destination": "/api/bible" },
-    { "source": "/scriptures", "destination": "/api/scriptures" }
+    { "source": "/scriptures", "destination": "/api/scriptures" },
+    { "source": "/sky-images", "destination": "/images/sky/list.json" }
   ],
   "functions": {
     "api/scriptures.js": {
