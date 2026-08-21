@@ -63,12 +63,11 @@ body { --header-h: 88px; }
 }
 .ew-mark img {
   display: block;
-  width: 40px !important;
-  height: 40px !important;
-  max-width: 40px !important;
-  max-height: 40px !important;
-  object-fit: cover;
-  flex: 0 0 40px;
+  height: 40px;
+  width: auto;
+  max-height: 40px;
+  object-fit: contain;
+  flex: 0 0 auto;
 }
 .ew-words {
   display: block;

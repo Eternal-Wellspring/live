@@ -11,6 +11,7 @@ from urllib.parse import parse_qs, urlparse
 from urllib.request import Request, urlopen
 
 LIVE = Path(__file__).resolve().parent
+SKY_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
 SOGA = LIVE / "soga"
 PUBLISHED = LIVE / "published"
 SCRIPTURES = LIVE / "scriptures.json"
@@ -70,6 +71,26 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_GET(self):
         path = urlparse(self.path).path
+        if path == "/sky-images":
+            folder = LIVE / "images" / "sky"
+            layers = {"1": [], "2": [], "3": []}
+            if folder.is_dir():
+                for p in sorted(folder.iterdir(), key=lambda x: x.name.lower()):
+                    if not (p.is_file() and p.suffix.lower() in SKY_EXTS):
+                        continue
+                    n = p.name.lower()
+                    m = (
+                        re.search(r"[-_ .]([123])\.[^.]+$", n)
+                        or re.search(r"[-_]([123])[-_]", n)
+                        or re.match(r"^([123])[-_]", n)
+                    )
+                    key = m.group(1) if m else "3"
+                    layers[key].append("/images/sky/" + p.name)
+            flat = layers["1"] + layers["2"] + layers["3"]
+            if not flat and (LIVE / "images" / "ew-sky.jpg").exists():
+                layers["3"] = ["/images/ew-sky.jpg"]
+                flat = layers["3"][:]
+            return self._json(200, {"images": flat, "layers": layers})
         if path == "/scriptures":
             q = parse_qs(urlparse(self.path).query)
             ref = (q.get("ref") or [""])[0]

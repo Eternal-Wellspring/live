@@ -6,7 +6,7 @@ html, body { margin: 0; background: var(--paper); color: var(--ink); font: 18px/
 .top { display: flex; align-items: baseline; gap: 1.4rem; padding: 0.7rem 1.2rem; background: #fff; border-bottom: 1px solid var(--line); }
 
 .ew-mark { display:inline-flex; align-items:center; gap:0.4rem; color:#005eb8; text-decoration:none; }
-.ew-mark img { display:block; width:40px !important; height:40px !important; max-width:40px !important; max-height:40px !important; object-fit:cover; flex:0 0 40px; }
+.ew-mark img { display:block; height:2.35em; width:auto; max-height:3rem; object-fit:contain; flex:0 0 auto; }
 .ew-words { display:block; font-weight:800; font-size:15px; line-height:1.15; letter-spacing:0.01em; }
 
 .ew { font-weight: 800; color: var(--title); text-decoration: none; }
