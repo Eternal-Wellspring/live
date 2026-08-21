@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en-GB" data-page="p-home">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,56 +10,68 @@ Understand passages there were a little strange instead of passing over them.  Y
 
 As you read this story, the Word of God will open up next to it with a single click or tap." />
   
-  <link rel="stylesheet" href="site.css?v=tools5" />
+  <link rel="stylesheet" href="site.css?v=tools19" />
   <style id="ew-format">
 /* writer format */
-.site, .ew-words { font-family:Arial, Helvetica, sans-serif; font-size:22px; color:#1f6f78; font-weight:400 }
-.site, .tag { text-align:center }
-.site { padding:0; margin:0; border:0; background:transparent }
-.top .brand-row { font-family:Arial, Helvetica, sans-serif; font-size:22px; color:#1f6f78; border-style:solid; border-color:#c5d0d4; border-width:0px 0px 0px 0px; padding:7px; margin-top:-11px; margin-bottom:-18px; text-align:center }
-.title-bar h1 { font-family:Arial, Helvetica, sans-serif; font-size:26px; color:#005eb8; text-align:left }
-.tab { font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#1b3a4b; background:#ffffff; border-style:solid; border-color:#c5d0d4; border-width:2.0px 2.0px 2.0px 2.0px; padding:9px; margin-top:3px; margin-bottom:0px; text-align:left }
-h2 { font-family:Arial, Helvetica, sans-serif; font-size:19px; color:#1f6f78; margin-top:18px; margin-bottom:0px; text-align:left }
-.para { font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#1b3a4b; background:#ffffff; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:10px; margin-top:10px; margin-bottom:10px; text-align:left; line-height:1.45; --para-gap:18px }
-.row-title { font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#1b3a4b; margin-bottom:6px; text-align:left }
-.col-title { font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#1b3a4b; margin-bottom:6px; text-align:left }
-.col { font-family:Arial, Helvetica, sans-serif; font-size:20px; color:#1b3a4b; background:# f4f7f8; text-align:center; line-height:1.2; --para-gap:3px }
-.ew-verse-body, .ew-verse-body p, .ew-verse-alt, .ew-verse-ref { font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#1b3a4b; text-align:left; line-height:1.45 }
-.ew-chapter-list, .ew-ch-row { font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#e8eef6; text-align:left; line-height:1.25 }
-.page-nav, .page-nav-word { font-weight:600; font-family:Arial, Helvetica, sans-serif; font-size:15.6px; color:#5a6a72 }
-.tab[data-sec="s-home-contents"] { font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:6px; text-align:left }
+.site, .ew-words { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); color:#1f6f78; font-weight:400 }
+.who, .site { text-align:center }
+.site { display:block; width:100%; padding:0; margin:0; border:0; background:transparent }
+.who .site, a.site { font-weight:400; font-style:normal; text-decoration:none }
+.top .brand-row { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f6f78; background:#f6f7eb; border-style:solid; border-color:#c5d0d4; border-width:0px 0px 0px 0px; padding:0px; margin-top:0px; margin-bottom:0px }
+.title-bar h1 { font-family:Arial, Helvetica, sans-serif; font-size:calc(23px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#004d97; background:#f6f7eb; border-style:solid; border-color:#004d97; border-width:0px 0px 0px 0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center }
+.tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:2.0px 2.0px 2.0px 2.0px; padding:9px; margin-top:0px; margin-bottom:0px; text-align:left }
+h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f6f78; margin-top:-8px; margin-bottom:6px; text-align:left }
+.para { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#ffffff; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:10px; margin-top:10px; margin-bottom:10px; text-align:left; line-height:1.45; --para-gap:18px }
+.row-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:6px; text-align:left }
+.col-title:not(:empty) { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:6px; text-align:left }
+.col { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.2; --para-gap:3px }
+.ew-verse-body, .ew-verse-body p, .ew-verse-alt, .ew-verse-ref { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.45 }
+.ew-chapter-list, .ew-ch-row { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.25 }
+.page-nav, .page-nav .page-nav-word, .page-nav .page-nav-tip, .page-tools, .page-tools button { font-weight:400; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#5a6a72 }
+.tab[data-sec="s-home-contents"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:6px; text-align:left }
 .tab[data-sec="s-home-contents"] { background:#fefcdd }
 .tab[data-sec="s-home-contents"].active, .tab-panel[data-sec="s-home-contents"] { background:#ffffff }
 .tab[data-sec="s-home-contents"].active { border-bottom-color:#ffffff }
-.tab[data-sec="s-home-story"] { font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:6px; text-align:left }
+.tab[data-sec="s-home-story"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:6px; text-align:left }
 .tab[data-sec="s-home-story"] { background:#fefcdd }
 .tab[data-sec="s-home-story"].active, .tab-panel[data-sec="s-home-story"] { background:#ffffff }
 .tab[data-sec="s-home-story"].active { border-bottom-color:#ffffff }
-.tab[data-sec="s-home-intro"] { font-family:Arial, Helvetica, sans-serif; font-size:16px; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:6px; text-align:left }
+.tab[data-sec="s-home-intro"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:6px; text-align:left }
 .tab[data-sec="s-home-intro"] { background:#fefcdd }
 .tab[data-sec="s-home-intro"].active, .tab-panel[data-sec="s-home-intro"] { background:#ffffff }
 .tab[data-sec="s-home-intro"].active { border-bottom-color:#ffffff }
 .tab.active { margin-bottom:-1px; position:relative; z-index:1 }
 .tab { border-radius:7px 7px 0 0 }
 .tab-panel { border-radius:0 7px 7px 7px }
-.para[data-para="r-3v542le"] .col[data-col="0"] { font-family:Arial, Helvetica, sans-serif; font-size:20px; color:#1b3a4b; background:#f6f7eb; text-align:center; line-height:1.2; --para-gap:3px }
-.para[data-para="r-7xst2ia"] .col[data-col="0"] { font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#1b3a4b; text-align:center; line-height:1.45; --para-gap:18px }
+.col-title:empty { display:none !important; margin:0 !important; min-height:0 !important; padding:0 !important }
+.title-bar { background:#f6f7eb }
+.title-bar-inner { background:#f6f7eb }
+.title-bar h1 { background:transparent; margin-bottom:0 }
+.tabs { margin-top:0 }
+.para[data-para="r-3v542le"] .col[data-col="0"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.2; --para-gap:3px }
+.para[data-para="r-7xst2ia"] .col[data-col="0"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:center; line-height:1.45; --para-gap:18px }
 .fn { font-size:.7em; font-weight:700; line-height:0; vertical-align:baseline; position:relative; top:-.45em }
 a.ref .fn { text-decoration:none }
 a.ref, .col a.ref, .col-text a.ref, .para a.ref { color:var(--title); font-weight:700; text-decoration:underline }
-html { --ew-sky-creep:2.0; --ew-sky-stars:100; --ew-sky-zoom:2.0; --ew-sky-zoom-mins:7.0; --ew-sky-twinkle:1; --ew-sky-bright:100.0; --ew-sky-twinkle-speed:13.0; --ew-sky-fade:3 }
+html { --ew-sky-creep:18; --ew-sky-stars:50; --ew-sky-zoom:1.4; --ew-sky-zoom-mins:12; --ew-sky-twinkle:1; --ew-sky-bright:70; --ew-sky-twinkle-speed:6; --ew-sky-fade:3 }
 html, body { background:#05070c }
 #ew-sky { display:block }
-.page-frame,.stick-top { background:#ededed }
-.page-frame{max-width:52rem;margin-left:auto;margin-right:auto;border:1px solid #9aa8ae;box-sizing:border-box}
+.page-frame { background:transparent }
+.stick-top { background:#f6f7eb }
+.tab-dock { background:transparent }
+.page-frame{max-width:none;width:auto;margin:1.25rem;border:1px solid #9aa8ae;box-sizing:border-box}
 .top,.title-bar,.tab-dock,main{max-width:none;margin-left:0;margin-right:0;padding-left:1.2rem;padding-right:1.2rem;box-sizing:border-box}
-.top{display:block;background:transparent;border:0}
-.top .brand-row{display:grid;grid-template-columns:minmax(0,1fr) auto max-content;align-items:center;width:100%;max-width:none;margin:0;background:transparent;box-sizing:border-box}
-.ew-mark{display:flex;grid-column:1;justify-self:start;align-items:center;align-self:center;gap:0.45rem;min-width:0;text-align:left}
+.top{display:block;border:0}
+.top .brand-row{display:grid;grid-template-columns:auto minmax(0,1fr) max-content;align-items:center;width:100%;max-width:none;margin:0;padding-left:0;padding-right:0;box-sizing:border-box}
+.top,.top .brand-row{background:#f6f7eb}
+.ew-mark{display:flex;grid-column:1;grid-row:1;justify-self:start;align-items:center;align-self:center;z-index:2;gap:0.45rem;min-width:0;text-align:left}
 .ew-mark img{display:block;height:2.35em;width:auto;max-height:3rem;object-fit:contain;flex:0 0 auto}
 .ew-words{text-align:left;align-items:flex-start}
-.who{grid-column:2;align-items:center;text-align:center}
-.page-tools{grid-column:3;justify-self:end;align-self:center;z-index:0}
+.who{grid-column:1/-1;grid-row:1;z-index:1;display:block;width:100%;min-width:0}
+.who,.site{text-align:center}
+.title-bar-inner{grid-template-columns:auto minmax(0,1fr) auto}
+.title-bar h1,.page-end-title{width:100%;min-width:0}
+.page-tools{grid-column:3;grid-row:1;justify-self:end;align-self:center;z-index:2}
 .top,.brand-row{overflow:visible}
 .tab-dock{background:transparent}
 </style>
@@ -71,7 +83,7 @@ html, body { background:#05070c }
     <header class="top">
       <div class="brand-row">
         <a class="ew-mark" href="/" target="_parent">
-          <img src="/images/wellspring.jpg?v=9" alt="" />
+          <img src="/images/wellspring.jpg?v=10" alt="" />
           <span class="ew-words">Eternal<br>Wellspring</span>
         </a>
         <div class="who">
@@ -83,13 +95,13 @@ html, body { background:#05070c }
         </div>
       </div>
     </header>
-    <div class="title-bar"><div class="title-bar-inner"><span class="page-nav prev"></span><h1>1. Home</h1><a class="page-nav next" href="creation-god-human-beings.html#s1" aria-label="2. Creation: God Human Beings"><span class="page-nav-word">Next</span><span class="page-nav-tip">2. Creation: God Human Beings</span></a></div></div>
-    <div class="tab-dock"><div class="tabs"><button type="button" class="tab" data-tab="s0" data-sec="s-home-contents">Contents</button><button type="button" class="tab active" data-tab="s1" data-sec="s-home-story">Home</button><button type="button" class="tab" data-tab="s2" data-sec="s-home-intro">Introduction</button></div></div>
+    <div class="title-bar"><div class="title-bar-inner"><span class="page-nav prev"></span><h1>1. Home</h1><a class="page-nav next" href="creation-god-with-human-beings.html#s1" aria-label="2. Creation: God with Human Beings"><span class="page-nav-word">Next</span><span class="page-nav-tip">2. Creation: God with Human Beings</span></a></div></div>
   </div>
+  <div class="tab-dock"><div class="tabs"><button type="button" class="tab" data-tab="s0" data-sec="s-home-contents">Contents</button><button type="button" class="tab active" data-tab="s1" data-sec="s-home-story">Home</button><button type="button" class="tab" data-tab="s2" data-sec="s-home-intro">Introduction</button></div></div>
   <main>
-    <div class=" tab-panel" id="s0" data-sec="s-home-contents"><ol class="contents-list"><li><a href="home.html#s1">1. Home</a></li><li><a href="creation-god-human-beings.html#s1">2. Creation: God Human Beings</a></li></ol></div><div class=" tab-panel active" id="s1" data-sec="s-home-story"><h2 class="edit-heading" data-heading="h-kk06ndy">Home Page</h2><div class="para" data-para="r-3v542le"><div class="col" data-col="0" style="flex:1.0 1 0"><div class="col-text"><span class="bit">“Creation eagerly awaits </span><span class="bit">the revealing of the</span><span class="bit">sons of God.”</span><span class="bit">Rom 8:19-21</span></div></div></div><div class="para" data-para="r-7xst2ia"><div class="col" data-col="0" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Photo</span></div></div></div></div><div class=" tab-panel" id="s2" data-sec="s-home-intro"></div>
+    <div class=" tab-panel" id="s0" data-sec="s-home-contents"><ol class="contents-list"><li><a href="home.html#s1">1. Home</a></li><li><a href="creation-god-with-human-beings.html#s1">2. Creation: God with Human Beings</a></li></ol></div><div class=" tab-panel active" id="s1" data-sec="s-home-story"><h2 class="edit-heading" data-heading="h-kk06ndy">Home Page</h2><div class="para" data-para="r-3v542le"><div class="col" data-col="0" style="flex:1.0 1 0"><div class="col-text"><span class="bit">“Creation eagerly awaits </span><span class="bit">the revealing of the</span><span class="bit">sons of God.”</span><span class="bit">Rom 8:19-21</span></div></div></div><div class="para" data-para="r-7xst2ia"><div class="col" data-col="0" style="flex:1.0 1 0"><div class="col-text"><span class="bit"><img class="col-pic" src="images/pic-20260821-175017-938388.jpg" alt="" style="display:block;max-width:100%;height:auto;box-sizing:border-box;margin:0 0 0 0" /></span></div></div></div></div><div class=" tab-panel" id="s2" data-sec="s-home-intro"></div>
   </main>
-  <div class="title-bar title-bar-bottom"><div class="title-bar-inner"><span class="page-nav prev"></span><span></span><a class="page-nav next" href="creation-god-human-beings.html#s1" aria-label="2. Creation: God Human Beings"><span class="page-nav-word">Next</span><span class="page-nav-tip">2. Creation: God Human Beings</span></a></div></div>
+  <div class="title-bar title-bar-bottom"><div class="title-bar-inner"><span class="page-nav prev"></span><span></span><a class="page-nav next" href="creation-god-with-human-beings.html#s1" aria-label="2. Creation: God with Human Beings"><span class="page-nav-word">Next</span><span class="page-nav-tip">2. Creation: God with Human Beings</span></a></div></div>
   </div>
   <script>
 function showTab(id){
@@ -151,7 +163,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
 (function(){
   var PAGE_KEY = "ew.page";
   var FONT_KEY = "ew.font";
-  var STEPS = [0.8, 0.9, 1, 1.1, 1.25, 1.4];
+  var STEPS = [0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.25, 1.4];
   function nearest(v) {
     var best = STEPS[0], d = 99, i;
     for (i = 0; i < STEPS.length; i++) {
@@ -173,15 +185,27 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
   function apply() {
     var f = document.querySelector(".page-frame");
     var main = document.querySelector("main");
-    var title = document.querySelector(".title-bar");
     var tabs = document.querySelector(".tab-dock");
-    if (f) f.style.zoom = String(pageZ);
-    var fz = String(fontZ);
-    if (main) main.style.zoom = fz;
-    if (title) title.style.zoom = fz;
-    if (tabs) tabs.style.zoom = fz;
+    if (f) {
+      f.style.zoom = "";
+      if (pageZ < 1) {
+        f.style.width = (pageZ * 100) + "%";
+        f.style.maxWidth = (pageZ * 100) + "%";
+        f.style.marginLeft = "auto";
+        f.style.marginRight = "auto";
+      } else {
+        f.style.width = "auto";
+        f.style.maxWidth = "none";
+        f.style.marginLeft = "1.25rem";
+        f.style.marginRight = "1.25rem";
+      }
+    }
+    document.documentElement.style.setProperty("--ew-font", String(fontZ));
+    if (main) main.style.zoom = "";
+    if (tabs) tabs.style.zoom = "";
+    document.querySelectorAll(".title-bar h1, .page-end-title").forEach(function(el){ el.style.zoom = ""; });
     document.querySelectorAll(".page-minus").forEach(function(b){ b.disabled = pageZ <= STEPS[0]; });
-    document.querySelectorAll(".page-plus").forEach(function(b){ b.disabled = pageZ >= STEPS[STEPS.length - 1]; });
+    document.querySelectorAll(".page-plus").forEach(function(b){ b.disabled = pageZ >= 1; });
     document.querySelectorAll(".font-minus").forEach(function(b){ b.disabled = fontZ <= STEPS[0]; });
     document.querySelectorAll(".font-plus").forEach(function(b){ b.disabled = fontZ >= STEPS[STEPS.length - 1]; });
   }

@@ -71,6 +71,9 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_GET(self):
         path = urlparse(self.path).path
+        site_img = re.match(r"/sites/([^/]+)/images/(.+)$", path)
+        if site_img:
+            return self._serve_dir(PUBLISHED / site_img.group(1) / "images", site_img.group(2))
         if path == "/sky-images":
             folder = LIVE / "images" / "sky"
             layers = {"1": [], "2": [], "3": []}
