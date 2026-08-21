@@ -688,7 +688,7 @@
       "#ew-ref-menu .ew-ref-title{padding:0.3rem 0.75rem 0.15rem;font:800 0.82rem Arial,Helvetica,sans-serif;color:#1f6f78}" +
       "#ew-ref-menu button{display:block;width:100%;text-align:left;border:0;background:none;padding:0.35rem 0.75rem;font:700 0.88rem Arial,Helvetica,sans-serif;color:#1b3a4b;cursor:pointer}" +
       "#ew-ref-menu button:hover{background:#eef3f4}" +
-      ".fn{font-size:.7em;font-weight:700;line-height:0;vertical-align:baseline;position:relative;top:-.45em}" +
+      ".fn{font-size:.7em;font-weight:700;line-height:1;vertical-align:super;cursor:pointer;color:var(--title,#005eb8)}" +
       "a.ref .fn{text-decoration:none}";
     document.head.appendChild(s);
   }
@@ -1010,6 +1010,16 @@
     }
     body.addEventListener("input", noteEdit);
     body.addEventListener("keyup", noteEdit);
+    body.addEventListener("keydown", function (ev) {
+      if (!canEditVerses()) return;
+      if (ev.isComposing) return;
+      if (!(ev.metaKey || ev.ctrlKey) || ev.altKey) return;
+      var key = (ev.key || "").toLowerCase();
+      if (key !== "b" && key !== "i" && key !== "u") return;
+      ev.preventDefault();
+      document.execCommand(key === "b" ? "bold" : key === "i" ? "italic" : "underline");
+      noteEdit();
+    });
     body.addEventListener("paste", function () {
       setTimeout(noteEdit, 0);
     });
@@ -1513,20 +1523,107 @@
     return true;
   }
 
-  ensureRefStyle();
-  document.addEventListener("click", function (ev) {
-    var a = ev.target.closest && ev.target.closest("a.ref");
-    if (!a) return;
-    if (a.closest && a.closest("#ew-verse, #ew-chapter, #ew-ref-menu")) return;
-    ev.preventDefault();
-    ev.stopPropagation();
-    var ref = parseChapter(a.getAttribute("data-ref") || a.textContent);
-    if (!ref) return;
+  function fnNumber(el) {
+    var n = parseInt(String((el && el.textContent) || "").trim(), 10);
+    return n > 0 ? n : 0;
+  }
+  function parseRefNode(a) {
+    if (!a) return null;
+    return parseChapter(a.getAttribute("data-ref") || a.textContent);
+  }
+  function textAfterFn(fn) {
+    var t = "";
+    var n = fn && fn.nextSibling;
+    while (n) {
+      if (n.nodeType === 3) t += n.nodeValue || "";
+      else if (n.nodeType === 1) {
+        if ((n.className || "").indexOf("ref") >= 0) {
+          var dr = n.getAttribute("data-ref");
+          if (dr) return String(dr).trim();
+        }
+        t += n.innerText || n.textContent || "";
+      }
+      n = n.nextSibling;
+    }
+    return String(t || "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+  function refFromAroundFn(fn) {
+    if (!fn) return null;
+    var a = fn.closest && fn.closest("a.ref");
+    var r = parseRefNode(a);
+    if (r) return { ref: r, a: a };
+    var after = textAfterFn(fn);
+    r = parseChapter(after);
+    if (r) {
+      a = fn.parentNode && fn.parentNode.querySelector ? fn.parentNode.querySelector("a.ref") : null;
+      return { ref: r, a: a };
+    }
+    var host = (fn.closest && (fn.closest(".bit") || fn.closest(".col"))) || fn.parentNode;
+    if (host && host.querySelectorAll) {
+      var links = host.querySelectorAll("a.ref");
+      for (var i = 0; i < links.length; i++) {
+        if (fn.compareDocumentPosition(links[i]) & 4) {
+          r = parseRefNode(links[i]);
+          if (r) return { ref: r, a: links[i] };
+        }
+      }
+    }
+    return null;
+  }
+  function noteRefForFn(fn) {
+    if (!fn) return null;
+    var hit = refFromAroundFn(fn);
+    if (hit) return hit;
+    var para = fn.closest && fn.closest(".para");
+    var num = fnNumber(fn);
+    if (!para || !num) return null;
+    var list = para.querySelectorAll(".fn");
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] === fn) continue;
+      if (fnNumber(list[i]) !== num) continue;
+      hit = refFromAroundFn(list[i]);
+      if (hit) return hit;
+    }
+    var cols = para.querySelectorAll(".col");
+    for (var c = 0; c < cols.length; c++) {
+      if (fn.closest && fn.closest(".col") === cols[c]) continue;
+      var link = cols[c].querySelector("a.ref");
+      var r = parseRefNode(link);
+      if (r) return { ref: r, a: link };
+    }
+    return null;
+  }
+  function openParsed(ref, a) {
+    if (!ref) return false;
     ensureBox();
     currentRef = ref;
     currentRef.label = ref.vs1 ? refLabel(ref) : ref.label;
-    savedLink = a;
+    savedLink = a || null;
     lookupThenShow();
+    return true;
+  }
+
+  ensureRefStyle();
+  document.addEventListener("click", function (ev) {
+    if (ev.target.closest && ev.target.closest("#ew-verse, #ew-chapter, #ew-ref-menu")) return;
+    var a = ev.target.closest && ev.target.closest("a.ref");
+    if (a) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      var ref = parseChapter(a.getAttribute("data-ref") || a.textContent);
+      if (!ref) return;
+      openParsed(ref, a);
+      return;
+    }
+    var fn = ev.target.closest && ev.target.closest(".fn");
+    if (!fn) return;
+    var hit = noteRefForFn(fn);
+    if (!hit || !hit.ref) return;
+    ev.preventDefault();
+    ev.stopPropagation();
+    openParsed(hit.ref, hit.a);
   });
   document.addEventListener("contextmenu", function (ev) {
     if (!canEditVerses()) return;
