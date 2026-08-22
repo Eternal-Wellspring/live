@@ -247,6 +247,7 @@ h2 { color: var(--accent); font-size: calc(1.2rem * var(--ew-font, 1)); margin: 
 html.ew-notes-off .col-footnotes,
 html.ew-notes-off .col-footnotes-split,
 html.ew-notes-off .col-footnotes + .col-split { display: none !important; }
+html.ew-notes-off .fn { display: none !important; }
 .set-box { max-width: 38rem; }
 .set-box h2 { margin-top: 0.2rem; }
 .set-row { display: flex; align-items: center; gap: 0.8rem; margin: 0.65rem 0; flex-wrap: wrap; }
