@@ -10,6 +10,9 @@
       return _ewFetch.apply(this, arguments);
     }
     if (u.pathname !== "/scriptures") return _ewFetch.apply(this, arguments);
+    if (location.port === "8766" || location.port === "8767") {
+      return _ewFetch.apply(this, arguments);
+    }
     var ref = u.searchParams.get("ref") || "";
     var want = String(ref).replace(/\s+/g, " ").trim().toLowerCase();
     var files = [];
@@ -194,11 +197,14 @@
   function loadScripturesFile() {
     if (scripturesFile) return Promise.resolve(scripturesFile);
     var urls = [];
+    if (window.ewFolder) {
+      urls.push("/sites/" + encodeURIComponent(window.ewFolder) + "/scriptures.json");
+    }
     try {
       urls.push(new URL("scriptures.json", location.href).href);
     } catch (e) {}
     urls.push("scriptures.json");
-    urls.push("/scriptures.json");
+    if (!window.ewFolder) urls.push("/scriptures.json");
     function next(i) {
       if (i >= urls.length) {
         scripturesFile = { verses: [] };
@@ -279,7 +285,12 @@
     return findStored(ref);
   }
   function storedHtml(text) {
-    return String(text || "").replace(/\n/g, "<br>");
+    return String(text || "")
+      .replace(/&amp;nbsp;/gi, " ")
+      .replace(/&nbsp;/gi, " ")
+      .replace(/&#160;|&#x0*a0;/gi, " ")
+      .replace(/\u00a0/g, " ")
+      .replace(/\n/g, "<br>");
   }
   function setChosen(id) {
     try {
@@ -1415,19 +1426,8 @@
       .then(function (d) {
         if (d && d.found && d.text) {
           inFile = true;
-          var kept = verseMapFromHtml(storedHtml(d.text));
           showPopup();
-          if (d.missing && d.missing.length) {
-            return loadPassage(currentRef, "NKJV").then(function (verses) {
-              addMissingVerses(kept, verses);
-              nkjvHtml = htmlFromVerseMap(kept, currentRef.vs1, vs2Safe(currentRef)) || storedHtml(d.text);
-              body.innerHTML = nkjvHtml;
-              savedCopy = nkjvHtml;
-              markHitPassages();
-              markClean();
-            });
-          }
-          nkjvHtml = htmlFromVerseMap(kept, currentRef.vs1, vs2Safe(currentRef)) || storedHtml(d.text);
+          nkjvHtml = storedHtml(d.text);
           body.innerHTML = nkjvHtml;
           savedCopy = nkjvHtml;
           markHitPassages();
@@ -1484,12 +1484,7 @@
     return body ? body.innerHTML : "";
   }
   function htmlToSave() {
-    var html = bodyHtml();
-    var map = verseMapFromHtml(html);
-    if (currentRef && currentRef.vs1 && Object.keys(map).length) {
-      html = htmlFromVerseMap(map, currentRef.vs1, vs2Safe(currentRef)) || html;
-    }
-    return html;
+    return bodyHtml();
   }
   function revertSaved() {
     if (!savedCopy || !body) return;
@@ -1497,16 +1492,22 @@
     nkjvHtml = savedCopy;
     markClean();
   }
+  function saveFolder() {
+    if (window.ewFolder) return String(window.ewFolder);
+    var m = String(location.pathname || "").match(/\/(?:sites|published)\/([^/]+)\//);
+    return m ? m[1] : "";
+  }
   function saveCurrent(andClose) {
     if (!currentRef || location.port !== "8767") return;
     var html = htmlToSave();
     if (!html) return;
+    var folder = saveFolder();
     if (saveBtn) saveBtn.disabled = true;
     if (saveCloseBtn) saveCloseBtn.disabled = true;
-    fetch("/scriptures", {
+    fetch("/scriptures?folder=" + encodeURIComponent(folder), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ reference: currentRef.label, text: html, folder: window.ewFolder || "" }),
+      body: JSON.stringify({ reference: currentRef.label, text: html, folder: folder }),
     })
       .then(function (r) {
         return r.json().then(function (d) {
