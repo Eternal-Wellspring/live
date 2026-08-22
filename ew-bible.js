@@ -239,10 +239,25 @@
       return { found: false, reference: ref, text: "", missing: [] };
     });
   }
+  function rememberSaved(ref, html) {
+    if (!scripturesFile || !Array.isArray(scripturesFile.verses)) {
+      scripturesFile = { verses: [] };
+    }
+    var want = scriptureKey(ref);
+    var list = scripturesFile.verses;
+    var i;
+    for (i = 0; i < list.length; i++) {
+      if (scriptureKey(list[i].reference) === want) {
+        list[i].reference = ref;
+        list[i].text = html;
+        list[i].source = "edited";
+        return;
+      }
+    }
+    list.push({ reference: ref, text: html, source: "edited" });
+  }
   function fetchStored(ref) {
-    return findStored(ref).then(function (d) {
-      if (d && d.found && d.text) return d;
-      if (!hasLocalApi()) return d;
+    if (hasLocalApi()) {
       var q = "/scriptures?ref=" + encodeURIComponent(ref);
       if (window.ewFolder) q += "&folder=" + encodeURIComponent(window.ewFolder);
       return fetch(q)
@@ -251,13 +266,17 @@
           return r.json();
         })
         .then(function (api) {
-          if (api && typeof api === "object" && ("found" in api || "text" in api)) return api;
-          return d;
+          if (api && api.found && api.text) {
+            rememberSaved(api.reference || ref, api.text);
+            return api;
+          }
+          return findStored(ref);
         })
         .catch(function () {
-          return d;
+          return findStored(ref);
         });
-    });
+    }
+    return findStored(ref);
   }
   function storedHtml(text) {
     return String(text || "").replace(/\n/g, "<br>");
@@ -1098,12 +1117,12 @@
     if (body) body.contentEditable = edit ? "true" : "false";
     if (!cancelBtn) return;
     if (saveBtn) {
-      saveBtn.hidden = !edit;
+      saveBtn.hidden = !edit || !dirty;
       saveBtn.disabled = !edit || !dirty;
       saveBtn.textContent = "Save";
     }
     if (saveCloseBtn) {
-      saveCloseBtn.hidden = !edit;
+      saveCloseBtn.hidden = !edit || !dirty;
       saveCloseBtn.disabled = !edit || !dirty;
     }
     if (revertBtn) {
@@ -1502,6 +1521,7 @@
           nkjvHtml = html;
           if (body && body.innerHTML !== html) body.innerHTML = html;
           savedCopy = html;
+          rememberSaved(currentRef.label, html);
           markClean();
           if (andClose) hide();
         }

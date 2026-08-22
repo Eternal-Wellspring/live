@@ -82,6 +82,8 @@ class Handler(SimpleHTTPRequestHandler):
                     if not (p.is_file() and p.suffix.lower() in SKY_EXTS):
                         continue
                     n = p.name.lower()
+                    if not n.startswith("sky"):
+                        continue
                     m = (
                         re.search(r"[-_ .]([123])\.[^.]+$", n)
                         or re.search(r"[-_]([123])[-_]", n)
