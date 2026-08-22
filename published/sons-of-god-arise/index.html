@@ -10,7 +10,7 @@ Understand passages there were a little strange instead of passing over them.  Y
 
 As you read this story, the Word of God will open up next to it with a single click or tap." />
   
-  <link rel="stylesheet" href="site.css?v=tools43" />
+  <link rel="stylesheet" href="site.css?v=tools45" />
   <style id="ew-format">
 /* writer format */
 .site { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); color:#1f6f78; font-weight:400 }
@@ -93,6 +93,7 @@ html, body { background:#05070c }
 </head>
 <body>
   <canvas id="ew-sky" aria-hidden="true"></canvas>
+  <button type="button" id="ew-full">Full Screen</button>
   <div class="page-frame">
   <div class="stick-top">
     <div class="head-banners">
@@ -109,11 +110,11 @@ html, body { background:#05070c }
       </header>
       <div class="title-bar"><div class="title-bar-inner"><h1>1. Home</h1></div></div>
     </div>
-    <div class="page-nav-bar"><span class="page-nav prev"></span><a class="page-nav next" href="page-2.html#s1" aria-label="2. Home"><span class="page-nav-word">Next</span><span class="page-nav-tip">2. Home</span></a></div>
+    <div class="page-nav-bar"><span class="page-nav prev"></span><a class="page-nav next" href="god-wanted-to-dwell-with-human-beings.html#s1" aria-label="2. God wanted to dwell with Human Beings"><span class="page-nav-word">Next</span><span class="page-nav-tip">2. God wanted to dwell with Human Beings</span></a></div>
     <div class="tab-dock"><div class="tabs"><button type="button" class="tab" data-tab="s0" data-sec="s-home-contents">Contents</button><button type="button" class="tab active" data-tab="s1" data-sec="s-home-story">Home</button><button type="button" class="tab" data-tab="s2" data-sec="s-home-intro">Introduction</button><button type="button" class="tab tab-settings" data-tab="s3" data-sec="s-sd2vs8k">Settings</button></div></div>
   </div>
   <main>
-    <div class=" tab-panel" id="s0" data-sec="s-home-contents"><ol class="contents-list"><li><a href="home.html#s1">1. Home</a></li><li><a href="page-2.html#s1">2. Home</a></li></ol></div><div class=" tab-panel active" id="s1" data-sec="s-home-story"><h2 class="edit-heading" data-heading="h-kk06ndy">Home Page</h2><div class="para" data-para="r-3v542le"><div class="col" data-col="0" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Creation eagerly awaits </span><span class="bit">the revealing of the</span><span class="bit">sons of God</span><span class="bit"><a class="ref" href="#ref" data-ref="Rom 8:19-21">Rom 8:19-21</a></span></div></div></div><div class="para" data-para="r-7xst2ia"><div class="col" data-col="0" style="flex:1.0 1 0"><div class="col-text"><span class="bit"><img class="col-pic" src="images/pic-20260821-175017-938388.jpg" alt="" style="display:block;max-width:100%;height:auto;box-sizing:border-box;margin:0 0 0 0" /></span></div></div></div></div><div class=" tab-panel" id="s2" data-sec="s-home-intro"></div><div class=" tab-panel" id="s3" data-sec="s-sd2vs8k"><div class="set-box">
+    <div class=" tab-panel" id="s0" data-sec="s-home-contents"><ol class="contents-list"><li><a href="home.html#s1">1. Home</a></li><li><a href="god-wanted-to-dwell-with-human-beings.html#s1">2. God wanted to dwell with Human Beings</a></li></ol></div><div class=" tab-panel active" id="s1" data-sec="s-home-story"><h2 class="edit-heading" data-heading="h-kk06ndy">Home Page</h2><div class="para" data-para="r-3v542le"><div class="col" data-col="0" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Creation eagerly awaits </span><span class="bit">the revealing of the</span><span class="bit">sons of God</span><span class="bit"><a class="ref" href="#ref" data-ref="Rom 8:19-21">Rom 8:19-21</a></span></div></div></div><div class="para" data-para="r-7xst2ia"><div class="col" data-col="0" style="flex:1.0 1 0"><div class="col-text"><span class="bit"><img class="col-pic" src="images/pic-20260821-175017-938388.jpg" alt="" style="display:block;max-width:100%;height:auto;box-sizing:border-box;margin:0 0 0 0" /></span></div></div></div></div><div class=" tab-panel" id="s2" data-sec="s-home-intro"></div><div class=" tab-panel" id="s3" data-sec="s-sd2vs8k"><div class="set-box">
   <h2>Settings</h2>
   <div class="set-row">
     <span class="set-label">Page</span>
@@ -143,7 +144,7 @@ html, body { background:#05070c }
   </div>
 </div></div>
   </main>
-  <div class="page-nav-bar page-nav-bar-bottom"><span class="page-nav prev"></span><a class="page-nav next" href="page-2.html#s1" aria-label="2. Home"><span class="page-nav-word">Next</span><span class="page-nav-tip">2. Home</span></a></div>
+  <div class="page-nav-bar page-nav-bar-bottom"><span class="page-nav prev"></span><a class="page-nav next" href="god-wanted-to-dwell-with-human-beings.html#s1" aria-label="2. God wanted to dwell with Human Beings"><span class="page-nav-word">Next</span><span class="page-nav-tip">2. God wanted to dwell with Human Beings</span></a></div>
   </div>
   <script>
 function showTab(id){
@@ -200,6 +201,31 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
 (function(){
   var home = location.protocol + "//" + location.hostname + ":8766/";
   document.querySelectorAll("a.ew-mark").forEach(function(a){ a.href = home; });
+})();
+</script><script>
+(function(){
+  var btn = document.getElementById("ew-full");
+  if (!btn) return;
+  function isFull(){
+    return !!(document.fullscreenElement || document.webkitFullscreenElement);
+  }
+  function paint(){
+    btn.textContent = isFull() ? "Exit Full Screen" : "Full Screen";
+  }
+  function go(){
+    if (isFull()) {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      return;
+    }
+    var el = document.documentElement;
+    var req = el.requestFullscreen || el.webkitRequestFullscreen || el.webkitRequestFullScreen;
+    if (req) req.call(el);
+  }
+  btn.addEventListener("click", go);
+  document.addEventListener("fullscreenchange", paint);
+  document.addEventListener("webkitfullscreenchange", paint);
+  paint();
 })();
 </script><script>
 (function(){
