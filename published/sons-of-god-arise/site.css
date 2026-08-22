@@ -236,21 +236,18 @@ body {
 .top { overflow: visible; }
 .page-tools { display: none !important; }
 #ew-full {
-  position: fixed;
-  top: 0.55rem;
-  right: 0.7rem;
-  z-index: 80;
+  position: absolute;
+  top: 0.4rem;
+  right: 0.5rem;
+  z-index: 50;
   padding: 0.28rem 0.7rem;
   border: 1px solid #9aa8ae;
-  background: #f6f7eb;
+  background: #fff;
   color: #1b3a4b;
   font: 700 0.82rem Arial, Helvetica, sans-serif;
   cursor: pointer;
 }
 #ew-full:hover { background: #e7ead8; }
-@media (max-width: 800px), (pointer: coarse) {
-  #ew-full { display: none !important; }
-}
 .site { display: block; width: 100%; font-weight: 400; color: var(--accent); text-decoration: none; padding: 0; margin: 0; border: 0; background: transparent; }
 .tag { margin: 0.2rem 0 0; color: #555; font-size: 0.95rem; outline: none; }
 .tab-dock { padding-top: 0.25rem; padding-bottom: 0; background: inherit; width: 100%; box-sizing: border-box; overflow: visible; }
