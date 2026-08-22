@@ -10,7 +10,7 @@ Understand passages there were a little strange instead of passing over them.  Y
 
 As you read this story, the Word of God will open up next to it with a single click or tap." />
   
-  <link rel="stylesheet" href="site.css?v=tools49" />
+  <link rel="stylesheet" href="site.css?v=tools50" />
   <style id="ew-format">
 /* writer format */
 .site { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); color:#1f6f78; font-weight:400 }
@@ -97,7 +97,7 @@ html, body { background:#05070c }
   <div class="stick-top">
     <button type="button" id="ew-full">Full Screen</button>
     <div class="head-banners">
-      <a class="ew-mark" href="http://127.0.0.1:8766/" target="_parent">
+      <a class="ew-mark" href="/" target="_parent">
         <img src="/images/wellspring.jpg?v=10" alt="" />
         <span class="ew-words">Eternal<br>Wellspring</span>
       </a>
@@ -114,7 +114,7 @@ html, body { background:#05070c }
     <div class="tab-dock"><div class="tabs"><button type="button" class="tab" data-tab="s0" data-sec="s-home-contents">Contents</button><button type="button" class="tab active" data-tab="s1" data-sec="s-home-story">Home</button><button type="button" class="tab" data-tab="s2" data-sec="s-home-intro">Introduction</button><button type="button" class="tab tab-settings" data-tab="s3" data-sec="s-sd2vs8k">Settings</button></div></div>
   </div>
   <main>
-    <div class=" tab-panel" id="s0" data-sec="s-home-contents"><ol class="contents-list"><li><a href="home.html#s1">1. Home</a></li><li><a href="page-2.html#s1">2. Home</a></li></ol></div><div class=" tab-panel active" id="s1" data-sec="s-home-story"><h2 class="edit-heading" data-heading="h-kk06ndy">Home Page</h2><div class="para" data-para="r-3v542le"><div class="col" data-col="0" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Creation eagerly awaits </span><span class="bit">the revealing of the</span><span class="bit">sons of God</span><span class="bit"><a class="ref" href="#ref" data-ref="Rom 8:19-21">Rom 8:19-21</a></span></div></div></div><div class="para" data-para="r-7xst2ia"><div class="col" data-col="0" style="flex:1.0 1 0"><div class="col-text"><span class="bit"><img class="col-pic" src="/sites/sons-of-god-arise/images/pic-20260821-175017-938388.jpg" alt="" style="display:block;max-width:100%;height:auto;box-sizing:border-box;margin:0 0 0 0" /></span></div></div></div></div><div class=" tab-panel" id="s2" data-sec="s-home-intro"></div><div class=" tab-panel" id="s3" data-sec="s-sd2vs8k"><div class="set-box">
+    <div class=" tab-panel" id="s0" data-sec="s-home-contents"><ol class="contents-list"><li><a href="home.html#s1">1. Home</a></li><li><a href="page-2.html#s1">2. Home</a></li></ol></div><div class=" tab-panel active" id="s1" data-sec="s-home-story"><h2 class="edit-heading" data-heading="h-kk06ndy">Home Page</h2><div class="para" data-para="r-3v542le"><div class="col" data-col="0" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Creation eagerly awaits </span><span class="bit">the revealing of the</span><span class="bit">sons of God</span><span class="bit"><a class="ref" href="#ref" data-ref="Rom 8:19-21">Rom 8:19-21</a></span></div></div></div><div class="para" data-para="r-7xst2ia"><div class="col" data-col="0" style="flex:1.0 1 0"><div class="col-text"><span class="bit"><img class="col-pic" src="images/pic-20260821-175017-938388.jpg" alt="" style="display:block;max-width:100%;height:auto;box-sizing:border-box;margin:0 0 0 0" /></span></div></div></div></div><div class=" tab-panel" id="s2" data-sec="s-home-intro"></div><div class=" tab-panel" id="s3" data-sec="s-sd2vs8k"><div class="set-box">
   <h2>Settings</h2>
   <div class="set-row">
     <span class="set-label">Page</span>
@@ -166,26 +166,26 @@ function tabFromHref(href){
   var i = String(href || "").indexOf("#");
   return i >= 0 ? href.slice(i + 1) : "";
 }
-document.querySelectorAll(".tab").forEach(function(btn){
-  btn.addEventListener("click", function(){
+document.addEventListener("click", function(ev){
+  var btn = ev.target.closest(".tab");
+  if (btn && btn.dataset.tab) {
     var id = btn.dataset.tab;
     showTab(id);
     if (id && location.hash.slice(1) !== id) {
       if (history.replaceState) history.replaceState(null, "", "#" + id);
       else location.hash = id;
     }
-  });
-});
-document.querySelectorAll(".contents-list a").forEach(function(a){
-  a.addEventListener("click", function(ev){
-    if (!samePage(a.getAttribute("href") || "")) return;
-    ev.preventDefault();
-    var id = tabFromHref(a.getAttribute("href") || "") || "s1";
-    showTab(id);
-    if (id && history.replaceState) history.replaceState(null, "", "#" + id);
-    else if (id) location.hash = id;
-    window.scrollTo(0, 0);
-  });
+    return;
+  }
+  var a = ev.target.closest(".contents-list a");
+  if (!a) return;
+  if (!samePage(a.getAttribute("href") || "")) return;
+  ev.preventDefault();
+  var tid = tabFromHref(a.getAttribute("href") || "") || "s1";
+  showTab(tid);
+  if (tid && history.replaceState) history.replaceState(null, "", "#" + tid);
+  else if (tid) location.hash = tid;
+  window.scrollTo(0, 0);
 });
 window.addEventListener("hashchange", function(){
   if (location.hash) showTab(location.hash.slice(1));
@@ -204,13 +204,12 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
 })();
 </script><script>
 (function(){
-  var btn = document.getElementById("ew-full");
-  if (!btn) return;
   function isFull(){
     return !!(document.fullscreenElement || document.webkitFullscreenElement);
   }
   function paint(){
-    btn.textContent = isFull() ? "Exit Full Screen" : "Full Screen";
+    var btn = document.getElementById("ew-full");
+    if (btn) btn.textContent = isFull() ? "Exit Full Screen" : "Full Screen";
   }
   function go(){
     if (isFull()) {
@@ -222,7 +221,69 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
     var req = el.requestFullscreen || el.webkitRequestFullscreen || el.webkitRequestFullScreen;
     if (req) req.call(el);
   }
-  btn.addEventListener("click", go);
+  function pageFile(href){
+    var path = String(href || "").split("#")[0].split("?")[0];
+    return path ? path.split("/").pop() : "";
+  }
+  function hereFile(){
+    return pageFile(location.pathname) || "home.html";
+  }
+  function isOtherHtml(href){
+    var file = pageFile(href);
+    var here = hereFile();
+    if (!file || !/\.html$/i.test(file)) return false;
+    if (file === here) return false;
+    if ((file === "home.html" || file === "index.html") && (here === "home.html" || here === "index.html")) return false;
+    return true;
+  }
+  function swapTo(href){
+    fetch(href, { credentials: "same-origin" })
+      .then(function(r){ if (!r.ok) throw new Error("nav"); return r.text(); })
+      .then(function(html){
+        var doc = new DOMParser().parseFromString(html, "text/html");
+        var next = doc.querySelector(".page-frame");
+        var cur = document.querySelector(".page-frame");
+        if (!next || !cur) { location.href = href; return; }
+        cur.innerHTML = next.innerHTML;
+        document.title = doc.title;
+        var dp = doc.documentElement.getAttribute("data-page");
+        if (dp) document.documentElement.setAttribute("data-page", dp);
+        var fmt = doc.getElementById("ew-format");
+        var mine = document.getElementById("ew-format");
+        if (fmt && mine) mine.textContent = fmt.textContent;
+        try { history.pushState({ ew: 1 }, "", href); } catch (e) {}
+        paint();
+        var hash = "";
+        var hi = String(href).indexOf("#");
+        if (hi >= 0) hash = href.slice(hi + 1);
+        if (hash && window.showTab) window.showTab(hash);
+        document.dispatchEvent(new Event("ew-page-swap"));
+        window.scrollTo(0, 0);
+        document.querySelectorAll("a.ew-mark").forEach(function(a){
+          a.href = location.protocol + "//" + location.hostname + ":8766/";
+        });
+      })
+      .catch(function(){ location.href = href; });
+  }
+  document.addEventListener("click", function(ev){
+    if (ev.target.closest("#ew-full")) {
+      ev.preventDefault();
+      go();
+      return;
+    }
+    if (!isFull()) return;
+    var a = ev.target.closest("a.page-nav, .contents-list a");
+    if (!a) return;
+    var href = a.getAttribute("href") || "";
+    if (!href || href.charAt(0) === "#") return;
+    if (!isOtherHtml(href)) return;
+    ev.preventDefault();
+    swapTo(href);
+  });
+  window.addEventListener("popstate", function(){
+    if (!isFull()) return;
+    swapTo(location.pathname + location.search + location.hash);
+  });
   document.addEventListener("fullscreenchange", paint);
   document.addEventListener("webkitfullscreenchange", paint);
   paint();
@@ -360,13 +421,20 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
     else if (ev.target.closest("#set-notes") || ev.target.closest("#set-notes-pic") || ev.target.closest(".set-shot")) setNotes(!readNotes());
     else if (ev.target.closest("[data-sky]")) setSky("stars");
   });
-  var col = document.getElementById("set-sky");
-  if (col) {
+  function bindSky(){
+    var col = document.getElementById("set-sky");
+    if (!col || col._ewSky) return;
+    col._ewSky = true;
     function paintSky(){ setSky(col.value); }
     col.addEventListener("click", paintSky);
     col.addEventListener("input", paintSky);
     col.addEventListener("change", paintSky);
   }
+  document.addEventListener("ew-page-swap", function(){
+    apply();
+    bindSky();
+  });
+  bindSky();
   apply();
 })();
 </script><script>window.ewDefaults={"sky": "stars", "notes": true}</script><script>window.ewFolder="sons-of-god-arise"</script><script src="/bible.js?v=40"></script><script src="/ew-sky.js?v=15"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script>
