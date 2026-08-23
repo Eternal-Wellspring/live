@@ -201,7 +201,7 @@ window.scrollTo(0, 0);
 window.addEventListener("load", function(){ window.scrollTo(0, 0); });
 </script><script>
 (function(){
-  var home = location.protocol + "//" + location.hostname + ":8766/";
+  var home = "/";
   document.querySelectorAll("a.ew-mark").forEach(function(a){ a.href = home; });
 })();
 </script><script>
@@ -262,7 +262,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
         document.dispatchEvent(new Event("ew-page-swap"));
         window.scrollTo(0, 0);
         document.querySelectorAll("a.ew-mark").forEach(function(a){
-          a.href = location.protocol + "//" + location.hostname + ":8766/";
+          a.href = "/";
         });
       })
       .catch(function(){ location.href = href; });
