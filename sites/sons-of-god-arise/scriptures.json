@@ -8,12 +8,52 @@
     },
     {
       "reference": "Eph 1:3-6",
-      "text": "Eph 1:3-6<br>3 Blessed be the God and Father of our Lord Jesus Christ,<br>who has blessed us with <b>every spiritual blessing</b><br>in the <b>heavenly places</b>,<br>4 just as <b>He chose us in Him before the foundation of the world</b>,<br>that we should be holy and without blame <b>before Him in love</b>,<br>5 having predestined us to <b>adoption as sons<br>by Jesus Christ to Himself,<br>according to the good pleasure of His will</b>,<br>6 to the praise of the glory of His grace,<br>by which <b>He made us accepted in the Beloved</b>.",
+      "text": "Eph 1:3-6<br>3 Blessed be the God and Father of our Lord Jesus Christ,<br>who has blessed us with <b>every spiritual blessing</b><br>in the <b>heavenly places</b>,<br>4 just as <b>He chose us </b>in Him <b>before the foundation of the world</b>,<br>that we should be holy and without blame <b>before Him in love</b>,<br>5 having predestined us to <b>adoption as sons</b><br>by Jesus Christ to Himself,<br><b>according to the good pleasure of His will</b>,<br>6 to the praise of the glory of <b>His grace</b>,<br>by which He made us <b>accepted in the Beloved</b>.",
       "source": "edited"
     },
     {
       "reference": "Rev 2:7",
       "text": "Rev 2:7\n7 He who has an ear,\nlet him hear what the Spirit says to the churches.\nTo him who overcomes I will give to eat from the <strong>tree of life</strong>,\nwhich is in the midst of the <strong>Paradise of God</strong>.",
+      "source": "hfw"
+    },
+    {
+      "reference": "Heb 1:13-14",
+      "text": "Heb 1:13-14<br>14 Are they not all <b>ministering spirits</b> sent forth <b>to minister</b> for those who will <b>inherit salvation</b>?",
+      "source": "edited"
+    },
+    {
+      "reference": "Heb 1:14",
+      "text": "<p><sup>14</sup> Are they <i>(angels)</i> not all <b>ministering spirits</b></p><p>&lt;span style=\"font-size: calc(18px * var(--ew-font, 1));\"&gt;sent forth </span><b>to minister</b></p><p>&lt;span style=\"font-size: calc(18px * var(--ew-font, 1));\"&gt;for those who will </span><b>inherit salvation</b>&lt;span style=\"font-size: calc(18px * var(--ew-font, 1));\"&gt;?</span></p>",
+      "source": "edited"
+    },
+    {
+      "reference": "1Co 6:2-3",
+      "text": "<p><sup>2</sup> Do you not know that <b>the saints will judge the world</b>?<br>And if the world will be judged by you,<br>are you unworthy to judge the smallest matters?</p><p><sup>3</sup> Do you not know that <b>we shall judge angels</b>?<br>How much more, things that pertain to this life?</p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Rom 8:19-21",
+      "text": "Rom 8:19-21\n19 For <strong>the earnest expectation of the creation\neagerly waits for the revealing of the sons of God.</strong>\n20 For the creation was subjected to futility, not willingly,\nbut because of Him who subjected it in hope;\n21 because the <strong>creation itself also\nwill be delivered from the bondage of corruption</strong>\ninto the glorious liberty of the children of God.",
+      "source": "hfw"
+    },
+    {
+      "reference": "Jhn 3:16",
+      "text": "Jhn 3:16\n16 For God so loved the world that He gave His only begotten Son,\nthat <strong>whoever believes in Him \nshould not perish but have everlasting life.</strong>",
+      "source": "hfw"
+    },
+    {
+      "reference": "Jhn 3:16-17",
+      "text": "<p><sup>16</sup> For God so loved the world that He gave His only begotten Son,<br>that <b>whoever believes in Him<br>should not perish but have everlasting life.</b></p><p><sup>17</sup> For God did not send His Son into the world to condemn the world, <br><b>but that the world through Him might be saved.</b></p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Gen 1:26",
+      "text": "Gen 1:26\n26 Then God said,\"Let Us<strong> make mankind</strong> in Our image</strong>,\naccording to Our likeness;\n<strong>let them have <strong>dominion</strong> over the fish of the sea,\nover the birds of the air, and over the cattle,\n<strong>over all the earth</strong> \nand over every creeping thing that creeps on the earth.</strong>\"",
+      "source": "soga"
+    },
+    {
+      "reference": "Isa 55:11",
+      "text": "Isa 55:11\n11 So shall <strong>My Word</strong> be that goes forth from <strong>My mouth</strong>;\nIt <strong>shall not return to Me void,</strong>\nBut it shall <strong>accomplish</strong> what I please,\nAnd it shall <strong>prosper</strong> in the thing for which I sent it.",
       "source": "hfw"
     }
   ]
