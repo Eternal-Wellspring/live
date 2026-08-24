@@ -10,7 +10,7 @@ Understand passages there were a little strange instead of passing over them.  Y
 
 As you read this story, the Word of God will open up next to it with a single click or tap." />
   <link rel="icon" href="images/icon.jpg">
-  <link rel="stylesheet" href="site.css?v=tools54" />
+  <link rel="stylesheet" href="site.css?v=tools58" />
   <style id="ew-format">
 /* writer format */
 .site { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); color:#1f6f78; font-weight:400 }
@@ -94,6 +94,24 @@ html, body { background:#05070c }
 .top{padding-bottom:0px}
 .tab-dock{background:#f6f7eb}
 </style>
+  <style id="ew-head-fit">
+.head-banners{--mark-w:14rem;--full-w:7.5rem}
+.who,.title-bar-inner{padding-left:max(1.2rem,var(--mark-w))!important;padding-right:max(1.2rem,var(--full-w))!important;box-sizing:border-box;width:100%;min-width:0}
+.who .site,.title-bar h1,.page-end-title{white-space:nowrap!important;overflow:hidden!important;min-width:0!important}
+html.ew-phone #ew-full{display:none!important}
+html.ew-phone .head-banners{--full-w:1.2rem}
+@media (pointer:coarse){#ew-full{display:none!important}.head-banners{--full-w:1.2rem}}
+  </style>
+  <script>
+  (function(){
+    var ua = navigator.userAgent || "";
+    var phone = /iPhone|iPod|Android.+Mobile/i.test(ua) || /iPad/i.test(ua) || (/Macintosh/i.test(ua) && (navigator.maxTouchPoints || 0) > 1);
+    if (!phone) {
+      try { phone = window.matchMedia("(pointer: coarse)").matches; } catch (e) {}
+    }
+    if (phone) document.documentElement.classList.add("ew-phone");
+  })();
+  </script>
 </head>
 <body>
   <canvas id="ew-sky" aria-hidden="true"></canvas>
@@ -292,6 +310,78 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
   document.addEventListener("fullscreenchange", paint);
   document.addEventListener("webkitfullscreenchange", paint);
   paint();
+})();
+</script>
+<script>
+(function(){
+  function isPhoneOrTablet(){
+    var ua = navigator.userAgent || "";
+    if (/iPhone|iPod|Android.+Mobile/i.test(ua) || /iPad/i.test(ua)) return true;
+    if (/Macintosh/i.test(ua) && (navigator.maxTouchPoints || 0) > 1) return true;
+    try { if (window.matchMedia("(pointer: coarse)").matches) return true; } catch (e) {}
+    return false;
+  }
+  function markPhone(){
+    var phone = isPhoneOrTablet();
+    document.documentElement.classList.toggle("ew-phone", phone);
+    var btn = document.getElementById("ew-full");
+    if (btn) {
+      if (phone) btn.style.setProperty("display", "none", "important");
+      else btn.style.removeProperty("display");
+    }
+  }
+  function setGutter(){
+    var banners = document.querySelector(".head-banners");
+    if (!banners) return;
+    var bb = banners.getBoundingClientRect();
+    var mark = document.querySelector(".ew-mark");
+    if (mark) {
+      var mb = mark.getBoundingClientRect();
+      var markW = Math.ceil(Math.max(0, mb.right - bb.left) + 12);
+      if (markW) banners.style.setProperty("--mark-w", markW + "px");
+    }
+    var btn = document.getElementById("ew-full");
+    var fullW = 19;
+    if (btn) {
+      var cs = window.getComputedStyle(btn);
+      if (cs.display !== "none" && cs.visibility !== "hidden") {
+        var fb = btn.getBoundingClientRect();
+        fullW = Math.ceil(Math.max(0, bb.right - fb.left) + 8);
+      }
+    }
+    banners.style.setProperty("--full-w", fullW + "px");
+  }
+  function fit(el){
+    if (!el) return;
+    el.style.fontSize = "";
+    var base = parseFloat(window.getComputedStyle(el).fontSize) || 16;
+    var size = base;
+    var n = 0;
+    while (el.scrollWidth > el.clientWidth + 1 && size > 8 && n < 50) {
+      size *= 0.92;
+      el.style.fontSize = size + "px";
+      n++;
+    }
+  }
+  function fitHead(){
+    markPhone();
+    setGutter();
+    requestAnimationFrame(function(){
+      setGutter();
+      document.querySelectorAll(".who .site, .title-bar h1, .page-end-title").forEach(fit);
+    });
+  }
+  window.addEventListener("resize", fitHead);
+  window.addEventListener("orientationchange", fitHead);
+  document.addEventListener("ew-page-swap", fitHead);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHead);
+  else window.addEventListener("load", fitHead);
+  var img = document.querySelector(".ew-mark img");
+  if (img && !img.complete) img.addEventListener("load", fitHead);
+  fitHead();
+  setTimeout(fitHead, 50);
+  setTimeout(fitHead, 250);
+  window.ewFitHead = fitHead;
 })();
 </script><script>
 (function(){

@@ -844,3 +844,10 @@ html, body { background:#05070c }
 .top{padding-top:0px}
 .top{padding-bottom:0px}
 .tab-dock{background:#f6f7eb}
+/* ew-head-fit */
+.head-banners{--mark-w:14rem;--full-w:7.5rem}
+.who,.title-bar-inner{padding-left:max(1.2rem,var(--mark-w))!important;padding-right:max(1.2rem,var(--full-w))!important;box-sizing:border-box;width:100%;min-width:0}
+.who .site,.title-bar h1,.page-end-title{white-space:nowrap;overflow:hidden;min-width:0}
+html.ew-phone #ew-full{display:none!important}
+html.ew-phone .head-banners{--full-w:1.2rem}
+@media (pointer:coarse){#ew-full{display:none!important}.head-banners{--full-w:1.2rem}}
