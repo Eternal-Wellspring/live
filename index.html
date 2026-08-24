@@ -4,35 +4,36 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Eternal Wellspring</title>
-  <link rel="stylesheet" href="index.css?v=3" />
+  <link rel="icon" href="images/icon.jpg" />
+  <link rel="stylesheet" href="index.css?v=4" />
 </head>
-<body class="hall-page">
-  <header class="hall-top">
+<body class="home-page">
+  <header class="home-top">
     <a class="ew-mark" href="index.html">
-      <img src="images/Wellspring.JPG?v=5" alt="" />
+      <img src="images/icon.jpg" alt="" />
       <span class="ew-words">Eternal<br />Wellspring</span>
     </a>
   </header>
 
-  <section class="hall-hero">
+  <section class="home-hero">
     <h1>Eternal Wellspring</h1>
     <p class="tagline">Read the story — Open the Word</p>
     <p class="tagline-sub">The Word stands forever — living water, one tap away.</p>
-    <div id="doors" class="site-list"></div>
+    <div id="sites" class="site-list"></div>
   </section>
   <script>
-    fetch("published/doors.json")
-      .then(function (r) { return r.ok ? r.json() : { doors: [] }; })
-      .catch(function () { return { doors: [] }; })
+    fetch("sites.json")
+      .then(function (r) { return r.ok ? r.json() : { sites: [] }; })
+      .catch(function () { return { sites: [] }; })
       .then(function (data) {
-        var box = document.getElementById("doors");
-        (data.doors || []).slice().sort(function (a, b) {
+        var box = document.getElementById("sites");
+        (data.sites || []).slice().sort(function (a, b) {
           return String(a && a.name || "").localeCompare(String(b && b.name || ""), "en", { sensitivity: "base" });
-        }).forEach(function (d) {
-          if (!d || !d.href || !d.name) return;
+        }).forEach(function (s) {
+          if (!s || !s.href || !s.name) return;
           var a = document.createElement("a");
-          a.href = d.href;
-          a.textContent = d.name;
+          a.href = s.href;
+          a.textContent = s.name;
           box.appendChild(a);
         });
       });

@@ -30,6 +30,7 @@ body { --header-h: 88px; }
   font-size: 13px !important;
   color: #444 !important;
 }
+.home-page,
 .hall-page {
   margin: 0;
   min-height: 100vh;
@@ -37,6 +38,7 @@ body { --header-h: 88px; }
   background: var(--body-bg, #f0e8d9);
   color: #222;
 }
+.home-top,
 .hall-top {
   display: flex;
   flex-wrap: wrap;
@@ -76,11 +78,13 @@ body { --header-h: 88px; }
   line-height: 1.15;
   letter-spacing: 0.01em;
 }
+.home-hero,
 .hall-hero {
   padding: 2.2rem 1.4rem 0.4rem;
   max-width: 58rem;
   margin: 0 auto;
 }
+.home-hero h1,
 .hall-hero h1 {
   margin: 0 !important;
   font-size: 2rem !important;
@@ -88,18 +92,21 @@ body { --header-h: 88px; }
   border: 0 !important;
   padding: 0 !important;
 }
+.home-page .tagline,
 .hall-page .tagline {
   margin: 0.45rem 0 0;
   font-size: 1.08rem;
   color: #444;
   max-width: 36rem;
 }
+.home-page .tagline-sub,
 .hall-page .tagline-sub {
   margin: 0.35rem 0 0;
   font-size: 0.98rem;
   color: #555;
   max-width: 36rem;
 }
+.home-hero .site-list,
 .hall-hero .site-list {
   display: flex;
   flex-direction: column;
@@ -107,6 +114,7 @@ body { --header-h: 88px; }
   gap: 0;
   margin: 0.9rem 0 0;
 }
+.home-hero .site-list a,
 .hall-hero .site-list a {
   color: #005EB8;
   font-weight: 700;
@@ -117,6 +125,7 @@ body { --header-h: 88px; }
   background: none;
   padding: 0.05rem 0;
 }
+.home-hero .site-list a:hover,
 .hall-hero .site-list a:hover { text-decoration: underline; }
 .hall-doors {
   display: grid;

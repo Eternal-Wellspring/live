@@ -13,10 +13,10 @@ from urllib.request import Request, urlopen
 LIVE = Path(__file__).resolve().parent
 SKY_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
 SOGA = LIVE / "soga"
-PUBLISHED = LIVE / "published"
+PUBLISHED = LIVE / "sites"
 SCRIPTURES = LIVE / "scriptures.json"
 PORT = 8766
-_PUB_FOLDER = re.compile(r"/published/([^/]+)/")
+_PUB_FOLDER = re.compile(r"/(?:published|sites)/([^/]+)/")
 
 
 def scriptures_path(handler) -> Path:
