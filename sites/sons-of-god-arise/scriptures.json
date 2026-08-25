@@ -23,7 +23,7 @@
     },
     {
       "reference": "Heb 1:14",
-      "text": "<p><sup>14</sup> Are they <i>(angels)</i> not all <b>ministering spirits</b></p><p>&lt;span style=\"font-size: calc(18px * var(--ew-font, 1));\"&gt;sent forth </span><b>to minister</b></p><p>&lt;span style=\"font-size: calc(18px * var(--ew-font, 1));\"&gt;for those who will </span><b>inherit salvation</b>&lt;span style=\"font-size: calc(18px * var(--ew-font, 1));\"&gt;?</span></p>",
+      "text": "<p><sup>14</sup> Are they <i>(angels)</i> not all <b>ministering spirits</b> sent forth <b>to minister</b> for those who will <b>inherit salvation</b>?</p>",
       "source": "edited"
     },
     {
@@ -55,6 +55,16 @@
       "reference": "Isa 55:11",
       "text": "Isa 55:11\n11 So shall <strong>My Word</strong> be that goes forth from <strong>My mouth</strong>;\nIt <strong>shall not return to Me void,</strong>\nBut it shall <strong>accomplish</strong> what I please,\nAnd it shall <strong>prosper</strong> in the thing for which I sent it.",
       "source": "hfw"
+    },
+    {
+      "reference": "Gen 1:27",
+      "text": "Gen 1:27\n27 So <strong>God created mankind in His own image</strong>;\nin the image of God <strong>He created him</strong>;\nmale and female <strong>He created them</strong><strong>\"",
+      "source": "soga"
+    },
+    {
+      "reference": "Gen 1:27-28",
+      "text": "<p><sup>27</sup> So <b>God created </b><u>mankind</u><b> </b>in His own <b>image</b>;<br>in the <b>image</b> of God <b>He created</b> him;<br><u>male and female</u> <b>He created </b>them<b>.</b></p><p><sup>28</sup> Then God blessed them, and God said to them,<br>\"<b>Be fruitful and multiply; <br>fill the earth and subdue it;<br>have dominion</b> over: <br>the fish of the sea,<br>over the birds of the air,<br>and over every living thing that moves on the earth.\"</p>",
+      "source": "edited"
     }
   ]
 }
