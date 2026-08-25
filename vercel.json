@@ -10,3 +10,17 @@
     }
   }
 }
+{
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "sons-of-god-arise.eternalwellspring.com"
+        }
+      ],
+      "destination": "/sites/sons-of-god-arise/:path*"
+    }
+  ]
+}
