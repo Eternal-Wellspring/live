@@ -1,21 +1,12 @@
 {
-  "redirects": [
-    {
-      "source": "/sites/sons-of-god-arise/:path*",
-      "destination": "/:path*",
-      "permanent": true
-    }
-  ],
   "rewrites": [
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "sons-of-god-arise.eternalwellspring.com"
-        }
-      ],
-      "destination": "/sites/sons-of-god-arise/:path*"
+    { "source": "/bible", "destination": "/api/bible" },
+    { "source": "/scriptures", "destination": "/api/scriptures" },
+    { "source": "/sky-images", "destination": "/images/sky/list.json" }
+  ],
+  "functions": {
+    "api/scriptures.js": {
+      "includeFiles": "scriptures.json"
     }
-  ]
+  }
 }
