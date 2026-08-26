@@ -3,7 +3,7 @@
   "verses": [
     {
       "reference": "Job 38:4-7",
-      "text": "<p><sup>4</sup> \"Where were you <i>(Job)</i> <br><b>when I </b><i>(Yahweh)</i> <b>laid the foundations of the earth</b>? <br>Tell Me, if you have understanding.</p><p><sup>5</sup> Who determined its measurements? Surely you know! <br>Or who stretched the line upon it?</p><p><sup>6</sup> To what were its foundations fastened? <br>Or who laid its cornerstone,</p><p><sup>7</sup> When<b> the morning stars</b> sang together, <br>And all <b>the sons of God</b> shouted for joy?</p><p><i>(These sons of God had to be spiritual beings because nothing physical existed before creation.)</i></p>",
+      "text": "<p><sup>4</sup> \"Where were you <i>(Job)</i><br><b>when I </b><i>(Yahweh)</i> <b>laid the foundations of the earth</b>?<br>Tell Me, if you have understanding.</p><p>&lt;font color=\"#1f6f78\" size=\"1\"&gt;<b>...</b>&lt;/font&gt;</p><p><sup>7</sup> When<b> the morning stars</b> sang together,<br>And all <b>the sons of God</b> shouted for joy?</p><p><i>(These sons of God had to be heavenly beings because the earth did not at that point.)</i></p>",
       "source": "edited"
     },
     {
@@ -13,8 +13,8 @@
     },
     {
       "reference": "Rev 2:7",
-      "text": "Rev 2:7\n7 He who has an ear,\nlet him hear what the Spirit says to the churches.\nTo him who overcomes I will give to eat from the <strong>tree of life</strong>,\nwhich is in the midst of the <strong>Paradise of God</strong>.",
-      "source": "hfw"
+      "text": "Rev 2:7 ...<br>To him who overcomes I will give to eat from the <b>tree of life</b>,<br>which is in the midst of the <b>Paradise of God</b>.",
+      "source": "edited"
     },
     {
       "reference": "Heb 1:13-14",
@@ -63,7 +63,17 @@
     },
     {
       "reference": "Gen 1:27-28",
-      "text": "<p><sup>27</sup> So <b>God created </b><u>mankind</u><b> </b>in His own <b>image</b>;<br>in the <b>image</b> of God <b>He created</b> him;<br><u>male and female</u> <b>He created </b>them<b>.</b></p><p><sup>28</sup> Then God blessed them, and God said to them,<br>\"<b>Be fruitful and multiply; <br>fill the earth and subdue it;<br>have dominion</b> over: <br>the fish of the sea,<br>over the birds of the air,<br>and over every living thing that moves on the earth.\"</p>",
+      "text": "<p><sup>27</sup> So <b>God created man</b> in His own image;<br>in the image of <b>God He created him</b>;<br>male and female <b>He created them</b>.</p><p><sup>28</sup> Then God blessed them, and God said to them,<br>\"<b>Be fruitful and multiply;<br>fill the earth and subdue it;<br>have dominion</b> <b>over</b>:<br>the fish of the sea,<br>over the birds of the air,<br>and over every living thing that moves on the earth.\"</p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Gen 1:26-27",
+      "text": "Gen 1:26-27\n26 Then God said,\"Let <strong>Us make mankind</strong>\nin <strong>Our image</strong>,\naccording to <strong>Our likeness</strong>;\nlet them have <strong>dominion</strong> over the fish of the sea,\nover the birds of the air, and over the cattle,\n<strong>over all the earth</strong> and over every creeping thing that creeps on the earth.\"\n27 So <strong>God created man</strong> in His own image;\nin the image of <strong>God He created him</strong>;\nmale and female <strong>He created them</strong>.",
+      "source": "soga"
+    },
+    {
+      "reference": "Rom 8:14-16",
+      "text": "Rom 8:14-16<br>14 For as many as are led by the Spirit of God,<br><b>these are sons of God</b>.<br>15 For you did not receive the spirit of bondage again to fear,  but you received the <b>Spirit of adoption</b> by whom we cry out, “<b>Abba, Father</b>.”<br>16 The Spirit Himself bears witness with our spirit<br>that we are <b>children of God</b>, ",
       "source": "edited"
     }
   ]

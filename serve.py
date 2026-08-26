@@ -14,6 +14,7 @@ LIVE = Path(__file__).resolve().parent
 SKY_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
 SOGA = LIVE / "soga"
 PUBLISHED = LIVE / "sites"
+_RESERVED = {"api", "images", "sites", "bible", "scriptures", "published"}
 SCRIPTURES = LIVE / "scriptures.json"
 PORT = 8766
 _PUB_FOLDER = re.compile(r"/(?:published|sites)/([^/]+)/")
@@ -35,6 +36,25 @@ def scriptures_path(handler) -> Path:
     if soga.exists():
         return soga
     return SCRIPTURES
+
+
+def pretty_site_target(path: str):
+    parts = [p for p in path.strip("/").split("/") if p]
+    if not parts or "." in parts[0] or parts[0] in _RESERVED:
+        return None
+    site = PUBLISHED / parts[0]
+    if not site.is_dir():
+        return None
+    if len(parts) == 1:
+        if (site / "index.html").is_file():
+            page = "index.html"
+        elif (site / "home.html").is_file():
+            page = "home.html"
+        else:
+            ones = sorted(site.glob("1-*.html"))
+            page = ones[0].name if ones else "index.html"
+        return site, page
+    return site, "/".join(parts[1:])
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -147,6 +167,14 @@ class Handler(SimpleHTTPRequestHandler):
             return SimpleHTTPRequestHandler.do_GET(self)
         if path == "/site.js":
             return self._serve_dir(SOGA, "site.js")
+        mapped = pretty_site_target(path)
+        if mapped:
+            if len(path.strip("/").split("/")) == 1 and not path.endswith("/"):
+                self.send_response(302)
+                self.send_header("Location", path + "/")
+                self.end_headers()
+                return
+            return self._serve_dir(mapped[0], mapped[1])
         return SimpleHTTPRequestHandler.do_GET(self)
 
 

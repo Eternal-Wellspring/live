@@ -1,8 +1,23 @@
 {
+  "redirects": [
+    {
+      "source": "/:site((?!bible|scriptures|sky-images|api|images|sites)[^/.]+)",
+      "destination": "/:site/",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     { "source": "/bible", "destination": "/api/bible" },
     { "source": "/scriptures", "destination": "/api/scriptures" },
-    { "source": "/sky-images", "destination": "/images/sky/list.json" }
+    { "source": "/sky-images", "destination": "/images/sky/list.json" },
+    {
+      "source": "/:site((?!bible|scriptures|sky-images|api|images|sites)[^/.]+)/",
+      "destination": "/sites/:site/index.html"
+    },
+    {
+      "source": "/:site((?!bible|scriptures|sky-images|api|images|sites)[^/.]+)/:path*",
+      "destination": "/sites/:site/:path*"
+    }
   ],
   "functions": {
     "api/scriptures.js": {
