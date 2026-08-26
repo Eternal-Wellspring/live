@@ -58,8 +58,8 @@
     },
     {
       "reference": "Gen 1:27",
-      "text": "Gen 1:27\n27 So <strong>God created mankind in His own image</strong>;\nin the image of God <strong>He created him</strong>;\nmale and female <strong>He created them</strong><strong>\"",
-      "source": "soga"
+      "text": "<p><sup>27</sup> So <b>God created mankind</b> in His own image;<br>in the image of <b>God He created him</b>;<br>male and female <b>He created them</b>.</p>",
+      "source": "edited"
     },
     {
       "reference": "Gen 1:27-28",
@@ -75,6 +75,11 @@
       "reference": "Rom 8:14-16",
       "text": "Rom 8:14-16<br>14 For as many as are led by the Spirit of God,<br><b>these are sons of God</b>.<br>15 For you did not receive the spirit of bondage again to fear,  but you received the <b>Spirit of adoption</b> by whom we cry out, “<b>Abba, Father</b>.”<br>16 The Spirit Himself bears witness with our spirit<br>that we are <b>children of God</b>, ",
       "source": "edited"
+    },
+    {
+      "reference": "Gen 1:28",
+      "text": "Gen 1:28\\n28 Then God blessed them, and God said to them,\n\"<strong>Be fruitful and multiply; \nfill the earth and subdue it;\nhave dominion</strong> over: \nthe fish of the sea,\nover the birds of the air,\nand over every living thing that moves on the earth.\"",
+      "source": "hfw"
     }
   ]
 }
