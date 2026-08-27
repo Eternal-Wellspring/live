@@ -395,16 +395,10 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
       var rowW = row.clientWidth;
       var nCols = Math.max(1, cols.length);
       var maxPic = Math.max(1, Math.floor(rowW / nCols));
-      var plain = textCol ? (textCol.innerText || "").replace(/\s+/g, " ").trim() : "";
-      var pass;
-      for (pass = 0; pass < 4; pass++) {
-        var th = textCol && plain ? contentHeight(textCol) : 0;
-        var tw = th >= 24 ? Math.round(th * nw / nh) : maxPic;
-        var ih = th >= 24 ? th : Math.round(maxPic * nh / nw);
-        if (tw > maxPic) {
-          tw = maxPic;
-          ih = Math.round(tw * nh / nw);
-        }
+      function setPic(tw){
+        tw = Math.max(1, Math.round(tw));
+        if (tw > maxPic) tw = maxPic;
+        var ih = Math.round(tw * nh / nw);
         img.style.boxSizing = "border-box";
         img.style.width = tw + "px";
         img.style.maxWidth = tw + "px";
@@ -417,6 +411,48 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
         picCol.style.maxWidth = (100 / nCols) + "%";
         picCol.style.minWidth = "0";
       }
+      function textWouldWrap(){
+        if (!textCol) return false;
+        var inner = textCol.querySelector(".col-text") || textCol;
+        var bits = inner.querySelectorAll(".bit");
+        var nodes = bits.length ? bits : [inner];
+        var i, n, prev, overflow;
+        for (i = 0; i < nodes.length; i++) {
+          n = nodes[i];
+          if (!n) continue;
+          if (n.classList && n.classList.contains("col-pic-alt") && !String(n.textContent || "").trim()) continue;
+          prev = n.style.whiteSpace;
+          n.style.whiteSpace = "nowrap";
+          overflow = n.scrollWidth > n.clientWidth + 1;
+          n.style.whiteSpace = prev;
+          if (overflow) return true;
+        }
+        return false;
+      }
+      if (!textCol) {
+        setPic(maxPic);
+        return;
+      }
+      picCol.style.flex = "0 0 0px";
+      picCol.style.width = "0px";
+      picCol.style.maxWidth = "0px";
+      img.style.width = "0px";
+      img.style.maxWidth = "0px";
+      if (textWouldWrap()) {
+        var th = contentHeight(textCol);
+        var tw = th >= 24 ? Math.round(th * nw / nh) : maxPic;
+        if (tw > maxPic) tw = maxPic;
+        setPic(tw);
+        return;
+      }
+      var lo = 0, hi = maxPic, best = 0, mid;
+      while (lo <= hi) {
+        mid = (lo + hi) >> 1;
+        setPic(mid);
+        if (textWouldWrap()) hi = mid - 1;
+        else { best = mid; lo = mid + 1; }
+      }
+      setPic(best > 0 ? best : maxPic);
     });
   }
   function setGutter(){
