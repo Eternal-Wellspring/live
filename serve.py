@@ -18,6 +18,12 @@ _RESERVED = {"api", "images", "sites", "bible", "scriptures", "published"}
 SCRIPTURES = LIVE / "scriptures.json"
 PORT = 8766
 _PUB_FOLDER = re.compile(r"/(?:published|sites)/([^/]+)/")
+SITE_ALIASES = {
+    "sons": "sons-of-god-arise",
+    "soga": "sons-of-god-arise",
+    "sonsofgodarise": "sons-of-god-arise",
+    "sons-of-god-arise": "sons-of-god-arise",
+}
 
 
 def scriptures_path(handler) -> Path:
@@ -38,14 +44,32 @@ def scriptures_path(handler) -> Path:
     return SCRIPTURES
 
 
-def pretty_site_target(path: str):
+def site_folder_key(name: str) -> str:
+    k = str(name or "").strip().lower()
+    return SITE_ALIASES.get(k, k)
+
+
+def folder_from_host(host: str) -> str:
+    name = (host or "").split(":")[0].strip().lower()
+    if not name or name in ("localhost", "127.0.0.1"):
+        return ""
+    label = name.split(".")[0]
+    return SITE_ALIASES.get(label, "")
+
+
+def pretty_site_target(path: str, host: str = ""):
     parts = [p for p in path.strip("/").split("/") if p]
-    if not parts or "." in parts[0] or parts[0] in _RESERVED:
-        return None
-    site = PUBLISHED / parts[0]
+    folder = folder_from_host(host)
+    rest = parts
+    if not folder:
+        if not parts or "." in parts[0] or parts[0] in _RESERVED:
+            return None
+        folder = site_folder_key(parts[0])
+        rest = parts[1:]
+    site = PUBLISHED / folder
     if not site.is_dir():
         return None
-    if len(parts) == 1:
+    if not rest:
         if (site / "index.html").is_file():
             page = "index.html"
         elif (site / "home.html").is_file():
@@ -54,7 +78,7 @@ def pretty_site_target(path: str):
             ones = sorted(site.glob("1-*.html"))
             page = ones[0].name if ones else "index.html"
         return site, page
-    return site, "/".join(parts[1:])
+    return site, "/".join(rest)
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -159,17 +183,17 @@ class Handler(SimpleHTTPRequestHandler):
             except Exception:
                 return self._json(502, {"error": "Could not open that passage."})
             return
-        if path.startswith("/soga/") or path == "/soga":
-            return self._serve_dir(SOGA, path[6:])
         if path.startswith("/published/") or path == "/published":
             return self._serve_dir(PUBLISHED, path[11:])
         if path == "/scriptures.json":
             return SimpleHTTPRequestHandler.do_GET(self)
         if path == "/site.js":
             return self._serve_dir(SOGA, "site.js")
-        mapped = pretty_site_target(path)
+        host = self.headers.get("Host") or ""
+        mapped = pretty_site_target(path, host)
         if mapped:
-            if len(path.strip("/").split("/")) == 1 and not path.endswith("/"):
+            segs = [p for p in path.strip("/").split("/") if p]
+            if len(segs) == 1 and not path.endswith("/") and not folder_from_host(host):
                 self.send_response(302)
                 self.send_header("Location", path + "/")
                 self.end_headers()

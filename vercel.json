@@ -11,6 +11,52 @@
     { "source": "/scriptures", "destination": "/api/scriptures" },
     { "source": "/sky-images", "destination": "/images/sky/list.json" },
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "sons.eternalwellspring.com" }],
+      "destination": "/sites/sons-of-god-arise/index.html"
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "sons.eternalwellspring.com" }],
+      "destination": "/sites/sons-of-god-arise/:path*"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "soga.eternalwellspring.com" }],
+      "destination": "/sites/sons-of-god-arise/index.html"
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "soga.eternalwellspring.com" }],
+      "destination": "/sites/sons-of-god-arise/:path*"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "sonsofgodarise.eternalwellspring.com" }],
+      "destination": "/sites/sons-of-god-arise/index.html"
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "sonsofgodarise.eternalwellspring.com" }],
+      "destination": "/sites/sons-of-god-arise/:path*"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "sons-of-god-arise.eternalwellspring.com" }],
+      "destination": "/sites/sons-of-god-arise/index.html"
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "sons-of-god-arise.eternalwellspring.com" }],
+      "destination": "/sites/sons-of-god-arise/:path*"
+    },
+    { "source": "/soga", "destination": "/sites/sons-of-god-arise/" },
+    { "source": "/soga/", "destination": "/sites/sons-of-god-arise/index.html" },
+    { "source": "/soga/:path*", "destination": "/sites/sons-of-god-arise/:path*" },
+    { "source": "/sonsofgodarise", "destination": "/sites/sons-of-god-arise/" },
+    { "source": "/sonsofgodarise/", "destination": "/sites/sons-of-god-arise/index.html" },
+    { "source": "/sonsofgodarise/:path*", "destination": "/sites/sons-of-god-arise/:path*" },
+    {
       "source": "/:site((?!bible|scriptures|sky-images|api|images|sites)[^/.]+)/",
       "destination": "/sites/:site/index.html"
     },
