@@ -3,7 +3,7 @@
   "verses": [
     {
       "reference": "Job 38:4-7",
-      "text": "<p><sup>4</sup> \"Where were you <i>(Job)</i><br><b>when I </b><i>(Yahweh)</i> <b>laid the foundations of the earth</b>?<br>Tell Me, if you have understanding.</p><p>&lt;font color=\"#1f6f78\" size=\"1\"&gt;<b>...</b>&lt;/font&gt;</p><p><sup>7</sup> When<b> the morning stars</b> sang together,<br>And all <b>the sons of God</b> shouted for joy?</p><p><i>(These sons of God had to be heavenly beings because the earth did not at that point.)</i></p>",
+      "text": "<p><sup>4</sup> \"Where were you <i>(Job)</i><br><b>when I </b><i>(Yahweh)</i> <br><b>laid the foundations of the earth</b>?<br>...</p><p><sup>7</sup> When<b> the morning stars</b> sang together,<br>And all <b>the sons of God</b> shouted for joy?</p><p><i>(These sons of God had to be heavenly beings because the earth did not exist at that point.)</i></p>",
       "source": "edited"
     },
     {
@@ -23,7 +23,7 @@
     },
     {
       "reference": "Heb 1:14",
-      "text": "<p><sup>14</sup> Are they <i>(angels)</i> not all <b>ministering spirits</b> sent forth <b>to minister</b> for those who will <b>inherit salvation</b>?</p>",
+      "text": "<p><sup>14</sup> Are angels not all <b>ministering spirits</b> <br>sent forth <b>to minister</b> <br>for those who will <b>inherit salvation</b>?</p>",
       "source": "edited"
     },
     {
@@ -78,12 +78,37 @@
     },
     {
       "reference": "Gen 1:28",
-      "text": "Gen 1:28\\n28 Then God blessed them, and God said to them,\n\"<strong>Be fruitful and multiply; \nfill the earth and subdue it;\nhave dominion</strong> over: \nthe fish of the sea,\nover the birds of the air,\nand over every living thing that moves on the earth.\"",
-      "source": "hfw"
+      "text": "<p><sup>28</sup> Then God blessed them, and God said to them,<br>\"<b>Be fruitful and multiply;<br>fill the earth and subdue it;<br>have dominion</b> <b>over</b>:<br>the fish of the sea,<br>over the birds of the air,<br>and over every living thing that moves on the earth.\"</p>",
+      "source": "edited"
     },
     {
       "reference": "Job 38:3-7",
       "text": "Job 38:3-7<br>4 \"Where were you <i>(Job)</i><br><b>when I </b><i>(Yahweh)</i> <br><b>laid the foundations of the earth</b>?<br>... <br>7 When<b> the morning stars</b> sang together,<br>And all <b>the sons of God</b> shouted for joy?",
+      "source": "edited"
+    },
+    {
+      "reference": "Mrk 12:29-31",
+      "text": "<p><sup>29</sup> Jesus answered him, “The <b>first</b> of all the commandments is: <br>‘Hear, O Israel, <b>Yahweh our God</b>, the LORD is one.</p><p><sup>30</sup> And you shall <b>love Yahweh your God</b> <br>with all your <b>heart</b>, with all your <b>soul</b>, with all your <b>mind</b>, and with all your <b>strength</b>.’ <br>This is the first commandment.</p><p><sup>31</sup> And the second, like it, is this: <br>‘You shall <b>love your neighbour as yourself</b>.’ <br>There is no other commandment greater than these.”</p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Mrk 12:29-30",
+      "text": "<p><sup>29</sup> Jesus answered him, “The <b>first</b> of all the commandments is:<br>‘Hear, O Israel, <b>Yahweh our God</b>, the LORD is one.</p><p><sup>30</sup> And you shall <b>love Yahweh your God</b><br>with all your <b>heart</b>, with all your <b>soul</b>, with all your <b>mind</b>, and with all your <b>strength</b>.’<br>This is the first commandment.</p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Zec 2:10-11",
+      "text": "<p><sup>10</sup> “Sing and rejoice, O daughter of Zion! <br>For behold, <br>I am coming and <b>I will dwell in your midst</b>,” says Yahweh.</p><p><sup>11</sup> <b>Many nations shall be joined to Yahweh in that day</b>,<br>and they shall become <b>My people</b>.<br>And <b>I will dwell in your midst</b>.<br>Then you will know that Yahweh of hosts has sent Me to you.</p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Gen 1:28-31",
+      "text": "<p><sup>28</sup> Then God blessed them, and God said to them,<br>\"<b>Be fruitful and multiply;<br>fill the earth and subdue it;<br>have dominion</b> <b>over</b>:<br>the fish of the sea,<br>over the birds of the air,<br>and over every living thing that moves on the earth.\"</p><p><sup>...</sup></p><p><sup>31</sup> Then God saw <b>everything</b> that He had made,<br></p><p>and indeed it was <b>very good</b>.</p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Luk 3:38",
+      "text": "<p><sup>38</sup> ... Seth, the son of Adam, the son of God.</p>",
       "source": "edited"
     }
   ]
