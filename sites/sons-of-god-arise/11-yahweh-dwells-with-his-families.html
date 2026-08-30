@@ -345,15 +345,16 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
         var el = row.children[i];
         if (el.classList && el.classList.contains("col") && !el.classList.contains("col-footnotes")) cols.push(el);
       }
-      var picCol = null, textCol = null;
+      var pics = [];
+      var textCol = null;
       cols.forEach(function(c){
-        if (c.querySelector("img.col-pic")) picCol = c;
+        if (c.querySelector("img.col-pic")) pics.push(c);
         else if (!textCol) textCol = c;
       });
-      if (!picCol) return;
-      var img = picCol.querySelector("img.col-pic");
-      if (!img) return;
-      function clearPicSize(){
+      if (!pics.length) return;
+      function clearPicSize(picCol){
+        var img = picCol.querySelector("img.col-pic");
+        if (!img) return;
         img.style.height = "";
         img.style.maxHeight = "";
         img.style.width = "";
@@ -365,17 +366,18 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
         picCol.style.maxWidth = "";
         picCol.style.minWidth = "";
       }
-      clearPicSize();
+      pics.forEach(clearPicSize);
       if (portrait) return;
-      var nw = img.naturalWidth || img.width;
-      var nh = img.naturalHeight || img.height;
-      if (!nw || !nh) return;
       var rowW = row.clientWidth;
       var nCols = Math.max(1, cols.length);
       var maxPic = Math.max(1, Math.floor(rowW / nCols));
-      function setPic(tw){
+      function setPic(picCol, tw, capPct){
+        var img = picCol.querySelector("img.col-pic");
+        if (!img) return;
+        var nw = img.naturalWidth || img.width;
+        var nh = img.naturalHeight || img.height;
+        if (!nw || !nh) return;
         tw = Math.max(1, Math.round(tw));
-        if (tw > maxPic) tw = maxPic;
         var ih = Math.round(tw * nh / nw);
         img.style.boxSizing = "border-box";
         img.style.width = tw + "px";
@@ -386,8 +388,26 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
         img.style.objectPosition = "center center";
         picCol.style.flex = "0 0 " + tw + "px";
         picCol.style.width = tw + "px";
-        picCol.style.maxWidth = (100 / nCols) + "%";
+        picCol.style.maxWidth = (capPct != null ? capPct : (100 / nCols)) + "%";
         picCol.style.minWidth = "0";
+      }
+      var growCol = null;
+      pics.forEach(function(picCol){
+        var pct = parseFloat(picCol.getAttribute("data-photo-pct") || "0");
+        if (pct > 0) {
+          if (pct > 100) pct = 100;
+          setPic(picCol, rowW * pct / 100, pct);
+        } else {
+          growCol = picCol;
+        }
+      });
+      if (!growCol) return;
+      var picCol = growCol;
+      var img = picCol.querySelector("img.col-pic");
+      if (!img) return;
+      function setGrow(tw){
+        if (tw > maxPic) tw = maxPic;
+        setPic(picCol, tw, 100 / nCols);
       }
       function textWouldWrap(){
         if (!textCol) return false;
@@ -408,7 +428,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
         return false;
       }
       if (!textCol) {
-        setPic(maxPic);
+        setGrow(maxPic);
         return;
       }
       picCol.style.flex = "0 0 0px";
@@ -418,19 +438,20 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
       img.style.maxWidth = "0px";
       if (textWouldWrap()) {
         var th = contentHeight(textCol);
-        var tw = th >= 24 ? Math.round(th * nw / nh) : maxPic;
-        if (tw > maxPic) tw = maxPic;
-        setPic(tw);
+        var nw = img.naturalWidth || img.width;
+        var nh = img.naturalHeight || img.height;
+        var tw = (th >= 24 && nw && nh) ? Math.round(th * nw / nh) : maxPic;
+        setGrow(tw);
         return;
       }
       var lo = 0, hi = maxPic, best = 0, mid;
       while (lo <= hi) {
         mid = (lo + hi) >> 1;
-        setPic(mid);
+        setGrow(mid);
         if (textWouldWrap()) hi = mid - 1;
         else { best = mid; lo = mid + 1; }
       }
-      setPic(best > 0 ? best : maxPic);
+      setGrow(best > 0 ? best : maxPic);
     });
   }
   function setGutter(){
