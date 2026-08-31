@@ -62,9 +62,13 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .para[data-para="r-7xst2ia"] .col[data-col="2"]{padding:0}
 .para[data-para="r-7xst2ia"] .col[data-col="2"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
 .para[data-para="r-7xst2ia"] .col[data-col="39"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:5px; margin-top:5px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:5px }
-.fn { font-size:.7em; font-weight:700; line-height:1; vertical-align:super; cursor:pointer; color:var(--title); display:inline-block; padding:0 .5em 0 0 }
+.fn-keep{white-space:nowrap}
+.fn { font-size:1em; font-weight:700; line-height:inherit; vertical-align:baseline; cursor:pointer; color:var(--title); display:inline-block; position:relative; padding:0; white-space:pre }
+.fn-mark { font-size:.7em; font-weight:700; line-height:1; vertical-align:super }
+.fn-tip{display:none;position:absolute;left:0;bottom:calc(100% + .28rem);z-index:80;padding:.15rem .45rem;border:1px solid var(--line);background:#fff;color:var(--title);font:400 .85em Arial,Helvetica,sans-serif;white-space:nowrap;pointer-events:none}
+.fn:hover .fn-tip,.fn:focus .fn-tip{display:block}
 .fn{text-decoration:none!important}
-a.ref .fn,.col-footnotes .fn{text-decoration:none!important;display:inline-block;padding:0 .5em 0 0}
+a.ref .fn,.col-footnotes .fn{text-decoration:none!important;display:inline-block;position:relative;white-space:pre}
 a.ref, .col a.ref, .col-text a.ref, .para a.ref { color:var(--title); font-weight:400; font-size:calc(1em - 2px); text-decoration:underline }
 html { --ew-sky-creep:5.0; --ew-sky-stars:100; --ew-sky-zoom:2.8; --ew-sky-zoom-mins:5.0; --ew-sky-twinkle:1; --ew-sky-bright:80.0; --ew-sky-twinkle-speed:20; --ew-sky-fade:1.0 }
 html, body { background:#05070c }
@@ -681,7 +685,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
   bindSky();
   apply();
 })();
-</script><script>window.ewDefaults={"sky": "stars", "notes": true}</script><script>window.ewFolder="sons-of-god-arise"</script><script src="/bible.js?v=86"></script><script src="/ew-sky.js?v=15"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
+</script><script>window.ewDefaults={"sky": "stars", "notes": true}</script><script>window.ewFolder="sons-of-god-arise"</script><script src="/bible.js?v=92"></script><script src="/ew-sky.js?v=15"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
 (function(){
   var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   var last = "";

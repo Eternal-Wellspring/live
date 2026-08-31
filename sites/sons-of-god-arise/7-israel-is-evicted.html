@@ -55,9 +55,13 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .title-bar-inner { background:#f6f7eb }
 .title-bar h1 { background:transparent; margin-bottom:0 }
 .tabs { margin-top:0 }
-.fn { font-size:.7em; font-weight:700; line-height:1; vertical-align:super; cursor:pointer; color:var(--title); display:inline-block; padding:0 .5em 0 0 }
+.fn-keep{white-space:nowrap}
+.fn { font-size:1em; font-weight:700; line-height:inherit; vertical-align:baseline; cursor:pointer; color:var(--title); display:inline-block; position:relative; padding:0; white-space:pre }
+.fn-mark { font-size:.7em; font-weight:700; line-height:1; vertical-align:super }
+.fn-tip{display:none;position:absolute;left:0;bottom:calc(100% + .28rem);z-index:80;padding:.15rem .45rem;border:1px solid var(--line);background:#fff;color:var(--title);font:400 .85em Arial,Helvetica,sans-serif;white-space:nowrap;pointer-events:none}
+.fn:hover .fn-tip,.fn:focus .fn-tip{display:block}
 .fn{text-decoration:none!important}
-a.ref .fn,.col-footnotes .fn{text-decoration:none!important;display:inline-block;padding:0 .5em 0 0}
+a.ref .fn,.col-footnotes .fn{text-decoration:none!important;display:inline-block;position:relative;white-space:pre}
 a.ref, .col a.ref, .col-text a.ref, .para a.ref { color:var(--title); font-weight:400; font-size:calc(1em - 2px); text-decoration:underline }
 html { --ew-sky-creep:5.0; --ew-sky-stars:100; --ew-sky-zoom:2.8; --ew-sky-zoom-mins:5.0; --ew-sky-twinkle:1; --ew-sky-bright:80.0; --ew-sky-twinkle-speed:20; --ew-sky-fade:1.0 }
 html, body { background:#05070c }
@@ -674,7 +678,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
   bindSky();
   apply();
 })();
-</script><script>window.ewDefaults={"sky": "stars", "notes": true}</script><script>window.ewFolder="sons-of-god-arise"</script><script src="/bible.js?v=86"></script><script src="/ew-sky.js?v=15"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
+</script><script>window.ewDefaults={"sky": "stars", "notes": true}</script><script>window.ewFolder="sons-of-god-arise"</script><script src="/bible.js?v=92"></script><script src="/ew-sky.js?v=15"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
 (function(){
   var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   var last = "";

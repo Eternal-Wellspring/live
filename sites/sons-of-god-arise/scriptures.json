@@ -3,7 +3,7 @@
   "verses": [
     {
       "reference": "Job 38:4-7",
-      "text": "<p><sup>4</sup> \"Where were you <i>(Job)</i><br><b>when I </b><i>(Yahweh)</i> <br><b>laid the foundations of the earth</b>?<br>...</p><p><sup>7</sup> When<b> the morning stars</b> sang together,<br>And all <b>the sons of God</b> shouted for joy?</p><p><i>(These sons of God had to be heavenly beings because the earth did not exist at that point.)</i></p>",
+      "text": "<p><sup>4</sup> \"Where were you <i>(Job)</i><br><b>when I </b><i>(Yahweh)</i><br><b>laid the foundations of the earth</b>?<br>...</p><p><sup>7</sup> When<b> the morning stars</b> sang together,<br>And all <b>the sons of God</b> shouted for joy?</p><p><i>(These sons of God had to be heavenly beings because Adam did not exist at that point.)</i></p>",
       "source": "edited"
     },
     {
@@ -48,7 +48,7 @@
     },
     {
       "reference": "Gen 1:26",
-      "text": "<p><sup>26</sup> Then God said,\"Let Us<b> make mankind</b> in Our image,<br>according to Our likeness;<br><b>let them have <b>dominion</b> </b>over the fish of the sea,<br>over the birds of the air, and over the cattle,<br><b>over all the earth</b><br>and over every creeping thing that creeps on the earth.\"</p>",
+      "text": "<p><sup>26</sup> Then God said,\"Let Us<b> make mankind</b><br>in <b>Our</b> image, according to <b>Our</b> likeness;<br><b>let them have <b>dominion</b> <br></b>over the <b>fish</b> of the sea,<br>over the <b>birds</b> of the air, <br>and over the <b>cattle</b>,<br><b>over all the earth</b><br>and over every <b>creeping thing</b> that creeps on the earth.\"</p>",
       "source": "edited"
     },
     {
@@ -58,12 +58,12 @@
     },
     {
       "reference": "Gen 1:27",
-      "text": "<p><sup>27</sup> So <b>God created mankind</b> in His own image;<br>in the image of <b>God He created him</b>;<br>male and female <b>He created them</b>.</p>",
+      "text": "<p><sup>27</sup> So <b>God created mankind</b> in His own image;<br>in the image of <b>God He created him</b>;<br><b>male and female</b> <b>He created them</b>.</p>",
       "source": "edited"
     },
     {
       "reference": "Gen 1:27-28",
-      "text": "<p><sup>27</sup> So <b>God created man</b> in His own image;<br>in the image of <b>God He created him</b>;<br>male and female <b>He created them</b>.</p><p><sup>28</sup> Then God blessed them, and God said to them,<br>\"<b>Be fruitful and multiply;<br>fill the earth and subdue it;<br>have dominion</b> <b>over</b>:<br>the fish of the sea,<br>over the birds of the air,<br>and over every living thing that moves on the earth.\"</p>",
+      "text": "<p><sup>27</sup> So <b>God created mankind</b> in His own image;<br>in the image of <b>God He created him</b>;<br><b>male and female</b> <b>He created them</b>.</p><p><sup>28</sup> Then God blessed them, and God said to them,<br>\"<b>Be fruitful and multiply;<br>fill the earth and subdue it;<br>have dominion</b> <b>over</b>:<br>the fish of the sea,<br>over the birds of the air,<br>and over every living thing that moves on the earth.\"</p>",
       "source": "edited"
     },
     {
@@ -128,7 +128,32 @@
     },
     {
       "reference": "Jub 2:1-6",
-      "text": "<p class=\"ew-extra-note\">This book of Jubilees (Jub 2:1-6) is not authorised scripture but shows what people of that time might of believed.</p><p><sup>1</sup> And the <b>angel of the presence</b> spake to Moses according to the word of the Lord, saying:</p><p><sup>2</sup> Write the complete history of the creation, how in six days the Lord God finished all His works and all that He created, and kept Sabbath on the seventh day and hallowed it for all ages, and appointed it as a sign for all His works.</p><p><sup>3</sup> For on the first day He created the <b>heavens which are above</b> and the earth and the waters and <b>all the spirits which serve</b> before Him</p><p><sup>4</sup> --the angels of the <b>presence</b>, and the angels of <b>sanctification</b>, and the angels of the <b>spirit of fire</b> and the angels of the <b>spirit of the winds</b>, and the angels of the <b>spirit of the clouds</b>,</p><p><sup>5</sup> and of <b>darkness</b>, and of <b>snow</b> and of <b>hail</b> and of <b>hoar frost</b>, and the angels of the <b>voices</b> and of the <b>thunder</b> and of the <b>lightning</b>, and the angels of the <b>spirits of cold</b> and of <b>heat</b>, and of <b>winter</b> and of <b>spring</b> and of <b>autumn</b> and of <b>summer</b>,</p><p><sup>6</sup> and of all the <b>spirits of His creatures</b> which are in the <b>heavens</b> and on the <b>earth.<br></b>(He created) the <b>abysses</b> and the <b>darkness</b>, <b>eventide</b> (and <b>night</b>), and the <b>light</b>, <b>dawn</b> and <b>day</b>, which He hath prepared in the knowledge of His heart.</p>",
+      "text": "<p class=\"ew-extra-note\">This book of Jubilees is not inspired scripture but shows what people of that time might of believed.</p><p><sup>1</sup> And the <b>angel of the presence</b> spake to Moses according to the word of the Lord, saying:</p><p><sup>2</sup> Write the complete history of the creation, how in six days the Lord God finished all His works and all that He created, and kept Sabbath on the seventh day and hallowed it for all ages, and appointed it as a sign for all His works.</p><p><sup>3</sup> For on the first day He created the <b>heavens which are above</b> and the earth and the waters and <b>all the spirits which serve</b> before Him</p><p><sup>4</sup> --the angels of the <b>presence</b>, and the angels of <b>sanctification</b>, and the angels of the <b>spirit of fire</b> and the angels of the <b>spirit of the winds</b>, and the angels of the <b>spirit of the clouds</b>,</p><p><sup>5</sup> and of <b>darkness</b>, and of <b>snow</b> and of <b>hail</b> and of <b>hoar frost</b>, and the angels of the <b>voices</b> and of the <b>thunder</b> and of the <b>lightning</b>, and the angels of the <b>spirits of cold</b> and of <b>heat</b>, and of <b>winter</b> and of <b>spring</b> and of <b>autumn</b> and of <b>summer</b>,</p><p><sup>6</sup> and of all the <b>spirits of His creatures</b> which are in the <b>heavens</b> and on the <b>earth.<br></b>(He created) the <b>abysses</b> and the <b>darkness</b>, <b>eventide</b> (and <b>night</b>), and the <b>light</b>, <b>dawn</b> and <b>day</b>, which He hath prepared in the knowledge of His heart.</p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Psa 33:6-9",
+      "text": "<p><sup>6</sup> <b>By the Word of Yahweh, the heavens were made</b>,<br>And <b>all the host</b> of them by the <b>breath</b> (<i>ruach: Spirit)</i> of His mouth.</p><p><sup>7</sup> <b>He gathers the waters of the sea together</b> as a heap;<br>He lays up the deep in storehouses.</p><p><sup>8</sup> Let all the earth fear Yahweh;<br><b>Let all the inhabitants of the world stand in awe of Him.</b></p><p><sup>9</sup> <b>For He spoke, and it was done;</b><br>He commanded, and it stood fast.</p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Jub 2:2-6",
+      "text": "<p>This book of Jubilees is not inspired scripture but shows what people of that time might of believed.</p><p><sup>2</sup> Write the complete history of the creation, how in six days the Lord God finished all His works and all that He created, and kept Sabbath on the seventh day and hallowed it for all ages, and appointed it as a sign for all His works.</p><p><sup>3</sup> For on the first day He created the <b>heavens which are above</b> and the earth and the waters and <b>all the spirits which serve</b> before Him</p><p><sup>4</sup> --the angels of the <b>presence</b>, and the angels of <b>sanctification</b>, and the angels of the <b>spirit of fire</b> and the angels of the <b>spirit of the winds</b>, and the angels of the <b>spirit of the clouds</b>,</p><p><sup>5</sup> and of <b>darkness</b>, and of <b>snow</b> and of <b>hail</b> and of <b>hoar frost</b>, and the angels of the <b>voices</b> and of the <b>thunder</b> and of the <b>lightning</b>, and the angels of the <b>spirits of cold</b> and of <b>heat</b>, and of <b>winter</b> and of <b>spring</b> and of <b>autumn</b> and of <b>summer</b>,</p><p><sup>6</sup> and of all the <b>spirits of His creatures</b> which are in the <b>heavens</b> and on the <b>earth.<br></b>(He created) the <b>abysses</b> and the <b>darkness</b>, <b>eventide</b> (and <b>night</b>), and the <b>light</b>, <b>dawn</b> and <b>day</b>, which He hath prepared in the knowledge of His heart.</p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Psa 82:1-6",
+      "text": "<p><sup>1</sup> A Psalm of Asaph.<br><b>God stands in the congregation</b> of the mighty; (heavenly beings)<br>He judges <b>among the gods</b> (elohim - gods).<br>...</p><p><sup>6</sup> I said, “<b>You are gods</b>, </p><p>And all of you are <b>children of the Most High</b>. (<i>Yahweh</i>)</p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Psa 147:4-5",
+      "text": "<p><sup>4</sup> Yahweh counts the <b>number of the stars</b>; <br>He calls them <b>all by name</b>.</p><p><sup>5</sup> <b>Great</b> is our Lord, <br>and <b>mighty</b> <b>in power</b>; <br>His <b>understanding</b> <b>is</b> <b>infinite</b>.</p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Gen 1:31",
+      "text": "<p><sup>31</sup> Then God saw <b>everything</b> that He had made,</p><p>and indeed it was <b>very good</b>.</p><p></p>",
       "source": "edited"
     }
   ]
