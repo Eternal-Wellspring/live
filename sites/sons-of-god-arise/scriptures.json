@@ -88,12 +88,12 @@
     },
     {
       "reference": "Mrk 12:29-31",
-      "text": "<p><sup>29</sup> Jesus answered him, “The <b>first</b> of all the commandments is: <br>‘Hear, O Israel, <b>Yahweh our God</b>, the LORD is one.</p><p><sup>30</sup> And you shall <b>love Yahweh your God</b> <br>with all your <b>heart</b>, with all your <b>soul</b>, with all your <b>mind</b>, and with all your <b>strength</b>.’ <br>This is the first commandment.</p><p><sup>31</sup> And the second, like it, is this: <br>‘You shall <b>love your neighbour as yourself</b>.’ <br>There is no other commandment greater than these.”</p>",
+      "text": "<p><sup>29</sup> Jesus answered him, “The <b>first</b> of all the commandments is: <br>‘Hear, O Israel, <b>Yahweh our God</b>, Yahweh is one.</p><p><sup>30</sup> And you shall <b>love Yahweh your God</b> <br>with all your <b>heart</b>, with all your <b>soul</b>, with all your <b>mind</b>, and with all your <b>strength</b>.’ <br>This is the first commandment.</p><p><sup>31</sup> And the second, like it, is this: <br>‘You shall <b>love your neighbour as yourself</b>.’ <br>There is no other commandment greater than these.”</p>",
       "source": "edited"
     },
     {
       "reference": "Mrk 12:29-30",
-      "text": "<p><sup>29</sup> Jesus answered him, “The <b>first</b> of all the commandments is:<br>‘Hear, O Israel, <b>Yahweh our God</b>, the LORD is one.</p><p><sup>30</sup> And you shall <b>love Yahweh your God</b><br>with all your <b>heart</b>, with all your <b>soul</b>, with all your <b>mind</b>, and with all your <b>strength</b>.’<br>This is the first commandment.</p>",
+      "text": "<p><sup>29</sup> Jesus answered him, “The <b>first</b> of all the commandments is:<br>‘Hear, O Israel, <b>Yahweh our God</b>, Yahweh is one.</p><p><sup>30</sup> And you shall <b>love Yahweh your God</b><br>with all your <b>heart</b>, <br>with all your <b>soul</b>, <br>with all your <b>mind</b>, <br>and with all your <b>strength</b>.’<br>This is the first commandment.</p>",
       "source": "edited"
     },
     {
@@ -108,7 +108,27 @@
     },
     {
       "reference": "Luk 3:38",
-      "text": "<p><sup>38</sup> ... Seth, the son of Adam, the son of God.</p>",
+      "text": "<p><sup>38</sup> ... Adam, the son of God.</p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Psa 82:1-2",
+      "text": "Psa 82:1-2<br>1 A Psalm of Asaph. <br>God stands in the congregation of the mighty; (heavenly beings)<br>He judges among the gods (elohim - gods).<br>2 How long will you judge unjustly, <br>And show partiality to the wicked?",
+      "source": "edited"
+    },
+    {
+      "reference": "Eph 3:14-15",
+      "text": "14 For this reason<br>I bow my knees to the <b>Father </b>of our Lord Jesus Christ,<br>15 from whom the <b>whole family in heaven and earth is named,</b>",
+      "source": "edited"
+    },
+    {
+      "reference": "Psa 33:6",
+      "text": "6 <b>By the Word of Yahweh, the heavens were made</b>,<br>And <b>all the host</b> of them by the breath of His mouth.",
+      "source": "edited"
+    },
+    {
+      "reference": "Jub 2:1-6",
+      "text": "<p class=\"ew-extra-note\">This book of Jubilees (Jub 2:1-6) is not authorised scripture but shows what people of that time might of believed.</p><p><sup>1</sup> And the <b>angel of the presence</b> spake to Moses according to the word of the Lord, saying:</p><p><sup>2</sup> Write the complete history of the creation, how in six days the Lord God finished all His works and all that He created, and kept Sabbath on the seventh day and hallowed it for all ages, and appointed it as a sign for all His works.</p><p><sup>3</sup> For on the first day He created the <b>heavens which are above</b> and the earth and the waters and <b>all the spirits which serve</b> before Him</p><p><sup>4</sup> --the angels of the <b>presence</b>, and the angels of <b>sanctification</b>, and the angels of the <b>spirit of fire</b> and the angels of the <b>spirit of the winds</b>, and the angels of the <b>spirit of the clouds</b>,</p><p><sup>5</sup> and of <b>darkness</b>, and of <b>snow</b> and of <b>hail</b> and of <b>hoar frost</b>, and the angels of the <b>voices</b> and of the <b>thunder</b> and of the <b>lightning</b>, and the angels of the <b>spirits of cold</b> and of <b>heat</b>, and of <b>winter</b> and of <b>spring</b> and of <b>autumn</b> and of <b>summer</b>,</p><p><sup>6</sup> and of all the <b>spirits of His creatures</b> which are in the <b>heavens</b> and on the <b>earth.<br></b>(He created) the <b>abysses</b> and the <b>darkness</b>, <b>eventide</b> (and <b>night</b>), and the <b>light</b>, <b>dawn</b> and <b>day</b>, which He hath prepared in the knowledge of His heart.</p>",
       "source": "edited"
     }
   ]
