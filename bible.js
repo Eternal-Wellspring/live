@@ -2463,13 +2463,7 @@
   document.querySelectorAll(".fn").forEach(paintFnTitle);
   markExtraRefs();
   document.addEventListener("click", function (ev) {
-    var det = ev.target.closest && ev.target.closest(".bit.ew-details");
-    if (det) {
-      ev.preventDefault();
-      ev.stopPropagation();
-      toggleDetails(det);
-      return;
-    }
+    if (ev.target.closest && ev.target.closest(".bit.ew-details")) return;
     if (ev.target.closest && ev.target.closest("#ew-verse, #ew-chapter, #ew-ref-menu")) return;
     var a = ev.target.closest && ev.target.closest("a.ref");
     if (a) {
@@ -2494,16 +2488,6 @@
       if (ev.target.closest && ev.target.closest(".bit.ew-details")) ev.preventDefault();
     },
     true
-  );
-  document.addEventListener(
-    "keydown",
-    function (ev) {
-      var det = ev.target && ev.target.classList && ev.target.classList.contains("ew-details") ? ev.target : null;
-      if (!det) return;
-      if (ev.key !== "Enter" && ev.key !== " ") return;
-      ev.preventDefault();
-      toggleDetails(det);
-    }
   );
   document.addEventListener(
     "contextmenu",

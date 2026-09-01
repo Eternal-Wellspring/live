@@ -680,6 +680,8 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
 })();
 </script><script>window.ewDefaults={"sky": "stars", "notes": true}</script><script>window.ewFolder="sons-of-god-arise"</script><script>
 (function(){
+  if (window.ewDetailsBound) return;
+  window.ewDetailsBound = true;
   function setOpen(btn, on){
     if (!btn || !btn.classList) return;
     btn.classList.toggle("open", !!on);
@@ -691,8 +693,9 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
     if (!btn) return;
     ev.preventDefault();
     ev.stopPropagation();
+    if (ev.stopImmediatePropagation) ev.stopImmediatePropagation();
     setOpen(btn, !btn.classList.contains("open"));
-  });
+  }, true);
   document.addEventListener("keydown", function(ev){
     var btn = ev.target && ev.target.classList && ev.target.classList.contains("ew-details") ? ev.target : null;
     if (!btn) return;
@@ -702,7 +705,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
   });
 })();
 </script>
-<script src="/bible.js?v=95"></script><script src="/ew-sky.js?v=15"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
+<script src="/bible.js?v=96"></script><script src="/ew-sky.js?v=15"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
 (function(){
   var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   var last = "";
