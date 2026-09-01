@@ -43,12 +43,12 @@
     },
     {
       "reference": "Jhn 3:16-17",
-      "text": "<p><sup>16</sup> For God so loved the world that He gave His only begotten Son,<br>that <b>whoever believes in Him<br>should not perish but have everlasting life.</b></p><p><sup>17</sup> For God did not send His Son into the world to condemn the world, <br><b>but that the world through Him might be saved.</b></p>",
+      "text": "<p><sup>16</sup> For God so <b>loved</b> the world <br>that <b>He gave</b> His only begotten Son,<br>that <b>whoever believes in Him</b><br>should not perish but <b>have everlasting life.</b></p><p><sup>17</sup> For God did not send His Son into the world to condemn the world,<br>but that <b>the world through Him might be saved.</b></p>",
       "source": "edited"
     },
     {
       "reference": "Gen 1:26",
-      "text": "<p><sup>26</sup> Then God said,\"Let Us<b> make mankind</b><br>in <b>Our</b> image, according to <b>Our</b> likeness;<br><b>let them have <b>dominion</b> <br></b>over the <b>fish</b> of the sea,<br>over the <b>birds</b> of the air, <br>and over the <b>cattle</b>,<br><b>over all the earth</b><br>and over every <b>creeping thing</b> that creeps on the earth.\"</p>",
+      "text": "<p><sup>26</sup> Then God said,<br>\"Let <b>Us make mankind</b><br>in <b>Our</b> image, <br>according to <b>Our</b> likeness;<br><b>let them have <b>dominion</b><br></b>over the <b>fish</b> of the sea,<br>over the <b>birds</b> of the air,<br>and over the <b>cattle</b>,<br><b>over all the earth</b><br>and over every <b>creeping thing</b> that creeps on the earth.\"</p>",
       "source": "edited"
     },
     {
@@ -68,8 +68,8 @@
     },
     {
       "reference": "Gen 1:26-27",
-      "text": "Gen 1:26-27\n26 Then God said,\"Let <strong>Us make mankind</strong>\nin <strong>Our image</strong>,\naccording to <strong>Our likeness</strong>;\nlet them have <strong>dominion</strong> over the fish of the sea,\nover the birds of the air, and over the cattle,\n<strong>over all the earth</strong> and over every creeping thing that creeps on the earth.\"\n27 So <strong>God created man</strong> in His own image;\nin the image of <strong>God He created him</strong>;\nmale and female <strong>He created them</strong>.",
-      "source": "soga"
+      "text": "<p><sup>26</sup> Then God said,<br>\"Let <b>Us make mankind</b><br>in <b>Our</b> image,<br>according to <b>Our</b> likeness;<br><b>let them have <b>dominion</b><br></b>over the <b>fish</b> of the sea,<br>over the <b>birds</b> of the air,<br>and over the <b>cattle</b>,<br><b>over all the earth</b><br>and over every <b>creeping thing</b> that creeps on the earth.\"</p><p><sup>27</sup> So <b>God created man</b> in His own image;<br>in the image of <b>God He created him</b>;<br>male and female <b>He created them</b>.</p>",
+      "source": "edited"
     },
     {
       "reference": "Rom 8:14-16",
@@ -118,7 +118,7 @@
     },
     {
       "reference": "Eph 3:14-15",
-      "text": "14 For this reason<br>I bow my knees to the <b>Father </b>of our Lord Jesus Christ,<br>15 from whom the <b>whole family in heaven and earth is named,</b>",
+      "text": "14 For this reason<br>I bow my knees to the <b>Father </b>of our Lord Jesus Christ,<br>15 from whom the <b>whole family in heaven and earth</b> is named<b>.</b>",
       "source": "edited"
     },
     {
@@ -169,6 +169,21 @@
     {
       "reference": "Rom 1:20-21",
       "text": "<p><sup>20</sup> For since the <b>creation of the world</b>,<br><b>God's invisible attributes are clearly seen</b>,<br>being <b>understood</b> by the things that are made,<br>even <b>His eternal power</b> and <b>Godhead</b>,<br><b>so that they are without excuse</b>.</p><p><sup>21</sup> because,<br><b>although</b> <b>they knew God</b>,<br><b>they did not glorify Him as God</b>,<br>nor were <b>thankful</b>,<br>but became <b>futile in their thoughts</b>,<br>and their <b>foolish hearts were darkened</b>.</p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Jer 24:7",
+      "text": "<p><sup>7</sup> Then I will give them a heart <b>to know Me</b>, <br>that <b>I am Yahweh</b>; <br>and they shall be <b>My people</b>, <br>and I will be <b>their God</b>, <br>for they shall return to Me with their whole heart.</p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Gen 1:29-31",
+      "text": "<p><sup>29</sup> And God said, “See, I have given you every herb that yields seed which is on the face of all the earth, and every tree whose fruit yields seed; to you it shall be for food.</p><p><sup>30</sup> Also, to every beast of the earth, to every bird of the air, and to everything that creeps on the earth, in which there is life, I have given every green herb for food”; and it was so.</p><p><sup>31</sup> Then God saw <b>everything</b> that He had made, and indeed it was very good.</p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Gen 2:9",
+      "text": "<p><sup>9</sup> And out of the ground Yahweh God made every tree grow<br>that is <b>pleasant to the sight and good for food.<br>The tree of life</b> was also in the midst of the garden,<br>and <b>the tree of the knowledge of good and evil.</b></p>",
       "source": "edited"
     }
   ]
