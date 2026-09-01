@@ -678,7 +678,31 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
   bindSky();
   apply();
 })();
-</script><script>window.ewDefaults={"sky": "stars", "notes": true}</script><script>window.ewFolder="sons-of-god-arise"</script><script src="/bible.js?v=94"></script><script src="/ew-sky.js?v=15"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
+</script><script>window.ewDefaults={"sky": "stars", "notes": true}</script><script>window.ewFolder="sons-of-god-arise"</script><script>
+(function(){
+  function setOpen(btn, on){
+    if (!btn || !btn.classList) return;
+    btn.classList.toggle("open", !!on);
+    btn.setAttribute("aria-expanded", on ? "true" : "false");
+    btn.textContent = on ? "Hide Details" : "Additional Details";
+  }
+  document.addEventListener("click", function(ev){
+    var btn = ev.target.closest && ev.target.closest(".bit.ew-details");
+    if (!btn) return;
+    ev.preventDefault();
+    ev.stopPropagation();
+    setOpen(btn, !btn.classList.contains("open"));
+  });
+  document.addEventListener("keydown", function(ev){
+    var btn = ev.target && ev.target.classList && ev.target.classList.contains("ew-details") ? ev.target : null;
+    if (!btn) return;
+    if (ev.key !== "Enter" && ev.key !== " ") return;
+    ev.preventDefault();
+    setOpen(btn, !btn.classList.contains("open"));
+  });
+})();
+</script>
+<script src="/bible.js?v=95"></script><script src="/ew-sky.js?v=15"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
 (function(){
   var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   var last = "";
