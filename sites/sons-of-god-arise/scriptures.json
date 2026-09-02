@@ -48,7 +48,7 @@
     },
     {
       "reference": "Gen 1:26",
-      "text": "<p><sup>26</sup> Then God said,<br>\"Let <b>Us make mankind</b><br>in <b>Our</b> image, <br>according to <b>Our</b> likeness;<br><b>let them have <b>dominion</b><br></b>over the <b>fish</b> of the sea,<br>over the <b>birds</b> of the air,<br>and over the <b>cattle</b>,<br><b>over all the earth</b><br>and over every <b>creeping thing</b> that creeps on the earth.\"</p>",
+      "text": "<p><sup>26</sup> Then God said,<br>\"Let <b>Us make mankind</b><br>in <b>Our</b> image,<br>according to <b>Our</b> likeness;<br><b>let them have <b>dominion</b><br></b>over the <b>fish</b> of the sea,<br>over the <b>birds</b> of the air,<br>and over the <b>cattle</b>,<br><b>over all the earth</b><br>and over every <b>creeping thing</b> that creeps on the earth.\"</p>",
       "source": "edited"
     },
     {
@@ -108,7 +108,7 @@
     },
     {
       "reference": "Luk 3:38",
-      "text": "<p><sup>38</sup> ... Adam, the son of God.</p>",
+      "text": "<p><sup>38</sup> ... <b>Adam</b>, the <b>son of God</b>.</p>",
       "source": "edited"
     },
     {
@@ -153,7 +153,7 @@
     },
     {
       "reference": "Gen 1:31",
-      "text": "<p><sup>31</sup> Then God saw <b>everything</b> that He had made,</p><p>and indeed it was <b>very good</b>.</p><p></p>",
+      "text": "<p><sup>31</sup> Then God saw <b>everything</b> that He had made, </p><p>and indeed it was <b>very good</b>.</p><p></p><p></p>",
       "source": "edited"
     },
     {
@@ -194,6 +194,16 @@
     {
       "reference": "2Th 1:6-9",
       "text": "<p><sup>6</sup> ...Those who trouble you ...</p><p><sup>8</sup> ... and who <b>do not obey</b> the gospel of our Lord Jesus Christ.</p><p><sup>9</sup> shall be punished with <b>everlasting destruction</b></p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Mal 2:10",
+      "text": "<p><sup>10</sup> Have we not all <b>one Father</b>? <br>Has not <b>one God created us</b>? </p>",
+      "source": "edited"
+    },
+    {
+      "reference": "Eph 4:6",
+      "text": "<p><sup>6</sup> <b>One God</b> and <b>Father of all</b>, <br>who is <b>above all</b>, <br>and <b>through all</b>, <br>and <b>in you all</b>.</p>",
       "source": "edited"
     }
   ]
