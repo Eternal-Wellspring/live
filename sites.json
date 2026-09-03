@@ -1,19 +1,24 @@
 {
   "sites": [
     {
-      "folder": "His-Finished-Work",
-      "name": "His Finished Work",
-      "tagline": "The best is yet to come.",
-      "description": "The story of what is happening behind the scenes of Creation - from Genesis to Revelation.\n\nUnderstand passages there were a little strange instead of passing over them.  You will see and understand the bible like you never did before.\n\nAs you read this story, the Word of God will open up next to it with a single click or tap.",
-      "category": "",
-      "href": "/His-Finished-Work/"
-    },
-    {
       "folder": "Waiting-for-the-sons-of-God",
       "name": "Waiting for the sons of God",
       "tagline": "Creation is waiting for you.",
       "description": "The story of what is happening behind the scenes of Creation - from Genesis to Revelation.\n\nUnderstand passages there were a little strange instead of passing over them.  You will see and understand the bible like you never did before.\n\nAs you read this story, the Word of God will open up next to it with a single click or tap.",
       "category": "",
+      "contents": [
+        "Home",
+        "1. God dwells with His Families",
+        "2. Mankind is tempted to sin - Eden",
+        "3. The Wicked are Destroyed - Flood",
+        "4. Nations are Rejected - Babel",
+        "5. God creates His own Nation - Israel",
+        "6. Israel is Evicted",
+        "7. God's Word is made flesh",
+        "8. God adopts Children of Faith",
+        "9. Sons of God reign over Creation",
+        "10. Yahweh dwells with His Families"
+      ],
       "href": "/Waiting-for-the-sons-of-God/"
     }
   ]

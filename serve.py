@@ -49,6 +49,21 @@ def site_folder_key(name: str) -> str:
     return SITE_ALIASES.get(k, k)
 
 
+def resolve_site_dir(folder: str):
+    raw = str(folder or "").strip()
+    if not raw:
+        return None
+    direct = PUBLISHED / raw
+    if direct.is_dir():
+        return direct
+    want = raw.lower()
+    if PUBLISHED.is_dir():
+        for path in PUBLISHED.iterdir():
+            if path.is_dir() and path.name.lower() == want:
+                return path
+    return None
+
+
 def folder_from_host(host: str) -> str:
     name = (host or "").split(":")[0].strip().lower()
     if not name or name in ("localhost", "127.0.0.1"):
@@ -66,8 +81,8 @@ def pretty_site_target(path: str, host: str = ""):
             return None
         folder = site_folder_key(parts[0])
         rest = parts[1:]
-    site = PUBLISHED / folder
-    if not site.is_dir():
+    site = resolve_site_dir(folder)
+    if not site:
         return None
     if not rest:
         if (site / "index.html").is_file():
