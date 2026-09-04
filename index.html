@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Eternal Wellspring</title>
   <link rel="icon" href="images/icon.jpg" />
-  <link rel="stylesheet" href="index.css?v=6" />
+  <link rel="stylesheet" href="index.css?v=7" />
 </head>
 <body class="home-page">
   <header class="home-top">
@@ -15,19 +15,19 @@
     </a>
   </header>
 
-  <div class="ew-hero">
-    <img src="images/wellspring-home.jpg" alt="" />
-  </div>
-
-  <section class="ew-story">
-    <h1>Eternal Wellspring</h1>
-    <p class="tagline">The River of Life — God dwelling with His people</p>
-    <p class="tagline-sub">Jesus is the Way, the Truth and the Life</p>
-    <div class="ew-narrative">
-      <p>Eternal is the end God has always intended: He dwelling with His people, His life among us, without end. Wellspring is the River of Life — living water from His throne, not the wells this age keeps digging.</p>
-      <p>This world is full of fake news, deception, hatred, division, violence, tribalism, injustice, fear and intimidation. Those things wound nations and households. They cannot heal them.</p>
-      <p>The Word can. These expositions open God’s ways, His truth and His life in the Scriptures — practical for today, prophetic for the hope set before us, when Jesus the Son of God returns to earth. That is the answer to mankind’s woes: not another tribe, not another rumour, but the Way, the Truth and the Life.</p>
-      <p>Choose a topic. Open a website. Read the story. The Word stands next to it.</p>
+  <section class="ew-intro">
+    <div class="ew-hero">
+      <img src="images/wellspring-home.jpg" alt="" />
+    </div>
+    <div class="ew-story">
+      <h1>Eternal Wellspring</h1>
+      <p class="tagline">Out of His throne, a river of life</p>
+      <p class="tagline-sub">Jesus is the Way, the Truth and the Life</p>
+      <div class="ew-narrative">
+        <p>A river runs from the throne of God and of the Lamb. That is the Wellspring — living water, already flowing, for anyone who will come. Eternal is the heart of the story: God dwelling with His people, His life among us, without end.</p>
+        <p>This age is loud with fake news, deception, hatred, division, violence, tribalism, injustice, fear and intimidation. It wounds what it cannot heal. The Word can. These expositions open His ways, His truth and His life in the Scriptures — practical for this day, prophetic for the hope set before us, when Jesus the Son of God returns.</p>
+        <p>That is the answer to mankind’s woes. Not another tribe. Not another rumour. The Way, the Truth and the Life. Come and drink.</p>
+      </div>
     </div>
   </section>
 
@@ -35,19 +35,20 @@
     <div class="ew-col">
       <h2>Topics</h2>
       <div id="topics" class="ew-pick" role="listbox" aria-label="Topics"></div>
+      <p id="topic-desc" class="ew-topic-desc"></p>
     </div>
     <div class="ew-col">
       <h2>Websites</h2>
       <div id="sites" class="ew-pick" role="listbox" aria-label="Websites"></div>
       <p id="sites-empty" class="ew-empty" hidden>None in this topic yet.</p>
+      <a id="load-site" class="load-btn" hidden>Load website</a>
     </div>
     <div class="ew-col">
       <div class="ew-about">
         <h2 id="about-name"></h2>
-        <p id="about-desc" class="ew-long"></p>
+        <div id="about-desc" class="ew-long"></div>
         <h3 id="contents-label" hidden>Contents</h3>
         <ul id="about-contents" class="ew-contents"></ul>
-        <a id="load-site" class="load-btn" hidden>Load website</a>
       </div>
     </div>
   </section>
@@ -76,6 +77,23 @@
       });
     }
 
+    function fillLong(el, text) {
+      el.innerHTML = "";
+      String(text || "").split(/\n+/).forEach(function (bit) {
+        bit = bit.replace(/^\s+|\s+$/g, "");
+        if (!bit) return;
+        var p = document.createElement("p");
+        p.textContent = bit;
+        el.appendChild(p);
+      });
+    }
+
+    function fillTopicDesc() {
+      var el = $("topic-desc");
+      var row = categories.filter(function (c) { return sameCat(catName(c), chosenCat); })[0];
+      el.textContent = row && row.description ? row.description : "";
+    }
+
     function fillTopics() {
       var box = $("topics");
       box.innerHTML = "";
@@ -87,25 +105,19 @@
         btn.className = sameCat(name, chosenCat) ? "on" : "";
         btn.setAttribute("role", "option");
         btn.setAttribute("aria-selected", sameCat(name, chosenCat) ? "true" : "false");
-        var title = document.createElement("span");
-        title.textContent = name;
-        btn.appendChild(title);
-        if (c.description) {
-          var sub = document.createElement("span");
-          sub.className = "pick-sub";
-          sub.textContent = c.description;
-          btn.appendChild(sub);
-        }
+        btn.textContent = name;
         btn.addEventListener("click", function () {
           chosenCat = name;
           var list = sitesIn(name);
           chosenFolder = list.length ? list[0].folder : "";
           fillTopics();
+          fillTopicDesc();
           fillSites();
           fillAbout();
         });
         box.appendChild(btn);
       });
+      fillTopicDesc();
     }
 
     function fillSites() {
@@ -148,14 +160,14 @@
       list.innerHTML = "";
       if (!site) {
         name.textContent = "";
-        desc.textContent = "";
+        fillLong(desc, "");
         label.hidden = true;
         load.hidden = true;
         load.removeAttribute("href");
         return;
       }
       name.textContent = site.name;
-      desc.textContent = site.description || site.tagline || "";
+      fillLong(desc, site.description || site.tagline || "");
       var pages = site.contents || [];
       label.hidden = pages.length === 0;
       pages.forEach(function (t) {
