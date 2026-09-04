@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Topics tree</title>
+  <title>Topics Tree</title>
   <style>
     :root {
       --ink: #1b3a4b;
@@ -545,10 +545,14 @@
       saveFold();
       paint();
     };
-    var lastW = 0, lastH = 0;
+    var lastW = 0, lastH = 0, tries = 0;
     function paintWhenReady(force) {
       var wrap = document.getElementById("wrap");
-      if (!wrap || wrap.clientWidth < 8) return;
+      if (!wrap || wrap.clientWidth < 8) {
+        if (tries++ < 40) setTimeout(function () { paintWhenReady(true); }, 50);
+        return;
+      }
+      tries = 0;
       var w = wrap.clientWidth, h = wrap.clientHeight;
       if (!force && w === lastW && h === lastH) return;
       lastW = w;
@@ -564,8 +568,8 @@
         var head = rootId
           ? topics.find(function (t) { return sid(t.id) === sid(rootId); })
           : null;
-        document.title = head && head.title ? head.title : "Topics tree";
-        paintWhenReady();
+        document.title = head && head.title ? head.title : "Topics Tree";
+        paintWhenReady(true);
       })
       .catch(function (err) {
         document.getElementById("status").textContent = String(err);
@@ -573,7 +577,7 @@
     if (window.ResizeObserver) {
       new ResizeObserver(function () { paintWhenReady(); }).observe(document.getElementById("wrap"));
     }
-    window.addEventListener("resize", paintWhenReady);
+    window.addEventListener("resize", function () { paintWhenReady(true); });
   </script>
 </body>
 </html>

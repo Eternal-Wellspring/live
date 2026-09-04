@@ -98,7 +98,7 @@
         <iframe class="topics-frame" id="topics-frame" title="Topics"></iframe>
       </div>
       <div class="tab-panel" id="s-tree" data-sec="s-tree">
-        <iframe class="topics-frame" id="tree-frame" title="Topics tree"></iframe>
+        <iframe class="topics-frame" id="tree-frame" title="Topics Tree"></iframe>
       </div>
     </main>
     <div class="tab-dock-end"><div class="tabs" id="tabs-end"></div></div>
@@ -120,6 +120,27 @@
       }
       return "";
     }
+    var frameId = "";
+    function treeUrl() {
+      var q = frameId ? "?id=" + encodeURIComponent(frameId) + "&v=201" : "?v=201";
+      return "topics-tree.html" + q;
+    }
+    function showTree() {
+      var fr = document.getElementById("tree-frame");
+      if (!fr) return;
+      var want = treeUrl();
+      if (fr.getAttribute("src") !== want) {
+        fr.src = want;
+        return;
+      }
+      requestAnimationFrame(function () {
+        try {
+          if (fr.contentWindow && typeof fr.contentWindow.snPaintTree === "function") {
+            fr.contentWindow.snPaintTree();
+          }
+        } catch (err) {}
+      });
+    }
     function showTab(id) {
       if (!id || !document.getElementById(id)) return;
       document.querySelectorAll(".tab[data-tab]").forEach(function (b) {
@@ -128,16 +149,7 @@
       document.querySelectorAll(".tab-panel").forEach(function (p) {
         p.classList.toggle("active", p.id === id);
       });
-      if (id === "s-tree") {
-        requestAnimationFrame(function () {
-          var fr = document.getElementById("tree-frame");
-          try {
-            if (fr && fr.contentWindow && typeof fr.contentWindow.snPaintTree === "function") {
-              fr.contentWindow.snPaintTree();
-            }
-          } catch (err) {}
-        });
-      }
+      if (id === "s-tree") showTree();
     }
     document.addEventListener("click", function (ev) {
       var btn = ev.target.closest && ev.target.closest(".tab[data-tab]");
@@ -148,16 +160,18 @@
     });
     var tabsHtml =
       '<button type="button" class="tab active" data-tab="s-topics" data-sec="s-topics">Topics</button>' +
-      '<button type="button" class="tab" data-tab="s-tree" data-sec="s-tree">Topics tree</button>' +
+      '<button type="button" class="tab" data-tab="s-tree" data-sec="s-tree">Topics Tree</button>' +
       '<button type="button" class="tab tab-notes" data-notes-toggle="1">Footnotes</button>' +
       '<button type="button" class="tab tab-settings" data-settings-open="1">Settings</button>';
     document.getElementById("tabs-top").innerHTML = tabsHtml;
     document.getElementById("tabs-end").innerHTML = tabsHtml;
     var id = qid();
     function setFrames(nid) {
-      var q = nid ? "?id=" + encodeURIComponent(nid) : "";
+      frameId = nid ? String(nid) : "";
+      var q = frameId ? "?id=" + encodeURIComponent(frameId) : "";
       document.getElementById("topics-frame").src = "topics-view.html" + q;
-      document.getElementById("tree-frame").src = "topics-tree.html" + q;
+      var fr = document.getElementById("tree-frame");
+      if (fr.getAttribute("src")) fr.src = treeUrl();
     }
     setFrames(id);
     fetch("data/topics.json", { cache: "no-store" })
