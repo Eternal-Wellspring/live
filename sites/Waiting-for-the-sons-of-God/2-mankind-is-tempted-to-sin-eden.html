@@ -19,7 +19,13 @@ As you read this story, the Word of God will open up next to it with a single cl
 .site { display:block; width:100%; padding:0; margin:0; border:0; background:transparent }
 .who .site, a.site { font-weight:700; font-style:normal; text-decoration:none }
 .top .brand-row { font-family:Arial, Helvetica, sans-serif; font-size:calc(26px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f6f78; background:#f6f7eb; border-style:solid; border-color:#c5d0d4; border-width:0px 0px 0px 0px; padding:0px; margin-top:0px; margin-bottom:0px }
-.bit.ew-info { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; background:#ededed; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:7px; margin-top:4px; margin-bottom:4px; text-align:left }
+.bit.ew-info { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; background:#ededed; border-style:solid; border-color:#aaaaaa; border-width:1.0px 1.0px 1.0px 1.0px; box-shadow:20px 20px 20px #00000040; padding:7px; margin-top:4px; margin-bottom:4px; text-align:left }
+#ew-info-modal .ew-info-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#333333; background:#f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:1.0px 1.0px 1.0px 1.0px; box-shadow:20px 20px 20px #00000059; text-align:left; line-height:1.25 }
+#ew-info-modal .ew-info-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#333333; background:#f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:1.0px 1.0px 1.0px 1.0px; box-shadow:20px 20px 20px #00000059; padding:22px; text-align:left; line-height:1.25 }
+#ew-info-modal .ew-info-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; text-decoration:underline; color:#0058B0 }
+#ew-info-modal .ew-info-x { color:#0058B0 }
+#ew-info-modal .ew-info-body .bit { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#333333; line-height:1.25 }
+#ew-info-modal .ew-info-body .bit.indent { font-weight:400 }
 .title-bar h1 { font-family:Arial, Helvetica, sans-serif; font-size:calc(23px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#004d97; background:#f6f7eb; border-style:solid; border-color:#004d97; border-width:0px 0px 0px 0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center }
 .title-bar h1 { border-width:0 !important }
 .tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
@@ -33,14 +39,15 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .col .col-text { gap:0 }
 .col .col-text .bit { margin:0 0 5px }
 .col .col-text .bit:last-child { margin-bottom:0 }
-.ew-verse-body, .ew-verse-body p, .ew-verse-alt { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.45 }
-.ew-verse-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.45 }
-.ew-verse-ref { font-weight:400; font-style:normal }
-.ew-term { font-weight:400; font-style:normal }
-.ew-term { font-weight:400; font-style:normal }
-#ew-text-modal .ew-text-card { font-weight:400; font-style:normal }
-#ew-text-modal .ew-text-title { font-weight:400; font-style:normal }
-#ew-text-modal .ew-text-body, #ew-text-modal .ew-text-body p { font-weight:400; font-style:normal }
+.col{align-self:center}
+.ew-verse-body, .ew-verse-body p, .ew-verse-alt { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:1.0px 1.0px 1.0px 1.0px; box-shadow:20px 20px 20px #00000040; text-align:left; line-height:1.45 }
+.ew-verse-card, .ew-chapter-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:1.0px 1.0px 1.0px 1.0px; box-shadow:20px 20px 20px #00000040; padding:8px; text-align:left; line-height:1.45 }
+.ew-verse-ref { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#005eb8 }
+.ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; background:##f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:20px 20px 20px #00000040; text-align:left }
+.ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; background:##f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:20px 20px 20px #00000040; text-align:left }
+#ew-text-modal .ew-text-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; background:##f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:20px 20px 20px #00000040; padding:16px; text-align:left }
+#ew-text-modal .ew-text-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; text-decoration:underline; color:#0058B0 }
+#ew-text-modal .ew-text-body, #ew-text-modal .ew-text-body p { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#333333; line-height:1.25 }
 .ew-chapter-list, .ew-ch-row { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.25 }
 .page-nav, .page-nav .page-nav-word, .page-nav .page-nav-tip, .page-tools, .page-tools button { font-weight:400; font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#5a6a72 }
 .tab[data-sec="109"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
@@ -83,6 +90,8 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .title-bar-inner { background:#f6f7eb }
 .title-bar h1 { background:transparent; margin-bottom:0 }
 .tabs { margin-top:0 }
+.para[data-para="136"] .col[data-col="137"]{align-self:center}
+.para[data-para="140"] .col[data-col="141"]{align-self:center}
 .fn-keep{white-space:nowrap}
 .fn { font-size:1em; font-weight:700; line-height:inherit; vertical-align:baseline; cursor:pointer; color:var(--title); display:inline-block; position:relative; padding:0; white-space:pre }
 .fn-mark { font-size:.7em; font-weight:700; line-height:1; vertical-align:super }
@@ -125,9 +134,11 @@ html.ew-phone #ew-full{display:none!important}
 .top{padding-top:0px}
 .top{padding-bottom:0px}
 .tab-dock{background:#f6f7eb}
-.col.col-footnotes{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important}
-.col.col-footnotes,.col.col-footnotes .col-text,.col.col-footnotes .bit,.col.col-footnotes .fn{white-space:nowrap!important}
-.col.col-footnotes a.ref{white-space:nowrap!important}
+.col.col-footnotes{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.col.col-footnotes .col-text,.col.col-footnotes .bit{white-space:normal!important}
+.col.col-footnotes .fn-keep{display:block;white-space:nowrap}
+.col.col-footnotes .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.col.col-footnotes a.ref{white-space:nowrap}
 </style>
 </head>
 <body>
@@ -153,7 +164,7 @@ html.ew-phone #ew-full{display:none!important}
     <div class="tab-dock"><div class="tabs"><button type="button" class="tab" data-tab="s0" data-sec="109">Contents</button><button type="button" class="tab active" data-tab="s1" data-sec="134">Story</button><button type="button" class="tab" data-tab="s2" data-sec="138">Q&amp;A</button><button type="button" class="tab tab-notes" data-notes-toggle="1">Footnotes</button><button type="button" class="tab tab-settings" data-settings-open="1">Settings</button></div></div>
   </div>
   <main data-page="108">
-    <div class="tab-panel" id="s0" data-sec="109"><ol class="contents-list"><li><a href="home.html#s1">Home</a></li><li><a href="1-god-dwells-with-his-families.html#s1">1. God dwells with His Families</a></li><li><a href="2-mankind-is-tempted-to-sin-eden.html#s1">2. Mankind is tempted to sin - Eden</a></li><li><a href="3-the-wicked-are-destroyed-flood.html#s1">3. The Wicked are Destroyed - Flood</a></li><li><a href="4-nations-are-rejected-babel.html#s0">4. Nations are Rejected - Babel</a></li><li><a href="5-god-creates-his-own-nation-israel.html#s1">5. God creates His own Nation - Israel</a></li><li><a href="6-israel-is-evicted.html#s1">6. Israel is Evicted</a></li><li><a href="7-god-s-word-is-made-flesh.html#s1">7. God&#x27;s Word is made flesh</a></li><li><a href="8-god-adopts-children-of-faith.html#s1">8. God adopts Children of Faith</a></li><li><a href="9-sons-of-god-reign-over-creation.html#s1">9. Sons of God reign over Creation</a></li><li><a href="10-yahweh-dwells-with-his-families.html#s1">10. Yahweh dwells with His Families</a></li></ol></div><div class="tab-panel active" id="s1" data-sec="134"><div class="subsec" data-heading="135"><div class="subsec-frame" data-heading="135"></div></div></div><div class="tab-panel" id="s2" data-sec="138"><div class="subsec" data-heading="139"><div class="subsec-frame" data-heading="139"></div></div></div>
+    <div class="tab-panel" id="s0" data-sec="109"><ol class="contents-list"><li><a href="home.html#s1">Home</a></li><li><a href="1-god-dwells-with-his-families.html#s1">1. God dwells with His Families</a></li><li><a href="2-mankind-is-tempted-to-sin-eden.html#s1">2. Mankind is tempted to sin - Eden</a></li><li><a href="3-the-wicked-are-destroyed-flood.html#s1">3. The Wicked are Destroyed - Flood</a></li><li><a href="4-nations-are-rejected-babel.html#s1">4. Nations are Rejected - Babel</a></li><li><a href="5-god-creates-his-own-nation-israel.html#s1">5. God creates His own Nation - Israel</a></li><li><a href="6-israel-is-evicted.html#s1">6. Israel is Evicted</a></li><li><a href="7-god-s-word-is-made-flesh.html#s1">7. God&#x27;s Word is made flesh</a></li><li><a href="8-god-adopts-children-of-faith.html#s1">8. God adopts Children of Faith</a></li><li><a href="9-sons-of-god-reign-over-creation.html#s1">9. Sons of God reign over Creation</a></li><li><a href="10-yahweh-dwells-with-his-families.html#s1">10. Yahweh dwells with His Families</a></li></ol></div><div class="tab-panel active" id="s1" data-sec="134"><div class="subsec" data-heading="135"><div class="subsec-frame" data-heading="135"></div></div></div><div class="tab-panel" id="s2" data-sec="138"><div class="subsec" data-heading="139"><div class="subsec-frame" data-heading="139"></div></div></div>
   </main>
   <div class="tab-dock-end"><div class="tabs"><button type="button" class="tab" data-tab="s0" data-sec="109">Contents</button><button type="button" class="tab active" data-tab="s1" data-sec="134">Story</button><button type="button" class="tab" data-tab="s2" data-sec="138">Q&amp;A</button><button type="button" class="tab tab-notes" data-notes-toggle="1">Footnotes</button><button type="button" class="tab tab-settings" data-settings-open="1">Settings</button></div></div>
   
