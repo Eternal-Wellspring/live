@@ -13,38 +13,70 @@
       --panel: #fff;
     }
     * { box-sizing: border-box; }
-    html, body { margin: 0; height: 100%; }
+    html, body { margin: 0; height: 100%; overflow: hidden; }
     body {
       font: 400 13px/1.2 Arial, Helvetica, sans-serif;
       color: var(--ink);
       background: var(--paper);
       display: flex;
       flex-direction: column;
+      height: 100%;
+      position: relative;
     }
     .board-wrap {
       flex: 1 1 auto;
+      min-height: 0;
       overflow: auto;
       background: var(--panel);
     }
-    .board { position: relative; min-width: 100%; min-height: 100%; }
-    .board svg { position: absolute; left: 0; top: 0; z-index: 1; pointer-events: none; }
+    .board { position: relative; display: block; min-width: 100%; min-height: 100%; }
     .tbox {
-      position: absolute;
+      position: absolute !important;
       z-index: 2;
+      display: flex;
+      align-items: stretch;
       margin: 0;
-      padding: 0.2rem 0.45rem;
+      padding: 0;
       border: 1px solid var(--line);
       background: var(--panel);
       font: 400 13px/1.2 Arial, Helvetica, sans-serif;
       color: inherit;
       text-align: left;
       white-space: nowrap;
+      overflow: hidden;
       cursor: pointer;
     }
     .tbox:hover { background: #f4f7f8; }
-    .tbox.on { background: #f6efc8; }
+    .tbox.on, .tbox.on:hover { background: #f6efc8; }
+    .tname {
+      flex: 1 1 auto;
+      min-width: 0;
+      padding: 0.2rem 0.45rem;
+      white-space: nowrap;
+      overflow: hidden;
+      font-weight: 400;
+    }
+    .tcount {
+      flex: 0 0 auto;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-left: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font: 400 13px/1.2 Arial, Helvetica, sans-serif;
+    }
     .thead { cursor: default; }
-    .note { padding: 0.35rem 0.7rem; color: var(--muted); font-size: 0.78rem; }
+    .note {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      padding: 0.2rem 0.5rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -52,6 +84,6 @@
     <div class="board" id="board"></div>
   </div>
   <span class="note" id="status"></span>
-  <script src="topics-tree.js?v=210"></script>
+  <script src="topics-tree.js?v=221"></script>
 </body>
 </html>
