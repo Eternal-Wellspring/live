@@ -94,6 +94,11 @@
       color: var(--ink);
       cursor: pointer;
     }
+    #s-tree .tree-bar button.on {
+      background: #fff;
+      border-color: var(--title);
+      color: var(--title);
+    }
     #s-tree .note { color: #5a6a72; font-size: 0.78rem; }
     #s-tree .board-wrap {
       flex: 1 1 auto;
@@ -101,35 +106,73 @@
       overflow: auto;
       background: #fff;
     }
-    #s-tree .board { position: static; min-width: 100%; min-height: 16rem; padding: 12px 14px; }
-    #s-tree .box {
-      position: static !important;
-      display: inline-block !important;
-      width: auto;
+    #s-tree .board {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 100%;
+      min-height: 16rem;
+      padding: 1rem 0.5rem 2rem;
+    }
+    #s-tree .tn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #s-tree .tbox {
+      position: relative;
+      display: inline-block;
       margin: 0;
-      padding: 0.2rem 0.45rem;
+      padding: 0.2rem 0.7rem 0.55rem 0.4rem;
       border: 1px solid var(--line);
       background: #fff;
       font: 400 13px/1.2 Arial, Helvetica, sans-serif;
       color: inherit;
       text-align: left;
       white-space: nowrap;
-    }
-    #s-tree .box:hover { background: #f4f7f8; }
-    #s-tree .box.on { background: #f6efc8; z-index: 3; }
-    #s-tree .name { display: block; font-weight: 400; white-space: nowrap; }
-    #s-tree .more { display: block; margin-top: 0.1rem; color: #5a6a72; font-size: 0.78rem; }
-    #s-tree .tog {
-      position: absolute;
-      top: 0.15rem;
-      right: 0.15rem;
-      width: 1.15rem;
-      height: 1.15rem;
-      padding: 0;
-      border: 1px solid var(--line);
-      background: #f4f7f8;
-      font: 700 0.85rem/1 Arial, Helvetica, sans-serif;
       cursor: pointer;
+    }
+    #s-tree .tbox:hover { background: #f4f7f8; }
+    #s-tree .tbox .name { display: block; font-weight: 400; white-space: nowrap; }
+    #s-tree .tcount {
+      position: absolute;
+      right: 4px;
+      bottom: 1px;
+      font-size: 0.7rem;
+      line-height: 1;
+      color: #5a6a72;
+      font-weight: 400;
+    }
+    #s-tree .tstem {
+      width: 1px;
+      height: 14px;
+      background: #888;
+    }
+    #s-tree .tkids {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 8px 18px;
+      padding-top: 10px;
+      border-top: 1px solid #888;
+    }
+    #s-tree .tkids-l4 {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      max-width: 100%;
+      align-items: center;
+      position: relative;
+    }
+    #s-tree .tkids-l4 > .tn { flex: 0 0 auto; position: relative; z-index: 2; }
+    #s-tree .tarr {
+      position: absolute;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
     }
   </style>
 </head>
@@ -162,6 +205,9 @@
         <div class="tree-bar">
           <button type="button" id="foldall" title="Fold each stream to one box">Compact streams</button>
           <button type="button" id="openall" title="Show every topic">Expand all</button>
+          <button type="button" data-depth="2" class="on" title="Levels 1 and 2">1–2</button>
+          <button type="button" data-depth="3" title="Levels 1 to 3">1–3</button>
+          <button type="button" data-depth="4" title="Levels 1 to 4">1–4</button>
           <span class="note" id="tree-status">Topics Tree</span>
         </div>
         <div class="board-wrap" id="wrap">
@@ -233,7 +279,7 @@
       });
   </script>
   <script>window.ewFolder="Scripture-Narratives"</script>
-  <script src="topics-tree.js?v=203"></script>
+  <script src="topics-tree.js?v=206"></script>
   <script src="/bible.js?v=100"></script>
   <script src="/ew-sky.js?v=15"></script>
 </body>

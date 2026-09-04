@@ -41,57 +41,87 @@
       cursor: pointer;
     }
     .bar button:hover { background: #e8eef0; }
+    .bar button.on { background: #fff; border-color: var(--title); color: var(--title); }
     .note { color: var(--muted); font-weight: 400; font-size: 0.78rem; }
     .board-wrap {
       flex: 1 1 auto;
       overflow: auto;
       background: var(--panel);
     }
-    .board { position: relative; min-width: 100%; min-height: 100%; }
-    .board svg { position: absolute; left: 0; top: 0; z-index: 1; pointer-events: none; }
-    .box {
-      position: absolute;
-      z-index: 2;
-      width: auto;
+    .board {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 100%;
+      min-height: 100%;
+      padding: 1rem 0.5rem 2rem;
+    }
+    .tn { display: flex; flex-direction: column; align-items: center; }
+    .tbox {
+      position: relative;
+      display: inline-block;
       margin: 0;
-      padding: 0.2rem 1.35rem 0.2rem 0.4rem;
+      padding: 0.2rem 0.7rem 0.55rem 0.4rem;
       border: 1px solid var(--line);
       background: var(--panel);
       font: 400 13px/1.2 Arial, Helvetica, sans-serif;
       color: inherit;
       text-align: left;
-      cursor: pointer;
       white-space: nowrap;
-    }
-    .box:hover { background: #f4f7f8; }
-    .box.on { background: #f6efc8; z-index: 3; }
-    .name { display: block; font-weight: 400; white-space: nowrap; }
-    .more { display: block; margin-top: 0.1rem; color: var(--muted); font-size: 0.78rem; font-weight: 400; }
-    .tog {
-      position: absolute;
-      top: 0.15rem;
-      right: 0.15rem;
-      width: 1.15rem;
-      height: 1.15rem;
-      padding: 0;
-      border: 1px solid var(--line);
-      background: #f4f7f8;
-      color: var(--ink);
-      font: 700 0.85rem/1 Arial, Helvetica, sans-serif;
       cursor: pointer;
     }
-    .tog:hover { background: #e8eef0; }
+    .tbox:hover { background: #f4f7f8; }
+    .tbox .name { display: block; font-weight: 400; white-space: nowrap; }
+    .tcount {
+      position: absolute;
+      right: 4px;
+      bottom: 1px;
+      font-size: 0.7rem;
+      line-height: 1;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .tstem { width: 1px; height: 14px; background: #888; }
+    .tkids {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 8px 18px;
+      padding-top: 10px;
+      border-top: 1px solid #888;
+    }
+    .tkids-l4 {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      max-width: 100%;
+      align-items: center;
+      position: relative;
+    }
+    .tkids-l4 > .tn { flex: 0 0 auto; position: relative; z-index: 2; }
+    .tarr {
+      position: absolute;
+      left: 0;
+      top: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+    }
   </style>
 </head>
 <body>
   <div class="bar">
     <button type="button" id="foldall" title="Fold each stream to one box">Compact streams</button>
     <button type="button" id="openall" title="Show every topic">Expand all</button>
+    <button type="button" data-depth="2" class="on" title="Levels 1 and 2">1–2</button>
+    <button type="button" data-depth="3" title="Levels 1 to 3">1–3</button>
+    <button type="button" data-depth="4" title="Levels 1 to 4">1–4</button>
     <span class="note" id="status"></span>
   </div>
   <div class="board-wrap" id="wrap">
     <div class="board" id="board"><div style="padding:1rem;color:#5a6a72">Loading tree…</div></div>
   </div>
-  <script src="topics-tree.js?v=203"></script>
+  <script src="topics-tree.js?v=206"></script>
 </body>
 </html>
