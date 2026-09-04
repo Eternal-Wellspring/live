@@ -1,7 +1,7 @@
 {
   "redirects": [
     {
-      "source": "/:site((?!bible|scriptures|sky-images|api|images|sites)[^/.]+)",
+      "source": "/:site((?!bible|scriptures|sky-images|api|images|sites|topics)[^/.]+)",
       "destination": "/:site/",
       "permanent": false
     }
@@ -50,6 +50,8 @@
       "has": [{ "type": "host", "value": "sons-of-god-arise.eternalwellspring.com" }],
       "destination": "/sites/sons-of-god-arise/:path*"
     },
+    { "source": "/topics", "destination": "/topics.html" },
+    { "source": "/topics/", "destination": "/topics.html" },
     { "source": "/soga", "destination": "/sites/sons-of-god-arise/" },
     { "source": "/soga/", "destination": "/sites/sons-of-god-arise/index.html" },
     { "source": "/soga/:path*", "destination": "/sites/sons-of-god-arise/:path*" },
@@ -57,11 +59,11 @@
     { "source": "/sonsofgodarise/", "destination": "/sites/sons-of-god-arise/index.html" },
     { "source": "/sonsofgodarise/:path*", "destination": "/sites/sons-of-god-arise/:path*" },
     {
-      "source": "/:site((?!bible|scriptures|sky-images|api|images|sites)[^/.]+)/",
+      "source": "/:site((?!bible|scriptures|sky-images|api|images|sites|topics)[^/.]+)/",
       "destination": "/sites/:site/index.html"
     },
     {
-      "source": "/:site((?!bible|scriptures|sky-images|api|images|sites)[^/.]+)/:path*",
+      "source": "/:site((?!bible|scriptures|sky-images|api|images|sites|topics)[^/.]+)/:path*",
       "destination": "/sites/:site/:path*"
     }
   ],

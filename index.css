@@ -214,6 +214,16 @@ body { --header-h: 88px; }
   line-height: 1.38;
   color: #222;
 }
+.ew-next {
+  margin: 0.7rem 0 1.4rem;
+}
+.ew-next a {
+  color: #005EB8;
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+}
+.ew-next a:hover { text-decoration: underline; }
 .home-page .tagline { margin: 0.3rem 0 0; }
 .home-page .tagline-sub { margin: 0.2rem 0 0; }
 .ew-board {
@@ -221,7 +231,7 @@ body { --header-h: 88px; }
   grid-template-columns: minmax(12rem, 16rem) minmax(14rem, 20rem) minmax(18rem, 1fr);
   gap: 1.1rem;
   max-width: 72rem;
-  margin: 0.5rem auto 2rem;
+  margin: 0.9rem auto 2rem;
   padding: 0 1.4rem;
   align-items: start;
 }
