@@ -1,9 +1,11 @@
 (function () {
+  var PAD = 16;
+  var GAP_X = 48;
+  var GAP_Y = 28;
   var topics = [];
-  var closed = {};
-  var extra = {};
-  var maxLevel = 2;
-  var byId = {};
+  var openL2 = null;
+  var openL3 = null;
+  var sel = null;
   var rootId = (function () {
     var q = location.search.replace(/^\?/, "").split("&");
     var i, p;
@@ -14,279 +16,259 @@
     return "";
   })();
   function sid(v) { return String(v); }
-  function statusEl() {
-    return document.getElementById("tree-status") || document.getElementById("status");
-  }
   function bySeq() {
     return topics.slice().sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); });
   }
-  function pageName() {
-    var el = document.getElementById("page-title");
-    var n = el ? String(el.textContent || "").trim() : "";
-    return n || "The Day of Yahweh";
-  }
-  function pageRoot() {
-    var list = bySeq();
-    var i;
-    if (rootId) {
-      for (i = 0; i < list.length; i++) {
-        if (sid(list[i].id) === sid(rootId)) return list[i];
-      }
-    }
-    var name = pageName().toLowerCase();
-    for (i = 0; i < list.length; i++) {
-      if ((list[i].level || 1) !== 1) continue;
-      if (String(list[i].title || "").trim().toLowerCase() === name) return list[i];
-    }
-    for (i = 0; i < list.length; i++) {
-      if ((list[i].level || 1) === 1) return list[i];
-    }
-    return null;
-  }
   function visible() {
     var list = bySeq();
-    var root = pageRoot();
-    if (!root) return [{ id: "page-root", level: 1, seq: 0, title: pageName() }];
-    var rootLv = root.level || 1;
-    var start = -1, i;
+    if (!rootId) return list;
+    var start = -1, rootLv = 1, i;
     for (i = 0; i < list.length; i++) {
-      if (sid(list[i].id) === sid(root.id)) { start = i; break; }
+      if (sid(list[i].id) === sid(rootId)) {
+        start = i;
+        rootLv = list[i].level || 1;
+        break;
+      }
     }
-    if (start < 0) return [root];
-    var out = [root];
+    if (start < 0) return list;
+    var out = [list[start]];
     for (i = start + 1; i < list.length; i++) {
       if ((list[i].level || 1) <= rootLv) break;
       out.push(list[i]);
     }
     return out;
   }
-  function idsOf(s) {
-    return String(s || "").split("|").map(function (x) { return x.trim(); }).filter(Boolean);
-  }
-  function kidsOf(items, i) {
-    var lv = items[i].level || 1;
-    var out = [], j;
-    for (j = i + 1; j < items.length; j++) {
-      var k = items[j].level || 1;
+  function kids(items, parent) {
+    var i, start = -1, lv = parent.level || 1, out = [];
+    for (i = 0; i < items.length; i++) {
+      if (sid(items[i].id) === sid(parent.id)) { start = i; break; }
+    }
+    if (start < 0) return out;
+    for (i = start + 1; i < items.length; i++) {
+      var k = items[i].level || 1;
       if (k <= lv) break;
-      if (k === lv + 1) out.push(j);
+      if (k === lv + 1) out.push(items[i]);
     }
     return out;
   }
-  function descCount(items, i) {
-    var lv = items[i].level || 1, n = 0, j;
-    for (j = i + 1; j < items.length; j++) {
-      if ((items[j].level || 1) <= lv) break;
-      n += 1;
+  function find(items, id) {
+    var i;
+    for (i = 0; i < items.length; i++) {
+      if (sid(items[i].id) === sid(id)) return items[i];
     }
-    return n;
+    return null;
   }
-  function capOf(t) {
-    var id = sid(t.id);
-    var cap = maxLevel;
-    if ((extra[id] || 0) > cap) cap = extra[id];
-    return cap;
+  function addPath(svg, d, arrowId) {
+    var p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    p.setAttribute("d", d);
+    p.setAttribute("fill", "none");
+    p.setAttribute("stroke", "#888");
+    p.setAttribute("stroke-width", "1");
+    if (arrowId) p.setAttribute("marker-end", "url(#" + arrowId + ")");
+    svg.appendChild(p);
   }
-  function kidsShown(items, i) {
-    var t = items[i];
-    var id = sid(t.id);
-    if (closed[id]) return [];
-    var cap = capOf(t);
-    return kidsOf(items, i).filter(function (j) {
-      return (items[j].level || 1) <= cap;
-    });
-  }
-  function hiddenCount(items, i) {
-    var total = descCount(items, i);
-    if (!total) return 0;
-    var shown = 0;
-    function walk(k) {
-      var ks = kidsShown(items, k);
-      shown += ks.length;
-      ks.forEach(walk);
+  function paint() {
+    var board = document.getElementById("board");
+    var st = document.getElementById("status");
+    var items = visible();
+    board.innerHTML = "";
+    if (!items.length) {
+      if (st) st.textContent = "0 topics.";
+      return;
     }
-    walk(i);
-    return total - shown;
-  }
-  function markDepth() {
-    document.querySelectorAll("[data-depth]").forEach(function (b) {
-      b.classList.toggle("on", Number(b.getAttribute("data-depth")) === maxLevel);
-    });
-  }
-  function drawAfterArrows(row) {
-    var nodes = [].slice.call(row.querySelectorAll(":scope > .tn"));
-    if (nodes.length < 2) return;
-    var links = [];
-    nodes.forEach(function (n) {
-      var id = n.getAttribute("data-id");
-      var t = byId[id];
-      if (!t) return;
-      idsOf(t.pre).forEach(function (p) {
-        var src = row.querySelector(':scope > .tn[data-id="' + p + '"]');
-        if (src && src !== n) links.push([src, n]);
-      });
-    });
-    if (!links.length) return;
-    var rr = row.getBoundingClientRect();
-    var w = Math.max(row.scrollWidth, row.clientWidth, 1);
-    var h = Math.max(row.clientHeight, 32);
+    var l1 = items[0];
+    var l2s = kids(items, l1);
+    var l3s = [];
+    var l4s = [];
+    var open2 = openL2 ? find(l2s, openL2) : null;
+    if (!open2) { openL2 = null; openL3 = null; }
+    else l3s = kids(items, open2);
+    var open3 = openL3 ? find(l3s, openL3) : null;
+    if (!open3) openL3 = null;
+    else l4s = kids(items, open3);
+
+    function box(t, kind) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "tbox" + (kind === "h" ? " thead" : "") + (sid(t.id) === sid(sel) ? " on" : "");
+      b.dataset.id = sid(t.id);
+      b.textContent = t.title || "";
+      if (kind !== "h") {
+        b.addEventListener("click", function (ev) {
+          ev.stopPropagation();
+          var lv = t.level || 1;
+          if (lv === 2) {
+            if (sid(openL2) === sid(t.id)) { openL2 = null; openL3 = null; sel = null; }
+            else { openL2 = sid(t.id); openL3 = null; sel = sid(t.id); }
+          } else if (lv === 3) {
+            if (sid(openL3) === sid(t.id)) { openL3 = null; sel = sid(t.id); }
+            else { openL3 = sid(t.id); sel = sid(t.id); }
+          } else {
+            sel = sid(sel) === sid(t.id) ? null : sid(t.id);
+          }
+          paint();
+        });
+      }
+      board.appendChild(b);
+      return b;
+    }
+    var h = box(l1, "h");
+    var c2 = l2s.map(function (t) { return box(t, "2"); });
+    var c3 = l3s.map(function (t) { return box(t, "3"); });
+    var c4 = l4s.map(function (t) { return box(t, "4"); });
+
+    function stack(els, x, y0) {
+      var y = y0, i, tot = 0;
+      for (i = 0; i < els.length; i++) {
+        els[i].style.left = x + "px";
+        els[i].style.top = y + "px";
+        els[i]._x = x;
+        els[i]._y = y;
+        els[i]._w = els[i].offsetWidth;
+        els[i]._h = els[i].offsetHeight;
+        y += els[i]._h + GAP_Y;
+        tot += els[i]._h;
+        if (i < els.length - 1) tot += GAP_Y;
+      }
+      return tot;
+    }
+    function colW(els) {
+      var w = 0, i;
+      for (i = 0; i < els.length; i++) {
+        if (els[i].offsetWidth > w) w = els[i].offsetWidth;
+      }
+      return w;
+    }
+
+    h.style.left = PAD + "px";
+    h.style.top = PAD + "px";
+    h._x = PAD;
+    h._y = PAD;
+    h._w = h.offsetWidth;
+    h._h = h.offsetHeight;
+    var y2 = PAD + h._h + GAP_Y;
+    stack(c2, PAD, y2);
+    var w2 = Math.max(h._w, colW(c2));
+    var x3 = PAD + w2 + GAP_X;
+    if (c3.length && c2.length) {
+      var parent2 = null, i;
+      for (i = 0; i < c2.length; i++) {
+        if (sid(c2[i].dataset.id) === sid(openL2)) parent2 = c2[i];
+      }
+      var tot3 = 0;
+      for (i = 0; i < c3.length; i++) {
+        tot3 += c3[i].offsetHeight;
+        if (i < c3.length - 1) tot3 += GAP_Y;
+      }
+      var cy2 = parent2 ? parent2._y + parent2._h / 2 : y2;
+      var y3 = cy2 - tot3 / 2;
+      if (y3 < PAD) y3 = PAD;
+      stack(c3, x3, y3);
+    }
+    var w3 = colW(c3);
+    var x4 = x3 + (w3 ? w3 + GAP_X : 0);
+    if (c4.length && c3.length) {
+      var parent3 = null, j;
+      for (j = 0; j < c3.length; j++) {
+        if (sid(c3[j].dataset.id) === sid(openL3)) parent3 = c3[j];
+      }
+      var tot4 = 0;
+      for (j = 0; j < c4.length; j++) {
+        tot4 += c4[j].offsetHeight;
+        if (j < c4.length - 1) tot4 += GAP_Y;
+      }
+      var cy3 = parent3 ? parent3._y + parent3._h / 2 : PAD;
+      var y4 = cy3 - tot4 / 2;
+      if (y4 < PAD) y4 = PAD;
+      stack(c4, x4, y4);
+    }
+
+    var maxX = PAD, maxY = PAD;
+    function bump(el) {
+      if (el._x + el._w + PAD > maxX) maxX = el._x + el._w + PAD;
+      if (el._y + el._h + PAD > maxY) maxY = el._y + el._h + PAD;
+    }
+    bump(h);
+    c2.forEach(bump);
+    c3.forEach(bump);
+    c4.forEach(bump);
+
     var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("class", "tarr");
-    svg.setAttribute("width", String(w));
-    svg.setAttribute("height", String(h));
+    svg.setAttribute("width", String(maxX));
+    svg.setAttribute("height", String(maxY));
     var defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
     var mark = document.createElementNS("http://www.w3.org/2000/svg", "marker");
-    mark.setAttribute("id", "arr-" + Math.random().toString(36).slice(2, 8));
+    mark.setAttribute("id", "dn");
     mark.setAttribute("viewBox", "0 0 8 8");
-    mark.setAttribute("refX", "7");
-    mark.setAttribute("refY", "4");
+    mark.setAttribute("refX", "4");
+    mark.setAttribute("refY", "7");
     mark.setAttribute("markerWidth", "7");
     mark.setAttribute("markerHeight", "7");
     mark.setAttribute("orient", "auto");
     var head = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    head.setAttribute("d", "M0,1 L8,4 L0,7 Z");
+    head.setAttribute("d", "M1,0 L4,8 L7,0 Z");
     head.setAttribute("fill", "#888");
     mark.appendChild(head);
+    var markR = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+    markR.setAttribute("id", "rt");
+    markR.setAttribute("viewBox", "0 0 8 8");
+    markR.setAttribute("refX", "7");
+    markR.setAttribute("refY", "4");
+    markR.setAttribute("markerWidth", "7");
+    markR.setAttribute("markerHeight", "7");
+    markR.setAttribute("orient", "auto");
+    var headR = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    headR.setAttribute("d", "M0,1 L8,4 L0,7 Z");
+    headR.setAttribute("fill", "#888");
+    markR.appendChild(headR);
     defs.appendChild(mark);
+    defs.appendChild(markR);
     svg.appendChild(defs);
-    var midY = 0, nY = 0;
-    function boxRect(tn) {
-      var box = tn.querySelector(".tbox") || tn;
-      var a = box.getBoundingClientRect();
-      return {
-        left: a.left - rr.left + row.scrollLeft,
-        right: a.right - rr.left + row.scrollLeft,
-        mid: a.left - rr.left + row.scrollLeft + a.width / 2,
-        top: a.top - rr.top,
-        bot: a.bottom - rr.top,
-        cy: a.top - rr.top + a.height / 2
-      };
+
+    function down(a, b) {
+      var x1 = a._x + a._w / 2;
+      var y1 = a._y + a._h;
+      var x2 = b._x + b._w / 2;
+      var y2 = b._y;
+      var d = x1 === x2
+        ? "M" + x1 + " " + y1 + " V" + y2
+        : "M" + x1 + " " + y1 + " V" + Math.round((y1 + y2) / 2) + " H" + x2 + " V" + y2;
+      addPath(svg, d, "dn");
     }
-    links.forEach(function (pair) {
-      var a = boxRect(pair[0]);
-      var b = boxRect(pair[1]);
-      midY += a.cy;
-      nY += 1;
-      var y = Math.round((a.cy + b.cy) / 2);
-      var x1 = a.right;
-      var x2 = b.left;
-      var p = document.createElementNS("http://www.w3.org/2000/svg", "path");
-      var d;
-      if (x2 >= x1 + 4) {
-        d = "M" + x1 + " " + y + " H" + x2;
-      } else if (x1 >= x2 + 4) {
-        var dip = Math.max(a.bot, b.bot) + 8;
-        d = "M" + a.mid + " " + a.bot + " V" + dip + " H" + b.mid + " V" + b.bot;
-      } else {
-        d = "M" + a.mid + " " + a.bot + " V" + (a.bot + 8) + " H" + b.mid + " V" + b.bot;
+    function across(parent, col) {
+      if (!parent || !col.length) return;
+      var x1 = parent._x + parent._w;
+      var y1 = parent._y + parent._h / 2;
+      var mid = col[Math.floor(col.length / 2)];
+      var x2 = mid._x;
+      var y2 = y1;
+      if (y2 < mid._y) y2 = mid._y + mid._h / 2;
+      if (y2 > col[col.length - 1]._y + col[col.length - 1]._h) {
+        y2 = col[col.length - 1]._y + col[col.length - 1]._h / 2;
       }
-      p.setAttribute("d", d);
-      p.setAttribute("fill", "none");
-      p.setAttribute("stroke", "#888");
-      p.setAttribute("stroke-width", "1");
-      p.setAttribute("marker-end", "url(#" + mark.getAttribute("id") + ")");
-      svg.appendChild(p);
-    });
-    row.insertBefore(svg, row.firstChild);
-  }
-  function paint() {
-    var board = document.getElementById("board");
-    var st = statusEl();
-    if (!board) return;
-    var items = visible();
-    board.innerHTML = "";
-    board.className = "board tree-board";
-    if (!items.length) {
-      board.textContent = pageName();
-      if (st) st.textContent = "1 topic.";
-      return;
+      if (y2 < col[0]._y) y2 = col[0]._y + col[0]._h / 2;
+      addPath(svg, "M" + x1 + " " + y1 + " H" + x2, "rt");
     }
-    function addNode(i) {
-      var t = items[i];
-      var id = sid(t.id);
-      var shown = kidsShown(items, i);
-      var hideN = hiddenCount(items, i);
-      var node = document.createElement("div");
-      node.className = "tn";
-      node.setAttribute("data-id", id);
-      var box = document.createElement("button");
-      box.type = "button";
-      box.className = "tbox";
-      var name = document.createElement("span");
-      name.className = "name";
-      name.textContent = t.title || "";
-      box.appendChild(name);
-      if (hideN > 0) {
-        var num = document.createElement("span");
-        num.className = "tcount";
-        num.textContent = String(hideN);
-        box.appendChild(num);
-      }
-      box.addEventListener("click", function (ev) {
-        ev.stopPropagation();
-        var has = kidsOf(items, i);
-        if (!has.length) return;
-        if (shown.length) {
-          closed[id] = true;
-        } else {
-          delete closed[id];
-          var need = (t.level || 1) + 1;
-          if (need > capOf(t)) extra[id] = need;
-        }
-        paint();
-      });
-      node.appendChild(box);
-      if (shown.length) {
-        var stem = document.createElement("div");
-        stem.className = "tstem";
-        node.appendChild(stem);
-        var row = document.createElement("div");
-        var kidLv = items[shown[0]].level || 1;
-        row.className = kidLv >= 4 ? "tkids tkids-l4" : "tkids";
-        shown.forEach(function (j) { row.appendChild(addNode(j)); });
-        node.appendChild(row);
-        if (kidLv >= 4) {
-          requestAnimationFrame(function () { drawAfterArrows(row); });
-        }
-      }
-      return node;
+    var i;
+    if (c2.length) down(h, c2[0]);
+    for (i = 0; i < c2.length - 1; i++) down(c2[i], c2[i + 1]);
+    for (i = 0; i < c3.length - 1; i++) down(c3[i], c3[i + 1]);
+    for (i = 0; i < c4.length - 1; i++) down(c4[i], c4[i + 1]);
+    var p2 = null, p3 = null;
+    for (i = 0; i < c2.length; i++) {
+      if (sid(c2[i].dataset.id) === sid(openL2)) p2 = c2[i];
     }
-    byId = {};
-    items.forEach(function (t) { byId[sid(t.id)] = t; });
-    var rootLv = items[0].level || 1;
-    items.forEach(function (t, i) {
-      if ((t.level || 1) === rootLv) board.appendChild(addNode(i));
-    });
-    markDepth();
+    for (i = 0; i < c3.length; i++) {
+      if (sid(c3[i].dataset.id) === sid(openL3)) p3 = c3[i];
+    }
+    across(p2, c3);
+    across(p3, c4);
+
+    board.insertBefore(svg, board.firstChild);
+    board.style.width = maxX + "px";
+    board.style.height = maxY + "px";
     if (st) st.textContent = items.length + " topics.";
   }
-  window.snPaintTree = paint;
-  var foldBtn = document.getElementById("foldall");
-  var openBtn = document.getElementById("openall");
-  if (foldBtn) {
-    foldBtn.onclick = function () {
-      visible().forEach(function (t, i, arr) {
-        if (descCount(arr, i)) closed[sid(t.id)] = true;
-      });
-      extra = {};
-      paint();
-    };
-  }
-  if (openBtn) {
-    openBtn.onclick = function () {
-      closed = {};
-      extra = {};
-      paint();
-    };
-  }
-  document.querySelectorAll("[data-depth]").forEach(function (b) {
-    b.onclick = function () {
-      maxLevel = Number(b.getAttribute("data-depth")) || 2;
-      closed = {};
-      extra = {};
-      paint();
-    };
-  });
   fetch("data/topics.json", { cache: "no-store" })
     .then(function (r) { return r.json(); })
     .then(function (rows) {
@@ -294,16 +276,7 @@
       paint();
     })
     .catch(function (err) {
-      var board = document.getElementById("board");
-      if (board) {
-        board.innerHTML = "";
-        var box = document.createElement("button");
-        box.type = "button";
-        box.className = "tbox";
-        box.textContent = pageName();
-        board.appendChild(box);
-      }
-      var st = statusEl();
+      var st = document.getElementById("status");
       if (st) st.textContent = String(err);
     });
 })();
