@@ -59,6 +59,13 @@
       box-sizing: border-box;
     }
     .tab-panel.active { display: flex !important; flex-direction: column; }
+    #s-tree.active {
+      display: block !important;
+      height: 70vh !important;
+      min-height: 400px !important;
+      overflow: auto !important;
+      background: #fff !important;
+    }
     .topics-frame {
       display: block;
       flex: 1 1 auto;
@@ -70,6 +77,60 @@
     }
     .tab-dock-end, .page-nav-bar-bottom, .date-updated { flex: 0 0 auto; }
     .tab-dock, .tab-dock-end { position: relative; z-index: 40; }
+    #s-tree { min-height: 16rem; }
+    #s-tree .tree-bar {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.2rem 0.5rem;
+      background: #fff;
+    }
+    #s-tree .tree-bar button {
+      font: 700 0.82rem Arial, Helvetica, sans-serif;
+      padding: 0.12rem 0.45rem;
+      border: 1px solid var(--line);
+      background: #f4f7f8;
+      color: var(--ink);
+      cursor: pointer;
+    }
+    #s-tree .note { color: #5a6a72; font-size: 0.78rem; }
+    #s-tree .board-wrap {
+      flex: 1 1 auto;
+      min-height: 16rem;
+      overflow: auto;
+      background: #fff;
+    }
+    #s-tree .board { position: static; min-width: 100%; min-height: 16rem; padding: 12px 14px; }
+    #s-tree .box {
+      position: static !important;
+      display: inline-block !important;
+      width: auto;
+      margin: 0;
+      padding: 0.2rem 0.45rem;
+      border: 1px solid var(--line);
+      background: #fff;
+      font: 400 13px/1.2 Arial, Helvetica, sans-serif;
+      color: inherit;
+      text-align: left;
+      white-space: nowrap;
+    }
+    #s-tree .box:hover { background: #f4f7f8; }
+    #s-tree .box.on { background: #f6efc8; z-index: 3; }
+    #s-tree .name { display: block; font-weight: 400; white-space: nowrap; }
+    #s-tree .more { display: block; margin-top: 0.1rem; color: #5a6a72; font-size: 0.78rem; }
+    #s-tree .tog {
+      position: absolute;
+      top: 0.15rem;
+      right: 0.15rem;
+      width: 1.15rem;
+      height: 1.15rem;
+      padding: 0;
+      border: 1px solid var(--line);
+      background: #f4f7f8;
+      font: 700 0.85rem/1 Arial, Helvetica, sans-serif;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -98,7 +159,14 @@
         <iframe class="topics-frame" id="topics-frame" title="Topics"></iframe>
       </div>
       <div class="tab-panel" id="s-tree" data-sec="s-tree">
-        <iframe class="topics-frame" id="tree-frame" title="Topics Tree"></iframe>
+        <div class="tree-bar">
+          <button type="button" id="foldall" title="Fold each stream to one box">Compact streams</button>
+          <button type="button" id="openall" title="Show every topic">Expand all</button>
+          <span class="note" id="tree-status">Topics Tree</span>
+        </div>
+        <div class="board-wrap" id="wrap">
+          <div class="board" id="board"><div style="padding:1rem;color:#5a6a72">Loading tree…</div></div>
+        </div>
       </div>
     </main>
     <div class="tab-dock-end"><div class="tabs" id="tabs-end"></div></div>
@@ -120,27 +188,6 @@
       }
       return "";
     }
-    var frameId = "";
-    function treeUrl() {
-      var q = frameId ? "?id=" + encodeURIComponent(frameId) + "&v=201" : "?v=201";
-      return "topics-tree.html" + q;
-    }
-    function showTree() {
-      var fr = document.getElementById("tree-frame");
-      if (!fr) return;
-      var want = treeUrl();
-      if (fr.getAttribute("src") !== want) {
-        fr.src = want;
-        return;
-      }
-      requestAnimationFrame(function () {
-        try {
-          if (fr.contentWindow && typeof fr.contentWindow.snPaintTree === "function") {
-            fr.contentWindow.snPaintTree();
-          }
-        } catch (err) {}
-      });
-    }
     function showTab(id) {
       if (!id || !document.getElementById(id)) return;
       document.querySelectorAll(".tab[data-tab]").forEach(function (b) {
@@ -149,7 +196,7 @@
       document.querySelectorAll(".tab-panel").forEach(function (p) {
         p.classList.toggle("active", p.id === id);
       });
-      if (id === "s-tree") showTree();
+      if (id === "s-tree" && window.snPaintTree) window.snPaintTree();
     }
     document.addEventListener("click", function (ev) {
       var btn = ev.target.closest && ev.target.closest(".tab[data-tab]");
@@ -160,18 +207,15 @@
     });
     var tabsHtml =
       '<button type="button" class="tab active" data-tab="s-topics" data-sec="s-topics">Topics</button>' +
-      '<button type="button" class="tab" data-tab="s-tree" data-sec="s-tree">Topics Tree</button>' +
+      '<button type="button" class="tab" data-tab="s-tree" data-sec="s-tree" onclick="showTab(\'s-tree\')">Topics Tree</button>' +
       '<button type="button" class="tab tab-notes" data-notes-toggle="1">Footnotes</button>' +
       '<button type="button" class="tab tab-settings" data-settings-open="1">Settings</button>';
     document.getElementById("tabs-top").innerHTML = tabsHtml;
     document.getElementById("tabs-end").innerHTML = tabsHtml;
     var id = qid();
     function setFrames(nid) {
-      frameId = nid ? String(nid) : "";
-      var q = frameId ? "?id=" + encodeURIComponent(frameId) : "";
+      var q = nid ? "?id=" + encodeURIComponent(nid) : "";
       document.getElementById("topics-frame").src = "topics-view.html" + q;
-      var fr = document.getElementById("tree-frame");
-      if (fr.getAttribute("src")) fr.src = treeUrl();
     }
     setFrames(id);
     fetch("data/topics.json", { cache: "no-store" })
@@ -189,6 +233,7 @@
       });
   </script>
   <script>window.ewFolder="Scripture-Narratives"</script>
+  <script src="topics-tree.js?v=203"></script>
   <script src="/bible.js?v=100"></script>
   <script src="/ew-sky.js?v=15"></script>
 </body>
