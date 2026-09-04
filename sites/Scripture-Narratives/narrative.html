@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Topics — Scripture Narratives</title>
+  <link rel="icon" href="images/icon.jpg">
+  <link rel="stylesheet" href="site.css?v=tools73" />
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    .page-frame {
+      height: calc(100% - 2.5rem);
+      max-height: calc(100% - 2.5rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      overflow: hidden;
+      border-color: #c5d0d4;
+    }
+    .stick-top {
+      flex: 0 0 auto;
+      overflow: visible;
+      margin-bottom: 0;
+      position: relative;
+      z-index: 40;
+    }
+    .tab-dock {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      overflow: visible;
+    }
+    .tab-dock .tabs { border-bottom: 1px solid var(--line); }
+    .tab-dock .tab { margin-bottom: 0; }
+    .tab-dock .tab.active {
+      margin-bottom: -1px;
+      padding-bottom: calc(0.4rem + 1px);
+      border-bottom: 1px solid #fff;
+    }
+    main {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      margin-top: 0;
+      padding-top: 0 !important;
+      padding-bottom: 0;
+    }
+    .tab-panel {
+      display: none;
+      padding: 0;
+      flex: 1 1 auto;
+      min-height: 0;
+      border: 1px solid var(--line);
+      border-top: 0;
+      background: #fff;
+      border-radius: 0 7px 7px 0;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .tab-panel.active { display: flex !important; flex-direction: column; }
+    .topics-frame {
+      display: block;
+      flex: 1 1 auto;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      border: 0;
+      background: #fff;
+    }
+    .tab-dock-end, .page-nav-bar-bottom, .date-updated { flex: 0 0 auto; }
+    .tab-dock, .tab-dock-end { position: relative; z-index: 40; }
+  </style>
+</head>
+<body>
+  <canvas id="ew-sky" aria-hidden="true"></canvas>
+  <div class="page-frame">
+    <div class="stick-top">
+      <div class="head-banners">
+        <a class="ew-mark" href="/" target="_parent">
+          <img src="/images/icon.jpg" alt="" />
+          <span class="ew-words">Eternal<br>Wellspring</span>
+        </a>
+        <header class="top">
+          <div class="brand-row">
+            <div class="who">
+              <a class="site" href="home.html">Scripture Narratives</a>
+            </div>
+          </div>
+        </header>
+        <div class="title-bar"><div class="title-bar-inner"><h1 id="page-title">Topics</h1></div></div>
+      </div>
+      <div class="page-nav-bar"><span class="page-nav prev"></span><span class="page-nav-name" id="page-nav-name">Topics</span><span class="page-nav next"></span></div>
+      <div class="tab-dock"><div class="tabs" id="tabs-top"></div></div>
+    </div>
+    <main>
+      <div class="tab-panel active" id="s-topics" data-sec="s-topics">
+        <iframe class="topics-frame" id="topics-frame" title="Topics"></iframe>
+      </div>
+      <div class="tab-panel" id="s-tree" data-sec="s-tree">
+        <iframe class="topics-frame" id="tree-frame" title="Topics tree"></iframe>
+      </div>
+    </main>
+    <div class="tab-dock-end"><div class="tabs" id="tabs-end"></div></div>
+    <div class="page-nav-bar page-nav-bar-bottom"><span class="page-nav prev"></span><span class="page-nav-name" id="page-nav-name-end">Topics</span><span class="page-nav next"></span></div>
+    <footer class="date-updated">Updated: <span class="ew-date-updated"></span></footer>
+    <div id="ew-settings-pop" hidden><div class="ew-settings-scrim"></div><div class="ew-settings-card"><div class="set-box">
+      <h2>Settings</h2>
+      <div class="set-row"><span class="set-label">Page</span><span class="set-zoom"><button type="button" class="page-minus" aria-label="Page narrower">−</button><button type="button" class="page-plus" aria-label="Page wider">+</button></span></div>
+      <div class="set-row"><span class="set-label">Font</span><span class="set-zoom"><button type="button" class="font-minus" aria-label="Font smaller">−</button><button type="button" class="font-plus" aria-label="Font bigger">+</button></span></div>
+    </div><button type="button" class="ew-settings-x" aria-label="Close">Close</button></div></div>
+  </div>
+  <script>
+    function qid() {
+      var q = location.search.replace(/^\?/, "").split("&");
+      var i, p;
+      for (i = 0; i < q.length; i++) {
+        p = q[i].split("=");
+        if (p[0] === "id") return decodeURIComponent(p[1] || "");
+      }
+      return "";
+    }
+    function showTab(id) {
+      if (!id || !document.getElementById(id)) return;
+      document.querySelectorAll(".tab[data-tab]").forEach(function (b) {
+        b.classList.toggle("active", b.dataset.tab === id);
+      });
+      document.querySelectorAll(".tab-panel").forEach(function (p) {
+        p.classList.toggle("active", p.id === id);
+      });
+      if (id === "s-tree") {
+        requestAnimationFrame(function () {
+          var fr = document.getElementById("tree-frame");
+          try {
+            if (fr && fr.contentWindow && typeof fr.contentWindow.snPaintTree === "function") {
+              fr.contentWindow.snPaintTree();
+            }
+          } catch (err) {}
+        });
+      }
+    }
+    document.addEventListener("click", function (ev) {
+      var btn = ev.target.closest && ev.target.closest(".tab[data-tab]");
+      if (!btn) return;
+      ev.preventDefault();
+      ev.stopPropagation();
+      showTab(btn.dataset.tab);
+    });
+    var tabsHtml =
+      '<button type="button" class="tab active" data-tab="s-topics" data-sec="s-topics">Topics</button>' +
+      '<button type="button" class="tab" data-tab="s-tree" data-sec="s-tree">Topics tree</button>' +
+      '<button type="button" class="tab tab-notes" data-notes-toggle="1">Footnotes</button>' +
+      '<button type="button" class="tab tab-settings" data-settings-open="1">Settings</button>';
+    document.getElementById("tabs-top").innerHTML = tabsHtml;
+    document.getElementById("tabs-end").innerHTML = tabsHtml;
+    var id = qid();
+    function setFrames(nid) {
+      var q = nid ? "?id=" + encodeURIComponent(nid) : "";
+      document.getElementById("topics-frame").src = "topics-view.html" + q;
+      document.getElementById("tree-frame").src = "topics-tree.html" + q;
+    }
+    setFrames(id);
+    fetch("data/topics.json", { cache: "no-store" })
+      .then(function (r) { return r.json(); })
+      .then(function (rows) {
+        var ones = (rows || []).filter(function (t) { return (t.level || 1) === 1; })
+          .sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); });
+        var cur = ones.find(function (t) { return String(t.id) === String(id); }) || ones[0];
+        var title = cur ? cur.title : "Topics";
+        document.title = title + " — Scripture Narratives";
+        document.getElementById("page-title").textContent = title;
+        document.getElementById("page-nav-name").textContent = title;
+        document.getElementById("page-nav-name-end").textContent = title;
+        if (cur && !id) setFrames(cur.id);
+      });
+  </script>
+  <script>window.ewFolder="Scripture-Narratives"</script>
+  <script src="/bible.js?v=100"></script>
+  <script src="/ew-sky.js?v=15"></script>
+</body>
+</html>

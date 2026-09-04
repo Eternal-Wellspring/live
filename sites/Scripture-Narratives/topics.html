@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Topics — The Day of Yahweh</title>
+  <style>
+    :root {
+      --ink: #1b3a4b;
+      --muted: #5a6a72;
+      --line: #d8dee0;
+      --paper: #f6f7eb;
+      --panel: #fff;
+      --accent: #1f6f78;
+      --title: #005eb8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      font: 13px/1.2 Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      display: flex;
+      flex-direction: column;
+    }
+    .bar {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.7rem;
+      background: var(--panel);
+      border-bottom: 1px solid var(--line);
+    }
+    .bar h1 {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--title);
+      flex: 1 1 auto;
+    }
+    .bar button {
+      font: 700 0.82rem Arial, Helvetica, sans-serif;
+      padding: 0.12rem 0.45rem;
+      border: 1px solid var(--line);
+      background: #f4f7f8;
+      color: var(--ink);
+      cursor: pointer;
+    }
+    .bar button:hover { background: #e8eef0; }
+    .bar button:disabled { opacity: 0.35; cursor: default; }
+    .bar .save { color: var(--title); }
+    .note { color: var(--muted); font-weight: 400; font-size: 0.78rem; }
+    .list {
+      flex: 1 1 auto;
+      overflow: auto;
+      background: var(--panel);
+    }
+    .list table {
+      border-collapse: collapse;
+      width: max-content;
+      font: inherit;
+      color: inherit;
+    }
+    .row { cursor: pointer; }
+    .row td {
+      padding: 0.08rem 0.5rem;
+      vertical-align: baseline;
+      white-space: nowrap;
+      border: 0;
+      border-top: 1px solid var(--line);
+    }
+    .row:first-child td { border-top: 0; }
+    .row.lv3 + .row.lv3 td { border-top: 1px dotted var(--line); }
+    .row.lv4 + .row.lv4 td { border-top: 0; }
+    .row.lv2 td { background: #dce8f2; }
+    .row:hover td { background: #f4f7f8; }
+    .row.lv2:hover td { background: #d2e0ec; }
+    .row.on td,
+    .row.on:hover td,
+    .row.lv2.on td,
+    .row.lv2.on:hover td { background: #f6efc8; }
+    .row.lv2 .title { font-weight: 800; color: var(--title); }
+    .lvnum {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .title { white-space: nowrap; }
+    .row.lv2 .title { font-weight: 800; color: var(--title); }
+    .pe {
+      font-weight: 400;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .dur { white-space: nowrap; }
+    .rel {
+      color: var(--muted);
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+    .foot {
+      flex: 0 0 auto;
+      padding: 0.35rem 0.7rem 0.45rem;
+      background: #dce8f2;
+      border-top: 1px solid var(--line);
+    }
+    .picks { display: flex; flex-wrap: wrap; gap: 0.35rem 0.8rem; align-items: flex-start; }
+    .picks label { display: flex; flex-direction: column; gap: 0.12rem; font-size: 0.72rem; font-weight: 700; color: var(--accent); }
+    .picks select { font: 13px Arial, Helvetica, sans-serif; min-width: 14rem; max-width: 22rem; }
+    .picks input[type="text"] { font: 13px Arial, Helvetica, sans-serif; }
+    #title { width: 22rem; }
+    #dur { width: 10rem; }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <h1>The Day of Yahweh — topics</h1>
+    <button type="button" id="up" title="Move up">↑</button>
+    <button type="button" id="down" title="Move down">↓</button>
+    <button type="button" id="out" title="Out a level">←</button>
+    <button type="button" id="in" title="In a level">→</button>
+    <button type="button" class="save" id="save">Save</button>
+    <span class="note" id="status"></span>
+  </div>
+  <div class="list" id="list"></div>
+  <div class="foot" id="foot" hidden>
+    <div class="picks">
+      <label>Title
+        <input id="title" type="text" />
+      </label>
+      <label>Kind
+        <select id="kind"><option value="period">period</option><option value="event">event</option></select>
+      </label>
+      <label>Period
+        <input id="dur" type="text" />
+      </label>
+      <label>Follows after
+        <select id="pre" multiple size="4"></select>
+      </label>
+      <label>Precedes
+        <select id="post" multiple size="4"></select>
+      </label>
+    </div>
+  </div>
+  <script>
+    var topics = [];
+    var sel = null;
+    var rootId = (function () {
+      var q = location.search.replace(/^\?/, "").split("&");
+      var i, p;
+      for (i = 0; i < q.length; i++) {
+        p = q[i].split("=");
+        if (p[0] === "id") return decodeURIComponent(p[1] || "");
+      }
+      return "";
+    })();
+    function bySeq() {
+      return topics.slice().sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); });
+    }
+    function visible() {
+      var list = bySeq();
+      if (!rootId) return list;
+      var start = -1, rootLv = 1, i;
+      for (i = 0; i < list.length; i++) {
+        if (String(list[i].id) === String(rootId)) {
+          start = i;
+          rootLv = list[i].level || 1;
+          break;
+        }
+      }
+      if (start < 0) {
+        return list.filter(function (t) { return (t.level || 1) > 1; });
+      }
+      var out = [];
+      for (i = start + 1; i < list.length; i++) {
+        if ((list[i].level || 1) <= rootLv) break;
+        out.push(list[i]);
+      }
+      return out;
+    }
+    function titleOf(id) {
+      var t = topics.find(function (x) { return String(x.id) === String(id); });
+      return t ? t.title : String(id);
+    }
+    function idsOf(s) {
+      return String(s || "").split("|").map(function (x) { return x.trim(); }).filter(Boolean);
+    }
+    function setIds(selEl, s) {
+      var want = idsOf(s);
+      Array.prototype.forEach.call(selEl.options, function (o) {
+        o.selected = want.indexOf(o.value) >= 0;
+      });
+    }
+    function getIds(selEl) {
+      return Array.prototype.filter.call(selEl.options, function (o) { return o.selected; })
+        .map(function (o) { return o.value; }).join("|");
+    }
+    function paint() {
+      var box = document.getElementById("list");
+      box.innerHTML = "";
+      var table = document.createElement("table");
+      visible().forEach(function (t) {
+        var lv = t.level || 1;
+        if (lv > 4) lv = 4;
+        var tr = document.createElement("tr");
+        tr.className = "row lv" + lv + (String(t.id) === String(sel) ? " on" : "");
+        tr.dataset.id = t.id;
+        function cell(cls, text, pad) {
+          var td = document.createElement("td");
+          td.className = cls;
+          if (pad) td.style.paddingLeft = pad;
+          td.textContent = text;
+          tr.appendChild(td);
+        }
+        cell("lvnum", String(lv));
+        var indent = Math.max(0, lv - 2) * 4;
+        cell("title", t.title || "", indent ? indent + "ch" : "");
+        cell("pe", t.kind === "event" ? "E" : "P");
+        cell("dur", t.kind === "event" ? "" : String(t.duration || "").trim());
+        var bits = [];
+        var pre = idsOf(t.pre).map(titleOf);
+        var post = idsOf(t.post).map(titleOf);
+        if (pre.length) bits.push("after " + pre.join(", "));
+        if (post.length) bits.push("before " + post.join(", "));
+        cell("rel", bits.join(" · "));
+        tr.addEventListener("click", function () {
+          sel = t.id;
+          paint();
+          paintFoot();
+          var now = document.querySelector('.row[data-id="' + t.id + '"]');
+          if (now && now.scrollIntoView) now.scrollIntoView({ block: "nearest" });
+        });
+        table.appendChild(tr);
+      });
+      box.appendChild(table);
+    }
+    function fillPick(selEl, exceptId) {
+      selEl.innerHTML = "";
+      bySeq().forEach(function (t) {
+        if (String(t.id) === String(exceptId)) return;
+        var o = document.createElement("option");
+        o.value = String(t.id);
+        o.textContent = t.title;
+        selEl.appendChild(o);
+      });
+    }
+    function current() {
+      return topics.find(function (t) { return String(t.id) === String(sel); });
+    }
+    function paintFoot() {
+      var t = current();
+      var foot = document.getElementById("foot");
+      if (!t) { foot.hidden = true; return; }
+      foot.hidden = false;
+      document.getElementById("title").value = t.title || "";
+      document.getElementById("kind").value = t.kind === "event" ? "event" : "period";
+      document.getElementById("dur").value = t.duration || "";
+      fillPick(document.getElementById("pre"), t.id);
+      fillPick(document.getElementById("post"), t.id);
+      setIds(document.getElementById("pre"), t.pre);
+      setIds(document.getElementById("post"), t.post);
+    }
+    function renumber() {
+      bySeq().forEach(function (t, i) { t.seq = (i + 1) * 10; });
+    }
+    function move(dir) {
+      var t = current();
+      if (!t) return;
+      var list = visible();
+      var i = list.indexOf(t);
+      var j = i + dir;
+      if (j < 0 || j >= list.length) return;
+      var other = list[j];
+      var a = t.seq;
+      t.seq = other.seq;
+      other.seq = a;
+      paint();
+    }
+    function bumpLevel(d) {
+      var t = current();
+      if (!t) return;
+      var n = (t.level || 1) + d;
+      if (n < 2) n = 2;
+      if (n > 4) n = 4;
+      t.level = n;
+      paint();
+    }
+    function readFoot() {
+      var t = current();
+      if (!t) return;
+      t.title = document.getElementById("title").value;
+      t.kind = document.getElementById("kind").value;
+      t.duration = document.getElementById("dur").value;
+      t.pre = getIds(document.getElementById("pre"));
+      t.post = getIds(document.getElementById("post"));
+      paint();
+    }
+    document.getElementById("up").onclick = function () { move(-1); };
+    document.getElementById("down").onclick = function () { move(1); };
+    document.getElementById("out").onclick = function () { bumpLevel(-1); };
+    document.getElementById("in").onclick = function () { bumpLevel(1); };
+    document.getElementById("title").oninput = function () {
+      var t = current();
+      if (!t) return;
+      t.title = document.getElementById("title").value;
+      var row = document.querySelector('.row[data-id="' + t.id + '"] .title');
+      if (row) row.textContent = t.title;
+    };
+    document.getElementById("kind").onchange = readFoot;
+    document.getElementById("dur").onchange = readFoot;
+    document.getElementById("pre").onchange = readFoot;
+    document.getElementById("post").onchange = readFoot;
+    document.getElementById("save").onclick = function () {
+      readFoot();
+      var st = document.getElementById("status");
+      st.textContent = "Saving…";
+      fetch("/dotl/topics", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ topics: bySeq() })
+      }).then(function (r) { return r.json(); }).then(function (d) {
+        st.textContent = d.error || ("Saved " + (d.count || topics.length) + " topics.");
+      }).catch(function (err) { st.textContent = String(err); });
+    };
+    fetch("data/topics.json", { cache: "no-store" })
+      .then(function (r) { return r.json(); })
+      .then(function (rows) {
+        topics = rows || [];
+        var vis = visible();
+        if (vis[0]) sel = vis[0].id;
+        var root = rootId
+          ? topics.find(function (t) { return String(t.id) === String(rootId); })
+          : bySeq().find(function (t) { return (t.level || 1) === 1; });
+        if (root && root.title) {
+          document.querySelector(".bar h1").textContent = root.title;
+          document.title = root.title + " — topics";
+        }
+        paint();
+        paintFoot();
+        document.getElementById("status").textContent = vis.length + " topics.";
+      })
+      .catch(function (err) {
+        document.getElementById("status").textContent = String(err);
+      });
+  </script>
+</body>
+</html>

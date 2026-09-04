@@ -609,12 +609,32 @@ body { --header-h: 88px; }
 .ew-ch-row sup { color: #1f6f78; font-weight: 700; padding-right: 0.25rem; }
 @media (max-width: 800px) {
   #ew-verse, #ew-chapter {
-    width: calc(100vw - 1.6rem);
-    left: 0.8rem;
-    right: 0.8rem;
-    transform: none;
-    top: 0.8rem;
-    max-height: calc(100vh - 1.6rem);
+    left: 50%;
+    right: auto;
+    width: min(28rem, calc(100vw - 4.4rem));
   }
-  #ew-chapter { top: auto; bottom: 0.8rem; height: 48vh; }
+  #ew-verse {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    max-height: 58vh;
+  }
+  #ew-chapter {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 72vh;
+    max-height: 72vh;
+  }
+  body:has(#ew-chapter:not([hidden])) #ew-verse {
+    top: 5.5%;
+    transform: translateX(-50%);
+    max-height: 34vh;
+  }
+  body:has(#ew-chapter:not([hidden])) #ew-chapter {
+    top: auto;
+    bottom: 4%;
+    transform: translateX(-50%);
+    height: 54vh;
+    max-height: 54vh;
+  }
 }

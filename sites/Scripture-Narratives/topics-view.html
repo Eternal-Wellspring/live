@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Topics</title>
+  <style>
+    :root {
+      --ink: #1b3a4b;
+      --muted: #5a6a72;
+      --line: #d8dee0;
+      --paper: #f6f7eb;
+      --panel: #fff;
+      --accent: #1f6f78;
+      --title: #005eb8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      font: 13px/1.2 Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      display: flex;
+      flex-direction: column;
+    }
+    .bar {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.2rem 0.5rem;
+      background: var(--panel);
+      border-bottom: 0;
+    }
+    .bar button {
+      font: 700 0.82rem Arial, Helvetica, sans-serif;
+      padding: 0.12rem 0.45rem;
+      border: 1px solid var(--line);
+      background: #f4f7f8;
+      color: var(--ink);
+      cursor: pointer;
+    }
+    .bar button:hover { background: #e8eef0; }
+    .note { color: var(--muted); font-weight: 400; font-size: 0.78rem; }
+    .list {
+      flex: 1 1 auto;
+      overflow: auto;
+      background: var(--panel);
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .list.dragging,
+    .list.dragging * { cursor: grabbing; user-select: none; -webkit-user-select: none; }
+    .row.drag-src td { opacity: 0.55; }
+    .drop-mark td {
+      padding: 0 !important;
+      height: 0;
+      border: 0 !important;
+      border-top: 2px solid var(--title) !important;
+    }
+    .list table {
+      border-collapse: collapse;
+      width: max-content;
+      font: inherit;
+      color: inherit;
+    }
+    .row { cursor: grab; touch-action: none; user-select: none; }
+    .row td {
+      padding: 0.08rem 0.5rem;
+      vertical-align: baseline;
+      white-space: nowrap;
+      border: 0;
+      border-top: 1px solid var(--line);
+    }
+    .row:first-child td { border-top: 0; }
+    .row.lv3 + .row.lv3 td { border-top: 1px dotted var(--line); }
+    .row.lv4 + .row.lv4 td { border-top: 0; }
+    .row.lv2 td { background: #dce8f2; }
+    .row:hover td { background: #f4f7f8; }
+    .row.lv2:hover td { background: #d2e0ec; }
+    .row.on td,
+    .row.on:hover td,
+    .row.lv2.on td,
+    .row.lv2.on:hover td { background: #f6efc8; }
+    .row.lv2 .title { font-weight: 800; color: var(--title); }
+    .lvnum {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .title { white-space: nowrap; }
+    .row.lv2 .title { font-weight: 800; color: var(--title); }
+    .pe {
+      font-weight: 400;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .dur { white-space: nowrap; }
+    .head th {
+      font-weight: 400;
+      color: var(--muted);
+      text-align: left;
+      padding: 0.08rem 0.5rem;
+      white-space: nowrap;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+    .after select,
+    .before select {
+      font: inherit;
+      color: inherit;
+      border: 1px solid var(--line);
+      background: transparent;
+      max-width: 22rem;
+    }
+    .foot {
+      flex: 0 0 auto;
+      padding: 0.35rem 0.7rem 0.45rem;
+      background: #dce8f2;
+      border-top: 1px solid var(--line);
+    }
+    .picks { display: flex; flex-wrap: wrap; gap: 0.35rem 0.8rem; align-items: flex-start; }
+    .picks label { display: flex; flex-direction: column; gap: 0.12rem; font-size: 0.72rem; font-weight: 700; color: var(--accent); }
+    .picks select { font: 13px Arial, Helvetica, sans-serif; min-width: 14rem; max-width: 22rem; }
+    .picks input[type="text"] { font: 13px Arial, Helvetica, sans-serif; }
+    #title { width: 22rem; }
+    #dur { width: 10rem; }
+    #sn-row-menu {
+      position: fixed;
+      z-index: 120;
+      min-width: 8.5rem;
+      width: max-content;
+      background: #fff;
+      border: 1px solid #c5d0d4;
+      box-shadow: 0 8px 22px rgba(0,0,0,.16);
+      padding: 0.15rem 0 0.25rem;
+    }
+    #sn-row-menu[hidden] { display: none !important; }
+    #sn-row-menu .sn-rhm-title {
+      padding: 0.3rem 0.75rem 0.2rem;
+      font: 400 0.82rem Arial, Helvetica, sans-serif;
+      color: #1f6f78;
+      border-bottom: 2px solid var(--title);
+      margin-bottom: 0.08rem;
+    }
+    #sn-row-menu button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      border: 0;
+      background: none;
+      padding: 0.35rem 0.75rem;
+      font: 400 0.88rem Arial, Helvetica, sans-serif;
+      color: #1b3a4b;
+      cursor: pointer;
+    }
+    #sn-row-menu button:hover { background: #eef3f4; }
+    #sn-rhm-ask {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    #sn-rhm-ask[hidden] { display: none !important; }
+    #sn-rhm-ask button {
+      display: inline-block;
+      width: auto;
+      flex: 1 1 auto;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <button type="button" id="up" title="Move up">↑</button>
+    <button type="button" id="down" title="Move down">↓</button>
+    <button type="button" id="out" title="Out a level">←</button>
+    <button type="button" id="in" title="In a level">→</button>
+    <span class="note" id="status"></span>
+  </div>
+  <div class="list" id="list"></div>
+  <div class="foot" id="foot" hidden>
+    <div class="picks">
+      <label>Title
+        <input id="title" type="text" />
+      </label>
+      <label>Kind
+        <select id="kind"><option value="period">period</option><option value="event">event</option></select>
+      </label>
+      <label>Period
+        <input id="dur" type="text" />
+      </label>
+    </div>
+  </div>
+  <div id="sn-row-menu" hidden>
+    <div class="sn-rhm-title" id="sn-rhm-title">Insert</div>
+    <div id="sn-rhm-main">
+      <button type="button" data-lv="2">Level 2</button>
+      <button type="button" data-lv="3">Level 3</button>
+      <button type="button" data-lv="4">Level 4</button>
+      <button type="button" data-del="1">Delete</button>
+    </div>
+    <div id="sn-rhm-ask" hidden>
+      <button type="button" data-del-y="1">Yes</button>
+      <button type="button" data-del-n="1">No</button>
+    </div>
+  </div>
+  <script>
+    var topics = [];
+    var sel = null;
+    var rootId = (function () {
+      var q = location.search.replace(/^\?/, "").split("&");
+      var i, p;
+      for (i = 0; i < q.length; i++) {
+        p = q[i].split("=");
+        if (p[0] === "id") return decodeURIComponent(p[1] || "");
+      }
+      return "";
+    })();
+    function bySeq() {
+      return topics.slice().sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); });
+    }
+    function visible() {
+      var list = bySeq();
+      if (!rootId) return list.filter(function (t) { return (t.level || 1) > 1; });
+      var start = -1, rootLv = 1, i;
+      for (i = 0; i < list.length; i++) {
+        if (String(list[i].id) === String(rootId)) {
+          start = i;
+          rootLv = list[i].level || 1;
+          break;
+        }
+      }
+      if (start < 0) return list.filter(function (t) { return (t.level || 1) > 1; });
+      var out = [];
+      for (i = start + 1; i < list.length; i++) {
+        if ((list[i].level || 1) <= rootLv) break;
+        out.push(list[i]);
+      }
+      return out;
+    }
+    function titleOf(id) {
+      var t = topics.find(function (x) { return String(x.id) === String(id); });
+      return t ? t.title : String(id);
+    }
+    function idsOf(s) {
+      return String(s || "").split("|").map(function (x) { return x.trim(); }).filter(Boolean);
+    }
+    function paintFoot() {
+      var t = current();
+      var foot = document.getElementById("foot");
+      if (!t) { foot.hidden = true; return; }
+      foot.hidden = false;
+      document.getElementById("title").value = t.title || "";
+      document.getElementById("kind").value = t.kind === "event" ? "event" : "period";
+      document.getElementById("dur").value = t.duration || "";
+    }
+    function readFoot() {
+      var t = current();
+      if (!t) return;
+      t.title = document.getElementById("title").value;
+      t.kind = document.getElementById("kind").value;
+      t.duration = document.getElementById("dur").value;
+    }
+    function relSelect(t, field) {
+      var td = document.createElement("td");
+      td.className = field === "pre" ? "after" : "before";
+      var selEl = document.createElement("select");
+      var blank = document.createElement("option");
+      blank.value = "";
+      blank.textContent = "";
+      selEl.appendChild(blank);
+      var cur = idsOf(t[field])[0] || "";
+      var seen = {};
+      bySeq().forEach(function (x) {
+        if (String(x.id) === String(t.id)) return;
+        seen[String(x.id)] = true;
+        var o = document.createElement("option");
+        o.value = String(x.id);
+        o.textContent = x.title || "";
+        if (String(x.id) === String(cur)) o.selected = true;
+        selEl.appendChild(o);
+      });
+      if (cur && !seen[String(cur)]) {
+        var o = document.createElement("option");
+        o.value = String(cur);
+        o.textContent = titleOf(cur);
+        o.selected = true;
+        selEl.appendChild(o);
+      }
+      selEl.addEventListener("pointerdown", function (ev) { ev.stopPropagation(); });
+      selEl.addEventListener("click", function (ev) { ev.stopPropagation(); });
+      selEl.addEventListener("change", function () {
+        t[field] = selEl.value || "";
+        saveMove();
+      });
+      td.appendChild(selEl);
+      return td;
+    }
+    function paint() {
+      var box = document.getElementById("list");
+      box.innerHTML = "";
+      var table = document.createElement("table");
+      var thead = document.createElement("thead");
+      var hr = document.createElement("tr");
+      hr.className = "head";
+      ["", "", "", "", "After", "Before"].forEach(function (label) {
+        var th = document.createElement("th");
+        th.textContent = label;
+        hr.appendChild(th);
+      });
+      thead.appendChild(hr);
+      table.appendChild(thead);
+      var tbody = document.createElement("tbody");
+      visible().forEach(function (t) {
+        var lv = t.level || 1;
+        if (lv > 4) lv = 4;
+        var tr = document.createElement("tr");
+        tr.className = "row lv" + lv + (String(t.id) === String(sel) ? " on" : "");
+        tr.dataset.id = t.id;
+        function cell(cls, text, pad) {
+          var td = document.createElement("td");
+          td.className = cls;
+          if (pad) td.style.paddingLeft = pad;
+          td.textContent = text;
+          tr.appendChild(td);
+        }
+        cell("lvnum", String(lv));
+        var indent = Math.max(0, lv - 2) * 4;
+        cell("title", t.title || "", indent ? indent + "ch" : "");
+        cell("pe", t.kind === "event" ? "E" : "P");
+        cell("dur", t.kind === "event" ? "" : String(t.duration || "").trim());
+        tr.appendChild(relSelect(t, "pre"));
+        tr.appendChild(relSelect(t, "post"));
+        tr.addEventListener("click", function (ev) {
+          if (skipClick) { skipClick = false; return; }
+          if (ev.target && ev.target.closest && ev.target.closest("select")) return;
+          if (String(t.id) === String(sel)) sel = null;
+          else sel = t.id;
+          paint();
+          paintFoot();
+        });
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      box.appendChild(table);
+    }
+    function current() {
+      return topics.find(function (t) { return String(t.id) === String(sel); });
+    }
+    function move(dir) {
+      var t = current();
+      if (!t) return;
+      var list = visible();
+      var i = list.indexOf(t);
+      var j = i + dir;
+      if (j < 0 || j >= list.length) return;
+      var other = list[j];
+      var a = t.seq;
+      t.seq = other.seq;
+      other.seq = a;
+      paint();
+      paintFoot();
+    }
+    function bumpLevel(d) {
+      var t = current();
+      if (!t) return;
+      var n = (t.level || 1) + d;
+      if (n < 2) n = 2;
+      if (n > 4) n = 4;
+      t.level = n;
+      paint();
+      paintFoot();
+    }
+    function saveMove() {
+      fetch("/dotl/topics", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ topics: bySeq() })
+      }).then(function (r) { return r.json(); }).then(function (d) {
+        document.getElementById("status").textContent = d.error || (visible().length + " topics.");
+      }).catch(function (err) {
+        document.getElementById("status").textContent = String(err);
+      });
+    }
+    document.getElementById("up").onclick = function () { move(-1); saveMove(); };
+    document.getElementById("down").onclick = function () { move(1); saveMove(); };
+    document.getElementById("out").onclick = function () { bumpLevel(-1); saveMove(); };
+    document.getElementById("in").onclick = function () { bumpLevel(1); saveMove(); };
+    document.getElementById("title").oninput = function () {
+      var t = current();
+      if (!t) return;
+      t.title = document.getElementById("title").value;
+      var cell = document.querySelector('.row[data-id="' + t.id + '"] .title');
+      if (cell) cell.textContent = t.title;
+    };
+    document.getElementById("title").onchange = function () { saveMove(); };
+    document.getElementById("title").onblur = function () { saveMove(); };
+    function applyFoot() {
+      readFoot();
+      paint();
+      paintFoot();
+      saveMove();
+    }
+    document.getElementById("kind").onchange = applyFoot;
+    document.getElementById("dur").onchange = applyFoot;
+    var drag = null;
+    var skipClick = false;
+    function dropMarker() {
+      var m = document.getElementById("drop-mark");
+      if (m) return m;
+      m = document.createElement("tr");
+      m.id = "drop-mark";
+      m.className = "drop-mark";
+      var td = document.createElement("td");
+      td.colSpan = 6;
+      m.appendChild(td);
+      return m;
+    }
+    function clearDragPaint() {
+      var list = document.getElementById("list");
+      list.classList.remove("dragging");
+      document.querySelectorAll("tr.row.drag-src").forEach(function (tr) {
+        tr.classList.remove("drag-src");
+        var title = tr.querySelector(".title");
+        if (title) title.style.paddingLeft = title.dataset.pad || "";
+      });
+      var mark = document.getElementById("drop-mark");
+      if (mark && mark.parentNode) mark.parentNode.removeChild(mark);
+    }
+    function updateOrderMark(ev) {
+      var mark = dropMarker();
+      var src = document.querySelector('tr.row[data-id="' + drag.id + '"]');
+      var over = document.elementFromPoint(ev.clientX, ev.clientY);
+      over = over && over.closest ? over.closest("tr.row") : null;
+      if (!over || String(over.dataset.id) === String(drag.id)) {
+        if (src && src.parentNode) src.parentNode.insertBefore(mark, src);
+        return;
+      }
+      var rect = over.getBoundingClientRect();
+      if (ev.clientY < rect.top + rect.height / 2) over.parentNode.insertBefore(mark, over);
+      else over.parentNode.insertBefore(mark, over.nextSibling);
+    }
+    function previewLevel(dx) {
+      var src = document.querySelector('tr.row[data-id="' + drag.id + '"]');
+      var t = current();
+      if (!src || !t) return;
+      var n = (t.level || 1) + Math.round(dx / 40);
+      if (n < 2) n = 2;
+      if (n > 4) n = 4;
+      drag.levelTo = n;
+      var title = src.querySelector(".title");
+      if (title) title.style.paddingLeft = Math.max(0, n - 2) * 4 + "ch";
+      var num = src.querySelector(".lvnum");
+      if (num) num.textContent = String(n);
+      document.getElementById("status").textContent = "Level " + n;
+    }
+    function applyDropOrder(movedId) {
+      var table = document.querySelector("#list table");
+      var mark = document.getElementById("drop-mark");
+      if (!table || !mark) return;
+      var ids = [];
+      var rows = table.querySelectorAll("tr");
+      var i;
+      for (i = 0; i < rows.length; i++) {
+        var node = rows[i];
+        if (node === mark) ids.push(movedId);
+        else if (node.classList && node.classList.contains("row") && String(node.dataset.id) !== String(movedId)) {
+          ids.push(node.dataset.id);
+        }
+      }
+      var vis = visible();
+      var seqs = vis.map(function (t) { return t.seq; }).sort(function (a, b) { return a - b; });
+      ids.forEach(function (id, i) {
+        var t = topics.find(function (x) { return String(x.id) === String(id); });
+        if (t && seqs[i] != null) t.seq = seqs[i];
+      });
+    }
+    document.getElementById("list").addEventListener("pointerdown", function (ev) {
+      if (ev.button) return;
+      if (ev.target && ev.target.closest && ev.target.closest("select")) return;
+      var tr = ev.target.closest && ev.target.closest("tr.row");
+      if (!tr) return;
+      drag = { id: String(tr.dataset.id), x: ev.clientX, y: ev.clientY, dragging: false, axis: "" };
+      try { ev.currentTarget.setPointerCapture(ev.pointerId); } catch (err) {}
+    });
+    document.addEventListener("pointermove", function (ev) {
+      if (!drag) return;
+      var dx = ev.clientX - drag.x;
+      var dy = ev.clientY - drag.y;
+      if (!drag.dragging) {
+        if (Math.abs(dx) < 12 && Math.abs(dy) < 12) return;
+        drag.dragging = true;
+        drag.axis = Math.abs(dy) >= Math.abs(dx) ? "y" : "x";
+        skipClick = true;
+        sel = drag.id;
+        var tr = document.querySelector('tr.row[data-id="' + drag.id + '"]');
+        if (tr) {
+          tr.classList.add("on", "drag-src");
+          var title = tr.querySelector(".title");
+          if (title) title.dataset.pad = title.style.paddingLeft || "";
+        }
+        document.getElementById("list").classList.add("dragging");
+        if (window.getSelection) window.getSelection().removeAllRanges();
+      }
+      ev.preventDefault();
+      if (window.getSelection) window.getSelection().removeAllRanges();
+      if (drag.axis === "y") {
+        updateOrderMark(ev);
+        document.getElementById("status").textContent = "Move";
+      } else {
+        var mark = document.getElementById("drop-mark");
+        if (mark && mark.parentNode) mark.parentNode.removeChild(mark);
+        previewLevel(dx);
+      }
+    });
+    function endDrag(ev) {
+      if (!drag) return;
+      var d = drag;
+      drag = null;
+      if (!d.dragging) {
+        clearDragPaint();
+        skipClick = true;
+        if (String(d.id) === String(sel)) sel = null;
+        else sel = d.id;
+        paint();
+        paintFoot();
+        return;
+      }
+      skipClick = true;
+      sel = d.id;
+      if (d.axis === "y") applyDropOrder(d.id);
+      else if (d.levelTo) {
+        var t = current();
+        if (t) t.level = d.levelTo;
+      }
+      clearDragPaint();
+      paint();
+      paintFoot();
+      saveMove();
+    }
+    document.addEventListener("pointerup", endDrag);
+    document.addEventListener("pointercancel", endDrag);
+    var rowMenu = document.getElementById("sn-row-menu");
+    function resetRowMenu() {
+      document.getElementById("sn-rhm-title").textContent = "Insert";
+      document.getElementById("sn-rhm-main").hidden = false;
+      document.getElementById("sn-rhm-ask").hidden = true;
+    }
+    function hideRowMenu() {
+      rowMenu.hidden = true;
+      resetRowMenu();
+    }
+    function showRowMenu(ev) {
+      resetRowMenu();
+      rowMenu.hidden = false;
+      var w = rowMenu.offsetWidth || 140;
+      var h = rowMenu.offsetHeight || 120;
+      var x = ev.clientX || 0;
+      var y = ev.clientY || 0;
+      rowMenu.style.left = Math.max(8, Math.min(x, window.innerWidth - w - 8)) + "px";
+      rowMenu.style.top = Math.max(8, Math.min(y, window.innerHeight - h - 8)) + "px";
+    }
+    function askDelete() {
+      document.getElementById("sn-rhm-title").textContent = "Delete?";
+      document.getElementById("sn-rhm-main").hidden = true;
+      document.getElementById("sn-rhm-ask").hidden = false;
+    }
+    function replaceId(s, gone, put, selfId) {
+      var ids = idsOf(s);
+      var puts = idsOf(put);
+      var out = [];
+      function add(v) {
+        v = String(v || "");
+        if (!v || v === String(gone) || v === String(selfId)) return;
+        if (out.indexOf(v) < 0) out.push(v);
+      }
+      ids.forEach(function (id) {
+        if (String(id) === String(gone)) puts.forEach(add);
+        else add(id);
+      });
+      return out.join("|");
+    }
+    function deleteRow() {
+      var t = current();
+      if (!t) return;
+      var gone = String(t.id);
+      var wasAfter = t.pre || "";
+      var wasBefore = t.post || "";
+      topics.forEach(function (x) {
+        if (String(x.id) === gone) return;
+        x.pre = replaceId(x.pre, gone, wasAfter, x.id);
+        x.post = replaceId(x.post, gone, wasBefore, x.id);
+      });
+      topics = topics.filter(function (x) { return String(x.id) !== gone; });
+      sel = null;
+      paint();
+      paintFoot();
+      saveMove();
+      document.getElementById("status").textContent = "Deleted.";
+    }
+    function insertRow(lv) {
+      var t = current();
+      if (!t) return;
+      lv = Number(lv);
+      if (lv < 2) lv = 2;
+      if (lv > 4) lv = 4;
+      var maxId = 0;
+      topics.forEach(function (x) {
+        var n = Number(x.id);
+        if (n > maxId) maxId = n;
+      });
+      var seq = t.seq || 0;
+      var list = visible();
+      var at = list.indexOf(t);
+      var below = (at >= 0 && at + 1 < list.length) ? list[at + 1] : null;
+      topics.forEach(function (x) {
+        if ((x.seq || 0) > seq) x.seq = (x.seq || 0) + 10;
+      });
+      var row = {
+        id: maxId + 1,
+        lecture_id: t.lecture_id,
+        level: lv,
+        seq: seq + 10,
+        pre: String(t.id),
+        post: below ? String(below.id) : "",
+        kind: "period",
+        title: "New",
+        notes: "",
+        duration: ""
+      };
+      topics.push(row);
+      sel = row.id;
+      paint();
+      paintFoot();
+      saveMove();
+      document.getElementById("status").textContent = "Inserted level " + lv + ".";
+      setTimeout(function () {
+        var inp = document.getElementById("title");
+        if (inp) { inp.focus(); inp.select(); }
+      }, 0);
+    }
+    document.getElementById("list").addEventListener("contextmenu", function (ev) {
+      var tr = ev.target.closest && ev.target.closest("tr.row");
+      if (!tr) { hideRowMenu(); return; }
+      ev.preventDefault();
+      sel = String(tr.dataset.id);
+      paint();
+      showRowMenu(ev);
+    });
+    rowMenu.addEventListener("click", function (ev) {
+      var btn = ev.target.closest && ev.target.closest("button");
+      if (!btn) return;
+      if (btn.getAttribute("data-del") === "1") {
+        askDelete();
+        return;
+      }
+      if (btn.getAttribute("data-del-n") === "1") {
+        hideRowMenu();
+        return;
+      }
+      if (btn.getAttribute("data-del-y") === "1") {
+        hideRowMenu();
+        deleteRow();
+        return;
+      }
+      if (btn.getAttribute("data-lv")) {
+        hideRowMenu();
+        insertRow(btn.getAttribute("data-lv"));
+      }
+    });
+    document.addEventListener("click", function (ev) {
+      if (rowMenu.hidden) return;
+      if (rowMenu.contains(ev.target)) return;
+      hideRowMenu();
+    });
+    document.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape") hideRowMenu();
+    });
+    fetch("data/topics.json", { cache: "no-store" })
+      .then(function (r) { return r.json(); })
+      .then(function (rows) {
+        topics = rows || [];
+        var vis = visible();
+        var root = rootId
+          ? topics.find(function (t) { return String(t.id) === String(rootId); })
+          : bySeq().find(function (t) { return (t.level || 1) === 1; });
+        if (root && root.title) document.title = root.title;
+        paint();
+        paintFoot();
+        document.getElementById("status").textContent = vis.length + " topics.";
+      })
+      .catch(function (err) {
+        document.getElementById("status").textContent = String(err);
+      });
+  </script>
+</body>
+</html>
