@@ -214,6 +214,30 @@ body { --header-h: 88px; }
   line-height: 1.38;
   color: #222;
 }
+.ew-narrative.col-text .bit {
+  display: block;
+  margin: 0.4rem 0 0;
+  min-height: 1em;
+  font-size: 0.98rem;
+  line-height: 1.38;
+  color: #222;
+}
+.ew-narrative.col-text .bit:first-child { margin-top: 0; }
+.ew-narrative .bit.indent { padding-left: 2em; }
+.ew-narrative .bit.bullet,
+.ew-narrative .bit.numbered { position: relative; padding-left: 1.75em; }
+.ew-narrative .bit.indent.bullet,
+.ew-narrative .bit.indent.numbered { padding-left: 3.75em; }
+.ew-narrative .bit.bullet::before { content: "•"; position: absolute; left: 0; width: 1.5em; }
+.ew-narrative .bit.indent.bullet::before { left: 2em; }
+.ew-narrative .bit.numbered::before { content: attr(data-n) ". "; position: absolute; left: 0; width: 1.6em; white-space: nowrap; }
+.ew-narrative .bit.indent.numbered::before { left: 2em; }
+.ew-narrative a.ref {
+  color: #0066cc;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
 .ew-next {
   margin: 0.7rem 0 1.4rem;
 }

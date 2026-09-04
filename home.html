@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Eternal Wellspring</title>
   <link rel="icon" href="images/icon.jpg" />
-  <link rel="stylesheet" href="index.css?v=8" />
+  <link rel="stylesheet" href="index.css?v=9" />
 </head>
 <body class="home-page">
   <header class="home-top">
@@ -63,7 +63,12 @@
           sub.hidden = true;
         }
       }
-      if (story && data.description) fillLong(story, data.description);
+      if (story && data.description) {
+        if (/<[a-z][\s\S]*>/i.test(data.description)) {
+          story.className = "ew-narrative col-text";
+          story.innerHTML = data.description;
+        } else fillLong(story, data.description);
+      }
     }
     function loadHall(path) {
       return fetch(path).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
@@ -84,6 +89,8 @@
       });
     });
   </script>
+  <script>window.ewFolder = "EternalWellspring";</script>
+  <script src="bible.js?v=100"></script>
   <script>
     window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
   </script>
