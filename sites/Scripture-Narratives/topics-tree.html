@@ -13,16 +13,33 @@
       --panel: #fff;
     }
     * { box-sizing: border-box; }
-    html, body { margin: 0; height: 100%; overflow: hidden; }
+    html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; }
     body {
       font: 400 13px/1.2 Arial, Helvetica, sans-serif;
       color: var(--ink);
-      background: var(--paper);
+      background: var(--panel);
       display: flex;
       flex-direction: column;
       height: 100%;
       position: relative;
     }
+    .bar {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.2rem 0.5rem;
+      background: var(--panel);
+    }
+    .bar button {
+      font: 700 0.82rem Arial, Helvetica, sans-serif;
+      padding: 0.12rem 0.45rem;
+      border: 1px solid var(--line);
+      background: #f4f7f8;
+      color: var(--title, #005eb8);
+      cursor: pointer;
+    }
+    .bar button:hover { background: #e8eef0; }
     .board-wrap {
       flex: 1 1 auto;
       min-height: 0;
@@ -80,10 +97,18 @@
   </style>
 </head>
 <body>
+  <div class="bar">
+    <button type="button" class="save" id="save">Save</button>
+    <span class="note" id="status"></span>
+  </div>
   <div class="board-wrap" id="wrap">
     <div class="board" id="board"></div>
   </div>
-  <span class="note" id="status"></span>
-  <script src="topics-tree.js?v=221"></script>
+  <script src="topics-tree.js?v=227"></script>
+  <script>
+    document.getElementById("save").onclick = function () {
+      if (window.snSaveTopics) window.snSaveTopics("Saved.");
+    };
+  </script>
 </body>
 </html>

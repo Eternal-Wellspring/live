@@ -25,7 +25,7 @@
       ones.forEach(function (t) {
         var a = document.createElement("a");
         var base = path.indexOf("/create-preview/") >= 0 ? "/sites/Scripture-Narratives/" : "";
-        a.href = base + "narrative.html?id=" + encodeURIComponent(t.id) + "&v=222";
+        a.href = base + "narrative.html?id=" + encodeURIComponent(t.id) + "&v=223";
         a.textContent = t.title || "";
         list.appendChild(a);
       });

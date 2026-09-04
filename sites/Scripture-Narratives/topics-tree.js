@@ -1,7 +1,7 @@
 (function () {
   var PAD = 8;
   var GAP_X = 16;
-  var GAP_Y = 4;
+  var GAP_Y = 8;
   var topics = [];
   var openL2 = null;
   var openL3 = null;
@@ -90,14 +90,23 @@
     if (!open3) openL3 = null;
     else l4s = kids(items, open3);
 
-    var boxW = 0, BOX_H = 0;
+    function colNameW(list) {
+      var w = 0;
+      list.forEach(function (t) {
+        var s = textSize(t.title || "");
+        if (s.w > w) w = s.w;
+      });
+      return w < 8 ? 8 : w;
+    }
+    var BOX_H = 0;
     items.forEach(function (t) {
       var s = textSize(t.title || "");
-      if (s.w > boxW) boxW = s.w;
       if (s.h > BOX_H) BOX_H = s.h;
     });
-    if (boxW < 8) boxW = 8;
     if (BOX_H < 8) BOX_H = 8;
+    var w1 = colNameW(l2s);
+    var w3 = colNameW(l3s);
+    var w4 = colNameW(l4s);
 
     function isOn(t) {
       return sid(t.id) === sid(sel) || sid(t.id) === sid(openL2) || sid(t.id) === sid(openL3);
@@ -121,10 +130,37 @@
         c.style.minWidth = BOX_H + "px";
         b.appendChild(c);
       }
+      function startEdit(ev) {
+        if (ev) { ev.preventDefault(); ev.stopPropagation(); }
+        if (name.querySelector("input")) return;
+        var inp = document.createElement("input");
+        inp.type = "text";
+        inp.value = t.title || "";
+        inp.style.cssText = "font:inherit;color:inherit;border:0;outline:1px solid #c5d0d4;padding:0;margin:0;width:100%;background:#fff;box-sizing:border-box";
+        name.textContent = "";
+        name.appendChild(inp);
+        inp.focus();
+        inp.select();
+        function commit() {
+          if (!inp.parentNode) return;
+          t.title = inp.value;
+          paint();
+          saveTopics("Saved.");
+        }
+        inp.addEventListener("keydown", function (kev) {
+          if (kev.key === "Enter") { kev.preventDefault(); commit(); }
+          if (kev.key === "Escape") { kev.preventDefault(); paint(); }
+        });
+        inp.addEventListener("blur", commit);
+        inp.addEventListener("click", function (cev) { cev.stopPropagation(); });
+      }
+      b.addEventListener("dblclick", startEdit);
       if (kind !== "h") {
         b.addEventListener("click", function (ev) {
           ev.preventDefault();
           ev.stopPropagation();
+          if (ev.detail > 1) return;
+          if (name.querySelector("input")) return;
           var lv = t.level || 1;
           if (lv === 2) {
             if (sid(openL2) === sid(t.id)) { openL2 = null; openL3 = null; sel = null; }
@@ -142,8 +178,8 @@
       board.appendChild(b);
       return b;
     }
-    function put(el, x, y) {
-      var w = boxW + (el._hasCount ? BOX_H : 0);
+    function put(el, x, y, nameW) {
+      var w = nameW + (el._hasCount ? BOX_H : 0);
       el.style.position = "absolute";
       el.style.left = Math.round(x) + "px";
       el.style.top = Math.round(y) + "px";
@@ -155,53 +191,94 @@
       el._w = w;
       el._h = BOX_H;
     }
-    function stack(els, x, y0) {
+    function stack(els, x, y0, nameW) {
       var y = y0, i;
       for (i = 0; i < els.length; i++) {
-        put(els[i], x, y);
+        put(els[i], x, y, nameW);
         y += BOX_H + GAP_Y;
       }
     }
-    function around(parent, els, x) {
+    function around(parent, els, x, nameW) {
       if (!parent || !els.length) return;
       var tot = els.length * BOX_H + Math.max(0, els.length - 1) * GAP_Y;
-      stack(els, x, parent._y + BOX_H / 2 - tot / 2);
+      stack(els, x, parent._y + BOX_H / 2 - tot / 2, nameW);
+    }
+    function colSpan(nameW, list) {
+      var extra = 0, i;
+      for (i = 0; i < list.length; i++) {
+        if (kids(items, list[i]).length > 0) extra = BOX_H;
+      }
+      return nameW + extra + GAP_X;
     }
 
-    var h = box(l1, "h");
     var c2 = l2s.map(function (t) { return box(t, "2"); });
     var c3 = l3s.map(function (t) { return box(t, "3"); });
     var c4 = l4s.map(function (t) { return box(t, "4"); });
 
-    put(h, PAD, PAD);
-    stack(c2, PAD, PAD + BOX_H + GAP_Y);
+    var col1n = c2.length;
+    var col1H = col1n * BOX_H + Math.max(0, col1n - 1) * GAP_Y;
+    var wrap = document.getElementById("wrap");
+    var viewH = wrap ? wrap.clientHeight : 0;
+    var y1 = PAD;
+    if (viewH > col1H + PAD * 2) y1 = Math.round((viewH - col1H) / 2);
+    stack(c2, PAD, y1, w1);
 
-    var col = boxW + BOX_H + GAP_X;
-    var x3 = PAD + col;
+    var x3 = PAD + colSpan(w1, l2s);
     var parent2 = null, i;
     for (i = 0; i < c2.length; i++) {
       if (sid(c2[i].dataset.id) === sid(openL2)) parent2 = c2[i];
     }
-    around(parent2, c3, x3);
-    var x4 = x3 + (c3.length ? col : 0);
+    around(parent2, c3, x3, w3);
+    var x4 = x3 + (c3.length ? colSpan(w3, l3s) : 0);
     var parent3 = null, j;
     for (j = 0; j < c3.length; j++) {
       if (sid(c3[j].dataset.id) === sid(openL3)) parent3 = c3[j];
     }
-    around(parent3, c4, x4);
+    around(parent3, c4, x4, w4);
 
-    var all = [h].concat(c2, c3, c4);
-    var minY = PAD, maxX = PAD, maxY = PAD, k;
+    var all = c2.concat(c3, c4);
+    var minY = Infinity, maxX = PAD, maxBottom = -Infinity, k;
     for (k = 0; k < all.length; k++) {
       if (all[k]._y < minY) minY = all[k]._y;
       if (all[k]._x + all[k]._w + PAD > maxX) maxX = all[k]._x + all[k]._w + PAD;
-      if (all[k]._y + all[k]._h + PAD > maxY) maxY = all[k]._y + all[k]._h + PAD;
+      if (all[k]._y + all[k]._h > maxBottom) maxBottom = all[k]._y + all[k]._h;
     }
+    if (!all.length) minY = PAD;
+    var treeH = maxBottom - minY;
+    var dy = 0;
+    if (viewH > 0 && all.length) {
+      if (treeH + PAD * 2 <= viewH) dy = Math.round((viewH - treeH) / 2) - minY;
+      else dy = PAD - minY;
+    }
+    if (dy) {
+      for (k = 0; k < all.length; k++) {
+        all[k]._y += dy;
+        all[k].style.top = Math.round(all[k]._y) + "px";
+      }
+      minY += dy;
+      maxBottom += dy;
+    }
+    if (wrap) wrap.scrollTop = 0;
     board.style.width = maxX + "px";
-    board.style.height = maxY + "px";
+    board.style.height = Math.max(viewH, maxBottom + PAD) + "px";
     if (st) st.textContent = items.length + " topics.";
   }
+  function saveTopics(msg) {
+    fetch("/dotl/topics", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ topics: bySeq() })
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      var el = document.getElementById("status");
+      if (el) el.textContent = d.error || msg || (visible().length + " topics.");
+    }).catch(function (err) {
+      var el = document.getElementById("status");
+      if (el) el.textContent = String(err);
+    });
+  }
   window.snPaintTree = paint;
+  window.snSaveTopics = saveTopics;
+  window.addEventListener("resize", function () { paint(); });
   fetch("data/topics.json", { cache: "no-store" })
     .then(function (r) { return r.json(); })
     .then(function (rows) {

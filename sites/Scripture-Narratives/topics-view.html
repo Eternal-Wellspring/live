@@ -41,7 +41,19 @@
       cursor: pointer;
     }
     .bar button:hover { background: #e8eef0; }
+    .bar .save { color: var(--title); }
     .note { color: var(--muted); font-weight: 400; font-size: 0.78rem; }
+    td.title input,
+    td.dur input {
+      font: inherit;
+      color: inherit;
+      border: 1px solid var(--line);
+      padding: 0 0.2rem;
+      margin: 0;
+      background: #fff;
+      min-width: 8rem;
+      width: 100%;
+    }
     .list {
       flex: 1 1 auto;
       overflow: auto;
@@ -114,18 +126,6 @@
       background: transparent;
       max-width: 22rem;
     }
-    .foot {
-      flex: 0 0 auto;
-      padding: 0.35rem 0.7rem 0.45rem;
-      background: #dce8f2;
-      border-top: 1px solid var(--line);
-    }
-    .picks { display: flex; flex-wrap: wrap; gap: 0.35rem 0.8rem; align-items: flex-start; }
-    .picks label { display: flex; flex-direction: column; gap: 0.12rem; font-size: 0.72rem; font-weight: 700; color: var(--accent); }
-    .picks select { font: 13px Arial, Helvetica, sans-serif; min-width: 14rem; max-width: 22rem; }
-    .picks input[type="text"] { font: 13px Arial, Helvetica, sans-serif; }
-    #title { width: 22rem; }
-    #dur { width: 10rem; }
     #sn-row-menu {
       position: fixed;
       z-index: 120;
@@ -176,22 +176,10 @@
     <button type="button" id="down" title="Move down">↓</button>
     <button type="button" id="out" title="Out a level">←</button>
     <button type="button" id="in" title="In a level">→</button>
+    <button type="button" class="save" id="save">Save</button>
     <span class="note" id="status"></span>
   </div>
   <div class="list" id="list"></div>
-  <div class="foot" id="foot" hidden>
-    <div class="picks">
-      <label>Title
-        <input id="title" type="text" />
-      </label>
-      <label>Kind
-        <select id="kind"><option value="period">period</option><option value="event">event</option></select>
-      </label>
-      <label>Period
-        <input id="dur" type="text" />
-      </label>
-    </div>
-  </div>
   <div id="sn-row-menu" hidden>
     <div class="sn-rhm-title" id="sn-rhm-title">Insert</div>
     <div id="sn-rhm-main">
@@ -246,21 +234,29 @@
     function idsOf(s) {
       return String(s || "").split("|").map(function (x) { return x.trim(); }).filter(Boolean);
     }
-    function paintFoot() {
-      var t = current();
-      var foot = document.getElementById("foot");
-      if (!t) { foot.hidden = true; return; }
-      foot.hidden = false;
-      document.getElementById("title").value = t.title || "";
-      document.getElementById("kind").value = t.kind === "event" ? "event" : "period";
-      document.getElementById("dur").value = t.duration || "";
-    }
-    function readFoot() {
-      var t = current();
-      if (!t) return;
-      t.title = document.getElementById("title").value;
-      t.kind = document.getElementById("kind").value;
-      t.duration = document.getElementById("dur").value;
+    function editField(td, t, field) {
+      if (!td || td.querySelector("input")) return;
+      var inp = document.createElement("input");
+      inp.type = "text";
+      inp.value = field === "title" ? (t.title || "") : (t.duration || "");
+      td.textContent = "";
+      td.appendChild(inp);
+      inp.focus();
+      inp.select();
+      function commit() {
+        if (!inp.parentNode) return;
+        if (field === "title") t.title = inp.value;
+        else t.duration = inp.value;
+        paint();
+        saveMove();
+      }
+      inp.addEventListener("keydown", function (ev) {
+        if (ev.key === "Enter") { ev.preventDefault(); commit(); }
+        if (ev.key === "Escape") { ev.preventDefault(); paint(); }
+      });
+      inp.addEventListener("blur", commit);
+      inp.addEventListener("pointerdown", function (ev) { ev.stopPropagation(); });
+      inp.addEventListener("click", function (ev) { ev.stopPropagation(); });
     }
     function relSelect(t, field) {
       var td = document.createElement("td");
@@ -332,13 +328,41 @@
         cell("dur", t.kind === "event" ? "" : String(t.duration || "").trim());
         tr.appendChild(relSelect(t, "pre"));
         tr.appendChild(relSelect(t, "post"));
+        var titleTd = tr.querySelector(".title");
+        var peTd = tr.querySelector(".pe");
+        var durTd = tr.querySelector(".dur");
+        titleTd.addEventListener("dblclick", function (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          skipClick = true;
+          sel = t.id;
+          editField(titleTd, t, "title");
+        });
+        durTd.addEventListener("dblclick", function (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          skipClick = true;
+          sel = t.id;
+          if (t.kind === "event") return;
+          editField(durTd, t, "duration");
+        });
+        peTd.addEventListener("dblclick", function (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          skipClick = true;
+          sel = t.id;
+          t.kind = t.kind === "event" ? "period" : "event";
+          if (t.kind === "event") t.duration = "";
+          paint();
+          saveMove();
+        });
         tr.addEventListener("click", function (ev) {
           if (skipClick) { skipClick = false; return; }
-          if (ev.target && ev.target.closest && ev.target.closest("select")) return;
+          if (ev.target && ev.target.closest && ev.target.closest("select, input")) return;
+          if (ev.detail > 1) return;
           if (String(t.id) === String(sel)) sel = null;
           else sel = t.id;
           paint();
-          paintFoot();
         });
         tbody.appendChild(tr);
       });
@@ -360,7 +384,6 @@
       t.seq = other.seq;
       other.seq = a;
       paint();
-      paintFoot();
     }
     function bumpLevel(d) {
       var t = current();
@@ -370,15 +393,14 @@
       if (n > 4) n = 4;
       t.level = n;
       paint();
-      paintFoot();
     }
-    function saveMove() {
+    function saveMove(msg) {
       fetch("/dotl/topics", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ topics: bySeq() })
       }).then(function (r) { return r.json(); }).then(function (d) {
-        document.getElementById("status").textContent = d.error || (visible().length + " topics.");
+        document.getElementById("status").textContent = d.error || msg || (visible().length + " topics.");
       }).catch(function (err) {
         document.getElementById("status").textContent = String(err);
       });
@@ -387,23 +409,7 @@
     document.getElementById("down").onclick = function () { move(1); saveMove(); };
     document.getElementById("out").onclick = function () { bumpLevel(-1); saveMove(); };
     document.getElementById("in").onclick = function () { bumpLevel(1); saveMove(); };
-    document.getElementById("title").oninput = function () {
-      var t = current();
-      if (!t) return;
-      t.title = document.getElementById("title").value;
-      var cell = document.querySelector('.row[data-id="' + t.id + '"] .title');
-      if (cell) cell.textContent = t.title;
-    };
-    document.getElementById("title").onchange = function () { saveMove(); };
-    document.getElementById("title").onblur = function () { saveMove(); };
-    function applyFoot() {
-      readFoot();
-      paint();
-      paintFoot();
-      saveMove();
-    }
-    document.getElementById("kind").onchange = applyFoot;
-    document.getElementById("dur").onchange = applyFoot;
+    document.getElementById("save").onclick = function () { saveMove("Saved."); };
     var drag = null;
     var skipClick = false;
     function dropMarker() {
@@ -524,7 +530,6 @@
         if (String(d.id) === String(sel)) sel = null;
         else sel = d.id;
         paint();
-        paintFoot();
         return;
       }
       skipClick = true;
@@ -536,7 +541,6 @@
       }
       clearDragPaint();
       paint();
-      paintFoot();
       saveMove();
     }
     document.addEventListener("pointerup", endDrag);
@@ -595,7 +599,6 @@
       topics = topics.filter(function (x) { return String(x.id) !== gone; });
       sel = null;
       paint();
-      paintFoot();
       saveMove();
       document.getElementById("status").textContent = "Deleted.";
     }
@@ -632,12 +635,11 @@
       topics.push(row);
       sel = row.id;
       paint();
-      paintFoot();
       saveMove();
       document.getElementById("status").textContent = "Inserted level " + lv + ".";
       setTimeout(function () {
-        var inp = document.getElementById("title");
-        if (inp) { inp.focus(); inp.select(); }
+        var td = document.querySelector('.row[data-id="' + row.id + '"] .title');
+        if (td) editField(td, row, "title");
       }, 0);
     }
     document.getElementById("list").addEventListener("contextmenu", function (ev) {
@@ -687,7 +689,6 @@
           : bySeq().find(function (t) { return (t.level || 1) === 1; });
         if (root && root.title) document.title = root.title;
         paint();
-        paintFoot();
         document.getElementById("status").textContent = vis.length + " topics.";
       })
       .catch(function (err) {
