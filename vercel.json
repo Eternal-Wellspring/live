@@ -50,8 +50,8 @@
       "has": [{ "type": "host", "value": "sons-of-god-arise.eternalwellspring.com" }],
       "destination": "/sites/sons-of-god-arise/:path*"
     },
-    { "source": "/topics", "destination": "/topics.html" },
-    { "source": "/topics/", "destination": "/topics.html" },
+    { "source": "/topics", "destination": "/index.html" },
+    { "source": "/topics/", "destination": "/index.html" },
     { "source": "/soga", "destination": "/sites/sons-of-god-arise/" },
     { "source": "/soga/", "destination": "/sites/sons-of-god-arise/index.html" },
     { "source": "/soga/:path*", "destination": "/sites/sons-of-god-arise/:path*" },

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eternal Wellspring</title>
+  <link rel="icon" href="images/icon.jpg" />
+  <link rel="stylesheet" href="index.css?v=8" />
+</head>
+<body class="home-page">
+  <header class="home-top">
+    <a class="ew-mark" href="index.html">
+      <img src="images/icon.jpg" alt="" />
+      <span class="ew-words">Eternal<br />Wellspring</span>
+    </a>
+  </header>
+
+  <section class="ew-intro">
+    <div class="ew-hero">
+      <img src="images/wellspring-home.jpg" alt="" />
+    </div>
+    <div class="ew-story">
+      <h1>Eternal Wellspring</h1>
+      <p id="ew-tagline" class="tagline">Out of His throne, a river of life</p>
+      <p id="ew-tagline-sub" class="tagline-sub">Jesus is the Way, the Truth and the Life</p>
+      <div id="ew-narrative" class="ew-narrative">
+        <p>A river runs from the throne of God and of the Lamb. That is the Wellspring — living water, already flowing, for anyone who will come. Eternal is the heart of the story: God dwelling with His people, His life among us, without end.</p>
+        <p>This age is loud with fake news, deception, hatred, division, violence, tribalism, injustice, fear and intimidation. It wounds what it cannot heal. The Word can. These expositions open His ways, His truth and His life in the Scriptures — practical for this day, prophetic for the hope set before us, when Jesus the Son of God returns.</p>
+        <p>That is the answer to mankind’s woes. Not another tribe. Not another rumour. The Way, the Truth and the Life. Come and drink.</p>
+      </div>
+      <p class="ew-next"><a href="index.html">Topics</a></p>
+    </div>
+  </section>
+  <script>
+    function hallFolder(name) {
+      return String(name || "").toLowerCase().replace(/[^a-z0-9]+/g, "") === "eternalwellspring";
+    }
+    function fillLong(el, text) {
+      el.innerHTML = "";
+      String(text || "").split(/\n+/).forEach(function (bit) {
+        bit = bit.replace(/^\s+|\s+$/g, "");
+        if (!bit) return;
+        var p = document.createElement("p");
+        p.textContent = bit;
+        el.appendChild(p);
+      });
+    }
+    function paintHall(data) {
+      if (!data) return;
+      var tag = document.getElementById("ew-tagline");
+      var sub = document.getElementById("ew-tagline-sub");
+      var story = document.getElementById("ew-narrative");
+      var bits = String(data.tagline || "").split(/\n+/).map(function (s) {
+        return s.replace(/^\s+|\s+$/g, "");
+      }).filter(Boolean);
+      if (tag && bits[0]) tag.textContent = bits[0];
+      if (sub) {
+        if (bits[1]) {
+          sub.textContent = bits[1];
+          sub.hidden = false;
+        } else if (bits.length) {
+          sub.textContent = "";
+          sub.hidden = true;
+        }
+      }
+      if (story && data.description) fillLong(story, data.description);
+    }
+    function loadHall(path) {
+      return fetch(path).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
+    }
+    loadHall("sites/EternalWellspring/website.json").then(function (data) {
+      if (data) return paintHall(data);
+      return loadHall("sites/Eternal-Wellspring/website.json").then(function (alt) {
+        if (alt) return paintHall(alt);
+        return loadHall("sites.json").then(function (bag) {
+          var list = (bag && bag.sites) || [];
+          for (var i = 0; i < list.length; i++) {
+            if (hallFolder(list[i].folder) || hallFolder(list[i].name)) {
+              paintHall(list[i]);
+              return;
+            }
+          }
+        });
+      });
+    });
+  </script>
+  <script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
