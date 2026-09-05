@@ -511,8 +511,7 @@ html.ew-phone.ew-portrait .col-footnotes { order: 3; }
 .col-text .bit.indent.bullet::before { left: 2em; }
 .col-text .bit.numbered::before { content: attr(data-n) ". "; position: absolute; left: 0; width: 1.6em; white-space: nowrap; }
 .col-text .bit.indent.numbered::before { left: 2em; }
-.col-text .bit.bullet:not(:last-child),
-.col-text .bit.numbered:not(:last-child) { margin-bottom: var(--list-gap, var(--para-gap, 0px)); }
+.col-text .bit[data-gap] { margin-bottom: var(--bit-gap, 0px) !important; }
 .col-text .bit.ew-details {
   display: block;
   width: max-content;
@@ -916,6 +915,12 @@ a.ref, .col a.ref, .col-text a.ref, .para a.ref {
 .ew-verse-body { line-height: 1.45; }
 .ew-chapter-list { line-height: 1.25; }
 .ew-verse-body p { margin: 0 0 0.35em; line-height: inherit; }
+.ew-verse-body, .ew-verse-body p, .ew-verse-alt, .ew-chapter-list, .ew-ch-row {
+  box-shadow: none !important;
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+}
 .ew-verse-body p.hit,
 .ew-verse-alt p.hit { background: transparent; padding: 0; }
 .ew-verse-body sup { color: #1f6f78; font-weight: 700; padding-right: 0.25rem; }
@@ -1085,7 +1090,7 @@ a.ref, .col a.ref, .col-text a.ref, .para a.ref {
 .who .site, a.site { font-weight:700; font-style:normal; text-decoration:none }
 .top .brand-row { font-family:Arial, Helvetica, sans-serif; font-size:calc(26px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f6f78; background:#f6f7eb; border-style:solid; border-color:#c5d0d4; border-width:0px 0px 0px 0px; padding:0px; margin-top:0px; margin-bottom:0px }
 .bit.ew-info { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; background:#ededed; border-style:solid; border-color:#aaaaaa; border-width:1.0px 1.0px 1.0px 1.0px; box-shadow:20px 20px 20px #00000040; padding:7px; margin-top:4px; margin-bottom:4px; text-align:left }
-#ew-info-modal .ew-info-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#333333; background:#f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:1.0px 1.0px 1.0px 1.0px; box-shadow:20px 20px 20px #00000059; text-align:left; line-height:1.25 }
+#ew-info-modal .ew-info-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#333333; text-align:left; line-height:1.25 }
 #ew-info-modal .ew-info-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#333333; background:#f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:1.0px 1.0px 1.0px 1.0px; box-shadow:20px 20px 20px #00000059; padding:22px; text-align:left; line-height:1.25 }
 #ew-info-modal .ew-info-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; text-decoration:underline; color:#0058B0 }
 #ew-info-modal .ew-info-x { color:#0058B0 }
@@ -1105,14 +1110,15 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .col .col-text .bit { margin:0 0 5px }
 .col .col-text .bit:last-child { margin-bottom:0 }
 .col{align-self:center}
-.ew-verse-body, .ew-verse-body p, .ew-verse-alt { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:1.0px 1.0px 1.0px 1.0px; box-shadow:20px 20px 20px #00000040; text-align:left; line-height:1.2 }
+.ew-verse-body, .ew-verse-alt { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.2 }
 .ew-verse-card, .ew-chapter-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:1.0px 1.0px 1.0px 1.0px; padding:12px; text-align:left; line-height:1.2; --para-gap:6px }
 .ew-verse-card, .ew-chapter-card { box-shadow:none }
 #ew-verse, #ew-chapter { box-shadow:20px 20px 20px #00000040 }
+.ew-verse-body, .ew-verse-body p, .ew-verse-alt, .ew-chapter-list, .ew-ch-row{box-shadow:none!important;border:0!important;background:transparent!important;padding:0!important}
 .ew-verse-ref { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#005eb8 }
 .ew-verse-body p, .ew-verse-alt p { margin-bottom:6px }
-.ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; background:##f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:20px 20px 20px #00000040; text-align:left }
-.ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; background:##f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:20px 20px 20px #00000040; text-align:left }
+.ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; text-align:left }
+.ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; text-align:left }
 #ew-text-modal .ew-text-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; background:##f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:20px 20px 20px #00000040; padding:16px; text-align:left }
 #ew-text-modal .ew-text-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; text-decoration:underline; color:#0058B0 }
 #ew-text-modal .ew-text-body, #ew-text-modal .ew-text-body p { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#333333; line-height:1.25 }
