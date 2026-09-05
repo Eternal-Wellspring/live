@@ -40,8 +40,15 @@
   fetch("data/topics.json", { cache: "no-store" })
     .then(function (r) { return r.json(); })
     .then(function (rows) {
+      var hide = {
+        "his finished work": 1,
+        "waiting for the sons of god": 1
+      };
       var ones = (rows || []).filter(function (t) { return (t.level || 1) === 1; })
-        .sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); });
+        .sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); })
+        .filter(function (t) {
+          return !hide[String(t.title || "").replace(/\s+/g, " ").trim().toLowerCase()];
+        });
       var h = document.querySelector('[data-sec="s-home"] h2');
       if (!h || !h.parentNode) return;
       var old = document.querySelector(".ew-l1-list");

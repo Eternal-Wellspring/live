@@ -274,7 +274,7 @@
     var id = qid();
     var frameId = id;
     function treeUrl() {
-      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=229";
+      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=237";
     }
     function showTree() {
       var fr = document.getElementById("tree-frame");
@@ -292,7 +292,7 @@
     }
     function setFrames(nid) {
       frameId = nid ? String(nid) : "";
-      var q = frameId ? "?id=" + encodeURIComponent(frameId) : "";
+      var q = frameId ? "?id=" + encodeURIComponent(frameId) + "&v=12" : "?v=12";
       document.getElementById("topics-frame").src = "topics-view.html" + q;
       showTree();
     }
@@ -312,7 +312,7 @@
       });
   </script>
   <script>window.ewFolder="Scripture-Narratives"</script>
-  <script src="site.js?v=8"></script>
+  <script src="site.js?v=9"></script>
   <script src="/bible.js?v=100"></script>
   <script src="/ew-sky.js?v=15"></script>
   <script>

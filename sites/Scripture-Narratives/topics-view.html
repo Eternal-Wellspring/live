@@ -44,7 +44,8 @@
     .bar .save { color: var(--title); }
     .note { color: var(--muted); font-weight: 400; font-size: 0.78rem; }
     td.title input,
-    td.dur input {
+    td.dur input,
+    td.desc input {
       font: inherit;
       color: inherit;
       border: 1px solid var(--line);
@@ -52,7 +53,12 @@
       margin: 0;
       background: #fff;
       min-width: 8rem;
-      width: 100%;
+      max-width: 48rem;
+      width: 12rem;
+      white-space: nowrap;
+    }
+    td.desc input {
+      min-width: 12rem;
     }
     .list {
       flex: 1 1 auto;
@@ -106,8 +112,10 @@
       font-weight: 400;
       color: var(--accent);
       white-space: nowrap;
+      cursor: pointer;
     }
     .dur { white-space: nowrap; }
+    .desc { white-space: nowrap; font-weight: 400; min-width: 12rem; }
     .head th {
       font-weight: 400;
       color: var(--muted);
@@ -117,14 +125,6 @@
       border: 0;
       border-bottom: 1px solid var(--line);
       background: var(--panel);
-    }
-    .after select,
-    .before select {
-      font: inherit;
-      color: inherit;
-      border: 1px solid var(--line);
-      background: transparent;
-      max-width: 22rem;
     }
     #sn-row-menu {
       position: fixed;
@@ -181,8 +181,9 @@
   </div>
   <div class="list" id="list"></div>
   <div id="sn-row-menu" hidden>
-    <div class="sn-rhm-title" id="sn-rhm-title">Insert</div>
+    <div class="sn-rhm-title" id="sn-rhm-title">Topic</div>
     <div id="sn-rhm-main">
+      <button type="button" data-edit="1">Edit</button>
       <button type="button" data-lv="2">Level 2</button>
       <button type="button" data-lv="3">Level 3</button>
       <button type="button" data-lv="4">Level 4</button>
@@ -196,6 +197,12 @@
   <script>
     var topics = [];
     var sel = null;
+    var extra = 0;
+    var pending = null;
+    var editing = null;
+    var holdTimer = null;
+    var SIB_CAP = 10;
+    var DEPTH_CAP = 5;
     var rootId = (function () {
       var q = location.search.replace(/^\?/, "").split("&");
       var i, p;
@@ -227,71 +234,69 @@
       }
       return out;
     }
-    function titleOf(id) {
-      var t = topics.find(function (x) { return String(x.id) === String(id); });
-      return t ? t.title : String(id);
+    function renumberSeq() {
+      bySeq().forEach(function (t, i) { t.seq = i + 1; });
     }
-    function idsOf(s) {
-      return String(s || "").split("|").map(function (x) { return x.trim(); }).filter(Boolean);
+    function sizeInput(inp, field) {
+      var min = field === "description" ? 12 : 8;
+      var max = field === "description" ? 56 : 40;
+      var n = (inp.value || "").length + 2;
+      if (n < min) n = min;
+      if (n > max) n = max;
+      inp.style.width = n + "ch";
     }
-    function editField(td, t, field) {
-      if (!td || td.querySelector("input")) return;
-      var inp = document.createElement("input");
-      inp.type = "text";
-      inp.value = field === "title" ? (t.title || "") : (t.duration || "");
-      td.textContent = "";
-      td.appendChild(inp);
-      inp.focus();
-      inp.select();
-      function commit() {
-        if (!inp.parentNode) return;
-        if (field === "title") t.title = inp.value;
-        else t.duration = inp.value;
-        paint();
-        saveMove();
-      }
-      inp.addEventListener("keydown", function (ev) {
-        if (ev.key === "Enter") { ev.preventDefault(); commit(); }
-        if (ev.key === "Escape") { ev.preventDefault(); paint(); }
-      });
-      inp.addEventListener("blur", commit);
+    function bindEditInput(inp, field) {
+      sizeInput(inp, field);
+      inp.addEventListener("input", function () { sizeInput(inp, field); });
       inp.addEventListener("pointerdown", function (ev) { ev.stopPropagation(); });
       inp.addEventListener("click", function (ev) { ev.stopPropagation(); });
+      inp.addEventListener("keydown", function (ev) {
+        if (ev.key === "Enter") { ev.preventDefault(); commitEdit(); }
+        if (ev.key === "Escape") {
+          ev.preventDefault();
+          editing = null;
+          paint();
+        }
+      });
     }
-    function relSelect(t, field) {
-      var td = document.createElement("td");
-      td.className = field === "pre" ? "after" : "before";
-      var selEl = document.createElement("select");
-      var blank = document.createElement("option");
-      blank.value = "";
-      blank.textContent = "";
-      selEl.appendChild(blank);
-      var cur = idsOf(t[field])[0] || "";
-      var seen = {};
-      bySeq().forEach(function (x) {
-        if (String(x.id) === String(t.id)) return;
-        seen[String(x.id)] = true;
-        var o = document.createElement("option");
-        o.value = String(x.id);
-        o.textContent = x.title || "";
-        if (String(x.id) === String(cur)) o.selected = true;
-        selEl.appendChild(o);
-      });
-      if (cur && !seen[String(cur)]) {
-        var o = document.createElement("option");
-        o.value = String(cur);
-        o.textContent = titleOf(cur);
-        o.selected = true;
-        selEl.appendChild(o);
+    function flushEditInputs() {
+      if (!editing) return;
+      var t = topics.find(function (x) { return String(x.id) === String(editing); });
+      var tr = document.querySelector('.row[data-id="' + editing + '"]');
+      if (!t || !tr) return;
+      var ti = tr.querySelector(".title input");
+      var di = tr.querySelector(".dur input");
+      var ei = tr.querySelector(".desc input");
+      if (ti) t.title = ti.value;
+      if (di) t.duration = di.value;
+      if (ei) t.description = ei.value;
+    }
+    function commitEdit() {
+      if (!editing) return;
+      flushEditInputs();
+      editing = null;
+      paint();
+      saveMove();
+    }
+    function startEdit() {
+      var t = current();
+      if (!t) return;
+      editing = t.id;
+      paint();
+      var inp = document.querySelector('.row[data-id="' + t.id + '"] .title input');
+      if (inp) {
+        inp.focus();
+        inp.select();
       }
-      selEl.addEventListener("pointerdown", function (ev) { ev.stopPropagation(); });
-      selEl.addEventListener("click", function (ev) { ev.stopPropagation(); });
-      selEl.addEventListener("change", function () {
-        t[field] = selEl.value || "";
-        saveMove();
-      });
-      td.appendChild(selEl);
-      return td;
+    }
+    function putInput(td, value, field) {
+      td.textContent = "";
+      var inp = document.createElement("input");
+      inp.type = "text";
+      inp.value = value || "";
+      td.appendChild(inp);
+      bindEditInput(inp, field);
+      return inp;
     }
     function paint() {
       var box = document.getElementById("list");
@@ -300,7 +305,7 @@
       var thead = document.createElement("thead");
       var hr = document.createElement("tr");
       hr.className = "head";
-      ["", "", "", "", "After", "Before"].forEach(function (label) {
+      ["", "", "", "", "Description"].forEach(function (label) {
         var th = document.createElement("th");
         th.textContent = label;
         hr.appendChild(th);
@@ -310,9 +315,9 @@
       var tbody = document.createElement("tbody");
       visible().forEach(function (t) {
         var lv = t.level || 1;
-        if (lv > 4) lv = 4;
+        var skin = lv > 4 ? 4 : lv;
         var tr = document.createElement("tr");
-        tr.className = "row lv" + lv + (String(t.id) === String(sel) ? " on" : "");
+        tr.className = "row lv" + skin + (String(t.id) === String(sel) ? " on" : "");
         tr.dataset.id = t.id;
         function cell(cls, text, pad) {
           var td = document.createElement("td");
@@ -323,43 +328,37 @@
         }
         cell("lvnum", String(lv));
         var indent = Math.max(0, lv - 2) * 4;
-        cell("title", t.title || "", indent ? indent + "ch" : "");
+        var onEdit = String(t.id) === String(editing);
+        cell("title", onEdit ? "" : (t.title || ""), indent ? indent + "ch" : "");
         cell("pe", t.kind === "event" ? "E" : "P");
-        cell("dur", t.kind === "event" ? "" : String(t.duration || "").trim());
-        tr.appendChild(relSelect(t, "pre"));
-        tr.appendChild(relSelect(t, "post"));
+        cell("dur", onEdit ? "" : (t.kind === "event" ? "" : String(t.duration || "").trim()));
+        cell("desc", onEdit ? "" : String(t.description || t.notes || "").trim());
         var titleTd = tr.querySelector(".title");
         var peTd = tr.querySelector(".pe");
         var durTd = tr.querySelector(".dur");
-        titleTd.addEventListener("dblclick", function (ev) {
+        var descTd = tr.querySelector(".desc");
+        if (onEdit) {
+          putInput(titleTd, t.title || "", "title");
+          if (t.kind !== "event") putInput(durTd, t.duration || "", "duration");
+          putInput(descTd, t.description || t.notes || "", "description");
+        }
+        peTd.addEventListener("click", function (ev) {
           ev.preventDefault();
           ev.stopPropagation();
-          skipClick = true;
-          sel = t.id;
-          editField(titleTd, t, "title");
-        });
-        durTd.addEventListener("dblclick", function (ev) {
-          ev.preventDefault();
-          ev.stopPropagation();
-          skipClick = true;
-          sel = t.id;
-          if (t.kind === "event") return;
-          editField(durTd, t, "duration");
-        });
-        peTd.addEventListener("dblclick", function (ev) {
-          ev.preventDefault();
-          ev.stopPropagation();
-          skipClick = true;
-          sel = t.id;
+          if (skipClick) { skipClick = false; return; }
+          if (editing) flushEditInputs();
           t.kind = t.kind === "event" ? "period" : "event";
           if (t.kind === "event") t.duration = "";
+          sel = t.id;
           paint();
           saveMove();
         });
         tr.addEventListener("click", function (ev) {
           if (skipClick) { skipClick = false; return; }
-          if (ev.target && ev.target.closest && ev.target.closest("select, input")) return;
-          if (ev.detail > 1) return;
+          if (ev.target && ev.target.closest && ev.target.closest("input")) return;
+          if (ev.target && ev.target.closest && ev.target.closest(".pe")) return;
+          if (onEdit) return;
+          if (editing) commitEdit();
           if (String(t.id) === String(sel)) sel = null;
           else sel = t.id;
           paint();
@@ -372,6 +371,56 @@
     function current() {
       return topics.find(function (t) { return String(t.id) === String(sel); });
     }
+    function maxLevel() {
+      return 1 + DEPTH_CAP + extra;
+    }
+    function maxSiblings() {
+      return SIB_CAP + extra;
+    }
+    function parentOf(t) {
+      var list = bySeq();
+      var i = list.indexOf(t);
+      if (i < 0) return null;
+      return parentBefore(list, i - 1, t.level || 1);
+    }
+    function parentBefore(list, fromIndex, lv) {
+      var j;
+      for (j = fromIndex; j >= 0; j--) {
+        if ((list[j].level || 1) < lv) return list[j];
+      }
+      return null;
+    }
+    function siblingCount(parent, lv, exceptId) {
+      var n = 0;
+      bySeq().forEach(function (x) {
+        if ((x.level || 1) !== lv) return;
+        if (exceptId && String(x.id) === String(exceptId)) return;
+        if (parentOf(x) === parent) n += 1;
+      });
+      return n;
+    }
+    function askMore(then) {
+      if (extra >= 2) {
+        document.getElementById("status").textContent = "That's the limit.";
+        return false;
+      }
+      pending = { kind: "more", then: then };
+      document.getElementById("sn-rhm-title").textContent = "Two more?";
+      document.getElementById("sn-rhm-main").hidden = true;
+      document.getElementById("sn-rhm-ask").hidden = false;
+      rowMenu.hidden = false;
+      var w = rowMenu.offsetWidth || 140;
+      rowMenu.style.left = "8px";
+      rowMenu.style.top = "36px";
+      if (w) rowMenu.style.left = Math.min(8, window.innerWidth - w - 8) + "px";
+      return true;
+    }
+    function canPlace(lv, parent, exceptId) {
+      if (lv < 2) return "Level 2 is the first.";
+      if (lv > maxLevel()) return extra >= 2 ? "That's the limit." : "more";
+      if (siblingCount(parent, lv, exceptId) >= maxSiblings()) return extra >= 2 ? "That's the limit." : "more";
+      return "";
+    }
     function move(dir) {
       var t = current();
       if (!t) return;
@@ -380,9 +429,13 @@
       var j = i + dir;
       if (j < 0 || j >= list.length) return;
       var other = list[j];
-      var a = t.seq;
-      t.seq = other.seq;
-      other.seq = a;
+      var full = bySeq();
+      var ia = full.indexOf(t);
+      var ib = full.indexOf(other);
+      if (ia < 0 || ib < 0) return;
+      full[ia] = other;
+      full[ib] = t;
+      full.forEach(function (x, n) { x.seq = n + 1; });
       paint();
     }
     function bumpLevel(d) {
@@ -390,7 +443,18 @@
       if (!t) return;
       var n = (t.level || 1) + d;
       if (n < 2) n = 2;
-      if (n > 4) n = 4;
+      if (n === (t.level || 1)) return;
+      var list = bySeq();
+      var parent = parentBefore(list, list.indexOf(t) - 1, n);
+      var gate = canPlace(n, parent, t.id);
+      if (gate === "more") {
+        askMore(function () { bumpLevel(d); });
+        return;
+      }
+      if (gate) {
+        document.getElementById("status").textContent = gate;
+        return;
+      }
       t.level = n;
       paint();
     }
@@ -412,6 +476,9 @@
     document.getElementById("save").onclick = function () { saveMove("Saved."); };
     var drag = null;
     var skipClick = false;
+    var menuSel = null;
+    var ignoreMenuClick = false;
+    var lastInsert = 0;
     function dropMarker() {
       var m = document.getElementById("drop-mark");
       if (m) return m;
@@ -419,7 +486,7 @@
       m.id = "drop-mark";
       m.className = "drop-mark";
       var td = document.createElement("td");
-      td.colSpan = 6;
+      td.colSpan = 5;
       m.appendChild(td);
       return m;
     }
@@ -453,7 +520,10 @@
       if (!src || !t) return;
       var n = (t.level || 1) + Math.round(dx / 40);
       if (n < 2) n = 2;
-      if (n > 4) n = 4;
+      if (n > maxLevel()) n = maxLevel();
+      var list = bySeq();
+      var parent = parentBefore(list, list.indexOf(t) - 1, n);
+      if (siblingCount(parent, n, t.id) >= maxSiblings()) n = t.level || 1;
       drag.levelTo = n;
       var title = src.querySelector(".title");
       if (title) title.style.paddingLeft = Math.max(0, n - 2) * 4 + "ch";
@@ -476,18 +546,37 @@
         }
       }
       var vis = visible();
-      var seqs = vis.map(function (t) { return t.seq; }).sort(function (a, b) { return a - b; });
-      ids.forEach(function (id, i) {
+      var ordered = [];
+      ids.forEach(function (id) {
         var t = topics.find(function (x) { return String(x.id) === String(id); });
-        if (t && seqs[i] != null) t.seq = seqs[i];
+        if (t) ordered.push(t);
       });
+      if (!ordered.length || ordered.length !== vis.length) return;
+      var full = bySeq();
+      var start = full.indexOf(vis[0]);
+      if (start < 0) return;
+      full.splice.apply(full, [start, vis.length].concat(ordered));
+      full.forEach(function (x, n) { x.seq = n + 1; });
     }
     document.getElementById("list").addEventListener("pointerdown", function (ev) {
       if (ev.button) return;
-      if (ev.target && ev.target.closest && ev.target.closest("select")) return;
+      if (ev.target && ev.target.closest && ev.target.closest("input, .pe")) return;
       var tr = ev.target.closest && ev.target.closest("tr.row");
       if (!tr) return;
-      drag = { id: String(tr.dataset.id), x: ev.clientX, y: ev.clientY, dragging: false, axis: "" };
+      if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; }
+      var holdX = ev.clientX;
+      var holdY = ev.clientY;
+      var holdId = String(tr.dataset.id);
+      holdTimer = setTimeout(function () {
+        holdTimer = null;
+        if (drag && drag.dragging) return;
+        drag = null;
+        skipClick = true;
+        sel = holdId;
+        paint();
+        showRowMenu({ clientX: holdX, clientY: holdY });
+      }, 550);
+      drag = { id: holdId, x: ev.clientX, y: ev.clientY, dragging: false, axis: "" };
       try { ev.currentTarget.setPointerCapture(ev.pointerId); } catch (err) {}
     });
     document.addEventListener("pointermove", function (ev) {
@@ -496,6 +585,7 @@
       var dy = ev.clientY - drag.y;
       if (!drag.dragging) {
         if (Math.abs(dx) < 12 && Math.abs(dy) < 12) return;
+        if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; }
         drag.dragging = true;
         drag.axis = Math.abs(dy) >= Math.abs(dx) ? "y" : "x";
         skipClick = true;
@@ -521,18 +611,20 @@
       }
     });
     function endDrag(ev) {
+      if (holdTimer) { clearTimeout(holdTimer); holdTimer = null; }
       if (!drag) return;
       var d = drag;
       drag = null;
+      skipClick = true;
       if (!d.dragging) {
         clearDragPaint();
-        skipClick = true;
+        if (rowMenu && !rowMenu.hidden) return;
+        if (editing) commitEdit();
         if (String(d.id) === String(sel)) sel = null;
         else sel = d.id;
         paint();
         return;
       }
-      skipClick = true;
       sel = d.id;
       if (d.axis === "y") applyDropOrder(d.id);
       else if (d.levelTo) {
@@ -546,8 +638,23 @@
     document.addEventListener("pointerup", endDrag);
     document.addEventListener("pointercancel", endDrag);
     var rowMenu = document.getElementById("sn-row-menu");
+    function fillInsertLevels() {
+      var main = document.getElementById("sn-rhm-main");
+      var del = main.querySelector("[data-del]");
+      main.querySelectorAll("[data-lv]").forEach(function (b) { b.remove(); });
+      var i, max = maxLevel();
+      for (i = 2; i <= max; i++) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("data-lv", String(i));
+        b.textContent = "Level " + i;
+        main.insertBefore(b, del);
+      }
+    }
     function resetRowMenu() {
-      document.getElementById("sn-rhm-title").textContent = "Insert";
+      pending = null;
+      document.getElementById("sn-rhm-title").textContent = "Topic";
+      fillInsertLevels();
       document.getElementById("sn-rhm-main").hidden = false;
       document.getElementById("sn-rhm-ask").hidden = true;
     }
@@ -556,8 +663,11 @@
       resetRowMenu();
     }
     function showRowMenu(ev) {
+      menuSel = sel;
       resetRowMenu();
       rowMenu.hidden = false;
+      ignoreMenuClick = true;
+      setTimeout(function () { ignoreMenuClick = false; }, 0);
       var w = rowMenu.offsetWidth || 140;
       var h = rowMenu.offsetHeight || 120;
       var x = ev.clientX || 0;
@@ -566,93 +676,102 @@
       rowMenu.style.top = Math.max(8, Math.min(y, window.innerHeight - h - 8)) + "px";
     }
     function askDelete() {
+      pending = { kind: "delete" };
       document.getElementById("sn-rhm-title").textContent = "Delete?";
       document.getElementById("sn-rhm-main").hidden = true;
       document.getElementById("sn-rhm-ask").hidden = false;
-    }
-    function replaceId(s, gone, put, selfId) {
-      var ids = idsOf(s);
-      var puts = idsOf(put);
-      var out = [];
-      function add(v) {
-        v = String(v || "");
-        if (!v || v === String(gone) || v === String(selfId)) return;
-        if (out.indexOf(v) < 0) out.push(v);
-      }
-      ids.forEach(function (id) {
-        if (String(id) === String(gone)) puts.forEach(add);
-        else add(id);
-      });
-      return out.join("|");
     }
     function deleteRow() {
       var t = current();
       if (!t) return;
       var gone = String(t.id);
-      var wasAfter = t.pre || "";
-      var wasBefore = t.post || "";
-      topics.forEach(function (x) {
-        if (String(x.id) === gone) return;
-        x.pre = replaceId(x.pre, gone, wasAfter, x.id);
-        x.post = replaceId(x.post, gone, wasBefore, x.id);
-      });
       topics = topics.filter(function (x) { return String(x.id) !== gone; });
+      renumberSeq();
       sel = null;
       paint();
       saveMove();
       document.getElementById("status").textContent = "Deleted.";
     }
     function insertRow(lv) {
+      var now = Date.now();
+      if (now - lastInsert < 400) return;
+      lastInsert = now;
+      if (!current() && menuSel) sel = menuSel;
       var t = current();
-      if (!t) return;
+      if (!t) {
+        document.getElementById("status").textContent = "Select a topic first.";
+        return;
+      }
       lv = Number(lv);
       if (lv < 2) lv = 2;
-      if (lv > 4) lv = 4;
+      var list = bySeq();
+      var parent = parentBefore(list, list.indexOf(t), lv);
+      var gate = canPlace(lv, parent, null);
+      if (gate === "more") {
+        askMore(function () { insertRow(lv); });
+        return;
+      }
+      if (gate) {
+        document.getElementById("status").textContent = gate;
+        return;
+      }
       var maxId = 0;
       topics.forEach(function (x) {
         var n = Number(x.id);
         if (n > maxId) maxId = n;
       });
-      var seq = t.seq || 0;
-      var list = visible();
-      var at = list.indexOf(t);
-      var below = (at >= 0 && at + 1 < list.length) ? list[at + 1] : null;
-      topics.forEach(function (x) {
-        if ((x.seq || 0) > seq) x.seq = (x.seq || 0) + 10;
-      });
+      var full = bySeq();
+      var at = full.indexOf(t);
+      var after = at < 0 ? (t.seq || full.length) : (t.seq || at + 1);
+      var next = at >= 0 && at + 1 < full.length ? full[at + 1] : null;
+      var before = next ? (next.seq || after + 1) : after + 1;
       var row = {
         id: maxId + 1,
         lecture_id: t.lecture_id,
         level: lv,
-        seq: seq + 10,
-        pre: String(t.id),
-        post: below ? String(below.id) : "",
+        seq: (after + before) / 2,
         kind: "period",
         title: "New",
         notes: "",
+        description: "",
         duration: ""
       };
-      topics.push(row);
+      if (at < 0) full.push(row);
+      else full.splice(at + 1, 0, row);
+      full.forEach(function (x, n) { x.seq = n + 1; });
+      topics = full;
       sel = row.id;
       paint();
       saveMove();
       document.getElementById("status").textContent = "Inserted level " + lv + ".";
-      setTimeout(function () {
-        var td = document.querySelector('.row[data-id="' + row.id + '"] .title');
-        if (td) editField(td, row, "title");
-      }, 0);
+      setTimeout(function () { startEdit(); }, 0);
     }
     document.getElementById("list").addEventListener("contextmenu", function (ev) {
       var tr = ev.target.closest && ev.target.closest("tr.row");
       if (!tr) { hideRowMenu(); return; }
       ev.preventDefault();
+      skipClick = true;
       sel = String(tr.dataset.id);
       paint();
       showRowMenu(ev);
     });
+    rowMenu.addEventListener("pointerdown", function (ev) {
+      var btn = ev.target.closest && ev.target.closest("button");
+      if (!btn || !btn.getAttribute("data-lv")) return;
+      ev.preventDefault();
+      ev.stopPropagation();
+      var lv = btn.getAttribute("data-lv");
+      hideRowMenu();
+      insertRow(lv);
+    });
     rowMenu.addEventListener("click", function (ev) {
       var btn = ev.target.closest && ev.target.closest("button");
       if (!btn) return;
+      if (btn.getAttribute("data-edit") === "1") {
+        hideRowMenu();
+        startEdit();
+        return;
+      }
       if (btn.getAttribute("data-del") === "1") {
         askDelete();
         return;
@@ -662,22 +781,40 @@
         return;
       }
       if (btn.getAttribute("data-del-y") === "1") {
+        var job = pending;
         hideRowMenu();
-        deleteRow();
+        if (job && job.kind === "more") {
+          extra = 2;
+          if (typeof job.then === "function") job.then();
+        } else {
+          deleteRow();
+        }
         return;
       }
       if (btn.getAttribute("data-lv")) {
+        var lv = btn.getAttribute("data-lv");
         hideRowMenu();
-        insertRow(btn.getAttribute("data-lv"));
+        insertRow(lv);
       }
     });
     document.addEventListener("click", function (ev) {
+      if (ignoreMenuClick) return;
       if (rowMenu.hidden) return;
       if (rowMenu.contains(ev.target)) return;
       hideRowMenu();
     });
     document.addEventListener("keydown", function (ev) {
-      if (ev.key === "Escape") hideRowMenu();
+      if (ev.key === "Escape") {
+        hideRowMenu();
+        if (editing) { editing = null; paint(); }
+      }
+    });
+    document.addEventListener("mousedown", function (ev) {
+      if (!editing) return;
+      var tr = document.querySelector('.row[data-id="' + editing + '"]');
+      if (tr && tr.contains(ev.target)) return;
+      if (rowMenu.contains(ev.target)) return;
+      commitEdit();
     });
     fetch("data/topics.json", { cache: "no-store" })
       .then(function (r) { return r.json(); })
