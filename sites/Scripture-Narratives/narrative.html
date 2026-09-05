@@ -315,5 +315,37 @@
   <script src="site.js?v=8"></script>
   <script src="/bible.js?v=100"></script>
   <script src="/ew-sky.js?v=15"></script>
+  <script>
+  (function(){
+    var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    var last = "";
+    function show(t){
+      var el = document.querySelector(".ew-date-updated");
+      if (!el) return;
+      t = String(t || "").trim().split("\n")[0];
+      var m = t.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
+      last = m ? (parseInt(m[3],10) + " " + months[parseInt(m[2],10)-1] + " " + m[1] + " " + m[4] + ":" + m[5]) : t;
+      el.textContent = last;
+    }
+    function fill(){
+      var el = document.querySelector(".ew-date-updated");
+      if (!el) return;
+      if (last) { el.textContent = last; return; }
+      var folder = window.ewFolder || "";
+      var urls = ["date-updated.txt"];
+      if (folder) urls.push("/sites/" + folder + "/date-updated.txt");
+      function next(i){
+        if (i >= urls.length) return;
+        fetch(urls[i], {cache:"no-store"}).then(function(r){
+          if (!r.ok) return next(i + 1);
+          return r.text().then(show);
+        }).catch(function(){ next(i + 1); });
+      }
+      next(0);
+    }
+    document.addEventListener("ew-page-swap", fill);
+    fill();
+  })();
+  </script>
 </body>
 </html>
