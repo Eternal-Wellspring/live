@@ -104,14 +104,23 @@
       if (s.h > BOX_H) BOX_H = s.h;
     });
     if (BOX_H < 8) BOX_H = 8;
-    var w1 = colNameW(l2s);
-    var w3 = colNameW(l3s);
-    var w4 = colNameW(l4s);
+    function colBoxW(list) {
+      var w = colNameW(list);
+      var i;
+      for (i = 0; i < list.length; i++) {
+        if (kids(items, list[i]).length > 0) return w + BOX_H;
+      }
+      return w;
+    }
+    var w1 = colBoxW(l2s);
+    var w3 = colBoxW(l3s);
+    var w4 = colBoxW(l4s);
 
     function isOn(t) {
       return sid(t.id) === sid(sel) || sid(t.id) === sid(openL2) || sid(t.id) === sid(openL3);
     }
     function box(t, kind) {
+      if ((t.level || 1) <= 1) return null;
       var b = document.createElement("button");
       var n = kids(items, t).length;
       var on = isOn(t);
@@ -178,42 +187,34 @@
       board.appendChild(b);
       return b;
     }
-    function put(el, x, y, nameW) {
-      var w = nameW + (el._hasCount ? BOX_H : 0);
+    function put(el, x, y, colW) {
       el.style.position = "absolute";
       el.style.left = Math.round(x) + "px";
       el.style.top = Math.round(y) + "px";
-      el.style.width = w + "px";
+      el.style.width = colW + "px";
       el.style.height = BOX_H + "px";
       el.style.margin = "0";
       el._x = x;
       el._y = y;
-      el._w = w;
+      el._w = colW;
       el._h = BOX_H;
     }
-    function stack(els, x, y0, nameW) {
+    function stack(els, x, y0, colW) {
       var y = y0, i;
       for (i = 0; i < els.length; i++) {
-        put(els[i], x, y, nameW);
+        put(els[i], x, y, colW);
         y += BOX_H + GAP_Y;
       }
     }
-    function around(parent, els, x, nameW) {
+    function around(parent, els, x, colW) {
       if (!parent || !els.length) return;
       var tot = els.length * BOX_H + Math.max(0, els.length - 1) * GAP_Y;
-      stack(els, x, parent._y + BOX_H / 2 - tot / 2, nameW);
-    }
-    function colSpan(nameW, list) {
-      var extra = 0, i;
-      for (i = 0; i < list.length; i++) {
-        if (kids(items, list[i]).length > 0) extra = BOX_H;
-      }
-      return nameW + extra + GAP_X;
+      stack(els, x, parent._y + BOX_H / 2 - tot / 2, colW);
     }
 
-    var c2 = l2s.map(function (t) { return box(t, "2"); });
-    var c3 = l3s.map(function (t) { return box(t, "3"); });
-    var c4 = l4s.map(function (t) { return box(t, "4"); });
+    var c2 = l2s.filter(function (t) { return (t.level || 1) === 2; }).map(function (t) { return box(t, "2"); }).filter(Boolean);
+    var c3 = l3s.filter(function (t) { return (t.level || 1) === 3; }).map(function (t) { return box(t, "3"); }).filter(Boolean);
+    var c4 = l4s.filter(function (t) { return (t.level || 1) === 4; }).map(function (t) { return box(t, "4"); }).filter(Boolean);
 
     var col1n = c2.length;
     var col1H = col1n * BOX_H + Math.max(0, col1n - 1) * GAP_Y;
@@ -223,13 +224,13 @@
     if (viewH > col1H + PAD * 2) y1 = Math.round((viewH - col1H) / 2);
     stack(c2, PAD, y1, w1);
 
-    var x3 = PAD + colSpan(w1, l2s);
+    var x3 = PAD + w1 + GAP_X;
     var parent2 = null, i;
     for (i = 0; i < c2.length; i++) {
       if (sid(c2[i].dataset.id) === sid(openL2)) parent2 = c2[i];
     }
     around(parent2, c3, x3, w3);
-    var x4 = x3 + (c3.length ? colSpan(w3, l3s) : 0);
+    var x4 = x3 + (c3.length ? w3 + GAP_X : 0);
     var parent3 = null, j;
     for (j = 0; j < c3.length; j++) {
       if (sid(c3[j].dataset.id) === sid(openL3)) parent3 = c3[j];
