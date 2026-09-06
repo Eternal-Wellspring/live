@@ -11,6 +11,7 @@
       --line: #c5d0d4;
       --paper: #f6f7eb;
       --panel: #fff;
+      --title: #005eb8;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; }
@@ -137,29 +138,206 @@
       box-sizing: border-box;
     }
     .tdesc textarea:focus { outline: 0; background: #fff; }
-    .tverses {
+    .tverse-wrap {
       position: absolute;
       z-index: 2;
+      display: flex;
+      flex-direction: column;
       margin: 0;
-      padding: 0.2rem 0.45rem;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      overflow: hidden;
+      box-shadow: none;
+    }
+    .tverse-bar {
+      flex: 0 0 auto;
+      position: relative;
+      z-index: 6;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.2rem 0.4rem;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+    .tverse-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 0.28rem;
+      min-width: 0;
+      flex: 0 1 auto;
+    }
+    .tverse-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-left: auto;
+      flex: 0 0 auto;
+    }
+    .tverse-ref {
+      flex: 0 1 auto;
+      min-width: 0;
+      color: var(--title);
+      font: 700 16px/1.2 Arial, Helvetica, sans-serif;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
+      padding: 0 0.15rem;
+      background: none;
+      border: 0;
+    }
+    .tverse-bar button.ew-ch-nkjv {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      font: 600 13px/1.2 Arial, Helvetica, sans-serif;
+      cursor: pointer;
+      padding: 0.22rem 0.65rem;
+      border-radius: 4px;
+    }
+    .tverse-bar button.ew-ch-nkjv:hover {
+      border-color: var(--title);
+      color: var(--title);
+    }
+    .ew-ch-nkjv.on,
+    .ew-ch-tr.on .ew-tr-now {
+      background: #e8eef6;
+      color: var(--title);
+      border-color: var(--title);
+    }
+    .ew-ch-prev,
+    .ew-ch-next {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: #e8eef6;
+      color: var(--title);
+      font: 600 13px/1.2 Arial, Helvetica, sans-serif;
+      padding: 0.22rem 0.55rem;
+      cursor: pointer;
+    }
+    .ew-ch-prev:hover:not(:disabled),
+    .ew-ch-next:hover:not(:disabled) {
+      background: #dce8f2;
+      border-color: var(--title);
+    }
+    .ew-ch-prev:disabled,
+    .ew-ch-next:disabled { opacity: 0.35; cursor: default; }
+    .ew-tr-pick {
+      position: relative;
+      display: inline-block;
+      font: 600 13px/1.2 Arial, Helvetica, sans-serif;
+      color: var(--ink);
+    }
+    .ew-tr-now {
+      -webkit-appearance: none;
+      appearance: none;
+      display: inline-block;
+      position: relative;
+      min-width: 6.4rem;
+      padding: 0.22rem 1.4rem 0.22rem 0.5rem;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      cursor: pointer;
+      text-align: left;
+    }
+    .ew-tr-now::after {
+      content: "";
+      position: absolute;
+      right: 0.45rem;
+      top: 50%;
+      margin-top: -2px;
+      border: 4px solid transparent;
+      border-top-color: var(--muted);
+    }
+    .ew-tr-list {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 2px);
+      z-index: 8;
+      min-width: 100%;
+      width: max-content;
+      max-height: none;
+      overflow: visible;
+      background: #fff;
+      border: 1px solid #d5dee2;
+      border-radius: 4px;
+      box-shadow: 0 6px 16px rgba(27,58,75,.12);
+      font: inherit;
+    }
+    .ew-tr-list[hidden] { display: none !important; }
+    .ew-tr-list [data-tr] {
+      display: grid;
+      grid-template-columns: 3.6em 3.4em;
+      column-gap: 0.7rem;
+      align-items: baseline;
+      padding: 0.2rem 0.55rem;
+      cursor: pointer;
+      font: inherit;
+      white-space: nowrap;
+    }
+    .ew-tr-code { font-weight: 700; }
+    .ew-tr-year {
+      text-align: right;
+      color: var(--muted);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+    }
+    .ew-tr-list [data-tr]:hover { background: #f4f7f8; }
+    .ew-tr-list [data-tr].on { background: #eef3f7; color: var(--title); }
+    .ew-tr-list [data-tr].on .ew-tr-year { color: var(--title); }
+    .tverses {
+      flex: 1 1 auto;
+      min-height: 0;
+      margin: 0;
+      padding: 0.45rem 0.6rem;
       border: 0;
       box-shadow: none;
-      background: transparent;
+      background: var(--panel);
       font: 400 13px/1.45 Arial, Helvetica, sans-serif;
       color: inherit;
       white-space: pre-wrap;
       overflow-wrap: break-word;
       word-wrap: break-word;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
     .tverses p {
-      margin: 0 0 0.35em;
-      padding: 0;
+      margin: 0;
+      padding: 0.12em 0.2rem;
       border: 0;
       box-shadow: none;
       background: transparent;
     }
+    .tverse-pick {
+      flex: 0 0 auto;
+      display: inline-block;
+      margin: 0 0 0 0.35rem;
+      padding: 0.22rem 0.55rem;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: #fff;
+      color: var(--ink);
+      font: 600 13px/1.2 Arial, Helvetica, sans-serif;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .tverse-pick:hover {
+      border-color: var(--title);
+      color: var(--title);
+    }
+    .tverse-pick.on {
+      background: #e8eef6;
+      color: var(--title);
+      border-color: var(--title);
+    }
+    .tverses.picking p { cursor: pointer; }
     .tverses p.hit {
-      background: #f6efc8;
+      background: #eaf6e8;
       border: 0;
       box-shadow: none;
     }
@@ -167,6 +345,8 @@
       color: #1f6f78;
       padding-right: 0.25rem;
     }
+    .tverses i, .tverses em { font-style: italic; }
+    .tverses strong, .tverses b { font-weight: 700; }
     .note {
       position: absolute;
       left: 0;
@@ -187,7 +367,7 @@
     <div class="descs" id="descs"></div>
     <div class="board" id="board"></div>
   </div>
-  <script src="topics-tree.js?v=237"></script>
+  <script src="topics-tree.js?v=258"></script>
   <script>
     document.getElementById("save").onclick = function () {
       if (window.snSaveTopics) window.snSaveTopics("Saved.");
