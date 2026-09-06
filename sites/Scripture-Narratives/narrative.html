@@ -313,7 +313,7 @@
     document.getElementById("tabs-top").innerHTML = tabsHtml;
     document.getElementById("tabs-end").innerHTML = tabsHtml;
     function treeUrl() {
-      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=258";
+      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=259";
     }
     function showTree() {
       var fr = document.getElementById("tree-frame");
@@ -345,7 +345,7 @@
       frameId = nid ? String(nid) : "";
       markL1(frameId);
       if (!frameId) return;
-      var q = "?id=" + encodeURIComponent(frameId) + "&v=12";
+      var q = "?id=" + encodeURIComponent(frameId) + "&v=13";
       document.getElementById("topics-frame").src = "topics-view.html" + q;
       showTree();
     }

@@ -372,7 +372,13 @@
       return topics.find(function (t) { return String(t.id) === String(sel); });
     }
     function maxLevel() {
-      return 1 + DEPTH_CAP + extra;
+      var m = 2;
+      visible().forEach(function (t) {
+        if ((t.level || 1) > m) m = t.level || 1;
+      });
+      var t = current();
+      if (t && (t.level || 1) + 1 > m) m = (t.level || 1) + 1;
+      return m;
     }
     function maxSiblings() {
       return SIB_CAP + extra;
@@ -417,7 +423,6 @@
     }
     function canPlace(lv, parent, exceptId) {
       if (lv < 2) return "Level 2 is the first.";
-      if (lv > maxLevel()) return extra >= 2 ? "That's the limit." : "more";
       if (siblingCount(parent, lv, exceptId) >= maxSiblings()) return extra >= 2 ? "That's the limit." : "more";
       return "";
     }

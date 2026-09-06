@@ -842,28 +842,53 @@
       if (dx) wrapEl.scrollLeft += dx;
       if (dy) wrapEl.scrollTop += dy;
     }
-    function keepOnScreen(els) {
-      if (!els || !els.length || viewH <= 0) return;
-      var minTop = PAD;
-      var viewBottom = viewH - PAD;
-      var minY = Infinity, maxB = -Infinity, i;
+    function boardY(el) {
+      if (!el) return 0;
+      var pane = el.parentNode;
+      if (!pane || String(pane.className || "").indexOf("tcol") < 0) return el._y || 0;
+      return (pane._top || 0) + (el._y || 0) - (pane.scrollTop || 0);
+    }
+    function layoutCol(els, x, nameW, parent) {
+      if (!els || !els.length) return null;
+      var paneW = colSpan(nameW);
+      var top = band;
+      var h = Math.max(80, viewH - top - PAD);
+      var pane = document.createElement("div");
+      pane.className = "tcol";
+      board.appendChild(pane);
+      pane.style.left = Math.round(x) + "px";
+      pane.style.top = Math.round(top) + "px";
+      pane.style.width = paneW + "px";
+      pane.style.height = h + "px";
+      pane._top = top;
+      pane._h = h;
+      pane._x = x;
+      pane._w = paneW;
+      pane._y = top;
+      var y = 0, i, pack;
       for (i = 0; i < els.length; i++) {
-        if (els[i]._y < minY) minY = els[i]._y;
-        if (els[i]._y + (els[i]._h || BOX_H) > maxB) maxB = els[i]._y + (els[i]._h || BOX_H);
+        pane.appendChild(els[i]);
+        if (els[i]._teal) pane.appendChild(els[i]._teal);
+        if (els[i]._green) pane.appendChild(els[i]._green);
+        put(els[i], 0, y, nameW, BOX_H);
+        y += BOX_H + GAP_Y;
       }
-      var dy = 0;
-      if (maxB - minY > viewBottom - minTop) dy = minTop - minY;
-      else if (minY < minTop) dy = minTop - minY;
-      else if (maxB > viewBottom) dy = viewBottom - maxB;
-      if (!dy) return;
-      var pack = [], el;
-      for (i = 0; i < els.length; i++) {
-        el = els[i];
-        pack.push(el);
-        if (el._teal) pack.push(el._teal);
-        if (el._green) pack.push(el._green);
+      var innerH = Math.max(0, y - GAP_Y);
+      if (parent) {
+        var pMid = boardY(parent) + BOX_H / 2;
+        var want = pMid - top;
+        var maxS = Math.max(0, innerH - h);
+        pane.scrollTop = Math.max(0, Math.min(maxS, Math.round(innerH / 2 - want)));
+      } else if (innerH + PAD * 2 < h) {
+        var pad = Math.round((h - innerH) / 2);
+        for (i = 0; i < els.length; i++) {
+          pack = [els[i]];
+          if (els[i]._teal) pack.push(els[i]._teal);
+          if (els[i]._green) pack.push(els[i]._green);
+          shiftY(pack, pad);
+        }
       }
-      shiftY(pack, dy);
+      return pane;
     }
     function centerHits(box) {
       var hits = box.querySelectorAll(".hit");
@@ -874,61 +899,42 @@
       box.scrollTop = Math.max(0, Math.round(mid - box.clientHeight / 2));
     }
 
-    var c2 = l2s.filter(function (t) { return (t.level || 1) === 2; }).map(function (t) { return box(t, "2"); }).filter(Boolean);
-    var c3 = l3s.filter(function (t) { return (t.level || 1) === 3; }).map(function (t) { return box(t, "3"); }).filter(Boolean);
-    var c4 = l4s.filter(function (t) { return (t.level || 1) === 4; }).map(function (t) { return box(t, "4"); }).filter(Boolean);
-    var cRef = refList.map(refBox);
-
-    var sel2 = sel ? find(l2s, sel) : null;
-    var sel3 = sel ? find(l3s, sel) : null;
-    var sel4 = sel ? find(l4s, sel) : null;
-    var d2h = descH(descText(sel2 || open2), w1);
-    var d3h = c3.length ? descH(descText(sel3 || open3), w3) : 0;
-    var d4h = c4.length ? descH(descText(sel4 || open4), w4) : 0;
-    var descMax = Math.max(BOX_H, d2h, d3h, d4h);
-    var band = PAD + BOX_H + GAP_Y;
-
-    var col1n = c2.length;
-    var col1H = col1n * BOX_H + Math.max(0, col1n - 1) * GAP_Y;
     var wrap = document.getElementById("wrap");
     var viewH = wrap ? wrap.clientHeight : 0;
-    var treeView = Math.max(0, viewH - band);
-    var y1 = band;
-    if (treeView > col1H + PAD * 2) y1 = band + Math.round((treeView - col1H) / 2);
-    stack(c2, PAD, y1, w1);
-
-    var x3 = PAD + colSpan(w1) + GAP_X;
-    var parent2 = findBox(c2, openL2);
-    if (l2Mode === "topics") {
-      around(parent2, c3, x3, w3);
-      keepOnScreen(c3);
+    var descMax = BOX_H;
+    colLists.forEach(function (cl) {
+      var tp = sel ? find(cl.list, sel) : null;
+      var dh = descH(descText(tp || cl.parent), colNameW(cl.list));
+      if (dh > descMax) descMax = dh;
+    });
+    var band = PAD + BOX_H + GAP_Y;
+    var x = PAD;
+    var colBuilt = [];
+    var ci, cl, cw, boxes, parentBox, pane;
+    for (ci = 0; ci < colLists.length; ci++) {
+      cl = colLists[ci];
+      cw = colNameW(cl.list);
+      boxes = cl.list.map(function (t) { return box(t, String(t.level || 1)); }).filter(Boolean);
+      parentBox = (cl.parent && colBuilt.length) ? findBox(colBuilt[colBuilt.length - 1].boxes, cl.parent.id) : null;
+      pane = layoutCol(boxes, x, cw, parentBox);
+      colBuilt.push({ boxes: boxes, pane: pane, w: cw, x: x });
+      x += colSpan(cw) + GAP_X;
     }
-    var x4 = x3 + (c3.length ? colSpan(w3) + GAP_X : 0);
-    var parent3 = findBox(c3, openL3);
-    if (l3Mode === "topics") {
-      around(parent3, c4, x4, w4);
-      keepOnScreen(c4);
-    }
-
-    var xRef = PAD + colSpan(w1) + GAP_X;
-    var refParent = parent2;
-    if (l3Mode === "refs") {
-      xRef = x4;
-      refParent = parent3;
-    } else if (l4Mode === "refs") {
-      xRef = x4 + (c4.length ? colSpan(w4) + GAP_X : 0);
-      refParent = findBox(c4, openL4);
-    } else if (l2Mode !== "refs") {
-      xRef = 0;
-    }
-    if (cRef.length && xRef) {
-      around(refParent, cRef, xRef, wRef);
-      keepOnScreen(cRef);
+    var cRef = [];
+    var xRef = 0;
+    var xVs = 0;
+    if (refTopic && refList.length) {
+      xRef = x;
+      cRef = refList.map(refBox);
+      wRef = colNameW(refList);
+      parentBox = colBuilt.length ? findBox(colBuilt[colBuilt.length - 1].boxes, refTopic.id) : null;
+      pane = layoutCol(cRef, x, wRef, parentBox);
+      colBuilt.push({ boxes: cRef, pane: pane, w: wRef, x: x });
+      xVs = x + colSpan(wRef) + GAP_X;
     }
 
     var versesEl = null;
     var versesWrap = null;
-    var xVs = 0;
     if (!openRef) {
       lastOpenRef = null;
       hitPick = false;
@@ -944,7 +950,7 @@
         hitEnd = 0;
       }
       if (!viewChap) viewChap = chapterOf(openRef);
-      xVs = xRef + wRef + GAP_X;
+      if (!xVs) xVs = xRef + (wRef ? colSpan(wRef) : 0) + GAP_X;
       versesWrap = document.createElement("div");
       versesWrap.className = "tverse-wrap";
       board.appendChild(versesWrap);
@@ -1169,21 +1175,15 @@
         d.appendChild(ta);
         descs.appendChild(d);
       }
-      descBox(sel2 || open2, PAD, w1, "2");
-      if (c3.length) descBox(sel3 || open3, x3, w3, "3");
-      if (c4.length) descBox(sel4 || open4, x4, w4, "4");
+      colBuilt.forEach(function (cb, n) {
+        if (n >= colLists.length) return;
+        var cl = colLists[n];
+        var tp = sel ? find(cl.list, sel) : null;
+        descBox(tp || cl.parent, cb.x, cb.w, String(n + 2));
+      });
     }
 
-    function withBtns(els) {
-      var out = [], i;
-      for (i = 0; i < els.length; i++) {
-        out.push(els[i]);
-        if (els[i]._teal) out.push(els[i]._teal);
-        if (els[i]._green) out.push(els[i]._green);
-      }
-      return out;
-    }
-    var all = withBtns(c2.concat(c3, c4)).concat(cRef);
+    var all = colBuilt.map(function (cb) { return cb.pane; }).filter(Boolean);
     if (versesWrap) all = all.concat([versesWrap]);
     var minY = Infinity, maxX = PAD, maxBottom = -Infinity, k;
     for (k = 0; k < all.length; k++) {
@@ -1223,8 +1223,8 @@
     if (now) now.setAttribute("aria-expanded", "false");
   });
   Promise.all([
-    fetch("data/topics.json?v=258", { cache: "no-store" }).then(function (r) { return r.json(); }),
-    fetch("data/topic-refs.json?v=258", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
+    fetch("data/topics.json?v=259", { cache: "no-store" }).then(function (r) { return r.json(); }),
+    fetch("data/topic-refs.json?v=259", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
   ]).then(function (pair) {
     topics = pair[0] || [];
     if (Array.isArray(pair[1])) topicRefs = pair[1];

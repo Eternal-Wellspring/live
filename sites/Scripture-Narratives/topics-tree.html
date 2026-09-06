@@ -45,8 +45,15 @@
       position: relative;
       flex: 1 1 auto;
       min-height: 0;
-      overflow: auto;
+      overflow-x: auto;
+      overflow-y: hidden;
       background: var(--panel);
+    }
+    .tcol {
+      position: absolute;
+      z-index: 2;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
     .board { position: relative; display: block; min-width: 100%; min-height: 100%; }
     .tbox {
@@ -367,7 +374,7 @@
     <div class="descs" id="descs"></div>
     <div class="board" id="board"></div>
   </div>
-  <script src="topics-tree.js?v=258"></script>
+  <script src="topics-tree.js?v=259"></script>
   <script>
     document.getElementById("save").onclick = function () {
       if (window.snSaveTopics) window.snSaveTopics("Saved.");
