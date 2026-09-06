@@ -293,6 +293,8 @@
       document.querySelectorAll(".tab-panel").forEach(function (p) {
         p.classList.toggle("active", p.id === id);
       });
+      if (id === "s-l1") setTitle("Topics");
+      else setTitle(chosenTitle || "Topics");
       if (id === "s-tree") showTree();
     }
     document.addEventListener("click", function (ev) {
@@ -304,6 +306,7 @@
     });
     var id = qid();
     var frameId = id;
+    var chosenTitle = "";
     var tabsHtml =
       '<button type="button" class="tab" data-tab="s-l1" data-sec="s-l1">Topics</button>' +
       '<button type="button" class="tab" data-tab="s-tree" data-sec="s-tree">Tree</button>' +
@@ -313,7 +316,7 @@
     document.getElementById("tabs-top").innerHTML = tabsHtml;
     document.getElementById("tabs-end").innerHTML = tabsHtml;
     function treeUrl() {
-      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=259";
+      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=262";
     }
     function showTree() {
       var fr = document.getElementById("tree-frame");
@@ -352,10 +355,10 @@
     function chooseL1(t) {
       if (!t) return;
       id = String(t.id);
+      chosenTitle = t.title || "";
       try {
         history.replaceState({}, "", "narrative.html?id=" + encodeURIComponent(id));
       } catch (err) {}
-      setTitle(t.title || "Topics");
       setFrames(id);
       showTab("s-tree");
     }
@@ -389,8 +392,10 @@
           });
         }
         var cur = ones.find(function (t) { return String(t.id) === String(id); });
-        if (cur) setTitle(cur.title);
-        else setTitle("Topics");
+        if (cur) chosenTitle = cur.title || "";
+        else chosenTitle = "";
+        var onTopics = document.getElementById("s-l1") && document.getElementById("s-l1").classList.contains("active");
+        setTitle(onTopics ? "Topics" : (chosenTitle || "Topics"));
         markL1(id);
       });
   </script>

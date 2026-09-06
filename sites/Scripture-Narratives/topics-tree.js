@@ -651,6 +651,7 @@
     board.style.display = "block";
     if (!items.length) {
       if (st) st.textContent = "0 topics.";
+      placeSave();
       return;
     }
     var l1 = items[0];
@@ -848,45 +849,42 @@
       if (!pane || String(pane.className || "").indexOf("tcol") < 0) return el._y || 0;
       return (pane._top || 0) + (el._y || 0) - (pane.scrollTop || 0);
     }
-    function layoutCol(els, x, nameW, parent) {
+    function layoutCol(els, x, nameW, parent, minTop) {
       if (!els || !els.length) return null;
       var paneW = colSpan(nameW);
-      var top = band;
-      var h = Math.max(80, viewH - top - PAD);
+      if (minTop == null) minTop = band;
+      var maxBot = viewH - PAD;
+      var availH = Math.max(80, maxBot - minTop);
+      var innerH = els.length * BOX_H + Math.max(0, els.length - 1) * GAP_Y;
+      var y0;
+      if (parent) {
+        y0 = boardY(parent) + BOX_H / 2 - innerH / 2;
+      } else {
+        y0 = minTop + (availH - innerH) / 2;
+      }
+      if (y0 < minTop) y0 = minTop;
+      y0 = Math.round(y0);
+      var paneH = innerH;
+      if (y0 + paneH > maxBot) paneH = Math.max(80, maxBot - y0);
       var pane = document.createElement("div");
       pane.className = "tcol";
       board.appendChild(pane);
       pane.style.left = Math.round(x) + "px";
-      pane.style.top = Math.round(top) + "px";
+      pane.style.top = y0 + "px";
       pane.style.width = paneW + "px";
-      pane.style.height = h + "px";
-      pane._top = top;
-      pane._h = h;
+      pane.style.height = paneH + "px";
+      pane._top = y0;
+      pane._h = paneH;
       pane._x = x;
       pane._w = paneW;
-      pane._y = top;
-      var y = 0, i, pack;
+      pane._y = y0;
+      var y = 0, i;
       for (i = 0; i < els.length; i++) {
         pane.appendChild(els[i]);
         if (els[i]._teal) pane.appendChild(els[i]._teal);
         if (els[i]._green) pane.appendChild(els[i]._green);
         put(els[i], 0, y, nameW, BOX_H);
         y += BOX_H + GAP_Y;
-      }
-      var innerH = Math.max(0, y - GAP_Y);
-      if (parent) {
-        var pMid = boardY(parent) + BOX_H / 2;
-        var want = pMid - top;
-        var maxS = Math.max(0, innerH - h);
-        pane.scrollTop = Math.max(0, Math.min(maxS, Math.round(innerH / 2 - want)));
-      } else if (innerH + PAD * 2 < h) {
-        var pad = Math.round((h - innerH) / 2);
-        for (i = 0; i < els.length; i++) {
-          pack = [els[i]];
-          if (els[i]._teal) pack.push(els[i]._teal);
-          if (els[i]._green) pack.push(els[i]._green);
-          shiftY(pack, pad);
-        }
       }
       return pane;
     }
@@ -928,7 +926,7 @@
       cRef = refList.map(refBox);
       wRef = colNameW(refList);
       parentBox = colBuilt.length ? findBox(colBuilt[colBuilt.length - 1].boxes, refTopic.id) : null;
-      pane = layoutCol(cRef, x, wRef, parentBox);
+      pane = layoutCol(cRef, x, wRef, parentBox, PAD);
       colBuilt.push({ boxes: cRef, pane: pane, w: wRef, x: x });
       xVs = x + colSpan(wRef) + GAP_X;
     }
@@ -955,7 +953,7 @@
       versesWrap.className = "tverse-wrap";
       board.appendChild(versesWrap);
       var vsW = Math.max(280, (wrap ? wrap.clientWidth : 800) - xVs - PAD);
-      var vsH = Math.max(160, viewH - PAD);
+      var vsH = Math.max(160, viewH - PAD * 2);
       put(versesWrap, xVs, PAD, vsW, vsH);
       versesWrap.style.height = vsH + "px";
 
@@ -1165,6 +1163,7 @@
         });
         ta.addEventListener("input", function () {
           if (topic) topic.description = ta.value;
+          markDirty();
           fitBand();
         });
         ta.addEventListener("blur", function () {
@@ -1199,6 +1198,45 @@
       requestAnimationFrame(function () { revealBox(versesWrap); });
     }
     if (st) st.textContent = items.length + " topics.";
+    placeSave();
+  }
+  var saveOn = false;
+  function markSaved(on) {
+    saveOn = !!on;
+    var btn = document.getElementById("save");
+    if (!btn) return;
+    btn.textContent = saveOn ? "Saved" : "Save";
+    if (saveOn) btn.classList.add("on");
+    else btn.classList.remove("on");
+  }
+  function markDirty() {
+    if (saveOn) markSaved(false);
+  }
+  function placeSave() {
+    var btn = document.getElementById("save");
+    if (!btn) return;
+    var nodes = document.querySelectorAll("#descs .tdesc");
+    var pick = null, i;
+    if (sel) {
+      for (i = 0; i < nodes.length; i++) {
+        if (sid(nodes[i].dataset.rest) === sid(sel)) {
+          pick = nodes[i];
+          break;
+        }
+      }
+    }
+    if (!pick && nodes.length) pick = nodes[nodes.length - 1];
+    var x = PAD, y = PAD, w;
+    if (pick) {
+      x = (parseInt(pick.style.left, 10) || 0) + (parseInt(pick.style.width, 10) || 0) + GAP_BTN;
+      y = parseInt(pick.style.top, 10) || PAD;
+    }
+    w = boxH + GAP_BTN + boxH;
+    if (w < 44) w = 44;
+    btn.style.left = Math.round(x) + "px";
+    btn.style.top = Math.round(y) + "px";
+    btn.style.width = Math.round(w) + "px";
+    btn.style.height = Math.round(Math.max(boxH, 18)) + "px";
   }
   function saveTopics(msg) {
     fetch("/dotl/topics", {
@@ -1207,14 +1245,31 @@
       body: JSON.stringify({ topics: bySeq() })
     }).then(function (r) { return r.json(); }).then(function (d) {
       var el = document.getElementById("status");
+      if (d && d.error) {
+        markSaved(false);
+        if (el) el.textContent = d.error;
+        return;
+      }
+      if (msg) markSaved(true);
       if (el) el.textContent = d.error || msg || (visible().length + " topics.");
     }).catch(function (err) {
+      markSaved(false);
       var el = document.getElementById("status");
       if (el) el.textContent = String(err);
     });
   }
   window.snPaintTree = paint;
   window.snSaveTopics = saveTopics;
+  (function () {
+    var btn = document.getElementById("save");
+    if (!btn) return;
+    btn.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      markSaved(true);
+      saveTopics("Saved.");
+    });
+  })();
   window.addEventListener("resize", function () { paint(); });
   document.addEventListener("click", function () {
     var list = document.querySelector(".tverse-bar .ew-tr-list");
@@ -1223,8 +1278,8 @@
     if (now) now.setAttribute("aria-expanded", "false");
   });
   Promise.all([
-    fetch("data/topics.json?v=259", { cache: "no-store" }).then(function (r) { return r.json(); }),
-    fetch("data/topic-refs.json?v=259", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
+    fetch("data/topics.json?v=262", { cache: "no-store" }).then(function (r) { return r.json(); }),
+    fetch("data/topic-refs.json?v=262", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
   ]).then(function (pair) {
     topics = pair[0] || [];
     if (Array.isArray(pair[1])) topicRefs = pair[1];
