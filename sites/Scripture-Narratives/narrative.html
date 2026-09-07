@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Topics — Scripture Narratives</title>
+  <title>Subjects — Scripture Narratives</title>
   <link rel="icon" href="images/icon.jpg">
   <link rel="stylesheet" href="site.css?v=tools73" />
   <style>
@@ -122,6 +122,7 @@
     }
     .tab-dock-end, .page-nav-bar-bottom, .date-updated { flex: 0 0 auto; }
     .tab-dock, .tab-dock-end { position: relative; z-index: 40; }
+    .page-frame.hide-end-tabs .tab-dock-end { display: none !important; }
     #s-tree, #s-verse { min-height: 0; }
     #s-tree .tree-bar {
       flex: 0 0 auto;
@@ -248,15 +249,15 @@
             </div>
           </div>
         </header>
-        <div class="title-bar"><div class="title-bar-inner"><h1 id="page-title">Topics</h1></div></div>
+        <div class="title-bar"><div class="title-bar-inner"><h1 id="page-title">Subjects</h1></div></div>
       </div>
-      <div class="page-nav-bar"><span class="page-nav prev"></span><span class="page-nav-name" id="page-nav-name">Topics</span><span class="page-nav next"></span></div>
+      <div class="page-nav-bar"><span class="page-nav prev"></span><span class="page-nav-name" id="page-nav-name">Subjects</span><span class="page-nav next"></span></div>
       <div class="tab-dock"><div class="tabs" id="tabs-top"></div></div>
     </div>
     <main>
       <div class="tab-panel active" id="s-l1" data-sec="s-l1">
         <div class="l1-wrap">
-          <h2>Select a topic</h2>
+          <h2>Subjects</h2>
           <div class="ew-l1-list" id="l1-list"></div>
         </div>
       </div>
@@ -271,7 +272,7 @@
       </div>
     </main>
     <div class="tab-dock-end"><div class="tabs" id="tabs-end"></div></div>
-    <div class="page-nav-bar page-nav-bar-bottom"><span class="page-nav prev"></span><span class="page-nav-name" id="page-nav-name-end">Topics</span><span class="page-nav next"></span></div>
+    <div class="page-nav-bar page-nav-bar-bottom"><span class="page-nav prev"></span><span class="page-nav-name" id="page-nav-name-end">Subjects</span><span class="page-nav next"></span></div>
     <footer class="date-updated">Updated: <span class="ew-date-updated"></span></footer>
     <div id="ew-settings-pop" hidden><div class="ew-settings-scrim"></div><div class="ew-settings-card"><div class="set-box">
       <h2>Settings</h2>
@@ -297,8 +298,10 @@
       document.querySelectorAll(".tab-panel").forEach(function (p) {
         p.classList.toggle("active", p.id === id);
       });
-      if (id === "s-l1") setTitle("Topics");
-      else setTitle(chosenTitle || "Topics");
+      var frame = document.querySelector(".page-frame");
+      if (frame) frame.classList.toggle("hide-end-tabs", id === "s-tree" || id === "s-verse");
+      if (id === "s-l1") setTitle("Subjects");
+      else setTitle(chosenTitle || "Subjects");
       if (id === "s-tree") showTree();
       if (id === "s-verse") showVerse();
     }
@@ -322,10 +325,10 @@
     document.getElementById("tabs-top").innerHTML = tabsHtml;
     document.getElementById("tabs-end").innerHTML = tabsHtml;
     function treeUrl() {
-      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=284";
+      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=290";
     }
     function verseUrl() {
-      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=311";
+      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=340";
     }
     function showTree() {
       var fr = document.getElementById("tree-frame");
@@ -336,7 +339,9 @@
         return;
       }
       try {
-        if (fr.contentWindow && typeof fr.contentWindow.snPaintTree === "function") {
+        if (fr.contentWindow && typeof fr.contentWindow.snReloadTree === "function") {
+          fr.contentWindow.snReloadTree();
+        } else if (fr.contentWindow && typeof fr.contentWindow.snPaintTree === "function") {
           fr.contentWindow.snPaintTree();
         }
       } catch (err) {}
@@ -350,13 +355,15 @@
         return;
       }
       try {
-        if (fr.contentWindow && typeof fr.contentWindow.snPaintVerse === "function") {
+        if (fr.contentWindow && typeof fr.contentWindow.snReloadVerse === "function") {
+          fr.contentWindow.snReloadVerse();
+        } else if (fr.contentWindow && typeof fr.contentWindow.snPaintVerse === "function") {
           fr.contentWindow.snPaintVerse();
         }
       } catch (err) {}
     }
     function setTitle(title) {
-      title = title || "Topics";
+      title = title || "Subjects";
       document.title = title + " — Scripture Narratives";
       document.getElementById("page-title").textContent = title;
       document.getElementById("page-nav-name").textContent = title;
@@ -417,9 +424,13 @@
         var cur = ones.find(function (t) { return String(t.id) === String(id); });
         if (cur) chosenTitle = cur.title || "";
         else chosenTitle = "";
-        var onTopics = document.getElementById("s-l1") && document.getElementById("s-l1").classList.contains("active");
-        setTitle(onTopics ? "Topics" : (chosenTitle || "Topics"));
-        markL1(id);
+        if (!id && ones.length === 1) {
+          chooseL1(ones[0]);
+        } else {
+          var onHome = document.getElementById("s-l1") && document.getElementById("s-l1").classList.contains("active");
+          setTitle(onHome ? "Subjects" : (chosenTitle || "Subjects"));
+          markL1(id);
+        }
       });
   </script>
   <script>window.ewFolder="Scripture-Narratives"</script>

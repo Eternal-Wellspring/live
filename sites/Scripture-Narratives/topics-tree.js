@@ -4,15 +4,14 @@
   var GAP_Y = 8;
   var GAP_BTN = 4;
   var DESC_H = 26;
-  var descPlace = { right: 0, cap: 0 };
-  var descOpen = false;
-  var descHold = false;
-  var descHoldTimer = 0;
   var VERSE_W = 420;
   var topics = [];
   var topicRefs = [];
   var openStack = [];
   var sel = null;
+  var descOpen = false;
+  var descId = "";
+  var descLock = 0;
   var openRef = null;
   var boxH = 8;
   var verseCache = {};
@@ -158,12 +157,6 @@
     document.body.removeChild(p);
     return s;
   }
-  function descCap() {
-    return descPlace.cap ? Math.max(DESC_H, descPlace.cap - PAD - GAP_Y) : DESC_H;
-  }
-  function descWidth() {
-    return Math.max(120, (descPlace.right || (PAD + 240)) - PAD);
-  }
   function descH(text, colW) {
     var box, ta, h;
     if (!colW) return boxH;
@@ -179,6 +172,7 @@
     return h;
   }
   var CANON = "Gen Exo Lev Num Deu Jos Jdg Rut 1Sa 2Sa 1Ki 2Ki 1Ch 2Ch Ezr Neh Est Job Psa Pro Ecc Sng Isa Jer Lam Ezk Dan Hos Jol Amo Oba Jon Mic Nam Hab Zep Hag Zec Mal Mat Mrk Luk Jhn Act Rom 1Co 2Co Gal Eph Php Col 1Th 2Th 1Ti 2Ti Tit Phm Heb Jas 1Pe 2Pe 1Jn 2Jn 3Jn Jud Rev 1Es Tob Jdt Wis Sir Lje Bar 1Ma 2Ma Man 2Es Sus Bel Aza Jub".split(" ");
+  var CANON_N = 66;
   function refSortKey(lab) {
     var m = String(lab || "").trim().match(/^(\S+)\s+(\d+)\s*:\s*(\d+)/);
     if (!m) return [1000, 0, 0, String(lab || "")];
@@ -683,12 +677,20 @@
     var ch = viewChap.ch + dir;
     var max = chCount(viewChap.num);
     var abbr;
+    if (i < 0 || i >= CANON_N) {
+      if (dir < 0) {
+        abbr = CANON[CANON_N - 1];
+        viewChap = { abbr: abbr, ch: chCount(bookNum(abbr)), num: bookNum(abbr) };
+        paint();
+      }
+      return;
+    }
     if (ch < 1) {
       if (i <= 0) return;
       abbr = CANON[i - 1];
       viewChap = { abbr: abbr, ch: chCount(bookNum(abbr)), num: bookNum(abbr) };
     } else if (ch > max) {
-      if (i < 0 || i >= CANON.length - 1) return;
+      if (i >= CANON_N - 1) return;
       abbr = CANON[i + 1];
       viewChap = { abbr: abbr, ch: 1, num: bookNum(abbr) };
     } else {
@@ -860,46 +862,52 @@
       if (!guardPick()) return;
       closeBranch(t);
       sel = parentSel(t);
+      hideDesc();
     } else {
       sel = id;
       pickGuard = Date.now() + 400;
     }
-    paint();
+    loadTopics(paint);
   }
   function toggleTopics(t) {
     if (!guardPick()) return;
+    hideDesc();
     var lv = t.level || 1;
     var id = sid(t.id);
     var depth = lv - 2;
     sel = id;
     openRef = null;
-    if (depth < 0) { paint(); return; }
+    if (depth < 0) { loadTopics(paint); return; }
     if (openStack[depth] && openStack[depth].id === id && openStack[depth].mode === "topics") {
       openStack.length = depth;
     } else {
       openStack.length = depth;
       openStack[depth] = { id: id, mode: "topics" };
     }
-    paint();
+    loadTopics(paint);
   }
   function toggleRefs(t) {
     if (!guardPick()) return;
+    hideDesc();
     var lv = t.level || 1;
     var id = sid(t.id);
     var depth = lv - 2;
     var same;
     sel = id;
     openRef = null;
-    if (depth < 0) { paint(); return; }
+    if (depth < 0) { loadTopics(paint); return; }
     same = openStack[depth] && openStack[depth].id === id && openStack[depth].mode === "refs";
     if (same) {
       openStack.length = depth;
     } else {
       openStack.length = depth;
       openStack[depth] = { id: id, mode: "refs" };
-      openRef = refsFor(t)[0] || null;
     }
-    paint();
+    loadTopics(function () {
+      var row = find(topics, id);
+      if (!same) openRef = row ? (refsFor(row)[0] || null) : null;
+      paint();
+    });
   }
   function shiftY(els, dy) {
     var i;
@@ -920,7 +928,7 @@
     board.style.display = "block";
     if (!items.length) {
       if (st) st.textContent = "0 topics.";
-      showDesc();
+      placePop();
       return;
     }
     var l1 = items[0];
@@ -1047,6 +1055,8 @@
           if (ev.detail > 1) return;
           if (name.querySelector("input")) return;
           pickTopic(t);
+          if (sid(sel) === sid(t.id)) openDesc(t);
+          else hideDesc();
         });
       }
       board.appendChild(b);
@@ -1204,7 +1214,7 @@
 
     var wrap = document.getElementById("wrap");
     var viewH = wrap ? wrap.clientHeight : 0;
-    var band = PAD + DESC_H + GAP_Y;
+    var band = PAD;
     var x = PAD;
     var colBuilt = [];
     var ci, cl, cw, boxes, parentBox, pane;
@@ -1230,13 +1240,7 @@
       wRef = colNameW(refList);
       parentBox = colBuilt.length ? findBox(colBuilt[colBuilt.length - 1].boxes, refTopic.id) : null;
       xVs = x + wRef + PAD;
-      var descW = Math.max(120, xVs - PAD - PAD);
-      var dTopic = sel ? find(topics, sel) : null;
-      var dTa = document.getElementById("tdesc-ta");
-      var dNeed = descH(dTa && document.activeElement === dTa ? dTa.value : descText(dTopic), descW);
-      var dCap = (topBox < Infinity) ? Math.max(DESC_H, topBox - PAD - GAP_Y) : DESC_H;
-      var dH = Math.min(Math.max(dNeed, DESC_H), dCap);
-      pane = layoutCol(cRef, x, wRef, parentBox, PAD + dH + GAP_Y, true);
+      pane = layoutCol(cRef, x, wRef, parentBox, band, true);
       colBuilt.push({ boxes: cRef, pane: pane, w: wRef, x: x });
     }
 
@@ -1267,7 +1271,7 @@
       versesWrap.className = "tverse-wrap";
       board.appendChild(versesWrap);
       var vsW = Math.max(280, (wrap ? wrap.clientWidth : 800) - xVs - PAD);
-      var vsH = Math.max(160, viewH - PAD);
+      var vsH = Math.max(160, viewH - PAD * 2);
       put(versesWrap, xVs, PAD, vsW, vsH);
       versesWrap.style.height = vsH + "px";
 
@@ -1281,7 +1285,7 @@
       var prevBtn = document.createElement("button");
       prevBtn.type = "button";
       prevBtn.className = "ew-ch-prev";
-      prevBtn.textContent = "Prev";
+      prevBtn.innerHTML = '<span class="ew-ch-arrow">&lt;</span><span class="ew-ch-lab">Prev</span>';
       var iCan = viewChap ? CANON.indexOf(viewChap.abbr) : 0;
       prevBtn.disabled = !viewChap || (iCan <= 0 && viewChap.ch <= 1);
       prevBtn.addEventListener("click", function (ev) {
@@ -1295,8 +1299,8 @@
       var nextBtn = document.createElement("button");
       nextBtn.type = "button";
       nextBtn.className = "ew-ch-next";
-      nextBtn.textContent = "Next";
-      nextBtn.disabled = !viewChap || (iCan >= CANON.length - 1 && viewChap.ch >= chCount(viewChap.num));
+      nextBtn.innerHTML = '<span class="ew-ch-lab">Next</span><span class="ew-ch-arrow">&gt;</span>';
+      nextBtn.disabled = !viewChap || ((iCan < 0 || iCan >= CANON_N - 1) && viewChap.ch >= chCount(viewChap.num));
       nextBtn.addEventListener("click", function (ev) {
         ev.preventDefault();
         ev.stopPropagation();
@@ -1456,14 +1460,12 @@
       }
     }
 
-    showDesc();
-    var colRight = PAD, topBox = Infinity, pi, nTopic = colLists.length;
+    var colRight = PAD, pi, nTopic = colLists.length;
     for (pi = 0; pi < colBuilt.length; pi++) {
       if (!colBuilt[pi].pane) continue;
       colRight = Math.max(colRight, colBuilt[pi].pane._x + colBuilt[pi].pane._w);
-      if (pi < nTopic && colBuilt[pi].pane._y < topBox) topBox = colBuilt[pi].pane._y;
     }
-    placeDesc(versesWrap ? (versesWrap._x - PAD) : colRight, topBox);
+    placePop();
 
     var all = colBuilt.map(function (cb) { return cb.pane; }).filter(Boolean);
     if (versesWrap) all = all.concat([versesWrap]);
@@ -1481,51 +1483,93 @@
     }
     if (st) st.textContent = items.length + " topics.";
   }
-  function showDesc() {
-    var ta = document.getElementById("tdesc-ta");
-    var topic = sel ? find(topics, sel) : null;
-    if (!ta) return;
-    if (document.activeElement === ta) return;
-    ta.value = descText(topic);
-    ta.dataset.topic = topic ? sid(topic.id) : "";
+  function topicBoxEl(id) {
+    var nodes = document.querySelectorAll(".tbox[data-id]");
+    var i;
+    id = sid(id);
+    for (i = 0; i < nodes.length; i++) {
+      if (nodes[i].dataset.ref) continue;
+      if (sid(nodes[i].dataset.id) === id) return nodes[i];
+    }
+    return null;
   }
-  function placeDesc(right, capY) {
+  function descKeep(el) {
+    var box;
+    while (el && el !== document.documentElement) {
+      if (el.id === "tdesc") return true;
+      if (el.classList && el.classList.contains("tbox") && !el.dataset.ref && sid(el.dataset.id) === sid(descId)) return true;
+      if (el.classList && String(el.className || "").indexOf("tcol") >= 0) {
+        box = topicBoxEl(descId);
+        if (box && box.parentNode === el) return true;
+      }
+      el = el.parentNode;
+    }
+    return false;
+  }
+  function hideDesc() {
     var d = document.getElementById("tdesc");
     var ta = document.getElementById("tdesc-ta");
-    var wrap = document.getElementById("wrap");
-    var topic = sel ? find(topics, sel) : null;
-    var w, need, cap, h, open, pop, more, board;
+    var topic;
+    if (descOpen && ta) {
+      topic = find(topics, ta.dataset.topic);
+      if (topic) {
+        topic.description = ta.value;
+        saveTopics();
+      }
+    }
+    descOpen = false;
+    descId = "";
+    if (d) d.hidden = true;
+  }
+  function openDesc(t) {
+    if (!t) {
+      hideDesc();
+      return;
+    }
+    descOpen = true;
+    descId = sid(t.id);
+    descLock = Date.now() + 400;
+    placePop();
+  }
+  function placePop() {
+    var d = document.getElementById("tdesc");
+    var ta = document.getElementById("tdesc-ta");
+    var vsEl = document.querySelector(".tverse-wrap");
+    var topic = descOpen ? find(topics, descId) : null;
+    var box, pane, br, pr, w, left, top, need, maxH, h, vw, vh;
     if (!d) return;
-    if (right) descPlace.right = right;
-    if (capY) descPlace.cap = capY;
-    w = descWidth();
-    cap = descCap();
-    need = descH(ta && document.activeElement === ta ? ta.value : descText(topic), w);
-    open = descOpen || (ta && document.activeElement === ta);
-    h = open ? Math.max(need, DESC_H) : Math.min(Math.max(need, DESC_H), cap);
-    d.style.left = PAD + "px";
-    d.style.top = PAD + "px";
+    if (!topic) {
+      d.hidden = true;
+      return;
+    }
+    box = topicBoxEl(topic.id);
+    w = vsEl && vsEl.offsetWidth ? vsEl.offsetWidth : VERSE_W;
+    d.hidden = false;
+    if (ta && document.activeElement !== ta) {
+      ta.value = descText(topic);
+      ta.dataset.topic = sid(topic.id);
+    }
+    need = descH(ta ? ta.value : descText(topic), w);
+    vw = window.innerWidth;
+    vh = window.innerHeight;
+    maxH = Math.max(80, Math.floor(vh * 0.45));
+    h = Math.min(Math.max(need, DESC_H), maxH);
+    if (box) {
+      pane = box.parentNode && String(box.parentNode.className || "").indexOf("tcol") >= 0 ? box.parentNode : box;
+      pr = pane.getBoundingClientRect();
+      left = pr.left + (pr.width - w) / 2;
+      top = PAD;
+      if (left + w > vw - 8) left = vw - 8 - w;
+      if (left < 8) left = 8;
+    } else {
+      left = 8;
+      top = PAD;
+    }
+    d.style.left = Math.round(left) + "px";
+    d.style.top = Math.round(top) + "px";
     d.style.width = w + "px";
     d.style.height = h + "px";
-    d.style.zIndex = open ? "40" : "6";
-    if (ta) ta.style.overflowY = open ? "hidden" : "auto";
-    if (wrap) wrap.style.overflowY = open && need > cap ? "visible" : "hidden";
-    board = document.getElementById("board");
-    if (board) board.style.pointerEvents = open ? "none" : "";
-    pop = document.getElementById("tdesc-full");
-    if (pop) pop.hidden = true;
-    more = document.getElementById("tdesc-more");
-    if (more) more.hidden = !(!open && need > cap);
-  }
-  function openDesc() {
-    descOpen = true;
-    placeDesc();
-  }
-  function closeDesc() {
-    var ta = document.getElementById("tdesc-ta");
-    if (ta && document.activeElement === ta) return;
-    descOpen = false;
-    placeDesc();
+    if (ta) ta.style.overflowY = need > maxH ? "auto" : "hidden";
   }
   function saveTopics(msg) {
     fetch("/dotl/topics", {
@@ -1540,51 +1584,34 @@
       if (el) el.textContent = String(err);
     });
   }
+  function loadTopics(done) {
+    Promise.all([
+      fetch("data/topics.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.json(); }),
+      fetch("data/topic-refs.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
+    ]).then(function (pair) {
+      topics = pair[0] || [];
+      if (Array.isArray(pair[1])) topicRefs = pair[1];
+      else if (pair[1] && Array.isArray(pair[1].rows)) topicRefs = pair[1].rows;
+      else topicRefs = [];
+      if (typeof done === "function") done();
+      else paint();
+    }).catch(function (err) {
+      var st = document.getElementById("status");
+      if (st) st.textContent = String(err);
+    });
+  }
   window.snPaintTree = paint;
+  window.snReloadTree = function () { loadTopics(paint); };
   window.snSaveTopics = saveTopics;
   (function () {
     var ta = document.getElementById("tdesc-ta");
+    var d = document.getElementById("tdesc");
     if (!ta) return;
+    if (d) d.addEventListener("click", function (ev) { ev.stopPropagation(); });
     ta.addEventListener("click", function (ev) { ev.stopPropagation(); });
     ta.addEventListener("focus", function () {
       var id = ta.dataset.topic;
       if (id) descSnap[id] = ta.value;
-      openDesc();
-    });
-    (function () {
-      var d = document.getElementById("tdesc");
-      if (!d) return;
-      d.addEventListener("pointerenter", function (ev) {
-        if (ev.pointerType === "mouse") openDesc();
-      });
-      d.addEventListener("pointerleave", function (ev) {
-        if (ev.pointerType === "mouse") closeDesc();
-      });
-      d.addEventListener("pointerdown", function (ev) {
-        if (ev.pointerType === "mouse") return;
-        descHold = false;
-        clearTimeout(descHoldTimer);
-        descHoldTimer = setTimeout(function () { descHold = true; }, 500);
-      });
-      d.addEventListener("pointerup", function (ev) {
-        if (ev.pointerType === "mouse") return;
-        clearTimeout(descHoldTimer);
-        if (descHold) return;
-        descOpen = !descOpen;
-        placeDesc();
-      });
-      d.addEventListener("contextmenu", function () {
-        descHold = true;
-        clearTimeout(descHoldTimer);
-      });
-    })();
-    document.addEventListener("pointerdown", function (ev) {
-      var d;
-      if (!descOpen) return;
-      if (ev.pointerType === "mouse") return;
-      d = document.getElementById("tdesc");
-      if (d && d.contains(ev.target)) return;
-      closeDesc();
     });
     ta.addEventListener("keydown", function (ev) {
       var id, topic;
@@ -1599,7 +1626,7 @@
       var id = ta.dataset.topic;
       var topic = id ? find(topics, id) : null;
       if (topic) topic.description = ta.value;
-      placeDesc();
+      placePop();
     });
     ta.addEventListener("blur", function () {
       var id = ta.dataset.topic;
@@ -1612,6 +1639,7 @@
   window.addEventListener("resize", function () { paint(); });
   document.addEventListener("mousemove", function (ev) {
     var g, t;
+    if (descOpen && Date.now() >= descLock && !descKeep(document.elementFromPoint(ev.clientX, ev.clientY))) hideDesc();
     if (!drag) return;
     if (!drag.moved) {
       if (Math.abs(ev.clientX - drag.sx) + Math.abs(ev.clientY - drag.sy) < 6) return;
@@ -1644,6 +1672,7 @@
     var list = document.querySelector(".tverse-bar .ew-tr-list");
     var now = document.querySelector(".tverse-bar .ew-tr-now");
     var menu = document.getElementById("sn-ref-menu");
+    if (descOpen && !descKeep(ev.target)) hideDesc();
     if (list && !ev.target.closest(".tverse-bar")) list.hidden = true;
     if (now && !ev.target.closest(".tverse-bar")) now.setAttribute("aria-expanded", "false");
     if (Date.now() < rhmLock) return;
@@ -1661,17 +1690,5 @@
       if (btn && btn.getAttribute("data-edit") === "1" && fn) fn();
     });
   })();
-  Promise.all([
-    fetch("data/topics.json?v=275", { cache: "no-store" }).then(function (r) { return r.json(); }),
-    fetch("data/topic-refs.json?v=275", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
-  ]).then(function (pair) {
-    topics = pair[0] || [];
-    if (Array.isArray(pair[1])) topicRefs = pair[1];
-    else if (pair[1] && Array.isArray(pair[1].rows)) topicRefs = pair[1].rows;
-    else topicRefs = [];
-    paint();
-  }).catch(function (err) {
-    var st = document.getElementById("status");
-    if (st) st.textContent = String(err);
-  });
+  loadTopics(paint);
 })();

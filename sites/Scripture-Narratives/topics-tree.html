@@ -103,8 +103,8 @@
     .tbtn-green:hover { background: #b7dcb1; }
     .thead { cursor: default; }
     .tdesc {
-      position: absolute;
-      z-index: 6;
+      position: fixed;
+      z-index: 40;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
@@ -116,15 +116,7 @@
       min-height: 26px;
       overflow: hidden;
     }
-    .tdesc-more {
-      flex: 0 0 auto;
-      margin: 0;
-      padding: 0.15rem 0.45rem;
-      border-top: 1px solid var(--title);
-      font: 400 13px/1.2 Arial, Helvetica, sans-serif;
-      color: var(--title);
-    }
-    .tdesc-more[hidden] { display: none !important; }
+    .tdesc[hidden] { display: none !important; }
     .tdesc textarea {
       display: block;
       flex: 1 1 auto;
@@ -146,23 +138,6 @@
       box-sizing: border-box;
     }
     .tdesc textarea:focus { outline: 0; background: #fff; }
-    .tdesc-full {
-      position: absolute;
-      z-index: 20;
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0.2rem 0.45rem;
-      border: 1px solid var(--line);
-      background: #fff;
-      font: 400 13px/1.2 Arial, Helvetica, sans-serif;
-      color: inherit;
-      white-space: pre-wrap;
-      overflow-wrap: break-word;
-      word-wrap: break-word;
-      overflow: auto;
-      pointer-events: none;
-    }
-    .tdesc-full[hidden] { display: none !important; }
     .tverse-wrap {
       position: absolute;
       z-index: 2;
@@ -240,22 +215,33 @@
     .ew-ch-prev,
     .ew-ch-next {
       position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28rem;
       flex: 0 0 auto;
       box-sizing: border-box;
-      min-width: 3.4rem;
+      min-width: 0;
       text-align: center;
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      background: #e8eef6;
-      color: var(--title);
-      font: 600 13px/1.2 Arial, Helvetica, sans-serif;
-      padding: 0.22rem 0.55rem;
+      border: 0;
+      border-radius: 0;
+      background: none;
+      color: #1b3a4b;
+      font: 600 16px/1.2 Arial, Helvetica, sans-serif;
+      padding: 0;
       cursor: pointer;
+      box-shadow: none;
+    }
+    .ew-ch-prev::before,
+    .ew-ch-next::before { content: none; display: none; }
+    .ew-ch-arrow {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1;
     }
     .ew-ch-prev:hover:not(:disabled),
     .ew-ch-next:hover:not(:disabled) {
-      background: #dce8f2;
-      border-color: var(--title);
+      background: none;
+      color: #0f2430;
     }
     .ew-ch-prev:disabled,
     .ew-ch-next:disabled { opacity: 0.35; cursor: default; }
@@ -427,8 +413,7 @@
 </head>
 <body>
   <div class="board-wrap" id="wrap">
-    <div class="tdesc" id="tdesc"><textarea id="tdesc-ta" title="Description"></textarea><div class="tdesc-more" id="tdesc-more" hidden>tap for more...</div></div>
-    <div class="tdesc-full" id="tdesc-full" hidden></div>
+    <div class="tdesc" id="tdesc" hidden><textarea id="tdesc-ta" title="Description"></textarea></div>
     <div class="board" id="board"></div>
   </div>
   <span class="note" id="status"></span>
@@ -436,6 +421,6 @@
     <div class="sn-rhm-title">Ref</div>
     <button type="button" data-edit="1">Edit</button>
   </div>
-  <script src="topics-tree.js?v=284"></script>
+  <script src="topics-tree.js?v=290"></script>
 </body>
 </html>

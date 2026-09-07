@@ -5,28 +5,33 @@
   var GAP_Y = 8;
   var GAP_BTN = 4;
   var DESC_H = 26;
-  var descPlace = { left: 0, right: 0, cap: 0 };
   var VERSE_W = 520;
   var topics = [];
   var topicRefs = [];
   var sel = null;
-  var hoverId = null;
+  var descOpen = false;
+  var descId = "";
+  var descLock = 0;
+  var selChapRef = "";
   var selVs = 0;
   var boxH = 8;
   var verseCache = {};
   var verseTr = "NKJV";
   var viewChap = null;
-  var descOpen = false;
-  var descHold = false;
-  var descHoldTimer = 0;
   var descSnap = {};
   var bookOpen = false;
   var chapOpen = false;
+  var wantChapOpen = false;
   var chapFilter = true;
+  var verseOpen = [];
+  var verseChapKey = "";
+  var verseAuto = true;
+  var expandByRef = false;
   var pendingEdit = null;
   var rhmLock = 0;
   var PATH_COLORS = ["#15803d", "#b91c1c", "#005eb8", "#c45c26", "#6d28d9"];
-  var JOIN_COLOR = "#f6efc8";
+  var JOIN_FILL = "#f6efc8";
+  var JOIN_LINE = "#000";
   var TRANSLATIONS = [
     { id: "NKJV", label: "NKJV", year: "1982" },
     { id: "ESV", label: "ESV", year: "2016" },
@@ -46,6 +51,7 @@
   var CHAPS = [0, 50, 40, 27, 36, 34, 24, 21, 4, 31, 24, 22, 25, 29, 36, 10, 13, 10, 42, 150, 31, 12, 8, 66, 52, 5, 48, 12, 14, 3, 9, 1, 4, 7, 3, 3, 3, 2, 14, 4, 28, 16, 24, 21, 28, 16, 16, 13, 6, 6, 4, 4, 5, 3, 6, 4, 3, 1, 13, 5, 5, 3, 5, 1, 1, 1, 22];
   var EXTRA_CH = { 67: 9, 68: 14, 69: 16, 70: 19, 71: 51, 72: 1, 73: 5, 74: 16, 75: 15, 76: 1, 77: 16, 78: 1, 79: 1, 88: 1, 90: 50 };
   var CANON = "Gen Exo Lev Num Deu Jos Jdg Rut 1Sa 2Sa 1Ki 2Ki 1Ch 2Ch Ezr Neh Est Job Psa Pro Ecc Sng Isa Jer Lam Ezk Dan Hos Jol Amo Oba Jon Mic Nam Hab Zep Hag Zec Mal Mat Mrk Luk Jhn Act Rom 1Co 2Co Gal Eph Php Col 1Th 2Th 1Ti 2Ti Tit Phm Heb Jas 1Pe 2Pe 1Jn 2Jn 3Jn Jud Rev 1Es Tob Jdt Wis Sir Lje Bar 1Ma 2Ma Man 2Es Sus Bel Aza Jub".split(" ");
+  var CANON_N = 66;
   var NT_AT = CANON.indexOf("Mat");
   var rootId = (function () {
     var q = location.search.replace(/^\?/, "").split("&");
@@ -150,13 +156,6 @@
     var s = { w: Math.ceil(p.offsetWidth), h: Math.ceil(p.offsetHeight) };
     document.body.removeChild(p);
     return s;
-  }
-  function descCap() {
-    return descPlace.cap ? Math.max(DESC_H, descPlace.cap - PAD - GAP_Y) : DESC_H;
-  }
-  function descWidth() {
-    var left = descPlace.left || PAD;
-    return Math.max(120, (descPlace.right || (left + 240)) - left);
   }
   function descH(text, colW) {
     var box, ta, h;
@@ -300,6 +299,113 @@
     }
     return false;
   }
+  function topicInChap(t) {
+    var i, k;
+    if (!t || !viewChap) return false;
+    if (ownHitsChap(t)) return true;
+    k = kids(visible(), t);
+    for (i = 0; i < k.length; i++) {
+      if (topicInChap(k[i])) return true;
+    }
+    return false;
+  }
+  function topicRelated(t) {
+    var i, k;
+    if (!t) return false;
+    if (selChapRef) {
+      if (topicHasRef(t, selChapRef)) return true;
+      k = kids(visible(), t);
+      for (i = 0; i < k.length; i++) {
+        if (topicRelated(k[i])) return true;
+      }
+      return false;
+    }
+    return topicInChap(t);
+  }
+  function fitKids(t) {
+    var k = kids(visible(), t), out = [], i;
+    for (i = 0; i < k.length; i++) {
+      if (topicInChap(k[i])) out.push(k[i]);
+    }
+    return out;
+  }
+  function firstInChap(list) {
+    var i;
+    for (i = 0; i < (list || []).length; i++) {
+      if (topicInChap(list[i])) return list[i];
+    }
+    return null;
+  }
+  function firstRelated(list) {
+    var i;
+    for (i = 0; i < (list || []).length; i++) {
+      if (topicRelated(list[i])) return list[i];
+    }
+    return null;
+  }
+  function firstForExpand(list) {
+    return expandByRef ? firstRelated(list) : firstInChap(list);
+  }
+  function idOpen(id) {
+    var i;
+    for (i = 0; i < verseOpen.length; i++) {
+      if (sid(verseOpen[i]) === sid(id)) return true;
+    }
+    return false;
+  }
+  function liveIn(list) {
+    var i, t;
+    for (i = 0; i < (list || []).length; i++) {
+      t = list[i];
+      if (idOpen(t.id)) return t;
+    }
+    if (sel) {
+      for (i = 0; i < (list || []).length; i++) {
+        if (sid(list[i].id) === sid(sel)) return list[i];
+      }
+    }
+    return firstForExpand(list);
+  }
+  function autoExpandIds(list, items) {
+    var ids = [], cur = list, first, ch;
+    while (cur && cur.length) {
+      first = firstForExpand(cur);
+      if (!first) break;
+      ch = kids(items, first);
+      if (!ch.length) break;
+      ids.push(sid(first.id));
+      cur = ch;
+    }
+    return ids;
+  }
+  function chapKey() {
+    return (viewChap ? viewChap.abbr + " " + viewChap.ch : "") + "|" + (selChapRef || "");
+  }
+  function toggleVerseTopics(t) {
+    var items = visible();
+    var chain = [];
+    var p = t;
+    var extra;
+    while (p && (p.level || 1) > 1) {
+      chain.unshift(sid(p.id));
+      p = parentTopic(p);
+    }
+    verseAuto = false;
+    var at = -1, i;
+    for (i = 0; i < verseOpen.length; i++) {
+      if (sid(verseOpen[i]) === sid(t.id)) { at = i; break; }
+    }
+    if (at >= 0) {
+      verseOpen = chain.slice(0, -1);
+      p = parentTopic(t);
+      sel = p && (p.level || 1) > 1 ? sid(p.id) : null;
+    } else {
+      sel = sid(t.id);
+      extra = autoExpandIds(kids(items, t), items);
+      verseOpen = chain.concat(extra);
+    }
+    paint();
+  }
   function bottomsForChapter() {
     var items = visible();
     var hit = [], i, t, desc, d, keep;
@@ -321,6 +427,81 @@
     keep.sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); });
     return keep;
   }
+  function chapterRefs() {
+    var seen = {}, labs = [], i, r, p, lab;
+    if (!viewChap) return [];
+    for (i = 0; i < topicRefs.length; i++) {
+      r = topicRefs[i];
+      lab = String(r.ref || "").trim();
+      p = parseRefParts(lab);
+      if (!p || p.book !== viewChap.abbr || p.ch !== viewChap.ch) continue;
+      if (seen[lab]) continue;
+      seen[lab] = 1;
+      labs.push(lab);
+    }
+    return combineRefs(labs);
+  }
+  function topicHasRef(t, lab) {
+    var i, r;
+    if (!t || !lab) return false;
+    for (i = 0; i < topicRefs.length; i++) {
+      r = topicRefs[i];
+      if (sid(r.topic_id) !== sid(t.id)) continue;
+      if (sameRef(r.ref, lab)) return true;
+    }
+    return false;
+  }
+  function bottomsForSelRef() {
+    var items = visible();
+    var hit = [], i, t, desc, d, keep;
+    if (!viewChap || !selChapRef) return [];
+    for (i = 0; i < items.length; i++) {
+      t = items[i];
+      if (topicHasRef(t, selChapRef)) hit.push(t);
+    }
+    keep = [];
+    for (i = 0; i < hit.length; i++) {
+      t = hit[i];
+      desc = branchOf(t);
+      var hasDeeper = false;
+      for (d = 1; d < desc.length; d++) {
+        if (topicHasRef(desc[d], selChapRef)) { hasDeeper = true; break; }
+      }
+      if (!hasDeeper && (t.level || 1) > 1) keep.push(t);
+    }
+    keep.sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); });
+    return keep;
+  }
+  function ensureSelRef() {
+    var refs = chapterRefs(), i;
+    if (!refs.length) {
+      selChapRef = "";
+      return refs;
+    }
+    for (i = 0; i < refs.length; i++) {
+      if (sameRef(refs[i], selChapRef)) return refs;
+    }
+    selChapRef = refs[0];
+    return refs;
+  }
+  function refIsSelected(lab) {
+    var rel, i;
+    if (!lab) return false;
+    if (sameRef(lab, selChapRef)) return true;
+    rel = bottomsForSelRef();
+    for (i = 0; i < rel.length; i++) {
+      if (topicHasRef(rel[i], lab)) return true;
+    }
+    return false;
+  }
+  function refForVerse(vs) {
+    var refs = chapterRefs(), i, p;
+    for (i = 0; i < refs.length; i++) {
+      p = parseRefParts(refs[i]);
+      if (p && vs >= p.a && vs <= p.b) return refs[i];
+    }
+    return "";
+  }
   function uniqSeq(list) {
     var seen = {}, out = [], i, t;
     for (i = 0; i < list.length; i++) {
@@ -333,7 +514,7 @@
     return out;
   }
   function reverseCols() {
-    var bottoms = bottomsForChapter();
+    var bottoms = bottomsForSelRef();
     var vis = visible();
     var byLv = {}, t, lv, i, p, maxLv = 0, cols = [], nodes, sisters;
     if (!bottoms.length) return cols;
@@ -361,14 +542,7 @@
     return cols;
   }
   function pathIds() {
-    var ids = {}, seeds = [], i, p, book, ch;
-    book = viewChap && viewChap.abbr;
-    ch = viewChap && viewChap.ch;
-    seeds = bottomsForChapter();
-    if (selVs && book) {
-      seeds = seeds.filter(function (row) { return ownHits(row, book, ch, selVs); });
-      if (!seeds.length) seeds = bottomsForChapter();
-    }
+    var ids = {}, seeds = bottomsForSelRef(), i, p;
     for (i = 0; i < seeds.length; i++) {
       p = seeds[i];
       while (p) {
@@ -379,7 +553,7 @@
     return ids;
   }
   function colorsThrough(t) {
-    var bottoms = bottomsForChapter();
+    var bottoms = bottomsForSelRef();
     var out = [], i, p;
     if (!t) return out;
     for (i = 0; i < bottoms.length; i++) {
@@ -397,7 +571,7 @@
   function pathBorder(t) {
     var c = colorsThrough(t);
     if (c.length === 1) return PATH_COLORS[c[0] % PATH_COLORS.length];
-    if (c.length >= 2) return JOIN_COLOR;
+    if (c.length >= 2) return JOIN_LINE;
     return "";
   }
   function tint(el, col) {
@@ -431,27 +605,25 @@
   function mappedBooks() {
     return bookCols(false);
   }
+  function shownBook(abbr) {
+    var i = CANON.indexOf(abbr);
+    return i >= 0 && i < CANON_N;
+  }
   function bookCols(all) {
     var by = mappedChapters();
-    var ot = [], nt = [], i, b, seen = {};
-    for (i = 0; i < CANON.length; i++) {
+    var ot = [], nt = [], i, b;
+    for (i = 0; i < CANON_N; i++) {
       b = CANON[i];
       if (!all && !by[b]) continue;
-      seen[b] = 1;
-      if (i >= NT_AT && i < 66) nt.push(b);
+      if (i >= NT_AT) nt.push(b);
       else ot.push(b);
-    }
-    if (!all) {
-      for (b in by) {
-        if (by.hasOwnProperty(b) && !seen[b]) ot.push(b);
-      }
     }
     return { ot: ot, nt: nt, by: by };
   }
   function mappedChapList() {
     var by = mappedChapters();
     var out = [], i, b, chs, c, n;
-    for (i = 0; i < CANON.length; i++) {
+    for (i = 0; i < CANON_N; i++) {
       b = CANON[i];
       if (!by[b]) continue;
       chs = Object.keys(by[b]).map(Number).sort(function (a, d) { return a - d; });
@@ -478,6 +650,39 @@
     n = bookNum(b);
     return { abbr: b, ch: chs[0] || 1, num: n };
   }
+  function validChap(abbr, ch) {
+    var num = bookNum(abbr);
+    ch = Number(ch);
+    if (!shownBook(abbr) || !num || !ch || ch < 1) return null;
+    if (ch > chCount(num)) return null;
+    return { abbr: abbr, ch: ch, num: num };
+  }
+  function applySection(row) {
+    var chap;
+    if (!row || typeof row !== "object") return false;
+    chap = validChap(row.book, row.chapter);
+    if (!chap) return false;
+    viewChap = chap;
+    if (typeof row.filter === "boolean") chapFilter = row.filter;
+    if (row.tr) verseTr = String(row.tr);
+    if (row.ref) selChapRef = String(row.ref);
+    return true;
+  }
+  function saveSection() {
+    if (!rootId || !viewChap) return;
+    fetch("/dotl/sections", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: rootId,
+        book: viewChap.abbr,
+        chapter: viewChap.ch,
+        ref: selChapRef || "",
+        filter: chapFilter,
+        tr: verseTr || "NKJV"
+      })
+    }).catch(function () {});
+  }
   function bookNum(abbr) {
     var i = CANON.indexOf(abbr);
     if (i < 0) return 0;
@@ -503,9 +708,10 @@
     viewChap = { abbr: abbr, ch: ch, num: bookNum(abbr) };
     selVs = 0;
     sel = null;
-    hoverId = null;
+    selChapRef = "";
     bookOpen = false;
-    chapOpen = false;
+    if (!wantChapOpen) chapOpen = false;
+    saveSection();
     paint();
   }
   function shiftChap(dir) {
@@ -524,6 +730,10 @@
       return;
     }
     i = CANON.indexOf(viewChap.abbr);
+    if (i < 0 || i >= CANON_N) {
+      if (dir < 0) setChap(CANON[CANON_N - 1], chCount(bookNum(CANON[CANON_N - 1])));
+      return;
+    }
     ch = viewChap.ch + dir;
     max = chCount(viewChap.num);
     if (ch < 1) {
@@ -531,7 +741,7 @@
       abbr = CANON[i - 1];
       setChap(abbr, chCount(bookNum(abbr)));
     } else if (ch > max) {
-      if (i < 0 || i >= CANON.length - 1) return;
+      if (i >= CANON_N - 1) return;
       abbr = CANON[i + 1];
       setChap(abbr, 1);
     } else {
@@ -548,6 +758,7 @@
         return;
       }
     }
+    saveSection();
     paint();
   }
   function verseHtml(raw) {
@@ -594,9 +805,21 @@
       })
       .catch(function () { finish([]); });
   }
+  function isSelOrAbove(t) {
+    var p;
+    if (!sel || !t) return false;
+    if (sid(t.id) === sid(sel)) return true;
+    p = find(visible(), sel) || find(topics, sel);
+    while (p) {
+      if (sid(p.id) === sid(t.id)) return true;
+      p = parentTopic(p);
+    }
+    return false;
+  }
   function pickTopic(t) {
     var id = sid(t.id);
     sel = sid(sel) === id ? null : id;
+    if (sid(sel) !== id) hideDesc();
     paint();
   }
   function saveTopics() {
@@ -605,6 +828,29 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ topics: bySeq() })
     }).catch(function () {});
+  }
+  function loadTopics(done) {
+    Promise.all([
+      fetch("data/topics.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.json(); }),
+      fetch("data/topic-refs.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }),
+      fetch("data/sections.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })
+    ]).then(function (pair) {
+      var sections = pair[2];
+      topics = pair[0] || [];
+      if (Array.isArray(pair[1])) topicRefs = pair[1];
+      else if (pair[1] && Array.isArray(pair[1].rows)) topicRefs = pair[1].rows;
+      else topicRefs = [];
+      if (!viewChap) {
+        if (!sections || typeof sections !== "object" || Array.isArray(sections) || !applySection(sections[sid(rootId)])) {
+          viewChap = firstMappedChap();
+        }
+      }
+      if (typeof done === "function") done();
+      else paint();
+    }).catch(function (err) {
+      var st = document.getElementById("status");
+      if (st) st.textContent = String(err);
+    });
   }
   function sameRef(a, b) {
     var pa, pb;
@@ -689,7 +935,6 @@
     board.style.position = "relative";
     board.style.display = "block";
     bookOpen = false;
-    chapOpen = false;
     var items = visible();
     var BOX_H = 0;
     items.forEach(function (t) {
@@ -707,23 +952,37 @@
       return w < 8 ? 8 : w;
     }
     function colSpan(nameW) {
-      return nameW;
+      return nameW + GAP_BTN + BOX_H;
     }
-    var onPath = pathIds();
-    function box(t) {
+    function mkBtn(kind, label, open, onClick) {
+      var c = document.createElement("button");
+      c.type = "button";
+      c.className = "tbtn tbtn-" + kind + (open ? " open" : "");
+      c.textContent = String(label);
+      c.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        if (onClick) onClick();
+      });
+      return c;
+    }
+    function box(t, live) {
       var b = document.createElement("button");
-      var on = !!onPath[sid(t.id)];
+      var nFit = fitKids(t).length;
+      var on = topicInChap(t) || isSelOrAbove(t);
       var name = document.createElement("span");
+      var tealOpen = idOpen(t.id);
+      var isLive = !!(live && sid(live.id) === sid(t.id));
+      var dim = on && !isLive && !!(live && idOpen(live.id));
       b.type = "button";
-      b.className = "tbox" + (on ? " on" : "");
+      b.className = "tbox" + (on ? " on" : "") + (dim ? " dim" : "");
       b.dataset.id = sid(t.id);
       name.className = "tname";
       name.textContent = t.title || "";
       b.appendChild(name);
-      var col = pathBorder(t);
-      if (col) tint(b, col);
-      else if (on) tint(b, "#c5d0d4");
-      if (on && col === JOIN_COLOR) b.style.background = JOIN_COLOR;
+      var teal = mkBtn("teal", nFit, tealOpen, function () { toggleVerseTopics(t); });
+      teal.dataset.id = sid(t.id);
+      b._teal = teal;
       function startEdit(ev) {
         if (ev) { ev.preventDefault(); ev.stopPropagation(); }
         if (name.querySelector("input")) return;
@@ -748,25 +1007,19 @@
         inp.addEventListener("blur", commit);
         inp.addEventListener("click", function (cev) { cev.stopPropagation(); });
       }
-      name.addEventListener("mouseenter", function () {
-        hoverId = sid(t.id);
-        showDesc();
-      });
-      name.addEventListener("mouseleave", function () {
-        if (hoverId === sid(t.id)) hoverId = null;
-        showDesc();
-      });
       b.addEventListener("contextmenu", function (ev) {
         showRhm(ev, "Topic", function () { startEdit(); });
       });
       b.addEventListener("click", function (ev) {
         ev.preventDefault();
         ev.stopPropagation();
-        if (descOpen) return;
         if (name.querySelector("input")) return;
         pickTopic(t);
+        if (sid(sel) === sid(t.id)) openDesc(t);
+        else hideDesc();
       });
       board.appendChild(b);
+      board.appendChild(teal);
       return b;
     }
     function refBox(label, col, topic) {
@@ -774,12 +1027,11 @@
       var name = document.createElement("span");
       var ownerId = topic ? sid(topic.id) : "";
       b.type = "button";
-      b.className = "tbox" + (refIsChap(label) ? " on" : "");
+      b.className = "tbox" + (refIsSelected(label) ? " on" : "");
       b.dataset.ref = label;
       name.className = "tname";
       name.textContent = label;
       b.appendChild(name);
-      tint(b, col);
       function startRefEdit(ev) {
         if (ev) { ev.preventDefault(); ev.stopPropagation(); }
         if (name.querySelector("input")) return;
@@ -814,11 +1066,13 @@
         p = parseRefParts(label);
         if (!p) return;
         viewChap = { abbr: p.book, ch: p.ch, num: bookNum(p.book) };
+        selChapRef = label;
         selVs = p.a;
-        sel = topic ? sid(topic.id) : null;
-        hoverId = null;
+        sel = null;
+        expandByRef = true;
         bookOpen = false;
         chapOpen = false;
+        saveSection();
         paint();
       });
       board.appendChild(b);
@@ -835,6 +1089,9 @@
       el._y = y;
       el._w = colW;
       el._h = h || BOX_H;
+      if (el._teal) {
+        put(el._teal, x + colW + GAP_BTN, y, BOX_H, BOX_H);
+      }
     }
     function boardY(el) {
       if (!el) return 0;
@@ -851,20 +1108,17 @@
     function layoutCol(els, x, nameW, parent, minTop) {
       if (!els || !els.length) return null;
       var paneW = colSpan(nameW);
-      if (minTop == null) minTop = band;
-      var maxBot = viewH - PAD;
-      var availH = Math.max(80, maxBot - minTop);
+      var visH = (chart && chart.clientHeight) ? chart.clientHeight : viewH;
       var innerH = els.length * BOX_H + Math.max(0, els.length - 1) * GAP_Y;
       var y0;
       if (parent) {
         y0 = boardY(parent) + BOX_H / 2 - innerH / 2;
       } else {
-        y0 = minTop + (availH - innerH) / 2;
+        y0 = Math.round((visH - innerH) / 2);
       }
-      if (y0 < minTop) y0 = minTop;
+      if (y0 < 0) y0 = 0;
       y0 = Math.round(y0);
-      var paneH = innerH;
-      if (y0 + paneH > maxBot) paneH = Math.max(80, maxBot - y0);
+      var paneH = Math.max(80, innerH);
       var pane = document.createElement("div");
       pane.className = "tcol";
       board.appendChild(pane);
@@ -880,26 +1134,35 @@
       var y = 0, i;
       for (i = 0; i < els.length; i++) {
         pane.appendChild(els[i]);
+        if (els[i]._teal) pane.appendChild(els[i]._teal);
         put(els[i], 0, y, nameW, BOX_H);
         y += BOX_H + GAP_Y;
       }
+      pane._boxes = els;
       return pane;
     }
-    function layoutLevelColumn(list, x, paneW, parentBoxes, minTop) {
+    function pathChildEl(item, prevBoxes) {
+      var i, t, p;
+      if (!item || !prevBoxes) return null;
+      for (i = 0; i < prevBoxes.length; i++) {
+        t = find(topics, prevBoxes[i].dataset.id);
+        p = t ? parentTopic(t) : null;
+        if (p && sid(p.id) === sid(item.id)) return prevBoxes[i];
+      }
+      return null;
+    }
+    function layoutLevelColumn(list, x, paneW, prevBoxes, minTop, clamp, asBlock) {
       if (!list || !list.length) return null;
       var botIds = {}, i, j, t, p, pid, map = {}, byParent = [], g, h, y0, parentEl, maxBot, availH, pane, paneTop, paneH, minY, maxY, topicEl, refs, refsH, ry, k, re, wRef, wTop, gapG, isBotCol;
-      bottomsForChapter().forEach(function (b) { botIds[sid(b.id)] = 1; });
+      bottomsForSelRef().forEach(function (b) { botIds[sid(b.id)] = 1; });
       wTop = colNameW(list);
       wRef = 0;
       isBotCol = false;
       for (i = 0; i < list.length; i++) {
         if (!botIds[sid(list[i].id)]) continue;
         isBotCol = true;
-        refs = ownRefs(list[i]);
-        if (!refs.length) refs = refsFor(list[i]);
-        if (refs.length) wRef = Math.max(wRef, colNameW(refs));
       }
-      if (!paneW) paneW = wRef ? wRef + GAP_X + wTop : wTop;
+      if (!paneW) paneW = wTop;
       for (i = 0; i < list.length; i++) {
         t = list[i];
         p = parentTopic(t);
@@ -918,71 +1181,79 @@
       availH = Math.max(80, maxBot - minTop);
       gapG = GAP_Y * 2;
       function itemRefs(row) {
-        var rf;
-        if (!botIds[sid(row.id)]) return [];
-        rf = ownRefs(row);
-        if (!rf.length) rf = refsFor(row);
-        return rf;
+        return [];
       }
       function itemRefsH(row) {
         var rf = itemRefs(row);
         if (!rf.length) return 0;
         return rf.length * BOX_H + Math.max(0, rf.length - 1) * GAP_Y;
       }
+      function anchorRefIndex(refs) {
+        var k, p;
+        if (!refs || !refs.length) return 0;
+        if (selVs && viewChap) {
+          for (k = 0; k < refs.length; k++) {
+            p = parseRefParts(refs[k]);
+            if (p && p.book === viewChap.abbr && p.ch === viewChap.ch && selVs >= p.a && selVs <= p.b) return k;
+          }
+        }
+        for (k = 0; k < refs.length; k++) {
+          if (refIsChap(refs[k])) return k;
+        }
+        return 0;
+      }
+      function itemY(grp, jj) {
+        if (grp.ys && grp.ys[jj] != null) return grp.ys[jj];
+        return grp.y + jj * (BOX_H + GAP_Y);
+      }
       function refSpan(grp) {
-        var top = Infinity, bot = -Infinity, ty, rh, jj, row;
+        var top = Infinity, bot = -Infinity, ty, rh, jj, row, rf, anc, stepY;
+        stepY = BOX_H + GAP_Y;
         for (jj = 0; jj < grp.items.length; jj++) {
           row = grp.items[jj];
-          ty = grp.y + jj * (BOX_H + GAP_Y);
+          rf = itemRefs(row);
+          if (!rf.length) continue;
+          ty = itemY(grp, jj);
+          anc = anchorRefIndex(rf);
           rh = itemRefsH(row);
-          if (!rh) continue;
-          if (ty < top) top = ty;
-          if (ty + rh > bot) bot = ty + rh;
+          if (ty - anc * stepY < top) top = ty - anc * stepY;
+          if (ty - anc * stepY + rh > bot) bot = ty - anc * stepY + rh;
         }
         return { top: top, bot: bot };
       }
-      g = [];
-      for (i = 0; i < byParent.length; i++) {
-        h = byParent[i].items.length * BOX_H + Math.max(0, byParent[i].items.length - 1) * GAP_Y;
-        parentEl = (byParent[i].p && parentBoxes) ? findBox(parentBoxes, byParent[i].p.id) : null;
-        if (parentEl) y0 = boardY(parentEl) + BOX_H / 2 - h / 2;
-        else y0 = minTop + (availH - h) / 2;
-        y0 = Math.round(y0);
-        g.push({ items: byParent[i].items, h: h, y: y0, p: byParent[i].p });
-      }
-      if (isBotCol && g.length) {
-        g[0].y = minTop;
-        for (i = 1; i < g.length; i++) {
-          var botItem = null, botJ = 0;
-          for (j = 0; j < g[i].items.length; j++) {
-            if (botIds[sid(g[i].items[j].id)]) {
-              botItem = g[i].items[j];
-              botJ = j;
-              break;
-            }
-          }
-          parentEl = (g[i].p && parentBoxes) ? findBox(parentBoxes, g[i].p.id) : null;
-          if (parentEl && botItem) {
-            g[i].y = Math.round(boardY(parentEl) - botJ * (BOX_H + GAP_Y));
-          }
+      g = [{ items: list, h: 0, y: minTop, p: null }];
+      (function () {
+        var stepY = BOX_H + GAP_Y;
+        var onP = pathIds();
+        var ys = [], onIdx = [], j2, shift, midI;
+        for (j2 = 0; j2 < list.length; j2++) {
+          ys.push(j2 * stepY);
+          if (onP[sid(list[j2].id)]) onIdx.push(j2);
         }
-      }
-      for (i = 1; i < g.length; i++) {
-        if (g[i].y < g[i - 1].y + g[i - 1].h + gapG) g[i].y = g[i - 1].y + g[i - 1].h + gapG;
-      }
-      for (i = 1; i < g.length; i++) {
-        var spanA = refSpan(g[i - 1]);
-        var spanB = refSpan(g[i]);
-        if (spanA.bot > -Infinity && spanB.top < Infinity && spanB.top < spanA.bot + GAP_Y) {
-          g[i].y += Math.round(spanA.bot + GAP_Y - spanB.top);
+        if (onIdx.length) {
+          midI = onIdx[Math.floor((onIdx.length - 1) / 2)];
+          shift = minTop - ys[midI];
+          for (j2 = 0; j2 < ys.length; j2++) ys[j2] = Math.round(ys[j2] + shift);
+        } else {
+          for (j2 = 0; j2 < ys.length; j2++) ys[j2] = Math.round(minTop + j2 * stepY);
         }
-      }
+        g[0].ys = ys;
+        g[0].y = ys[0];
+        g[0].h = ys[ys.length - 1] + BOX_H - ys[0];
+      })();
       minY = g.length ? g[0].y : minTop;
       maxY = minY;
       for (i = 0; i < g.length; i++) {
         maxY = Math.max(maxY, g[i].y + g[i].h);
-        spanA = refSpan(g[i]);
-        if (spanA.bot > -Infinity) maxY = Math.max(maxY, spanA.bot);
+        if (g[i].ys) {
+          for (j = 0; j < g[i].ys.length; j++) {
+            if (g[i].ys[j] < minY) minY = g[i].ys[j];
+            if (g[i].ys[j] + BOX_H > maxY) maxY = g[i].ys[j] + BOX_H;
+          }
+        }
+        var spanR = refSpan(g[i]);
+        if (spanR.top < Infinity && spanR.top < minY) minY = spanR.top;
+        if (spanR.bot > -Infinity) maxY = Math.max(maxY, spanR.bot);
       }
       paneTop = Math.min(minTop, minY);
       paneH = Math.max(maxBot, maxY) - paneTop;
@@ -1004,16 +1275,19 @@
         for (j = 0; j < g[i].items.length; j++) {
           t = g[i].items[j];
           refs = itemRefs(t);
+          y0 = itemY(g[i], j);
           topicEl = box(t);
           pane.appendChild(topicEl);
           put(topicEl, wRef ? wRef + GAP_X : 0, y0 - paneTop, wTop, BOX_H);
           pane._boxes.push(topicEl);
+          topicEl._refs = [];
+          var anc = anchorRefIndex(refs);
           for (k = 0; k < refs.length; k++) {
             re = refBox(refs[k], pathBorder(t), t);
             pane.appendChild(re);
-            put(re, 0, y0 - paneTop + k * (BOX_H + GAP_Y), wRef, BOX_H);
+            put(re, 0, y0 - paneTop + (k - anc) * (BOX_H + GAP_Y), wRef, BOX_H);
+            topicEl._refs.push(re);
           }
-          y0 += BOX_H + GAP_Y;
         }
       }
       return pane;
@@ -1042,6 +1316,24 @@
         path.style.strokeWidth = thick;
         svg.appendChild(path);
       }
+      if (selRefEl) {
+        var rel = bottomsForSelRef();
+        for (i = 0; i < rel.length; i++) {
+          b = findBox(topicEls, rel[i].id);
+          if (!b) continue;
+          c = colorsThrough(rel[i]);
+          col = (c.length === 1) ? PATH_COLORS[c[0] % PATH_COLORS.length] : PATH_COLORS[i % PATH_COLORS.length];
+          addPath(
+            boardX(selRefEl) + (selRefEl._w || 0),
+            boardY(selRefEl) + BOX_H / 2,
+            Math.round((boardX(selRefEl) + (selRefEl._w || 0) + boardX(b)) / 2),
+            boardX(b),
+            boardY(b) + BOX_H / 2,
+            col,
+            "2px"
+          );
+        }
+      }
       for (i = 0; i < topicEls.length; i++) {
         a = topicEls[i];
         t = find(topics, a.dataset.id);
@@ -1060,7 +1352,7 @@
           a: a,
           x1: boardX(a) + (a._w || 0),
           y1: boardY(a) + BOX_H / 2,
-          col: (c.length === 1) ? PATH_COLORS[c[0] % PATH_COLORS.length] : (c.length >= 2 ? JOIN_COLOR : ""),
+          col: (c.length === 1) ? PATH_COLORS[c[0] % PATH_COLORS.length] : (c.length >= 2 ? JOIN_LINE : ""),
           colored: c.length === 1,
           joined: c.length >= 2
         });
@@ -1103,7 +1395,6 @@
         function paintDest(dest, xBus) {
           var y2 = boardY(dest.b) + BOX_H / 2;
           var x2 = boardX(dest.b);
-          var yMin, yMax, seg;
           grey = [];
           colr = [];
           var joinE = [];
@@ -1113,54 +1404,59 @@
             else if (e.joined) joinE.push(e);
             else grey.push(e);
           }
-          function hOnly(e, col, thick) {
-            var d = "M " + Math.round(e.x1) + " " + Math.round(e.y1) +
-              " L " + xBus + " " + Math.round(e.y1);
+          function stroke(d, col, thick) {
             var path = document.createElementNS(ns, "path");
             path.setAttribute("d", d);
             path.style.stroke = col;
             path.style.strokeWidth = thick;
             svg.appendChild(path);
           }
-          var nJoin = colr.length + joinE.length;
-          if (nJoin >= 2) {
-            for (ei = 0; ei < grey.length; ei++) {
-              e = grey[ei];
-              addPath(e.x1, e.y1, xBus, x2, y2, "#c5d0d4", "1px");
+          function hSeg(x1, y, x2, col, thick) {
+            stroke("M " + Math.round(x1) + " " + Math.round(y) + " L " + Math.round(x2) + " " + Math.round(y), col, thick);
+          }
+          function vSeg(x, y1, y2b, col, thick) {
+            if (Math.round(y1) === Math.round(y2b)) return;
+            stroke("M " + Math.round(x) + " " + Math.round(y1) + " L " + Math.round(x) + " " + Math.round(y2b), col, thick);
+          }
+          function between(a, b, m) {
+            return (m - a) * (m - b) <= 0;
+          }
+          function firstMeet(y1, yDest, ys) {
+            var i, y, d, best = null, bestD;
+            for (i = 0; i < ys.length; i++) {
+              y = ys[i];
+              if (Math.round(y) === Math.round(y1)) continue;
+              if (!between(y1, yDest, y)) continue;
+              d = Math.abs(y - y1);
+              if (best == null || d < bestD) {
+                best = y;
+                bestD = d;
+              }
             }
-            for (ei = 0; ei < joinE.length; ei++) hOnly(joinE[ei], JOIN_COLOR, "2px");
-            for (ei = 0; ei < colr.length; ei++) hOnly(colr[ei], colr[ei].col, "2px");
-            yMin = y2;
-            yMax = y2;
-            for (ei = 0; ei < colr.length; ei++) {
-              if (colr[ei].y1 < yMin) yMin = colr[ei].y1;
-              if (colr[ei].y1 > yMax) yMax = colr[ei].y1;
-            }
-            for (ei = 0; ei < joinE.length; ei++) {
-              if (joinE[ei].y1 < yMin) yMin = joinE[ei].y1;
-              if (joinE[ei].y1 > yMax) yMax = joinE[ei].y1;
-            }
-            seg = "M " + xBus + " " + Math.round(yMin) +
-              " L " + xBus + " " + Math.round(yMax) +
-              " M " + xBus + " " + Math.round(y2) +
-              " L " + Math.round(x2) + " " + Math.round(y2);
-            path = document.createElementNS(ns, "path");
-            path.setAttribute("d", seg);
-            path.style.stroke = JOIN_COLOR;
-            path.style.strokeWidth = "2px";
-            svg.appendChild(path);
-          } else {
-            for (ei = 0; ei < grey.length; ei++) {
-              e = grey[ei];
-              addPath(e.x1, e.y1, xBus, x2, y2, "#c5d0d4", "1px");
-            }
-            for (ei = 0; ei < joinE.length; ei++) {
-              e = joinE[ei];
-              addPath(e.x1, e.y1, xBus, x2, y2, JOIN_COLOR, "2px");
-            }
-            for (ei = 0; ei < colr.length; ei++) {
-              e = colr[ei];
-              addPath(e.x1, e.y1, xBus, x2, y2, e.col, "2px");
+            return best;
+          }
+          for (ei = 0; ei < grey.length; ei++) {
+            e = grey[ei];
+            addPath(e.x1, e.y1, xBus, x2, y2, "#c5d0d4", "1px");
+          }
+          for (ei = 0; ei < joinE.length; ei++) {
+            e = joinE[ei];
+            addPath(e.x1, e.y1, xBus, x2, y2, JOIN_LINE, "2px");
+          }
+          var meetYs = [];
+          for (ei = 0; ei < colr.length; ei++) meetYs.push(colr[ei].y1);
+          for (ei = 0; ei < joinE.length; ei++) meetYs.push(joinE[ei].y1);
+          for (ei = 0; ei < colr.length; ei++) {
+            e = colr[ei];
+            var meet = firstMeet(e.y1, y2, meetYs);
+            hSeg(e.x1, e.y1, xBus, e.col, "2px");
+            if (meet == null) {
+              vSeg(xBus, e.y1, y2, e.col, "2px");
+              hSeg(xBus, y2, x2, e.col, "2px");
+            } else {
+              vSeg(xBus, e.y1, meet, e.col, "2px");
+              vSeg(xBus, meet, y2, JOIN_LINE, "2px");
+              hSeg(xBus, y2, x2, JOIN_LINE, "2px");
             }
           }
         }
@@ -1198,16 +1494,28 @@
     }
 
     var wrap = document.getElementById("wrap");
+    var chart = document.getElementById("chart");
     var viewH = wrap ? wrap.clientHeight : 0;
     var viewW = wrap ? wrap.clientWidth : 800;
-    var band = PAD + DESC_H + GAP_Y;
+    var chartTop = PAD;
+    var band = PAD;
     var vsW = Math.max(400, Math.min(VERSE_W, Math.floor(viewW * 0.48)));
     var vsH = Math.max(160, viewH - PAD * 2);
     var versesWrap = document.createElement("div");
     versesWrap.className = "tverse-wrap";
-    board.appendChild(versesWrap);
+    var oldVs = wrap ? wrap.querySelector(".tverse-wrap") : null;
+    if (oldVs && oldVs.parentNode) oldVs.parentNode.removeChild(oldVs);
+    if (wrap) wrap.appendChild(versesWrap);
+    else board.appendChild(versesWrap);
     put(versesWrap, PAD, PAD, vsW, vsH);
     versesWrap.style.height = vsH + "px";
+    versesWrap.style.zIndex = "5";
+    if (chart) {
+      chart.style.left = (PAD + vsW + GAP_X) + "px";
+      chart.style.top = chartTop + "px";
+      chart.style.right = "0";
+      chart.style.bottom = "0";
+    }
 
     var bar = document.createElement("div");
     bar.className = "tverse-bar";
@@ -1219,7 +1527,7 @@
     bookPick.className = "ew-book-pick";
     var bookBtn = document.createElement("button");
     bookBtn.type = "button";
-    bookBtn.className = "ew-tr-now";
+    bookBtn.className = "ew-tr-now ew-chap-btn";
     bookBtn.textContent = viewChap.abbr;
     var bookList = document.createElement("div");
     bookList.className = "ew-book-list";
@@ -1243,6 +1551,8 @@
           ev.preventDefault();
           ev.stopPropagation();
           var chs = Object.keys(maps.by[b] || {}).map(Number).sort(function (a, c) { return a - c; });
+          wantChapOpen = true;
+          chapOpen = true;
           setChap(b, chapFilter ? (chs[0] || 1) : 1);
         });
         col.appendChild(row);
@@ -1266,7 +1576,7 @@
     chPick.className = "ew-ch-pick";
     var chBtn = document.createElement("button");
     chBtn.type = "button";
-    chBtn.className = "ew-tr-now";
+    chBtn.className = "ew-tr-now ew-chap-btn";
     chBtn.textContent = String(viewChap.ch);
     var chGrid = document.createElement("div");
     chGrid.className = "ew-ch-grid";
@@ -1290,6 +1600,8 @@
       cell.addEventListener("click", function (ev) {
         ev.preventDefault();
         ev.stopPropagation();
+        wantChapOpen = false;
+        chapOpen = false;
         setChap(viewChap.abbr, n);
       });
       chGrid.appendChild(cell);
@@ -1304,36 +1616,43 @@
     });
     chPick.appendChild(chBtn);
     chPick.appendChild(chGrid);
+    if (wantChapOpen) {
+      wantChapOpen = false;
+      chapOpen = true;
+    }
+    chGrid.hidden = !chapOpen;
+    if (chapOpen) {
+      bookList.hidden = true;
+      bookOpen = false;
+    }
 
-    var mode = document.createElement("div");
-    mode.className = "ew-chap-mode";
-    var allBtn = document.createElement("button");
-    allBtn.type = "button";
-    allBtn.className = "tverse-pick" + (chapFilter ? "" : " on");
-    allBtn.textContent = "All";
-    allBtn.addEventListener("click", function (ev) {
+    var mode = document.createElement("button");
+    mode.type = "button";
+    mode.className = "ew-chap-mode" + (chapFilter ? " filter-on" : " all-on");
+    var allLab = document.createElement("span");
+    allLab.className = "ew-mode-all";
+    allLab.textContent = "All";
+    var slash = document.createElement("span");
+    slash.className = "ew-mode-slash";
+    slash.textContent = "/";
+    var filterLab = document.createElement("span");
+    filterLab.className = "ew-mode-filter";
+    filterLab.textContent = "Filter";
+    mode.appendChild(allLab);
+    mode.appendChild(slash);
+    mode.appendChild(filterLab);
+    mode.addEventListener("click", function (ev) {
       ev.preventDefault();
       ev.stopPropagation();
-      setFilter(false);
+      setFilter(!chapFilter);
     });
-    var filterBtn = document.createElement("button");
-    filterBtn.type = "button";
-    filterBtn.className = "tverse-pick" + (chapFilter ? " on" : "");
-    filterBtn.textContent = "Filter";
-    filterBtn.addEventListener("click", function (ev) {
-      ev.preventDefault();
-      ev.stopPropagation();
-      setFilter(true);
-    });
-    mode.appendChild(allBtn);
-    mode.appendChild(filterBtn);
 
     var nav = document.createElement("div");
     nav.className = "tverse-nav";
     var prevBtn = document.createElement("button");
     prevBtn.type = "button";
     prevBtn.className = "ew-ch-prev";
-    prevBtn.textContent = "Prev";
+    prevBtn.innerHTML = '<span class="ew-ch-arrow">&lt;</span><span class="ew-ch-lab">Prev</span>';
     var mapped = mappedChapList();
     var atMap = chapIndex(mapped);
     var iCan = CANON.indexOf(viewChap.abbr);
@@ -1347,9 +1666,9 @@
     var nextBtn = document.createElement("button");
     nextBtn.type = "button";
     nextBtn.className = "ew-ch-next";
-    nextBtn.textContent = "Next";
+    nextBtn.innerHTML = '<span class="ew-ch-lab">Next</span><span class="ew-ch-arrow">&gt;</span>';
     if (chapFilter) nextBtn.disabled = !mapped.length || atMap < 0 || atMap >= mapped.length - 1;
-    else nextBtn.disabled = iCan >= CANON.length - 1 && viewChap.ch >= chCount(viewChap.num);
+    else nextBtn.disabled = (iCan < 0 || iCan >= CANON_N - 1) && viewChap.ch >= chCount(viewChap.num);
     nextBtn.addEventListener("click", function (ev) {
       ev.preventDefault();
       ev.stopPropagation();
@@ -1396,6 +1715,7 @@
         ev.preventDefault();
         ev.stopPropagation();
         verseTr = this.getAttribute("data-tr");
+        saveSection();
         paint();
       });
       trList.appendChild(trow);
@@ -1453,7 +1773,12 @@
             var v = Number(this.getAttribute("data-vs"));
             if (selVs === v) selVs = 0;
             else selVs = v;
-            hoverId = null;
+            sel = null;
+            if (selVs) {
+              var hitRef = refForVerse(selVs);
+              if (hitRef) selChapRef = hitRef;
+            }
+            saveSection();
             paint();
           });
         }
@@ -1473,161 +1798,235 @@
       });
     }
 
-    var x = PAD + vsW + GAP_X;
+    var chapRefs = ensureSelRef();
+    var x = 0;
     var colBuilt = [];
     var topicEls = [];
-    var colLists = reverseCols();
-    var ci, pane, bottoms, widths = [], xs = [], parentBoxes = null, panes = [];
-    bottoms = bottomsForChapter();
-    function levelColWidth(list) {
-      var ids = {}, wr = 0, wt = colNameW(list), ii, rf;
-      bottoms.forEach(function (b) { ids[sid(b.id)] = 1; });
-      for (ii = 0; ii < list.length; ii++) {
-        if (!ids[sid(list[ii].id)]) continue;
-        rf = ownRefs(list[ii]);
-        if (!rf.length) rf = refsFor(list[ii]);
-        if (rf.length) wr = Math.max(wr, colNameW(rf));
+    var refEls = [];
+    var ci, pane, panes = [];
+    var selRefEl = null;
+    function layoutRefsColumn(refs, x0, minTop) {
+      if (!refs || !refs.length) return null;
+      var w = colNameW(refs);
+      var innerH = refs.length * BOX_H + Math.max(0, refs.length - 1) * GAP_Y;
+      var visH = (chart && chart.clientHeight) ? chart.clientHeight : viewH;
+      var y0 = Math.max(0, Math.round((visH - innerH) / 2));
+      var paneH = Math.max(80, innerH);
+      var paneEl = document.createElement("div");
+      var ii, re, y;
+      paneEl.className = "tcol";
+      board.appendChild(paneEl);
+      paneEl.style.left = Math.round(x0) + "px";
+      paneEl.style.top = y0 + "px";
+      paneEl.style.width = w + "px";
+      paneEl.style.height = paneH + "px";
+      paneEl._top = y0;
+      paneEl._h = paneH;
+      paneEl._x = x0;
+      paneEl._w = w;
+      paneEl._y = y0;
+      paneEl._boxes = [];
+      y = 0;
+      for (ii = 0; ii < refs.length; ii++) {
+        re = refBox(refs[ii], "", null);
+        paneEl.appendChild(re);
+        put(re, 0, y, w, BOX_H);
+        paneEl._boxes.push(re);
+        if (sameRef(refs[ii], selChapRef)) selRefEl = re;
+        y += BOX_H + GAP_Y;
       }
-      return wr ? wr + GAP_X + wt : wt;
+      return paneEl;
     }
-    for (ci = 0; ci < colLists.length; ci++) widths.push(levelColWidth(colLists[ci]));
-    for (ci = 0; ci < widths.length; ci++) {
-      xs.push(x);
-      x += widths[ci] + GAP_COL;
+    pane = layoutRefsColumn(chapRefs, x, band);
+    if (pane) {
+      refEls = pane._boxes || [];
+      x += pane._w + GAP_COL;
+      panes.push(pane);
     }
-    for (ci = colLists.length - 1; ci >= 0; ci--) {
-      pane = layoutLevelColumn(colLists[ci], xs[ci], widths[ci], parentBoxes, band);
-      panes[ci] = pane;
+    var l1 = items[0];
+    var l2 = (l1 && (l1.level || 1) === 1) ? kids(items, l1) : [];
+    var key = chapKey();
+    var colLists, curList, found, iOpen, j, nxt, boxes, parentBox, cw;
+    var keyChanged = key !== verseChapKey;
+    if (keyChanged) {
+      verseChapKey = key;
+      verseOpen = [];
+      verseAuto = true;
+      sel = null;
+    }
+    if (verseAuto) {
+      verseOpen = autoExpandIds(l2, items);
+      if (keyChanged) {
+        found = firstForExpand(l2);
+        if (found) sel = sid(found.id);
+      }
+    }
+    colLists = [{ list: l2, parent: null }];
+    curList = l2;
+    for (iOpen = 0; iOpen < verseOpen.length; iOpen++) {
+      found = null;
+      for (j = 0; j < curList.length; j++) {
+        if (sid(curList[j].id) === sid(verseOpen[iOpen])) { found = curList[j]; break; }
+      }
+      if (!found) break;
+      nxt = kids(items, found);
+      if (!nxt.length) break;
+      colLists.push({ list: nxt, parent: found });
+      curList = nxt;
+    }
+    for (ci = 0; ci < colLists.length; ci++) {
+      if (!colLists[ci].list.length) continue;
+      cw = colNameW(colLists[ci].list);
+      boxes = colLists[ci].list.map(function (t) { return box(t, liveIn(colLists[ci].list)); });
+      parentBox = null;
+      if (colLists[ci].parent && colBuilt.length) {
+        parentBox = findBox(colBuilt[colBuilt.length - 1].boxes, colLists[ci].parent.id);
+      }
+      pane = layoutCol(boxes, x, cw, parentBox);
       if (pane) {
-        topicEls = topicEls.concat(pane._boxes || []);
-        colBuilt.unshift({ boxes: pane._boxes || [], pane: pane, w: pane._w, x: xs[ci] });
-        parentBoxes = pane._boxes;
-      } else parentBoxes = null;
+        topicEls = topicEls.concat(boxes);
+        colBuilt.push({ boxes: boxes, pane: pane, w: cw, x: x });
+        panes.push(pane);
+        x += colSpan(cw) + GAP_COL;
+      }
     }
-    colBuilt.forEach(function (cb) {
-      if (cb.pane) cb.pane.addEventListener("scroll", drawPathLines);
-    });
+    expandByRef = false;
 
-    function shiftPane(pane, dy) {
-      if (!pane || !dy) return;
-      pane._top += dy;
-      pane._y += dy;
-      pane.style.top = Math.round(pane._top) + "px";
-    }
-    var lowBots = bottomsForChapter();
-    if (lowBots.length) {
-      var low = lowBots[lowBots.length - 1];
-      var lowEl = findBox(topicEls, low.id);
-      var par = parentTopic(low);
-      var parEl = par ? findBox(topicEls, par.id) : null;
-      if (lowEl && parEl && lowEl.parentNode !== parEl.parentNode) {
-        shiftPane(parEl.parentNode, boardY(lowEl) - boardY(parEl));
-      }
-    }
-    if (colBuilt.length) {
-      var lastCol = colBuilt[colBuilt.length - 1];
-      var tMin = Infinity, tMax = -Infinity, bi, by;
-      for (bi = 0; bi < topicEls.length; bi++) {
-        if (lastCol.pane && topicEls[bi].parentNode === lastCol.pane) continue;
-        by = boardY(topicEls[bi]);
-        if (by < tMin) tMin = by;
-        if (by > tMax) tMax = by;
-      }
-      if (tMin < Infinity && lastCol.pane && lastCol.boxes && lastCol.boxes.length) {
-        var firstY = boardY(lastCol.boxes[0]);
-        var lastY = boardY(lastCol.boxes[lastCol.boxes.length - 1]);
-        var colH = lastY + BOX_H - firstY;
-        var spanH = tMax + BOX_H - tMin;
-        var want = tMin + (spanH - colH) / 2;
-        shiftPane(lastCol.pane, Math.round(want - firstY));
-      }
-    }
 
-    var topBox = Infinity, pi, colRight = x;
+    var pi, colRight = x;
     for (pi = 0; pi < colBuilt.length; pi++) {
       if (!colBuilt[pi].pane) continue;
       colRight = Math.max(colRight, colBuilt[pi].pane._x + colBuilt[pi].pane._w);
-      if (colBuilt[pi].pane._y < topBox) topBox = colBuilt[pi].pane._y;
     }
-    descPlace.left = PAD + vsW + GAP_X;
-    placeDesc(colRight, topBox < Infinity ? topBox : band);
-    showDesc();
+    for (pi = 0; pi < panes.length; pi++) {
+      if (!panes[pi]) continue;
+      colRight = Math.max(colRight, (panes[pi]._x || 0) + (panes[pi]._w || 0));
+    }
+    placePop();
 
     var maxX = Math.max(PAD + vsW + PAD, colRight + PAD);
+    var contentBot = vsH + PAD * 2;
+    for (pi = 0; pi < colBuilt.length; pi++) {
+      if (!colBuilt[pi].pane) continue;
+      contentBot = Math.max(contentBot, (colBuilt[pi].pane._top || 0) + (colBuilt[pi].pane._h || 0));
+    }
+    for (pi = 0; pi < panes.length; pi++) {
+      if (!panes[pi]) continue;
+      contentBot = Math.max(contentBot, (panes[pi]._top || 0) + (panes[pi]._h || 0));
+    }
+    for (pi = 0; pi < topicEls.length; pi++) {
+      contentBot = Math.max(contentBot, boardY(topicEls[pi]) + BOX_H);
+      var rfs = topicEls[pi]._refs || [];
+      for (var ri = 0; ri < rfs.length; ri++) {
+        contentBot = Math.max(contentBot, boardY(rfs[ri]) + BOX_H);
+      }
+    }
     board.style.width = maxX + "px";
-    board.style.height = Math.max(viewH, vsH + PAD * 2) + "px";
-    drawPathLines();
-    if (st) st.textContent = bottoms.length ? (bottoms.length + " topics.") : (items.length + " topics.");
+    board.style.height = Math.max(viewH, contentBot + PAD) + "px";
+    if (st) st.textContent = chapRefs.length ? (chapRefs.length + " refs.") : (items.length + " topics.");
   }
 
-  function showDesc() {
-    var ta = document.getElementById("tdesc-ta");
-    var topic = hoverId ? find(topics, hoverId) : (sel ? find(topics, sel) : null);
-    if (!ta) return;
-    if (document.activeElement === ta) return;
-    ta.value = descText(topic);
-    ta.dataset.topic = topic ? sid(topic.id) : "";
+  function topicBoxEl(id) {
+    var nodes = document.querySelectorAll(".tbox[data-id]");
+    var i;
+    id = sid(id);
+    for (i = 0; i < nodes.length; i++) {
+      if (nodes[i].dataset.ref) continue;
+      if (sid(nodes[i].dataset.id) === id) return nodes[i];
+    }
+    return null;
   }
-  function placeDesc(right, capY) {
+  function descKeep(el) {
+    var box;
+    while (el && el !== document.documentElement) {
+      if (el.id === "tdesc") return true;
+      if (el.classList && el.classList.contains("tbox") && !el.dataset.ref && sid(el.dataset.id) === sid(descId)) return true;
+      if (el.classList && String(el.className || "").indexOf("tcol") >= 0) {
+        box = topicBoxEl(descId);
+        if (box && box.parentNode === el) return true;
+      }
+      el = el.parentNode;
+    }
+    return false;
+  }
+  function hideDesc() {
     var d = document.getElementById("tdesc");
     var ta = document.getElementById("tdesc-ta");
-    var wrap = document.getElementById("wrap");
-    var topic = hoverId ? find(topics, hoverId) : (sel ? find(topics, sel) : null);
-    var w, need, cap, h, open, pop, more, board, left;
+    var topic;
+    if (descOpen && ta) {
+      topic = find(topics, ta.dataset.topic);
+      if (topic) {
+        topic.description = ta.value;
+        saveTopics();
+      }
+    }
+    descOpen = false;
+    descId = "";
+    if (d) d.hidden = true;
+  }
+  function openDesc(t) {
+    if (!t) {
+      hideDesc();
+      return;
+    }
+    descOpen = true;
+    descId = sid(t.id);
+    descLock = Date.now() + 400;
+    placePop();
+  }
+  function placePop() {
+    var d = document.getElementById("tdesc");
+    var ta = document.getElementById("tdesc-ta");
+    var vsEl = document.querySelector(".tverse-wrap");
+    var topic = descOpen ? find(topics, descId) : null;
+    var box, pane, br, pr, w, left, top, need, maxH, h, vw, vh;
     if (!d) return;
-    if (right) descPlace.right = right;
-    if (capY) descPlace.cap = capY;
-    left = descPlace.left || PAD;
-    w = descWidth();
-    cap = descCap();
-    need = descH(ta && document.activeElement === ta ? ta.value : descText(topic), w);
-    open = descOpen || (ta && document.activeElement === ta);
-    h = open ? Math.max(need, DESC_H) : Math.min(Math.max(need, DESC_H), cap);
-    d.style.left = left + "px";
-    d.style.top = PAD + "px";
+    if (!topic) {
+      d.hidden = true;
+      return;
+    }
+    box = topicBoxEl(topic.id);
+    w = vsEl && vsEl.offsetWidth ? vsEl.offsetWidth : VERSE_W;
+    d.hidden = false;
+    if (ta && document.activeElement !== ta) {
+      ta.value = descText(topic);
+      ta.dataset.topic = sid(topic.id);
+    }
+    need = descH(ta ? ta.value : descText(topic), w);
+    vw = window.innerWidth;
+    vh = window.innerHeight;
+    maxH = Math.max(80, Math.floor(vh * 0.45));
+    h = Math.min(Math.max(need, DESC_H), maxH);
+    if (box) {
+      pane = box.parentNode && String(box.parentNode.className || "").indexOf("tcol") >= 0 ? box.parentNode : box;
+      pr = pane.getBoundingClientRect();
+      left = pr.left + (pr.width - w) / 2;
+      top = PAD;
+      if (left + w > vw - 8) left = vw - 8 - w;
+      if (left < 8) left = 8;
+    } else {
+      left = 8;
+      top = PAD;
+    }
+    d.style.left = Math.round(left) + "px";
+    d.style.top = Math.round(top) + "px";
     d.style.width = w + "px";
     d.style.height = h + "px";
-    d.style.zIndex = open ? "40" : "6";
-    if (ta) ta.style.overflowY = open ? "hidden" : "auto";
-    if (wrap) wrap.style.overflowY = open && need > cap ? "visible" : "hidden";
-    board = document.getElementById("board");
-    if (board) board.style.pointerEvents = open ? "none" : "";
-    pop = document.getElementById("tdesc-full");
-    if (pop) pop.hidden = true;
-    more = document.getElementById("tdesc-more");
-    if (more) more.hidden = !(!open && need > cap);
-  }
-  function openDesc() {
-    descOpen = true;
-    placeDesc();
-  }
-  function closeDesc() {
-    var ta = document.getElementById("tdesc-ta");
-    if (ta && document.activeElement === ta) return;
-    descOpen = false;
-    placeDesc();
+    if (ta) ta.style.overflowY = need > maxH ? "auto" : "hidden";
   }
 
   window.snPaintVerse = paint;
+  window.snReloadVerse = function () { loadTopics(paint); };
   (function () {
     var ta = document.getElementById("tdesc-ta");
+    var d = document.getElementById("tdesc");
     if (!ta) return;
+    if (d) d.addEventListener("click", function (ev) { ev.stopPropagation(); });
     ta.addEventListener("click", function (ev) { ev.stopPropagation(); });
     ta.addEventListener("focus", function () {
       var id = ta.dataset.topic;
       if (id) descSnap[id] = ta.value;
-      openDesc();
     });
-    (function () {
-      var d = document.getElementById("tdesc");
-      if (!d) return;
-      d.addEventListener("pointerenter", function (ev) {
-        if (ev.pointerType === "mouse") openDesc();
-      });
-      d.addEventListener("pointerleave", function (ev) {
-        if (ev.pointerType === "mouse") closeDesc();
-      });
-    })();
     ta.addEventListener("keydown", function (ev) {
       var id, topic;
       if (ev.key !== "Escape") return;
@@ -1641,7 +2040,7 @@
       var id = ta.dataset.topic;
       var topic = id ? find(topics, id) : null;
       if (topic) topic.description = ta.value;
-      placeDesc();
+      placePop();
     });
     ta.addEventListener("blur", function () {
       var id = ta.dataset.topic;
@@ -1652,20 +2051,22 @@
     });
   })();
   window.addEventListener("resize", function () { paint(); });
+  document.addEventListener("mousemove", function (ev) {
+    if (!descOpen || Date.now() < descLock) return;
+    if (!descKeep(document.elementFromPoint(ev.clientX, ev.clientY))) hideDesc();
+  });
   document.addEventListener("pointerdown", function (ev) {
     var list = document.querySelector(".tverse-bar .ew-tr-list");
     var now = document.querySelector(".tverse-bar .ew-tr-now");
     var bl = document.querySelector(".ew-book-list");
-    var cg = document.querySelector(".ew-ch-grid");
     var menu = document.getElementById("sn-ref-menu");
     var inBar = ev.target && ev.target.closest && ev.target.closest(".tverse-bar");
+    if (descOpen && !descKeep(ev.target)) hideDesc();
     if (!inBar) {
       if (list) list.hidden = true;
       if (now) now.setAttribute("aria-expanded", "false");
       if (bl) bl.hidden = true;
-      if (cg) cg.hidden = true;
       bookOpen = false;
-      chapOpen = false;
     }
     if (Date.now() < rhmLock) return;
     if (menu && !menu.hidden && !(ev.target && ev.target.closest && ev.target.closest("#sn-ref-menu"))) hideRhm();
@@ -1682,18 +2083,5 @@
       if (btn && btn.getAttribute("data-edit") === "1" && fn) fn();
     });
   })();
-  Promise.all([
-    fetch("data/topics.json?v=291", { cache: "no-store" }).then(function (r) { return r.json(); }),
-    fetch("data/topic-refs.json?v=291", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
-  ]).then(function (pair) {
-    topics = pair[0] || [];
-    if (Array.isArray(pair[1])) topicRefs = pair[1];
-    else if (pair[1] && Array.isArray(pair[1].rows)) topicRefs = pair[1].rows;
-    else topicRefs = [];
-    viewChap = firstMappedChap();
-    paint();
-  }).catch(function (err) {
-    var st = document.getElementById("status");
-    if (st) st.textContent = String(err);
-  });
+  loadTopics(paint);
 })();
