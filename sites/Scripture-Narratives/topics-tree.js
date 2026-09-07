@@ -5,6 +5,9 @@
   var GAP_BTN = 4;
   var DESC_H = 26;
   var descPlace = { right: 0, cap: 0 };
+  var descOpen = false;
+  var descHold = false;
+  var descHoldTimer = 0;
   var VERSE_W = 420;
   var topics = [];
   var topicRefs = [];
@@ -23,6 +26,7 @@
   var drag = null;
   var skipRefClick = false;
   var pendingRefEdit = null;
+  var rhmLock = 0;
   var TRANSLATIONS = [
     { id: "NKJV", label: "NKJV", year: "1982" },
     { id: "ESV", label: "ESV", year: "2016" },
@@ -154,10 +158,25 @@
     document.body.removeChild(p);
     return s;
   }
+  function descCap() {
+    return descPlace.cap ? Math.max(DESC_H, descPlace.cap - PAD - GAP_Y) : DESC_H;
+  }
+  function descWidth() {
+    return Math.max(120, (descPlace.right || (PAD + 240)) - PAD);
+  }
   function descH(text, colW) {
+    var box, ta, h;
     if (!colW) return boxH;
-    var s = wrapSize(text, colW);
-    return Math.max(boxH, s.h);
+    box = document.createElement("div");
+    ta = document.createElement("textarea");
+    box.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;box-sizing:border-box;border:1px solid #c5d0d4;width:" + Math.max(8, colW) + "px";
+    ta.style.cssText = "display:block;width:100%;height:auto;margin:0;padding:0.2rem 0.45rem;border:0;font:400 13px/1.2 Arial,Helvetica,sans-serif;white-space:pre-wrap;overflow-wrap:break-word;word-wrap:break-word;overflow:hidden;resize:none;box-sizing:border-box";
+    ta.value = text || "";
+    box.appendChild(ta);
+    document.body.appendChild(box);
+    h = Math.max(DESC_H, ta.scrollHeight + 2);
+    document.body.removeChild(box);
+    return h;
   }
   var CANON = "Gen Exo Lev Num Deu Jos Jdg Rut 1Sa 2Sa 1Ki 2Ki 1Ch 2Ch Ezr Neh Est Job Psa Pro Ecc Sng Isa Jer Lam Ezk Dan Hos Jol Amo Oba Jon Mic Nam Hab Zep Hag Zec Mal Mat Mrk Luk Jhn Act Rom 1Co 2Co Gal Eph Php Col 1Th 2Th 1Ti 2Ti Tit Phm Heb Jas 1Pe 2Pe 1Jn 2Jn 3Jn Jud Rev 1Es Tob Jdt Wis Sir Lje Bar 1Ma 2Ma Man 2Es Sus Bel Aza Jub".split(" ");
   function refSortKey(lab) {
@@ -427,11 +446,18 @@
     if (m) m.hidden = true;
     pendingRefEdit = null;
   }
-  function showRefMenu(ev, startEdit) {
+  function showRefMenu(ev, startEdit, title) {
     var m = document.getElementById("sn-ref-menu");
-    var r, x, y;
+    var r, x, y, tit;
     if (!m) return;
+    if (ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+    }
     pendingRefEdit = startEdit;
+    tit = m.querySelector(".sn-rhm-title");
+    if (tit) tit.textContent = title || "Ref";
+    rhmLock = Date.now() + 500;
     m.hidden = false;
     x = ev.clientX;
     y = ev.clientY;
@@ -1007,6 +1033,9 @@
         inp.addEventListener("click", function (cev) { cev.stopPropagation(); });
       }
       b.addEventListener("dblclick", startEdit);
+      b.addEventListener("contextmenu", function (ev) {
+        showRefMenu(ev, function () { startEdit(); }, "Topic");
+      });
       b.addEventListener("mouseenter", function () {
         if (drag && drag.moved) return;
         if (leaveOther(t)) paint();
@@ -1058,10 +1087,8 @@
         inp.addEventListener("mousedown", function (mev) { mev.stopPropagation(); });
       }
       b.addEventListener("contextmenu", function (ev) {
-        ev.preventDefault();
-        ev.stopPropagation();
         if (drag) endRefDrag(null);
-        showRefMenu(ev, function () { startRefEdit(); });
+        showRefMenu(ev, function () { startRefEdit(); }, "Ref");
       });
       b.addEventListener("mousedown", function (ev) {
         if (ev.button !== 0) return;
@@ -1190,6 +1217,10 @@
       colBuilt.push({ boxes: boxes, pane: pane, w: cw, x: x });
       x += colSpan(cw) + GAP_X;
     }
+    var topBox = Infinity, ti;
+    for (ti = 0; ti < colBuilt.length; ti++) {
+      if (colBuilt[ti].pane && colBuilt[ti].pane._y < topBox) topBox = colBuilt[ti].pane._y;
+    }
     var cRef = [];
     var xRef = 0;
     var xVs = 0;
@@ -1198,9 +1229,15 @@
       cRef = refList.map(refBox);
       wRef = colNameW(refList);
       parentBox = colBuilt.length ? findBox(colBuilt[colBuilt.length - 1].boxes, refTopic.id) : null;
-      pane = layoutCol(cRef, x, wRef, parentBox, null, true);
-      colBuilt.push({ boxes: cRef, pane: pane, w: wRef, x: x });
       xVs = x + wRef + PAD;
+      var descW = Math.max(120, xVs - PAD - PAD);
+      var dTopic = sel ? find(topics, sel) : null;
+      var dTa = document.getElementById("tdesc-ta");
+      var dNeed = descH(dTa && document.activeElement === dTa ? dTa.value : descText(dTopic), descW);
+      var dCap = (topBox < Infinity) ? Math.max(DESC_H, topBox - PAD - GAP_Y) : DESC_H;
+      var dH = Math.min(Math.max(dNeed, DESC_H), dCap);
+      pane = layoutCol(cRef, x, wRef, parentBox, PAD + dH + GAP_Y, true);
+      colBuilt.push({ boxes: cRef, pane: pane, w: wRef, x: x });
     }
 
     var versesEl = null;
@@ -1455,40 +1492,40 @@
   function placeDesc(right, capY) {
     var d = document.getElementById("tdesc");
     var ta = document.getElementById("tdesc-ta");
+    var wrap = document.getElementById("wrap");
     var topic = sel ? find(topics, sel) : null;
-    var w, need, cap, h;
+    var w, need, cap, h, open, pop, more, board;
     if (!d) return;
     if (right) descPlace.right = right;
     if (capY) descPlace.cap = capY;
-    right = descPlace.right || (PAD + 240);
-    w = Math.max(120, right - PAD);
+    w = descWidth();
+    cap = descCap();
     need = descH(ta && document.activeElement === ta ? ta.value : descText(topic), w);
-    cap = descPlace.cap ? Math.max(DESC_H, descPlace.cap - PAD - GAP_Y) : DESC_H;
-    h = Math.min(Math.max(need, DESC_H), cap);
+    open = descOpen || (ta && document.activeElement === ta);
+    h = open ? Math.max(need, DESC_H) : Math.min(Math.max(need, DESC_H), cap);
     d.style.left = PAD + "px";
     d.style.top = PAD + "px";
     d.style.width = w + "px";
     d.style.height = h + "px";
-    hideDescFull();
-  }
-  function hideDescFull() {
-    var pop = document.getElementById("tdesc-full");
+    d.style.zIndex = open ? "40" : "6";
+    if (ta) ta.style.overflowY = open ? "hidden" : "auto";
+    if (wrap) wrap.style.overflowY = open && need > cap ? "visible" : "hidden";
+    board = document.getElementById("board");
+    if (board) board.style.pointerEvents = open ? "none" : "";
+    pop = document.getElementById("tdesc-full");
     if (pop) pop.hidden = true;
+    more = document.getElementById("tdesc-more");
+    if (more) more.hidden = !(!open && need > cap);
   }
-  function showDescFull() {
-    var d = document.getElementById("tdesc");
+  function openDesc() {
+    descOpen = true;
+    placeDesc();
+  }
+  function closeDesc() {
     var ta = document.getElementById("tdesc-ta");
-    var pop = document.getElementById("tdesc-full");
-    var t;
-    if (!d || !ta || !pop) return;
-    if (document.activeElement === ta) return;
-    t = ta.value || "";
-    if (!String(t).trim()) { pop.hidden = true; return; }
-    pop.textContent = t;
-    pop.style.left = d.style.left;
-    pop.style.top = d.style.top;
-    pop.style.width = d.style.width;
-    pop.hidden = false;
+    if (ta && document.activeElement === ta) return;
+    descOpen = false;
+    placeDesc();
   }
   function saveTopics(msg) {
     fetch("/dotl/topics", {
@@ -1512,14 +1549,43 @@
     ta.addEventListener("focus", function () {
       var id = ta.dataset.topic;
       if (id) descSnap[id] = ta.value;
-      hideDescFull();
+      openDesc();
     });
     (function () {
       var d = document.getElementById("tdesc");
       if (!d) return;
-      d.addEventListener("mouseenter", showDescFull);
-      d.addEventListener("mouseleave", hideDescFull);
+      d.addEventListener("pointerenter", function (ev) {
+        if (ev.pointerType === "mouse") openDesc();
+      });
+      d.addEventListener("pointerleave", function (ev) {
+        if (ev.pointerType === "mouse") closeDesc();
+      });
+      d.addEventListener("pointerdown", function (ev) {
+        if (ev.pointerType === "mouse") return;
+        descHold = false;
+        clearTimeout(descHoldTimer);
+        descHoldTimer = setTimeout(function () { descHold = true; }, 500);
+      });
+      d.addEventListener("pointerup", function (ev) {
+        if (ev.pointerType === "mouse") return;
+        clearTimeout(descHoldTimer);
+        if (descHold) return;
+        descOpen = !descOpen;
+        placeDesc();
+      });
+      d.addEventListener("contextmenu", function () {
+        descHold = true;
+        clearTimeout(descHoldTimer);
+      });
     })();
+    document.addEventListener("pointerdown", function (ev) {
+      var d;
+      if (!descOpen) return;
+      if (ev.pointerType === "mouse") return;
+      d = document.getElementById("tdesc");
+      if (d && d.contains(ev.target)) return;
+      closeDesc();
+    });
     ta.addEventListener("keydown", function (ev) {
       var id, topic;
       if (ev.key !== "Escape") return;
@@ -1574,12 +1640,13 @@
   document.addEventListener("mouseup", function (ev) {
     if (drag) endRefDrag(ev);
   });
-  document.addEventListener("click", function (ev) {
+  document.addEventListener("pointerdown", function (ev) {
     var list = document.querySelector(".tverse-bar .ew-tr-list");
     var now = document.querySelector(".tverse-bar .ew-tr-now");
     var menu = document.getElementById("sn-ref-menu");
-    if (list) list.hidden = true;
-    if (now) now.setAttribute("aria-expanded", "false");
+    if (list && !ev.target.closest(".tverse-bar")) list.hidden = true;
+    if (now && !ev.target.closest(".tverse-bar")) now.setAttribute("aria-expanded", "false");
+    if (Date.now() < rhmLock) return;
     if (menu && !menu.hidden && !(ev.target && ev.target.closest && ev.target.closest("#sn-ref-menu"))) hideRefMenu();
   });
   (function () {

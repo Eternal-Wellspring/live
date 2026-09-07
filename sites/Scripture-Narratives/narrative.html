@@ -65,7 +65,8 @@
       min-height: 0;
       position: relative;
     }
-    #s-tree.active {
+    #s-tree.active,
+    #s-verse.active {
       display: block !important;
       flex: 1 1 auto;
       min-height: 0;
@@ -121,7 +122,7 @@
     }
     .tab-dock-end, .page-nav-bar-bottom, .date-updated { flex: 0 0 auto; }
     .tab-dock, .tab-dock-end { position: relative; z-index: 40; }
-    #s-tree { min-height: 0; }
+    #s-tree, #s-verse { min-height: 0; }
     #s-tree .tree-bar {
       flex: 0 0 auto;
       display: flex;
@@ -260,7 +261,10 @@
         </div>
       </div>
       <div class="tab-panel" id="s-tree" data-sec="s-tree">
-        <iframe class="topics-frame" id="tree-frame" title="Tree"></iframe>
+        <iframe class="topics-frame" id="tree-frame" title="By Topic"></iframe>
+      </div>
+      <div class="tab-panel" id="s-verse" data-sec="s-verse">
+        <iframe class="topics-frame" id="verse-frame" title="By Verse"></iframe>
       </div>
       <div class="tab-panel" id="s-hierarchy" data-sec="s-hierarchy">
         <iframe class="topics-frame" id="topics-frame" title="Hierarchy"></iframe>
@@ -296,6 +300,7 @@
       if (id === "s-l1") setTitle("Topics");
       else setTitle(chosenTitle || "Topics");
       if (id === "s-tree") showTree();
+      if (id === "s-verse") showVerse();
     }
     document.addEventListener("click", function (ev) {
       var btn = ev.target.closest && ev.target.closest(".tab[data-tab]");
@@ -308,15 +313,19 @@
     var frameId = id;
     var chosenTitle = "";
     var tabsHtml =
-      '<button type="button" class="tab" data-tab="s-l1" data-sec="s-l1">Topics</button>' +
-      '<button type="button" class="tab" data-tab="s-tree" data-sec="s-tree">Tree</button>' +
+      '<button type="button" class="tab" data-tab="s-l1" data-sec="s-l1">Home</button>' +
+      '<button type="button" class="tab" data-tab="s-tree" data-sec="s-tree">By Topic</button>' +
+      '<button type="button" class="tab" data-tab="s-verse" data-sec="s-verse">By Verse</button>' +
       '<button type="button" class="tab" data-tab="s-hierarchy" data-sec="s-hierarchy">Hierarchy</button>' +
       '<button type="button" class="tab tab-notes" data-notes-toggle="1">Footnotes</button>' +
       '<button type="button" class="tab tab-settings" data-settings-open="1">Settings</button>';
     document.getElementById("tabs-top").innerHTML = tabsHtml;
     document.getElementById("tabs-end").innerHTML = tabsHtml;
     function treeUrl() {
-      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=275";
+      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=284";
+    }
+    function verseUrl() {
+      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=311";
     }
     function showTree() {
       var fr = document.getElementById("tree-frame");
@@ -329,6 +338,20 @@
       try {
         if (fr.contentWindow && typeof fr.contentWindow.snPaintTree === "function") {
           fr.contentWindow.snPaintTree();
+        }
+      } catch (err) {}
+    }
+    function showVerse() {
+      var fr = document.getElementById("verse-frame");
+      if (!fr || !frameId) return;
+      var want = verseUrl();
+      if (fr.getAttribute("src") !== want) {
+        fr.src = want;
+        return;
+      }
+      try {
+        if (fr.contentWindow && typeof fr.contentWindow.snPaintVerse === "function") {
+          fr.contentWindow.snPaintVerse();
         }
       } catch (err) {}
     }

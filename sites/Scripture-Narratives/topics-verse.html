@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Topics Tree</title>
+  <title>By Verse</title>
   <style>
     :root {
       --ink: #1b3a4b;
@@ -52,14 +52,26 @@
       color: inherit;
       text-align: left;
       white-space: nowrap;
-      overflow: hidden;
+      overflow: visible;
       cursor: pointer;
       -webkit-appearance: none;
       appearance: none;
     }
     .tbox:hover { background: #f6efc8; }
     .tbox.on, .tbox.on:hover { background: #f6efc8; }
-    .tbox[data-ref] { cursor: grab; }
+    .tbox[data-ref] { cursor: pointer; }
+    .tpath {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 3;
+      pointer-events: none;
+      overflow: visible;
+    }
+    .tpath path {
+      fill: none;
+      stroke-width: 2;
+    }
     .ref-ghost {
       position: fixed;
       z-index: 80;
@@ -197,6 +209,13 @@
       align-items: center;
       gap: 0.28rem;
       flex: 0 0 auto;
+    }
+    .ew-chap-mode {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      flex: 0 0 auto;
+      margin-right: 0.12rem;
     }
     .tverse-bar-right {
       display: flex;
@@ -377,7 +396,84 @@
       background: #eaf6e8;
       border: 0;
       box-shadow: none;
+      cursor: pointer;
     }
+    .tverses p.hit.on {
+      background: #eaf6e8;
+      box-shadow: inset 0 0 0 1px #c5d0d4;
+    }
+    .ew-book-pick,
+    .ew-ch-pick {
+      position: relative;
+      display: inline-block;
+      font: 600 13px/1.2 Arial, Helvetica, sans-serif;
+      color: var(--ink);
+    }
+    .ew-book-list {
+      position: absolute;
+      left: 0;
+      top: calc(100% + 2px);
+      z-index: 8;
+      display: grid;
+      grid-template-columns: max-content max-content;
+      column-gap: 1.1rem;
+      padding: 0.2rem 0.35rem 0.35rem;
+      width: max-content;
+      max-height: 22rem;
+      overflow-y: auto;
+      background: #fff;
+      border: 1px solid #d5dee2;
+      border-radius: 4px;
+      box-shadow: 0 6px 16px rgba(27,58,75,.12);
+      font: 400 13px/1.2 Arial, Helvetica, sans-serif;
+    }
+    .ew-book-list[hidden],
+    .ew-ch-grid[hidden] { display: none !important; }
+    .ew-book-col { display: flex; flex-direction: column; min-width: 0; }
+    .ew-book-head {
+      padding: 0.18rem 0.4rem 0.12rem;
+      color: var(--muted);
+      font: 400 13px/1.2 Arial, Helvetica, sans-serif;
+    }
+    .ew-book-list [data-book] {
+      padding: 0.18rem 0.4rem;
+      cursor: pointer;
+      white-space: nowrap;
+      font: 400 13px/1.2 Arial, Helvetica, sans-serif;
+    }
+    .ew-book-list [data-book]:hover { background: #f4f7f8; }
+    .ew-book-list [data-book].has-topic,
+    .ew-ch-grid [data-ch].has-topic { color: #8a1f1f; }
+    .ew-book-list [data-book].on { background: #eef3f7; color: var(--title); }
+    .ew-ch-grid {
+      position: absolute;
+      left: 0;
+      top: calc(100% + 2px);
+      z-index: 8;
+      display: grid;
+      grid-template-columns: repeat(5, max-content);
+      gap: 0.2rem;
+      padding: 0.3rem;
+      width: max-content;
+      max-height: 18rem;
+      overflow-y: auto;
+      background: #fff;
+      border: 1px solid #d5dee2;
+      border-radius: 4px;
+      box-shadow: 0 6px 16px rgba(27,58,75,.12);
+    }
+    .ew-ch-grid [data-ch] {
+      min-width: 1.8rem;
+      text-align: center;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      font: 400 13px/1.2 Arial, Helvetica, sans-serif;
+      padding: 0.18rem 0.4rem;
+      cursor: pointer;
+    }
+    .ew-ch-grid [data-ch]:hover { background: #f4f7f8; }
+    .ew-ch-grid [data-ch].on { background: #eef3f7; color: var(--title); }
     .tverses .vn {
       color: #1f6f78;
       padding-right: 0.25rem;
@@ -433,9 +529,9 @@
   </div>
   <span class="note" id="status"></span>
   <div id="sn-ref-menu" hidden>
-    <div class="sn-rhm-title">Ref</div>
+    <div class="sn-rhm-title">Topic</div>
     <button type="button" data-edit="1">Edit</button>
   </div>
-  <script src="topics-tree.js?v=284"></script>
+  <script src="topics-verse.js?v=311"></script>
 </body>
 </html>
