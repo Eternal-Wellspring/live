@@ -253,13 +253,17 @@ body { --header-h: 88px; }
 .home-page .tagline-sub { margin: 0.2rem 0 0; }
 .ew-board {
   display: grid;
-  grid-template-columns: minmax(12rem, 16rem) minmax(14rem, 20rem) minmax(18rem, 1fr);
+  grid-template-columns: minmax(12rem, 16rem);
   gap: 1.1rem;
   max-width: 72rem;
   margin: 0.9rem auto 2rem;
   padding: 0 1.4rem;
   align-items: start;
 }
+.ew-board.has-sites {
+  grid-template-columns: minmax(12rem, 16rem) minmax(16rem, 32rem);
+}
+.ew-col[hidden] { display: none !important; }
 .ew-col h2 {
   margin: 0 0 0.35rem;
   font-size: 0.95rem;
