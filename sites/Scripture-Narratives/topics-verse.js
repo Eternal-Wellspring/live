@@ -451,6 +451,38 @@
     }
     return false;
   }
+  function relatedToRef(t, lab) {
+    var i, k;
+    if (!t || !lab) return false;
+    if (topicHasRef(t, lab)) return true;
+    k = kids(visible(), t);
+    for (i = 0; i < k.length; i++) {
+      if (relatedToRef(k[i], lab)) return true;
+    }
+    return false;
+  }
+  function topicsForRef(lab) {
+    var items = visible(), out = [], i;
+    for (i = 0; i < items.length; i++) {
+      if (relatedToRef(items[i], lab)) out.push(items[i]);
+    }
+    return out;
+  }
+  function kidNForRef(t, lab) {
+    var k = kids(visible(), t), n = 0, i;
+    for (i = 0; i < k.length; i++) {
+      if (relatedToRef(k[i], lab)) n++;
+    }
+    return n;
+  }
+  function firstLeafForRef(lab) {
+    var rows = topicsForRef(lab), i, t;
+    for (i = 0; i < rows.length; i++) {
+      t = rows[i];
+      if (!kidNForRef(t, lab)) return t;
+    }
+    return rows[0] || null;
+  }
   function bottomsForSelRef() {
     var items = visible();
     var hit = [], i, t, desc, d, keep;
@@ -1803,92 +1835,119 @@
     var colBuilt = [];
     var topicEls = [];
     var refEls = [];
-    var ci, pane, panes = [];
+    var pane, panes = [];
     var selRefEl = null;
-    function layoutRefsColumn(refs, x0, minTop) {
-      if (!refs || !refs.length) return null;
-      var w = colNameW(refs);
-      var innerH = refs.length * BOX_H + Math.max(0, refs.length - 1) * GAP_Y;
-      var visH = (chart && chart.clientHeight) ? chart.clientHeight : viewH;
-      var y0 = Math.max(0, Math.round((visH - innerH) / 2));
-      var paneH = Math.max(80, innerH);
-      var paneEl = document.createElement("div");
-      var ii, re, y;
-      paneEl.className = "tcol";
-      board.appendChild(paneEl);
-      paneEl.style.left = Math.round(x0) + "px";
-      paneEl.style.top = y0 + "px";
-      paneEl.style.width = w + "px";
-      paneEl.style.height = paneH + "px";
-      paneEl._top = y0;
-      paneEl._h = paneH;
-      paneEl._x = x0;
-      paneEl._w = w;
-      paneEl._y = y0;
-      paneEl._boxes = [];
-      y = 0;
-      for (ii = 0; ii < refs.length; ii++) {
-        re = refBox(refs[ii], "", null);
-        paneEl.appendChild(re);
-        put(re, 0, y, w, BOX_H);
-        paneEl._boxes.push(re);
-        if (sameRef(refs[ii], selChapRef)) selRefEl = re;
-        y += BOX_H + GAP_Y;
-      }
-      return paneEl;
-    }
-    pane = layoutRefsColumn(chapRefs, x, band);
-    if (pane) {
-      refEls = pane._boxes || [];
-      x += pane._w + GAP_COL;
-      panes.push(pane);
-    }
-    var l1 = items[0];
-    var l2 = (l1 && (l1.level || 1) === 1) ? kids(items, l1) : [];
     var key = chapKey();
-    var colLists, curList, found, iOpen, j, nxt, boxes, parentBox, cw;
-    var keyChanged = key !== verseChapKey;
-    if (keyChanged) {
-      verseChapKey = key;
-      verseOpen = [];
-      verseAuto = true;
-      sel = null;
+    var IND = textSize("xxxx").w;
+    var ri, rows, maxW, t, row, nameW, nKid, header, leaf, lv, rw;
+    if (key !== verseChapKey) verseChapKey = key;
+    if (!sel) {
+      leaf = firstLeafForRef(selChapRef);
+      if (leaf) sel = sid(leaf.id);
     }
-    if (verseAuto) {
-      verseOpen = autoExpandIds(l2, items);
-      if (keyChanged) {
-        found = firstForExpand(l2);
-        if (found) sel = sid(found.id);
+    function outlineRow(topic, lab, nmW) {
+      var b = document.createElement("button");
+      var wrap = document.createElement("div");
+      var name = document.createElement("span");
+      var on = sid(sel) === sid(topic.id) || isSelOrAbove(topic);
+      var nFit = kidNForRef(topic, lab);
+      var teal = mkBtn("teal", nFit, false, function () {
+        selChapRef = lab;
+        pickTopic(topic);
+      });
+      wrap.className = "vrow";
+      wrap.style.paddingLeft = (Math.max(0, (topic.level || 1) - 1) * IND) + "px";
+      b.type = "button";
+      b.className = "tbox" + (on ? " on" : "");
+      b.dataset.id = sid(topic.id);
+      name.className = "tname";
+      name.textContent = topic.title || "";
+      b.appendChild(name);
+      b.style.width = nmW + "px";
+      b.style.height = BOX_H + "px";
+      teal.dataset.id = sid(topic.id);
+      teal.style.width = BOX_H + "px";
+      teal.style.height = BOX_H + "px";
+      b.addEventListener("contextmenu", function (ev) {
+        showRhm(ev, "Topic", function () { startEdit(); });
+      });
+      function startEdit(ev) {
+        if (ev) { ev.preventDefault(); ev.stopPropagation(); }
+        if (name.querySelector("input")) return;
+        var inp = document.createElement("input");
+        inp.type = "text";
+        inp.value = topic.title || "";
+        inp.style.cssText = "font:inherit;color:inherit;border:0;outline:1px solid #c5d0d4;padding:0;margin:0;width:100%;background:#fff;box-sizing:border-box";
+        name.textContent = "";
+        name.appendChild(inp);
+        inp.focus();
+        inp.select();
+        function commit() {
+          if (!inp.parentNode) return;
+          topic.title = inp.value;
+          paint();
+          saveTopics();
+        }
+        inp.addEventListener("keydown", function (kev) {
+          if (kev.key === "Enter") { kev.preventDefault(); commit(); }
+          if (kev.key === "Escape") { kev.preventDefault(); paint(); }
+        });
+        inp.addEventListener("blur", commit);
+        inp.addEventListener("click", function (cev) { cev.stopPropagation(); });
       }
+      b.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        if (name.querySelector("input")) return;
+        selChapRef = lab;
+        pickTopic(topic);
+        if (sid(sel) === sid(topic.id)) openDesc(topic);
+        else hideDesc();
+      });
+      wrap.appendChild(b);
+      wrap.appendChild(teal);
+      return wrap;
     }
-    colLists = [{ list: l2, parent: null }];
-    curList = l2;
-    for (iOpen = 0; iOpen < verseOpen.length; iOpen++) {
-      found = null;
-      for (j = 0; j < curList.length; j++) {
-        if (sid(curList[j].id) === sid(verseOpen[iOpen])) { found = curList[j]; break; }
+    for (ri = 0; ri < chapRefs.length; ri++) {
+      rows = topicsForRef(chapRefs[ri]);
+      nameW = textSize(chapRefs[ri]).w;
+      for (t = 0; t < rows.length; t++) {
+        rw = textSize(rows[t].title || "").w;
+        if (rw > nameW) nameW = rw;
       }
-      if (!found) break;
-      nxt = kids(items, found);
-      if (!nxt.length) break;
-      colLists.push({ list: nxt, parent: found });
-      curList = nxt;
-    }
-    for (ci = 0; ci < colLists.length; ci++) {
-      if (!colLists[ci].list.length) continue;
-      cw = colNameW(colLists[ci].list);
-      boxes = colLists[ci].list.map(function (t) { return box(t, liveIn(colLists[ci].list)); });
-      parentBox = null;
-      if (colLists[ci].parent && colBuilt.length) {
-        parentBox = findBox(colBuilt[colBuilt.length - 1].boxes, colLists[ci].parent.id);
+      if (nameW < 8) nameW = 8;
+      maxW = nameW;
+      for (t = 0; t < rows.length; t++) {
+        lv = Math.max(1, rows[t].level || 1);
+        rw = (lv - 1) * IND + nameW + GAP_BTN + BOX_H;
+        if (rw > maxW) maxW = rw;
       }
-      pane = layoutCol(boxes, x, cw, parentBox);
-      if (pane) {
-        topicEls = topicEls.concat(boxes);
-        colBuilt.push({ boxes: boxes, pane: pane, w: cw, x: x });
-        panes.push(pane);
-        x += colSpan(cw) + GAP_COL;
+      pane = document.createElement("div");
+      pane.className = "tcol vcol";
+      board.appendChild(pane);
+      pane.style.left = Math.round(x) + "px";
+      pane.style.top = "0px";
+      pane.style.width = maxW + "px";
+      header = refBox(chapRefs[ri], "", null);
+      header.style.width = nameW + "px";
+      header.style.height = BOX_H + "px";
+      pane.appendChild(header);
+      if (sameRef(chapRefs[ri], selChapRef)) selRefEl = header;
+      refEls.push(header);
+      for (t = 0; t < rows.length; t++) {
+        row = outlineRow(rows[t], chapRefs[ri], nameW);
+        pane.appendChild(row);
+        topicEls.push(row.firstChild);
       }
+      pane._top = 0;
+      pane._h = (1 + rows.length) * BOX_H + Math.max(0, rows.length) * GAP_Y;
+      pane._x = x;
+      pane._w = maxW;
+      pane._y = 0;
+      pane._boxes = topicEls.slice(topicEls.length - rows.length);
+      colBuilt.push({ pane: pane, boxes: pane._boxes, w: maxW, x: x });
+      panes.push(pane);
+      x += maxW + GAP_COL;
     }
     expandByRef = false;
 
