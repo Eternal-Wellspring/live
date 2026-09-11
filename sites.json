@@ -1,29 +1,6 @@
 {
   "sites": [
     {
-      "folder": "His-Finished-Work",
-      "name": "His Finished Work",
-      "tagline": "The best is yet to come.",
-      "description": "The story of what is happening behind the scenes of Creation - from Genesis to Revelation.\n\nUnderstand passages there were a little strange instead of passing over them.  You will see and understand the bible like you never did before.\n\nAs you read this story, the Word of God will open up next to it with a single click or tap.",
-      "category": "End Times Prophecies",
-      "contents": [
-        "Home",
-        "1. Before Creation",
-        "2. God’s Word Creates",
-        "3. Mankind Rebels",
-        "4. Yahweh’s 10 Words",
-        "5. Son of God and of Man",
-        "6. The Statue & the Stone",
-        "7. Tribulation and Wrath",
-        "8. The Gospel Of The Kingdom",
-        "9. The Word Is Worthy",
-        "10. The Word Conquers",
-        "11. The Kingdom Comes",
-        "12. Eternity"
-      ],
-      "href": "/His-Finished-Work/"
-    },
-    {
       "folder": "Scripture-Narratives",
       "name": "Scripture Narratives",
       "tagline": "Scripture for Biblical Narratives",
@@ -32,7 +9,8 @@
       "contents": [
         "Home"
       ],
-      "href": "/Scripture-Narratives/"
+      "href": "/Scripture-Narratives/",
+      "showOnWeb": true
     },
     {
       "folder": "the-day-of-yahweh",
@@ -43,7 +21,8 @@
       "contents": [
         "Home"
       ],
-      "href": "/the-day-of-yahweh/"
+      "href": "/the-day-of-yahweh/",
+      "showOnWeb": true
     },
     {
       "folder": "Waiting-for-the-sons-of-God",
@@ -64,7 +43,8 @@
         "9. Sons of God reign over Creation",
         "10. Yahweh dwells with His Families"
       ],
-      "href": "/Waiting-for-the-sons-of-God/"
+      "href": "/Waiting-for-the-sons-of-God/",
+      "showOnWeb": true
     }
   ]
 }

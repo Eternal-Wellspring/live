@@ -206,16 +206,14 @@
       localStorage.setItem(STORE + ".on", on ? "1" : "0");
     } catch (e) {}
   }
-  function builderPort() {
-    var p = String(location.port || "");
-    return p === "8775" || p === "8776" || p === "8777";
-  }
   function canEditVerses() {
-    return builderPort();
+    return location.port === "8775" || location.port === "8776" || location.port === "8777";
   }
   function hasLocalApi() {
     return (
-      builderPort() ||
+      location.port === "8775" ||
+      location.port === "8776" ||
+      location.port === "8777" ||
       location.port === "8778" ||
       location.port === "8779" ||
       location.port === "8780"
@@ -763,16 +761,6 @@
     }
     return bits.join("");
   }
-  function applyPopupVerses(storedText, verses) {
-    var kept = storedText ? verseMapFromHtml(storedHtml(storedText)) : {};
-    addMissingVerses(kept, verses || []);
-    var html = htmlFromVerseMap(kept, currentRef.vs1, vs2Safe(currentRef));
-    if (!html) return false;
-    setPopupHtml(html);
-    savedCopy = nkjvHtml;
-    markHitPassages();
-    return true;
-  }
   function addMissingVerses(map, verses) {
     (verses || []).forEach(function (v) {
       if (v && v.vs && !map[v.vs]) map[v.vs] = String(v.text || "").replace(/</g, "&lt;");
@@ -885,7 +873,7 @@
     s.id = "ew-ref-style";
     s.textContent =
       "a.ref,.col a.ref,.col-text a.ref,.para a.ref{color:var(--title,#005eb8)!important;font-weight:400!important;font-size:calc(1em - 2px)!important;text-decoration:underline;text-underline-offset:0.15em;cursor:pointer;white-space:nowrap}" +
-      "#ew-ref-menu{position:fixed;z-index:200;min-width:12rem;background:#fff;border:1px solid #c5d0d4;box-shadow:0 8px 22px rgba(0,0,0,.16);padding:0.15rem 0 0.35rem}" +
+      "#ew-ref-menu{position:fixed;z-index:120;min-width:12rem;background:#fff;border:1px solid #c5d0d4;box-shadow:0 8px 22px rgba(0,0,0,.16);padding:0.15rem 0 0.35rem}" +
       "#ew-ref-menu[hidden]{display:none!important}" +
       "#ew-ref-menu .ew-ref-title{padding:0.3rem 0.75rem 0.15rem;font:800 0.82rem Arial,Helvetica,sans-serif;color:#1f6f78}" +
       "#ew-ref-menu .ew-ref-title.ew-rhm-font{border-top:2px solid var(--title,#004d97);margin-top:0.08rem;padding-top:0.22rem}" +
@@ -2429,11 +2417,9 @@
         if (d && d.found && d.text) {
           inFile = true;
           showPopup();
-          if (!applyPopupVerses(d.text, [])) {
-            setPopupHtml(storedHtml(d.text));
-            savedCopy = nkjvHtml;
-            markHitPassages();
-          }
+          setPopupHtml(storedHtml(d.text));
+          savedCopy = nkjvHtml;
+          markHitPassages();
           markClean();
           return;
         }
@@ -2505,7 +2491,7 @@
     return m ? m[1] : "";
   }
   function saveCurrent(andClose) {
-    if (!currentRef || !canEditVerses()) return;
+    if (!currentRef || (location.port !== "8775" && location.port !== "8776" && location.port !== "8777")) return;
     var html = htmlToSave();
     if (!html) return;
     var folder = saveFolder();
@@ -2806,13 +2792,7 @@
     "contextmenu",
     function (ev) {
       if (!canEditVerses()) return;
-      if (ev.target.closest && ev.target.closest("#ew-ref-menu, #ew-chapter")) return;
-      if (ev.target.closest && ev.target.closest("#ew-verse, #ew-text-modal, #ew-info-modal")) {
-        ev.preventDefault();
-        ev.stopPropagation();
-        showRefMenu(ev, hitFromEvent(ev) || { text: selectedText(), a: null });
-        return;
-      }
+      if (ev.target.closest && ev.target.closest("#ew-verse, #ew-chapter, #ew-ref-menu")) return;
       var inIframe = window.parent && window.parent !== window;
       var inLong = ev.target.closest && ev.target.closest("#long-desc");
       if (!inIframe && !inLong) return;

@@ -55,18 +55,46 @@
       return f === "eternalwellspring" || n === "eternalwellspring";
     }
 
-    function sitesIn(cat) {
+    function webSites() {
       return sites.filter(function (s) {
-        return s && s.href && s.name && !isHall(s) && sameCat(s.category, cat);
+        return s && s.href && s.name && !isHall(s) && s.showOnWeb !== false;
       });
+    }
+
+    function sitesIn(cat) {
+      return webSites().filter(function (s) {
+        return sameCat(s.category, cat);
+      });
+    }
+
+    function categoriesFromWebsites() {
+      var have = {};
+      webSites().forEach(function (s) {
+        var n = String(s.category || "").trim();
+        if (!n) return;
+        var k = n.toLowerCase();
+        if (!have[k]) have[k] = n;
+      });
+      var out = [];
+      (categories || []).forEach(function (c) {
+        var name = catName(c);
+        if (!name) return;
+        var k = name.toLowerCase();
+        if (have[k]) {
+          out.push(have[k]);
+          delete have[k];
+        }
+      });
+      Object.keys(have).sort().forEach(function (k) {
+        out.push(have[k]);
+      });
+      return out;
     }
 
     function fillTopics() {
       var box = $("topics");
       box.innerHTML = "";
-      categories.forEach(function (c) {
-        var name = catName(c);
-        if (!name) return;
+      categoriesFromWebsites().forEach(function (name) {
         var btn = document.createElement("button");
         btn.type = "button";
         btn.className = sameCat(name, chosenCat) ? "on" : "";
@@ -135,7 +163,7 @@
     ];
 
     function useLists(catList, siteList) {
-      categories = (catList && catList.length) ? catList : fallbackCategories;
+      categories = catList || [];
       sites = ((siteList && siteList.length) ? siteList : fallbackSites).slice().sort(function (a, b) {
         return String(a && a.name || "").localeCompare(String(b && b.name || ""), "en", { sensitivity: "base" });
       });
