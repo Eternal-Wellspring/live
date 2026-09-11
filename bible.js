@@ -11,15 +11,12 @@
     }
     if (u.pathname !== "/scriptures") return _ewFetch.apply(this, arguments);
     if (
-      location.port === "8766" ||
-      location.port === "8767" ||
-      location.port === "8768" ||
+      location.port === "8775" ||
       location.port === "8776" ||
       location.port === "8777" ||
       location.port === "8778" ||
       location.port === "8779" ||
-      location.port === "8787" ||
-      location.port === "8788"
+      location.port === "8780"
     ) {
       return _ewFetch.apply(this, arguments);
     }
@@ -211,13 +208,18 @@
   }
   function builderPort() {
     var p = String(location.port || "");
-    return p === "8767" || p === "8768" || p === "8777" || p === "8779" || p === "8787";
+    return p === "8775" || p === "8776" || p === "8777";
   }
   function canEditVerses() {
     return builderPort();
   }
   function hasLocalApi() {
-    return builderPort() || location.port === "8766" || location.port === "8776" || location.port === "8778" || location.port === "8788";
+    return (
+      builderPort() ||
+      location.port === "8778" ||
+      location.port === "8779" ||
+      location.port === "8780"
+    );
   }
   function scriptureKey(ref) {
     return String(ref || "").replace(/\s+/g, " ").trim().toLowerCase();

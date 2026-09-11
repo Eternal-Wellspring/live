@@ -10,7 +10,14 @@
       return _ewFetch.apply(this, arguments);
     }
     if (u.pathname !== "/scriptures") return _ewFetch.apply(this, arguments);
-    if (location.port === "8766" || location.port === "8767") {
+    if (
+      location.port === "8775" ||
+      location.port === "8776" ||
+      location.port === "8777" ||
+      location.port === "8778" ||
+      location.port === "8779" ||
+      location.port === "8780"
+    ) {
       return _ewFetch.apply(this, arguments);
     }
     var ref = u.searchParams.get("ref") || "";
@@ -185,10 +192,17 @@
     } catch (e) {}
   }
   function canEditVerses() {
-    return location.port === "8767";
+    return location.port === "8775" || location.port === "8776" || location.port === "8777";
   }
   function hasLocalApi() {
-    return location.port === "8766" || location.port === "8767";
+    return (
+      location.port === "8775" ||
+      location.port === "8776" ||
+      location.port === "8777" ||
+      location.port === "8778" ||
+      location.port === "8779" ||
+      location.port === "8780"
+    );
   }
   function scriptureKey(ref) {
     return String(ref || "").replace(/\s+/g, " ").trim().toLowerCase();
@@ -1498,7 +1512,7 @@
     return m ? m[1] : "";
   }
   function saveCurrent(andClose) {
-    if (!currentRef || location.port !== "8767") return;
+    if (!currentRef || (location.port !== "8775" && location.port !== "8776" && location.port !== "8777")) return;
     var html = htmlToSave();
     if (!html) return;
     var folder = saveFolder();

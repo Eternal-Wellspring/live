@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Eternal Wellspring — public live site, port 8766."""
+"""Eternal Wellspring — public site; Web Develop 8778, Test 8779, Live 8780."""
 
 from __future__ import annotations
 
 import json
+import sys
 import re
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -16,7 +17,15 @@ SOGA = LIVE / "soga"
 PUBLISHED = LIVE / "sites"
 _RESERVED = {"api", "images", "sites", "bible", "scriptures", "published"}
 SCRIPTURES = LIVE / "scriptures.json"
-PORT = 8766
+def _web_port():
+    if len(sys.argv) > 1 and str(sys.argv[1]).strip().isdigit():
+        n = int(sys.argv[1])
+        if 1 <= n <= 65535:
+            return n
+    name = Path(__file__).resolve().parent.name
+    return {"Sites 1 Develop": 8778, "Sites 2 Test": 8779, "Sites 3 Live": 8780}.get(name, 8778)
+
+PORT = _web_port()
 _PUB_FOLDER = re.compile(r"/(?:published|sites)/([^/]+)/")
 SITE_ALIASES = {
     "sons": "sons-of-god-arise",
