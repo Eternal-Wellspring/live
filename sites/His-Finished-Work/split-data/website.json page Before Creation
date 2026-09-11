@@ -1,0 +1,232 @@
+{
+  "id": "76",
+  "order": 1,
+  "editedAt": 0,
+  "title": "Before Creation",
+  "description": "",
+  "sections": [
+    {
+      "id": "329",
+      "order": 0,
+      "editedAt": 0,
+      "tabName": "Contents",
+      "description": "",
+      "headings": [],
+      "formatName": "Default"
+    },
+    {
+      "id": "333",
+      "order": 1,
+      "editedAt": 0,
+      "tabName": "Overview",
+      "description": "",
+      "headings": [
+        {
+          "id": "332",
+          "order": 0,
+          "editedAt": 0,
+          "name": "",
+          "paragraphs": [
+            {
+              "id": "331",
+              "order": 0,
+              "editedAt": 0,
+              "title": "",
+              "columns": [
+                {
+                  "id": "330",
+                  "rowId": "331",
+                  "order": 0,
+                  "editedAt": 0,
+                  "title": "",
+                  "text": "",
+                  "width": 100,
+                  "format": "Default",
+                  "titleFormat": "Default"
+                }
+              ],
+              "formatNames": {
+                "paragraph": "Default"
+              }
+            }
+          ]
+        }
+      ],
+      "formatName": "Default"
+    },
+    {
+      "id": "337",
+      "order": 2,
+      "editedAt": 0,
+      "tabName": "Takeaways",
+      "description": "",
+      "headings": [
+        {
+          "id": "336",
+          "order": 0,
+          "editedAt": 0,
+          "name": "",
+          "paragraphs": [
+            {
+              "id": "335",
+              "order": 0,
+              "editedAt": 0,
+              "title": "",
+              "columns": [
+                {
+                  "id": "334",
+                  "rowId": "335",
+                  "order": 0,
+                  "editedAt": 0,
+                  "title": "",
+                  "text": "",
+                  "width": 100,
+                  "format": "Default",
+                  "titleFormat": "Default"
+                }
+              ],
+              "formatNames": {
+                "paragraph": "Default"
+              }
+            }
+          ]
+        }
+      ],
+      "formatName": "Default"
+    },
+    {
+      "id": "341",
+      "order": 3,
+      "editedAt": 0,
+      "tabName": "Details",
+      "description": "",
+      "headings": [
+        {
+          "id": "340",
+          "order": 0,
+          "editedAt": 0,
+          "name": "",
+          "paragraphs": [
+            {
+              "id": "339",
+              "order": 0,
+              "editedAt": 0,
+              "title": "",
+              "columns": [
+                {
+                  "id": "338",
+                  "rowId": "339",
+                  "order": 0,
+                  "editedAt": 0,
+                  "title": "",
+                  "text": "",
+                  "width": 100,
+                  "format": "Default",
+                  "titleFormat": "Default"
+                }
+              ],
+              "formatNames": {
+                "paragraph": "Default"
+              }
+            }
+          ]
+        }
+      ],
+      "formatName": "Default"
+    },
+    {
+      "id": "345",
+      "order": 4,
+      "editedAt": 0,
+      "tabName": "Q&A",
+      "description": "",
+      "headings": [
+        {
+          "id": "344",
+          "order": 0,
+          "editedAt": 0,
+          "name": "",
+          "paragraphs": [
+            {
+              "id": "343",
+              "order": 0,
+              "editedAt": 0,
+              "title": "",
+              "columns": [
+                {
+                  "id": "342",
+                  "rowId": "343",
+                  "order": 0,
+                  "editedAt": 0,
+                  "title": "",
+                  "text": "",
+                  "width": 100,
+                  "format": "Default",
+                  "titleFormat": "Default"
+                }
+              ],
+              "formatNames": {
+                "paragraph": "Default"
+              }
+            }
+          ]
+        }
+      ],
+      "formatName": "Default"
+    },
+    {
+      "id": "349",
+      "order": 5,
+      "editedAt": 0,
+      "tabName": "Videos",
+      "description": "",
+      "headings": [
+        {
+          "id": "348",
+          "order": 0,
+          "editedAt": 0,
+          "name": "",
+          "paragraphs": [
+            {
+              "id": "347",
+              "order": 0,
+              "editedAt": 0,
+              "title": "",
+              "columns": [
+                {
+                  "id": "346",
+                  "rowId": "347",
+                  "order": 0,
+                  "editedAt": 0,
+                  "title": "",
+                  "text": "",
+                  "width": 100,
+                  "format": "Default",
+                  "titleFormat": "Default"
+                }
+              ],
+              "formatNames": {
+                "paragraph": "Default"
+              }
+            }
+          ]
+        }
+      ],
+      "formatName": "Default"
+    },
+    {
+      "id": "350",
+      "order": 6,
+      "editedAt": 0,
+      "tabName": "Settings",
+      "description": "",
+      "headings": [],
+      "formatName": "Default",
+      "settings": true
+    }
+  ],
+  "formatNames": {
+    "website": "Default",
+    "pageTitle": "Default"
+  }
+}

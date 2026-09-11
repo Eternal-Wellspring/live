@@ -1,0 +1,23 @@
+{
+  "website.json": [
+    "website.json site",
+    "website.json page Home",
+    "website.json page Before Creation",
+    "website.json page God’s Word Creates",
+    "website.json page Mankind Rebels",
+    "website.json page Yahweh’s 10 Words",
+    "website.json page Son of God and of Man",
+    "website.json page The Statue & the Stone",
+    "website.json page Tribulation and Wrath",
+    "website.json page The Gospel Of The Kingdom",
+    "website.json page The Word Is Worthy",
+    "website.json page The Word Conquers",
+    "website.json page The Kingdom Comes",
+    "website.json page Eternity"
+  ],
+  "scriptures.json": [
+    "scriptures.json translation",
+    "scriptures.json verses"
+  ],
+  "scriptures.json compact": false
+}
