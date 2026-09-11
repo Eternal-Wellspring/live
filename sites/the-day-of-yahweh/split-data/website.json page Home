@@ -1,0 +1,37 @@
+{
+  "id": "p-home",
+  "title": "Home",
+  "description": "",
+  "sections": [
+    {
+      "id": "s-home",
+      "tabName": "Home",
+      "description": "",
+      "headings": [
+        {
+          "id": "h-home",
+          "name": "The Day of Yahweh",
+          "paragraphs": [
+            {
+              "id": "r-home",
+              "columns": [
+                {
+                  "title": "",
+                  "text": "When Jesus returns — the events and periods of the last days, and the scriptures they stand on.\n\n<a href=\"topics.html\">Topics</a>",
+                  "width": 1
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "s-set-p-home",
+      "tabName": "Settings",
+      "description": "",
+      "headings": [],
+      "settings": true
+    }
+  ]
+}
