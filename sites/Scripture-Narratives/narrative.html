@@ -328,7 +328,7 @@
       return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=290";
     }
     function verseUrl() {
-      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=368";
+      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=340";
     }
     function showTree() {
       var fr = document.getElementById("tree-frame");
@@ -369,7 +369,6 @@
       document.getElementById("page-nav-name").textContent = title;
       document.getElementById("page-nav-name-end").textContent = title;
     }
-
     function markL1(nid) {
       document.querySelectorAll("#l1-list a").forEach(function (a) {
         a.classList.toggle("on", a.getAttribute("data-id") === String(nid || ""));
