@@ -616,78 +616,12 @@
     "duration": ""
   },
   {
-    "id": 66,
+    "id": 54,
     "lecture_id": 4,
     "level": 3,
     "seq": 57,
     "kind": "period",
-    "title": "Definition",
-    "notes": "",
-    "description": "",
-    "duration": ""
-  },
-  {
-    "id": 68,
-    "lecture_id": 4,
-    "level": 3,
-    "seq": 58,
-    "kind": "period",
-    "title": "Timing",
-    "notes": "",
-    "description": "",
-    "duration": ""
-  },
-  {
-    "id": 67,
-    "lecture_id": 4,
-    "level": 3,
-    "seq": 59,
-    "kind": "period",
-    "title": "Exodus",
-    "notes": "",
-    "description": "",
-    "duration": ""
-  },
-  {
-    "id": 56,
-    "lecture_id": 4,
-    "level": 3,
-    "seq": 60,
-    "kind": "period",
-    "title": "End Times",
-    "notes": "",
-    "description": "",
-    "duration": ""
-  },
-  {
-    "id": 63,
-    "lecture_id": 4,
-    "level": 4,
-    "seq": 61,
-    "kind": "period",
-    "title": "Trumpet",
-    "notes": "",
-    "description": "",
-    "duration": ""
-  },
-  {
-    "id": 64,
-    "lecture_id": 4,
-    "level": 4,
-    "seq": 62,
-    "kind": "period",
-    "title": "Gathering",
-    "notes": "",
-    "description": "",
-    "duration": ""
-  },
-  {
-    "id": 65,
-    "lecture_id": 4,
-    "level": 4,
-    "seq": 63,
-    "kind": "period",
-    "title": "Battle",
+    "title": "Biblical Examples",
     "notes": "",
     "description": "",
     "duration": ""
@@ -695,8 +629,8 @@
   {
     "id": 55,
     "lecture_id": 4,
-    "level": 3,
-    "seq": 64,
+    "level": 4,
+    "seq": 58,
     "kind": "period",
     "title": "Historical",
     "notes": "",
@@ -704,23 +638,12 @@
     "duration": ""
   },
   {
-    "id": 61,
+    "id": 56,
     "lecture_id": 4,
-    "level": 2,
-    "seq": 65,
+    "level": 4,
+    "seq": 59,
     "kind": "period",
-    "title": "Day of Atonement",
-    "notes": "",
-    "description": "",
-    "duration": ""
-  },
-  {
-    "id": 62,
-    "lecture_id": 4,
-    "level": 2,
-    "seq": 66,
-    "kind": "period",
-    "title": "Tabernacles/Harvest",
+    "title": "End Times Examples",
     "notes": "",
     "description": "",
     "duration": ""

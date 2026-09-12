@@ -6,6 +6,8 @@
   var GAP_BTN = 4;
   var DESC_H = 26;
   var VERSE_W = 520;
+  var userSize = 0;
+  var MIN_FS = 9;
   var topics = [];
   var topicRefs = [];
   var sel = null;
@@ -25,6 +27,12 @@
   var chapFilter = true;
   var verseOpen = [];
   var verseChapKey = "";
+  var colPruned = {};
+  var colClosed = {};
+  var refTopicId = "";
+  var openRef = "";
+  var tealFlip = {};
+  var leftPaintKey = "";
   var verseAuto = true;
   var expandByRef = false;
   var pendingEdit = null;
@@ -51,6 +59,16 @@
   var CHAPS = [0, 50, 40, 27, 36, 34, 24, 21, 4, 31, 24, 22, 25, 29, 36, 10, 13, 10, 42, 150, 31, 12, 8, 66, 52, 5, 48, 12, 14, 3, 9, 1, 4, 7, 3, 3, 3, 2, 14, 4, 28, 16, 24, 21, 28, 16, 16, 13, 6, 6, 4, 4, 5, 3, 6, 4, 3, 1, 13, 5, 5, 3, 5, 1, 1, 1, 22];
   var EXTRA_CH = { 67: 9, 68: 14, 69: 16, 70: 19, 71: 51, 72: 1, 73: 5, 74: 16, 75: 15, 76: 1, 77: 16, 78: 1, 79: 1, 88: 1, 90: 50 };
   var CANON = "Gen Exo Lev Num Deu Jos Jdg Rut 1Sa 2Sa 1Ki 2Ki 1Ch 2Ch Ezr Neh Est Job Psa Pro Ecc Sng Isa Jer Lam Ezk Dan Hos Jol Amo Oba Jon Mic Nam Hab Zep Hag Zec Mal Mat Mrk Luk Jhn Act Rom 1Co 2Co Gal Eph Php Col 1Th 2Th 1Ti 2Ti Tit Phm Heb Jas 1Pe 2Pe 1Jn 2Jn 3Jn Jud Rev 1Es Tob Jdt Wis Sir Lje Bar 1Ma 2Ma Man 2Es Sus Bel Aza Jub".split(" ");
+  var BOOK_FULL = [
+    "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", "Ruth",
+    "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles", "Ezra", "Nehemiah", "Esther",
+    "Job", "Psalms", "Proverbs", "Ecclesiastes", "Song of Solomon", "Isaiah", "Jeremiah", "Lamentations",
+    "Ezekiel", "Daniel", "Hosea", "Joel", "Amos", "Obadiah", "Jonah", "Micah", "Nahum", "Habakkuk",
+    "Zephaniah", "Haggai", "Zechariah", "Malachi", "Matthew", "Mark", "Luke", "John", "Acts", "Romans",
+    "1 Corinthians", "2 Corinthians", "Galatians", "Ephesians", "Philippians", "Colossians",
+    "1 Thessalonians", "2 Thessalonians", "1 Timothy", "2 Timothy", "Titus", "Philemon", "Hebrews", "James",
+    "1 Peter", "2 Peter", "1 John", "2 John", "3 John", "Jude", "Revelation"
+  ];
   var CANON_N = 66;
   var NT_AT = CANON.indexOf("Mat");
   var rootId = (function () {
@@ -172,9 +190,10 @@
     return h;
   }
   function parseRefParts(lab) {
-    var m = String(lab || "").trim().match(/^(\S+)\s+(\d+)\s*:\s*(\d+)(?:\s*[-–—]\s*(\d+))?$/);
+    var m = String(lab || "").trim().replace(/\s+/g, " ")
+      .match(/^(\S+)\s+(\d+)\s*:\s*(\d+)(?:\s*[-–—]\s*(?:(\d+)\s*:\s*)?(\d+))?$/);
     if (!m) return null;
-    return { book: m[1], ch: Number(m[2]), a: Number(m[3]), b: Number(m[4] || m[3]) };
+    return { book: m[1], ch: Number(m[2]), a: Number(m[3]), b: Number(m[5] || m[4] || m[3]) };
   }
   function combineRefs(list) {
     var parsed = [], rest = [], i, p, acc = null, out = [];
@@ -232,6 +251,40 @@
     }
     return combineRefs(out);
   }
+  function homeRef(t) {
+    var labs = ownChapRefs(t);
+    return labs.length ? labs[0] : "";
+  }
+  function ownChapRefs(t) {
+    var out = [], seen = {}, i, r, lab, p;
+    if (!t || !viewChap) return out;
+    for (i = 0; i < topicRefs.length; i++) {
+      r = topicRefs[i];
+      if (sid(r.topic_id) !== sid(t.id)) continue;
+      lab = String(r.ref || "").trim();
+      if (!lab || seen[lab]) continue;
+      p = parseRefParts(lab);
+      if (!p || p.book !== viewChap.abbr || Number(p.ch) !== Number(viewChap.ch)) continue;
+      seen[lab] = 1;
+      out.push(lab);
+    }
+    return combineRefs(out);
+  }
+  function descHasChapRef(t, lab) {
+    var k = kids(bySeq(), t), i, j, labs;
+    for (i = 0; i < k.length; i++) {
+      labs = ownChapRefs(k[i]);
+      for (j = 0; j < labs.length; j++) {
+        if (labs[j] === lab || sameRef(labs[j], lab)) return true;
+      }
+      if (descHasChapRef(k[i], lab)) return true;
+    }
+    return false;
+  }
+  function bottomChapRefs(t) {
+    if (!isLeaf(t)) return [];
+    return ownChapRefs(t);
+  }
   function refIsChap(lab) {
     var p = parseRefParts(lab);
     return !!(p && viewChap && p.book === viewChap.abbr && p.ch === viewChap.ch);
@@ -274,17 +327,49 @@
     }
     return false;
   }
+  function firstChapRef(t) {
+    var labs = refsFor(t), i, p, inChap = "";
+    for (i = 0; i < labs.length; i++) {
+      p = parseRefParts(labs[i]);
+      if (p && viewChap && p.book === viewChap.abbr && p.ch === viewChap.ch) {
+        inChap = labs[i];
+        break;
+      }
+    }
+    return inChap || labs[0] || "";
+  }
+  function showRefInChap(lab) {
+    var p = parseRefParts(lab);
+    if (!p) return;
+    viewChap = { abbr: p.book, ch: p.ch, num: bookNum(p.book) };
+    selChapRef = lab;
+    selVs = p.a;
+    bookOpen = false;
+    chapOpen = false;
+    saveSection();
+    paint();
+  }
   function hitsInChapter() {
-    var set = {}, ids = visIds(), i, r, p, fa, fb, n;
+    var set = {}, ids, i, r, p, n, lab, seen;
     if (!viewChap) return set;
+    function addRange(raw) {
+      p = parseRefParts(raw);
+      if (!p || p.book !== viewChap.abbr || p.ch !== viewChap.ch) return;
+      for (n = p.a; n <= p.b; n++) set[n] = 1;
+    }
+    if (selChapRef) {
+      addRange(selChapRef);
+      return set;
+    }
+    ids = visIds();
+    seen = {};
     for (i = 0; i < topicRefs.length; i++) {
       r = topicRefs[i];
       if (!ids[sid(r.topic_id)]) continue;
-      p = parseRefParts(r.ref);
-      if (!p || p.book !== viewChap.abbr || p.ch !== viewChap.ch) continue;
-      fa = Number(r.from) || p.a;
-      fb = Number(r.to) || p.b;
-      for (n = fa; n <= fb; n++) set[n] = 1;
+      lab = String(r.ref || "").trim();
+      if (!lab || seen[lab]) continue;
+      seen[lab] = 1;
+      addRange(lab);
     }
     return set;
   }
@@ -379,30 +464,127 @@
     return ids;
   }
   function chapKey() {
-    return (viewChap ? viewChap.abbr + " " + viewChap.ch : "") + "|" + (selChapRef || "");
+    return viewChap ? viewChap.abbr + " " + viewChap.ch : "";
   }
-  function toggleVerseTopics(t) {
-    var items = visible();
-    var chain = [];
-    var p = t;
-    var extra;
-    while (p && (p.level || 1) > 1) {
-      chain.unshift(sid(p.id));
+  function colClosedSet(lab) {
+    if (!colClosed[lab]) colClosed[lab] = {};
+    return colClosed[lab];
+  }
+  function colIsClosed(lab, id) {
+    return !!(colClosed[lab] && colClosed[lab][sid(id)]);
+  }
+  function hasYellowBelow(t, lab) {
+    var k = kids(visible(), t), i;
+    for (i = 0; i < k.length; i++) {
+      if (relatedToRef(k[i], lab)) return true;
+    }
+    return false;
+  }
+  function subN(t) {
+    return kids(visible(), t).length;
+  }
+  function topicExpanded(t) {
+    if (!t) return false;
+    if ((t.level || 1) <= 1) return true;
+    var open = topicInChap(t);
+    if (tealFlip[sid(t.id)]) open = !open;
+    return open;
+  }
+  function toggleTealPrune(t) {
+    var id = sid(t.id);
+    if (tealFlip[id]) delete tealFlip[id];
+    else tealFlip[id] = 1;
+    paint();
+  }
+  function toggleGreenRefs(t) {
+    var id = sid(t.id);
+    if (sid(refTopicId) === id) refTopicId = "";
+    else refTopicId = id;
+    paint();
+  }
+  function shownTopics() {
+    var items = visible(), out = [];
+    function walk(t) {
+      var k, i;
+      if (!t) return;
+      out.push(t);
+      if (!topicExpanded(t)) return;
+      k = kids(items, t);
+      for (i = 0; i < k.length; i++) walk(k[i]);
+    }
+    if (items[0]) walk(items[0]);
+    return out;
+  }
+  function toggleColTeal(t, lab) {
+    var id = sid(t.id);
+    var closed;
+    if (!colPruned[lab] && hasYellowBelow(t, lab)) {
+      colPruned[lab] = true;
+      paint();
+      return;
+    }
+    closed = colClosedSet(lab);
+    if (closed[id]) delete closed[id];
+    else closed[id] = 1;
+    paint();
+  }
+  function rowShown(t, lab) {
+    var p;
+    if (colPruned[lab] && !relatedToRef(t, lab)) return false;
+    p = parentTopic(t);
+    while (p) {
+      if (colIsClosed(lab, p.id)) return false;
       p = parentTopic(p);
     }
-    verseAuto = false;
-    var at = -1, i;
-    for (i = 0; i < verseOpen.length; i++) {
-      if (sid(verseOpen[i]) === sid(t.id)) { at = i; break; }
+    return true;
+  }
+  function underOf(id, anc) {
+    var t = find(visible(), id) || find(topics, id);
+    id = sid(id);
+    anc = sid(anc);
+    while (t) {
+      if (sid(t.id) === anc) return true;
+      t = parentTopic(t);
     }
-    if (at >= 0) {
-      verseOpen = chain.slice(0, -1);
-      p = parentTopic(t);
-      sel = p && (p.level || 1) > 1 ? sid(p.id) : null;
+    return false;
+  }
+  function relatedLevel1() {
+    var items = visible(), out = [], i, t;
+    for (i = 0; i < items.length; i++) {
+      t = items[i];
+      if ((t.level || 1) === 1 && topicInChap(t)) out.push(t);
+    }
+    return out;
+  }
+  function openAllRelated() {
+    var items = visible(), i, t;
+    verseOpen = [];
+    for (i = 0; i < items.length; i++) {
+      t = items[i];
+      if (!topicInChap(t)) continue;
+      if (fitKids(t).length) verseOpen.push(sid(t.id));
+    }
+  }
+  function rowOpen(t) {
+    if ((t.level || 1) <= 1) return true;
+    var p = parentTopic(t);
+    return !!(p && idOpen(p.id));
+  }
+  function toggleVerseTopics(t) {
+    var id = sid(t.id);
+    var next = [];
+    var i, x;
+    verseAuto = false;
+    if (idOpen(id)) {
+      for (i = 0; i < verseOpen.length; i++) {
+        x = verseOpen[i];
+        if (sid(x) === id) continue;
+        if (underOf(x, id)) continue;
+        next.push(x);
+      }
+      verseOpen = next;
     } else {
-      sel = sid(t.id);
-      extra = autoExpandIds(kids(items, t), items);
-      verseOpen = chain.concat(extra);
+      verseOpen.push(id);
     }
     paint();
   }
@@ -726,8 +908,9 @@
     if (num <= 66) return CHAPS[num] || 1;
     return EXTRA_CH[num] || 1;
   }
-  function cacheKey() {
-    return (viewChap ? viewChap.abbr + " " + viewChap.ch : "") + "|" + (verseTr || "NKJV");
+  function cacheKey(chap) {
+    chap = chap || viewChap;
+    return (chap && chap.abbr ? chap.abbr + " " + chap.ch : "") + "|" + (verseTr || "NKJV");
   }
   function trSlug(id) {
     var i;
@@ -808,34 +991,33 @@
     });
     return s;
   }
-  function loadVerses(done) {
-    var key = cacheKey();
-    if (verseCache[key]) {
+  function loadVerses(done, chap) {
+    chap = chap || viewChap;
+    var num = chap && (chap.num || bookNum(chap.abbr));
+    var key = cacheKey(chap);
+    if (verseCache[key] && verseCache[key].length) {
       done(verseCache[key]);
       return;
     }
-    function finish(lines) {
-      verseCache[key] = lines;
-      done(lines);
-    }
-    if (!viewChap || !viewChap.num) {
-      finish([]);
+    if (!chap || !num) {
+      done([]);
       return;
     }
-    fetch("/bible?tr=" + encodeURIComponent(trSlug(verseTr || "NKJV")) + "&book=" + viewChap.num + "&chapter=" + viewChap.ch, { cache: "no-store" })
+    fetch("/bible?tr=" + encodeURIComponent(trSlug(verseTr || "NKJV")) + "&book=" + num + "&chapter=" + chap.ch, { cache: "no-store" })
       .then(function (r) { return r.ok ? r.json() : []; })
       .then(function (rows) {
         var chapter = [], i, row, n, t;
-        if (!Array.isArray(rows)) rows = [];
+        if (!Array.isArray(rows)) rows = Array.isArray(rows && rows.verses) ? rows.verses : [];
         for (i = 0; i < rows.length; i++) {
           row = rows[i] || {};
           n = Number(row.verse);
           t = String(row.text || "").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").trim();
           if (n) chapter.push({ n: n, t: t });
         }
-        finish(chapter);
+        if (chapter.length) verseCache[key] = chapter;
+        done(chapter);
       })
-      .catch(function () { finish([]); });
+      .catch(function () { done([]); });
   }
   function isSelOrAbove(t) {
     var p;
@@ -958,11 +1140,51 @@
     if (r.bottom > window.innerHeight - 8) m.style.top = Math.max(8, window.innerHeight - r.height - 8) + "px";
   }
 
+  function fitHeadings(wrap, bar) {
+    var fs;
+    if (!wrap || !bar) return;
+    for (fs = 13; fs >= MIN_FS; fs--) {
+      wrap.style.setProperty("--fs", fs + "px");
+      if (bar.scrollWidth <= bar.clientWidth + 1) return fs;
+    }
+    wrap.style.setProperty("--fs", MIN_FS + "px");
+    return MIN_FS;
+  }
+
+  function bookFull(abbr) {
+    var i = CANON.indexOf(abbr);
+    if (i >= 0 && i < BOOK_FULL.length) return BOOK_FULL[i];
+    return abbr || "";
+  }
+  function verseHeading() {
+    if (!viewChap) return "";
+    return bookFull(viewChap.abbr) + " " + viewChap.ch;
+  }
+  function tellHeading() {
+    var el = document.getElementById("verse-heading");
+    if (el) el.textContent = verseHeading();
+  }
+  function placeHeading(x, w) {
+    var el = document.getElementById("verse-heading");
+    if (!el) return 20;
+    el.textContent = verseHeading();
+    el.style.left = Math.round(x) + "px";
+    el.style.width = Math.round(w) + "px";
+    return Math.max(18, el.offsetHeight);
+  }
   function paint() {
     var board = document.getElementById("board");
     var st = document.getElementById("status");
     if (!board) return;
     if (!viewChap) viewChap = firstMappedChap();
+    var chapNow = chapKey();
+    if (chapNow !== verseChapKey) {
+      verseChapKey = chapNow;
+      tealFlip = {};
+      verseOpen = [];
+      refTopicId = "";
+    }
+    tellHeading();
     board.innerHTML = "";
     board.style.position = "relative";
     board.style.display = "block";
@@ -984,13 +1206,19 @@
       return w < 8 ? 8 : w;
     }
     function colSpan(nameW) {
-      return nameW + GAP_BTN + BOX_H;
+      return nameW + GAP_BTN + BOX_H + GAP_BTN + BOX_H;
     }
     function mkBtn(kind, label, open, onClick) {
       var c = document.createElement("button");
+      var n = Number(label);
+      var zero = n === 0;
       c.type = "button";
-      c.className = "tbtn tbtn-" + kind + (open ? " open" : "");
-      c.textContent = String(label);
+      c.className = "tbtn tbtn-" + kind + (open && !zero ? " open" : "") + (zero ? " off" : "");
+      c.textContent = zero ? "" : String(label);
+      if (zero) {
+        c.disabled = true;
+        return c;
+      }
       c.addEventListener("click", function (ev) {
         ev.preventDefault();
         ev.stopPropagation();
@@ -1000,21 +1228,24 @@
     }
     function box(t, live) {
       var b = document.createElement("button");
-      var nFit = fitKids(t).length;
-      var on = topicInChap(t) || isSelOrAbove(t);
+      var nFit = subN(t);
+      var onPath = topicInChap(t) || isSelOrAbove(t);
       var name = document.createElement("span");
-      var tealOpen = idOpen(t.id);
-      var isLive = !!(live && sid(live.id) === sid(t.id));
-      var dim = on && !isLive && !!(live && idOpen(live.id));
+      var tealOpen = topicExpanded(t) && nFit > 0;
       b.type = "button";
-      b.className = "tbox" + (on ? " on" : "") + (dim ? " dim" : "");
+      b.className = "tbox" + (onPath ? " stream" : "");
       b.dataset.id = sid(t.id);
+      b.dataset.level = String(t.level || 1);
       name.className = "tname";
       name.textContent = t.title || "";
       b.appendChild(name);
-      var teal = mkBtn("teal", nFit, tealOpen, function () { toggleVerseTopics(t); });
+      var teal = mkBtn("teal", nFit, tealOpen && nFit > 0, function () { toggleTealPrune(t); });
       teal.dataset.id = sid(t.id);
       b._teal = teal;
+      var nGreen = refsFor(t).length;
+      var green = mkBtn("green", nGreen, sid(refTopicId) === sid(t.id), function () { toggleGreenRefs(t); });
+      green.dataset.id = sid(t.id);
+      b._green = green;
       function startEdit(ev) {
         if (ev) { ev.preventDefault(); ev.stopPropagation(); }
         if (name.querySelector("input")) return;
@@ -1052,6 +1283,7 @@
       });
       board.appendChild(b);
       board.appendChild(teal);
+      board.appendChild(green);
       return b;
     }
     function refBox(label, col, topic) {
@@ -1059,7 +1291,7 @@
       var name = document.createElement("span");
       var ownerId = topic ? sid(topic.id) : "";
       b.type = "button";
-      b.className = "tbox" + (refIsSelected(label) ? " on" : "");
+      b.className = "tbox" + (refIsChap(label) ? " hit" : "") + (openRef === label ? " on" : "");
       b.dataset.ref = label;
       name.className = "tname";
       name.textContent = label;
@@ -1097,14 +1329,7 @@
         if (name.querySelector("input")) return;
         p = parseRefParts(label);
         if (!p) return;
-        viewChap = { abbr: p.book, ch: p.ch, num: bookNum(p.book) };
-        selChapRef = label;
-        selVs = p.a;
-        sel = null;
-        expandByRef = true;
-        bookOpen = false;
-        chapOpen = false;
-        saveSection();
+        openRef = label;
         paint();
       });
       board.appendChild(b);
@@ -1124,6 +1349,9 @@
       if (el._teal) {
         put(el._teal, x + colW + GAP_BTN, y, BOX_H, BOX_H);
       }
+      if (el._green) {
+        put(el._green, x + colW + GAP_BTN + BOX_H + GAP_BTN, y, BOX_H, BOX_H);
+      }
     }
     function boardY(el) {
       if (!el) return 0;
@@ -1137,21 +1365,35 @@
       if (!pane || String(pane.className || "").indexOf("tcol") < 0) return el._x || 0;
       return (pane._x || 0) + (el._x || 0);
     }
-    function layoutCol(els, x, nameW, parent, minTop) {
+    function layoutCol(els, x, nameW, parent, minTop, noBtns) {
       if (!els || !els.length) return null;
-      var paneW = colSpan(nameW);
-      var visH = (chart && chart.clientHeight) ? chart.clientHeight : viewH;
-      var innerH = els.length * BOX_H + Math.max(0, els.length - 1) * GAP_Y;
-      var y0;
-      if (parent) {
+      var IND = Math.round(textSize("xx").w);
+      var maxInd = 0, i, lv, ind, hitAt = 0, y0, paneW, innerH, visH, paneH, pane, y;
+      if (!noBtns) {
+        for (i = 0; i < els.length; i++) {
+          lv = Math.max(1, Number(els[i].dataset.level) || 1);
+          ind = (lv - 1) * IND;
+          if (ind > maxInd) maxInd = ind;
+        }
+      } else {
+        for (i = 0; i < els.length; i++) {
+          if (refIsChap(els[i].dataset.ref)) { hitAt = i; break; }
+        }
+      }
+      paneW = (noBtns ? nameW : colSpan(nameW)) + maxInd;
+      visH = (chart && chart.clientHeight) ? chart.clientHeight : viewH;
+      innerH = els.length * BOX_H + Math.max(0, els.length - 1) * GAP_Y;
+      if (parent && noBtns) {
+        y0 = boardY(parent) - hitAt * (BOX_H + GAP_Y);
+      } else if (parent) {
         y0 = boardY(parent) + BOX_H / 2 - innerH / 2;
       } else {
-        y0 = Math.round((visH - innerH) / 2);
+        y0 = 0;
       }
-      if (y0 < 0) y0 = 0;
+      if (!(parent && noBtns) && y0 < 0) y0 = 0;
       y0 = Math.round(y0);
-      var paneH = Math.max(80, innerH);
-      var pane = document.createElement("div");
+      paneH = Math.max(80, innerH);
+      pane = document.createElement("div");
       pane.className = "tcol";
       board.appendChild(pane);
       pane.style.left = Math.round(x) + "px";
@@ -1163,11 +1405,14 @@
       pane._x = x;
       pane._w = paneW;
       pane._y = y0;
-      var y = 0, i;
+      y = 0;
       for (i = 0; i < els.length; i++) {
         pane.appendChild(els[i]);
         if (els[i]._teal) pane.appendChild(els[i]._teal);
-        put(els[i], 0, y, nameW, BOX_H);
+        if (els[i]._green) pane.appendChild(els[i]._green);
+        lv = Math.max(1, Number(els[i].dataset.level) || 1);
+        ind = noBtns ? 0 : (lv - 1) * IND;
+        put(els[i], ind, y, nameW, BOX_H);
         y += BOX_H + GAP_Y;
       }
       pane._boxes = els;
@@ -1513,14 +1758,16 @@
       boxEl.scrollTop = Math.max(0, Math.round(mid - boxEl.clientHeight / 2));
     }
     function closePickers() {
-      var bl = board.querySelector(".ew-book-list");
-      var cg = board.querySelector(".ew-ch-grid");
-      var tr = board.querySelector(".ew-tr-list");
-      var now = board.querySelector(".ew-tr-now");
+      var root = wrap || board || document;
+      var bl = root.querySelector(".ew-book-list");
+      var cg = root.querySelector(".ew-ch-grid");
+      var lists = root.querySelectorAll(".ew-tr-list");
+      var nows = root.querySelectorAll(".ew-tr-pick .ew-tr-now");
+      var i;
       if (bl) bl.hidden = true;
       if (cg) cg.hidden = true;
-      if (tr) tr.hidden = true;
-      if (now) now.setAttribute("aria-expanded", "false");
+      for (i = 0; i < lists.length; i++) lists[i].hidden = true;
+      for (i = 0; i < nows.length; i++) nows[i].setAttribute("aria-expanded", "false");
       bookOpen = false;
       chapOpen = false;
     }
@@ -1529,21 +1776,47 @@
     var chart = document.getElementById("chart");
     var viewH = wrap ? wrap.clientHeight : 0;
     var viewW = wrap ? wrap.clientWidth : 800;
-    var chartTop = PAD;
+    var vsW0 = userSize > 0 ? userSize : 280;
+    var maxW = Math.max(200, viewW - PAD * 2 - 80);
+    if (vsW0 > maxW) vsW0 = maxW;
+    if (vsW0 < 200) vsW0 = 200;
+    var headH = placeHeading(PAD, vsW0);
+    var boxTop = headH + 2;
+    var chartTop = boxTop;
     var band = PAD;
-    var vsW = Math.max(400, Math.min(VERSE_W, Math.floor(viewW * 0.48)));
-    var vsH = Math.max(160, viewH - PAD * 2);
-    var versesWrap = document.createElement("div");
-    versesWrap.className = "tverse-wrap";
-    var oldVs = wrap ? wrap.querySelector(".tverse-wrap") : null;
+    var vsH = Math.max(160, viewH - boxTop - PAD);
+    var leftKey = chapKey() + "|" + (verseTr || "") + "|" + (chapFilter ? "1" : "0") + "|" + String(selVs || 0) + "|" + String(vsH);
+    var oldVs = wrap ? wrap.querySelector(".tverse-wrap.chap-vs") : null;
+    var keepLeft = !!(oldVs && leftPaintKey === leftKey && oldVs.querySelector(".tverses p"));
+    var versesWrap;
+    var vsW;
+    if (keepLeft) {
+      versesWrap = oldVs;
+      vsW = oldVs.offsetWidth || vsW0;
+      headH = placeHeading(PAD, vsW);
+      boxTop = headH + 2;
+      chartTop = boxTop;
+      vsH = Math.max(160, viewH - boxTop - PAD);
+      put(versesWrap, PAD, boxTop, vsW, vsH);
+      versesWrap.style.height = vsH + "px";
+      versesWrap.style.zIndex = "50";
+      if (chart) {
+        chart.style.left = (PAD + vsW + GAP_X) + "px";
+        chart.style.top = chartTop + "px";
+        chart.style.right = "0";
+        chart.style.bottom = "0";
+      }
+    } else {
+    versesWrap = document.createElement("div");
+    versesWrap.className = "tverse-wrap chap-vs";
     if (oldVs && oldVs.parentNode) oldVs.parentNode.removeChild(oldVs);
     if (wrap) wrap.appendChild(versesWrap);
     else board.appendChild(versesWrap);
-    put(versesWrap, PAD, PAD, vsW, vsH);
+    put(versesWrap, PAD, boxTop, vsW0, vsH);
     versesWrap.style.height = vsH + "px";
-    versesWrap.style.zIndex = "5";
+    versesWrap.style.zIndex = "50";
     if (chart) {
-      chart.style.left = (PAD + vsW + GAP_X) + "px";
+      chart.style.left = (PAD + vsW0 + GAP_X) + "px";
       chart.style.top = chartTop + "px";
       chart.style.right = "0";
       chart.style.bottom = "0";
@@ -1593,6 +1866,15 @@
     }
     bookList.appendChild(fillBookCol("OT", maps.ot));
     bookList.appendChild(fillBookCol("NT", maps.nt));
+    function placePicker(list, btn) {
+      var r;
+      if (!list || !btn || list.hidden) return;
+      r = btn.getBoundingClientRect();
+      list.style.position = "fixed";
+      list.style.left = Math.round(r.left) + "px";
+      list.style.top = Math.round(r.bottom + 2) + "px";
+      list.style.zIndex = "400";
+    }
     bookBtn.addEventListener("click", function (ev) {
       ev.preventDefault();
       ev.stopPropagation();
@@ -1600,6 +1882,7 @@
       closePickers();
       bookList.hidden = !open;
       bookOpen = !open;
+      placePicker(bookList, bookBtn);
     });
     bookPick.appendChild(bookBtn);
     bookPick.appendChild(bookList);
@@ -1645,6 +1928,7 @@
       closePickers();
       chGrid.hidden = !open;
       chapOpen = !open;
+      placePicker(chGrid, chBtn);
     });
     chPick.appendChild(chBtn);
     chPick.appendChild(chGrid);
@@ -1656,6 +1940,7 @@
     if (chapOpen) {
       bookList.hidden = true;
       bookOpen = false;
+      placePicker(chGrid, chBtn);
     }
 
     var mode = document.createElement("button");
@@ -1684,7 +1969,8 @@
     var prevBtn = document.createElement("button");
     prevBtn.type = "button";
     prevBtn.className = "ew-ch-prev";
-    prevBtn.innerHTML = '<span class="ew-ch-arrow">&lt;</span><span class="ew-ch-lab">Prev</span>';
+    prevBtn.setAttribute("aria-label", "Previous chapter");
+    prevBtn.innerHTML = '<span class="ew-ch-arrow">&lt;</span><span class="page-nav-tip">Previous chapter</span>';
     var mapped = mappedChapList();
     var atMap = chapIndex(mapped);
     var iCan = CANON.indexOf(viewChap.abbr);
@@ -1698,7 +1984,8 @@
     var nextBtn = document.createElement("button");
     nextBtn.type = "button";
     nextBtn.className = "ew-ch-next";
-    nextBtn.innerHTML = '<span class="ew-ch-lab">Next</span><span class="ew-ch-arrow">&gt;</span>';
+    nextBtn.setAttribute("aria-label", "Next chapter");
+    nextBtn.innerHTML = '<span class="ew-ch-arrow">&gt;</span><span class="page-nav-tip">Next chapter</span>';
     if (chapFilter) nextBtn.disabled = !mapped.length || atMap < 0 || atMap >= mapped.length - 1;
     else nextBtn.disabled = (iCan < 0 || iCan >= CANON_N - 1) && viewChap.ch >= chCount(viewChap.num);
     nextBtn.addEventListener("click", function (ev) {
@@ -1710,7 +1997,6 @@
     nav.appendChild(prevBtn);
     nav.appendChild(bookPick);
     nav.appendChild(chPick);
-    nav.appendChild(nextBtn);
     left.appendChild(nav);
 
     var right = document.createElement("div");
@@ -1774,9 +2060,58 @@
     pick.appendChild(trNow);
     pick.appendChild(trList);
     right.appendChild(pick);
+    right.appendChild(nextBtn);
     bar.appendChild(left);
     bar.appendChild(right);
     versesWrap.appendChild(bar);
+    var fs = 13;
+    var need;
+    versesWrap.style.setProperty("--fs", fs + "px");
+    need = Math.ceil(bar.scrollWidth + 8);
+    while (need > maxW && fs > MIN_FS) {
+      fs -= 1;
+      versesWrap.style.setProperty("--fs", fs + "px");
+      need = Math.ceil(bar.scrollWidth + 8);
+    }
+    if (need < 200) need = 200;
+    vsW = userSize > 0 ? Math.max(userSize, need) : need;
+    if (vsW > maxW) vsW = maxW;
+    headH = placeHeading(PAD, vsW);
+    boxTop = headH + 2;
+    chartTop = boxTop;
+    vsH = Math.max(160, viewH - boxTop - PAD);
+    put(versesWrap, PAD, boxTop, vsW, vsH);
+    versesWrap.style.height = vsH + "px";
+    if (chart) {
+      chart.style.left = (PAD + vsW + GAP_X) + "px";
+      chart.style.top = chartTop + "px";
+      chart.style.right = "0";
+      chart.style.bottom = "0";
+    }
+    var sizeGrip = document.createElement("div");
+    sizeGrip.className = "tverse-size";
+    sizeGrip.addEventListener("mousedown", function (ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      var startX = ev.clientX;
+      var startW = versesWrap.offsetWidth;
+      var viewMax = wrap ? Math.max(need, wrap.clientWidth - PAD * 2 - 80) : startW;
+      function move(e) {
+        var w = startW + (e.clientX - startX);
+        if (w > viewMax) w = viewMax;
+        if (w < need) w = need;
+        versesWrap.style.width = w + "px";
+        userSize = w;
+        if (chart) chart.style.left = (PAD + w + GAP_X) + "px";
+      }
+      function up() {
+        window.removeEventListener("mousemove", move);
+        window.removeEventListener("mouseup", up);
+      }
+      window.addEventListener("mousemove", move);
+      window.addEventListener("mouseup", up);
+    });
+    versesWrap.appendChild(sizeGrip);
 
     var versesEl = document.createElement("div");
     versesEl.className = "tverses";
@@ -1829,6 +2164,8 @@
         paint();
       });
     }
+      leftPaintKey = leftKey;
+    }
 
     var chapRefs = ensureSelRef();
     var x = 0;
@@ -1837,117 +2174,257 @@
     var refEls = [];
     var pane, panes = [];
     var selRefEl = null;
-    var key = chapKey();
-    var IND = textSize("xxxx").w;
-    var ri, rows, maxW, t, row, nameW, nKid, header, leaf, lv, rw;
-    if (key !== verseChapKey) verseChapKey = key;
-    if (!sel) {
-      leaf = firstLeafForRef(selChapRef);
-      if (leaf) sel = sid(leaf.id);
+    var IND = Math.round(textSize("xx").w);
+    var nameW, shown, refTopic, refList, wRef, cRef, parentBox, xVs, rightChap, rightWrap, rightHit, refW;
+    function maxRefNameW() {
+      var w = 8, i, lab, s;
+      for (i = 0; i < topicRefs.length; i++) {
+        lab = String(topicRefs[i].ref || "").trim();
+        if (!lab) continue;
+        s = textSize(lab);
+        if (s.w > w) w = s.w;
+      }
+      return w;
     }
-    function outlineRow(topic, lab, nmW) {
-      var b = document.createElement("button");
-      var wrap = document.createElement("div");
-      var name = document.createElement("span");
-      var on = sid(sel) === sid(topic.id) || isSelOrAbove(topic);
-      var nFit = kidNForRef(topic, lab);
-      var teal = mkBtn("teal", nFit, false, function () {
-        selChapRef = lab;
-        pickTopic(topic);
-      });
-      wrap.className = "vrow";
-      wrap.style.paddingLeft = (Math.max(0, (topic.level || 1) - 1) * IND) + "px";
-      b.type = "button";
-      b.className = "tbox" + (on ? " on" : "");
-      b.dataset.id = sid(topic.id);
-      name.className = "tname";
-      name.textContent = topic.title || "";
-      b.appendChild(name);
-      b.style.width = nmW + "px";
-      b.style.height = BOX_H + "px";
-      teal.dataset.id = sid(topic.id);
-      teal.style.width = BOX_H + "px";
-      teal.style.height = BOX_H + "px";
-      b.addEventListener("contextmenu", function (ev) {
-        showRhm(ev, "Topic", function () { startEdit(); });
-      });
-      function startEdit(ev) {
-        if (ev) { ev.preventDefault(); ev.stopPropagation(); }
-        if (name.querySelector("input")) return;
-        var inp = document.createElement("input");
-        inp.type = "text";
-        inp.value = topic.title || "";
-        inp.style.cssText = "font:inherit;color:inherit;border:0;outline:1px solid #c5d0d4;padding:0;margin:0;width:100%;background:#fff;box-sizing:border-box";
-        name.textContent = "";
-        name.appendChild(inp);
-        inp.focus();
-        inp.select();
-        function commit() {
-          if (!inp.parentNode) return;
-          topic.title = inp.value;
-          paint();
-          saveTopics();
+    nameW = colNameW(items);
+    refW = maxRefNameW();
+    shown = shownTopics();
+    topicEls = shown.map(function (t) { return box(t); });
+    pane = layoutCol(topicEls, x, nameW, null);
+    refTopic = refTopicId ? find(items, refTopicId) : null;
+    function placeChapRefs(col) {
+      var pne = col.pane;
+      var boxes = col.boxes;
+      var homes = [];
+      var i, j, t, labs, refX, b, y0, tot, paneW = 0;
+      if (!pne || !boxes || !boxes.length) return;
+      if (refTopic) return;
+      for (i = 0; i < boxes.length; i++) {
+        if (boxes[i].dataset.ref) continue;
+        t = find(topics, boxes[i].dataset.id);
+        labs = bottomChapRefs(t);
+        if (!labs.length) continue;
+        homes.push({ el: boxes[i], t: t, labs: labs });
+      }
+      if (!homes.length) return;
+      for (i = 0; i < homes.length; i++) {
+        refX = (homes[i].el._x || 0) + colSpan(nameW) + GAP_BTN;
+        tot = homes[i].labs.length * BOX_H + Math.max(0, homes[i].labs.length - 1) * GAP_Y;
+        y0 = homes[i].el._y;
+        for (j = 0; j < homes[i].labs.length; j++) {
+          b = refBox(homes[i].labs[j], "", homes[i].t);
+          pne.appendChild(b);
+          put(b, refX, y0 + j * (BOX_H + GAP_Y), refW, BOX_H);
         }
-        inp.addEventListener("keydown", function (kev) {
-          if (kev.key === "Enter") { kev.preventDefault(); commit(); }
-          if (kev.key === "Escape") { kev.preventDefault(); paint(); }
-        });
-        inp.addEventListener("blur", commit);
-        inp.addEventListener("click", function (cev) { cev.stopPropagation(); });
+        paneW = Math.max(paneW, refX + refW);
       }
-      b.addEventListener("click", function (ev) {
-        ev.preventDefault();
-        ev.stopPropagation();
-        if (name.querySelector("input")) return;
-        selChapRef = lab;
-        pickTopic(topic);
-        if (sid(sel) === sid(topic.id)) openDesc(topic);
-        else hideDesc();
-      });
-      wrap.appendChild(b);
-      wrap.appendChild(teal);
-      return wrap;
+      pne.style.width = paneW + "px";
+      pne._w = paneW;
+      col.homeW = refW;
     }
-    for (ri = 0; ri < chapRefs.length; ri++) {
-      rows = topicsForRef(chapRefs[ri]);
-      nameW = textSize(chapRefs[ri]).w;
-      for (t = 0; t < rows.length; t++) {
-        rw = textSize(rows[t].title || "").w;
-        if (rw > nameW) nameW = rw;
-      }
-      if (nameW < 8) nameW = 8;
-      maxW = nameW;
-      for (t = 0; t < rows.length; t++) {
-        lv = Math.max(1, rows[t].level || 1);
-        rw = (lv - 1) * IND + nameW + GAP_BTN + BOX_H;
-        if (rw > maxW) maxW = rw;
-      }
-      pane = document.createElement("div");
-      pane.className = "tcol vcol";
-      board.appendChild(pane);
-      pane.style.left = Math.round(x) + "px";
-      pane.style.top = "0px";
-      pane.style.width = maxW + "px";
-      header = refBox(chapRefs[ri], "", null);
-      header.style.width = nameW + "px";
-      header.style.height = BOX_H + "px";
-      pane.appendChild(header);
-      if (sameRef(chapRefs[ri], selChapRef)) selRefEl = header;
-      refEls.push(header);
-      for (t = 0; t < rows.length; t++) {
-        row = outlineRow(rows[t], chapRefs[ri], nameW);
-        pane.appendChild(row);
-        topicEls.push(row.firstChild);
-      }
-      pane._top = 0;
-      pane._h = (1 + rows.length) * BOX_H + Math.max(0, rows.length) * GAP_Y;
-      pane._x = x;
-      pane._w = maxW;
-      pane._y = 0;
-      pane._boxes = topicEls.slice(topicEls.length - rows.length);
-      colBuilt.push({ pane: pane, boxes: pane._boxes, w: maxW, x: x });
+    if (pane) {
+      colBuilt.push({ pane: pane, boxes: topicEls, w: nameW, x: x });
       panes.push(pane);
-      x += maxW + GAP_COL;
+      placeChapRefs(colBuilt[colBuilt.length - 1]);
+      x += (pane._w || colSpan(nameW)) + GAP_X;
+    }
+    refList = refTopic ? refsFor(refTopic) : [];
+    xVs = x;
+    if (refTopic && refList.length) {
+      wRef = refW;
+      parentBox = findBox(topicEls, refTopic.id);
+      cRef = refList.map(function (lab) { return refBox(lab, "", refTopic); });
+      pane = layoutCol(cRef, x, wRef, parentBox, null, true);
+      if (pane) {
+        colBuilt.push({ pane: pane, boxes: cRef, w: wRef, x: x });
+        panes.push(pane);
+        refEls = cRef;
+        xVs = x + wRef + GAP_X;
+        x += wRef + GAP_X;
+      }
+    }
+    var showRight = false;
+    var hi, hEl, ht;
+    for (hi = 0; hi < topicEls.length; hi++) {
+      hEl = topicEls[hi];
+      ht = find(topics, hEl.dataset.id);
+      if (ht && bottomChapRefs(ht).length) showRight = true;
+    }
+    if (refTopic && refList.length) showRight = true;
+    var oldRight = wrap ? wrap.querySelector(".tverse-wrap.ref-vs") : null;
+    if (oldRight && oldRight.parentNode) oldRight.parentNode.removeChild(oldRight);
+    if (showRight) {
+      rightHit = openRef ? parseRefParts(openRef) : null;
+      rightChap = rightHit
+        ? { abbr: rightHit.book, ch: rightHit.ch, num: bookNum(rightHit.book) || (CANON.indexOf(rightHit.book) >= 0 && CANON.indexOf(rightHit.book) < 66 ? CANON.indexOf(rightHit.book) + 1 : 0) }
+        : null;
+      if (rightChap && !rightChap.num && viewChap && rightChap.abbr === viewChap.abbr) rightChap.num = viewChap.num;
+      rightWrap = document.createElement("div");
+      rightWrap.className = "tverse-wrap ref-vs" + (openRef ? "" : " empty");
+      if (wrap) wrap.appendChild(rightWrap);
+      else board.appendChild(rightWrap);
+      var leftW = (versesWrap && (versesWrap._w || versesWrap.offsetWidth)) || vsW0 || 280;
+      var rx = PAD + leftW + GAP_X + xVs;
+      var rW = Math.max(280, viewW - rx - PAD);
+      var rH = vsH;
+      put(rightWrap, rx, boxTop, rW, rH);
+      rightWrap.style.height = rH + "px";
+      rightWrap.style.zIndex = "50";
+      if (openRef && rightChap && rightChap.num) {
+        var rBar = document.createElement("div");
+        rBar.className = "tverse-bar";
+        rBar.addEventListener("click", function (ev) { ev.stopPropagation(); });
+        var rLeft = document.createElement("div");
+        rLeft.className = "tverse-bar-left";
+        var rNav = document.createElement("div");
+        rNav.className = "tverse-nav";
+        var rPrev = document.createElement("button");
+        rPrev.type = "button";
+        rPrev.className = "ew-ch-prev";
+        rPrev.setAttribute("aria-label", "Previous chapter");
+        rPrev.innerHTML = '<span class="ew-ch-arrow">&lt;</span><span class="page-nav-tip">Previous chapter</span>';
+        var iCanR = CANON.indexOf(rightChap.abbr);
+        rPrev.disabled = iCanR <= 0 && rightChap.ch <= 1;
+        rPrev.addEventListener("click", function (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          var abbr = rightChap.abbr, num = rightChap.num, ch = rightChap.ch - 1, i;
+          if (ch < 1) {
+            i = CANON.indexOf(abbr);
+            if (i <= 0) return;
+            abbr = CANON[i - 1];
+            num = bookNum(abbr);
+            ch = chCount(num);
+          }
+          openRef = abbr + " " + ch + ":1";
+          paint();
+        });
+        var rLab = document.createElement("strong");
+        rLab.className = "tverse-ref";
+        rLab.textContent = openRef;
+        var slot = Math.max(
+          refLabelW(openRef),
+          refLabelW(rightChap.abbr + " " + rightChap.ch),
+          refLabelW("1Th 00:00-00")
+        );
+        rLab.style.width = slot + "px";
+        rLab.style.minWidth = slot + "px";
+        var rNext = document.createElement("button");
+        rNext.type = "button";
+        rNext.className = "ew-ch-next";
+        rNext.setAttribute("aria-label", "Next chapter");
+        rNext.innerHTML = '<span class="ew-ch-arrow">&gt;</span><span class="page-nav-tip">Next chapter</span>';
+        rNext.disabled = (iCanR < 0 || iCanR >= CANON_N - 1) && rightChap.ch >= chCount(rightChap.num);
+        rNext.addEventListener("click", function (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          var abbr = rightChap.abbr, num = rightChap.num, ch = rightChap.ch + 1, i, max = chCount(num);
+          if (ch > max) {
+            i = CANON.indexOf(abbr);
+            if (i < 0 || i >= CANON_N - 1) return;
+            abbr = CANON[i + 1];
+            num = bookNum(abbr);
+            ch = 1;
+          }
+          openRef = abbr + " " + ch + ":1";
+          paint();
+        });
+        rNav.appendChild(rPrev);
+        rNav.appendChild(rLab);
+        rNav.appendChild(rNext);
+        rLeft.appendChild(rNav);
+        var rRight = document.createElement("div");
+        rRight.className = "tverse-bar-right";
+        var rPick = document.createElement("div");
+        rPick.className = "ew-tr-pick ew-ch-tr";
+        var rTrNow = document.createElement("button");
+        rTrNow.type = "button";
+        rTrNow.className = "ew-tr-now";
+        rTrNow.setAttribute("aria-haspopup", "listbox");
+        rTrNow.setAttribute("aria-expanded", "false");
+        rTrNow.textContent = verseTr || "NKJV";
+        var rTrList = document.createElement("div");
+        rTrList.className = "ew-tr-list";
+        rTrList.setAttribute("role", "listbox");
+        rTrList.hidden = true;
+        var rTrs = TRANSLATIONS.slice().sort(function (a, b) {
+          return String(a.label || a.id).localeCompare(String(b.label || b.id));
+        });
+        rTrs.forEach(function (tr) {
+          var trow = document.createElement("div");
+          trow.setAttribute("role", "option");
+          trow.setAttribute("data-tr", tr.id);
+          trow.className = verseTr === tr.id ? "on" : "";
+          var tcode = document.createElement("span");
+          tcode.className = "ew-tr-code";
+          tcode.textContent = tr.label;
+          var tyear = document.createElement("span");
+          tyear.className = "ew-tr-year";
+          tyear.textContent = tr.year || "";
+          trow.appendChild(tcode);
+          trow.appendChild(tyear);
+          trow.addEventListener("click", function (ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+            verseTr = this.getAttribute("data-tr");
+            saveSection();
+            paint();
+          });
+          rTrList.appendChild(trow);
+        });
+        rTrNow.addEventListener("click", function (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          var open = rTrList.hidden;
+          closePickers();
+          rTrList.hidden = !open;
+          rTrNow.setAttribute("aria-expanded", open ? "true" : "false");
+          if (open) {
+            rTrList.style.maxHeight = "none";
+            rTrList.style.overflowY = "visible";
+            var need = rTrList.scrollHeight;
+            var boxR = rightWrap.getBoundingClientRect();
+            var room = Math.floor(boxR.bottom - rTrList.getBoundingClientRect().top - 4);
+            if (need > room && room > 40) {
+              rTrList.style.maxHeight = room + "px";
+              rTrList.style.overflowY = "auto";
+            }
+          }
+        });
+        rPick.appendChild(rTrNow);
+        rPick.appendChild(rTrList);
+        rRight.appendChild(rPick);
+        rBar.appendChild(rLeft);
+        rBar.appendChild(rRight);
+        rightWrap.appendChild(rBar);
+        var rVerses = document.createElement("div");
+        rVerses.className = "tverses";
+        rightWrap.appendChild(rVerses);
+        function drawRight(lines) {
+          var i, p, n, vn, body, a, b;
+          rVerses.innerHTML = "";
+          a = rightHit ? rightHit.a : 0;
+          b = rightHit ? rightHit.b : 0;
+          for (i = 0; i < lines.length; i++) {
+            n = lines[i].n;
+            p = document.createElement("p");
+            if (n >= a && n <= b) p.className = "hit";
+            vn = document.createElement("span");
+            vn.className = "vn";
+            vn.textContent = String(n);
+            p.appendChild(vn);
+            p.appendChild(document.createTextNode(" "));
+            body = document.createElement("span");
+            body.innerHTML = verseHtml(lines[i].t);
+            p.appendChild(body);
+            rVerses.appendChild(p);
+          }
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () { centerHits(rVerses); });
+          });
+        }
+        loadVerses(drawRight, rightChap);
+      }
     }
     expandByRef = false;
 
@@ -1964,7 +2441,7 @@
     placePop();
 
     var maxX = Math.max(PAD + vsW + PAD, colRight + PAD);
-    var contentBot = vsH + PAD * 2;
+    var contentBot = PAD;
     for (pi = 0; pi < colBuilt.length; pi++) {
       if (!colBuilt[pi].pane) continue;
       contentBot = Math.max(contentBot, (colBuilt[pi].pane._top || 0) + (colBuilt[pi].pane._h || 0));
@@ -1981,7 +2458,7 @@
       }
     }
     board.style.width = maxX + "px";
-    board.style.height = Math.max(viewH, contentBot + PAD) + "px";
+    board.style.height = Math.max(contentBot + PAD, BOX_H) + "px";
     if (st) st.textContent = chapRefs.length ? (chapRefs.length + " refs.") : (items.length + " topics.");
   }
 
@@ -2036,7 +2513,7 @@
   function placePop() {
     var d = document.getElementById("tdesc");
     var ta = document.getElementById("tdesc-ta");
-    var vsEl = document.querySelector(".tverse-wrap");
+    var vsEl = document.querySelector(".tverse-wrap.chap-vs");
     var topic = descOpen ? find(topics, descId) : null;
     var box, pane, br, pr, w, left, top, need, maxH, h, vw, vh;
     if (!d) return;
@@ -2115,15 +2592,22 @@
     if (!descKeep(document.elementFromPoint(ev.clientX, ev.clientY))) hideDesc();
   });
   document.addEventListener("pointerdown", function (ev) {
-    var list = document.querySelector(".tverse-bar .ew-tr-list");
-    var now = document.querySelector(".tverse-bar .ew-tr-now");
+    var bar = ev.target && ev.target.closest && ev.target.closest(".tverse-bar");
+    var lists = document.querySelectorAll(".tverse-bar .ew-tr-list");
+    var nows = document.querySelectorAll(".ew-tr-pick .ew-tr-now");
     var bl = document.querySelector(".ew-book-list");
     var menu = document.getElementById("sn-ref-menu");
-    var inBar = ev.target && ev.target.closest && ev.target.closest(".tverse-bar");
+    var i, host;
     if (descOpen && !descKeep(ev.target)) hideDesc();
-    if (!inBar) {
-      if (list) list.hidden = true;
-      if (now) now.setAttribute("aria-expanded", "false");
+    for (i = 0; i < lists.length; i++) {
+      host = lists[i].closest(".tverse-bar");
+      if (!bar || host !== bar) lists[i].hidden = true;
+    }
+    for (i = 0; i < nows.length; i++) {
+      host = nows[i].closest(".tverse-bar");
+      if (!bar || host !== bar) nows[i].setAttribute("aria-expanded", "false");
+    }
+    if (!bar) {
       if (bl) bl.hidden = true;
       bookOpen = false;
     }

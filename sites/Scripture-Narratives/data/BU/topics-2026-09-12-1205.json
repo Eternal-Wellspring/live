@@ -621,29 +621,29 @@
     "level": 3,
     "seq": 57,
     "kind": "period",
-    "title": "Definition",
+    "title": "New",
     "notes": "",
     "description": "",
     "duration": ""
   },
   {
-    "id": 68,
+    "id": 54,
     "lecture_id": 4,
     "level": 3,
     "seq": 58,
     "kind": "period",
-    "title": "Timing",
+    "title": "Biblical Examples",
     "notes": "",
     "description": "",
     "duration": ""
   },
   {
-    "id": 67,
+    "id": 55,
     "lecture_id": 4,
-    "level": 3,
+    "level": 4,
     "seq": 59,
     "kind": "period",
-    "title": "Exodus",
+    "title": "Historical",
     "notes": "",
     "description": "",
     "duration": ""
@@ -651,7 +651,7 @@
   {
     "id": 56,
     "lecture_id": 4,
-    "level": 3,
+    "level": 4,
     "seq": 60,
     "kind": "period",
     "title": "End Times",
@@ -662,7 +662,7 @@
   {
     "id": 63,
     "lecture_id": 4,
-    "level": 4,
+    "level": 5,
     "seq": 61,
     "kind": "period",
     "title": "Trumpet",
@@ -673,7 +673,7 @@
   {
     "id": 64,
     "lecture_id": 4,
-    "level": 4,
+    "level": 5,
     "seq": 62,
     "kind": "period",
     "title": "Gathering",
@@ -684,7 +684,7 @@
   {
     "id": 65,
     "lecture_id": 4,
-    "level": 4,
+    "level": 5,
     "seq": 63,
     "kind": "period",
     "title": "Battle",
@@ -693,21 +693,10 @@
     "duration": ""
   },
   {
-    "id": 55,
-    "lecture_id": 4,
-    "level": 3,
-    "seq": 64,
-    "kind": "period",
-    "title": "Historical",
-    "notes": "",
-    "description": "",
-    "duration": ""
-  },
-  {
     "id": 61,
     "lecture_id": 4,
     "level": 2,
-    "seq": 65,
+    "seq": 64,
     "kind": "period",
     "title": "Day of Atonement",
     "notes": "",
@@ -718,9 +707,9 @@
     "id": 62,
     "lecture_id": 4,
     "level": 2,
-    "seq": 66,
+    "seq": 65,
     "kind": "period",
-    "title": "Tabernacles/Harvest",
+    "title": "Tabernacles / Ingathering",
     "notes": "",
     "description": "",
     "duration": ""

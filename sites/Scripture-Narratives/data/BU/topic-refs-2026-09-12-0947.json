@@ -942,141 +942,93 @@
     "to": 9
   },
   {
-    "topic_id": 55,
+    "topic_id": 54,
     "ref": "Num 10:9",
     "from": 9,
     "to": 9
   },
   {
-    "topic_id": 55,
+    "topic_id": 54,
     "ref": "Num 31:6",
     "from": 6,
     "to": 6
   },
   {
-    "topic_id": 55,
+    "topic_id": 54,
     "ref": "Jos 6:4-5",
     "from": 4,
     "to": 5
   },
   {
-    "topic_id": 55,
+    "topic_id": 54,
     "ref": "Jdg 7:16-22",
     "from": 16,
     "to": 22
   },
   {
-    "topic_id": 55,
+    "topic_id": 54,
     "ref": "2Ch 13:12-14",
     "from": 12,
     "to": 14
   },
   {
-    "topic_id": 55,
+    "topic_id": 54,
     "ref": "Jer 4:19",
     "from": 19,
     "to": 19
   },
   {
-    "topic_id": 55,
+    "topic_id": 54,
     "ref": "Jer 6:1",
     "from": 1,
     "to": 1
   },
   {
-    "topic_id": 55,
+    "topic_id": 54,
     "ref": "Jer 51:27",
     "from": 27,
     "to": 27
   },
   {
-    "topic_id": 55,
+    "topic_id": 54,
     "ref": "Ezk 7:14",
     "from": 14,
     "to": 14
   },
   {
-    "topic_id": 55,
+    "topic_id": 54,
     "ref": "Hos 5:8",
     "from": 8,
     "to": 8
   },
   {
-    "topic_id": 55,
+    "topic_id": 54,
     "ref": "Jol 2:1",
     "from": 1,
     "to": 1
   },
   {
-    "topic_id": 55,
+    "topic_id": 54,
     "ref": "Amo 3:6",
     "from": 6,
     "to": 6
   },
   {
-    "topic_id": 55,
+    "topic_id": 54,
     "ref": "Zep 1:16",
     "from": 16,
     "to": 16
   },
   {
-    "topic_id": 55,
+    "topic_id": 54,
     "ref": "Zec 9:14",
     "from": 14,
     "to": 14
   },
   {
-    "topic_id": 55,
+    "topic_id": 54,
     "ref": "1Co 14:8",
     "from": 8,
     "to": 8
-  },
-  {
-    "topic_id": 56,
-    "ref": "Isa 27:12-13",
-    "from": 12,
-    "to": 13
-  },
-  {
-    "topic_id": 56,
-    "ref": "Jol 2:1",
-    "from": 1,
-    "to": 1
-  },
-  {
-    "topic_id": 56,
-    "ref": "Zep 1:14-16",
-    "from": 14,
-    "to": 16
-  },
-  {
-    "topic_id": 56,
-    "ref": "Zec 9:14-16",
-    "from": 14,
-    "to": 16
-  },
-  {
-    "topic_id": 56,
-    "ref": "Mat 24:30-31",
-    "from": 30,
-    "to": 31
-  },
-  {
-    "topic_id": 56,
-    "ref": "1Co 15:51-52",
-    "from": 51,
-    "to": 52
-  },
-  {
-    "topic_id": 56,
-    "ref": "1Th 4:16-17",
-    "from": 16,
-    "to": 17
-  },
-  {
-    "topic_id": 56,
-    "ref": "Rev 11:15",
-    "from": 15,
-    "to": 15
   }
 ]

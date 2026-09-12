@@ -206,14 +206,16 @@
       localStorage.setItem(STORE + ".on", on ? "1" : "0");
     } catch (e) {}
   }
+  function builderPort() {
+    var p = String(location.port || "");
+    return p === "8775" || p === "8776" || p === "8777";
+  }
   function canEditVerses() {
-    return location.port === "8775" || location.port === "8776" || location.port === "8777";
+    return builderPort();
   }
   function hasLocalApi() {
     return (
-      location.port === "8775" ||
-      location.port === "8776" ||
-      location.port === "8777" ||
+      builderPort() ||
       location.port === "8778" ||
       location.port === "8779" ||
       location.port === "8780"
@@ -761,6 +763,16 @@
     }
     return bits.join("");
   }
+  function applyPopupVerses(storedText, verses) {
+    var kept = storedText ? verseMapFromHtml(storedHtml(storedText)) : {};
+    addMissingVerses(kept, verses || []);
+    var html = htmlFromVerseMap(kept, currentRef.vs1, vs2Safe(currentRef));
+    if (!html) return false;
+    setPopupHtml(html);
+    savedCopy = nkjvHtml;
+    markHitPassages();
+    return true;
+  }
   function addMissingVerses(map, verses) {
     (verses || []).forEach(function (v) {
       if (v && v.vs && !map[v.vs]) map[v.vs] = String(v.text || "").replace(/</g, "&lt;");
@@ -873,7 +885,7 @@
     s.id = "ew-ref-style";
     s.textContent =
       "a.ref,.col a.ref,.col-text a.ref,.para a.ref{color:var(--title,#005eb8)!important;font-weight:400!important;font-size:calc(1em - 2px)!important;text-decoration:underline;text-underline-offset:0.15em;cursor:pointer;white-space:nowrap}" +
-      "#ew-ref-menu{position:fixed;z-index:120;min-width:12rem;background:#fff;border:1px solid #c5d0d4;box-shadow:0 8px 22px rgba(0,0,0,.16);padding:0.15rem 0 0.35rem}" +
+      "#ew-ref-menu{position:fixed;z-index:200;min-width:12rem;background:#fff;border:1px solid #c5d0d4;box-shadow:0 8px 22px rgba(0,0,0,.16);padding:0.15rem 0 0.35rem}" +
       "#ew-ref-menu[hidden]{display:none!important}" +
       "#ew-ref-menu .ew-ref-title{padding:0.3rem 0.75rem 0.15rem;font:800 0.82rem Arial,Helvetica,sans-serif;color:#1f6f78}" +
       "#ew-ref-menu .ew-ref-title.ew-rhm-font{border-top:2px solid var(--title,#004d97);margin-top:0.08rem;padding-top:0.22rem}" +
@@ -922,21 +934,24 @@
       "#ew-info-modal .ew-info-body .bit{display:block;margin:0 0 8px;padding:4px 0 2px;font-size:16px;font-weight:700;line-height:1.25;color:#333}" +
       "#ew-info-modal .ew-info-body .bit.indent{margin-left:15px;padding-left:0;font-weight:400}" +
       "#ew-info-modal .ew-info-body a.ref{color:#0066cc;font-weight:700;font-size:16px;text-decoration:underline;text-underline-offset:0.12em}" +
-      ".fn-keep{white-space:nowrap}" +
-      ".col-footnotes .fn-keep{display:block;white-space:nowrap}" +
-      ".col-footnotes .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}" +
-      ".fn{font-size:1em;font-weight:700;line-height:inherit;vertical-align:baseline;cursor:pointer;color:var(--title,#005eb8);text-decoration:none!important;display:inline-block;position:relative;padding:0;white-space:pre}" +
-      ".fn-mark{font-size:.7em;font-weight:700;line-height:1;vertical-align:super}" +
-      ".fn-tip{display:none;position:absolute;left:0;bottom:calc(100% + .28rem);z-index:80;padding:.15rem .45rem;border:1px solid var(--line,#c5d0d4);background:#fff;color:var(--title,#005eb8);font:400 .85em Arial,Helvetica,sans-serif;white-space:nowrap;pointer-events:none}" +
-      ".fn:hover .fn-tip,.fn:focus .fn-tip{display:block}" +
-      "a.ref .fn,.col-footnotes .fn{text-decoration:none!important;display:inline-block;position:relative;white-space:pre}" +
       "a.ref.ew-extra,.fn.ew-extra,.fn.ew-extra .fn-mark,.fn.ew-extra .fn-tip,#ew-verse.ew-extra .ew-verse-ref,#ew-verse.ew-extra .ew-extra-note{color:#0a7a22!important}" +
       "#ew-verse.ew-extra .ew-verse-body{font-size:1.22em;line-height:1.28}" +
       "#ew-verse.ew-extra .ew-verse-body p{margin:0 0 .18em;line-height:inherit}" +
-      "#ew-verse.ew-extra .ew-extra-note{font-size:.92em;line-height:1.3;margin:0 0 .45em}" +
-      ".col.col-footnotes{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:.15rem .4rem!important;text-align:left!important;white-space:normal!important}" +
-      ".col.col-footnotes .col-text,.col.col-footnotes .bit{white-space:normal!important}" +
-      ".col.col-footnotes a.ref{white-space:nowrap}";
+      "#ew-verse.ew-extra .ew-extra-note{font-size:.92em;line-height:1.3;margin:0 0 .45em}";
+    if (!document.getElementById("ew-fn-style")) {
+      s.textContent +=
+        ".fn-keep{white-space:nowrap}" +
+        ".col-footnotes .fn-keep{display:block;white-space:nowrap}" +
+        ".col-footnotes .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}" +
+        ".fn{font-size:1em;font-weight:700;line-height:inherit;vertical-align:baseline;cursor:pointer;color:var(--title,#005eb8);text-decoration:none!important;display:inline-block;position:relative;padding:0;white-space:pre}" +
+        ".fn-mark{font-size:.7em;font-weight:700;line-height:1;vertical-align:super}" +
+        ".fn-tip{display:none;position:absolute;left:0;bottom:calc(100% + .28rem);z-index:80;padding:.15rem .45rem;border:1px solid var(--line,#c5d0d4);background:#fff;color:var(--title,#005eb8);font:400 .85em Arial,Helvetica,sans-serif;white-space:nowrap;pointer-events:none}" +
+        ".fn:hover .fn-tip,.fn:focus .fn-tip{display:block}" +
+        "a.ref .fn,.col-footnotes .fn{text-decoration:none!important;display:inline-block;position:relative;white-space:pre}" +
+        ".col.col-footnotes{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:.15rem .4rem!important;text-align:left!important;white-space:normal!important}" +
+        ".col.col-footnotes .col-text,.col.col-footnotes .bit{white-space:normal!important}" +
+        ".col.col-footnotes a.ref{white-space:nowrap}";
+    }
     document.head.appendChild(s);
   }
   function hideRefMenu() {
@@ -1783,6 +1798,7 @@
     bumpHost(a);
   }
   function applyFootnote(hit) {
+    if (window.ewFootnotes && window.ewFootnotes.applyFootnote) return window.ewFootnotes.applyFootnote(hit);
     var num = selectedNumber();
     if (num) {
       wrapSelectionInSup();
@@ -2417,9 +2433,11 @@
         if (d && d.found && d.text) {
           inFile = true;
           showPopup();
-          setPopupHtml(storedHtml(d.text));
-          savedCopy = nkjvHtml;
-          markHitPassages();
+          if (!applyPopupVerses(d.text, [])) {
+            setPopupHtml(storedHtml(d.text));
+            savedCopy = nkjvHtml;
+            markHitPassages();
+          }
           markClean();
           return;
         }
@@ -2491,7 +2509,7 @@
     return m ? m[1] : "";
   }
   function saveCurrent(andClose) {
-    if (!currentRef || (location.port !== "8775" && location.port !== "8776" && location.port !== "8777")) return;
+    if (!currentRef || !canEditVerses()) return;
     var html = htmlToSave();
     if (!html) return;
     var folder = saveFolder();
@@ -2647,12 +2665,17 @@
   }
 
   ensureRefStyle();
-  document.querySelectorAll("a.ref").forEach(liftFnOutOfRef);
-  document.querySelectorAll(".fn").forEach(spaceAfterFn);
-  dedupeFootnoteRefs(document);
-  watchFootnoteOrder();
-  document.querySelectorAll(".para").forEach(renumberRow);
-  document.querySelectorAll(".fn").forEach(paintFnTitle);
+  if (window.ewFootnotes && window.ewFootnotes.paintAll) {
+    window.ewFootnotes.setTitlePainter(paintFnTitle);
+    window.ewFootnotes.paintAll();
+  } else {
+    document.querySelectorAll("a.ref").forEach(liftFnOutOfRef);
+    document.querySelectorAll(".fn").forEach(spaceAfterFn);
+    dedupeFootnoteRefs(document);
+    watchFootnoteOrder();
+    document.querySelectorAll(".para").forEach(renumberRow);
+    document.querySelectorAll(".fn").forEach(paintFnTitle);
+  }
   markExtraRefs();
   if (!window.ewInfoBound) {
     window.ewInfoBound = true;
@@ -2792,7 +2815,13 @@
     "contextmenu",
     function (ev) {
       if (!canEditVerses()) return;
-      if (ev.target.closest && ev.target.closest("#ew-verse, #ew-chapter, #ew-ref-menu")) return;
+      if (ev.target.closest && ev.target.closest("#ew-ref-menu, #ew-chapter")) return;
+      if (ev.target.closest && ev.target.closest("#ew-verse, #ew-text-modal, #ew-info-modal")) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        showRefMenu(ev, hitFromEvent(ev) || { text: selectedText(), a: null });
+        return;
+      }
       var inIframe = window.parent && window.parent !== window;
       var inLong = ev.target.closest && ev.target.closest("#long-desc");
       if (!inIframe && !inLong) return;

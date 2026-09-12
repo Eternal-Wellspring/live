@@ -13,6 +13,7 @@
   var descId = "";
   var descLock = 0;
   var openRef = null;
+  var lastRefTopic = null;
   var boxH = 8;
   var verseCache = {};
   var verseTr = "NKJV";
@@ -241,6 +242,23 @@
   }
   function refN(t) {
     return refsFor(t).length;
+  }
+  function homeRef(t) {
+    var i, r, lab, p;
+    if (!t) return "";
+    for (i = 0; i < topicRefs.length; i++) {
+      r = topicRefs[i];
+      if (sid(r.topic_id) !== sid(t.id)) continue;
+      lab = String(r.ref || "").trim();
+      p = parseRefParts(lab);
+      if (p && p.book === "Mrk") return lab;
+    }
+    return "";
+  }
+  function topicForOpenRef(refTopic) {
+    if (refTopic) return refTopic;
+    if (lastRefTopic) return find(topics, lastRefTopic);
+    return null;
   }
   function collectRange(ids, ref) {
     var i, r, p, want, lab, a = 0, b = 0, fa, fb;
@@ -894,7 +912,6 @@
     var depth = lv - 2;
     var same;
     sel = id;
-    openRef = null;
     if (depth < 0) { loadTopics(paint); return; }
     same = openStack[depth] && openStack[depth].id === id && openStack[depth].mode === "refs";
     if (same) {
@@ -903,11 +920,7 @@
       openStack.length = depth;
       openStack[depth] = { id: id, mode: "refs" };
     }
-    loadTopics(function () {
-      var row = find(topics, id);
-      if (!same) openRef = row ? (refsFor(row)[0] || null) : null;
-      paint();
-    });
+    loadTopics(paint);
   }
   function shiftY(els, dy) {
     var i;
@@ -951,7 +964,7 @@
       refTopic = find(items, openStack[openStack.length - 1].id);
     }
     var refList = refsFor(refTopic);
-    if (openRef && refList.indexOf(openRef) < 0) openRef = null;
+    if (refTopic && openRef && refList.indexOf(openRef) < 0) openRef = null;
 
     function colNameW(list) {
       var w = 0;
@@ -1064,12 +1077,13 @@
       board.appendChild(green);
       return b;
     }
-    function refBox(label) {
+    function refBox(label, topicId) {
       var b = document.createElement("button");
       var name = document.createElement("span");
       b.type = "button";
       b.className = "tbox" + (openRef === label ? " on" : "");
       b.dataset.ref = label;
+      if (topicId) b.dataset.id = sid(topicId);
       name.className = "tname";
       name.textContent = label;
       b.appendChild(name);
@@ -1111,6 +1125,7 @@
         ev.stopPropagation();
         if (skipRefClick) { skipRefClick = false; return; }
         if (name.querySelector("input")) return;
+        if (topicId) lastRefTopic = sid(topicId);
         openRef = openRef === label ? null : label;
         paint();
       });
@@ -1231,12 +1246,40 @@
     for (ti = 0; ti < colBuilt.length; ti++) {
       if (colBuilt[ti].pane && colBuilt[ti].pane._y < topBox) topBox = colBuilt[ti].pane._y;
     }
+    function placeHomeRefs(col) {
+      var pane = col.pane;
+      var boxes = col.boxes;
+      var homes = [];
+      var i, t, hr, maxW = 0, homeX, b;
+      if (!pane || !boxes || !boxes.length) return;
+      if (refTopic) return;
+      for (i = 0; i < boxes.length; i++) {
+        if (boxes[i].dataset.ref) continue;
+        t = find(topics, boxes[i].dataset.id);
+        hr = homeRef(t);
+        if (!hr) continue;
+        maxW = Math.max(maxW, textSize(hr).w);
+        homes.push({ el: boxes[i], t: t, hr: hr });
+      }
+      if (!homes.length) return;
+      homeX = (pane._w || 0) + GAP_X;
+      pane.style.width = (homeX + maxW) + "px";
+      pane._w = homeX + maxW;
+      for (i = 0; i < homes.length; i++) {
+        b = refBox(homes[i].hr, homes[i].t.id);
+        pane.appendChild(b);
+        put(b, homeX, homes[i].el._y, maxW, BOX_H);
+      }
+      col.homeW = maxW;
+    }
+    for (ci = 0; ci < colBuilt.length; ci++) placeHomeRefs(colBuilt[ci]);
+
     var cRef = [];
     var xRef = 0;
     var xVs = 0;
     if (refTopic && refList.length) {
       xRef = x;
-      cRef = refList.map(refBox);
+      cRef = refList.map(function (lab) { return refBox(lab, refTopic.id); });
       wRef = colNameW(refList);
       parentBox = colBuilt.length ? findBox(colBuilt[colBuilt.length - 1].boxes, refTopic.id) : null;
       xVs = x + wRef + PAD;
@@ -1246,35 +1289,63 @@
 
     var versesEl = null;
     var versesWrap = null;
+    var verseTopic = topicForOpenRef(refTopic);
+    var showChap = false;
+    var yVs = PAD;
+    var homeTop = Infinity;
+    var hi, hEl, ht;
     if (!openRef) {
       lastOpenRef = null;
       hitPick = false;
       hitStart = 0;
       hitEnd = 0;
     }
-    if (openRef && cRef.length && xRef) {
-      if (openRef !== lastOpenRef) {
+    for (ci = 0; ci < colBuilt.length; ci++) {
+      if (!colBuilt[ci].homeW || !colBuilt[ci].boxes) continue;
+      for (hi = 0; hi < colBuilt[ci].boxes.length; hi++) {
+        hEl = colBuilt[ci].boxes[hi];
+        ht = find(topics, hEl.dataset.id);
+        if (ht && homeRef(ht) && boardY(hEl) < homeTop) homeTop = boardY(hEl);
+      }
+    }
+    if (homeTop < Infinity) {
+      showChap = true;
+    }
+    if (refTopic && refList.length && pane) {
+      showChap = true;
+    }
+    if (showChap) {
+      if (openRef && openRef !== lastOpenRef) {
         lastOpenRef = openRef;
         viewChap = chapterOf(openRef);
         hitPick = false;
         hitStart = 0;
         hitEnd = 0;
       }
-      if (refTopic && !isLeaf(refTopic)) {
+      if (verseTopic && !isLeaf(verseTopic)) {
         hitPick = false;
         hitStart = 0;
         hitEnd = 0;
       }
-      if (!viewChap) viewChap = chapterOf(openRef);
-      if (!xVs) xVs = xRef + (wRef || 0) + PAD;
+      if (openRef && !viewChap) viewChap = chapterOf(openRef);
+      colRight = PAD;
+      for (pi = 0; pi < colBuilt.length; pi++) {
+        if (!colBuilt[pi].pane) continue;
+        colRight = Math.max(colRight, colBuilt[pi].pane._x + colBuilt[pi].pane._w);
+      }
+      xVs = colRight + GAP_X;
+      yVs = PAD;
       versesWrap = document.createElement("div");
-      versesWrap.className = "tverse-wrap";
+      versesWrap.className = "tverse-wrap" + (openRef ? "" : " empty");
       board.appendChild(versesWrap);
       var vsW = Math.max(280, (wrap ? wrap.clientWidth : 800) - xVs - PAD);
       var vsH = Math.max(160, viewH - PAD * 2);
-      put(versesWrap, xVs, PAD, vsW, vsH);
+      put(versesWrap, xVs, yVs, vsW, vsH);
       versesWrap.style.height = vsH + "px";
 
+      if (!openRef) {
+        /* empty chapter box */
+      } else {
       var bar = document.createElement("div");
       bar.className = "tverse-bar";
       bar.addEventListener("click", function (ev) { ev.stopPropagation(); });
@@ -1285,7 +1356,8 @@
       var prevBtn = document.createElement("button");
       prevBtn.type = "button";
       prevBtn.className = "ew-ch-prev";
-      prevBtn.innerHTML = '<span class="ew-ch-arrow">&lt;</span><span class="ew-ch-lab">Prev</span>';
+      prevBtn.setAttribute("aria-label", "Previous chapter");
+      prevBtn.innerHTML = '<span class="ew-ch-arrow">&lt;</span><span class="page-nav-tip">Previous chapter</span>';
       var iCan = viewChap ? CANON.indexOf(viewChap.abbr) : 0;
       prevBtn.disabled = !viewChap || (iCan <= 0 && viewChap.ch <= 1);
       prevBtn.addEventListener("click", function (ev) {
@@ -1299,7 +1371,8 @@
       var nextBtn = document.createElement("button");
       nextBtn.type = "button";
       nextBtn.className = "ew-ch-next";
-      nextBtn.innerHTML = '<span class="ew-ch-lab">Next</span><span class="ew-ch-arrow">&gt;</span>';
+      nextBtn.setAttribute("aria-label", "Next chapter");
+      nextBtn.innerHTML = '<span class="ew-ch-arrow">&gt;</span><span class="page-nav-tip">Next chapter</span>';
       nextBtn.disabled = !viewChap || ((iCan < 0 || iCan >= CANON_N - 1) && viewChap.ch >= chCount(viewChap.num));
       nextBtn.addEventListener("click", function (ev) {
         ev.preventDefault();
@@ -1317,7 +1390,7 @@
       nav.appendChild(refLab);
       nav.appendChild(nextBtn);
       left.appendChild(nav);
-      if (sameOrigChap() && isLeaf(refTopic)) {
+      if (sameOrigChap() && isLeaf(verseTopic)) {
         var pickBtn = document.createElement("button");
         pickBtn.type = "button";
         pickBtn.className = "tverse-pick" + (hitPick ? " on" : "");
@@ -1401,7 +1474,7 @@
       versesEl = document.createElement("div");
       versesEl.className = "tverses" + (hitPick ? " picking" : "");
       versesWrap.appendChild(versesEl);
-      var rng = sameOrigChap() ? rangeFor(refTopic, openRef) : { from: 0, to: 0 };
+      var rng = sameOrigChap() ? rangeFor(verseTopic, openRef) : { from: 0, to: 0 };
       var cached = verseCache[cacheKey(openRef)];
       function drawLines(lines) {
         versesEl.innerHTML = "";
@@ -1457,6 +1530,7 @@
           if (!viewChap || viewChap.abbr + " " + viewChap.ch !== wantChap) return;
           paint();
         });
+      }
       }
     }
 

@@ -99,8 +99,18 @@
     }
     .tbtn-teal { background: #1f6f78; color: #fff; }
     .tbtn-teal:hover { background: #186066; }
-    .tbtn-green { background: #cdebc8; color: #1b3a4b; }
+    .tbtn-green {
+      background: #cdebc8;
+      color: #1b3a4b;
+      font-weight: 700;
+    }
     .tbtn-green:hover { background: #b7dcb1; }
+    .tbtn-green.open {
+      background: #3d7a45;
+      color: #fff;
+      font-weight: 700;
+    }
+    .tbtn-green.open:hover { background: #32663a; }
     .thead { cursor: default; }
     .tdesc {
       position: fixed;
@@ -149,6 +159,7 @@
       overflow: hidden;
       box-shadow: none;
     }
+    .tverse-wrap.empty { background: #fff; }
     .tverse-bar {
       flex: 0 0 auto;
       position: relative;
@@ -238,6 +249,26 @@
       font-weight: 600;
       line-height: 1;
     }
+    .ew-ch-prev .page-nav-tip,
+    .ew-ch-next .page-nav-tip {
+      display: none;
+      position: absolute;
+      left: 0;
+      bottom: calc(100% + 0.28rem);
+      z-index: 80;
+      padding: 0.15rem 0.45rem;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--title);
+      font: 400 0.85em Arial, Helvetica, sans-serif;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .ew-ch-next .page-nav-tip { left: auto; right: 0; }
+    .ew-ch-prev:hover:not(:disabled) .page-nav-tip,
+    .ew-ch-next:hover:not(:disabled) .page-nav-tip,
+    .ew-ch-prev:focus:not(:disabled) .page-nav-tip,
+    .ew-ch-next:focus:not(:disabled) .page-nav-tip { display: block; }
     .ew-ch-prev:hover:not(:disabled),
     .ew-ch-next:hover:not(:disabled) {
       background: none;
@@ -421,6 +452,6 @@
     <div class="sn-rhm-title">Ref</div>
     <button type="button" data-edit="1">Edit</button>
   </div>
-  <script src="topics-tree.js?v=290"></script>
+  <script src="topics-tree.js?v=293"></script>
 </body>
 </html>
