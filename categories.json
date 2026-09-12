@@ -2,11 +2,21 @@
   "categories": [
     {
       "name": "End Times Prophecies",
-      "description": "A Scriptural basis for the hope set before us, when Jesus, the son of God returns to earth."
+      "description": "A Scriptural basis for the hope set before us, when Jesus, the son of God returns to earth.",
+      "showOnBuild": true,
+      "showOnWeb": true
     },
     {
       "name": "Torah - God's Ways",
-      "description": "Practical and Prophetic insights for today"
+      "description": "Practical and Prophetic insights for today",
+      "showOnBuild": true,
+      "showOnWeb": false
+    },
+    {
+      "name": "Yahweh's seven annual Festivals",
+      "description": "1. Passover, Unleavened Bread and  First Fruits (resurrection) were fulfilled by Jesus 2,000 years ago.\n\n2. Pentecost (the wheat harvest) will be fulfilled when the Messiah returns and His saints are resurrected, filled with the Spirit of God.\n\n3.Trumpets, Atonement and Tabernacles/Final Ingathering will be fulfilled after the Messiah delivers His Kingdom of earth the God the Father",
+      "showOnBuild": true,
+      "showOnWeb": true
     }
   ]
 }
