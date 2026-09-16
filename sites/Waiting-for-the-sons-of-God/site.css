@@ -535,6 +535,29 @@ html.ew-phone.ew-portrait .col-footnotes { order: 3; }
   border-color: #1f6f78;
 }
 .col-text .bit.ew-details:not(.open) ~ .bit { display: none !important; }
+button.ew-hidden-sub {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  margin: 0.25rem 0 var(--para-gap, 0px);
+  padding: 0.22rem 0.55rem;
+  border: 1px solid #c5d0d4;
+  border-radius: 2px;
+  background: #e4eaec;
+  color: #5a6d75;
+  font: 400 0.88em Arial, Helvetica, sans-serif;
+  line-height: 1.25;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  box-sizing: border-box;
+}
+button.ew-hidden-sub.open {
+  background: #1f6f78;
+  color: #f6f7eb;
+  border-color: #1f6f78;
+}
+.subsec.ew-hidden-sub-wrap:not(.open) > .subsec-frame { display: none !important; }
 .col-text .bit.ew-info {
   display: block;
   width: max-content;
@@ -1083,32 +1106,32 @@ a.ref, .col a.ref, .col-text a.ref, .para a.ref {
 .ew-pick-verses button.mid { background: #e8f2f3; }
 
 /* writer format */
-.site { font-family:Arial, Helvetica, sans-serif; font-size:calc(26px * var(--ew-font, 1)); color:#1f6f78; font-weight:700 }
+.site { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); color:#1f6f78; font-weight:400 }
 .ew-words { font-size:calc(18px * var(--ew-font, 1)) }
 .who, .site { text-align:left }
 .site { display:block; width:100%; padding:0; margin:0; border:0; background:transparent }
-.who .site, a.site { font-weight:700; font-style:normal; text-decoration:none }
-.top .brand-row { font-family:Arial, Helvetica, sans-serif; font-size:calc(26px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f6f78; background:#f6f7eb; border-style:solid; border-color:#c5d0d4; border-width:0px 0px 0px 0px; padding:0px; margin-top:0px; margin-bottom:0px }
+.who .site, a.site { font-weight:400; font-style:normal; text-decoration:none }
+.top .brand-row { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f6f78; background:#f6f7eb; border-style:solid; border-color:#c5d0d4; border-width:0px 0px 0px 0px; padding:0px; margin-top:0px; margin-bottom:0px }
 .ew-book-pick .ew-chap-btn, .ew-book-pick .ew-tr-now { font-family:Arial, Helvetica, sans-serif; font-size:calc(13px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#005eb8; background:#e8eef6; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:4px; text-align:left }
 .ew-ch-pick .ew-chap-btn, .ew-ch-pick .ew-tr-now { font-family:Arial, Helvetica, sans-serif; font-size:calc(13px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#005eb8; background:#e8eef6; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:4px; text-align:left }
 .ew-ch-prev { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; text-align:left }
 .ew-ch-prev::before { content:none; display:none }
 .ew-ch-next { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; text-align:left }
 .ew-ch-next::before { content:none; display:none }
-.bit.ew-info { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; background:#ededed; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:7px; margin-top:4px; margin-bottom:4px; text-align:left }
+.bit.ew-info { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; background:#ededed; border-style:solid; border-color:#aaaaaa; border-width:1.0px 1.0px 1.0px 1.0px; box-shadow:20px 20px 20px #00000040; padding:7px; margin-top:4px; margin-bottom:4px; text-align:left }
 #ew-info-modal .ew-info-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#333333; text-align:left; line-height:1.25 }
-#ew-info-modal .ew-info-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#333333; background:#f6f7eb; border-style:solid; border-color:#0058B0; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:0px 10px 30px #00000059; padding:22px; text-align:left; line-height:1.25 }
+#ew-info-modal .ew-info-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#333333; background:#f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:1.0px 1.0px 1.0px 1.0px; box-shadow:20px 20px 20px #00000059; padding:22px; text-align:left; line-height:1.25 }
 #ew-info-modal .ew-info-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; text-decoration:underline; color:#0058B0 }
 #ew-info-modal .ew-info-x { color:#0058B0 }
 #ew-info-modal .ew-info-body .bit { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#333333; line-height:1.25 }
 #ew-info-modal .ew-info-body .bit.indent { font-weight:400 }
-.title-bar h1 { font-family:Arial, Helvetica, sans-serif; font-size:calc(23px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#004d97; border-style:solid; border-color:#004d97; border-width:0px 0px 0px 0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center }
+.title-bar h1 { font-family:Arial, Helvetica, sans-serif; font-size:calc(23px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#004d97; background:#f6f7eb; border-style:solid; border-color:#004d97; border-width:0px 0px 0px 0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center }
 .title-bar h1 { border-width:0 !important }
 .tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f6f78; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
 .subsec-frame { font-weight:400; font-style:normal; border-style:solid; border-color:#919191; border-width:2.0px 2.0px 2.0px 2.0px; padding:5px; margin-top:0px; margin-bottom:13px; text-align:left }
 .para { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#ffffff; border-style:solid; border-color:#e2e2e2; border-width:1.0px 0px 0px 0px; padding:0px; margin-top:12px; margin-bottom:-2px; text-align:left; line-height:1.45; --para-gap:18px }
-.row-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:6px; text-align:left }
+.row-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:0px; text-align:left }
 .col-title:not(:empty) { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; margin-top:-11px; margin-bottom:3px; text-align:left }
 .col { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:5px }
 .col .col-text, .col .col-text .bit { line-height:1.2 }
@@ -1124,11 +1147,11 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .ew-verse-ref { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#005eb8 }
 .ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; text-align:left }
 .ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; text-align:left }
-#ew-text-modal .ew-text-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; background:#f6f7eb; border-style:solid; border-color:#0058B0; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:0px 2px 6px #00000040; padding:16px; text-align:left }
+#ew-text-modal .ew-text-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; background:##f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:20px 20px 20px #00000040; padding:16px; text-align:left }
 #ew-text-modal .ew-text-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; text-decoration:underline; color:#0058B0 }
 #ew-text-modal .ew-text-body, #ew-text-modal .ew-text-body p { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#333333; line-height:1.25 }
 .ew-chapter-list, .ew-ch-row { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.25 }
-.page-nav, .page-nav .page-nav-word, .page-nav .page-nav-tip, .page-tools, .page-tools button { font-weight:400; font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#5a6a72 }
+.page-nav, .page-nav .page-nav-word, .page-nav .page-nav-tip, .page-tools, .page-tools button { font-weight:400; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#5a6a72 }
 .tab[data-sec="s-home-contents"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="s-home-contents"] { background:#fefcdd }
 .tab-panel[data-sec="s-home-contents"] .sub-tab { background:#fefcdd }
@@ -1192,34 +1215,26 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .tab-dock-end .tab[data-sec="294"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="294"].active { border-top-color:#ffffff; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
 .subsec-frame[data-heading="295"] { font-weight:400; font-style:normal; border-style:solid; border-color:#919191; border-width:0px 0px 0px 0px; padding:5px; margin-top:20px; margin-bottom:-4px; text-align:left }
-.tab[data-sec="466"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
-.tab[data-sec="466"] { background:#fefcdd }
-.tab-panel[data-sec="466"] .sub-tab { background:#fefcdd }
-.end-sub-tabs[data-for="s2"] .sub-tab { background:#fefcdd }
-.tab[data-sec="466"].active, .tab-panel[data-sec="466"] { background:#ffffff }
-.tab[data-sec="466"].active { border-bottom-color:#ffffff }
-.tab-panel[data-sec="466"] .sub-tab.active { background:#ffffff; border-bottom-color:#ffffff }
-.end-sub-tabs[data-for="s2"] .sub-tab.active { background:#ffffff; border-top-color:#ffffff }
-.tab-dock-end .tab[data-sec="466"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="466"].active { border-top-color:#ffffff; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+h2[data-heading="453"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ffffff; background:#0042aa; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
+.subsec-frame[data-heading="453"] { font-size:calc(22px * var(--ew-font, 1)); font-weight:400; font-style:normal; background:#dcfff4; border-style:solid; border-color:#919191; border-width:2.0px 2.0px 2.0px 2.0px; padding:5px; margin-top:0px; margin-bottom:13px; text-align:left }
 .tab[data-sec="s-p2-qa"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="s-p2-qa"] { background:#fefcdd }
 .tab-panel[data-sec="s-p2-qa"] .sub-tab { background:#fefcdd }
-.end-sub-tabs[data-for="s3"] .sub-tab { background:#fefcdd }
+.end-sub-tabs[data-for="s2"] .sub-tab { background:#fefcdd }
 .tab[data-sec="s-p2-qa"].active, .tab-panel[data-sec="s-p2-qa"] { background:#ffffff }
 .tab[data-sec="s-p2-qa"].active { border-bottom-color:#ffffff }
 .tab-panel[data-sec="s-p2-qa"] .sub-tab.active { background:#ffffff; border-bottom-color:#ffffff }
-.end-sub-tabs[data-for="s3"] .sub-tab.active { background:#ffffff; border-top-color:#ffffff }
+.end-sub-tabs[data-for="s2"] .sub-tab.active { background:#ffffff; border-top-color:#ffffff }
 .tab-dock-end .tab[data-sec="s-p2-qa"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="s-p2-qa"].active { border-top-color:#ffffff; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
 .tab[data-sec="s-b7wst1g"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="s-b7wst1g"] { background:#fefcdd }
 .tab-panel[data-sec="s-b7wst1g"] .sub-tab { background:#fefcdd }
-.end-sub-tabs[data-for="s4"] .sub-tab { background:#fefcdd }
+.end-sub-tabs[data-for="s3"] .sub-tab { background:#fefcdd }
 .tab[data-sec="s-b7wst1g"].active, .tab-panel[data-sec="s-b7wst1g"] { background:#ffffff }
 .tab[data-sec="s-b7wst1g"].active { border-bottom-color:#ffffff }
 .tab-panel[data-sec="s-b7wst1g"] .sub-tab.active { background:#ffffff; border-bottom-color:#ffffff }
-.end-sub-tabs[data-for="s4"] .sub-tab.active { background:#ffffff; border-top-color:#ffffff }
+.end-sub-tabs[data-for="s3"] .sub-tab.active { background:#ffffff; border-top-color:#ffffff }
 .tab-dock-end .tab[data-sec="s-b7wst1g"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="s-b7wst1g"].active { border-top-color:#ffffff; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
 .tab[data-sec="109"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
@@ -1622,6 +1637,10 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .end-sub-tabs .sub-tab { border-radius:0 0 7px 7px; border-top:0 }
 .end-sub-tabs .sub-tab.active { margin-top:-1px; border-top-color:#ffffff; background:#ffffff }
 .col-title:empty { display:none; margin:0 }
+.title-bar { background:#f6f7eb }
+.title-bar-inner { background:#f6f7eb }
+.title-bar h1 { background:transparent; margin-bottom:0 }
+.tabs { margin-top:0 }
 .para[data-para="r-3v542le"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#e2e2e2; border-width:0px 0px 0px 0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.45; --para-gap:18px }
 .para[data-para="r-3v542le"] .col[data-col="1"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
 .para[data-para="r-3v542le"] .col[data-col="1"] .col-text, .para[data-para="r-3v542le"] .col[data-col="1"] .col-text .bit { line-height:1.2 }
@@ -1721,69 +1740,22 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .para[data-para="400"] .col[data-col="403"]{align-self:center}
 .para[data-para="400"] .col[data-col="403"]{padding:0}
 .para[data-para="400"] .col[data-col="403"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="452"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#dcfff4; border-style:solid; border-color:#919191; border-width:1.0px 1.0px 1.0px 1.0px; padding:0px; margin-top:0px; margin-bottom:5px; text-align:left; line-height:1.45; --para-gap:18px }
+.row-title[data-para="452"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; background:#dcfff4; margin-top:3px; margin-bottom:0px; text-align:left }
 .para[data-para="452"] .col[data-col="451"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
 .para[data-para="452"] .col[data-col="451"] .col-text, .para[data-para="452"] .col[data-col="451"] .col-text .bit { line-height:1.2 }
 .para[data-para="452"] .col[data-col="451"] .col-text { gap:0 }
 .para[data-para="452"] .col[data-col="451"] .col-text .bit { margin:0 0 7px }
 .para[data-para="452"] .col[data-col="451"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="452"] .col[data-col="451"]{align-self:center}
+.para[data-para="456"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#dcfff4; border-style:solid; border-color:#919191; border-width:1.0px 1.0px 1.0px 1.0px; padding:0px; margin-top:0px; margin-bottom:5px; text-align:left; line-height:1.45; --para-gap:18px }
+.row-title[data-para="456"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; background:#dcfff4; margin-top:3px; margin-bottom:0px; text-align:left }
 .para[data-para="456"] .col[data-col="454"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
 .para[data-para="456"] .col[data-col="454"] .col-text, .para[data-para="456"] .col[data-col="454"] .col-text .bit { line-height:1.2 }
 .para[data-para="456"] .col[data-col="454"] .col-text { gap:0 }
 .para[data-para="456"] .col[data-col="454"] .col-text .bit { margin:0 0 7px }
 .para[data-para="456"] .col[data-col="454"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="456"] .col[data-col="454"]{align-self:center}
-.para[data-para="456"] .col[data-col="455"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="456"] .col[data-col="455"] .col-text, .para[data-para="456"] .col[data-col="455"] .col-text .bit { line-height:1.2 }
-.para[data-para="456"] .col[data-col="455"] .col-text { gap:0 }
-.para[data-para="456"] .col[data-col="455"] .col-text .bit { margin:0 0 5px }
-.para[data-para="456"] .col[data-col="455"] .col-text .bit:last-child { margin-bottom:0 }
-.para[data-para="456"] .col[data-col="455"]{align-self:center}
-.para[data-para="456"] .col[data-col="455"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
-.para[data-para="456"] .col[data-col="455"] .col-text,.para[data-para="456"] .col[data-col="455"] .bit{white-space:normal!important}
-.para[data-para="456"] .col[data-col="455"] .fn-keep{display:block;white-space:nowrap}
-.para[data-para="456"] .col[data-col="455"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
-.para[data-para="456"] .col[data-col="455"] a.ref{white-space:nowrap}
-.para[data-para="459"] .col[data-col="457"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="459"] .col[data-col="457"] .col-text, .para[data-para="459"] .col[data-col="457"] .col-text .bit { line-height:1.2 }
-.para[data-para="459"] .col[data-col="457"] .col-text { gap:0 }
-.para[data-para="459"] .col[data-col="457"] .col-text .bit { margin:0 0 7px }
-.para[data-para="459"] .col[data-col="457"] .col-text .bit:last-child { margin-bottom:0 }
-.para[data-para="459"] .col[data-col="457"]{align-self:center}
-.para[data-para="459"] .col[data-col="458"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="459"] .col[data-col="458"] .col-text, .para[data-para="459"] .col[data-col="458"] .col-text .bit { line-height:1.2 }
-.para[data-para="459"] .col[data-col="458"] .col-text { gap:0 }
-.para[data-para="459"] .col[data-col="458"] .col-text .bit { margin:0 0 5px }
-.para[data-para="459"] .col[data-col="458"] .col-text .bit:last-child { margin-bottom:0 }
-.para[data-para="459"] .col[data-col="458"]{align-self:center}
-.para[data-para="459"] .col[data-col="458"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
-.para[data-para="459"] .col[data-col="458"] .col-text,.para[data-para="459"] .col[data-col="458"] .bit{white-space:normal!important}
-.para[data-para="459"] .col[data-col="458"] .fn-keep{display:block;white-space:nowrap}
-.para[data-para="459"] .col[data-col="458"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
-.para[data-para="459"] .col[data-col="458"] a.ref{white-space:nowrap}
-.para[data-para="462"] .col[data-col="460"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="462"] .col[data-col="460"] .col-text, .para[data-para="462"] .col[data-col="460"] .col-text .bit { line-height:1.2 }
-.para[data-para="462"] .col[data-col="460"] .col-text { gap:0 }
-.para[data-para="462"] .col[data-col="460"] .col-text .bit { margin:0 0 7px }
-.para[data-para="462"] .col[data-col="460"] .col-text .bit:last-child { margin-bottom:0 }
-.para[data-para="462"] .col[data-col="460"]{align-self:center}
-.para[data-para="462"] .col[data-col="461"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="462"] .col[data-col="461"] .col-text, .para[data-para="462"] .col[data-col="461"] .col-text .bit { line-height:1.2 }
-.para[data-para="462"] .col[data-col="461"] .col-text { gap:0 }
-.para[data-para="462"] .col[data-col="461"] .col-text .bit { margin:0 0 5px }
-.para[data-para="462"] .col[data-col="461"] .col-text .bit:last-child { margin-bottom:0 }
-.para[data-para="462"] .col[data-col="461"]{align-self:center}
-.para[data-para="462"] .col[data-col="461"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
-.para[data-para="462"] .col[data-col="461"] .col-text,.para[data-para="462"] .col[data-col="461"] .bit{white-space:normal!important}
-.para[data-para="462"] .col[data-col="461"] .fn-keep{display:block;white-space:nowrap}
-.para[data-para="462"] .col[data-col="461"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
-.para[data-para="462"] .col[data-col="461"] a.ref{white-space:nowrap}
-.para[data-para="464"] .col[data-col="463"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="464"] .col[data-col="463"] .col-text, .para[data-para="464"] .col[data-col="463"] .col-text .bit { line-height:1.2 }
-.para[data-para="464"] .col[data-col="463"] .col-text { gap:0 }
-.para[data-para="464"] .col[data-col="463"] .col-text .bit { margin:0 0 7px }
-.para[data-para="464"] .col[data-col="463"] .col-text .bit:last-child { margin-bottom:0 }
-.para[data-para="464"] .col[data-col="463"]{align-self:center}
 .para[data-para="r-fgx6ojv"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#919191; border-width:0px 0px 0px 0px; box-shadow:3px 3px 6px #00000040; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.45; --para-gap:18px }
 .para[data-para="r-fgx6ojv"] .col[data-col="9"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:0px; margin-top:5px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:3px }
 .para[data-para="r-fgx6ojv"] .col[data-col="9"] .col-text, .para[data-para="r-fgx6ojv"] .col[data-col="9"] .col-text .bit { line-height:1.2 }

@@ -403,12 +403,14 @@
     var t = String(html || "")
       .replace(/<S\b[^>]*>[\s\S]*?<\/S>/gi, "")
       .replace(/<\/?S\b[^>]*>/gi, "")
+      .replace(/<sup\b[^>]*>[\s\S]*?<\/sup>/gi, "")
+      .replace(/<\/?sup\b[^>]*>/gi, "")
       .replace(/\{(?:H|G)?\d+\}/gi, "")
       .replace(/<[^>]+>/g, "")
       .replace(/&nbsp;/g, " ")
       .replace(/\s+/g, " ")
       .trim();
-    if (tr === "NKJV") t = nkjvYahweh(t);
+    t = nkjvYahweh(t);
     return t;
   }
   function trById(id) {
@@ -888,8 +890,10 @@
       "#ew-ref-menu{position:fixed;z-index:200;min-width:12rem;background:#fff;border:1px solid #c5d0d4;box-shadow:0 8px 22px rgba(0,0,0,.16);padding:0.15rem 0 0.35rem}" +
       "#ew-ref-menu[hidden]{display:none!important}" +
       "#ew-ref-menu .ew-ref-title{padding:0.3rem 0.75rem 0.15rem;font:800 0.82rem Arial,Helvetica,sans-serif;color:#1f6f78}" +
+      "#ew-ref-menu .ew-ref-title:first-child{padding:0.08rem 0.75rem 0.02rem}" +
       "#ew-ref-menu .ew-ref-title.ew-rhm-font{border-top:2px solid var(--title,#004d97);margin-top:0.08rem;padding-top:0.22rem}" +
       "#ew-ref-menu button{display:block;width:100%;text-align:left;border:0;background:none;padding:0.35rem 0.75rem;font:700 0.88rem Arial,Helvetica,sans-serif;color:#1b3a4b;cursor:pointer}" +
+      "#ew-ref-menu button[data-act]{padding:0.1rem 0.75rem}" +
       "#ew-ref-menu button:hover{background:#eef3f4}" +
       "#ew-ref-menu .ew-rhm-size-pair{display:flex;align-items:stretch;gap:0.35rem;margin:0.08rem 0.75rem 0.3rem}" +
       "#ew-ref-menu .ew-rhm-size-row{display:flex;align-items:stretch;margin:0;width:4.7rem;height:1.55rem;border:1px solid #c5d0d4;background:#fff;box-sizing:border-box}" +
@@ -915,10 +919,8 @@
       "#ew-ref-menu .ew-rhm-list button:active{background:#d5dde0}" +
       "#ew-ref-menu .ew-rhm-list input{width:2.4rem;height:1.6rem;margin:0;padding:0 0.2rem;border:1px solid #c5d0d4;background:#fff;font:400 0.82rem Arial,Helvetica,sans-serif;box-sizing:border-box}" +
       ".col-text .bit[data-gap]{margin-bottom:var(--bit-gap,0px)!important}" +
-      "#ew-ref-menu button[data-rhm='details']{display:block;width:auto;max-width:calc(100% - 1.5rem);margin:0.1rem 0.75rem 0.3rem;padding:0.28rem 0.55rem;border:1px solid #c5d0d4;border-radius:2px;background:#e4eaec;color:#5a6d75;font:400 0.82rem Arial,Helvetica,sans-serif;text-align:left;cursor:pointer;box-sizing:border-box}" +
-      "#ew-ref-menu button[data-rhm='details']:hover{background:#d5dde0;color:#1b3a4b}" +
-      "#ew-ref-menu button[data-rhm='info']{display:block;width:auto;max-width:calc(100% - 1.5rem);margin:0.1rem 0.75rem 0.3rem;padding:0.28rem 0.55rem;border:1px solid #c5d0d4;border-radius:2px;background:#e4eaec;color:#5a6d75;font:400 0.82rem Arial,Helvetica,sans-serif;text-align:left;cursor:pointer;box-sizing:border-box}" +
-      "#ew-ref-menu button[data-rhm='info']:hover{background:#d5dde0;color:#1b3a4b}" +
+      "#ew-ref-menu button[data-rhm='details'],#ew-ref-menu button[data-rhm='info'],#ew-ref-menu button[data-rhm='hidden-sub']{display:block;width:auto;max-width:calc(100% - 1.5rem);margin:0.06rem 0.75rem;padding:0.28rem 0.55rem;border:1px solid #c5d0d4;border-radius:2px;background:#e4eaec;color:#5a6d75;font:400 0.82rem Arial,Helvetica,sans-serif;text-align:left;cursor:pointer;box-sizing:border-box}" +
+      "#ew-ref-menu button[data-rhm='details']:hover,#ew-ref-menu button[data-rhm='info']:hover,#ew-ref-menu button[data-rhm='hidden-sub']:hover{background:#d5dde0;color:#1b3a4b}" +
       ".bit.ew-details{display:block;width:max-content;max-width:100%;margin:0.25rem 0 var(--para-gap,0px);padding:0.22rem 0.55rem;border:1px solid #c5d0d4;border-radius:2px;background:#e4eaec;color:#5a6d75;font:400 0.88em Arial,Helvetica,sans-serif;line-height:1.25;cursor:pointer;user-select:none;-webkit-user-select:none;box-sizing:border-box}" +
       ".bit.ew-details.open{background:#1f6f78;color:#f6f7eb;border-color:#1f6f78}" +
       ".col-text .bit.ew-details:not(.open)~.bit{display:none!important}" +
@@ -996,7 +998,6 @@
     refMenu.innerHTML =
       '<div class="ew-ref-title">Popups</div>' +
       '<button type="button" data-act="new">New</button>' +
-      '<button type="button" data-act="edit">Edit</button>' +
       '<button type="button" data-act="remove">Remove</button>' +
       '<button type="button" data-act="footnote">Foot note</button>' +
       '<div class="ew-ref-title ew-rhm-font">Font Size</div>' +
@@ -1032,7 +1033,8 @@
       '<button type="button" data-rhm="list" data-kind="none" title="Remove list" aria-label="Remove list">−</button>' +
       "</div>" +
       '<button type="button" data-rhm="details">Additional Details</button>' +
-      '<button type="button" data-rhm="info">Information</button>';
+      '<button type="button" data-rhm="info">Information</button>' +
+      '<button type="button" data-rhm="hidden-sub">Hidden-Sub-Section</button>';
     document.body.appendChild(refMenu);
     refMenu.addEventListener("mousedown", function (ev) {
       ev.stopPropagation();
@@ -1078,6 +1080,28 @@
         var startEl = refMenu.querySelector("#ew-rhm-list-start");
         var start = parseInt((startEl && startEl.value) || "1", 10);
         applyRhmList(listBtn.getAttribute("data-kind") || "none", start);
+        return;
+      }
+      var hiddenSubBtn = ev.target.closest && ev.target.closest("[data-rhm='hidden-sub']");
+      if (hiddenSubBtn) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        var htext = "";
+        var hid = "";
+        var sel = window.getSelection();
+        if (sel && !sel.isCollapsed) htext = String(sel.toString() || "").replace(/\s+/g, " ").trim();
+        var node = sel && sel.rangeCount ? sel.getRangeAt(0).commonAncestorContainer : null;
+        if (node && node.nodeType === 3) node = node.parentNode;
+        var el = node && node.nodeType === 1 ? node : null;
+        var heading = el && el.closest && (el.closest("h2.edit-heading") || el.closest("button.ew-hidden-sub") || el.closest(".subsec"));
+        if (heading) {
+          hid = heading.getAttribute("data-heading") || "";
+          if (!htext) htext = String(heading.innerText || heading.textContent || "").replace(/\s+/g, " ").trim();
+        }
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: "heading-rhm-apply", id: hid, text: htext }, "*");
+        }
+        hideRefMenu();
         return;
       }
       var detailsBtn = ev.target.closest && ev.target.closest("[data-rhm='details']");
