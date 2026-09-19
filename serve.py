@@ -16,7 +16,13 @@ SKY_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
 SOGA = LIVE / "soga"
 PUBLISHED = LIVE / "sites"
 _RESERVED = {"api", "images", "sites", "bible", "scriptures", "published"}
-SCRIPTURES = LIVE / "scriptures.json"
+SCRIPTURES = LIVE / "sites" / "scriptures.json"
+SCRIPTURES_FALLBACK = LIVE / "scriptures.json"
+_REF_SPAN = re.compile(
+    r"^(\S+)\s+(\d+)\s*:\s*(\d+)(?:\s*[-–—]\s*(?:(\d+)\s*:)?(\d+))?$"
+)
+
+
 def _web_port():
     if len(sys.argv) > 1 and str(sys.argv[1]).strip().isdigit():
         n = int(sys.argv[1])
@@ -35,22 +41,152 @@ SITE_ALIASES = {
 }
 
 
-def scriptures_path(handler) -> Path:
-    q = parse_qs(urlparse(handler.path).query)
-    folder = (q.get("folder") or [""])[0]
-    if not folder:
-        m = _PUB_FOLDER.search(handler.headers.get("Referer") or "")
-        if m:
-            folder = m.group(1)
-    folder = re.sub(r"[^a-zA-Z0-9_-]", "", folder or "")
-    if folder:
-        path = PUBLISHED / folder / "scriptures.json"
-        if path.exists():
-            return path
-    soga = PUBLISHED / "sons-of-god-arise" / "scriptures.json"
-    if soga.exists():
-        return soga
+def scripture_key(ref: str) -> str:
+    return re.sub(r"\s+", " ", str(ref or "")).strip().lower()
+
+
+def scriptures_file() -> Path:
+    if SCRIPTURES.is_file():
+        return SCRIPTURES
+    if SCRIPTURES_FALLBACK.is_file():
+        return SCRIPTURES_FALLBACK
     return SCRIPTURES
+
+
+def load_scriptures() -> dict:
+    path = scriptures_file()
+    if not path.is_file():
+        return {"translation": "NKJV", "verses": []}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {"translation": "NKJV", "verses": []}
+    if not isinstance(data, dict) or not isinstance(data.get("verses"), list):
+        return {"translation": "NKJV", "verses": []}
+    return data
+
+
+def find_in_store(store: dict, ref: str):
+    want = scripture_key(ref)
+    if not want:
+        return None
+    for row in (store or {}).get("verses") or []:
+        if scripture_key(row.get("reference") or "") == want:
+            return row
+    return None
+
+
+def with_ref_line(text: str, ref: str) -> str:
+    ref = str(ref or "").strip()
+    text = str(text or "")
+    if not ref:
+        return text
+    lines = text.split("\n")
+    if not lines:
+        return ref
+    if scripture_key(lines[0]) == scripture_key(ref):
+        lines[0] = ref
+        return "\n".join(lines)
+    return text
+
+
+def parse_ref_span(ref: str):
+    m = _REF_SPAN.match(scripture_key(ref))
+    if not m:
+        return None
+    book = m.group(1)
+    ch1 = int(m.group(2))
+    vs1 = int(m.group(3))
+    if m.group(4):
+        ch2 = int(m.group(4))
+        vs2 = int(m.group(5) or vs1)
+        if ch2 != ch1:
+            return None
+    else:
+        vs2 = int(m.group(5) or vs1)
+    return book, ch1, vs1, vs2
+
+
+def split_stored_verses(text: str) -> dict:
+    raw = str(text or "")
+    out = {}
+    for m in re.finditer(r"<p>\s*<sup>\s*(\d+)\s*</sup>\s*([\s\S]*?)</p>", raw, re.I):
+        out[int(m.group(1))] = m.group(2).strip()
+    if out:
+        return out
+    parts = re.split(r"(?:<br\s*/?>|\n)+", raw)
+    if parts and _REF_SPAN.match(scripture_key(parts[0].strip())):
+        parts = parts[1:]
+    cur = None
+    buf = []
+    for line in parts:
+        m = re.match(r"^\s*(\d+)\s+(.*)$", line)
+        if m:
+            if cur is not None:
+                out[cur] = "\n".join(buf).strip()
+            cur = int(m.group(1))
+            buf = [m.group(2)]
+        elif cur is not None:
+            buf.append(line)
+    if cur is not None:
+        out[cur] = "\n".join(buf).strip()
+    return out
+
+
+def _row_span(row):
+    sp = parse_ref_span(row.get("reference") or "")
+    if sp:
+        return sp
+    text = str(row.get("text") or "")
+    first = text.split("\n", 1)[0].strip()
+    sp = parse_ref_span(first)
+    if sp:
+        return sp
+    first = re.sub(r"\s+[-–—].*$", "", first).strip()
+    return parse_ref_span(first)
+
+
+def _absorb_verses(store: dict, book, ch, vs1, vs2, by_vs: dict):
+    scored = []
+    for row in (store or {}).get("verses") or []:
+        sp = _row_span(row)
+        if not sp or sp[0] != book or sp[1] != ch:
+            continue
+        if sp[3] < vs1 or sp[2] > vs2:
+            continue
+        scored.append((sp[3] - sp[2], row))
+    scored.sort(key=lambda x: x[0])
+    added = 0
+    for _, row in scored:
+        for vs, html in split_stored_verses(row.get("text") or "").items():
+            if vs1 <= vs <= vs2 and vs not in by_vs and html:
+                by_vs[vs] = html
+                added += 1
+    return added
+
+
+def assemble_scripture(ref: str):
+    store = load_scriptures()
+    exact = find_in_store(store, ref)
+    if exact:
+        return exact
+    span = parse_ref_span(ref)
+    if not span:
+        return None
+    book, ch, vs1, vs2 = span
+    by_vs = {}
+    _absorb_verses(store, book, ch, vs1, vs2, by_vs)
+    if not by_vs:
+        return None
+    bits = [ref]
+    missing = []
+    for vs in range(vs1, vs2 + 1):
+        if vs in by_vs:
+            bits.append("%s %s" % (vs, by_vs[vs]))
+        else:
+            missing.append(vs)
+            bits.append("%s ..." % vs)
+    return {"reference": ref, "text": "\n".join(bits), "missing": missing}
 
 
 def site_folder_key(name: str) -> str:
@@ -167,18 +303,24 @@ class Handler(SimpleHTTPRequestHandler):
         if path == "/scriptures":
             q = parse_qs(urlparse(self.path).query)
             ref = (q.get("ref") or [""])[0]
-            want = re.sub(r"\s+", " ", ref).strip().lower()
-            store = scriptures_path(self)
-            try:
-                data = json.loads(store.read_text(encoding="utf-8")) if store.exists() else {"verses": []}
-            except Exception:
-                data = {"verses": []}
+            want = scripture_key(ref)
+            data = load_scriptures()
             if not want:
                 return self._json(200, {"translation": "NKJV", "count": len(data.get("verses") or [])})
-            for row in data.get("verses") or []:
-                if re.sub(r"\s+", " ", str(row.get("reference") or "")).strip().lower() == want:
-                    return self._json(200, {"found": True, "reference": row.get("reference") or ref, "text": row.get("text") or ""})
-            return self._json(200, {"found": False, "reference": ref, "text": ""})
+            row = assemble_scripture(ref)
+            if not row:
+                return self._json(200, {"found": False, "reference": ref, "text": ""})
+            shown_ref = row.get("reference") or ref
+            shown_text = with_ref_line(row.get("text") or "", shown_ref)
+            return self._json(
+                200,
+                {
+                    "found": True,
+                    "reference": shown_ref,
+                    "text": shown_text,
+                    "missing": row.get("missing") or [],
+                },
+            )
         if path == "/bible":
             q = parse_qs(urlparse(self.path).query)
             tr = (q.get("tr") or ["KJV"])[0]
@@ -210,6 +352,8 @@ class Handler(SimpleHTTPRequestHandler):
         if path.startswith("/published/") or path == "/published":
             return self._serve_dir(PUBLISHED, path[11:])
         if path == "/scriptures.json":
+            if SCRIPTURES.is_file():
+                return self._serve_dir(PUBLISHED, "scriptures.json")
             return SimpleHTTPRequestHandler.do_GET(self)
         if path == "/site.js":
             return self._serve_dir(SOGA, "site.js")
