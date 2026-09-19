@@ -69,7 +69,7 @@
   ],
   "functions": {
     "api/scriptures.js": {
-      "includeFiles": "scriptures.json"
+      "includeFiles": "{scriptures.json,sites/scriptures.json}"
     }
   }
 }
