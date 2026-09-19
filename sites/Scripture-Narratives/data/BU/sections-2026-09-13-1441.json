@@ -1,0 +1,23 @@
+{
+  "1": {
+    "book": "Isa",
+    "chapter": 11,
+    "ref": "",
+    "filter": true,
+    "tr": "NKJV"
+  },
+  "52": {
+    "book": "Num",
+    "chapter": 31,
+    "ref": "",
+    "filter": true,
+    "tr": "NKJV"
+  },
+  "70": {
+    "book": "Lev",
+    "chapter": 23,
+    "ref": "",
+    "filter": true,
+    "tr": "NKJV"
+  }
+}

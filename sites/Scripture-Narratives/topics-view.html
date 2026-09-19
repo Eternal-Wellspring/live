@@ -426,21 +426,53 @@
       if (siblingCount(parent, lv, exceptId) >= maxSiblings()) return extra >= 2 ? "That's the limit." : "more";
       return "";
     }
+    function takeBranch(list, i) {
+      var row = list[i];
+      var lv = row.level || 1;
+      var n = 1;
+      while (i + n < list.length && (list[i + n].level || 1) > lv) n += 1;
+      return list.splice(i, n);
+    }
+    function moveBranchInLevel(from, dest, after) {
+      var list, i, k, destI, at, branch;
+      if (!from || !dest) return;
+      if (String(from.id) === String(dest.id)) return;
+      if ((from.level || 1) !== (dest.level || 1)) return;
+      if (parentOf(from) !== parentOf(dest)) return;
+      list = bySeq();
+      i = -1;
+      for (k = 0; k < list.length; k++) {
+        if (String(list[k].id) === String(from.id)) { i = k; break; }
+      }
+      if (i < 0) return;
+      branch = takeBranch(list, i);
+      destI = -1;
+      for (k = 0; k < list.length; k++) {
+        if (String(list[k].id) === String(dest.id)) { destI = k; break; }
+      }
+      if (destI < 0) return;
+      at = destI;
+      if (after) {
+        at = destI + 1;
+        while (at < list.length && (list[at].level || 1) > (dest.level || 1)) at += 1;
+      }
+      list.splice.apply(list, [at, 0].concat(branch));
+      list.forEach(function (x, n) { x.seq = n + 1; });
+    }
     function move(dir) {
       var t = current();
       if (!t) return;
-      var list = visible();
-      var i = list.indexOf(t);
+      var lv = t.level || 1;
+      var parent = parentOf(t);
+      var sibs = [];
+      bySeq().forEach(function (x) {
+        if ((x.level || 1) !== lv) return;
+        if (parentOf(x) === parent) sibs.push(x);
+      });
+      var i = sibs.indexOf(t);
       var j = i + dir;
-      if (j < 0 || j >= list.length) return;
-      var other = list[j];
-      var full = bySeq();
-      var ia = full.indexOf(t);
-      var ib = full.indexOf(other);
-      if (ia < 0 || ib < 0) return;
-      full[ia] = other;
-      full[ib] = t;
-      full.forEach(function (x, n) { x.seq = n + 1; });
+      if (j < 0 || j >= sibs.length) return;
+      moveBranchInLevel(t, sibs[j], dir > 0);
       paint();
     }
     function bumpLevel(d) {
@@ -537,31 +569,48 @@
       document.getElementById("status").textContent = "Level " + n;
     }
     function applyDropOrder(movedId) {
-      var table = document.querySelector("#list table");
       var mark = document.getElementById("drop-mark");
-      if (!table || !mark) return;
-      var ids = [];
-      var rows = table.querySelectorAll("tr");
-      var i;
-      for (i = 0; i < rows.length; i++) {
-        var node = rows[i];
-        if (node === mark) ids.push(movedId);
-        else if (node.classList && node.classList.contains("row") && String(node.dataset.id) !== String(movedId)) {
-          ids.push(node.dataset.id);
+      var from = topics.find(function (x) { return String(x.id) === String(movedId); });
+      if (!mark || !from) return;
+      var dest = null;
+      var after = false;
+      var node = mark.nextElementSibling;
+      while (node && !dest) {
+        if (node.classList && node.classList.contains("row") && node.dataset.id && String(node.dataset.id) !== String(movedId)) {
+          var cand = topics.find(function (x) { return String(x.id) === String(node.dataset.id); });
+          if (cand) {
+            if ((cand.level || 1) === (from.level || 1) && parentOf(cand) === parentOf(from)) dest = cand;
+            else {
+              var p = cand;
+              while (p && (p.level || 1) > (from.level || 1)) p = parentOf(p);
+              if (p && (p.level || 1) === (from.level || 1) && parentOf(p) === parentOf(from) && String(p.id) !== String(from.id)) {
+                dest = p;
+                after = true;
+              }
+            }
+          }
+        }
+        node = node.nextElementSibling;
+      }
+      if (!dest) {
+        node = mark.previousElementSibling;
+        after = true;
+        while (node && !dest) {
+          if (node.classList && node.classList.contains("row") && node.dataset.id && String(node.dataset.id) !== String(movedId)) {
+            var prev = topics.find(function (x) { return String(x.id) === String(node.dataset.id); });
+            if (prev) {
+              if ((prev.level || 1) === (from.level || 1) && parentOf(prev) === parentOf(from)) dest = prev;
+              else {
+                var q = prev;
+                while (q && (q.level || 1) > (from.level || 1)) q = parentOf(q);
+                if (q && (q.level || 1) === (from.level || 1) && parentOf(q) === parentOf(from) && String(q.id) !== String(from.id)) dest = q;
+              }
+            }
+          }
+          node = node.previousElementSibling;
         }
       }
-      var vis = visible();
-      var ordered = [];
-      ids.forEach(function (id) {
-        var t = topics.find(function (x) { return String(x.id) === String(id); });
-        if (t) ordered.push(t);
-      });
-      if (!ordered.length || ordered.length !== vis.length) return;
-      var full = bySeq();
-      var start = full.indexOf(vis[0]);
-      if (start < 0) return;
-      full.splice.apply(full, [start, vis.length].concat(ordered));
-      full.forEach(function (x, n) { x.seq = n + 1; });
+      if (dest) moveBranchInLevel(from, dest, after);
     }
     document.getElementById("list").addEventListener("pointerdown", function (ev) {
       if (ev.button) return;

@@ -535,6 +535,29 @@ html.ew-phone.ew-portrait .col-footnotes { order: 3; }
   border-color: #1f6f78;
 }
 .col-text .bit.ew-details:not(.open) ~ .bit { display: none !important; }
+button.ew-hidden-sub {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  margin: 0.25rem 0 var(--para-gap, 0px);
+  padding: 0.22rem 0.55rem;
+  border: 1px solid #c5d0d4;
+  border-radius: 2px;
+  background: #e4eaec;
+  color: #5a6d75;
+  font: 400 0.88em Arial, Helvetica, sans-serif;
+  line-height: 1.25;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  box-sizing: border-box;
+}
+button.ew-hidden-sub.open {
+  background: #1f6f78;
+  color: #f6f7eb;
+  border-color: #1f6f78;
+}
+.subsec.ew-hidden-sub-wrap:not(.open) > .subsec-frame { display: none !important; }
 .col-text .bit.ew-info {
   display: block;
   width: max-content;
@@ -1108,7 +1131,7 @@ a.ref, .col a.ref, .col-text a.ref, .para a.ref {
 h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f6f78; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
 .subsec-frame { font-weight:400; font-style:normal; border-style:solid; border-color:#919191; border-width:2.0px 2.0px 2.0px 2.0px; padding:5px; margin-top:0px; margin-bottom:13px; text-align:left }
 .para { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#ffffff; border-style:solid; border-color:#e2e2e2; border-width:1.0px 0px 0px 0px; padding:0px; margin-top:12px; margin-bottom:-2px; text-align:left; line-height:1.45; --para-gap:18px }
-.row-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:6px; text-align:left }
+.row-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:0px; text-align:left }
 .col-title:not(:empty) { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; margin-top:-11px; margin-bottom:3px; text-align:left }
 .col { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:5px }
 .col .col-text, .col .col-text .bit { line-height:1.2 }

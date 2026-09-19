@@ -35,8 +35,7 @@
     .tcol {
       position: absolute;
       z-index: 2;
-      overflow-x: hidden;
-      overflow-y: auto;
+      overflow: visible;
     }
     .board { position: relative; display: block; min-width: 100%; min-height: 100%; }
     .tbox {
@@ -60,6 +59,13 @@
     .tbox:hover { background: #f6efc8; }
     .tbox.on, .tbox.on:hover { background: #f6efc8; }
     .tbox[data-ref] { cursor: grab; }
+    .topic-drop-line {
+      position: fixed;
+      z-index: 90;
+      height: 2px;
+      background: #005eb8;
+      pointer-events: none;
+    }
     .ref-ghost {
       position: fixed;
       z-index: 80;
@@ -98,12 +104,17 @@
       appearance: none;
     }
     .tbtn-teal { background: #1f6f78; color: #fff; }
+    .tbtn-teal.zero { opacity: 0.5; }
     .tbtn-teal:hover { background: #186066; }
     .tbtn-green {
       background: #cdebc8;
       color: #1b3a4b;
       font-weight: 700;
+      font-size: 12px;
+      padding: 0 4px;
+      white-space: nowrap;
     }
+    .tbtn-green.zero { opacity: 0.5; }
     .tbtn-green:hover { background: #b7dcb1; }
     .tbtn-green.open {
       background: #3d7a45;
@@ -344,8 +355,42 @@
     .ew-tr-list [data-tr]:hover { background: #f4f7f8; }
     .ew-tr-list [data-tr].on { background: #eef3f7; color: var(--title); }
     .ew-tr-list [data-tr].on .ew-tr-year { color: var(--title); }
+    .tverse-note {
+      flex: 0 0 auto;
+      position: relative;
+      z-index: 1;
+      margin: 0.3rem 0.45rem 0.15rem;
+      padding: 0.2rem 0.45rem;
+      min-height: 0;
+      border: 1px solid #c5d0d4;
+      background: #fff;
+      color: inherit;
+      font: 400 13px/1.35 Arial, Helvetica, sans-serif;
+      white-space: pre-wrap;
+    }
+    .tverse-note textarea {
+      display: block;
+      width: 100%;
+      min-height: 0;
+      height: auto;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font: 400 13px/1.35 Arial, Helvetica, sans-serif;
+      line-height: 1.35;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+      overflow: hidden;
+      resize: none;
+      box-sizing: border-box;
+    }
+    .tverse-note textarea:focus { outline: 0; background: #fff; }
+    .tverse-pad { flex: 0 0 auto; }
     .tverses {
       flex: 1 1 auto;
+      position: relative;
       min-height: 0;
       margin: 0;
       padding: 0.45rem 0.6rem;
@@ -384,6 +429,8 @@
       border-color: var(--title);
       color: var(--title);
     }
+    .tverses .vt { outline: none; }
+    .tverses .vt[contenteditable="true"] { cursor: text; }
     .tverse-pick.on {
       background: #e8eef6;
       color: var(--title);
@@ -439,6 +486,7 @@
       color: #1b3a4b;
       cursor: pointer;
     }
+    #sn-ref-menu button[hidden] { display: none !important; }
     #sn-ref-menu button:hover { background: #eef3f4; }
   </style>
 </head>
@@ -451,7 +499,17 @@
   <div id="sn-ref-menu" hidden>
     <div class="sn-rhm-title">Ref</div>
     <button type="button" data-edit="1">Edit</button>
+    <button type="button" data-add="1">Add Topic</button>
+    <button type="button" data-add-ref="1">Add a ref</button>
+    <button type="button" data-add-same="1">Same level</button>
+    <button type="button" data-add-below="1">One below</button>
+    <button type="button" data-out="1">Out a level</button>
+    <button type="button" data-in="1">In a level</button>
+    <button type="button" data-delete="1">Delete</button>
+    <button type="button" data-move="1">Move</button>
+    <button type="button" data-yes="1">Yes</button>
+    <button type="button" data-no="1">No</button>
   </div>
-  <script src="topics-tree.js?v=293"></script>
+  <script src="topics-tree.js?v=336"></script>
 </body>
 </html>

@@ -1,0 +1,26 @@
+{
+  "topic": {
+    "title": "Topic",
+    "items": ["Edit", "Add Topic", "Out a level", "In a level"]
+  },
+  "addTopic": {
+    "title": "Add Topic",
+    "items": ["Same level", "One below"]
+  },
+  "ref": {
+    "title": "Ref",
+    "items": ["Edit", "Delete", "Move"]
+  },
+  "refsBox": {
+    "title": "Refs",
+    "items": ["Add a ref"]
+  },
+  "description": {
+    "title": "Description",
+    "items": ["Edit"]
+  },
+  "twoMore": {
+    "title": "Two more?",
+    "items": ["Yes", "No"]
+  }
+}

@@ -1,0 +1,4537 @@
+[
+  {
+    "topic_id": 2,
+    "ref": "Dan 9:24-27",
+    "from": 24,
+    "to": 27
+  },
+  {
+    "topic_id": 35,
+    "ref": "Dan 9:24-27",
+    "from": 25,
+    "to": 25
+  },
+  {
+    "topic_id": 37,
+    "ref": "Dan 9:24-27",
+    "from": 25,
+    "to": 25
+  },
+  {
+    "topic_id": 36,
+    "ref": "Dan 9:24-27",
+    "from": 25,
+    "to": 26
+  },
+  {
+    "topic_id": 4,
+    "ref": "Dan 9:24-27",
+    "from": 27,
+    "to": 27
+  },
+  {
+    "topic_id": 5,
+    "ref": "Dan 9:24-27",
+    "from": 27,
+    "to": 27
+  },
+  {
+    "topic_id": 5,
+    "ref": "Dan 11:36",
+    "from": 36,
+    "to": 36
+  },
+  {
+    "topic_id": 6,
+    "ref": "Dan 8:9-12",
+    "from": 9,
+    "to": 12
+  },
+  {
+    "topic_id": 6,
+    "ref": "Dan 9:24-27",
+    "from": 27,
+    "to": 27
+  },
+  {
+    "topic_id": 6,
+    "ref": "Dan 11:30-32",
+    "from": 30,
+    "to": 32
+  },
+  {
+    "topic_id": 7,
+    "ref": "2Th 2:3-4",
+    "from": 3,
+    "to": 4
+  },
+  {
+    "topic_id": 7,
+    "ref": "Dan 9:24-27",
+    "from": 27,
+    "to": 27
+  },
+  {
+    "topic_id": 7,
+    "ref": "Dan 11:30-32",
+    "from": 30,
+    "to": 32
+  },
+  {
+    "topic_id": 7,
+    "ref": "Mat 24:15-16",
+    "from": 15,
+    "to": 16
+  },
+  {
+    "topic_id": 7,
+    "ref": "Mrk 13:14",
+    "from": 14,
+    "to": 14
+  },
+  {
+    "topic_id": 8,
+    "ref": "2Th 2:9-10",
+    "from": 9,
+    "to": 10
+  },
+  {
+    "topic_id": 8,
+    "ref": "Dan 7:23-25",
+    "from": 23,
+    "to": 25
+  },
+  {
+    "topic_id": 8,
+    "ref": "Dan 9:24-27",
+    "from": 27,
+    "to": 27
+  },
+  {
+    "topic_id": 8,
+    "ref": "Dan 12:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 8,
+    "ref": "Dan 12:7",
+    "from": 7,
+    "to": 7
+  },
+  {
+    "topic_id": 8,
+    "ref": "Mat 24:15-22",
+    "from": 15,
+    "to": 22
+  },
+  {
+    "topic_id": 8,
+    "ref": "Mrk 13:19-20",
+    "from": 19,
+    "to": 20
+  },
+  {
+    "topic_id": 8,
+    "ref": "Rev 7:13-17",
+    "from": 13,
+    "to": 17
+  },
+  {
+    "topic_id": 8,
+    "ref": "Rev 12:6",
+    "from": 6,
+    "to": 6
+  },
+  {
+    "topic_id": 8,
+    "ref": "Rev 12:14-17",
+    "from": 14,
+    "to": 17
+  },
+  {
+    "topic_id": 8,
+    "ref": "Rev 13:4-7",
+    "from": 4,
+    "to": 7
+  },
+  {
+    "topic_id": 8,
+    "ref": "Rev 13:15-17",
+    "from": 15,
+    "to": 17
+  },
+  {
+    "topic_id": 8,
+    "ref": "Zec 13:8-9",
+    "from": 8,
+    "to": 9
+  },
+  {
+    "topic_id": 9,
+    "ref": "1Th 5:9",
+    "from": 9,
+    "to": 9
+  },
+  {
+    "topic_id": 9,
+    "ref": "Dan 9:24-27",
+    "from": 27,
+    "to": 27
+  },
+  {
+    "topic_id": 9,
+    "ref": "Mat 24:14",
+    "from": 14,
+    "to": 14
+  },
+  {
+    "topic_id": 9,
+    "ref": "Rev 9:18-21",
+    "from": 18,
+    "to": 21
+  },
+  {
+    "topic_id": 9,
+    "ref": "Rev 14:6-11",
+    "from": 6,
+    "to": 11
+  },
+  {
+    "topic_id": 9,
+    "ref": "Rev 15:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 9,
+    "ref": "Rev 16:1-21",
+    "from": 1,
+    "to": 21
+  },
+  {
+    "topic_id": 10,
+    "ref": "1Th 3:13",
+    "from": 13,
+    "to": 13
+  },
+  {
+    "topic_id": 10,
+    "ref": "Act 1:11",
+    "from": 11,
+    "to": 11
+  },
+  {
+    "topic_id": 10,
+    "ref": "Mat 24:29-31",
+    "from": 29,
+    "to": 31
+  },
+  {
+    "topic_id": 10,
+    "ref": "Rev 19:11-16",
+    "from": 11,
+    "to": 16
+  },
+  {
+    "topic_id": 11,
+    "ref": "1Th 3:13",
+    "from": 13,
+    "to": 13
+  },
+  {
+    "topic_id": 11,
+    "ref": "Act 1:11",
+    "from": 11,
+    "to": 11
+  },
+  {
+    "topic_id": 11,
+    "ref": "Mat 24:29-31",
+    "from": 29,
+    "to": 31
+  },
+  {
+    "topic_id": 11,
+    "ref": "Rev 5:1-6",
+    "from": 1,
+    "to": 6
+  },
+  {
+    "topic_id": 11,
+    "ref": "Rev 5:8-10",
+    "from": 8,
+    "to": 10
+  },
+  {
+    "topic_id": 11,
+    "ref": "Rev 19:11-16",
+    "from": 11,
+    "to": 16
+  },
+  {
+    "topic_id": 12,
+    "ref": "1Th 3:13",
+    "from": 13,
+    "to": 13
+  },
+  {
+    "topic_id": 12,
+    "ref": "1Th 4:14-17",
+    "from": 14,
+    "to": 17
+  },
+  {
+    "topic_id": 12,
+    "ref": "Act 1:11",
+    "from": 11,
+    "to": 11
+  },
+  {
+    "topic_id": 12,
+    "ref": "Mat 24:29-31",
+    "from": 29,
+    "to": 31
+  },
+  {
+    "topic_id": 12,
+    "ref": "Rev 19:6-9",
+    "from": 6,
+    "to": 9
+  },
+  {
+    "topic_id": 12,
+    "ref": "Rev 19:11-16",
+    "from": 11,
+    "to": 16
+  },
+  {
+    "topic_id": 30,
+    "ref": "1Th 3:13",
+    "from": 13,
+    "to": 13
+  },
+  {
+    "topic_id": 30,
+    "ref": "1Th 4:14-17",
+    "from": 16,
+    "to": 17
+  },
+  {
+    "topic_id": 30,
+    "ref": "Act 1:11",
+    "from": 11,
+    "to": 11
+  },
+  {
+    "topic_id": 30,
+    "ref": "Ezk 37:12-14",
+    "from": 12,
+    "to": 14
+  },
+  {
+    "topic_id": 30,
+    "ref": "Mat 24:29-31",
+    "from": 29,
+    "to": 31
+  },
+  {
+    "topic_id": 30,
+    "ref": "Rev 19:6-9",
+    "from": 6,
+    "to": 9
+  },
+  {
+    "topic_id": 30,
+    "ref": "Rev 19:11-16",
+    "from": 11,
+    "to": 16
+  },
+  {
+    "topic_id": 30,
+    "ref": "Rev 20:5-6",
+    "from": 5,
+    "to": 6
+  },
+  {
+    "topic_id": 31,
+    "ref": "1Th 3:13",
+    "from": 13,
+    "to": 13
+  },
+  {
+    "topic_id": 31,
+    "ref": "1Th 4:14-17",
+    "from": 16,
+    "to": 17
+  },
+  {
+    "topic_id": 31,
+    "ref": "Act 1:11",
+    "from": 11,
+    "to": 11
+  },
+  {
+    "topic_id": 31,
+    "ref": "Mat 24:29-31",
+    "from": 29,
+    "to": 31
+  },
+  {
+    "topic_id": 31,
+    "ref": "Rev 5:9-10",
+    "from": 9,
+    "to": 10
+  },
+  {
+    "topic_id": 31,
+    "ref": "Rev 19:6-9",
+    "from": 6,
+    "to": 9
+  },
+  {
+    "topic_id": 31,
+    "ref": "Rev 19:11-16",
+    "from": 11,
+    "to": 16
+  },
+  {
+    "topic_id": 31,
+    "ref": "Rev 20:5-6",
+    "from": 5,
+    "to": 6
+  },
+  {
+    "topic_id": 13,
+    "ref": "1Th 3:13",
+    "from": 13,
+    "to": 13
+  },
+  {
+    "topic_id": 13,
+    "ref": "Act 1:11",
+    "from": 11,
+    "to": 11
+  },
+  {
+    "topic_id": 13,
+    "ref": "Ezk 38:16",
+    "from": 16,
+    "to": 16
+  },
+  {
+    "topic_id": 13,
+    "ref": "Ezk 39:1-8",
+    "from": 1,
+    "to": 8
+  },
+  {
+    "topic_id": 13,
+    "ref": "Jol 3:1-2",
+    "from": 1,
+    "to": 2
+  },
+  {
+    "topic_id": 13,
+    "ref": "Mat 24:29-31",
+    "from": 29,
+    "to": 31
+  },
+  {
+    "topic_id": 13,
+    "ref": "Rev 16:14-16",
+    "from": 14,
+    "to": 16
+  },
+  {
+    "topic_id": 13,
+    "ref": "Rev 19:11-16",
+    "from": 11,
+    "to": 16
+  },
+  {
+    "topic_id": 13,
+    "ref": "Rev 19:19-21",
+    "from": 19,
+    "to": 21
+  },
+  {
+    "topic_id": 13,
+    "ref": "Zec 14:1-5",
+    "from": 1,
+    "to": 5
+  },
+  {
+    "topic_id": 17,
+    "ref": "1Th 3:13",
+    "from": 13,
+    "to": 13
+  },
+  {
+    "topic_id": 17,
+    "ref": "Act 1:11",
+    "from": 11,
+    "to": 11
+  },
+  {
+    "topic_id": 17,
+    "ref": "Dan 7:13-14",
+    "from": 13,
+    "to": 14
+  },
+  {
+    "topic_id": 17,
+    "ref": "Dan 7:26-27",
+    "from": 26,
+    "to": 27
+  },
+  {
+    "topic_id": 17,
+    "ref": "Mat 24:29-31",
+    "from": 29,
+    "to": 31
+  },
+  {
+    "topic_id": 17,
+    "ref": "Rev 19:11-16",
+    "from": 11,
+    "to": 16
+  },
+  {
+    "topic_id": 17,
+    "ref": "Rev 20:1-6",
+    "from": 1,
+    "to": 6
+  },
+  {
+    "topic_id": 16,
+    "ref": "Dan 7:27",
+    "from": 27,
+    "to": 27
+  },
+  {
+    "topic_id": 16,
+    "ref": "Isa 2:2-4",
+    "from": 2,
+    "to": 4
+  },
+  {
+    "topic_id": 16,
+    "ref": "Mat 6:9-10",
+    "from": 9,
+    "to": 10
+  },
+  {
+    "topic_id": 16,
+    "ref": "Mic 4:1-4",
+    "from": 1,
+    "to": 4
+  },
+  {
+    "topic_id": 16,
+    "ref": "Rev 20:4-6",
+    "from": 4,
+    "to": 6
+  },
+  {
+    "topic_id": 21,
+    "ref": "Mat 13:47-50",
+    "from": 47,
+    "to": 50
+  },
+  {
+    "topic_id": 21,
+    "ref": "Rev 20:11-15",
+    "from": 11,
+    "to": 15
+  },
+  {
+    "topic_id": 22,
+    "ref": "Mat 13:47-50",
+    "from": 47,
+    "to": 50
+  },
+  {
+    "topic_id": 22,
+    "ref": "Rev 20:11-15",
+    "from": 11,
+    "to": 15
+  },
+  {
+    "topic_id": 23,
+    "ref": "1Co 15:23-26",
+    "from": 23,
+    "to": 26
+  },
+  {
+    "topic_id": 23,
+    "ref": "Dan 7:27",
+    "from": 27,
+    "to": 27
+  },
+  {
+    "topic_id": 23,
+    "ref": "Mat 13:47-50",
+    "from": 47,
+    "to": 50
+  },
+  {
+    "topic_id": 23,
+    "ref": "Rev 20:11-15",
+    "from": 11,
+    "to": 15
+  },
+  {
+    "topic_id": 24,
+    "ref": "2Pe 3:13",
+    "from": 13,
+    "to": 13
+  },
+  {
+    "topic_id": 24,
+    "ref": "Rev 21:1-3",
+    "from": 1,
+    "to": 3
+  },
+  {
+    "topic_id": 25,
+    "ref": "2Pe 3:13",
+    "from": 13,
+    "to": 13
+  },
+  {
+    "topic_id": 25,
+    "ref": "Isa 65:17-19",
+    "from": 17,
+    "to": 19
+  },
+  {
+    "topic_id": 25,
+    "ref": "Rev 21:1-3",
+    "from": 1,
+    "to": 3
+  },
+  {
+    "topic_id": 26,
+    "ref": "2Pe 3:13",
+    "from": 13,
+    "to": 13
+  },
+  {
+    "topic_id": 26,
+    "ref": "Rev 21:1-3",
+    "from": 2,
+    "to": 3
+  },
+  {
+    "topic_id": 26,
+    "ref": "Rev 21:22-24",
+    "from": 22,
+    "to": 24
+  },
+  {
+    "topic_id": 27,
+    "ref": "2Pe 3:13",
+    "from": 13,
+    "to": 13
+  },
+  {
+    "topic_id": 27,
+    "ref": "Rev 21:1-3",
+    "from": 1,
+    "to": 3
+  },
+  {
+    "topic_id": 27,
+    "ref": "Rev 21:27",
+    "from": 27,
+    "to": 27
+  },
+  {
+    "topic_id": 27,
+    "ref": "Rev 22:3-5",
+    "from": 3,
+    "to": 5
+  },
+  {
+    "topic_id": 18,
+    "ref": "Deu 30:7-9",
+    "from": 7,
+    "to": 9
+  },
+  {
+    "topic_id": 18,
+    "ref": "Ezk 36:24-28",
+    "from": 24,
+    "to": 28
+  },
+  {
+    "topic_id": 18,
+    "ref": "Ezk 37:21-25",
+    "from": 21,
+    "to": 25
+  },
+  {
+    "topic_id": 18,
+    "ref": "Isa 11:11-12",
+    "from": 11,
+    "to": 12
+  },
+  {
+    "topic_id": 18,
+    "ref": "Jer 23:5-8",
+    "from": 7,
+    "to": 8
+  },
+  {
+    "topic_id": 28,
+    "ref": "Ezk 36:33-35",
+    "from": 33,
+    "to": 35
+  },
+  {
+    "topic_id": 28,
+    "ref": "Isa 65:20-23",
+    "from": 20,
+    "to": 23
+  },
+  {
+    "topic_id": 38,
+    "ref": "Deu 30:7-9",
+    "from": 7,
+    "to": 9
+  },
+  {
+    "topic_id": 38,
+    "ref": "Ezk 36:24-28",
+    "from": 24,
+    "to": 28
+  },
+  {
+    "topic_id": 38,
+    "ref": "Ezk 36:33-35",
+    "from": 33,
+    "to": 35
+  },
+  {
+    "topic_id": 38,
+    "ref": "Ezk 37:21-25",
+    "from": 21,
+    "to": 25
+  },
+  {
+    "topic_id": 38,
+    "ref": "Isa 11:11-12",
+    "from": 11,
+    "to": 12
+  },
+  {
+    "topic_id": 38,
+    "ref": "Isa 65:20-23",
+    "from": 20,
+    "to": 23
+  },
+  {
+    "topic_id": 38,
+    "ref": "Jer 23:5-8",
+    "from": 5,
+    "to": 8
+  },
+  {
+    "topic_id": 39,
+    "ref": "Isa 2:2-4",
+    "from": 2,
+    "to": 4
+  },
+  {
+    "topic_id": 39,
+    "ref": "Isa 9:6-7",
+    "from": 6,
+    "to": 7
+  },
+  {
+    "topic_id": 39,
+    "ref": "Isa 11:6-9",
+    "from": 6,
+    "to": 9
+  },
+  {
+    "topic_id": 39,
+    "ref": "Mic 4:1-4",
+    "from": 1,
+    "to": 4
+  },
+  {
+    "topic_id": 39,
+    "ref": "Zec 14:16",
+    "from": 16,
+    "to": 16
+  },
+  {
+    "topic_id": 19,
+    "ref": "Hab 2:14",
+    "from": 14,
+    "to": 14
+  },
+  {
+    "topic_id": 19,
+    "ref": "Isa 2:2-4",
+    "from": 3,
+    "to": 3
+  },
+  {
+    "topic_id": 19,
+    "ref": "Isa 11:6-9",
+    "from": 9,
+    "to": 9
+  },
+  {
+    "topic_id": 19,
+    "ref": "Mic 4:1-4",
+    "from": 2,
+    "to": 2
+  },
+  {
+    "topic_id": 19,
+    "ref": "Zec 14:16",
+    "from": 16,
+    "to": 16
+  },
+  {
+    "topic_id": 29,
+    "ref": "Zec 14:17-19",
+    "from": 17,
+    "to": 19
+  },
+  {
+    "topic_id": 40,
+    "ref": "Rev 20:7-11",
+    "from": 7,
+    "to": 11
+  },
+  {
+    "topic_id": 20,
+    "ref": "Rev 20:7-11",
+    "from": 7,
+    "to": 8
+  },
+  {
+    "topic_id": 41,
+    "ref": "Rev 20:7-11",
+    "from": 9,
+    "to": 9
+  },
+  {
+    "topic_id": 42,
+    "ref": "Rev 19:20",
+    "from": 20,
+    "to": 20
+  },
+  {
+    "topic_id": 42,
+    "ref": "Rev 20:7-11",
+    "from": 10,
+    "to": 10
+  },
+  {
+    "topic_id": 51,
+    "ref": "Deu 30:1-5",
+    "from": 3,
+    "to": 5
+  },
+  {
+    "topic_id": 51,
+    "ref": "Ezk 36:24-28",
+    "from": 24,
+    "to": 24
+  },
+  {
+    "topic_id": 51,
+    "ref": "Ezk 37:21-23",
+    "from": 21,
+    "to": 22
+  },
+  {
+    "topic_id": 51,
+    "ref": "Hos 1:10-11",
+    "from": 11,
+    "to": 11
+  },
+  {
+    "topic_id": 51,
+    "ref": "Isa 11:11-12",
+    "from": 11,
+    "to": 12
+  },
+  {
+    "topic_id": 51,
+    "ref": "Jer 23:3-4",
+    "from": 3,
+    "to": 4
+  },
+  {
+    "topic_id": 32,
+    "ref": "Ezk 39:11-13",
+    "from": 12,
+    "to": 13
+  },
+  {
+    "topic_id": 14,
+    "ref": "Deu 30:1-5",
+    "from": 3,
+    "to": 5
+  },
+  {
+    "topic_id": 14,
+    "ref": "Ezk 36:24-28",
+    "from": 24,
+    "to": 24
+  },
+  {
+    "topic_id": 14,
+    "ref": "Ezk 37:21-23",
+    "from": 21,
+    "to": 22
+  },
+  {
+    "topic_id": 14,
+    "ref": "Hos 1:10-11",
+    "from": 11,
+    "to": 11
+  },
+  {
+    "topic_id": 14,
+    "ref": "Isa 11:11-12",
+    "from": 11,
+    "to": 12
+  },
+  {
+    "topic_id": 14,
+    "ref": "Jer 23:3-4",
+    "from": 3,
+    "to": 3
+  },
+  {
+    "topic_id": 15,
+    "ref": "Ezk 36:24-28",
+    "from": 26,
+    "to": 28
+  },
+  {
+    "topic_id": 15,
+    "ref": "Hos 1:10-11",
+    "from": 10,
+    "to": 10
+  },
+  {
+    "topic_id": 15,
+    "ref": "Jer 31:31-34",
+    "from": 31,
+    "to": 34
+  },
+  {
+    "topic_id": 15,
+    "ref": "Rom 11:25-27",
+    "from": 26,
+    "to": 27
+  },
+  {
+    "topic_id": 16,
+    "ref": "Deu 30:7-9",
+    "from": 7,
+    "to": 9
+  },
+  {
+    "topic_id": 55,
+    "ref": "Num 10:9",
+    "from": 9,
+    "to": 9
+  },
+  {
+    "topic_id": 55,
+    "ref": "Num 31:6",
+    "from": 6,
+    "to": 6
+  },
+  {
+    "topic_id": 55,
+    "ref": "Jos 6:4-5",
+    "from": 4,
+    "to": 5
+  },
+  {
+    "topic_id": 55,
+    "ref": "Jdg 7:16-22",
+    "from": 16,
+    "to": 22
+  },
+  {
+    "topic_id": 55,
+    "ref": "2Ch 13:12-14",
+    "from": 12,
+    "to": 14
+  },
+  {
+    "topic_id": 55,
+    "ref": "Jer 4:19",
+    "from": 19,
+    "to": 19
+  },
+  {
+    "topic_id": 55,
+    "ref": "Jer 6:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 55,
+    "ref": "Jer 51:27",
+    "from": 27,
+    "to": 27
+  },
+  {
+    "topic_id": 55,
+    "ref": "Ezk 7:14",
+    "from": 14,
+    "to": 14
+  },
+  {
+    "topic_id": 55,
+    "ref": "Hos 5:8",
+    "from": 8,
+    "to": 8
+  },
+  {
+    "topic_id": 55,
+    "ref": "Jol 2:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 55,
+    "ref": "Amo 3:6",
+    "from": 6,
+    "to": 6
+  },
+  {
+    "topic_id": 55,
+    "ref": "Zep 1:16",
+    "from": 16,
+    "to": 16
+  },
+  {
+    "topic_id": 55,
+    "ref": "Zec 9:14",
+    "from": 14,
+    "to": 14
+  },
+  {
+    "topic_id": 55,
+    "ref": "1Co 14:8",
+    "from": 8,
+    "to": 8
+  },
+  {
+    "topic_id": 56,
+    "ref": "Isa 27:12-13",
+    "from": 12,
+    "to": 13
+  },
+  {
+    "topic_id": 56,
+    "ref": "Jol 2:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 56,
+    "ref": "Zep 1:14-16",
+    "from": 14,
+    "to": 16
+  },
+  {
+    "topic_id": 56,
+    "ref": "Zec 9:14-16",
+    "from": 14,
+    "to": 16
+  },
+  {
+    "topic_id": 56,
+    "ref": "Mat 24:30-31",
+    "from": 30,
+    "to": 31
+  },
+  {
+    "topic_id": 56,
+    "ref": "1Co 15:51-52",
+    "from": 51,
+    "to": 52
+  },
+  {
+    "topic_id": 56,
+    "ref": "1Th 4:16-17",
+    "from": 16,
+    "to": 17
+  },
+  {
+    "topic_id": 56,
+    "ref": "Rev 11:15",
+    "from": 15,
+    "to": 15
+  },
+  {
+    "topic_id": 72,
+    "ref": "Exo 12:1-14",
+    "from": 1,
+    "to": 14,
+    "description": "This day is a memorial: the lamb and the blood"
+  },
+  {
+    "topic_id": 72,
+    "ref": "Lev 23:4-5",
+    "from": 4,
+    "to": 5,
+    "description": "Fourteenth day of the first month, at twilight"
+  },
+  {
+    "topic_id": 72,
+    "ref": "Num 28:16",
+    "from": 16,
+    "to": 16
+  },
+  {
+    "topic_id": 72,
+    "ref": "Deu 16:1-2",
+    "from": 1,
+    "to": 2
+  },
+  {
+    "topic_id": 73,
+    "ref": "1Co 5:7-8",
+    "from": 7,
+    "to": 8
+  },
+  {
+    "topic_id": 73,
+    "ref": "2Co 5:21",
+    "from": 21,
+    "to": 21,
+    "description": "Made sin for us"
+  },
+  {
+    "topic_id": 73,
+    "ref": "1Pe 1:17-19",
+    "from": 17,
+    "to": 19,
+    "description": "Redeemed with the precious blood of a lamb"
+  },
+  {
+    "topic_id": 73,
+    "ref": "Gen 14:17-20",
+    "from": 17,
+    "to": 20
+  },
+  {
+    "topic_id": 73,
+    "ref": "Exo 29:4",
+    "from": 4,
+    "to": 4,
+    "description": "Washing the disciples feet"
+  },
+  {
+    "topic_id": 73,
+    "ref": "Psa 51:1-19",
+    "from": 1,
+    "to": 19
+  },
+  {
+    "topic_id": 73,
+    "ref": "Ezk 20:1-32",
+    "from": 1,
+    "to": 32
+  },
+  {
+    "topic_id": 73,
+    "ref": "Amo 8:5",
+    "from": 5,
+    "to": 5
+  },
+  {
+    "topic_id": 73,
+    "ref": "Mat 11:28-30",
+    "from": 28,
+    "to": 30
+  },
+  {
+    "topic_id": 73,
+    "ref": "Mat 27:51",
+    "from": 51,
+    "to": 51
+  },
+  {
+    "topic_id": 73,
+    "ref": "Mrk 15:38",
+    "from": 38,
+    "to": 38,
+    "description": "The veil of the temple was torn in two"
+  },
+  {
+    "topic_id": 73,
+    "ref": "Luk 22:7-20",
+    "from": 7,
+    "to": 20,
+    "description": "Last Supper - Kingdom of God"
+  },
+  {
+    "topic_id": 73,
+    "ref": "Luk 23:45",
+    "from": 45,
+    "to": 45,
+    "description": "The veil of the temple was torn in two"
+  },
+  {
+    "topic_id": 73,
+    "ref": "Jhn 1:29",
+    "from": 29,
+    "to": 29,
+    "description": "Lamb of God, sins of the world"
+  },
+  {
+    "topic_id": 73,
+    "ref": "Act 7:17-19",
+    "from": 17,
+    "to": 19
+  },
+  {
+    "topic_id": 73,
+    "ref": "Heb 4:14-16",
+    "from": 14,
+    "to": 16
+  },
+  {
+    "topic_id": 73,
+    "ref": "Heb 10:19-22",
+    "from": 19,
+    "to": 22,
+    "description": "Hearts sprinkled from an evil conscience & Bodies washed with pure water"
+  },
+  {
+    "topic_id": 74,
+    "ref": "Exo 12:3-6",
+    "from": 3,
+    "to": 6,
+    "description": "Passover meal"
+  },
+  {
+    "topic_id": 74,
+    "ref": "Lev 23:5",
+    "from": 5,
+    "to": 5,
+    "description": "Fourteenth day of the first month, at twilight"
+  },
+  {
+    "topic_id": 74,
+    "ref": "Num 9:2-5",
+    "from": 2,
+    "to": 5
+  },
+  {
+    "topic_id": 74,
+    "ref": "Jos 4:18-24",
+    "from": 18,
+    "to": 24,
+    "description": "Crossing the Jordan 10th day, month 1"
+  },
+  {
+    "topic_id": 75,
+    "ref": "1Ch 17:16-27",
+    "from": 16,
+    "to": 27
+  },
+  {
+    "topic_id": 75,
+    "ref": "2Sa 7:18-29",
+    "from": 18,
+    "to": 29
+  },
+  {
+    "topic_id": 75,
+    "ref": "1Pe 1:13-25",
+    "from": 13,
+    "to": 25,
+    "description": "Redeemed with the precious blood of a lamb"
+  },
+  {
+    "topic_id": 75,
+    "ref": "1Pe 2:9-10",
+    "from": 9,
+    "to": 10
+  },
+  {
+    "topic_id": 75,
+    "ref": "Gen 3:15",
+    "from": 15,
+    "to": 15,
+    "description": "The seed of the woman"
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 1:14",
+    "from": 14,
+    "to": 14,
+    "description": "Egyptians made their lives bitter"
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 1:16-17",
+    "from": 16,
+    "to": 17,
+    "description": "Egyptians made their lives bitter"
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 2:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 2:23-25",
+    "from": 23,
+    "to": 25
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 4:17-20",
+    "from": 17,
+    "to": 20
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 4:29-31",
+    "from": 29,
+    "to": 31
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 5:4-5",
+    "from": 4,
+    "to": 5
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 5:19-21",
+    "from": 19,
+    "to": 21,
+    "description": "Rebellion against Yahweh"
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 6:1-13",
+    "from": 1,
+    "to": 13
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 7:3-5",
+    "from": 3,
+    "to": 5,
+    "description": "Great Judgements on Egypt and also Israel for rebellion"
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 9:3",
+    "from": 3,
+    "to": 3
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 10:1-2",
+    "from": 1,
+    "to": 2,
+    "description": "That Israel's sons may know that I am Yahweh"
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 11:1-10",
+    "from": 1,
+    "to": 10
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 12:1-14",
+    "from": 1,
+    "to": 14,
+    "description": "This day is a memorial: the lamb and the blood"
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 12:21-28",
+    "from": 21,
+    "to": 28,
+    "description": "Bowed and worshipped"
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 12:42-51",
+    "from": 42,
+    "to": 51
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 13:3-16",
+    "from": 3,
+    "to": 16
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 15:1-20",
+    "from": 1,
+    "to": 20,
+    "description": "Redeemed, outstretched arm, Holy Habitation"
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 30:10-16",
+    "from": 10,
+    "to": 16
+  },
+  {
+    "topic_id": 75,
+    "ref": "Exo 32:34-35",
+    "from": 34,
+    "to": 35,
+    "description": "Yahweh plagues people for sinning"
+  },
+  {
+    "topic_id": 75,
+    "ref": "Lev 4:32",
+    "from": 32,
+    "to": 32
+  },
+  {
+    "topic_id": 75,
+    "ref": "Lev 5:5-6",
+    "from": 5,
+    "to": 6,
+    "description": "Sin offering is female lamb for individual"
+  },
+  {
+    "topic_id": 75,
+    "ref": "Lev 25:23-28",
+    "from": 23,
+    "to": 28,
+    "description": "The land is Mine"
+  },
+  {
+    "topic_id": 75,
+    "ref": "Lev 25:54-55",
+    "from": 54,
+    "to": 55,
+    "description": "Jubilee - final redemption because of Egypt"
+  },
+  {
+    "topic_id": 75,
+    "ref": "Num 18:1-24",
+    "from": 1,
+    "to": 24
+  },
+  {
+    "topic_id": 75,
+    "ref": "Num 33:4",
+    "from": 4,
+    "to": 4,
+    "description": "Against the gods"
+  },
+  {
+    "topic_id": 75,
+    "ref": "Deu 7:6-16",
+    "from": 6,
+    "to": 16
+  },
+  {
+    "topic_id": 75,
+    "ref": "Deu 9:26",
+    "from": 26,
+    "to": 26
+  },
+  {
+    "topic_id": 75,
+    "ref": "Deu 12:5-7",
+    "from": 5,
+    "to": 7
+  },
+  {
+    "topic_id": 75,
+    "ref": "Deu 13:1-5",
+    "from": 1,
+    "to": 5
+  },
+  {
+    "topic_id": 75,
+    "ref": "Deu 14:22-29",
+    "from": 22,
+    "to": 29
+  },
+  {
+    "topic_id": 75,
+    "ref": "Deu 15:1-23",
+    "from": 1,
+    "to": 23,
+    "description": "Year of release of debt"
+  },
+  {
+    "topic_id": 75,
+    "ref": "Deu 24:17-22",
+    "from": 17,
+    "to": 22
+  },
+  {
+    "topic_id": 75,
+    "ref": "Jos 5:1-15",
+    "from": 1,
+    "to": 15
+  },
+  {
+    "topic_id": 75,
+    "ref": "Psa 105:36",
+    "from": 36,
+    "to": 36
+  },
+  {
+    "topic_id": 75,
+    "ref": "Isa 10:24-26",
+    "from": 24,
+    "to": 26
+  },
+  {
+    "topic_id": 75,
+    "ref": "Isa 52:4-6",
+    "from": 4,
+    "to": 6
+  },
+  {
+    "topic_id": 75,
+    "ref": "Isa 56:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 75,
+    "ref": "Mat 11:28",
+    "from": 28,
+    "to": 28
+  },
+  {
+    "topic_id": 75,
+    "ref": "Luk 1:67-80",
+    "from": 67,
+    "to": 80
+  },
+  {
+    "topic_id": 75,
+    "ref": "Luk 21:20-28",
+    "from": 20,
+    "to": 28
+  },
+  {
+    "topic_id": 75,
+    "ref": "Act 7:17-19",
+    "from": 17,
+    "to": 19
+  },
+  {
+    "topic_id": 75,
+    "ref": "Rom 3:21-26",
+    "from": 21,
+    "to": 26
+  },
+  {
+    "topic_id": 75,
+    "ref": "Gal 3:10-14",
+    "from": 10,
+    "to": 14
+  },
+  {
+    "topic_id": 75,
+    "ref": "Gal 4:1-7",
+    "from": 1,
+    "to": 7
+  },
+  {
+    "topic_id": 75,
+    "ref": "Eph 1:3-14",
+    "from": 3,
+    "to": 14
+  },
+  {
+    "topic_id": 75,
+    "ref": "Eph 4:30",
+    "from": 30,
+    "to": 30
+  },
+  {
+    "topic_id": 75,
+    "ref": "Col 1:9-14",
+    "from": 9,
+    "to": 14
+  },
+  {
+    "topic_id": 75,
+    "ref": "Tit 2:11-14",
+    "from": 11,
+    "to": 14
+  },
+  {
+    "topic_id": 75,
+    "ref": "Heb 9:1-28",
+    "from": 1,
+    "to": 28
+  },
+  {
+    "topic_id": 75,
+    "ref": "Heb 12:22-24",
+    "from": 22,
+    "to": 24
+  },
+  {
+    "topic_id": 80,
+    "ref": "Zec 14:1",
+    "from": 1,
+    "to": 1,
+    "description": "The second coming. Rocks splitting Zechariah 14"
+  },
+  {
+    "topic_id": 82,
+    "ref": "1Ki 17:20-22",
+    "from": 20,
+    "to": 22
+  },
+  {
+    "topic_id": 82,
+    "ref": "Exo 12:15-20",
+    "from": 15,
+    "to": 20
+  },
+  {
+    "topic_id": 82,
+    "ref": "Exo 13:3-10",
+    "from": 3,
+    "to": 10
+  },
+  {
+    "topic_id": 82,
+    "ref": "Exo 23:14-17",
+    "from": 14,
+    "to": 17,
+    "description": "Pilgrimage (three times)"
+  },
+  {
+    "topic_id": 82,
+    "ref": "Exo 34:22-24",
+    "from": 22,
+    "to": 24,
+    "description": "Pilgrimage (three times)"
+  },
+  {
+    "topic_id": 82,
+    "ref": "Lev 23:6-8",
+    "from": 6,
+    "to": 8,
+    "description": "Unleavened bread for seven days"
+  },
+  {
+    "topic_id": 82,
+    "ref": "Num 28:17-25",
+    "from": 17,
+    "to": 25
+  },
+  {
+    "topic_id": 82,
+    "ref": "Deu 16:3-8",
+    "from": 3,
+    "to": 8
+  },
+  {
+    "topic_id": 82,
+    "ref": "Deu 16:16-17",
+    "from": 16,
+    "to": 17,
+    "description": "Three times in the place which He chooses"
+  },
+  {
+    "topic_id": 82,
+    "ref": "Job 33:28-30",
+    "from": 28,
+    "to": 30
+  },
+  {
+    "topic_id": 82,
+    "ref": "Dan 6:8",
+    "from": 8,
+    "to": 8
+  },
+  {
+    "topic_id": 82,
+    "ref": "Mat 26:34",
+    "from": 34,
+    "to": 34
+  },
+  {
+    "topic_id": 82,
+    "ref": "Mrk 8:15",
+    "from": 15,
+    "to": 15
+  },
+  {
+    "topic_id": 82,
+    "ref": "Act 10:9-15",
+    "from": 9,
+    "to": 15
+  },
+  {
+    "topic_id": 83,
+    "ref": "1Co 5:4",
+    "from": 4,
+    "to": 4
+  },
+  {
+    "topic_id": 83,
+    "ref": "1Co 5:6-8",
+    "from": 6,
+    "to": 8
+  },
+  {
+    "topic_id": 83,
+    "ref": "1Pe 2:1-3",
+    "from": 1,
+    "to": 3,
+    "description": "Desire the pure milk of the word, that you may grow"
+  },
+  {
+    "topic_id": 83,
+    "ref": "Isa 6:8",
+    "from": 8,
+    "to": 8,
+    "description": "End time prophecy from Isaiah 6 - hardened hearts"
+  },
+  {
+    "topic_id": 83,
+    "ref": "Isa 53:1",
+    "from": 1,
+    "to": 1,
+    "description": "Messiah prophecy from Isaiah 53"
+  },
+  {
+    "topic_id": 83,
+    "ref": "Mat 10:5-8",
+    "from": 5,
+    "to": 8,
+    "description": "Lost sheep of the House of Israel"
+  },
+  {
+    "topic_id": 83,
+    "ref": "Mat 10:32-33",
+    "from": 32,
+    "to": 33,
+    "description": "I will deny before My Father"
+  },
+  {
+    "topic_id": 83,
+    "ref": "Mat 15:1",
+    "from": 1,
+    "to": 1,
+    "description": "Doctrines of men"
+  },
+  {
+    "topic_id": 83,
+    "ref": "Mat 15:24",
+    "from": 24,
+    "to": 24,
+    "description": "Lost sheep of the House of Israel"
+  },
+  {
+    "topic_id": 83,
+    "ref": "Mat 16:5",
+    "from": 5,
+    "to": 5,
+    "description": "Beware the leaven of Pharisees and Sadducees and Herod (Matthew)"
+  },
+  {
+    "topic_id": 83,
+    "ref": "Mat 26:30-32",
+    "from": 30,
+    "to": 32,
+    "description": "I will go before you to Galilee"
+  },
+  {
+    "topic_id": 83,
+    "ref": "Mat 28:7-10",
+    "from": 7,
+    "to": 10,
+    "description": "He goes before you to Galilee"
+  },
+  {
+    "topic_id": 83,
+    "ref": "Mat 28:16-20",
+    "from": 16,
+    "to": 20,
+    "description": "Commissioned the disciples in Galilee"
+  },
+  {
+    "topic_id": 83,
+    "ref": "Luk 11:37",
+    "from": 37,
+    "to": 37,
+    "description": "Woe to you hypocrites"
+  },
+  {
+    "topic_id": 83,
+    "ref": "Luk 12:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 83,
+    "ref": "Luk 12:54-56",
+    "from": 54,
+    "to": 56,
+    "description": "Hypocrites do not discern the ways of God"
+  },
+  {
+    "topic_id": 83,
+    "ref": "Luk 20:27",
+    "from": 27,
+    "to": 27
+  },
+  {
+    "topic_id": 83,
+    "ref": "Luk 24:44",
+    "from": 44,
+    "to": 44,
+    "description": "Returned to Jerusalem for Ascension and Shavuot"
+  },
+  {
+    "topic_id": 83,
+    "ref": "Act 12:3",
+    "from": 3,
+    "to": 3
+  },
+  {
+    "topic_id": 83,
+    "ref": "Act 20:5-6",
+    "from": 5,
+    "to": 6
+  },
+  {
+    "topic_id": 83,
+    "ref": "Gal 5:7-12",
+    "from": 7,
+    "to": 12
+  },
+  {
+    "topic_id": 84,
+    "ref": "Exo 12:18-20",
+    "from": 18,
+    "to": 20
+  },
+  {
+    "topic_id": 84,
+    "ref": "Lev 23:6-8",
+    "from": 6,
+    "to": 8,
+    "description": "Unleavened bread for seven days"
+  },
+  {
+    "topic_id": 85,
+    "ref": "Gen 37:5-8",
+    "from": 5,
+    "to": 8
+  },
+  {
+    "topic_id": 85,
+    "ref": "Gen 41:28-32",
+    "from": 28,
+    "to": 32,
+    "description": "The famine was ordained by Yahweh"
+  },
+  {
+    "topic_id": 85,
+    "ref": "Gen 46:2-4",
+    "from": 2,
+    "to": 4,
+    "description": "Yahweh's promise to bring Jacob up again"
+  },
+  {
+    "topic_id": 85,
+    "ref": "Gen 47:13",
+    "from": 13,
+    "to": 13,
+    "description": "Severe Famine in Canaan"
+  },
+  {
+    "topic_id": 85,
+    "ref": "Exo 8:3",
+    "from": 3,
+    "to": 3,
+    "description": "Do not eat leavened bread"
+  },
+  {
+    "topic_id": 85,
+    "ref": "Exo 12:15-20",
+    "from": 15,
+    "to": 20
+  },
+  {
+    "topic_id": 85,
+    "ref": "Exo 13:3-10",
+    "from": 3,
+    "to": 10
+  },
+  {
+    "topic_id": 85,
+    "ref": "Jos 5:10-12",
+    "from": 10,
+    "to": 12,
+    "description": "Passover and Firstfruits and Unleavened bread"
+  },
+  {
+    "topic_id": 90,
+    "ref": "Ezk 45:21-25",
+    "from": 21,
+    "to": 25
+  },
+  {
+    "topic_id": 92,
+    "ref": "Gen 1:11-13",
+    "from": 11,
+    "to": 13
+  },
+  {
+    "topic_id": 92,
+    "ref": "Gen 3:15",
+    "from": 15,
+    "to": 15,
+    "description": "The seed of the woman"
+  },
+  {
+    "topic_id": 92,
+    "ref": "Gen 4:25",
+    "from": 25,
+    "to": 25,
+    "description": "Seth, seed of the woman"
+  },
+  {
+    "topic_id": 92,
+    "ref": "Gen 22:16-18",
+    "from": 16,
+    "to": 18
+  },
+  {
+    "topic_id": 92,
+    "ref": "Lev 23:9-14",
+    "from": 9,
+    "to": 14,
+    "description": "Wave offering of lamb, grain and drink"
+  },
+  {
+    "topic_id": 92,
+    "ref": "Lev 27:30",
+    "from": 30,
+    "to": 30,
+    "description": "Tithe of the land"
+  },
+  {
+    "topic_id": 92,
+    "ref": "Neh 13:31",
+    "from": 31,
+    "to": 31,
+    "description": "At the appointed times"
+  },
+  {
+    "topic_id": 92,
+    "ref": "Isa 25:8-9",
+    "from": 8,
+    "to": 9,
+    "description": "Swallow up death"
+  },
+  {
+    "topic_id": 92,
+    "ref": "Act 24:14-16",
+    "from": 14,
+    "to": 16,
+    "description": "Resurrection of the dead, both of the just and the unjust"
+  },
+  {
+    "topic_id": 92,
+    "ref": "Rom 1:1-6",
+    "from": 1,
+    "to": 6,
+    "description": "Son of God with power - King - Messiah - Seed of David"
+  },
+  {
+    "topic_id": 92,
+    "ref": "Rev 6:6",
+    "from": 6,
+    "to": 6
+  },
+  {
+    "topic_id": 93,
+    "ref": "2Ki 4:38",
+    "from": 38,
+    "to": 38
+  },
+  {
+    "topic_id": 93,
+    "ref": "1Co 15:3-5",
+    "from": 3,
+    "to": 5,
+    "description": "Messiah died for our sins"
+  },
+  {
+    "topic_id": 93,
+    "ref": "1Co 15:20-23",
+    "from": 20,
+    "to": 23
+  },
+  {
+    "topic_id": 93,
+    "ref": "1Co 15:50",
+    "from": 50,
+    "to": 50,
+    "description": "The dead in Christ will rise first"
+  },
+  {
+    "topic_id": 93,
+    "ref": "2Co 5:16-17",
+    "from": 16,
+    "to": 17,
+    "description": "New creation, In the Messiah"
+  },
+  {
+    "topic_id": 93,
+    "ref": "1Pe 1:3-5",
+    "from": 3,
+    "to": 5
+  },
+  {
+    "topic_id": 93,
+    "ref": "Gen 3:15",
+    "from": 15,
+    "to": 15,
+    "description": "The seed of the woman"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Gen 7:8-24",
+    "from": 8,
+    "to": 24
+  },
+  {
+    "topic_id": 93,
+    "ref": "Gen 8:1-4",
+    "from": 1,
+    "to": 4
+  },
+  {
+    "topic_id": 93,
+    "ref": "Gen 9:1",
+    "from": 1,
+    "to": 1,
+    "description": "Fruitfulness and multiplication follow first fruits"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Gen 18:10",
+    "from": 10,
+    "to": 10,
+    "description": "New life from dead womb done by Yahweh"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Gen 28:13-14",
+    "from": 13,
+    "to": 14
+  },
+  {
+    "topic_id": 93,
+    "ref": "Gen 32:9-10",
+    "from": 9,
+    "to": 10
+  },
+  {
+    "topic_id": 93,
+    "ref": "Lev 7:15-17",
+    "from": 15,
+    "to": 17
+  },
+  {
+    "topic_id": 93,
+    "ref": "Deu 21:22-23",
+    "from": 22,
+    "to": 23,
+    "description": "Bodies are to be buried the same day (Day 1)"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Neh 12:44",
+    "from": 44,
+    "to": 44
+  },
+  {
+    "topic_id": 93,
+    "ref": "Neh 13:29-31",
+    "from": 29,
+    "to": 31,
+    "description": "At the appointed times"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Psa 16:10-11",
+    "from": 10,
+    "to": 11,
+    "description": "Risen from the Grave"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Psa 22:1",
+    "from": 1,
+    "to": 1,
+    "description": "Resurrection according to scriptures"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Psa 69:1",
+    "from": 1,
+    "to": 1,
+    "description": "Resurrection according to scriptures"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Psa 110:1",
+    "from": 1,
+    "to": 1,
+    "description": "Order of Melchizedek"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Psa 126:1-6",
+    "from": 1,
+    "to": 6
+  },
+  {
+    "topic_id": 93,
+    "ref": "Pro 3:9-10",
+    "from": 9,
+    "to": 10,
+    "description": "Obey Firstfruits and be blessed"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Isa 25:8",
+    "from": 8,
+    "to": 8,
+    "description": "Swallow up death"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Isa 53:1",
+    "from": 1,
+    "to": 1,
+    "description": "Messiah prophecy from Isaiah 53"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Ezk 37:1",
+    "from": 1,
+    "to": 1,
+    "description": "Graves opened"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Ezk 37:11-14",
+    "from": 11,
+    "to": 14,
+    "description": "Graves opened"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Dan 9:24",
+    "from": 24,
+    "to": 24,
+    "description": "Resurrection according to scriptures"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Dan 12:1-2",
+    "from": 1,
+    "to": 2
+  },
+  {
+    "topic_id": 93,
+    "ref": "Hos 1:4-7",
+    "from": 4,
+    "to": 7,
+    "description": "Valley of Jezreel: End of House of Israel"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Hos 1:9-11",
+    "from": 9,
+    "to": 11
+  },
+  {
+    "topic_id": 93,
+    "ref": "Hos 6:1-5",
+    "from": 1,
+    "to": 5,
+    "description": "On the third day"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Hos 6:10-11",
+    "from": 10,
+    "to": 11,
+    "description": "A harvest is appointed"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Hos 13:12-14",
+    "from": 12,
+    "to": 14
+  },
+  {
+    "topic_id": 93,
+    "ref": "Jon 2:10",
+    "from": 10,
+    "to": 10,
+    "description": "Three days and three nights"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Zec 13:7-9",
+    "from": 7,
+    "to": 9
+  },
+  {
+    "topic_id": 93,
+    "ref": "Mat 13:24",
+    "from": 24,
+    "to": 24
+  },
+  {
+    "topic_id": 93,
+    "ref": "Mat 22:28-32",
+    "from": 28,
+    "to": 32
+  },
+  {
+    "topic_id": 93,
+    "ref": "Mat 27:35",
+    "from": 35,
+    "to": 35
+  },
+  {
+    "topic_id": 93,
+    "ref": "Mat 27:50-53",
+    "from": 50,
+    "to": 53
+  },
+  {
+    "topic_id": 93,
+    "ref": "Mat 28:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 93,
+    "ref": "Luk 20:34-38",
+    "from": 34,
+    "to": 38
+  },
+  {
+    "topic_id": 93,
+    "ref": "Luk 24:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 93,
+    "ref": "Act 2:16",
+    "from": 16,
+    "to": 16,
+    "description": "Pentecost preaching"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Act 2:23-24",
+    "from": 23,
+    "to": 24
+  },
+  {
+    "topic_id": 93,
+    "ref": "Act 3:25-26",
+    "from": 25,
+    "to": 26
+  },
+  {
+    "topic_id": 93,
+    "ref": "Act 24:14-16",
+    "from": 14,
+    "to": 16,
+    "description": "Resurrection of the dead, both of the just and the unjust"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Act 26:22-23",
+    "from": 22,
+    "to": 23
+  },
+  {
+    "topic_id": 93,
+    "ref": "Rom 1:1-6",
+    "from": 1,
+    "to": 6,
+    "description": "Son of God with power - King - Messiah - Seed of David"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Rom 6:3",
+    "from": 3,
+    "to": 3
+  },
+  {
+    "topic_id": 93,
+    "ref": "Rom 8:10-22",
+    "from": 10,
+    "to": 22
+  },
+  {
+    "topic_id": 93,
+    "ref": "Rom 8:29",
+    "from": 29,
+    "to": 29,
+    "description": "Firstborn: conformed to the image of His Son"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Rom 10:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 93,
+    "ref": "Rom 10:9",
+    "from": 9,
+    "to": 9
+  },
+  {
+    "topic_id": 93,
+    "ref": "Gal 1:1",
+    "from": 1,
+    "to": 1,
+    "description": "Yahweh raised Yeshua"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Php 3:8-11",
+    "from": 8,
+    "to": 11,
+    "description": "Resurrection from the dead; Power of His resurrection"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Heb 6:1-2",
+    "from": 1,
+    "to": 2,
+    "description": "Resurrection of the dead"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Heb 11:32",
+    "from": 32,
+    "to": 32,
+    "description": "Better resurrection"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Jas 1:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 93,
+    "ref": "Jas 1:12",
+    "from": 12,
+    "to": 12
+  },
+  {
+    "topic_id": 94,
+    "ref": "Exo 23:16",
+    "from": 16,
+    "to": 16,
+    "description": "Pilgrimage (three times)"
+  },
+  {
+    "topic_id": 94,
+    "ref": "Exo 34:25",
+    "from": 25,
+    "to": 25,
+    "description": "Shavuot is also first-fruits"
+  },
+  {
+    "topic_id": 94,
+    "ref": "Lev 23:11",
+    "from": 11,
+    "to": 11,
+    "description": "The day after the Sabbath"
+  },
+  {
+    "topic_id": 94,
+    "ref": "Lev 23:15-16",
+    "from": 15,
+    "to": 16,
+    "description": "Count seven Sabbaths from the day after the Sabbath"
+  },
+  {
+    "topic_id": 95,
+    "ref": "2Ch 31:4-6",
+    "from": 4,
+    "to": 6
+  },
+  {
+    "topic_id": 95,
+    "ref": "1Sa 2:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 95,
+    "ref": "2Ki 4:42-44",
+    "from": 42,
+    "to": 44
+  },
+  {
+    "topic_id": 95,
+    "ref": "Gen 8:21",
+    "from": 21,
+    "to": 21
+  },
+  {
+    "topic_id": 95,
+    "ref": "Gen 26:2-5",
+    "from": 2,
+    "to": 5
+  },
+  {
+    "topic_id": 95,
+    "ref": "Gen 37:5-8",
+    "from": 5,
+    "to": 8
+  },
+  {
+    "topic_id": 95,
+    "ref": "Gen 47:27",
+    "from": 27,
+    "to": 27
+  },
+  {
+    "topic_id": 95,
+    "ref": "Lev 2:8-12",
+    "from": 8,
+    "to": 12,
+    "description": "Firstfruits is for the priests and is not burned: Grain Offering Olah"
+  },
+  {
+    "topic_id": 95,
+    "ref": "Lev 26:3",
+    "from": 3,
+    "to": 3
+  },
+  {
+    "topic_id": 95,
+    "ref": "Num 18:11-13",
+    "from": 11,
+    "to": 13
+  },
+  {
+    "topic_id": 95,
+    "ref": "Deu 18:4-5",
+    "from": 4,
+    "to": 5,
+    "description": "Firstfruits is for the priests and is not burned: Grain Offering Olah"
+  },
+  {
+    "topic_id": 95,
+    "ref": "Jos 5:10-12",
+    "from": 10,
+    "to": 12,
+    "description": "Passover and Firstfruits and Unleavened bread"
+  },
+  {
+    "topic_id": 95,
+    "ref": "Jos 6:17-19",
+    "from": 17,
+    "to": 19
+  },
+  {
+    "topic_id": 95,
+    "ref": "Jos 7:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 95,
+    "ref": "Jer 2:2-3",
+    "from": 2,
+    "to": 3,
+    "description": "Israel, Firstfruits of Yahweh's increase"
+  },
+  {
+    "topic_id": 93,
+    "ref": "Exo 23:18",
+    "from": 18,
+    "to": 18,
+    "description": "Nor shall the fat of My sacrifice remain until morning"
+  },
+  {
+    "topic_id": 100,
+    "ref": "Ezk 20:40-42",
+    "from": 40,
+    "to": 42
+  },
+  {
+    "topic_id": 110,
+    "ref": "Ezk 36:27",
+    "from": 27,
+    "to": 27
+  },
+  {
+    "topic_id": 99,
+    "ref": "Jas 1:18",
+    "from": 18,
+    "to": 18
+  },
+  {
+    "topic_id": 98,
+    "ref": "1Co 15:20-23",
+    "from": 20,
+    "to": 23
+  },
+  {
+    "topic_id": 102,
+    "ref": "1Jn 2:1-6",
+    "from": 1,
+    "to": 6,
+    "description": "Propitiation for the sins of the whole world"
+  },
+  {
+    "topic_id": 102,
+    "ref": "Gen 12:1-3",
+    "from": 1,
+    "to": 3
+  },
+  {
+    "topic_id": 102,
+    "ref": "Gen 26:3-5",
+    "from": 3,
+    "to": 5
+  },
+  {
+    "topic_id": 102,
+    "ref": "Gen 35:9-12",
+    "from": 9,
+    "to": 12,
+    "description": "A company of nations shall proceed from you"
+  },
+  {
+    "topic_id": 102,
+    "ref": "Exo 23:16",
+    "from": 16,
+    "to": 16,
+    "description": "Pilgrimage (three times)"
+  },
+  {
+    "topic_id": 102,
+    "ref": "Exo 28:9-12",
+    "from": 9,
+    "to": 12
+  },
+  {
+    "topic_id": 102,
+    "ref": "Exo 29:1",
+    "from": 1,
+    "to": 1,
+    "description": "Consecration of Priests"
+  },
+  {
+    "topic_id": 102,
+    "ref": "Exo 29:35-37",
+    "from": 35,
+    "to": 37,
+    "description": "Consecration of priests: bull and rams"
+  },
+  {
+    "topic_id": 102,
+    "ref": "Exo 34:22",
+    "from": 22,
+    "to": 22,
+    "description": "Pilgrimage (three times)"
+  },
+  {
+    "topic_id": 102,
+    "ref": "Lev 7:11",
+    "from": 11,
+    "to": 11,
+    "description": "Free will Offering / Peace offering"
+  },
+  {
+    "topic_id": 102,
+    "ref": "Lev 14:10",
+    "from": 10,
+    "to": 10,
+    "description": "Cleansing of leprosy: burnt, sin, grain and wave offerings"
+  },
+  {
+    "topic_id": 102,
+    "ref": "Lev 23:1-5",
+    "from": 1,
+    "to": 5,
+    "description": "Appointed Times are Holy Convocations"
+  },
+  {
+    "topic_id": 102,
+    "ref": "Lev 23:15-22",
+    "from": 15,
+    "to": 22,
+    "description": "Fifty days, a holy convocation"
+  },
+  {
+    "topic_id": 102,
+    "ref": "Num 28:26-31",
+    "from": 26,
+    "to": 31
+  },
+  {
+    "topic_id": 102,
+    "ref": "Deu 16:9-12",
+    "from": 9,
+    "to": 12
+  },
+  {
+    "topic_id": 102,
+    "ref": "Deu 22:9",
+    "from": 9,
+    "to": 9,
+    "description": "Do not mix grain seed with vineyard"
+  },
+  {
+    "topic_id": 102,
+    "ref": "Psa 119:142",
+    "from": 142,
+    "to": 142
+  },
+  {
+    "topic_id": 102,
+    "ref": "Mat 13:33",
+    "from": 33,
+    "to": 33
+  },
+  {
+    "topic_id": 102,
+    "ref": "Jhn 11:51-52",
+    "from": 51,
+    "to": 52
+  },
+  {
+    "topic_id": 102,
+    "ref": "Act 3:25-26",
+    "from": 25,
+    "to": 26
+  },
+  {
+    "topic_id": 102,
+    "ref": "Rom 11:1-36",
+    "from": 1,
+    "to": 36
+  },
+  {
+    "topic_id": 102,
+    "ref": "Gal 3:22-29",
+    "from": 22,
+    "to": 29
+  },
+  {
+    "topic_id": 102,
+    "ref": "Rev 11:1-4",
+    "from": 1,
+    "to": 4,
+    "description": "Two olive trees and lamp-stands and witnesses"
+  },
+  {
+    "topic_id": 103,
+    "ref": "1Co 16:5-8",
+    "from": 5,
+    "to": 8,
+    "description": "I will tarry in Ephesus until Pentecost"
+  },
+  {
+    "topic_id": 103,
+    "ref": "2Co 1:20-22",
+    "from": 20,
+    "to": 22,
+    "description": "Has sealed us and given us the Spirit in our hearts as a guarantee"
+  },
+  {
+    "topic_id": 103,
+    "ref": "Gen 8:20",
+    "from": 20,
+    "to": 20
+  },
+  {
+    "topic_id": 103,
+    "ref": "Gen 22:2-3",
+    "from": 2,
+    "to": 3
+  },
+  {
+    "topic_id": 103,
+    "ref": "Exo 22:29-30",
+    "from": 29,
+    "to": 30,
+    "description": "First of your ripe produce and your juices"
+  },
+  {
+    "topic_id": 103,
+    "ref": "Lev 23:21",
+    "from": 21,
+    "to": 21
+  },
+  {
+    "topic_id": 103,
+    "ref": "Deu 16:9-10",
+    "from": 9,
+    "to": 10
+  },
+  {
+    "topic_id": 103,
+    "ref": "Pro 3:9-10",
+    "from": 9,
+    "to": 10,
+    "description": "Obey Firstfruits and be blessed"
+  },
+  {
+    "topic_id": 103,
+    "ref": "Pro 10:22",
+    "from": 22,
+    "to": 22
+  },
+  {
+    "topic_id": 103,
+    "ref": "Isa 2:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 103,
+    "ref": "Isa 42:5",
+    "from": 5,
+    "to": 5,
+    "description": "Tarry in the city of Jerusalem until you are endued with power from on high"
+  },
+  {
+    "topic_id": 103,
+    "ref": "Isa 44:1-5",
+    "from": 1,
+    "to": 5,
+    "description": "I will pour My Spirit on your descendant"
+  },
+  {
+    "topic_id": 103,
+    "ref": "Isa 49:5-6",
+    "from": 5,
+    "to": 6,
+    "description": "Tarry in the city of Jerusalem until you are endued with power from on high"
+  },
+  {
+    "topic_id": 103,
+    "ref": "Isa 66:15-24",
+    "from": 15,
+    "to": 24
+  },
+  {
+    "topic_id": 103,
+    "ref": "Ezk 6:8-10",
+    "from": 8,
+    "to": 10
+  },
+  {
+    "topic_id": 103,
+    "ref": "Dan 12:1-3",
+    "from": 1,
+    "to": 3
+  },
+  {
+    "topic_id": 103,
+    "ref": "Jol 2:27",
+    "from": 27,
+    "to": 27
+  },
+  {
+    "topic_id": 103,
+    "ref": "Jol 3:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 103,
+    "ref": "Mat 9:35-38",
+    "from": 35,
+    "to": 38
+  },
+  {
+    "topic_id": 103,
+    "ref": "Mat 13:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 103,
+    "ref": "Mat 24:29-31",
+    "from": 29,
+    "to": 31,
+    "description": "Gather the elect"
+  },
+  {
+    "topic_id": 103,
+    "ref": "Luk 1:67",
+    "from": 67,
+    "to": 67
+  },
+  {
+    "topic_id": 103,
+    "ref": "Luk 4:16",
+    "from": 16,
+    "to": 16
+  },
+  {
+    "topic_id": 103,
+    "ref": "Act 1:4-9",
+    "from": 4,
+    "to": 9,
+    "description": "Baptised with the Holy Spirit"
+  },
+  {
+    "topic_id": 103,
+    "ref": "Act 2:1-4",
+    "from": 1,
+    "to": 4
+  },
+  {
+    "topic_id": 103,
+    "ref": "Act 2:32-33",
+    "from": 32,
+    "to": 33,
+    "description": "Yeshua received the Holy Spirit"
+  },
+  {
+    "topic_id": 103,
+    "ref": "Act 2:37-41",
+    "from": 37,
+    "to": 41,
+    "description": "Baptized in the name of Jesus Christ for the remission of sins"
+  },
+  {
+    "topic_id": 103,
+    "ref": "Act 4:8",
+    "from": 8,
+    "to": 8
+  },
+  {
+    "topic_id": 103,
+    "ref": "Act 4:31",
+    "from": 31,
+    "to": 31,
+    "description": "Spoke the word of God with boldness"
+  },
+  {
+    "topic_id": 103,
+    "ref": "Act 9:17",
+    "from": 17,
+    "to": 17,
+    "description": "They were all filled with the Holy Spirit"
+  },
+  {
+    "topic_id": 103,
+    "ref": "Act 20:16",
+    "from": 16,
+    "to": 16
+  },
+  {
+    "topic_id": 103,
+    "ref": "Act 20:20-21",
+    "from": 20,
+    "to": 21
+  },
+  {
+    "topic_id": 103,
+    "ref": "Rom 8:12",
+    "from": 12,
+    "to": 12
+  },
+  {
+    "topic_id": 103,
+    "ref": "Rom 8:22-23",
+    "from": 22,
+    "to": 23
+  },
+  {
+    "topic_id": 103,
+    "ref": "Jas 1:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 103,
+    "ref": "Jas 1:18",
+    "from": 18,
+    "to": 18
+  },
+  {
+    "topic_id": 104,
+    "ref": "1Pe 1:19-21",
+    "from": 19,
+    "to": 21,
+    "description": "Redeemed with the precious blood of a lamb"
+  },
+  {
+    "topic_id": 104,
+    "ref": "Lev 23:15-16",
+    "from": 15,
+    "to": 16,
+    "description": "Count seven Sabbaths from the day after the Sabbath"
+  },
+  {
+    "topic_id": 104,
+    "ref": "Deu 16:9-11",
+    "from": 9,
+    "to": 11
+  },
+  {
+    "topic_id": 104,
+    "ref": "Act 2:1-4",
+    "from": 1,
+    "to": 4
+  },
+  {
+    "topic_id": 104,
+    "ref": "Rev 13:8",
+    "from": 8,
+    "to": 8,
+    "description": "The Lamb slain from the foundation of the world"
+  },
+  {
+    "topic_id": 105,
+    "ref": "2Ch 8:11",
+    "from": 11,
+    "to": 11
+  },
+  {
+    "topic_id": 105,
+    "ref": "1Sa 10:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 105,
+    "ref": "Exo 19:1-20",
+    "from": 1,
+    "to": 20
+  },
+  {
+    "topic_id": 105,
+    "ref": "Exo 20:22-24",
+    "from": 22,
+    "to": 24,
+    "description": "Sinai - Burnt & Peace Offerings"
+  },
+  {
+    "topic_id": 105,
+    "ref": "Exo 34:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 105,
+    "ref": "Lev 19:9-10",
+    "from": 9,
+    "to": 10,
+    "description": "Do not glean the corners"
+  },
+  {
+    "topic_id": 105,
+    "ref": "Lev 25:1",
+    "from": 1,
+    "to": 1,
+    "description": "Sabbath rest for fields"
+  },
+  {
+    "topic_id": 105,
+    "ref": "Num 8:13",
+    "from": 13,
+    "to": 13,
+    "description": "Consecration of Levites"
+  },
+  {
+    "topic_id": 105,
+    "ref": "Num 28:26",
+    "from": 26,
+    "to": 26
+  },
+  {
+    "topic_id": 105,
+    "ref": "Deu 8:6",
+    "from": 6,
+    "to": 6
+  },
+  {
+    "topic_id": 105,
+    "ref": "Deu 14:24-25",
+    "from": 24,
+    "to": 25
+  },
+  {
+    "topic_id": 105,
+    "ref": "Deu 16:9-12",
+    "from": 9,
+    "to": 12
+  },
+  {
+    "topic_id": 105,
+    "ref": "Deu 16:16-17",
+    "from": 16,
+    "to": 17,
+    "description": "Three times in the place which He chooses"
+  },
+  {
+    "topic_id": 105,
+    "ref": "Deu 24:19-22",
+    "from": 19,
+    "to": 22
+  },
+  {
+    "topic_id": 105,
+    "ref": "Deu 26:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 105,
+    "ref": "Mat 15:21",
+    "from": 21,
+    "to": 21,
+    "description": "Remember the poor"
+  },
+  {
+    "topic_id": 105,
+    "ref": "Rom 12:1-2",
+    "from": 1,
+    "to": 2
+  },
+  {
+    "topic_id": 109,
+    "ref": "Dan 9:24",
+    "from": 24,
+    "to": 24,
+    "description": "Resurrection according to scriptures"
+  },
+  {
+    "topic_id": 108,
+    "ref": "Rev 14:1",
+    "from": 1,
+    "to": 1,
+    "description": "First fruits and harvest sickle"
+  },
+  {
+    "topic_id": 107,
+    "ref": "Act 2:1-41",
+    "from": 1,
+    "to": 41
+  },
+  {
+    "topic_id": 112,
+    "ref": "Exo 20:2",
+    "from": 2,
+    "to": 2
+  },
+  {
+    "topic_id": 112,
+    "ref": "Lev 23:23-25",
+    "from": 23,
+    "to": 25
+  },
+  {
+    "topic_id": 112,
+    "ref": "Num 10:9-10",
+    "from": 9,
+    "to": 10
+  },
+  {
+    "topic_id": 112,
+    "ref": "Num 29:1-6",
+    "from": 1,
+    "to": 6
+  },
+  {
+    "topic_id": 112,
+    "ref": "Ezk 16:59",
+    "from": 59,
+    "to": 59,
+    "description": "Everlasting Covenant"
+  },
+  {
+    "topic_id": 112,
+    "ref": "Mal 3:16-18",
+    "from": 16,
+    "to": 18
+  },
+  {
+    "topic_id": 113,
+    "ref": "1Th 5:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 113,
+    "ref": "Gen 9:8",
+    "from": 8,
+    "to": 8
+  },
+  {
+    "topic_id": 113,
+    "ref": "Num 25:10-13",
+    "from": 10,
+    "to": 13,
+    "description": "Covenant of Peace: everlasting priesthood"
+  },
+  {
+    "topic_id": 113,
+    "ref": "Jos 6:4-5",
+    "from": 4,
+    "to": 5
+  },
+  {
+    "topic_id": 113,
+    "ref": "Jdg 7:16-22",
+    "from": 16,
+    "to": 22
+  },
+  {
+    "topic_id": 113,
+    "ref": "Job 39:19-25",
+    "from": 19,
+    "to": 25
+  },
+  {
+    "topic_id": 113,
+    "ref": "Psa 47:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 113,
+    "ref": "Psa 89:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 113,
+    "ref": "Psa 89:15",
+    "from": 15,
+    "to": 15
+  },
+  {
+    "topic_id": 113,
+    "ref": "Psa 98:1-9",
+    "from": 1,
+    "to": 9
+  },
+  {
+    "topic_id": 113,
+    "ref": "Psa 100:1-5",
+    "from": 1,
+    "to": 5,
+    "description": "A Psalm of Thanksgiving"
+  },
+  {
+    "topic_id": 113,
+    "ref": "Psa 150:1-6",
+    "from": 1,
+    "to": 6
+  },
+  {
+    "topic_id": 113,
+    "ref": "Isa 13:1-22",
+    "from": 1,
+    "to": 22
+  },
+  {
+    "topic_id": 113,
+    "ref": "Isa 27:13",
+    "from": 13,
+    "to": 13,
+    "description": "The great trumpet will be blown"
+  },
+  {
+    "topic_id": 113,
+    "ref": "Isa 44:21-28",
+    "from": 21,
+    "to": 28
+  },
+  {
+    "topic_id": 113,
+    "ref": "Jer 20:15-17",
+    "from": 15,
+    "to": 17
+  },
+  {
+    "topic_id": 113,
+    "ref": "Jer 34:1-22",
+    "from": 1,
+    "to": 22,
+    "description": "Proclaim liberty"
+  },
+  {
+    "topic_id": 113,
+    "ref": "Amo 2:1-3",
+    "from": 1,
+    "to": 3
+  },
+  {
+    "topic_id": 113,
+    "ref": "Mat 24:29-31",
+    "from": 29,
+    "to": 31,
+    "description": "Gather the elect"
+  },
+  {
+    "topic_id": 114,
+    "ref": "Exo 12:1-3",
+    "from": 1,
+    "to": 3,
+    "description": "Passover meal"
+  },
+  {
+    "topic_id": 114,
+    "ref": "Lev 23:24",
+    "from": 24,
+    "to": 24
+  },
+  {
+    "topic_id": 114,
+    "ref": "Lev 25:8",
+    "from": 8,
+    "to": 8,
+    "description": "Jubilee on the Day of Atonement"
+  },
+  {
+    "topic_id": 114,
+    "ref": "Num 10:10",
+    "from": 10,
+    "to": 10
+  },
+  {
+    "topic_id": 114,
+    "ref": "Num 29:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 114,
+    "ref": "Psa 81:1-5",
+    "from": 1,
+    "to": 5,
+    "description": "Blow the trumpet; Joyful Shout"
+  },
+  {
+    "topic_id": 114,
+    "ref": "Rev 4:1",
+    "from": 1,
+    "to": 1,
+    "description": "Trumpets 1st day of the 7th month"
+  },
+  {
+    "topic_id": 115,
+    "ref": "2Ch 15:12-15",
+    "from": 12,
+    "to": 15
+  },
+  {
+    "topic_id": 115,
+    "ref": "Exo 12:14",
+    "from": 14,
+    "to": 14
+  },
+  {
+    "topic_id": 115,
+    "ref": "Exo 13:7-10",
+    "from": 7,
+    "to": 10
+  },
+  {
+    "topic_id": 115,
+    "ref": "Exo 20:18-21",
+    "from": 18,
+    "to": 21
+  },
+  {
+    "topic_id": 115,
+    "ref": "Exo 28:36-38",
+    "from": 36,
+    "to": 38,
+    "description": "Holiness to Yahweh"
+  },
+  {
+    "topic_id": 115,
+    "ref": "Lev 2:1-3",
+    "from": 1,
+    "to": 3
+  },
+  {
+    "topic_id": 115,
+    "ref": "Lev 5:12",
+    "from": 12,
+    "to": 12
+  },
+  {
+    "topic_id": 115,
+    "ref": "Num 5:11",
+    "from": 11,
+    "to": 11,
+    "description": "Offering for remembrance of iniquity"
+  },
+  {
+    "topic_id": 115,
+    "ref": "Num 10:1-10",
+    "from": 1,
+    "to": 10
+  },
+  {
+    "topic_id": 115,
+    "ref": "Num 23:18-24",
+    "from": 18,
+    "to": 24,
+    "description": "Balaam blessing on Israel"
+  },
+  {
+    "topic_id": 115,
+    "ref": "Jos 6:15-27",
+    "from": 15,
+    "to": 27
+  },
+  {
+    "topic_id": 115,
+    "ref": "Ezr 3:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 115,
+    "ref": "Zec 14:20",
+    "from": 20,
+    "to": 20,
+    "description": "Holiness to Yahweh"
+  },
+  {
+    "topic_id": 117,
+    "ref": "1Th 4:16-17",
+    "from": 16,
+    "to": 17
+  },
+  {
+    "topic_id": 117,
+    "ref": "Isa 11:1-16",
+    "from": 1,
+    "to": 16
+  },
+  {
+    "topic_id": 117,
+    "ref": "Isa 12:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 117,
+    "ref": "Jol 2:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 117,
+    "ref": "Jol 2:23",
+    "from": 23,
+    "to": 23
+  },
+  {
+    "topic_id": 117,
+    "ref": "Jol 3:1-3",
+    "from": 1,
+    "to": 3
+  },
+  {
+    "topic_id": 117,
+    "ref": "Mat 24:29-31",
+    "from": 29,
+    "to": 31,
+    "description": "Gather the elect"
+  },
+  {
+    "topic_id": 117,
+    "ref": "Rev 1:10",
+    "from": 10,
+    "to": 10
+  },
+  {
+    "topic_id": 117,
+    "ref": "Rev 8:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 118,
+    "ref": "Deu 31:1-32",
+    "from": 1,
+    "to": 32,
+    "description": "Song of Moses"
+  },
+  {
+    "topic_id": 118,
+    "ref": "Isa 27:12-13",
+    "from": 12,
+    "to": 13,
+    "description": "The great trumpet will be blown"
+  },
+  {
+    "topic_id": 118,
+    "ref": "Mat 24:31",
+    "from": 31,
+    "to": 31,
+    "description": "Gather the elect"
+  },
+  {
+    "topic_id": 119,
+    "ref": "Ezk 21:22",
+    "from": 22,
+    "to": 22,
+    "description": "Call to battle"
+  },
+  {
+    "topic_id": 119,
+    "ref": "Jol 2:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 119,
+    "ref": "Amo 1:13-15",
+    "from": 13,
+    "to": 15,
+    "description": "Shouting in battle"
+  },
+  {
+    "topic_id": 119,
+    "ref": "Zep 1:14-16",
+    "from": 14,
+    "to": 16
+  },
+  {
+    "topic_id": 120,
+    "ref": "Rev 11:15",
+    "from": 15,
+    "to": 15
+  },
+  {
+    "topic_id": 122,
+    "ref": "Exo 12:14-17",
+    "from": 14,
+    "to": 17
+  },
+  {
+    "topic_id": 122,
+    "ref": "Exo 29:35-37",
+    "from": 35,
+    "to": 37,
+    "description": "Consecration of priests: bull and rams"
+  },
+  {
+    "topic_id": 122,
+    "ref": "Lev 1:2-4",
+    "from": 2,
+    "to": 4,
+    "description": "Burnt Offering makes Atonement"
+  },
+  {
+    "topic_id": 122,
+    "ref": "Lev 16:1-34",
+    "from": 1,
+    "to": 34
+  },
+  {
+    "topic_id": 122,
+    "ref": "Lev 23:2-3",
+    "from": 2,
+    "to": 3,
+    "description": "Appointed Times are Holy Convocations"
+  },
+  {
+    "topic_id": 122,
+    "ref": "Lev 23:5-8",
+    "from": 5,
+    "to": 8
+  },
+  {
+    "topic_id": 122,
+    "ref": "Lev 23:21",
+    "from": 21,
+    "to": 21
+  },
+  {
+    "topic_id": 122,
+    "ref": "Lev 23:24-32",
+    "from": 24,
+    "to": 32
+  },
+  {
+    "topic_id": 122,
+    "ref": "Lev 23:34-36",
+    "from": 34,
+    "to": 36
+  },
+  {
+    "topic_id": 122,
+    "ref": "Num 29:7-11",
+    "from": 7,
+    "to": 11
+  },
+  {
+    "topic_id": 123,
+    "ref": "2Pe 2:5",
+    "from": 5,
+    "to": 5
+  },
+  {
+    "topic_id": 123,
+    "ref": "Gen 10:21-32",
+    "from": 21,
+    "to": 32
+  },
+  {
+    "topic_id": 123,
+    "ref": "Gen 11:10-32",
+    "from": 10,
+    "to": 32
+  },
+  {
+    "topic_id": 123,
+    "ref": "Deu 8:1-3",
+    "from": 1,
+    "to": 3
+  },
+  {
+    "topic_id": 123,
+    "ref": "Isa 58:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 123,
+    "ref": "Ezk 40:1-48",
+    "from": 1,
+    "to": 48
+  },
+  {
+    "topic_id": 123,
+    "ref": "Jol 2:1-32",
+    "from": 1,
+    "to": 32
+  },
+  {
+    "topic_id": 123,
+    "ref": "Jol 3:1-21",
+    "from": 1,
+    "to": 21
+  },
+  {
+    "topic_id": 123,
+    "ref": "Mat 4:1-4",
+    "from": 1,
+    "to": 4
+  },
+  {
+    "topic_id": 123,
+    "ref": "Mat 25:31-46",
+    "from": 31,
+    "to": 46
+  },
+  {
+    "topic_id": 123,
+    "ref": "Luk 3:34-38",
+    "from": 34,
+    "to": 38
+  },
+  {
+    "topic_id": 123,
+    "ref": "Luk 4:1-4",
+    "from": 1,
+    "to": 4
+  },
+  {
+    "topic_id": 123,
+    "ref": "Act 27:8-10",
+    "from": 8,
+    "to": 10
+  },
+  {
+    "topic_id": 123,
+    "ref": "Eph 1:7-8",
+    "from": 7,
+    "to": 8
+  },
+  {
+    "topic_id": 123,
+    "ref": "Heb 2:16-18",
+    "from": 16,
+    "to": 18
+  },
+  {
+    "topic_id": 123,
+    "ref": "Heb 3:1-2",
+    "from": 1,
+    "to": 2
+  },
+  {
+    "topic_id": 123,
+    "ref": "Heb 7:1-28",
+    "from": 1,
+    "to": 28
+  },
+  {
+    "topic_id": 123,
+    "ref": "Heb 8:1",
+    "from": 1,
+    "to": 1,
+    "description": "Copy and shadow of heavenly things according to the pattern"
+  },
+  {
+    "topic_id": 123,
+    "ref": "Heb 9:7-14",
+    "from": 7,
+    "to": 14
+  },
+  {
+    "topic_id": 123,
+    "ref": "Heb 9:24-28",
+    "from": 24,
+    "to": 28
+  },
+  {
+    "topic_id": 124,
+    "ref": "1Ch 3:13-17",
+    "from": 13,
+    "to": 17,
+    "description": "Zerubbabel son of Shealtiel - Line of David"
+  },
+  {
+    "topic_id": 124,
+    "ref": "1Co 15:1-5",
+    "from": 1,
+    "to": 5,
+    "description": "Messiah died for our sins"
+  },
+  {
+    "topic_id": 124,
+    "ref": "1Pe 1:3-5",
+    "from": 3,
+    "to": 5
+  },
+  {
+    "topic_id": 124,
+    "ref": "1Pe 1:22-25",
+    "from": 22,
+    "to": 25,
+    "description": "Redeemed with the precious blood of a lamb"
+  },
+  {
+    "topic_id": 124,
+    "ref": "1Pe 2:1-3",
+    "from": 1,
+    "to": 3,
+    "description": "Desire the pure milk of the word, that you may grow"
+  },
+  {
+    "topic_id": 124,
+    "ref": "1Jn 3:2-3",
+    "from": 2,
+    "to": 3,
+    "description": "Christ as High Priest and His own Blood - cleanses your conscience from dead works"
+  },
+  {
+    "topic_id": 124,
+    "ref": "Gen 6:11-14",
+    "from": 11,
+    "to": 14
+  },
+  {
+    "topic_id": 124,
+    "ref": "Exo 13:1-16",
+    "from": 1,
+    "to": 16
+  },
+  {
+    "topic_id": 124,
+    "ref": "Exo 19:22",
+    "from": 22,
+    "to": 22
+  },
+  {
+    "topic_id": 124,
+    "ref": "Exo 28:1-3",
+    "from": 1,
+    "to": 3,
+    "description": "Instructions to Consecrate Aaron and sons as Priests"
+  },
+  {
+    "topic_id": 124,
+    "ref": "Exo 28:38",
+    "from": 38,
+    "to": 38,
+    "description": "Holiness to Yahweh"
+  },
+  {
+    "topic_id": 124,
+    "ref": "Exo 30:30",
+    "from": 30,
+    "to": 30
+  },
+  {
+    "topic_id": 124,
+    "ref": "Exo 32:25-29",
+    "from": 25,
+    "to": 29,
+    "description": "Consecrate yourselves - Levites but not as priests"
+  },
+  {
+    "topic_id": 124,
+    "ref": "Lev 10:8-20",
+    "from": 8,
+    "to": 20,
+    "description": "Statute forever: Teaching by Aaron - former statute"
+  },
+  {
+    "topic_id": 124,
+    "ref": "Lev 16:29-30",
+    "from": 29,
+    "to": 30
+  },
+  {
+    "topic_id": 124,
+    "ref": "Lev 23:27-32",
+    "from": 27,
+    "to": 32,
+    "description": "Afflicted in soul: Do no work"
+  },
+  {
+    "topic_id": 124,
+    "ref": "Num 8:1-26",
+    "from": 1,
+    "to": 26,
+    "description": "Consecration of Levites"
+  },
+  {
+    "topic_id": 124,
+    "ref": "Num 18:26-28",
+    "from": 26,
+    "to": 28
+  },
+  {
+    "topic_id": 124,
+    "ref": "Ezr 3:8-11",
+    "from": 8,
+    "to": 11,
+    "description": "Priest and King build the temple"
+  },
+  {
+    "topic_id": 124,
+    "ref": "Psa 2:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 124,
+    "ref": "Psa 72:1-4",
+    "from": 1,
+    "to": 4,
+    "description": "Bring peace by righteousness"
+  },
+  {
+    "topic_id": 124,
+    "ref": "Psa 85:9-13",
+    "from": 9,
+    "to": 13,
+    "description": "Righteousness and peace have kissed"
+  },
+  {
+    "topic_id": 124,
+    "ref": "Psa 110:1-7",
+    "from": 1,
+    "to": 7,
+    "description": "Order of Melchizedek"
+  },
+  {
+    "topic_id": 124,
+    "ref": "Isa 32:1-20",
+    "from": 1,
+    "to": 20,
+    "description": "The work of righteousness will be peace"
+  },
+  {
+    "topic_id": 124,
+    "ref": "Zec 6:13",
+    "from": 13,
+    "to": 13,
+    "description": "Priest and King build the temple"
+  },
+  {
+    "topic_id": 124,
+    "ref": "Mat 4:1-3",
+    "from": 1,
+    "to": 3
+  },
+  {
+    "topic_id": 124,
+    "ref": "Mat 5:8",
+    "from": 8,
+    "to": 8
+  },
+  {
+    "topic_id": 124,
+    "ref": "Mat 22:41-46",
+    "from": 41,
+    "to": 46
+  },
+  {
+    "topic_id": 124,
+    "ref": "Mat 26:26-29",
+    "from": 26,
+    "to": 29
+  },
+  {
+    "topic_id": 124,
+    "ref": "Rom 14:16-17",
+    "from": 16,
+    "to": 17,
+    "description": "The kingdom of God is righteousness, peace and joy in the Holy Spirit"
+  },
+  {
+    "topic_id": 124,
+    "ref": "Heb 4:14-16",
+    "from": 14,
+    "to": 16
+  },
+  {
+    "topic_id": 124,
+    "ref": "Heb 5:1-14",
+    "from": 1,
+    "to": 14
+  },
+  {
+    "topic_id": 124,
+    "ref": "Heb 6:19-20",
+    "from": 19,
+    "to": 20
+  },
+  {
+    "topic_id": 124,
+    "ref": "Heb 7:1-28",
+    "from": 1,
+    "to": 28
+  },
+  {
+    "topic_id": 124,
+    "ref": "Heb 8:6",
+    "from": 6,
+    "to": 6
+  },
+  {
+    "topic_id": 124,
+    "ref": "Heb 10:19-22",
+    "from": 19,
+    "to": 22,
+    "description": "Hearts sprinkled from an evil conscience & Bodies washed with pure water"
+  },
+  {
+    "topic_id": 124,
+    "ref": "Jas 3:18",
+    "from": 18,
+    "to": 18,
+    "description": "The fruit of righteousness is sown in peace"
+  },
+  {
+    "topic_id": 124,
+    "ref": "Rev 1:17-18",
+    "from": 17,
+    "to": 18
+  },
+  {
+    "topic_id": 125,
+    "ref": "1Ch 6:48-49",
+    "from": 48,
+    "to": 49
+  },
+  {
+    "topic_id": 125,
+    "ref": "1Jn 2:2",
+    "from": 2,
+    "to": 2,
+    "description": "Propitiation for the sins of the whole world"
+  },
+  {
+    "topic_id": 125,
+    "ref": "Gen 9:18-29",
+    "from": 18,
+    "to": 29
+  },
+  {
+    "topic_id": 125,
+    "ref": "Exo 29:15-18",
+    "from": 15,
+    "to": 18,
+    "description": "Burnt Offering makes atonement"
+  },
+  {
+    "topic_id": 125,
+    "ref": "Exo 29:26",
+    "from": 26,
+    "to": 26
+  },
+  {
+    "topic_id": 125,
+    "ref": "Exo 29:29-37",
+    "from": 29,
+    "to": 37,
+    "description": "Consecration of priests: bull and rams"
+  },
+  {
+    "topic_id": 125,
+    "ref": "Exo 30:10-21",
+    "from": 10,
+    "to": 21
+  },
+  {
+    "topic_id": 125,
+    "ref": "Lev 1:4",
+    "from": 4,
+    "to": 4,
+    "description": "Burnt Offering makes Atonement"
+  },
+  {
+    "topic_id": 125,
+    "ref": "Lev 1:10-13",
+    "from": 10,
+    "to": 13
+  },
+  {
+    "topic_id": 125,
+    "ref": "Lev 4:1-35",
+    "from": 1,
+    "to": 35
+  },
+  {
+    "topic_id": 125,
+    "ref": "Lev 6:25-30",
+    "from": 25,
+    "to": 30,
+    "description": "This Sin Offering shall be burnt"
+  },
+  {
+    "topic_id": 125,
+    "ref": "Lev 16:1-25",
+    "from": 1,
+    "to": 25
+  },
+  {
+    "topic_id": 125,
+    "ref": "Lev 16:27-34",
+    "from": 27,
+    "to": 34,
+    "description": "Two kids of goats - burnt outside"
+  },
+  {
+    "topic_id": 125,
+    "ref": "Lev 22:15-16",
+    "from": 15,
+    "to": 16
+  },
+  {
+    "topic_id": 125,
+    "ref": "Lev 25:23",
+    "from": 23,
+    "to": 23,
+    "description": "The land is Mine"
+  },
+  {
+    "topic_id": 125,
+    "ref": "Num 8:19",
+    "from": 19,
+    "to": 19,
+    "description": "Consecration of Levites"
+  },
+  {
+    "topic_id": 125,
+    "ref": "Num 16:47",
+    "from": 47,
+    "to": 47,
+    "description": "Korah: incense makes atonement"
+  },
+  {
+    "topic_id": 125,
+    "ref": "Num 29:7-11",
+    "from": 7,
+    "to": 11
+  },
+  {
+    "topic_id": 125,
+    "ref": "Deu 32:43",
+    "from": 43,
+    "to": 43,
+    "description": "God will provide atonement"
+  },
+  {
+    "topic_id": 125,
+    "ref": "Isa 53:1-12",
+    "from": 1,
+    "to": 12
+  },
+  {
+    "topic_id": 129,
+    "ref": "Heb 9:28",
+    "from": 28,
+    "to": 28
+  },
+  {
+    "topic_id": 130,
+    "ref": "Lev 25:9-10",
+    "from": 9,
+    "to": 10
+  },
+  {
+    "topic_id": 128,
+    "ref": "Rom 14:16-18",
+    "from": 16,
+    "to": 18,
+    "description": "The kingdom of God is righteousness, peace and joy in the Holy Spirit"
+  },
+  {
+    "topic_id": 132,
+    "ref": "Gen 33:15-17",
+    "from": 15,
+    "to": 17,
+    "description": "Tent or Tabernacle or Booth - Succoth"
+  },
+  {
+    "topic_id": 132,
+    "ref": "Exo 23:16",
+    "from": 16,
+    "to": 16,
+    "description": "Pilgrimage (three times)"
+  },
+  {
+    "topic_id": 132,
+    "ref": "Exo 26:7",
+    "from": 7,
+    "to": 7
+  },
+  {
+    "topic_id": 132,
+    "ref": "Lev 23:33-43",
+    "from": 33,
+    "to": 43
+  },
+  {
+    "topic_id": 132,
+    "ref": "Lev 24:3",
+    "from": 3,
+    "to": 3
+  },
+  {
+    "topic_id": 132,
+    "ref": "Num 29:12-38",
+    "from": 12,
+    "to": 38
+  },
+  {
+    "topic_id": 132,
+    "ref": "Deu 16:13-15",
+    "from": 13,
+    "to": 15
+  },
+  {
+    "topic_id": 132,
+    "ref": "Jdg 21:19-21",
+    "from": 19,
+    "to": 21
+  },
+  {
+    "topic_id": 132,
+    "ref": "Rev 16:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 133,
+    "ref": "Exo 34:6",
+    "from": 6,
+    "to": 6
+  },
+  {
+    "topic_id": 133,
+    "ref": "Lev 23:43",
+    "from": 43,
+    "to": 43,
+    "description": "Dwell in booths, as Israel did when Yahweh brought them out"
+  },
+  {
+    "topic_id": 133,
+    "ref": "Neh 8:1-18",
+    "from": 1,
+    "to": 18,
+    "description": "Booths (7 days 15-21) and Convocation (8th day 22)"
+  },
+  {
+    "topic_id": 133,
+    "ref": "Neh 9:1-38",
+    "from": 1,
+    "to": 38
+  },
+  {
+    "topic_id": 133,
+    "ref": "Neh 10:1-39",
+    "from": 1,
+    "to": 39
+  },
+  {
+    "topic_id": 133,
+    "ref": "Psa 25:10",
+    "from": 10,
+    "to": 10
+  },
+  {
+    "topic_id": 133,
+    "ref": "Psa 68:1-35",
+    "from": 1,
+    "to": 35
+  },
+  {
+    "topic_id": 133,
+    "ref": "Pro 4:18",
+    "from": 18,
+    "to": 18
+  },
+  {
+    "topic_id": 133,
+    "ref": "Isa 3:1-4",
+    "from": 1,
+    "to": 4
+  },
+  {
+    "topic_id": 133,
+    "ref": "Isa 11:1-16",
+    "from": 1,
+    "to": 16
+  },
+  {
+    "topic_id": 133,
+    "ref": "Isa 12:1-6",
+    "from": 1,
+    "to": 6,
+    "description": "Poured out water"
+  },
+  {
+    "topic_id": 133,
+    "ref": "Isa 66:15-24",
+    "from": 15,
+    "to": 24
+  },
+  {
+    "topic_id": 133,
+    "ref": "Jer 17:13",
+    "from": 13,
+    "to": 13
+  },
+  {
+    "topic_id": 133,
+    "ref": "Ezk 47:1-12",
+    "from": 1,
+    "to": 12,
+    "description": "Thirsts - living water"
+  },
+  {
+    "topic_id": 133,
+    "ref": "Hos 12:7-10",
+    "from": 7,
+    "to": 10,
+    "description": "I will again make you dwell in tents"
+  },
+  {
+    "topic_id": 133,
+    "ref": "Jol 2:1-32",
+    "from": 1,
+    "to": 32
+  },
+  {
+    "topic_id": 133,
+    "ref": "Amo 7:9-15",
+    "from": 9,
+    "to": 15
+  },
+  {
+    "topic_id": 133,
+    "ref": "Hag 2:1-9",
+    "from": 1,
+    "to": 9
+  },
+  {
+    "topic_id": 133,
+    "ref": "Zec 8:20-23",
+    "from": 20,
+    "to": 23
+  },
+  {
+    "topic_id": 133,
+    "ref": "Zec 13:1-6",
+    "from": 1,
+    "to": 6
+  },
+  {
+    "topic_id": 133,
+    "ref": "Zec 14:1-9",
+    "from": 1,
+    "to": 9
+  },
+  {
+    "topic_id": 133,
+    "ref": "Jhn 7:2-39",
+    "from": 2,
+    "to": 39
+  },
+  {
+    "topic_id": 133,
+    "ref": "Rev 19:11",
+    "from": 11,
+    "to": 11
+  },
+  {
+    "topic_id": 134,
+    "ref": "Lev 23:34-36",
+    "from": 34,
+    "to": 36
+  },
+  {
+    "topic_id": 134,
+    "ref": "Lev 23:39-43",
+    "from": 39,
+    "to": 43,
+    "description": "After gathering the fruit from the land"
+  },
+  {
+    "topic_id": 134,
+    "ref": "Ezk 45:18-25",
+    "from": 18,
+    "to": 25
+  },
+  {
+    "topic_id": 134,
+    "ref": "Ezk 46:1-24",
+    "from": 1,
+    "to": 24
+  },
+  {
+    "topic_id": 135,
+    "ref": "2Ch 7:4",
+    "from": 4,
+    "to": 4,
+    "description": "Solomon’s sacrifices"
+  },
+  {
+    "topic_id": 135,
+    "ref": "2Ch 7:8-11",
+    "from": 8,
+    "to": 11
+  },
+  {
+    "topic_id": 135,
+    "ref": "Gen 33:17",
+    "from": 17,
+    "to": 17,
+    "description": "Tent or Tabernacle or Booth - Succoth"
+  },
+  {
+    "topic_id": 135,
+    "ref": "Exo 25:1-9",
+    "from": 1,
+    "to": 9
+  },
+  {
+    "topic_id": 135,
+    "ref": "Lev 23:42-43",
+    "from": 42,
+    "to": 43,
+    "description": "Dwell in booths, as Israel did when Yahweh brought them out"
+  },
+  {
+    "topic_id": 135,
+    "ref": "Num 29:12-40",
+    "from": 12,
+    "to": 40
+  },
+  {
+    "topic_id": 135,
+    "ref": "Deu 8:1-20",
+    "from": 1,
+    "to": 20
+  },
+  {
+    "topic_id": 135,
+    "ref": "Deu 15:1-23",
+    "from": 1,
+    "to": 23,
+    "description": "Year of release of debt"
+  },
+  {
+    "topic_id": 135,
+    "ref": "Deu 28:1",
+    "from": 1,
+    "to": 1
+  },
+  {
+    "topic_id": 135,
+    "ref": "Deu 33:26-29",
+    "from": 26,
+    "to": 29,
+    "description": "Armageddon"
+  },
+  {
+    "topic_id": 135,
+    "ref": "Rev 16:12",
+    "from": 12,
+    "to": 12,
+    "description": "Armageddon"
+  },
+  {
+    "topic_id": 132,
+    "ref": "1Ch 2:13-15",
+    "from": 13,
+    "to": 15
+  },
+  {
+    "topic_id": 140,
+    "ref": "1Co 15:24-28",
+    "from": 24,
+    "to": 28
+  },
+  {
+    "topic_id": 140,
+    "ref": "2Co 5:1-10",
+    "from": 1,
+    "to": 10
+  },
+  {
+    "topic_id": 137,
+    "ref": "Exo 25:8",
+    "from": 8,
+    "to": 8
+  },
+  {
+    "topic_id": 140,
+    "ref": "Mat 22:23-33",
+    "from": 23,
+    "to": 33
+  },
+  {
+    "topic_id": 140,
+    "ref": "Luk 20:27-40",
+    "from": 27,
+    "to": 40
+  },
+  {
+    "topic_id": 140,
+    "ref": "Luk 21:25-28",
+    "from": 25,
+    "to": 28
+  },
+  {
+    "topic_id": 140,
+    "ref": "Rev 20:7",
+    "from": 7,
+    "to": 7,
+    "description": "Satan is in prison during the millennium Rev 20"
+  },
+  {
+    "topic_id": 139,
+    "ref": "1Co 15:20-23",
+    "from": 20,
+    "to": 23
+  },
+  {
+    "topic_id": 139,
+    "ref": "Lev 23:39",
+    "from": 39,
+    "to": 39,
+    "description": "After gathering the fruit from the land"
+  },
+  {
+    "topic_id": 139,
+    "ref": "Jol 2:1-32",
+    "from": 1,
+    "to": 32
+  },
+  {
+    "topic_id": 138,
+    "ref": "Zec 14:16-19",
+    "from": 16,
+    "to": 19
+  },
+  {
+    "topic_id": 138,
+    "ref": "Zec 14:16-21",
+    "from": 16,
+    "to": 21,
+    "description": "Holiness to Yahweh"
+  },
+  {
+    "topic_id": 137,
+    "ref": "Rev 21:1-3",
+    "from": 1,
+    "to": 3
+  },
+  {
+    "topic_id": 143,
+    "ref": "Heb 10:1-3",
+    "from": 1,
+    "to": 3,
+    "description": "There is a reminder of sins every year"
+  },
+  {
+    "topic_id": 145,
+    "ref": "Heb 9:9",
+    "from": 9,
+    "to": 9
+  },
+  {
+    "topic_id": 154,
+    "ref": "Deu 16:16-17",
+    "from": 16,
+    "to": 17,
+    "description": "Three times in the place which He chooses"
+  },
+  {
+    "topic_id": 155,
+    "ref": "Deu 16:16-17",
+    "from": 16,
+    "to": 17,
+    "description": "Three times in the place which He chooses"
+  },
+  {
+    "topic_id": 157,
+    "ref": "Gen 2:3",
+    "from": 3,
+    "to": 3
+  },
+  {
+    "topic_id": 158,
+    "ref": "Exo 16:1-36",
+    "from": 1,
+    "to": 36
+  },
+  {
+    "topic_id": 159,
+    "ref": "Exo 20:8-11",
+    "from": 8,
+    "to": 11
+  },
+  {
+    "topic_id": 159,
+    "ref": "Deu 5:12-15",
+    "from": 12,
+    "to": 15
+  },
+  {
+    "topic_id": 160,
+    "ref": "Exo 31:12-18",
+    "from": 12,
+    "to": 18
+  },
+  {
+    "topic_id": 162,
+    "ref": "Lev 26:1-46",
+    "from": 1,
+    "to": 46
+  },
+  {
+    "topic_id": 164,
+    "ref": "Exo 19:1-25",
+    "from": 1,
+    "to": 25
+  },
+  {
+    "topic_id": 170,
+    "ref": "Dan 12:1-13",
+    "from": 1,
+    "to": 13
+  },
+  {
+    "topic_id": 170,
+    "ref": "Rev 11:1-12",
+    "from": 1,
+    "to": 12,
+    "description": "Two olive trees and lamp-stands and witnesses"
+  },
+  {
+    "topic_id": 170,
+    "ref": "Rev 12:13-17",
+    "from": 13,
+    "to": 17
+  },
+  {
+    "topic_id": 170,
+    "ref": "Rev 13:1-10",
+    "from": 1,
+    "to": 10,
+    "description": "The Lamb slain from the foundation of the world"
+  },
+  {
+    "topic_id": 173,
+    "ref": "Rev 19:15",
+    "from": 15,
+    "to": 15
+  },
+  {
+    "topic_id": 175,
+    "ref": "Deu 31:9-13",
+    "from": 9,
+    "to": 13,
+    "description": "Song of Moses"
+  },
+  {
+    "topic_id": 176,
+    "ref": "Neh 8:1-8",
+    "from": 1,
+    "to": 8
+  },
+  {
+    "topic_id": 97,
+    "ref": "1Co 15:20-23",
+    "from": 20,
+    "to": 23
+  }
+]

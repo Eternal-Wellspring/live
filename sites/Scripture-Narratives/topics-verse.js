@@ -223,6 +223,25 @@
     if (acc) out.push(joinRef(acc));
     return out.concat(rest);
   }
+  function refSortKey(lab) {
+    var m = String(lab || "").trim().match(/^(\S+)\s+(\d+)\s*:\s*(\d+)/);
+    if (!m) return [1000, 0, 0, String(lab || "")];
+    var i = CANON.indexOf(m[1]);
+    if (i < 0) i = 900;
+    return [i, Number(m[2]), Number(m[3]), lab];
+  }
+  function sortRefLabs(out) {
+    out.sort(function (a, b) {
+      var ka = refSortKey(a), kb = refSortKey(b), n;
+      for (n = 0; n < 3; n++) {
+        if (ka[n] !== kb[n]) return ka[n] - kb[n];
+      }
+      if (ka[3] < kb[3]) return -1;
+      if (ka[3] > kb[3]) return 1;
+      return 0;
+    });
+    return out;
+  }
   function refsFor(t) {
     var out = [], seen = {}, i, r, lab, ids = {}, br;
     if (!t) return out;
@@ -236,7 +255,7 @@
       seen[lab] = 1;
       out.push(lab);
     }
-    return combineRefs(out);
+    return sortRefLabs(combineRefs(out));
   }
   function ownRefs(t) {
     var out = [], seen = {}, i, r, lab;
@@ -249,7 +268,7 @@
       seen[lab] = 1;
       out.push(lab);
     }
-    return combineRefs(out);
+    return sortRefLabs(combineRefs(out));
   }
   function homeRef(t) {
     var labs = ownChapRefs(t);
@@ -1750,12 +1769,27 @@
     }
     function centerHits(boxEl, prefer) {
       var hits = boxEl.querySelectorAll(prefer ? "p.on" : "p.hit");
+      var first, last, top, bot, mid, h, pad, scroll, padEl, old;
       if (!hits.length) hits = boxEl.querySelectorAll("p.hit");
       if (!hits.length) return;
-      var first = hits[0];
-      var last = hits[hits.length - 1];
-      var mid = (first.offsetTop + last.offsetTop + last.offsetHeight) / 2;
-      boxEl.scrollTop = Math.max(0, Math.round(mid - boxEl.clientHeight / 2));
+      old = boxEl.querySelector(".tverse-pad");
+      padEl = old || document.createElement("div");
+      if (!old) {
+        padEl.className = "tverse-pad";
+        boxEl.appendChild(padEl);
+      }
+      padEl.style.height = Math.max(0, Math.round(boxEl.clientHeight * 0.45)) + "px";
+      first = hits[0];
+      last = hits[hits.length - 1];
+      top = first.offsetTop;
+      bot = last.offsetTop + last.offsetHeight;
+      mid = (top + bot) / 2;
+      h = boxEl.clientHeight;
+      pad = 8;
+      scroll = Math.round(mid - h / 2);
+      if (scroll > top - pad) scroll = Math.max(0, top - pad);
+      if (scroll < 0) scroll = 0;
+      boxEl.scrollTop = scroll;
     }
     function closePickers() {
       var root = wrap || board || document;

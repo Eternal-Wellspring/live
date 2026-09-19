@@ -1,8 +1,10 @@
+/* By Topic: one program for every Level 1. Root is ?id=. On open: first topic selected; if it has a ref, that ref is opened and the verses shown. */
 (function () {
   var PAD = 8;
   var GAP_X = 16;
   var GAP_Y = 8;
   var GAP_BTN = 4;
+  var JOIN = 1;
   var DESC_H = 26;
   var VERSE_W = 420;
   var topics = [];
@@ -23,10 +25,44 @@
   var hitStart = 0;
   var hitEnd = 0;
   var descSnap = {};
+  var noteSnap = "";
+  var noteSnapRef = "";
+  var noteEditing = false;
+  var verseDirty = false;
+  var verseDraft = "";
+  var verseEditRef = "";
+  var verseBoxEl = null;
+  var colScroll = {};
   var drag = null;
+  var topicDrag = null;
+  var skipTopicClick = false;
   var skipRefClick = false;
   var pendingRefEdit = null;
+  var pendingActs = null;
+  var pendingMove = null;
+  var extraSibs = 0;
   var rhmLock = 0;
+  var rhm = {
+    topic: { title: "Topic", items: ["Edit", "Add Topic", "Out a level", "In a level"] },
+    addTopic: { title: "Add Topic", items: ["Same level", "One below"] },
+    ref: { title: "Ref", items: ["Edit", "Delete", "Move"] },
+    description: { title: "Description", items: ["Edit"] },
+    twoMore: { title: "Two more?", items: ["Yes", "No"] },
+    refsBox: { title: "Refs", items: ["Add a ref"] }
+  };
+  var RHM_ITEM = {
+    "Edit": "[data-edit]",
+    "Add Topic": "[data-add]",
+    "Same level": "[data-add-same]",
+    "One below": "[data-add-below]",
+    "Delete": "[data-delete]",
+    "Move": "[data-move]",
+    "Yes": "[data-yes]",
+    "No": "[data-no]",
+    "Add a ref": "[data-add-ref]",
+    "Out a level": "[data-out]",
+    "In a level": "[data-in]"
+  };
   var TRANSLATIONS = [
     { id: "NKJV", label: "NKJV", year: "1982" },
     { id: "ESV", label: "ESV", year: "2016" },
@@ -101,6 +137,203 @@
     }
     return out;
   }
+  var SIB_CAP = 10;
+  var editAfterPaint = "";
+  var editAfterPaintRef = "";
+  function addRefToTopic(t) {
+    var lab = "New", n = 2, depth;
+    if (!t) return;
+    while (ownRefs(t).indexOf(lab) >= 0) {
+      lab = "New " + n;
+      n += 1;
+    }
+    topicRefs.push({
+      topic_id: t.id,
+      ref: lab,
+      from: 0,
+      to: 0,
+      description: ""
+    });
+    depth = (t.level || 1) - 2;
+    if (depth < 0) return;
+    openStack.length = depth;
+    openStack[depth] = { id: sid(t.id), mode: "refs" };
+    lastRefTopic = sid(t.id);
+    openRef = lab;
+    sel = sid(t.id);
+    editAfterPaintRef = lab;
+    saveTopicRefs();
+    paint();
+  }
+  function parentOf(t) {
+    var list = bySeq();
+    var i, lv, j;
+    if (!t) return null;
+    lv = t.level || 1;
+    for (i = 0; i < list.length; i++) {
+      if (sid(list[i].id) === sid(t.id)) {
+        for (j = i - 1; j >= 0; j--) {
+          if ((list[j].level || 1) < lv) return list[j];
+        }
+        return null;
+      }
+    }
+    return null;
+  }
+  function sameTopic(a, b) {
+    return !!(a && b && sid(a.id) === sid(b.id));
+  }
+  function siblingCount(parent, lv, exceptId) {
+    var n = 0;
+    bySeq().forEach(function (x) {
+      if ((x.level || 1) !== lv) return;
+      if (exceptId && sid(x.id) === sid(exceptId)) return;
+      if (sameTopic(parentOf(x), parent)) n += 1;
+    });
+    return n;
+  }
+  function nextTopicId() {
+    var maxId = 0;
+    topics.forEach(function (x) {
+      var n = Number(x.id);
+      if (n > maxId) maxId = n;
+    });
+    maxId += 1;
+    while (maxId === 3 || maxId === 54 || find(topics, maxId)) maxId += 1;
+    return maxId;
+  }
+  function askTwoMore(then) {
+    showRefMenu(null, "twoMore", {
+      yes: function () {
+        extraSibs = 2;
+        if (typeof then === "function") then();
+      },
+      no: function () {}
+    });
+  }
+  function insertRelative(from, below) {
+    var lv, parent, gate, full, i, at, row, st;
+    if (!from) return;
+    lv = (from.level || 1) + (below ? 1 : 0);
+    if (lv < 2) lv = 2;
+    parent = below ? from : parentOf(from);
+    if (siblingCount(parent, lv) >= SIB_CAP + extraSibs) {
+      if (extraSibs >= 2) {
+        st = document.getElementById("status");
+        if (st) st.textContent = "That's the limit.";
+        return;
+      }
+      askTwoMore(function () {
+        extraSibs = 2;
+        insertRelative(from, below);
+      });
+      return;
+    }
+    full = bySeq();
+    at = -1;
+    for (i = 0; i < full.length; i++) {
+      if (sid(full[i].id) === sid(from.id)) { at = i; break; }
+    }
+    if (at < 0) return;
+    at += 1;
+    if (!below) {
+      while (at < full.length && (full[at].level || 1) > (from.level || 1)) at += 1;
+    }
+    row = {
+      id: nextTopicId(),
+      lecture_id: from.lecture_id,
+      level: lv,
+      seq: 0,
+      kind: "period",
+      title: "New",
+      notes: "",
+      description: "",
+      duration: ""
+    };
+    full.splice(at, 0, row);
+    full.forEach(function (x, n) { x.seq = n + 1; });
+    topics = full;
+    sel = sid(row.id);
+    if (below) {
+      openStack.length = Math.max(0, (from.level || 1) - 2);
+      openStack[(from.level || 1) - 2] = { id: sid(from.id), mode: "topics" };
+    }
+    editAfterPaint = sid(row.id);
+    saveTopics();
+    paint();
+  }
+  function takeBranch(list, i) {
+    var t = list[i];
+    var lv = t.level || 1;
+    var n = 1;
+    while (i + n < list.length && (list[i + n].level || 1) > lv) n += 1;
+    return list.splice(i, n);
+  }
+  function bumpLevel(from, d) {
+    var n, list, i, parent, dest, branch, st, j, after, oldParent;
+    if (!from) return;
+    n = (from.level || 1) + d;
+    if (n < 2) return;
+    if (n === (from.level || 1)) return;
+    list = bySeq();
+    i = -1;
+    for (j = 0; j < list.length; j++) {
+      if (sid(list[j].id) === sid(from.id)) { i = j; break; }
+    }
+    if (i < 0) return;
+    oldParent = parentOf(from);
+    if (d < 0) parent = parentOf(oldParent);
+    else {
+      dest = null;
+      for (j = i - 1; j >= 0; j--) {
+        if ((list[j].level || 1) === (from.level || 1)) { dest = list[j]; break; }
+        if ((list[j].level || 1) < (from.level || 1)) break;
+      }
+      if (!dest) {
+        st = document.getElementById("status");
+        if (st) st.textContent = "Nothing to go under.";
+        return;
+      }
+      parent = dest;
+    }
+    if (siblingCount(parent, n, from.id) >= SIB_CAP + extraSibs) {
+      if (extraSibs >= 2) {
+        st = document.getElementById("status");
+        if (st) st.textContent = "That's the limit.";
+        return;
+      }
+      askTwoMore(function () {
+        extraSibs = 2;
+        bumpLevel(from, d);
+      });
+      return;
+    }
+    branch = takeBranch(list, i);
+    branch[0].level = n;
+    after = list.length;
+    if (d < 0) {
+      for (j = 0; j < list.length; j++) {
+        if (oldParent && sid(list[j].id) === sid(oldParent.id)) {
+          after = j + 1;
+          while (after < list.length && (list[after].level || 1) > (oldParent.level || 1)) after += 1;
+          break;
+        }
+      }
+    } else {
+      for (j = 0; j < list.length; j++) {
+        if (sid(list[j].id) === sid(parent.id)) {
+          after = j + 1;
+          break;
+        }
+      }
+    }
+    list.splice.apply(list, [after, 0].concat(branch));
+    list.forEach(function (x, k) { x.seq = k + 1; });
+    topics = list;
+    sel = sid(from.id);
+    saveTopics();
+    paint();
+  }
   function kids(items, parent) {
     var i, start = -1, lv = parent.level || 1, out = [];
     for (i = 0; i < items.length; i++) {
@@ -123,7 +356,8 @@
   }
   function findBox(els, id) {
     var i;
-    for (i = 0; i < els.length; i++) {
+    for (i = 0; i < (els || []).length; i++) {
+      if (els[i].dataset.ref) continue;
       if (sid(els[i].dataset.id) === sid(id)) return els[i];
     }
     return null;
@@ -214,8 +448,34 @@
     if (acc) out.push(joinRef(acc));
     return out.concat(rest);
   }
+  function sortRefLabs(out) {
+    // Canonical order: book, then chapter, then verse. Standing SN. Do not drop. Do not use file order.
+    out.sort(function (a, b) {
+      var ka = refSortKey(a), kb = refSortKey(b), n;
+      for (n = 0; n < 3; n++) {
+        if (ka[n] !== kb[n]) return ka[n] - kb[n];
+      }
+      if (ka[3] < kb[3]) return -1;
+      if (ka[3] > kb[3]) return 1;
+      return 0;
+    });
+    return out;
+  }
+  function ownRefs(t) {
+    var out = [], seen = {}, i, r, lab;
+    if (!t) return out;
+    for (i = 0; i < topicRefs.length; i++) {
+      r = topicRefs[i];
+      if (sid(r.topic_id) !== sid(t.id)) continue;
+      lab = String(r.ref || "").trim();
+      if (!lab || seen[lab]) continue;
+      seen[lab] = 1;
+      out.push(lab);
+    }
+    return sortRefLabs(combineRefs(out));
+  }
   function refsFor(t) {
-    var out = [], seen = {}, i, r, lab, ka, kb, n, ids = {}, br;
+    var out = [], seen = {}, i, r, lab, ids = {}, br;
     if (!t) return out;
     br = branchOf(t);
     for (i = 0; i < br.length; i++) ids[sid(br[i].id)] = 1;
@@ -228,32 +488,35 @@
       out.push(lab);
     }
     out = combineRefs(out);
-    out.sort(function (a, b) {
-      ka = refSortKey(a);
-      kb = refSortKey(b);
-      for (n = 0; n < 3; n++) {
-        if (ka[n] !== kb[n]) return ka[n] - kb[n];
-      }
-      if (ka[3] < kb[3]) return -1;
-      if (ka[3] > kb[3]) return 1;
-      return 0;
-    });
-    return out;
+    return sortRefLabs(out);
   }
-  function refN(t) {
-    return refsFor(t).length;
-  }
-  function homeRef(t) {
-    var i, r, lab, p;
-    if (!t) return "";
+  function lowerRefs(t) {
+    var out = [], seen = {}, i, r, lab, ids = {}, br;
+    if (!t) return out;
+    br = branchOf(t);
+    for (i = 0; i < br.length; i++) {
+      if (sid(br[i].id) === sid(t.id)) continue;
+      ids[sid(br[i].id)] = 1;
+    }
     for (i = 0; i < topicRefs.length; i++) {
       r = topicRefs[i];
-      if (sid(r.topic_id) !== sid(t.id)) continue;
+      if (!ids[sid(r.topic_id)]) continue;
       lab = String(r.ref || "").trim();
-      p = parseRefParts(lab);
-      if (p && p.book === "Mrk") return lab;
+      if (!lab || seen[lab]) continue;
+      seen[lab] = 1;
+      out.push(lab);
     }
-    return "";
+    return sortRefLabs(out);
+  }
+  function ownN(t) {
+    return ownRefs(t).length;
+  }
+  function lowerN(t) {
+    return lowerRefs(t).length;
+  }
+  function homeRef(t) {
+    var list = ownRefs(t);
+    return list.length ? list[0] : "";
   }
   function topicForOpenRef(refTopic) {
     if (refTopic) return refTopic;
@@ -318,6 +581,50 @@
     pb = parseRefParts(b);
     return !!(pa && pb && pa.book === pb.book && pa.ch === pb.ch && pa.a === pb.a && pa.b === pb.b);
   }
+  function refDescIndex(topic) {
+    var i, r, p, want, best = -1, bestSpan = -1, span;
+    if (!topic || !openRef) return -1;
+    want = parseRefParts(openRef);
+    for (i = 0; i < topicRefs.length; i++) {
+      r = topicRefs[i];
+      if (sid(r.topic_id) !== sid(topic.id)) continue;
+      if (sameRef(r.ref, openRef) || String(r.ref || "").trim() === String(openRef).trim()) return i;
+      p = parseRefParts(r.ref);
+      if (!want || !p || p.book !== want.book || p.ch !== want.ch) continue;
+      if (p.b < want.a || p.a > want.b) continue;
+      span = Math.min(p.b, want.b) - Math.max(p.a, want.a) + 1;
+      if (span > bestSpan) {
+        bestSpan = span;
+        best = i;
+      }
+    }
+    return best;
+  }
+  function descriptionForOpen(topic) {
+    var i = refDescIndex(topic);
+    if (i < 0) return "";
+    return String(topicRefs[i].description || "");
+  }
+  function saveOpenDescription(topic, text) {
+    var i, p, row;
+    if (!topic || !openRef) return;
+    text = String(text || "").replace(/\n+$/, "");
+    i = refDescIndex(topic);
+    if (i >= 0) {
+      topicRefs[i].description = text;
+    } else if (text.trim()) {
+      p = parseRefParts(openRef);
+      row = {
+        topic_id: topic.id,
+        ref: openRef,
+        from: p ? p.a : 0,
+        to: p ? p.b : 0,
+        description: text
+      };
+      topicRefs.push(row);
+    }
+    saveTopicRefs();
+  }
   function rowsMatchingRef(ids, label) {
     var want = parseRefParts(label);
     var out = [], i, r, lab, p;
@@ -356,13 +663,15 @@
       }
     } else {
       del = {};
+      var keepDesc = idxs.length ? String(topicRefs[idxs[0]].description || "") : "";
       for (i = 0; i < idxs.length; i++) del[idxs[i]] = 1;
       if (idxs.length) topicRefs = topicRefs.filter(function (r, n) { return !del[n]; });
       topicRefs.push({
         topic_id: owner.id,
         ref: newLabel,
         from: p ? p.a : 0,
-        to: p ? p.b : 0
+        to: p ? p.b : 0,
+        description: keepDesc
       });
     }
     if (openRef === oldLabel) openRef = newLabel;
@@ -396,6 +705,9 @@
         if (Number(r.to)) fb = Math.max(fb, Number(r.to));
         topicRefs[destIdx].from = fa;
         topicRefs[destIdx].to = fb;
+        if (!String(topicRefs[destIdx].description || "").trim() && String(r.description || "").trim()) {
+          topicRefs[destIdx].description = r.description;
+        }
         del[idx] = 1;
       } else {
         r.topic_id = dest.id;
@@ -403,6 +715,17 @@
       }
     }
     if (Object.keys(del).length) topicRefs = topicRefs.filter(function (row, n) { return !del[n]; });
+    saveTopicRefs();
+    paint();
+  }
+  function deleteRefFromTopic(label, topicId) {
+    if (!label || topicId == null || topicId === "") return;
+    topicRefs = topicRefs.filter(function (r) {
+      if (sid(r.topic_id) !== sid(topicId)) return true;
+      if (sameRef(r.ref, label) || String(r.ref || "").trim() === label) return false;
+      return true;
+    });
+    if (openRef && (sameRef(openRef, label) || openRef === label)) openRef = null;
     saveTopicRefs();
     paint();
   }
@@ -426,6 +749,110 @@
     openStack.length = depth;
     openStack[depth] = { id: sid(t.id), mode: "topics" };
     paint();
+  }
+  function sameParent(a, b) {
+    var pa = parentOf(a), pb = parentOf(b);
+    if (!pa && !pb) return true;
+    return !!(pa && pb && sid(pa.id) === sid(pb.id));
+  }
+  function dropLine() {
+    var el = document.getElementById("topic-drop-line");
+    if (!el) {
+      el = document.createElement("div");
+      el.id = "topic-drop-line";
+      el.className = "topic-drop-line";
+      document.body.appendChild(el);
+    }
+    return el;
+  }
+  function hideDropLine() {
+    var el = document.getElementById("topic-drop-line");
+    if (el && el.parentNode) el.parentNode.removeChild(el);
+  }
+  function topicDropAt(ev) {
+    var t, box, after, r;
+    if (!ev || !topicDrag || !topicDrag.from) return null;
+    t = topicUnderPoint(ev.clientX, ev.clientY);
+    if (!t) return null;
+    if (sid(t.id) === sid(topicDrag.from.id)) return null;
+    if ((t.level || 1) !== (topicDrag.from.level || 1)) return null;
+    if (!sameParent(t, topicDrag.from)) return null;
+    box = document.querySelector('.tbox[data-id="' + sid(t.id) + '"]:not([data-ref])');
+    after = false;
+    if (box) {
+      r = box.getBoundingClientRect();
+      after = ev.clientY > (r.top + r.height / 2);
+      var line = dropLine();
+      line.style.left = r.left + "px";
+      line.style.width = r.width + "px";
+      line.style.top = (after ? r.bottom : r.top) - 1 + "px";
+    }
+    return { dest: t, after: after };
+  }
+  function moveTopicInLevel(from, dest, after) {
+    var list, i, k, destI, at, branch;
+    if (!from || !dest) return;
+    if (sid(from.id) === sid(dest.id)) return;
+    if ((from.level || 1) !== (dest.level || 1)) return;
+    if (!sameParent(from, dest)) return;
+    list = bySeq();
+    i = -1;
+    for (k = 0; k < list.length; k++) {
+      if (sid(list[k].id) === sid(from.id)) { i = k; break; }
+    }
+    if (i < 0) return;
+    branch = takeBranch(list, i);
+    destI = -1;
+    for (k = 0; k < list.length; k++) {
+      if (sid(list[k].id) === sid(dest.id)) { destI = k; break; }
+    }
+    if (destI < 0) return;
+    at = destI;
+    if (after) {
+      at = destI + 1;
+      while (at < list.length && (list[at].level || 1) > (dest.level || 1)) at += 1;
+    }
+    list.splice.apply(list, [at, 0].concat(branch));
+    list.forEach(function (x, n) { x.seq = n + 1; });
+    topics = list;
+    sel = sid(from.id);
+    (function showMoved() {
+      var depth = (from.level || 1) - 2;
+      var anc = [];
+      var p = parentOf(from);
+      while (p && (p.level || 1) >= 2) {
+        anc.unshift(p);
+        p = parentOf(p);
+      }
+      openStack = anc.map(function (x) { return { id: sid(x.id), mode: "topics" }; });
+      if (depth >= 0) {
+        openStack[depth] = { id: sid(from.id), mode: "topics" };
+        openStack.length = depth + 1;
+      }
+    })();
+    saveTopics();
+    paint();
+  }
+  function beginTopicDrag(from, ev) {
+    if (!canEditChapter() || !from) return;
+    topicDrag = {
+      from: from,
+      sx: ev.clientX,
+      sy: ev.clientY,
+      moved: false,
+      ghost: null
+    };
+  }
+  function endTopicDrag(ev) {
+    var moved = topicDrag && topicDrag.moved;
+    var from = topicDrag && topicDrag.from;
+    var hit = (moved && ev && from) ? topicDropAt(ev) : null;
+    hideDropLine();
+    if (topicDrag && topicDrag.ghost && topicDrag.ghost.parentNode) topicDrag.ghost.parentNode.removeChild(topicDrag.ghost);
+    topicDrag = null;
+    document.body.style.cursor = "";
+    if (moved) skipTopicClick = true;
+    if (hit) moveTopicInLevel(from, hit.dest, hit.after);
   }
   function beginRefDrag(label, ev) {
     var owner = refOwner();
@@ -457,27 +884,42 @@
     var m = document.getElementById("sn-ref-menu");
     if (m) m.hidden = true;
     pendingRefEdit = null;
+    pendingActs = null;
   }
-  function showRefMenu(ev, startEdit, title) {
+  function showRefMenu(ev, part, acts) {
     var m = document.getElementById("sn-ref-menu");
-    var r, x, y, tit;
+    var r, x, y, tit, spec, items, i, sel, b, btns;
     if (!m) return;
     if (ev) {
       ev.preventDefault();
       ev.stopPropagation();
     }
-    pendingRefEdit = startEdit;
+    acts = acts || {};
+    pendingActs = acts;
+    pendingRefEdit = acts.edit || null;
+    spec = rhm[part] || { title: part || "Menu", items: [] };
+    items = spec.items ? spec.items.slice() : [];
+    if (part === "topic" && acts.move && items.indexOf("Move") < 0) items.push("Move");
     tit = m.querySelector(".sn-rhm-title");
-    if (tit) tit.textContent = title || "Ref";
+    if (tit) tit.textContent = spec.title || part || "Menu";
+    btns = m.querySelectorAll("button");
+    for (i = 0; i < btns.length; i++) btns[i].hidden = true;
+    for (i = 0; i < items.length; i++) {
+      sel = RHM_ITEM[items[i]];
+      b = sel ? m.querySelector(sel) : null;
+      if (b) b.hidden = false;
+    }
     rhmLock = Date.now() + 500;
     m.hidden = false;
-    x = ev.clientX;
-    y = ev.clientY;
-    m.style.left = x + "px";
-    m.style.top = y + "px";
-    r = m.getBoundingClientRect();
-    if (r.right > window.innerWidth - 8) m.style.left = Math.max(8, window.innerWidth - r.width - 8) + "px";
-    if (r.bottom > window.innerHeight - 8) m.style.top = Math.max(8, window.innerHeight - r.height - 8) + "px";
+    if (ev && ev.clientX != null) {
+      x = ev.clientX;
+      y = ev.clientY;
+      m.style.left = x + "px";
+      m.style.top = y + "px";
+      r = m.getBoundingClientRect();
+      if (r.right > window.innerWidth - 8) m.style.left = Math.max(8, window.innerWidth - r.width - 8) + "px";
+      if (r.bottom > window.innerHeight - 8) m.style.top = Math.max(8, window.innerHeight - r.height - 8) + "px";
+    }
   }
   function refRowIndex(topicId, ref) {
     var i, r;
@@ -523,7 +965,7 @@
       topicRefs[i].to = to;
       if (!topicRefs[i].ref) topicRefs[i].ref = ref;
     } else {
-      topicRefs.push({ topic_id: topicId, ref: ref, from: from, to: to });
+      topicRefs.push({ topic_id: topicId, ref: ref, from: from, to: to, description: "" });
     }
   }
   function clipTopicRange(topicId, ref, from, to) {
@@ -551,10 +993,20 @@
     return collectRange(ids, ref);
   }
   function saveTopicRefs(done) {
+    var payload = topicRefs.map(function (r) {
+      var row = {
+        topic_id: r.topic_id,
+        ref: r.ref,
+        from: r.from,
+        to: r.to
+      };
+      if (r.description != null) row.description = String(r.description);
+      return row;
+    });
     fetch("/dotl/topic-refs", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ refs: topicRefs })
+      body: JSON.stringify({ refs: payload })
     }).then(function (r) { return r.json(); }).then(function (d) {
       if (done) done(d);
     }).catch(function () { if (done) done({ error: "Could not save." }); });
@@ -562,7 +1014,8 @@
   function applyHighlight(from, to) {
     var t = refOwner();
     var a, b, parts, newLab, idx, p, u, br, i, lab;
-    if (!t || !openRef || !isLeaf(t)) return;
+    if (!t && lastRefTopic) t = find(topics, lastRefTopic);
+    if (!t || !openRef) return;
     a = Math.min(from, to);
     b = Math.max(from, to);
     parts = parseRefParts(openRef);
@@ -573,32 +1026,14 @@
     newLab = joinRef(parts);
     idx = refRowIndex(t.id, openRef);
     if (idx < 0) idx = refRowIndexByChap(t.id, parts.book, parts.ch);
+    var keepDesc = idx >= 0 ? String(topicRefs[idx].description || "") : "";
     if (idx >= 0) {
       topicRefs[idx].ref = newLab;
       topicRefs[idx].from = a;
       topicRefs[idx].to = b;
     } else {
-      topicRefs.push({ topic_id: t.id, ref: newLab, from: a, to: b });
+      topicRefs.push({ topic_id: t.id, ref: newLab, from: a, to: b, description: keepDesc });
     }
-    p = parentTopic(t);
-    while (p && (p.level || 1) > 1) {
-      u = unionKidsChapter(p, parts.book, parts.ch);
-      if (u && u.from) {
-        lab = joinRef({ book: parts.book, ch: parts.ch, a: u.from, b: u.to });
-        idx = refRowIndexByChap(p.id, parts.book, parts.ch);
-        if (idx < 0) idx = refRowIndex(p.id, openRef);
-        if (idx >= 0) {
-          topicRefs[idx].ref = lab;
-          topicRefs[idx].from = u.from;
-          topicRefs[idx].to = u.to;
-        } else {
-          topicRefs.push({ topic_id: p.id, ref: lab, from: u.from, to: u.to });
-        }
-      }
-      p = parentTopic(p);
-    }
-    br = branchOf(t);
-    for (i = 1; i < br.length; i++) clipTopicRange(br[i].id, newLab, a, b);
     openRef = newLab;
     lastOpenRef = newLab;
     saveTopicRefs();
@@ -615,6 +1050,73 @@
     hitEnd = n;
     hitPick = false;
     applyHighlight(hitStart, hitEnd);
+  }
+  function canEditChapter() {
+    var p = String(location.port || "");
+    return p === "8775" || p === "8776" || p === "8778" || p === "8779";
+  }
+  function storedToLines(html) {
+    var map = {};
+    String(html || "").replace(/<p[^>]*>\s*<sup>\s*(\d+)\s*<\/sup>\s*([\s\S]*?)<\/p>/gi, function (_, n, inner) {
+      map[Number(n)] = String(inner || "").replace(/^\s+|\s+$/g, "");
+      return "";
+    });
+    var keys = Object.keys(map).map(Number).sort(function (a, b) { return a - b; });
+    if (keys.length) {
+      return keys.map(function (n) { return { n: n, t: map[n] }; });
+    }
+    return verseLines(html);
+  }
+  function chapterStoreRef(lines) {
+    if (!viewChap) return openRef || "";
+    var first = lines && lines[0] && lines[0].n;
+    var last = lines && lines.length && lines[lines.length - 1].n;
+    if (!first) return viewChap.abbr + " " + viewChap.ch;
+    if (first === last) return viewChap.abbr + " " + viewChap.ch + ":" + first;
+    return viewChap.abbr + " " + viewChap.ch + ":" + first + "-" + last;
+  }
+  function htmlFromVerseBox() {
+    if (!verseBoxEl) return "";
+    var bits = [];
+    verseBoxEl.querySelectorAll("p[data-vs]").forEach(function (p) {
+      var n = p.getAttribute("data-vs");
+      var body = p.querySelector(".vt");
+      bits.push("<p><sup>" + n + "</sup> " + (body ? body.innerHTML : "") + "</p>");
+    });
+    return bits.join("");
+  }
+  function linesFromVerseBox() {
+    var lines = [];
+    if (!verseBoxEl) return lines;
+    verseBoxEl.querySelectorAll("p[data-vs]").forEach(function (p) {
+      var n = Number(p.getAttribute("data-vs"));
+      var body = p.querySelector(".vt");
+      lines.push({ n: n, t: body ? body.innerHTML : "" });
+    });
+    return lines;
+  }
+  function saveChapterText() {
+    if (!canEditChapter() || (verseTr || "NKJV") !== "NKJV" || !openRef) return Promise.resolve(false);
+    var html = htmlFromVerseBox();
+    if (!html) return Promise.resolve(false);
+    var lines = linesFromVerseBox();
+    var ref = chapterStoreRef(lines) || openRef;
+    return fetch("/scriptures", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ reference: ref, text: html, folder: siteFolder() })
+    })
+      .then(function (r) { return r.ok; })
+      .then(function (ok) {
+        if (ok) {
+          verseCache[cacheKey(openRef)] = lines;
+          verseDirty = false;
+          verseDraft = "";
+          verseEditRef = "";
+        }
+        return ok;
+      })
+      .catch(function () { return false; });
   }
   function verseHtml(raw) {
     var s = String(raw || "");
@@ -758,16 +1260,31 @@
       done(lines);
     }
     function fromStore(chapter) {
-      if (chapter && chapter.length) {
-        finish(chapter);
-        return;
+      var chRef = "";
+      if (viewChap && chapter && chapter.length) {
+        chRef = viewChap.abbr + " " + viewChap.ch + ":" + chapter[0].n + "-" + chapter[chapter.length - 1].n;
       }
-      fetch("/scriptures?ref=" + encodeURIComponent(ref) + "&folder=" + encodeURIComponent(siteFolder()), { cache: "no-store" })
-        .then(function (r) { return r.json(); })
-        .then(function (d) {
-          finish(completeSpan(verseLines((d && d.text) || ""), ref));
-        })
-        .catch(function () { finish([]); });
+      var jobs = [
+        fetch("/scriptures?ref=" + encodeURIComponent(ref) + "&folder=" + encodeURIComponent(siteFolder()), { cache: "no-store" })
+          .then(function (r) { return r.ok ? r.json() : {}; })
+          .catch(function () { return {}; })
+      ];
+      if (chRef && chRef !== ref) {
+        jobs.push(
+          fetch("/scriptures?ref=" + encodeURIComponent(chRef) + "&folder=" + encodeURIComponent(siteFolder()), { cache: "no-store" })
+            .then(function (r) { return r.ok ? r.json() : {}; })
+            .catch(function () { return {}; })
+        );
+      }
+      Promise.all(jobs).then(function (pair) {
+        var refStored = storedToLines((pair[0] && pair[0].text) || "");
+        var chapStored = pair[1] && pair[1].text ? storedToLines(pair[1].text) : [];
+        var merged = overlayStored(chapter || [], chapStored);
+        merged = overlayStored(merged, refStored);
+        if (!merged.length) merged = chapter && chapter.length ? chapter : refStored;
+        if (!merged.length && ref) finish(completeSpan([], ref));
+        else finish(merged);
+      });
     }
     var ch = viewChap || chapterOf(ref);
     if (!ch || !ch.num) {
@@ -846,11 +1363,7 @@
     }
   }
   function leaveOther(t) {
-    if (!sel || sid(sel) === sid(t.id)) return false;
-    if (inOpenBranch(t)) return false;
-    sel = null;
-    closeOpens();
-    return true;
+    return false;
   }
   function closeBranch(t) {
     if (!t) return;
@@ -874,8 +1387,34 @@
     pickGuard = now + 400;
     return true;
   }
+  function openLowestRef(t) {
+    var list, lv, depth;
+    if (!t || !isLeaf(t)) return;
+    list = ownRefs(t);
+    lv = t.level || 1;
+    depth = lv - 2;
+    if (depth < 0) return;
+    openStack.length = depth;
+    openStack[depth] = { id: sid(t.id), mode: "refs" };
+    lastRefTopic = sid(t.id);
+    openRef = list.length ? list[0] : null;
+  }
+  function openFirstTopic() {
+    var vis, first, list;
+    vis = visible();
+    if (!vis.length) return;
+    first = kids(vis, vis[0])[0];
+    if (!first) return;
+    sel = sid(first.id);
+    lastRefTopic = sel;
+    openStack = [];
+    list = ownRefs(first);
+    openRef = list.length ? list[0] : null;
+    openDesc(first);
+  }
   function pickTopic(t) {
     var id = sid(t.id);
+    var list;
     if (sid(sel) === id) {
       if (!guardPick()) return;
       closeBranch(t);
@@ -885,41 +1424,88 @@
       sel = id;
       pickGuard = Date.now() + 400;
     }
+    list = sel ? ownRefs(find(topics, sel)) : [];
+    lastRefTopic = sel;
+    openRef = list.length ? list[0] : null;
     loadTopics(paint);
   }
   function toggleTopics(t) {
+    var list, kidsList, first;
     if (!guardPick()) return;
     hideDesc();
     var lv = t.level || 1;
     var id = sid(t.id);
     var depth = lv - 2;
-    sel = id;
-    openRef = null;
     if (depth < 0) { loadTopics(paint); return; }
     if (openStack[depth] && openStack[depth].id === id && openStack[depth].mode === "topics") {
       openStack.length = depth;
+      sel = id;
+      lastRefTopic = id;
+      list = ownRefs(t);
+      openRef = list.length ? list[0] : null;
     } else {
       openStack.length = depth;
       openStack[depth] = { id: id, mode: "topics" };
+      kidsList = kids(bySeq(), t);
+      first = kidsList[0];
+      if (first) {
+        sel = sid(first.id);
+        lastRefTopic = sel;
+        list = ownRefs(first);
+        openRef = list.length ? list[0] : null;
+      } else {
+        sel = id;
+        lastRefTopic = id;
+        list = ownRefs(t);
+        openRef = list.length ? list[0] : null;
+      }
+    }
+    loadTopics(paint);
+  }
+  function toggleLowerRefs(t) {
+    var lv, id, depth, kidsList, i, first, list, same;
+    if (!guardPick()) return;
+    hideDesc();
+    lv = t.level || 1;
+    id = sid(t.id);
+    depth = lv - 2;
+    sel = id;
+    if (depth < 0) { loadTopics(paint); return; }
+    same = openStack[depth] && openStack[depth].id === id && openStack[depth].mode === "topics"
+      && openStack[depth + 1] && openStack[depth + 1].mode === "refs";
+    if (same) {
+      openStack.length = depth;
+      openRef = null;
+      loadTopics(paint);
+      return;
+    }
+    openStack.length = depth;
+    openStack[depth] = { id: id, mode: "topics" };
+    kidsList = kids(bySeq(), t);
+    first = null;
+    for (i = 0; i < kidsList.length; i++) {
+      if (ownRefs(kidsList[i]).length) {
+        first = kidsList[i];
+        break;
+      }
+    }
+    if (first) {
+      openStack[depth + 1] = { id: sid(first.id), mode: "refs" };
+      lastRefTopic = sid(first.id);
+      list = ownRefs(first);
+      openRef = list.length ? list[0] : null;
+      sel = sid(first.id);
     }
     loadTopics(paint);
   }
   function toggleRefs(t) {
+    var list;
     if (!guardPick()) return;
     hideDesc();
-    var lv = t.level || 1;
-    var id = sid(t.id);
-    var depth = lv - 2;
-    var same;
-    sel = id;
-    if (depth < 0) { loadTopics(paint); return; }
-    same = openStack[depth] && openStack[depth].id === id && openStack[depth].mode === "refs";
-    if (same) {
-      openStack.length = depth;
-    } else {
-      openStack.length = depth;
-      openStack[depth] = { id: id, mode: "refs" };
-    }
+    sel = sid(t.id);
+    lastRefTopic = sel;
+    list = ownRefs(t);
+    openRef = list.length ? list[0] : null;
     loadTopics(paint);
   }
   function shiftY(els, dy) {
@@ -934,6 +1520,19 @@
   function paint() {
     var board = document.getElementById("board");
     var st = document.getElementById("status");
+    var oldNote = document.querySelector(".tverse-note textarea");
+    var oldCols, oi, oc, ok;
+    if (oldNote) {
+      noteSnap = oldNote.value;
+      noteSnapRef = openRef || "";
+      if (document.activeElement === oldNote) noteEditing = true;
+    }
+    oldCols = document.querySelectorAll(".tcol");
+    for (oi = 0; oi < oldCols.length; oi++) {
+      oc = oldCols[oi];
+      ok = oc.getAttribute("data-col");
+      if (ok) colScroll[ok] = oc._y;
+    }
     if (!board) return;
     var items = visible();
     board.innerHTML = "";
@@ -945,6 +1544,7 @@
       return;
     }
     var l1 = items[0];
+    if (!sel) openFirstTopic();
     pruneToSel();
     var colLists = [{ list: kids(items, l1), parent: null }];
     var iOpen, o, par, nxt;
@@ -959,12 +1559,10 @@
       nxt = kids(items, par);
       colLists.push({ list: nxt, parent: par });
     }
-    var refTopic = null;
-    if (openStack.length && openStack[openStack.length - 1].mode === "refs") {
-      refTopic = find(items, openStack[openStack.length - 1].id);
-    }
-    var refList = refsFor(refTopic);
+    var refTopic = sel ? find(items, sel) : null;
+    var refList = sortRefLabs(ownRefs(refTopic));
     if (refTopic && openRef && refList.indexOf(openRef) < 0) openRef = null;
+    if (refTopic && !openRef && refList.length) openRef = refList[0];
 
     function colNameW(list) {
       var w = 0;
@@ -981,8 +1579,22 @@
     });
     if (BOX_H < 8) BOX_H = 8;
     boxH = BOX_H;
+    function numWFor(list, nfn) {
+      var w = BOX_H, i, s, lab;
+      for (i = 0; i < (list || []).length; i++) {
+        lab = String(nfn(list[i]));
+        s = textSize(lab);
+        if (s.w + 10 > w) w = s.w + 10;
+      }
+      return w;
+    }
+    var OWN_W = BOX_H;
+    var GREEN_W = BOX_H;
+    var HAS_KIDS = true;
     function colSpan(nameW) {
-      return nameW + GAP_BTN + BOX_H + GAP_BTN + BOX_H;
+      var w = nameW + OWN_W - JOIN;
+      if (HAS_KIDS) w += GAP_BTN + BOX_H;
+      return w;
     }
     var wRef = refList.length ? colNameW(refList) : 0;
 
@@ -1006,15 +1618,15 @@
       if ((t.level || 1) <= 1) return null;
       var b = document.createElement("button");
       var n = kids(items, t).length;
-      var vn = refN(t);
       var on = isOn(t);
       var name = document.createElement("span");
-      var tealOpen = false, greenOpen = false, oi, oo;
+      var tealOpen = false, greenOpen = false, lowerOpen = false, oi, oo;
       for (oi = 0; oi < openStack.length; oi++) {
         oo = openStack[oi];
         if (oo && oo.id === sid(t.id)) {
           tealOpen = oo.mode === "topics";
           greenOpen = oo.mode === "refs";
+          if (tealOpen && openStack[oi + 1] && openStack[oi + 1].mode === "refs") lowerOpen = true;
         }
       }
       b.type = "button";
@@ -1023,12 +1635,23 @@
       name.className = "tname";
       name.textContent = t.title || "";
       b.appendChild(name);
-      var teal = mkBtn("teal", n, tealOpen, function () { toggleTopics(t); });
-      var green = mkBtn("green", vn, greenOpen, function () { toggleRefs(t); });
-      teal.dataset.id = sid(t.id);
-      green.dataset.id = sid(t.id);
-      b._teal = teal;
-      b._green = green;
+      var own = mkBtn("green", ownN(t), greenOpen, function () { toggleRefs(t); });
+      var teal;
+      own.dataset.id = sid(t.id);
+      if (ownN(t) === 0) own.classList.add("zero");
+      own.addEventListener("contextmenu", function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        showRefMenu(ev, "refsBox", {
+          addRef: function () { addRefToTopic(t); }
+        });
+      });
+      b._own = own;
+      if (n > 0) {
+        teal = mkBtn("teal", n, tealOpen, function () { toggleTopics(t); });
+        teal.dataset.id = sid(t.id);
+        b._teal = teal;
+      }
       function startEdit(ev) {
         if (ev) { ev.preventDefault(); ev.stopPropagation(); }
         if (name.querySelector("input")) return;
@@ -1053,18 +1676,46 @@
         inp.addEventListener("blur", commit);
         inp.addEventListener("click", function (cev) { cev.stopPropagation(); });
       }
+      if (sid(t.id) === sid(editAfterPaint)) {
+        editAfterPaint = "";
+        requestAnimationFrame(function () { startEdit(); });
+      }
       b.addEventListener("dblclick", startEdit);
       b.addEventListener("contextmenu", function (ev) {
-        showRefMenu(ev, function () { startEdit(); }, "Topic");
+        var acts = {
+          edit: function () { startEdit(); },
+          add: function () {
+            showRefMenu(null, "addTopic", {
+              addSame: function () { insertRelative(t, false); },
+              addBelow: function () { insertRelative(t, true); }
+            });
+          },
+          out: function () { bumpLevel(t, -1); },
+          inn: function () { bumpLevel(t, 1); }
+        };
+        if (pendingMove && sid(pendingMove.fromId) !== sid(t.id)) {
+          acts.move = function () {
+            moveRefToTopic(pendingMove.label, pendingMove.fromId, t);
+            pendingMove = null;
+          };
+        }
+        showRefMenu(ev, "topic", acts);
       });
       b.addEventListener("mouseenter", function () {
         if (drag && drag.moved) return;
         if (leaveOther(t)) paint();
       });
       if (kind !== "h") {
+        b.addEventListener("mousedown", function (ev) {
+          if (ev.button !== 0) return;
+          if (name.querySelector("input")) return;
+          ev.preventDefault();
+          beginTopicDrag(t, ev);
+        });
         b.addEventListener("click", function (ev) {
           ev.preventDefault();
           ev.stopPropagation();
+          if (skipTopicClick) { skipTopicClick = false; return; }
           if (ev.detail > 1) return;
           if (name.querySelector("input")) return;
           pickTopic(t);
@@ -1073,8 +1724,8 @@
         });
       }
       board.appendChild(b);
-      board.appendChild(teal);
-      board.appendChild(green);
+      board.appendChild(own);
+      if (teal) board.appendChild(teal);
       return b;
     }
     function refBox(label, topicId) {
@@ -1110,9 +1761,19 @@
         inp.addEventListener("click", function (cev) { cev.stopPropagation(); });
         inp.addEventListener("mousedown", function (mev) { mev.stopPropagation(); });
       }
+      if (label === editAfterPaintRef) {
+        editAfterPaintRef = "";
+        requestAnimationFrame(function () { startRefEdit(); });
+      }
       b.addEventListener("contextmenu", function (ev) {
         if (drag) endRefDrag(null);
-        showRefMenu(ev, function () { startRefEdit(); }, "Ref");
+        showRefMenu(ev, "ref", {
+          edit: function () { startRefEdit(); },
+          del: function () { deleteRefFromTopic(label, topicId); },
+          move: function () {
+            pendingMove = { label: label, fromId: topicId };
+          }
+        });
       });
       b.addEventListener("mousedown", function (ev) {
         if (ev.button !== 0) return;
@@ -1143,9 +1804,9 @@
       el._y = y;
       el._w = colW;
       el._h = h || BOX_H;
-      if (el._teal) {
-        put(el._teal, x + colW + GAP_BTN, y, BOX_H, BOX_H);
-        put(el._green, x + colW + GAP_BTN + BOX_H + GAP_BTN, y, BOX_H, BOX_H);
+      if (el._own) {
+        put(el._own, x + colW - JOIN, y, OWN_W, BOX_H);
+        if (el._teal) put(el._teal, x + colW - JOIN + OWN_W + GAP_BTN, y, BOX_H, BOX_H);
       }
     }
     function stack(els, x, y0, colW) {
@@ -1179,7 +1840,15 @@
       if (!pane || String(pane.className || "").indexOf("tcol") < 0) return el._y || 0;
       return (pane._top || 0) + (el._y || 0) - (pane.scrollTop || 0);
     }
-    function layoutCol(els, x, nameW, parent, minTop, plain) {
+    function clampColTop(top, innerH) {
+      var mid = (viewH || window.innerHeight) / 2;
+      var maxTop = mid - BOX_H / 2;
+      var minTop = maxTop - Math.max(0, innerH - BOX_H);
+      if (top > maxTop) top = maxTop;
+      if (top < minTop) top = minTop;
+      return Math.round(top);
+    }
+    function layoutCol(els, x, nameW, parent, minTop, plain, colKey) {
       if (!els || !els.length) return null;
       var paneW = plain ? nameW : colSpan(nameW);
       if (minTop == null) minTop = band;
@@ -1194,23 +1863,28 @@
       }
       if (y0 < minTop) y0 = minTop;
       y0 = Math.round(y0);
-      var paneH = innerH;
-      if (y0 + paneH > maxBot) paneH = Math.max(80, maxBot - y0);
+      if (colKey && String(colKey).indexOf("r:") !== 0 && colScroll[colKey] != null) {
+        y0 = clampColTop(colScroll[colKey], innerH);
+      } else if (!parent) y0 = clampColTop(y0, innerH);
       var pane = document.createElement("div");
       pane.className = "tcol";
+      if (colKey) pane.setAttribute("data-col", colKey);
       board.appendChild(pane);
       pane.style.left = Math.round(x) + "px";
       pane.style.top = y0 + "px";
       pane.style.width = paneW + "px";
-      pane.style.height = paneH + "px";
+      pane.style.height = innerH + "px";
+      pane.style.overflow = "visible";
       pane._top = y0;
-      pane._h = paneH;
+      pane._h = innerH;
       pane._x = x;
       pane._w = paneW;
       pane._y = y0;
+      pane._innerH = innerH;
       var y = 0, i;
       for (i = 0; i < els.length; i++) {
         pane.appendChild(els[i]);
+        if (els[i]._own) pane.appendChild(els[i]._own);
         if (els[i]._teal) pane.appendChild(els[i]._teal);
         if (els[i]._green) pane.appendChild(els[i]._green);
         put(els[i], 0, y, nameW, BOX_H);
@@ -1218,13 +1892,23 @@
       }
       return pane;
     }
-    function centerHits(box) {
+    function yInBox(el, box) {
+      var er = el.getBoundingClientRect();
+      var br = box.getBoundingClientRect();
+      return er.top - br.top + box.scrollTop;
+    }
+    function showFirstHit(box) {
       var hits = box.querySelectorAll(".hit");
       if (!hits.length) return;
       var first = hits[0];
-      var last = hits[hits.length - 1];
-      var mid = (first.offsetTop + last.offsetTop + last.offsetHeight) / 2;
-      box.scrollTop = Math.max(0, Math.round(mid - box.clientHeight / 2));
+      var pad = 4;
+      var top = first.offsetTop;
+      var bot = top + first.offsetHeight;
+      var viewTop = box.scrollTop;
+      var viewH = box.clientHeight;
+      if (!viewH) return;
+      if (top >= viewTop + pad && bot <= viewTop + viewH - pad) return;
+      box.scrollTop = Math.max(0, Math.round(top - pad));
     }
 
     var wrap = document.getElementById("wrap");
@@ -1238,7 +1922,10 @@
       cw = colNameW(cl.list);
       boxes = cl.list.map(function (t) { return box(t, String(t.level || 1)); }).filter(Boolean);
       parentBox = (cl.parent && colBuilt.length) ? findBox(colBuilt[colBuilt.length - 1].boxes, cl.parent.id) : null;
-      pane = layoutCol(boxes, x, cw, parentBox);
+      HAS_KIDS = cl.list.some(function (t) { return kids(items, t).length > 0; });
+      OWN_W = BOX_H;
+      GREEN_W = HAS_KIDS ? BOX_H : 0;
+      pane = layoutCol(boxes, x, cw, parentBox, null, false, cl.parent ? "t:" + sid(cl.parent.id) : "t:root");
       colBuilt.push({ boxes: boxes, pane: pane, w: cw, x: x });
       x += colSpan(cw) + GAP_X;
     }
@@ -1252,10 +1939,10 @@
       var homes = [];
       var i, t, hr, maxW = 0, homeX, b;
       if (!pane || !boxes || !boxes.length) return;
-      if (refTopic) return;
       for (i = 0; i < boxes.length; i++) {
         if (boxes[i].dataset.ref) continue;
         t = find(topics, boxes[i].dataset.id);
+        if (refTopic && t && sid(t.id) === sid(refTopic.id)) continue;
         hr = homeRef(t);
         if (!hr) continue;
         maxW = Math.max(maxW, textSize(hr).w);
@@ -1272,7 +1959,9 @@
       }
       col.homeW = maxW;
     }
-    for (ci = 0; ci < colBuilt.length; ci++) placeHomeRefs(colBuilt[ci]);
+    if (!sel && colLists.length && colBuilt[colLists.length - 1]) {
+      placeHomeRefs(colBuilt[colLists.length - 1]);
+    }
 
     var cRef = [];
     var xRef = 0;
@@ -1281,9 +1970,13 @@
       xRef = x;
       cRef = refList.map(function (lab) { return refBox(lab, refTopic.id); });
       wRef = colNameW(refList);
-      parentBox = colBuilt.length ? findBox(colBuilt[colBuilt.length - 1].boxes, refTopic.id) : null;
+      parentBox = null;
+      for (ci = 0; ci < colBuilt.length; ci++) {
+        parentBox = findBox(colBuilt[ci].boxes, refTopic.id);
+        if (parentBox) break;
+      }
       xVs = x + wRef + PAD;
-      pane = layoutCol(cRef, x, wRef, parentBox, band, true);
+      pane = layoutCol(cRef, x, wRef, parentBox, band, true, "r:" + sid(refTopic.id));
       colBuilt.push({ boxes: cRef, pane: pane, w: wRef, x: x });
     }
 
@@ -1318,11 +2011,6 @@
       if (openRef && openRef !== lastOpenRef) {
         lastOpenRef = openRef;
         viewChap = chapterOf(openRef);
-        hitPick = false;
-        hitStart = 0;
-        hitEnd = 0;
-      }
-      if (verseTopic && !isLeaf(verseTopic)) {
         hitPick = false;
         hitStart = 0;
         hitEnd = 0;
@@ -1390,13 +2078,13 @@
       nav.appendChild(refLab);
       nav.appendChild(nextBtn);
       left.appendChild(nav);
-      if (sameOrigChap() && isLeaf(verseTopic)) {
+      if (sameOrigChap()) {
         var pickBtn = document.createElement("button");
         pickBtn.type = "button";
         pickBtn.className = "tverse-pick" + (hitPick ? " on" : "");
         if (!hitPick) pickBtn.textContent = "Modify";
-        else if (hitStart && !hitEnd) pickBtn.textContent = "Now click the last verse.";
-        else pickBtn.textContent = "Click the first verse, then the last";
+        else if (hitStart && !hitEnd) pickBtn.textContent = "select 2nd verse";
+        else pickBtn.textContent = "select 1st verse";
         pickBtn.addEventListener("click", function (ev) {
           ev.preventDefault();
           ev.stopPropagation();
@@ -1405,6 +2093,41 @@
           paint();
         });
         left.appendChild(pickBtn);
+      }
+      if (canEditChapter() && (verseTr || "NKJV") === "NKJV" && !hitPick) {
+        var saveBtn = document.createElement("button");
+        saveBtn.type = "button";
+        saveBtn.className = "tverse-pick";
+        saveBtn.textContent = "Save";
+        saveBtn.hidden = !verseDirty;
+        saveBtn.disabled = !verseDirty;
+        saveBtn.addEventListener("click", function (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          saveBtn.disabled = true;
+          saveChapterText().then(function (ok) {
+            saveBtn.disabled = !ok ? false : true;
+            saveBtn.hidden = !!ok;
+            if (ok) paint();
+            else saveBtn.textContent = "Could not save.";
+          });
+        });
+        var cancelBtn = document.createElement("button");
+        cancelBtn.type = "button";
+        cancelBtn.className = "tverse-pick";
+        cancelBtn.textContent = "Cancel";
+        cancelBtn.hidden = !verseDirty;
+        cancelBtn.addEventListener("click", function (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          verseDirty = false;
+          verseDraft = "";
+          verseEditRef = "";
+          if (openRef) delete verseCache[cacheKey(openRef)];
+          paint();
+        });
+        left.appendChild(saveBtn);
+        left.appendChild(cancelBtn);
       }
       var right = document.createElement("div");
       right.className = "tverse-bar-right";
@@ -1471,8 +2194,69 @@
       bar.appendChild(right);
       versesWrap.appendChild(bar);
 
+      var noteBox = document.createElement("div");
+      noteBox.className = "tverse-note";
+      function startDescEdit() {
+        if (noteBox.querySelector("textarea")) return;
+        var ta = document.createElement("textarea");
+        ta.setAttribute("title", "Description");
+        ta.value = String(descriptionForOpen(verseTopic) || "").replace(/\n+$/, "");
+        noteBox.textContent = "";
+        noteBox.appendChild(ta);
+        noteEditing = true;
+        function fitTa() {
+          ta.style.height = "auto";
+          ta.style.height = Math.max(ta.scrollHeight, 18) + "px";
+        }
+        fitTa();
+        ta.addEventListener("input", fitTa);
+        ta.addEventListener("click", function (ev) { ev.stopPropagation(); });
+        ta.addEventListener("mousedown", function (ev) { ev.stopPropagation(); });
+        ta.addEventListener("keydown", function (kev) {
+          if (kev.key === "Escape") { kev.preventDefault(); noteEditing = false; paint(); }
+        });
+        ta.addEventListener("blur", function () {
+          saveOpenDescription(verseTopic, ta.value);
+          noteSnap = ta.value;
+          noteSnapRef = openRef || "";
+          noteEditing = false;
+          paint();
+        });
+        ta.focus();
+      }
+      if (noteEditing && noteSnapRef === openRef) {
+        var keepTa = document.createElement("textarea");
+        keepTa.setAttribute("title", "Description");
+        keepTa.value = String(noteSnap || "").replace(/\n+$/, "");
+        keepTa.style.height = "auto";
+        keepTa.style.height = Math.max(keepTa.scrollHeight, 18) + "px";
+        keepTa.addEventListener("input", function () {
+          keepTa.style.height = "auto";
+          keepTa.style.height = Math.max(keepTa.scrollHeight, 18) + "px";
+        });
+        keepTa.addEventListener("click", function (ev) { ev.stopPropagation(); });
+        keepTa.addEventListener("mousedown", function (ev) { ev.stopPropagation(); });
+        keepTa.addEventListener("blur", function () {
+          saveOpenDescription(verseTopic, keepTa.value);
+          noteSnap = keepTa.value;
+          noteSnapRef = openRef || "";
+          noteEditing = false;
+          paint();
+        });
+        noteBox.appendChild(keepTa);
+        requestAnimationFrame(function () { keepTa.focus(); keepTa.setSelectionRange(keepTa.value.length, keepTa.value.length); });
+      } else {
+        noteBox.textContent = String(descriptionForOpen(verseTopic) || "").replace(/\n+$/, "");
+      }
+      noteBox.addEventListener("click", function (ev) { ev.stopPropagation(); });
+      noteBox.addEventListener("contextmenu", function (ev) {
+        showRefMenu(ev, "description", { edit: startDescEdit });
+      });
+      versesWrap.appendChild(noteBox);
+
       versesEl = document.createElement("div");
       versesEl.className = "tverses" + (hitPick ? " picking" : "");
+      verseBoxEl = versesEl;
       versesWrap.appendChild(versesEl);
       var rng = sameOrigChap() ? rangeFor(verseTopic, openRef) : { from: 0, to: 0 };
       var cached = verseCache[cacheKey(openRef)];
@@ -1505,6 +2289,7 @@
           p.appendChild(vn);
           p.appendChild(document.createTextNode(" "));
           var body = document.createElement("span");
+          body.className = "vt";
           body.innerHTML = verseHtml(lines[li].t);
           p.appendChild(body);
           if (hitPick) {
@@ -1516,8 +2301,46 @@
           }
           versesEl.appendChild(p);
         }
+        if (verseDirty && verseEditRef === openRef && verseDraft) {
+          versesEl.innerHTML = verseDraft;
+        }
+        if (canEditChapter() && (verseTr || "NKJV") === "NKJV" && !hitPick) {
+          versesEl.querySelectorAll(".vt").forEach(function (el) {
+            el.contentEditable = "true";
+            el.addEventListener("input", function () {
+              verseDirty = true;
+              verseEditRef = openRef;
+              verseDraft = versesEl.innerHTML;
+              versesWrap.querySelectorAll(".tverse-pick").forEach(function (btn) {
+                var lab = btn.textContent;
+                if (lab === "Save" || lab === "Cancel" || lab === "Could not save.") {
+                  btn.hidden = false;
+                  if (lab === "Could not save.") btn.textContent = "Save";
+                  if (btn.textContent === "Save") btn.disabled = false;
+                }
+              });
+            });
+            el.addEventListener("keydown", function (ev) {
+              if (ev.key === "Enter") {
+                ev.preventDefault();
+                document.execCommand(ev.shiftKey ? "insertLineBreak" : "insertParagraph");
+              }
+              if ((ev.metaKey || ev.ctrlKey) && !ev.altKey) {
+                var k = (ev.key || "").toLowerCase();
+                if (k === "b" || k === "i" || k === "u") {
+                  ev.preventDefault();
+                  document.execCommand(k === "b" ? "bold" : k === "i" ? "italic" : "underline");
+                }
+              }
+            });
+            el.addEventListener("click", function (ev) { ev.stopPropagation(); });
+          });
+        }
         versesEl._h = versesEl.clientHeight;
-        requestAnimationFrame(function () { centerHits(versesEl); });
+        requestAnimationFrame(function () {
+          showFirstHit(versesEl);
+          requestAnimationFrame(function () { showFirstHit(versesEl); });
+        });
       }
       if (cached) drawLines(cached);
       else {
@@ -1661,12 +2484,27 @@
   function loadTopics(done) {
     Promise.all([
       fetch("data/topics.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.json(); }),
-      fetch("data/topic-refs.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
+      fetch("data/topic-refs.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }),
+      fetch("data/rhm.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
     ]).then(function (pair) {
+      if (pair[2] && typeof pair[2] === "object") rhm = pair[2];
       topics = pair[0] || [];
-      if (Array.isArray(pair[1])) topicRefs = pair[1];
-      else if (pair[1] && Array.isArray(pair[1].rows)) topicRefs = pair[1].rows;
-      else topicRefs = [];
+      var incoming;
+      var keep = {};
+      var ki, kr, key, row;
+      if (Array.isArray(pair[1])) incoming = pair[1];
+      else if (pair[1] && Array.isArray(pair[1].rows)) incoming = pair[1].rows;
+      else incoming = [];
+      for (ki = 0; ki < topicRefs.length; ki++) {
+        kr = topicRefs[ki];
+        if (String(kr.description || "").trim()) keep[sid(kr.topic_id) + "|" + String(kr.ref || "")] = kr.description;
+      }
+      for (ki = 0; ki < incoming.length; ki++) {
+        row = incoming[ki];
+        key = sid(row.topic_id) + "|" + String(row.ref || "");
+        if (!String(row.description || "").trim() && keep[key]) row.description = keep[key];
+      }
+      topicRefs = incoming;
       if (typeof done === "function") done();
       else paint();
     }).catch(function (err) {
@@ -1675,7 +2513,16 @@
     });
   }
   window.snPaintTree = paint;
-  window.snReloadTree = function () { loadTopics(paint); };
+  window.snOpenFirst = function () {
+    openFirstTopic();
+    paint();
+  };
+  window.snReloadTree = function () {
+    loadTopics(function () {
+      openFirstTopic();
+      paint();
+    });
+  };
   window.snSaveTopics = saveTopics;
   (function () {
     var ta = document.getElementById("tdesc-ta");
@@ -1711,9 +2558,73 @@
     });
   })();
   window.addEventListener("resize", function () { paint(); });
+  (function () {
+    var wrap = document.getElementById("wrap");
+    if (!wrap) return;
+    wrap.addEventListener(
+      "wheel",
+      function (ev) {
+        var n = ev.target;
+        var col = null;
+        while (n && n !== wrap) {
+          if (n.classList && String(n.className || "").indexOf("tcol") >= 0) {
+            col = n;
+            break;
+          }
+          n = n.parentNode;
+        }
+        if (!col) {
+          n = document.elementFromPoint(ev.clientX, ev.clientY);
+          while (n && n !== wrap) {
+            if (n.classList && String(n.className || "").indexOf("tcol") >= 0) {
+              col = n;
+              break;
+            }
+            n = n.parentNode;
+          }
+        }
+        if (!col) return;
+        var innerH = col._innerH || col.offsetHeight;
+        var box = boxH || 22;
+        var mid = (wrap.clientHeight || window.innerHeight) / 2;
+        var maxTop = mid - box / 2;
+        var minTop = maxTop - Math.max(0, innerH - box);
+        var next = (col._y || 0) - ev.deltaY;
+        if (next > maxTop) next = maxTop;
+        if (next < minTop) next = minTop;
+        next = Math.round(next);
+        if (next === col._y) return;
+        ev.preventDefault();
+        col._y = next;
+        col._top = next;
+        col.style.top = next + "px";
+        var key = col.getAttribute("data-col");
+        if (key) colScroll[key] = next;
+      },
+      { passive: false }
+    );
+  })();
   document.addEventListener("mousemove", function (ev) {
-    var g, t;
-    if (descOpen && Date.now() >= descLock && !descKeep(document.elementFromPoint(ev.clientX, ev.clientY))) hideDesc();
+    var g, t, hit;
+    if (topicDrag) {
+      if (!topicDrag.moved) {
+        if (Math.abs(ev.clientX - topicDrag.sx) + Math.abs(ev.clientY - topicDrag.sy) < 6) return;
+        topicDrag.moved = true;
+        g = document.createElement("div");
+        g.className = "ref-ghost";
+        g.textContent = topicDrag.from.title || "";
+        document.body.appendChild(g);
+        topicDrag.ghost = g;
+        document.body.style.cursor = "grabbing";
+      }
+      if (topicDrag.ghost) {
+        topicDrag.ghost.style.left = (ev.clientX + 8) + "px";
+        topicDrag.ghost.style.top = (ev.clientY + 8) + "px";
+      }
+      hit = topicDropAt(ev);
+      if (!hit) hideDropLine();
+      return;
+    }
     if (!drag) return;
     if (!drag.moved) {
       if (Math.abs(ev.clientX - drag.sx) + Math.abs(ev.clientY - drag.sy) < 6) return;
@@ -1740,6 +2651,7 @@
     }
   });
   document.addEventListener("mouseup", function (ev) {
+    if (topicDrag) endTopicDrag(ev);
     if (drag) endRefDrag(ev);
   });
   document.addEventListener("pointerdown", function (ev) {
@@ -1757,12 +2669,26 @@
     if (!menu) return;
     menu.addEventListener("click", function (ev) {
       var btn = ev.target.closest && ev.target.closest("button");
-      var fn = pendingRefEdit;
+      var acts = pendingActs || {};
       ev.preventDefault();
       ev.stopPropagation();
       hideRefMenu();
-      if (btn && btn.getAttribute("data-edit") === "1" && fn) fn();
+      if (!btn) return;
+      if (btn.getAttribute("data-edit") === "1" && acts.edit) acts.edit();
+      if (btn.getAttribute("data-add") === "1" && acts.add) acts.add();
+      if (btn.getAttribute("data-add-ref") === "1" && acts.addRef) acts.addRef();
+      if (btn.getAttribute("data-out") === "1" && acts.out) acts.out();
+      if (btn.getAttribute("data-in") === "1" && acts.inn) acts.inn();
+      if (btn.getAttribute("data-add-same") === "1" && acts.addSame) acts.addSame();
+      if (btn.getAttribute("data-add-below") === "1" && acts.addBelow) acts.addBelow();
+      if (btn.getAttribute("data-delete") === "1" && acts.del) acts.del();
+      if (btn.getAttribute("data-move") === "1" && acts.move) acts.move();
+      if (btn.getAttribute("data-yes") === "1" && acts.yes) acts.yes();
+      if (btn.getAttribute("data-no") === "1" && acts.no) acts.no();
     });
   })();
-  loadTopics(paint);
+  loadTopics(function () {
+    openFirstTopic();
+    paint();
+  });
 })();

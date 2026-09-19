@@ -34,7 +34,7 @@
 h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f6f78; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
 .subsec-frame { font-weight:400; font-style:normal; border-style:solid; border-color:#919191; border-width:2.0px 2.0px 2.0px 2.0px; padding:5px; margin-top:0px; margin-bottom:13px; text-align:left }
 .para { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#ffffff; border-style:solid; border-color:#e2e2e2; border-width:1.0px 0px 0px 0px; padding:0px; margin-top:12px; margin-bottom:-2px; text-align:left; line-height:1.45; --para-gap:18px }
-.row-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:6px; text-align:left }
+.row-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:0px; text-align:left }
 .col-title:not(:empty) { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; margin-top:-11px; margin-bottom:3px; text-align:left }
 .col { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:5px }
 .col .col-text, .col .col-text .bit { line-height:1.2 }
@@ -206,6 +206,15 @@ function showTab(id){
   document.querySelectorAll(".tab[data-tab]").forEach(function(b){ b.classList.toggle("active", b.dataset.tab===id); });
   document.querySelectorAll(".tab-panel").forEach(function(p){ p.classList.toggle("active", p.id===id); });
   document.querySelectorAll(".end-sub-tabs").forEach(function(el){ el.hidden = el.getAttribute("data-for") !== id; });
+  var panel = document.getElementById(id);
+  if (panel) {
+    panel.querySelectorAll(".ew-hidden-sub").forEach(function(btn){
+      btn.classList.remove("open");
+      btn.setAttribute("aria-expanded", "false");
+      var wrap = btn.closest && btn.closest(".subsec");
+      if (wrap) wrap.classList.remove("open");
+    });
+  }
   if (window.ewFitHead) requestAnimationFrame(function(){ window.ewFitHead(); });
 }
 function pageFile(href){
@@ -748,7 +757,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
   bindSky();
   apply();
 })();
-</script><script>window.ewDefaults={"sky": "stars", "notes": false}</script><script>window.ewFolder="Scripture-Narratives"</script><script>
+</script><script>window.ewDefaults={"sky": "stars", "notes": true}</script><script>window.ewFolder="Scripture-Narratives"</script><script>
 (function(){
   if (window.ewDetailsBound) return;
   window.ewDetailsBound = true;
@@ -758,7 +767,22 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
     btn.setAttribute("aria-expanded", on ? "true" : "false");
     if (btn.classList.contains("ew-details")) btn.textContent = on ? "Hide Details" : "Additional Details";
   }
+  function setHiddenSubOpen(btn, on){
+    if (!btn || !btn.classList) return;
+    btn.classList.toggle("open", !!on);
+    btn.setAttribute("aria-expanded", on ? "true" : "false");
+    var wrap = btn.closest && btn.closest(".subsec");
+    if (wrap) wrap.classList.toggle("open", !!on);
+  }
   document.addEventListener("click", function(ev){
+    var hbtn = ev.target.closest && ev.target.closest(".ew-hidden-sub");
+    if (hbtn) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      if (ev.stopImmediatePropagation) ev.stopImmediatePropagation();
+      setHiddenSubOpen(hbtn, !hbtn.classList.contains("open"));
+      return;
+    }
     var btn = ev.target.closest && ev.target.closest(".bit.ew-details");
     if (!btn) return;
     ev.preventDefault();
@@ -774,7 +798,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
     setOpen(btn, !btn.classList.contains("open"));
   });
 })();
-</script><script src="/footnotes.js?v=1"></script><script src="/bible.js?v=114"></script><script src="/ew-sky.js?v=15"></script><script src="site.js?v=7"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
+</script><script src="/footnotes.js?v=1"></script><script src="/bible.js?v=115"></script><script src="/ew-sky.js?v=15"></script><script src="site.js?v=7"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
 (function(){
   var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   var last = "";

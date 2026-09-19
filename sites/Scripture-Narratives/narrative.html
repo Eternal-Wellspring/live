@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Topics — Scripture Narratives</title>
   <link rel="icon" href="images/icon.jpg">
-  <link rel="stylesheet" href="site.css?v=tools73" />
+  <link rel="stylesheet" href="site.css?v=tools74" />
   <style>
     html, body { height: 100%; overflow: hidden; }
     .page-frame {
@@ -84,37 +84,104 @@
     #s-l1.active {
       display: block !important;
       overflow: auto;
-      background: #fff;
+      background: #f6f7eb url("images/parchment.webp") center / cover no-repeat;
     }
     #s-l1 .l1-wrap {
       padding: 0.7rem 1.2rem 1.2rem;
     }
+    #s-l1 .ew-l1-block {
+      display: inline-block;
+      width: max-content;
+      max-width: 100%;
+    }
+    #s-l1 .ew-l1-top {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin: 0 0 0.25rem;
+    }
     #s-l1 h2 {
-      margin: 0 0 0.35rem;
+      margin: 0;
       font: 400 1.15rem/1.3 Arial, Helvetica, sans-serif;
-      color: inherit;
+      color: #004d97;
+    }
+    #s-l1 .ew-l1-live-head {
+      min-width: 2.2rem;
+      padding: 0 0.45rem;
+      font: 400 0.95rem/1.3 Arial, Helvetica, sans-serif;
+      color: #004d97;
+      text-align: center;
     }
     #s-l1 .ew-l1-list {
       display: table;
-      width: auto;
+      width: 100%;
       max-width: 100%;
-      margin: 0.2rem 0 0;
+      margin: 0;
       border: 1px solid #888;
-      background: #fff;
+      background: #f6f7eb;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 7px;
+      overflow: hidden;
     }
+    #s-l1 .ew-l1-row { display: table-row; }
+    #s-l1 .ew-l1-row + .ew-l1-row > * { border-top: 1px solid #ddd; }
     #s-l1 .ew-l1-list a {
-      display: block;
+      display: table-cell;
       width: auto;
-      padding: 0.2rem 0.55rem;
+      padding: 0.28rem 0.7rem;
       font-weight: 400;
       color: inherit;
       text-decoration: none;
       line-height: 1.45;
       white-space: nowrap;
+      background: transparent;
     }
-    #s-l1 .ew-l1-list a + a { border-top: 1px solid #ddd; }
-    #s-l1 .ew-l1-list a:hover { background: #f4f7f8; }
-    #s-l1 .ew-l1-list a.on { background: #f6efc8; }
+    #s-l1 .ew-l1-row:hover > *,
+    #s-l1 .ew-l1-row.on > *,
+    #s-l1 .ew-l1-row.on:hover > * { background: #f6efc8; }
+    #s-l1 .ew-l1-live {
+      display: table-cell;
+      width: 2.2rem;
+      padding: 0.28rem 0.45rem;
+      text-align: center;
+      vertical-align: middle;
+    }
+    #s-l1 .ew-l1-live input { margin: 0; vertical-align: middle; }
+    body.sn-live .ew-l1-live-head,
+    body.sn-live .ew-l1-live { display: none !important; }
+    #sn-l1-menu {
+      position: fixed;
+      z-index: 200;
+      min-width: 8.5rem;
+      width: max-content;
+      background: #fff;
+      border: 1px solid #c5d0d4;
+      box-shadow: 0 8px 22px rgba(0,0,0,.16);
+      padding: 0.15rem 0 0.25rem;
+    }
+    #sn-l1-menu[hidden] { display: none !important; }
+    #sn-l1-menu .sn-rhm-title {
+      padding: 0.3rem 0.75rem 0.2rem;
+      font: 400 0.82rem Arial, Helvetica, sans-serif;
+      color: #1f6f78;
+      border-bottom: 2px solid #005eb8;
+      margin-bottom: 0.08rem;
+    }
+    #sn-l1-menu button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      border: 0;
+      background: none;
+      padding: 0.35rem 0.75rem;
+      font: 400 0.88rem Arial, Helvetica, sans-serif;
+      color: #1b3a4b;
+      cursor: pointer;
+    }
+    #sn-l1-menu button[hidden] { display: none !important; }
+    #sn-l1-menu button:hover { background: #eef3f4; }
     .topics-frame {
       position: absolute;
       inset: 0;
@@ -138,6 +205,22 @@
     }
     #ew-full:hover { background: #e7ead8; }
     html.ew-phone #ew-full { display: none !important; }
+    html.ew-app-full,
+    html.ew-app-full body {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
+    html.ew-app-full .page-frame {
+      position: fixed;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
     .tab-dock-end, .page-nav-bar-bottom, .date-updated { flex: 0 0 auto; }
     .tab-dock, .tab-dock-end { position: relative; z-index: 40; }
     .page-frame.hide-end-tabs .tab-dock-end { display: none !important; }
@@ -276,8 +359,13 @@
     <main>
       <div class="tab-panel active" id="s-l1" data-sec="s-l1">
         <div class="l1-wrap">
-          <h2>Topics</h2>
-          <div class="ew-l1-list" id="l1-list"></div>
+          <div class="ew-l1-block">
+            <div class="ew-l1-top">
+              <h2>Topics</h2>
+              <span class="ew-l1-live-head" id="l1-live-head" hidden>Live</span>
+            </div>
+            <div class="ew-l1-list" id="l1-list"></div>
+          </div>
         </div>
       </div>
       <div class="tab-panel" id="s-tree" data-sec="s-tree">
@@ -299,6 +387,16 @@
       <div class="set-row"><span class="set-label">Font</span><span class="set-zoom"><button type="button" class="font-minus" aria-label="Font smaller">−</button><button type="button" class="font-plus" aria-label="Font bigger">+</button></span></div>
     </div><button type="button" class="ew-settings-x" aria-label="Close">Close</button></div></div>
   </div>
+  <div id="sn-l1-menu" hidden>
+    <div class="sn-rhm-title" id="sn-l1-title">Topic</div>
+    <button type="button" data-l1="edit">Edit</button>
+    <button type="button" data-l1="add">Add Topic</button>
+    <button type="button" data-l1="same">Same level</button>
+    <button type="button" data-l1="below">One below</button>
+    <button type="button" data-l1="del">Delete</button>
+    <button type="button" data-l1="yes">Yes</button>
+    <button type="button" data-l1="no">No</button>
+  </div>
   <script>
     function qid() {
       var q = location.search.replace(/^\?/, "").split("&");
@@ -310,6 +408,7 @@
       return "";
     }
     function showTab(id) {
+      if (isLive && (id === "s-hierarchy")) id = "s-l1";
       if (!id || !document.getElementById(id)) return;
       document.querySelectorAll(".tab[data-tab]").forEach(function (b) {
         b.classList.toggle("active", b.dataset.tab === id);
@@ -334,36 +433,48 @@
     var id = qid();
     var frameId = id;
     var chosenTitle = "";
-    var tabsHtml =
-      '<button type="button" class="tab" data-tab="s-l1" data-sec="s-l1">Home</button>' +
-      '<button type="button" class="tab" data-tab="s-tree" data-sec="s-tree">By Topic</button>' +
-      '<button type="button" class="tab" data-tab="s-verse" data-sec="s-verse">By Verse</button>' +
-      '<button type="button" class="tab" data-tab="s-hierarchy" data-sec="s-hierarchy">Hierarchy</button>' +
-      '<button type="button" class="tab tab-notes" data-notes-toggle="1">Footnotes</button>' +
-      '<button type="button" class="tab tab-settings" data-settings-open="1">Settings</button>';
-    document.getElementById("tabs-top").innerHTML = tabsHtml;
-    document.getElementById("tabs-end").innerHTML = tabsHtml;
+    var isLive = true;
+    var allL1 = [];
+    function paintTabs() {
+      var tabsHtml =
+        '<button type="button" class="tab" data-tab="s-l1" data-sec="s-l1">Home</button>' +
+        '<button type="button" class="tab" data-tab="s-tree" data-sec="s-tree">By Topic</button>' +
+        '<button type="button" class="tab" data-tab="s-verse" data-sec="s-verse">By Verse</button>';
+      if (!isLive) {
+        tabsHtml +=
+          '<button type="button" class="tab" data-tab="s-hierarchy" data-sec="s-hierarchy">Hierarchy</button>' +
+          '<button type="button" class="tab tab-notes" data-notes-toggle="1">Footnotes</button>';
+      }
+      tabsHtml += '<button type="button" class="tab tab-settings" data-settings-open="1">Settings</button>';
+      document.getElementById("tabs-top").innerHTML = tabsHtml;
+      document.getElementById("tabs-end").innerHTML = tabsHtml;
+    }
+    paintTabs();
     function treeUrl() {
-      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=295";
+      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=336";
     }
     function verseUrl() {
-      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=387";
+      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=390";
     }
     function showTree() {
       var fr = document.getElementById("tree-frame");
       if (!fr || !frameId) return;
       var want = treeUrl();
+      function kick() {
+        try {
+          if (fr.contentWindow && typeof fr.contentWindow.snOpenFirst === "function") {
+            fr.contentWindow.snOpenFirst();
+          } else if (fr.contentWindow && typeof fr.contentWindow.snReloadTree === "function") {
+            fr.contentWindow.snReloadTree();
+          }
+        } catch (err) {}
+      }
       if (fr.getAttribute("src") !== want) {
+        fr.onload = kick;
         fr.src = want;
         return;
       }
-      try {
-        if (fr.contentWindow && typeof fr.contentWindow.snReloadTree === "function") {
-          fr.contentWindow.snReloadTree();
-        } else if (fr.contentWindow && typeof fr.contentWindow.snPaintTree === "function") {
-          fr.contentWindow.snPaintTree();
-        }
-      } catch (err) {}
+      kick();
     }
     function showVerse() {
       var fr = document.getElementById("verse-frame");
@@ -389,9 +500,272 @@
       document.getElementById("page-nav-name-end").textContent = title;
     }
 
+    function shownL1() {
+      if (!isLive) return allL1;
+      return allL1.filter(function (t) { return t.live !== false; });
+    }
+    function liveOn(t) {
+      return t && t.live !== false;
+    }
+    function saveLiveFlag(topic, on) {
+      fetch("data/topics.json?t=" + Date.now(), { cache: "no-store" })
+        .then(function (r) { return r.json(); })
+        .then(function (rows) {
+          (rows || []).forEach(function (row) {
+            if (String(row.id) === String(topic.id) && (row.level || 1) === 1) row.live = !!on;
+          });
+          topic.live = !!on;
+          return fetch("/dotl/topics", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ topics: rows })
+          });
+        })
+        .catch(function () {});
+    }
+    var l1MenuTopic = null;
+    var l1MenuMode = "main";
+    var SIB_CAP = 10;
+    function hideL1Menu() {
+      var m = document.getElementById("sn-l1-menu");
+      if (m) m.hidden = true;
+      l1MenuTopic = null;
+      l1MenuMode = "main";
+    }
+    function showL1Buttons() {
+      var m = document.getElementById("sn-l1-menu");
+      var tit = document.getElementById("sn-l1-title");
+      if (!m) return;
+      var main = l1MenuMode === "main";
+      var add = l1MenuMode === "add";
+      var del = l1MenuMode === "del";
+      if (tit) tit.textContent = add ? "Add Topic" : del ? "Delete?" : "Topic";
+      m.querySelectorAll("button").forEach(function (btn) {
+        var k = btn.getAttribute("data-l1");
+        if (add) btn.hidden = k !== "same" && k !== "below";
+        else if (del) btn.hidden = k !== "yes" && k !== "no";
+        else btn.hidden = k !== "edit" && k !== "add" && k !== "del";
+      });
+    }
+    function placeL1Menu(ev) {
+      var m = document.getElementById("sn-l1-menu");
+      if (!m) return;
+      showL1Buttons();
+      m.hidden = false;
+      var w = m.offsetWidth || 140;
+      var h = m.offsetHeight || 120;
+      var x = (ev && ev.clientX) || 8;
+      var y = (ev && ev.clientY) || 8;
+      m.style.left = Math.max(8, Math.min(x, window.innerWidth - w - 8)) + "px";
+      m.style.top = Math.max(8, Math.min(y, window.innerHeight - h - 8)) + "px";
+    }
+    function loadTopicsFile() {
+      return fetch("data/topics.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.json(); });
+    }
+    function postTopics(rows) {
+      return fetch("/dotl/topics", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ topics: rows })
+      }).then(function (r) { return r.json(); });
+    }
+    function refreshL1(rows) {
+      var hide = {
+        "his finished work": 1,
+        "waiting for the sons of god": 1
+      };
+      allL1 = (rows || []).filter(function (t) { return (t.level || 1) === 1; })
+        .sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); })
+        .filter(function (t) {
+          return !hide[String(t.title || "").replace(/\s+/g, " ").trim().toLowerCase()];
+        });
+      paintL1();
+    }
+    function nextTopicId(rows) {
+      var max = 0;
+      (rows || []).forEach(function (x) {
+        var n = Number(x.id);
+        if (n > max) max = n;
+      });
+      return max + 1;
+    }
+    function topicIndex(rows, id) {
+      var i;
+      for (i = 0; i < rows.length; i++) {
+        if (String(rows[i].id) === String(id)) return i;
+      }
+      return -1;
+    }
+    function branchLen(rows, i) {
+      var lv = rows[i].level || 1;
+      var n = 1;
+      while (i + n < rows.length && (rows[i + n].level || 1) > lv) n += 1;
+      return n;
+    }
+    function startL1Edit(topic) {
+      var a = document.querySelector('#l1-list a[data-id="' + String(topic.id) + '"]');
+      if (!a || a.querySelector("input")) return;
+      var inp = document.createElement("input");
+      inp.type = "text";
+      inp.value = topic.title || "";
+      inp.style.cssText = "font:inherit;color:inherit;border:0;outline:1px solid #c5d0d4;padding:0;margin:0;width:100%;background:#fff;box-sizing:border-box";
+      a.textContent = "";
+      a.appendChild(inp);
+      inp.focus();
+      inp.select();
+      function commit() {
+        if (!inp.parentNode) return;
+        var title = String(inp.value || "").trim() || "New";
+        loadTopicsFile().then(function (rows) {
+          (rows || []).forEach(function (row) {
+            if (String(row.id) === String(topic.id)) row.title = title;
+          });
+          topic.title = title;
+          return postTopics(rows).then(function () { refreshL1(rows); });
+        }).catch(function () { paintL1(); });
+      }
+      inp.addEventListener("keydown", function (kev) {
+        if (kev.key === "Enter") { kev.preventDefault(); inp.blur(); }
+        if (kev.key === "Escape") { kev.preventDefault(); paintL1(); }
+      });
+      inp.addEventListener("blur", commit);
+      inp.addEventListener("click", function (cev) { cev.stopPropagation(); });
+    }
+    function addL1(from, below) {
+      loadTopicsFile().then(function (rows) {
+        var i = topicIndex(rows, from.id);
+        var lv, at, count, row, j;
+        if (i < 0) return;
+        lv = below ? 2 : 1;
+        count = 0;
+        if (below) {
+          for (j = i + 1; j < rows.length && (rows[j].level || 1) > 1; j++) {
+            if ((rows[j].level || 1) === 2) count += 1;
+          }
+        } else count = (rows || []).filter(function (t) { return (t.level || 1) === 1; }).length;
+        if (count >= SIB_CAP) return;
+        at = i + 1;
+        if (!below) at = i + branchLen(rows, i);
+        row = {
+          id: nextTopicId(rows),
+          lecture_id: from.lecture_id != null ? from.lecture_id : 1,
+          level: lv,
+          seq: 0,
+          kind: "period",
+          title: "New",
+          notes: "",
+          description: "",
+          duration: "",
+          live: true
+        };
+        rows.splice(at, 0, row);
+        rows.forEach(function (x, n) { x.seq = n + 1; });
+        return postTopics(rows).then(function () {
+          refreshL1(rows);
+          if (!below) startL1Edit(row);
+          else chooseL1(from);
+        });
+      }).catch(function () {});
+    }
+    function deleteL1(from) {
+      loadTopicsFile().then(function (rows) {
+        var i = topicIndex(rows, from.id);
+        var n, gone, keep;
+        if (i < 0) return;
+        n = branchLen(rows, i);
+        gone = {};
+        rows.splice(i, n).forEach(function (x) { gone[String(x.id)] = 1; });
+        rows.forEach(function (x, k) { x.seq = k + 1; });
+        keep = rows;
+        return postTopics(keep).then(function () {
+          return fetch("data/topic-refs.json?t=" + Date.now(), { cache: "no-store" })
+            .then(function (r) { return r.ok ? r.json() : []; })
+            .catch(function () { return []; })
+            .then(function (refs) {
+              var list = Array.isArray(refs) ? refs : (refs && refs.rows) || [];
+              list = list.filter(function (r) { return !gone[String(r.topic_id)]; });
+              return fetch("/dotl/topic-refs", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ refs: list })
+              });
+            })
+            .catch(function () {})
+            .then(function () {
+              if (String(id) === String(from.id)) {
+                id = "";
+                frameId = "";
+                try { history.replaceState({}, "", "narrative.html"); } catch (err) {}
+              }
+              refreshL1(keep);
+              afterL1();
+            });
+        });
+      }).catch(function () {});
+    }
+    function snL1ContextMenu(ev) {
+      var row, a, tid, t;
+      if (!ev || !ev.target || !ev.target.closest) return false;
+      if (!ev.target.closest("#s-l1")) return false;
+      ev.preventDefault();
+      ev.stopPropagation();
+      if (isLive) return true;
+      row = ev.target.closest(".ew-l1-row");
+      a = row && row.querySelector("a[data-id]");
+      tid = a && a.getAttribute("data-id");
+      t = allL1.find(function (x) { return String(x.id) === String(tid); });
+      if (!t) { hideL1Menu(); return true; }
+      l1MenuTopic = t;
+      l1MenuMode = "main";
+      placeL1Menu(ev);
+      return true;
+    }
+    window.snL1ContextMenu = snL1ContextMenu;
+    function paintL1() {
+      var ones = shownL1();
+      var list = document.getElementById("l1-list");
+      var head = document.getElementById("l1-live-head");
+      if (!list) return;
+      list.innerHTML = "";
+      if (head) head.hidden = !!isLive;
+      ones.forEach(function (t) {
+        var row = document.createElement("div");
+        var a = document.createElement("a");
+        var lab, box;
+        row.className = "ew-l1-row";
+        a.href = "narrative.html?id=" + encodeURIComponent(t.id);
+        a.setAttribute("data-id", String(t.id));
+        a.textContent = t.title || "";
+        a.addEventListener("click", function (ev) {
+          ev.preventDefault();
+          chooseL1(t);
+        });
+        row.addEventListener("contextmenu", function (ev) {
+          snL1ContextMenu(ev);
+        });
+        row.appendChild(a);
+        if (!isLive) {
+          lab = document.createElement("label");
+          lab.className = "ew-l1-live";
+          box = document.createElement("input");
+          box.type = "checkbox";
+          box.checked = liveOn(t);
+          box.setAttribute("aria-label", "Live");
+          box.addEventListener("click", function (ev) { ev.stopPropagation(); });
+          box.addEventListener("change", function () { saveLiveFlag(t, box.checked); });
+          lab.appendChild(box);
+          row.appendChild(lab);
+        }
+        list.appendChild(row);
+      });
+      markL1(frameId);
+    }
     function markL1(nid) {
-      document.querySelectorAll("#l1-list a").forEach(function (a) {
-        a.classList.toggle("on", a.getAttribute("data-id") === String(nid || ""));
+      document.querySelectorAll("#l1-list .ew-l1-row").forEach(function (row) {
+        var a = row.querySelector("a");
+        var on = !!(a && a.getAttribute("data-id") === String(nid || ""));
+        row.classList.toggle("on", on);
+        if (a) a.classList.toggle("on", on);
       });
     }
     function setFrames(nid) {
@@ -412,50 +786,82 @@
       setFrames(id);
       showTab("s-tree");
     }
-    if (id) setFrames(id);
-    showTab(id ? "s-tree" : "s-l1");
-    fetch("data/topics.json", { cache: "no-store" })
-      .then(function (r) { return r.json(); })
+    function afterL1() {
+      var ones = shownL1();
+      var cur = ones.find(function (t) { return String(t.id) === String(id); });
+      if (isLive && id && !cur) {
+        id = "";
+        frameId = "";
+        try { history.replaceState({}, "", "narrative.html"); } catch (err) {}
+      }
+      if (cur) chosenTitle = cur.title || "";
+      else chosenTitle = "";
+      if (id && cur) setFrames(id);
+      if (!id && ones.length === 1) {
+        chooseL1(ones[0]);
+      } else {
+        showTab(id && cur ? "s-tree" : "s-l1");
+        var onHome = document.getElementById("s-l1") && document.getElementById("s-l1").classList.contains("active");
+        setTitle(onHome ? "Topics" : (chosenTitle || "Topics"));
+        markL1(id);
+      }
+    }
+    fetch("/ew-env", { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : {}; })
+      .catch(function () { return {}; })
+      .then(function (env) {
+        var port = String(location.port || "");
+        var onBuilder = port === "8775" || port === "8776" || port === "8777";
+        isLive = !onBuilder;
+        document.body.classList.toggle("sn-live", isLive);
+        paintTabs();
+        return fetch("data/topics.json", { cache: "no-store" }).then(function (r) { return r.json(); });
+      })
       .then(function (rows) {
         var hide = {
           "his finished work": 1,
           "waiting for the sons of god": 1
         };
-        var ones = (rows || []).filter(function (t) { return (t.level || 1) === 1; })
+        allL1 = (rows || []).filter(function (t) { return (t.level || 1) === 1; })
           .sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); })
           .filter(function (t) {
             return !hide[String(t.title || "").replace(/\s+/g, " ").trim().toLowerCase()];
           });
-        var list = document.getElementById("l1-list");
-        if (list) {
-          list.innerHTML = "";
-          ones.forEach(function (t) {
-            var a = document.createElement("a");
-            a.href = "narrative.html?id=" + encodeURIComponent(t.id);
-            a.setAttribute("data-id", String(t.id));
-            a.textContent = t.title || "";
-            a.addEventListener("click", function (ev) {
-              ev.preventDefault();
-              chooseL1(t);
-            });
-            list.appendChild(a);
-          });
-        }
-        var cur = ones.find(function (t) { return String(t.id) === String(id); });
-        if (cur) chosenTitle = cur.title || "";
-        else chosenTitle = "";
-        if (!id && ones.length === 1) {
-          chooseL1(ones[0]);
-        } else {
-          var onHome = document.getElementById("s-l1") && document.getElementById("s-l1").classList.contains("active");
-          setTitle(onHome ? "Topics" : (chosenTitle || "Topics"));
-          markL1(id);
-        }
+        paintL1();
+        afterL1();
       });
+    document.getElementById("sn-l1-menu").addEventListener("click", function (ev) {
+      var btn = ev.target.closest && ev.target.closest("button");
+      var t = l1MenuTopic;
+      ev.preventDefault();
+      ev.stopPropagation();
+      if (!btn) return;
+      if (btn.getAttribute("data-l1") === "edit" && t) { hideL1Menu(); startL1Edit(t); return; }
+      if (btn.getAttribute("data-l1") === "add" && t) { l1MenuMode = "add"; placeL1Menu(ev); return; }
+      if (btn.getAttribute("data-l1") === "same" && t) { hideL1Menu(); addL1(t, false); return; }
+      if (btn.getAttribute("data-l1") === "below" && t) { hideL1Menu(); addL1(t, true); return; }
+      if (btn.getAttribute("data-l1") === "del" && t) { l1MenuMode = "del"; placeL1Menu(ev); return; }
+      if (btn.getAttribute("data-l1") === "yes" && t) { hideL1Menu(); deleteL1(t); return; }
+      if (btn.getAttribute("data-l1") === "no") { hideL1Menu(); return; }
+    });
+    document.addEventListener("mousedown", function (ev) {
+      var m = document.getElementById("sn-l1-menu");
+      if (!m || m.hidden) return;
+      if (ev.target && ev.target.closest && ev.target.closest("#sn-l1-menu")) return;
+      hideL1Menu();
+    });
   </script>
   <script>window.ewFolder="Scripture-Narratives"</script>
   <script src="site.js?v=11"></script>
-  <script src="/bible.js?v=100"></script>
+  <script src="/bible.js?v=116"></script>
+  <script>
+    window.addEventListener("contextmenu", function (ev) {
+      if (window.snL1ContextMenu && window.snL1ContextMenu(ev)) {
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+      }
+    }, true);
+  </script>
   <script src="/ew-sky.js?v=15"></script>
   <script>
   (function(){
@@ -491,14 +897,44 @@
   </script>
   <script>
   (function(){
+    function isPad(){
+      var ua = navigator.userAgent || "";
+      if (/iPad/i.test(ua)) return true;
+      if (/Macintosh/i.test(ua) && (navigator.maxTouchPoints || 0) > 1) return true;
+      return false;
+    }
+    function isAppFull(){
+      return document.documentElement.classList.contains("ew-app-full");
+    }
     function isFull(){
-      return !!(document.fullscreenElement || document.webkitFullscreenElement);
+      return isAppFull() || !!(document.fullscreenElement || document.webkitFullscreenElement);
+    }
+    function fitAppFull(){
+      var frame = document.querySelector(".page-frame");
+      var vv, top, h;
+      if (!frame) return;
+      if (!isAppFull()) {
+        frame.style.top = "";
+        frame.style.height = "";
+        return;
+      }
+      vv = window.visualViewport;
+      h = vv ? vv.height : window.innerHeight;
+      frame.style.top = "0";
+      frame.style.height = h + "px";
+      window.scrollTo(0, 0);
     }
     function paint(){
       var btn = document.getElementById("ew-full");
       if (btn) btn.textContent = isFull() ? "Exit Full Screen" : "Full Screen";
     }
     function go(){
+      if (isPad()) {
+        document.documentElement.classList.toggle("ew-app-full");
+        fitAppFull();
+        paint();
+        return;
+      }
       if (isFull()) {
         if (document.exitFullscreen) document.exitFullscreen();
         else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
@@ -516,6 +952,11 @@
     });
     document.addEventListener("fullscreenchange", paint);
     document.addEventListener("webkitfullscreenchange", paint);
+    window.addEventListener("resize", fitAppFull);
+    window.addEventListener("orientationchange", fitAppFull);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", fitAppFull);
+    }
     paint();
   })();
   </script>
