@@ -998,7 +998,8 @@
   function verseHtml(raw) {
     var s = String(raw || "");
     s = s.replace(/\n/g, "<br>");
-    s = s.replace(/<\/?(strong|b|i|em|br)\b[^>]*>/gi, function (m) {
+    s = s.replace(/<span\b[^>]*text-decoration\s*:\s*underline[^>]*>([\s\S]*?)<\/span>/gi, "<u>$1</u>");
+    s = s.replace(/<\/?(strong|b|i|em|u|br)\b[^>]*>/gi, function (m) {
       var close = m.charAt(1) === "/";
       var tag = (m.match(/\/?([a-z]+)/i) || [null, ""])[1].toLowerCase();
       if (tag === "br") return "<br>";
@@ -1006,7 +1007,7 @@
       return close ? "</" + tag + ">" : "<" + tag + ">";
     });
     s = s.replace(/<[^>]+>/g, function (m) {
-      return /^<\/?(?:strong|b|i|em|br)>$/i.test(m) ? m : "";
+      return /^<\/?(?:strong|b|i|em|u|br)>$/i.test(m) ? m : "";
     });
     return s;
   }

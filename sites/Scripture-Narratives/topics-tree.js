@@ -994,14 +994,13 @@
   }
   function saveTopicRefs(done) {
     var payload = topicRefs.map(function (r) {
-      var row = {
+      return {
         topic_id: r.topic_id,
         ref: r.ref,
         from: r.from,
-        to: r.to
+        to: r.to,
+        description: String(r.description || "")
       };
-      if (r.description != null) row.description = String(r.description);
-      return row;
     });
     fetch("/dotl/topic-refs", {
       method: "POST",
@@ -1121,7 +1120,8 @@
   function verseHtml(raw) {
     var s = String(raw || "");
     s = s.replace(/\n/g, "<br>");
-    s = s.replace(/<\/?(strong|b|i|em|br)\b[^>]*>/gi, function (m) {
+    s = s.replace(/<span\b[^>]*text-decoration\s*:\s*underline[^>]*>([\s\S]*?)<\/span>/gi, "<u>$1</u>");
+    s = s.replace(/<\/?(strong|b|i|em|u|br)\b[^>]*>/gi, function (m) {
       var close = m.charAt(1) === "/";
       var tag = (m.match(/\/?([a-z]+)/i) || [null, ""])[1].toLowerCase();
       if (tag === "br") return "<br>";
@@ -1129,7 +1129,7 @@
       return close ? "</" + tag + ">" : "<" + tag + ">";
     });
     s = s.replace(/<[^>]+>/g, function (m) {
-      return /^<\/?(?:strong|b|i|em|br)>$/i.test(m) ? m : "";
+      return /^<\/?(?:strong|b|i|em|u|br)>$/i.test(m) ? m : "";
     });
     return s;
   }
@@ -1261,28 +1261,36 @@
     }
     function fromStore(chapter) {
       var chRef = "";
+      var thisChap = sameOrigChap();
       if (viewChap && chapter && chapter.length) {
         chRef = viewChap.abbr + " " + viewChap.ch + ":" + chapter[0].n + "-" + chapter[chapter.length - 1].n;
       }
-      var jobs = [
-        fetch("/scriptures?ref=" + encodeURIComponent(ref) + "&folder=" + encodeURIComponent(siteFolder()), { cache: "no-store" })
-          .then(function (r) { return r.ok ? r.json() : {}; })
-          .catch(function () { return {}; })
-      ];
+      var jobs = [];
+      if (thisChap && ref) {
+        jobs.push(
+          fetch("/scriptures?ref=" + encodeURIComponent(ref) + "&folder=" + encodeURIComponent(siteFolder()), { cache: "no-store" })
+            .then(function (r) { return r.ok ? r.json() : {}; })
+            .catch(function () { return {}; })
+        );
+      } else {
+        jobs.push(Promise.resolve({}));
+      }
       if (chRef && chRef !== ref) {
         jobs.push(
           fetch("/scriptures?ref=" + encodeURIComponent(chRef) + "&folder=" + encodeURIComponent(siteFolder()), { cache: "no-store" })
             .then(function (r) { return r.ok ? r.json() : {}; })
             .catch(function () { return {}; })
         );
+      } else {
+        jobs.push(Promise.resolve({}));
       }
       Promise.all(jobs).then(function (pair) {
         var refStored = storedToLines((pair[0] && pair[0].text) || "");
         var chapStored = pair[1] && pair[1].text ? storedToLines(pair[1].text) : [];
         var merged = overlayStored(chapter || [], chapStored);
-        merged = overlayStored(merged, refStored);
-        if (!merged.length) merged = chapter && chapter.length ? chapter : refStored;
-        if (!merged.length && ref) finish(completeSpan([], ref));
+        if (thisChap) merged = overlayStored(merged, refStored);
+        if (!merged.length) merged = chapter && chapter.length ? chapter : (thisChap ? refStored : []);
+        if (!merged.length && thisChap && ref) finish(completeSpan([], ref));
         else finish(merged);
       });
     }
