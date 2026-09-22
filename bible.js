@@ -2783,10 +2783,33 @@
   function bodyHtml() {
     return body ? body.innerHTML : "";
   }
+  function inlineHtml(el) {
+    var html = el ? el.innerHTML || "" : "";
+    html = html.replace(/<strong\b[^>]*>/gi, "<b>").replace(/<\/strong>/gi, "</b>");
+    html = html.replace(/<em\b[^>]*>/gi, "<i>").replace(/<\/em>/gi, "</i>");
+    html = html.replace(/<span\b[^>]*font-weight:\s*(?:bold|[6-9]00)[^>]*>([\s\S]*?)<\/span>/gi, "<b>$1</b>");
+    html = html.replace(/<span\b[^>]*font-style:\s*italic[^>]*>([\s\S]*?)<\/span>/gi, "<i>$1</i>");
+    html = html.replace(/<span\b[^>]*text-decoration:[^>]*underline[^>]*>([\s\S]*?)<\/span>/gi, "<u>$1</u>");
+    html = html.replace(/<div><br\s*\/?><\/div>/gi, "<br>");
+    html = html.replace(/<\/div>\s*<div\b[^>]*>/gi, "<br>");
+    html = html.replace(/<div\b[^>]*>/gi, "").replace(/<\/div>/gi, "<br>");
+    html = html.replace(/<span\b[^>]*>/gi, "").replace(/<\/span>/gi, "");
+    return html.replace(/(<br>\s*)+$/gi, "").trim();
+  }
   function htmlToSave() {
     var hits = chList && chList.querySelector(".ew-ch-hits");
-    if (hits && String(hits.innerHTML || "").trim()) return hits.innerHTML;
-    return bodyHtml();
+    if (!hits) return bodyHtml();
+    var lines = [];
+    Array.prototype.forEach.call(hits.querySelectorAll(".ew-ch-row"), function (row) {
+      var n = row.getAttribute("data-vs") || "";
+      var text = row.querySelector(".ew-vs-text");
+      var html = inlineHtml(text || row);
+      if (!n && !html) return;
+      lines.push((n ? n + " " : "") + html);
+    });
+    if (!lines.length) return bodyHtml();
+    var head = currentRef && currentRef.label ? currentRef.label + "<br>" : "";
+    return head + lines.join("<br>");
   }
   function revertSaved() {
     if (!savedCopy || !body) return;
