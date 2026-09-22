@@ -159,6 +159,7 @@
       box-sizing: border-box;
     }
     .tdesc textarea:focus { outline: 0; background: #fff; }
+    .tdesc textarea[readonly] { cursor: default; background: var(--panel); }
     .tverse-wrap {
       position: absolute;
       z-index: 2;
@@ -510,6 +511,6 @@
     <button type="button" data-yes="1">Yes</button>
     <button type="button" data-no="1">No</button>
   </div>
-  <script src="topics-tree.js?v=339"></script>
+  <script src="topics-tree.js?v=344"></script>
 </body>
 </html>

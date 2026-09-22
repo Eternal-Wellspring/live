@@ -42,6 +42,7 @@
   var pendingMove = null;
   var extraSibs = 0;
   var rhmLock = 0;
+  var saveWait = Promise.resolve();
   var rhm = {
     topic: { title: "Topic", items: ["Edit", "Add Topic", "Out a level", "In a level"] },
     addTopic: { title: "Add Topic", items: ["Same level", "One below"] },
@@ -95,6 +96,9 @@
     var m = location.pathname.match(/\/sites\/([^/]+)\//);
     if (m) return decodeURIComponent(m[1]);
     return "Scripture-Narratives";
+  }
+  function dataFile(name) {
+    return "/sites/" + encodeURIComponent(siteFolder()) + "/data/" + name + "?t=" + Date.now();
   }
   function bySeq() {
     return topics.slice().sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); });
@@ -1053,6 +1057,10 @@
   function canEditChapter() {
     var p = String(location.port || "");
     return p === "8775" || p === "8776" || p === "8778" || p === "8779";
+  }
+  function canEditDesc() {
+    var p = String(location.port || "");
+    return p === "8775" || p === "8776" || p === "8777";
   }
   function storedToLines(html) {
     var map = {};
@@ -2034,9 +2042,17 @@
       versesWrap = document.createElement("div");
       versesWrap.className = "tverse-wrap" + (openRef ? "" : " empty");
       board.appendChild(versesWrap);
-      var vsW = Math.max(280, (wrap ? wrap.clientWidth : 800) - xVs - PAD);
+      var viewW = wrap ? wrap.clientWidth : (window.innerWidth || 800);
+      try {
+        if (window.frameElement) {
+          var fw = window.frameElement.getBoundingClientRect().width;
+          if (fw > 40) viewW = Math.min(viewW, fw);
+        }
+      } catch (err) {}
+      var vsW = Math.max(120, Math.min(Math.floor(viewW * 0.5), viewW - xVs - PAD));
       var vsH = Math.max(160, viewH - PAD * 2);
-      put(versesWrap, xVs, yVs, vsW, vsH);
+      var xBox = Math.max(xVs, viewW - PAD - vsW);
+      put(versesWrap, xBox, yVs, vsW, vsH);
       versesWrap.style.height = vsH + "px";
 
       if (!openRef) {
@@ -2205,6 +2221,7 @@
       var noteBox = document.createElement("div");
       noteBox.className = "tverse-note";
       function startDescEdit() {
+        if (!canEditDesc()) return;
         if (noteBox.querySelector("textarea")) return;
         var ta = document.createElement("textarea");
         ta.setAttribute("title", "Description");
@@ -2232,7 +2249,7 @@
         });
         ta.focus();
       }
-      if (noteEditing && noteSnapRef === openRef) {
+      if (canEditDesc() && noteEditing && noteSnapRef === openRef) {
         var keepTa = document.createElement("textarea");
         keepTa.setAttribute("title", "Description");
         keepTa.value = String(noteSnap || "").replace(/\n+$/, "");
@@ -2258,6 +2275,7 @@
       }
       noteBox.addEventListener("click", function (ev) { ev.stopPropagation(); });
       noteBox.addEventListener("contextmenu", function (ev) {
+        if (!canEditDesc()) return;
         showRefMenu(ev, "description", { edit: startDescEdit });
       });
       versesWrap.appendChild(noteBox);
@@ -2415,7 +2433,7 @@
     var d = document.getElementById("tdesc");
     var ta = document.getElementById("tdesc-ta");
     var topic;
-    if (descOpen && ta) {
+    if (descOpen && ta && canEditDesc()) {
       topic = find(topics, ta.dataset.topic);
       if (topic) {
         topic.description = ta.value;
@@ -2441,35 +2459,36 @@
     var ta = document.getElementById("tdesc-ta");
     var vsEl = document.querySelector(".tverse-wrap");
     var topic = descOpen ? find(topics, descId) : null;
-    var box, pane, br, pr, w, left, top, need, maxH, h, vw, vh;
+    var box, w, left, top, need, maxH, h, vw, vh, vr;
     if (!d) return;
     if (!topic) {
       d.hidden = true;
       return;
     }
     box = topicBoxEl(topic.id);
-    w = vsEl && vsEl.offsetWidth ? vsEl.offsetWidth : VERSE_W;
     d.hidden = false;
-    if (ta && document.activeElement !== ta) {
-      ta.value = descText(topic);
-      ta.dataset.topic = sid(topic.id);
+    if (ta) {
+      ta.readOnly = !canEditDesc();
+      if (document.activeElement !== ta) {
+        ta.value = descText(topic);
+        ta.dataset.topic = sid(topic.id);
+      }
     }
-    need = descH(ta ? ta.value : descText(topic), w);
     vw = window.innerWidth;
     vh = window.innerHeight;
+    left = PAD;
+    top = PAD;
+    if (vsEl) {
+      vr = vsEl.getBoundingClientRect();
+      w = Math.max(80, Math.floor(vsEl._w || vsEl.offsetWidth || VERSE_W));
+      if (left + w > vr.left - PAD) w = Math.max(80, vr.left - PAD - left);
+    } else {
+      w = Math.max(80, Math.min(VERSE_W, Math.floor(vw * 0.5) - left));
+    }
+    need = descH(ta ? ta.value : descText(topic), w);
     maxH = Math.max(80, Math.floor(vh * 0.45));
     h = Math.min(Math.max(need, DESC_H), maxH);
-    if (box) {
-      pane = box.parentNode && String(box.parentNode.className || "").indexOf("tcol") >= 0 ? box.parentNode : box;
-      pr = pane.getBoundingClientRect();
-      left = pr.left + (pr.width - w) / 2;
-      top = PAD;
-      if (left + w > vw - 8) left = vw - 8 - w;
-      if (left < 8) left = 8;
-    } else {
-      left = 8;
-      top = PAD;
-    }
+    if (left < PAD) left = PAD;
     d.style.left = Math.round(left) + "px";
     d.style.top = Math.round(top) + "px";
     d.style.width = w + "px";
@@ -2477,24 +2496,35 @@
     if (ta) ta.style.overflowY = need > maxH ? "auto" : "hidden";
   }
   function saveTopics(msg) {
-    fetch("/dotl/topics", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ topics: bySeq() })
-    }).then(function (r) { return r.json(); }).then(function (d) {
-      var el = document.getElementById("status");
-      if (el) el.textContent = (d && d.error) || msg || (visible().length + " topics.");
+    if (!canEditDesc()) return saveWait;
+    var rows = bySeq();
+    if (!rows.length) return saveWait;
+    saveWait = saveWait.then(function () {
+      return fetch("/dotl/topics", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ topics: rows })
+      }).then(function (r) {
+        if (!r.ok) throw new Error("Could not save.");
+        return r.json();
+      }).then(function (d) {
+        var el = document.getElementById("status");
+        if (el) el.textContent = (d && d.error) || msg || (visible().length + " topics.");
+      });
     }).catch(function (err) {
       var el = document.getElementById("status");
-      if (el) el.textContent = String(err);
+      if (el) el.textContent = (err && err.message) ? err.message : "Could not save.";
     });
+    return saveWait;
   }
   function loadTopics(done) {
-    Promise.all([
-      fetch("data/topics.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.json(); }),
-      fetch("data/topic-refs.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }),
-      fetch("data/rhm.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
-    ]).then(function (pair) {
+    saveWait.then(function () {
+      return Promise.all([
+      fetch(dataFile("topics.json"), { cache: "no-store" }).then(function (r) { return r.json(); }),
+      fetch(dataFile("topic-refs.json"), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }),
+      fetch(dataFile("rhm.json"), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+    ]);
+    }).then(function (pair) {
       if (pair[2] && typeof pair[2] === "object") rhm = pair[2];
       topics = pair[0] || [];
       var incoming;
@@ -2554,13 +2584,14 @@
     ta.addEventListener("input", function () {
       var id = ta.dataset.topic;
       var topic = id ? find(topics, id) : null;
-      if (topic) topic.description = ta.value;
+      if (!canEditDesc() || !topic) return;
+      topic.description = ta.value;
       placePop();
     });
     ta.addEventListener("blur", function () {
       var id = ta.dataset.topic;
       var topic = id ? find(topics, id) : null;
-      if (!topic) return;
+      if (!canEditDesc() || !topic) return;
       topic.description = ta.value;
       saveTopics();
     });
@@ -2569,48 +2600,65 @@
   (function () {
     var wrap = document.getElementById("wrap");
     if (!wrap) return;
-    wrap.addEventListener(
-      "wheel",
-      function (ev) {
-        var n = ev.target;
-        var col = null;
-        while (n && n !== wrap) {
-          if (n.classList && String(n.className || "").indexOf("tcol") >= 0) {
-            col = n;
-            break;
-          }
-          n = n.parentNode;
+    function visH() {
+      var h = wrap.clientHeight || window.innerHeight || 0;
+      try {
+        if (window.frameElement) {
+          var fh = window.frameElement.getBoundingClientRect().height;
+          if (fh > 40) h = Math.min(h, fh);
         }
-        if (!col) {
-          n = document.elementFromPoint(ev.clientX, ev.clientY);
-          while (n && n !== wrap) {
-            if (n.classList && String(n.className || "").indexOf("tcol") >= 0) {
-              col = n;
-              break;
-            }
-            n = n.parentNode;
-          }
+      } catch (err) {}
+      return h;
+    }
+    function colFromPoint(x, y) {
+      var n = document.elementFromPoint(x, y);
+      var col = null;
+      var cols, i, r, best = Infinity, d;
+      while (n && n !== wrap && n !== document.body) {
+        if (n.classList && String(n.className || "").indexOf("tcol") >= 0) {
+          return n;
         }
-        if (!col) return;
-        var innerH = col._innerH || col.offsetHeight;
-        var box = boxH || 22;
-        var mid = (wrap.clientHeight || window.innerHeight) / 2;
-        var maxTop = mid - box / 2;
-        var minTop = maxTop - Math.max(0, innerH - box);
-        var next = (col._y || 0) - ev.deltaY;
-        if (next > maxTop) next = maxTop;
-        if (next < minTop) next = minTop;
-        next = Math.round(next);
-        if (next === col._y) return;
-        ev.preventDefault();
-        col._y = next;
-        col._top = next;
-        col.style.top = next + "px";
-        var key = col.getAttribute("data-col");
-        if (key) colScroll[key] = next;
-      },
-      { passive: false }
-    );
+        n = n.parentNode;
+      }
+      cols = wrap.querySelectorAll(".tcol");
+      for (i = 0; i < cols.length; i++) {
+        r = cols[i].getBoundingClientRect();
+        if (x >= r.left && x <= r.right) return cols[i];
+        d = x < r.left ? r.left - x : x - r.right;
+        if (d < best) {
+          best = d;
+          col = cols[i];
+        }
+      }
+      return col;
+    }
+    function snWheel(deltaY, x, y) {
+      var col = colFromPoint(x, y);
+      var innerH, box, mid, maxTop, minTop, next, key;
+      if (!col) return false;
+      innerH = col._innerH || col.offsetHeight;
+      box = boxH || 22;
+      mid = visH() / 2;
+      maxTop = mid - box / 2;
+      minTop = maxTop - Math.max(0, innerH - box);
+      next = (col._y || 0) - deltaY;
+      if (next > maxTop) next = maxTop;
+      if (next < minTop) next = minTop;
+      next = Math.round(next);
+      if (next === col._y) return false;
+      col._y = next;
+      col._top = next;
+      col.style.top = next + "px";
+      key = col.getAttribute("data-col");
+      if (key) colScroll[key] = next;
+      return true;
+    }
+    window.snWheel = snWheel;
+    function onWheel(ev) {
+      if (snWheel(ev.deltaY, ev.clientX, ev.clientY)) ev.preventDefault();
+    }
+    wrap.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("wheel", onWheel, { passive: false, capture: true });
   })();
   document.addEventListener("mousemove", function (ev) {
     var g, t, hit;

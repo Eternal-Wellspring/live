@@ -451,7 +451,7 @@
     }
     paintTabs();
     function treeUrl() {
-      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=336";
+      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=344";
     }
     function verseUrl() {
       return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=390";
@@ -861,6 +861,23 @@
         ev.stopImmediatePropagation();
       }
     }, true);
+  </script>
+  <script>
+  (function () {
+    var tree = document.getElementById("s-tree");
+    if (!tree) return;
+    tree.addEventListener("wheel", function (ev) {
+      var fr = document.getElementById("tree-frame");
+      var win, rect, x, y;
+      if (!fr) return;
+      try { win = fr.contentWindow; } catch (err) { return; }
+      if (!win || typeof win.snWheel !== "function") return;
+      rect = fr.getBoundingClientRect();
+      x = ev.clientX - rect.left;
+      y = ev.clientY - rect.top;
+      if (win.snWheel(ev.deltaY, x, y)) ev.preventDefault();
+    }, { passive: false });
+  })();
   </script>
   <script src="/ew-sky.js?v=15"></script>
   <script>
