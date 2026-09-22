@@ -539,10 +539,14 @@ button.ew-hidden-sub {
   display: block;
   width: max-content;
   max-width: 100%;
+  margin: 0.25rem 0 var(--para-gap, 0px);
   padding: 0.22rem 0.55rem;
-  border: 1px solid #c5d0d4;
+  border: 1px solid #1f6f78;
   border-radius: 2px;
-  background: #e4eaec;
+  background: #1f6f78;
+  color: #f6f7eb;
+  font: 700 22px Arial, Helvetica, sans-serif;
+  line-height: 1.25;
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
@@ -780,22 +784,26 @@ a.ref, .col a.ref, .col-text a.ref, .para a.ref {
   position: fixed;
   z-index: 80;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
   bottom: auto;
-  height: calc(100vh - 4.8rem);
-  max-height: calc(100vh - 4.8rem);
-  width: min(36rem, calc(100vw - 4.8rem));
+  height: auto;
+  max-height: calc(100vh - 2.4rem);
+  width: calc(50% - 2.4rem);
   display: flex;
   flex-direction: column;
   padding: 0;
   background: transparent;
   overflow: visible;
   border-radius: 6px;
-  box-shadow: 18px 24px 64px rgba(27,58,75,.48);
+  box-shadow: 0 8px 24px rgba(27,58,75,.12);
 }
-#ew-verse { right: auto; }
-#ew-chapter { display: none !important; }
+#ew-verse { left: 1.2rem; right: auto; }
+#ew-chapter {
+  left: auto;
+  right: 1.2rem;
+  z-index: 81;
+  height: calc(100vh - 2.4rem);
+}
 #ew-verse[hidden], #ew-chapter[hidden] { display: none !important; }
 .ew-verse-card, .ew-chapter-card {
   width: 100%;
@@ -804,7 +812,7 @@ a.ref, .col a.ref, .col-text a.ref, .para a.ref {
   overflow: auto;
   display: flex;
   flex-direction: column;
-  background: #eaf6e8;
+  background: #fff;
   color: #1b3a4b;
   border: 1px solid #d5dee2;
   border-radius: 6px;
@@ -1121,7 +1129,6 @@ a.ref, .col a.ref, .col-text a.ref, .para a.ref {
 .title-bar h1 { border-width:0 !important }
 .tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f6f78; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
-button.ew-hidden-sub { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f6f78; margin-top:0px; margin-bottom:0px; text-align:left }
 .subsec-frame { font-weight:400; font-style:normal; border-style:solid; border-color:#919191; border-width:2.0px 2.0px 2.0px 2.0px; padding:5px; margin-top:0px; margin-bottom:13px; text-align:left }
 .para { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#ffffff; border-style:solid; border-color:#e2e2e2; border-width:1.0px 0px 0px 0px; padding:0px; margin-top:12px; margin-bottom:-2px; text-align:left; line-height:1.45; --para-gap:18px }
 .row-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:0px; text-align:left }
@@ -1209,7 +1216,6 @@ button.ew-hidden-sub { font-family:Arial, Helvetica, sans-serif; font-size:calc(
 .tab-dock-end .tab[data-sec="294"].active { border-top-color:#ffffff; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
 .subsec-frame[data-heading="295"] { font-weight:400; font-style:normal; border-style:solid; border-color:#919191; border-width:0px 0px 0px 0px; padding:5px; margin-top:20px; margin-bottom:-4px; text-align:left }
 h2[data-heading="453"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ffffff; background:#0042aa; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
-button.ew-hidden-sub[data-heading="453"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ffffff; margin-top:0px; margin-bottom:0px; text-align:left }
 .subsec-frame[data-heading="453"] { font-size:calc(22px * var(--ew-font, 1)); font-weight:400; font-style:normal; background:#dcfff4; border-style:solid; border-color:#919191; border-width:2.0px 2.0px 2.0px 2.0px; padding:5px; margin-top:0px; margin-bottom:13px; text-align:left }
 .tab[data-sec="s-p2-qa"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="s-p2-qa"] { background:#fefcdd }
@@ -1635,7 +1641,6 @@ button.ew-hidden-sub[data-heading="453"] { font-family:Arial, Helvetica, sans-se
 .title-bar-inner { background:#f6f7eb }
 .title-bar h1 { background:transparent; margin-bottom:0 }
 .tabs { margin-top:0 }
-button.ew-hidden-sub.open { color:#f6f7eb }
 .para[data-para="r-3v542le"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#e2e2e2; border-width:0px 0px 0px 0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.45; --para-gap:18px }
 .para[data-para="r-3v542le"] .col[data-col="1"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
 .para[data-para="r-3v542le"] .col[data-col="1"] .col-text, .para[data-para="r-3v542le"] .col[data-col="1"] .col-text .bit { line-height:1.2 }
@@ -1780,6 +1785,20 @@ button.ew-hidden-sub.open { color:#f6f7eb }
 .para[data-para="r-tscdkju"] .col[data-col="12"] .col-text .bit { margin:0 0 7px }
 .para[data-para="r-tscdkju"] .col[data-col="12"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="r-tscdkju"] .col[data-col="12"]{align-self:center}
+.para[data-para="622"] .col[data-col="623"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:0px; margin-top:5px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:3px }
+.para[data-para="622"] .col[data-col="623"] .col-text, .para[data-para="622"] .col[data-col="623"] .col-text .bit { line-height:1.2 }
+.para[data-para="622"] .col[data-col="623"] .col-text { gap:0 }
+.para[data-para="622"] .col[data-col="623"] .col-text .bit { margin:0 0 3px }
+.para[data-para="622"] .col[data-col="623"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="622"] .col[data-col="623"]{align-self:center}
+.para[data-para="622"] .col[data-col="623"]{padding:0}
+.para[data-para="622"] .col[data-col="623"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="622"] .col[data-col="625"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
+.para[data-para="622"] .col[data-col="625"] .col-text, .para[data-para="622"] .col[data-col="625"] .col-text .bit { line-height:1.2 }
+.para[data-para="622"] .col[data-col="625"] .col-text { gap:0 }
+.para[data-para="622"] .col[data-col="625"] .col-text .bit { margin:0 0 7px }
+.para[data-para="622"] .col[data-col="625"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="622"] .col[data-col="625"]{align-self:center}
 .para[data-para="368"] .col[data-col="375"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
 .para[data-para="368"] .col[data-col="375"] .col-text, .para[data-para="368"] .col[data-col="375"] .col-text .bit { line-height:1.2 }
 .para[data-para="368"] .col[data-col="375"] .col-text { gap:0 }

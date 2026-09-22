@@ -192,7 +192,7 @@
       var v = localStorage.getItem(STORE);
       if (TRANSLATIONS.some(function (t) { return t.id === v; })) return v;
     } catch (e) {}
-    return "ESV";
+    return "NKJV";
   }
   function prefOn() {
     try {
@@ -441,6 +441,30 @@
       return a.label.localeCompare(b.label);
     });
   }
+  function versionChoices() {
+    return TRANSLATIONS.slice().sort(function (a, b) {
+      return a.label.localeCompare(b.label);
+    });
+  }
+  function fillVersionsList(list) {
+    if (!list) return;
+    list.innerHTML = "";
+    versionChoices().forEach(function (t) {
+      var row = document.createElement("div");
+      row.setAttribute("role", "option");
+      row.setAttribute("data-tr", t.id);
+      row.title = trHover(t.id);
+      var code = document.createElement("span");
+      code.className = "ew-tr-code";
+      code.textContent = t.label;
+      var year = document.createElement("span");
+      year.className = "ew-tr-year";
+      year.textContent = trYear(t.id);
+      row.appendChild(code);
+      row.appendChild(year);
+      list.appendChild(row);
+    });
+  }
   function fillTrList(list) {
     if (!list) return;
     list.innerHTML = "";
@@ -683,9 +707,15 @@
   function verseMapFromHtml(html) {
     var map = {};
     var raw = String(html || "");
-    var leftover = raw.replace(/<p>\s*<sup>\s*(\d+)\s*<\/sup>\s*([\s\S]*?)<\/p>/gi, function (_, n, inner) {
+    var leftover = raw.replace(/<p\b([^>]*)>([\s\S]*?)<\/p>/gi, function (_, attrs, inner) {
+      var vs = /data-vs\s*=\s*["']?(\d+)/i.exec(attrs || "");
+      var sup = /^\s*<sup\b[^>]*>\s*(\d+)\s*<\/sup>\s*/i.exec(inner);
+      var n = vs ? Number(vs[1]) : sup ? Number(sup[1]) : 0;
+      if (sup) inner = inner.replace(/^\s*<sup\b[^>]*>\s*\d+\s*<\/sup>\s*/i, "");
+      inner = inner.replace(/<span\b[^>]*\bew-vs\b[^>]*>[\s\S]*?<\/span>\s*/gi, "");
+      inner = inner.replace(/<span\b[^>]*\bew-vs-text\b[^>]*>([\s\S]*?)<\/span>/gi, "$1");
       inner = sanitizeVerseInner(inner);
-      if (inner) map[Number(n)] = inner;
+      if (n && inner) map[n] = inner;
       return "";
     });
     leftover = sanitizeVerseInner(leftover);
@@ -701,14 +731,24 @@
     function flush() {
       if (cur && buf.length) map[cur] = buf.join("<br>").replace(/^(<br>)+|(<br>)+$/g, "").trim();
     }
-    parts.forEach(function (line) {
-      var m = String(line || "").match(/^\s*(\d+)\s+([\s\S]*)$/);
+    function pushLine(line) {
+      var s = String(line || "");
+      var cut = s.match(/^(.*?)\s*(?:\.{2,}|…)\s*(\d+)\s+([\s\S]*)$/);
+      if (cut && (String(cut[1] || "").trim() || cur)) {
+        if (String(cut[1] || "").trim()) buf.push(cut[1]);
+        flush();
+        cur = Number(cut[2]);
+        buf = [cut[3]];
+        return;
+      }
+      var m = s.match(/^\s*(\d+)\s+([\s\S]*)$/);
       if (m) {
         flush();
         cur = Number(m[1]);
         buf = [m[2]];
-      } else if (cur) buf.push(line);
-    });
+      } else if (cur) buf.push(s);
+    }
+    parts.forEach(pushLine);
     flush();
     return map;
   }
@@ -788,7 +828,7 @@
   var savedCopy = "";
   var trNow, trList, chNkjv, chTrPick, chTrNow, chTrList, chView = "NKJV";
   var chBox, chList, chTitle, chHint, chPickBtn, chPrev, chNext, chPick = false, chBrowse;
-  var currentRef, nkjvHtml, savedLink, inFile;
+  var currentRef, nkjvHtml, savedLink, linkSnap, inFile;
   var chStart, chEnd, chRows;
 
   function setRefRange(start, end) {
@@ -804,7 +844,7 @@
     currentRef.ch2 = currentRef.ch1;
     currentRef.label = refLabel(currentRef);
     if (title) setAbbrTitle(title, currentRef.label, "NKJV");
-    updateSavedLink();
+    if (chTitle) chTitle.textContent = currentRef.label;
   }
   function updateSavedLink() {
     if (!savedLink || !currentRef || !currentRef.vs1) return;
@@ -1892,41 +1932,45 @@
     chBox = document.createElement("div");
     chBox.id = "ew-chapter";
     chBox.hidden = true;
+    chBox.className = "ew-fn-pop";
     chBox.innerHTML =
-      '<div class="ew-chapter-card">' +
-      '<div class="ew-verse-bar">' +
-      '<div class="ew-verse-bar-left">' +
-      '<button type="button" class="ew-ch-prev">Prev</button>' +
+      '<div class="ew-chapter-card ew-fn-card">' +
+      '<div class="ew-verse-bar ew-fn-bar">' +
+      '<button type="button" class="ew-ch-prev" aria-label="Previous chapter">&lt;</button>' +
       '<strong class="ew-chapter-title"></strong>' +
-      '<button type="button" class="ew-ch-next">Next</button>' +
-      "</div>" +
-      '<div class="ew-verse-bar-right">' +
+      '<button type="button" class="ew-ch-next" aria-label="Next chapter">&gt;</button>' +
       '<button type="button" class="ew-ch-nkjv">NKJV</button>' +
       '<div class="ew-tr-pick ew-ch-tr">' +
-      '<button type="button" class="ew-tr-now" aria-haspopup="listbox" aria-expanded="false" aria-label="Chapter version"></button>' +
+      '<button type="button" class="ew-versions-btn" aria-haspopup="listbox" aria-expanded="false">Versions</button>' +
+      '<span class="ew-ver-now"></span>' +
       '<div class="ew-tr-list" role="listbox" hidden></div>' +
       "</div>" +
+      '<span class="ew-fn-mod">' +
+      '<button type="button" class="ew-fn-modify">Modify</button>' +
+      '<span class="ew-fn-msg" hidden>Click the first verse</span>' +
+      "</span>" +
+      '<button type="button" class="ew-save" hidden>Save</button>' +
+      '<button type="button" class="ew-save-close" hidden>Save and Close</button>' +
       '<button type="button" class="ew-chapter-x">Close</button>' +
       "</div>" +
-      "</div>" +
-      '<button type="button" class="ew-ch-pick">Change the popup verses</button>' +
       '<div class="ew-chapter-list"></div>' +
       "</div>";
+    ensureFootnoteStyle();
     document.body.appendChild(chBox);
     title = box.querySelector(".ew-verse-ref");
     body = box.querySelector(".ew-verse-body");
     alt = box.querySelector(".ew-verse-alt");
     altWrap = box.querySelector(".ew-verse-alt-wrap");
-    saveBtn = box.querySelector(".ew-save");
-    saveCloseBtn = box.querySelector(".ew-save-close");
-    revertBtn = box.querySelector(".ew-revert");
-    cancelBtn = box.querySelector(".ew-verse-x");
+    saveBtn = chBox.querySelector(".ew-save");
+    saveCloseBtn = chBox.querySelector(".ew-save-close");
+    revertBtn = null;
+    cancelBtn = chBox.querySelector(".ew-chapter-x");
     chapterBtn = box.querySelector(".ew-chapter-btn");
     prefBtn = box.querySelector(".ew-pref-btn");
     chList = chBox.querySelector(".ew-chapter-list");
     chTitle = chBox.querySelector(".ew-chapter-title");
     chHint = chBox.querySelector(".ew-chapter-hint");
-    chPickBtn = chBox.querySelector(".ew-ch-pick");
+    chPickBtn = chBox.querySelector(".ew-fn-modify");
     chPrev = chBox.querySelector(".ew-ch-prev");
     chNext = chBox.querySelector(".ew-ch-next");
     select = box.querySelector(".ew-tr-pick");
@@ -1957,21 +2001,38 @@
     });
     chNkjv = chBox.querySelector(".ew-ch-nkjv");
     chTrPick = chBox.querySelector(".ew-ch-tr");
-    chTrNow = chTrPick.querySelector(".ew-tr-now");
+    chTrNow = chBox.querySelector(".ew-versions-btn");
     chTrList = chTrPick.querySelector(".ew-tr-list");
-    fillTrList(chTrList);
-    chNkjv.addEventListener("click", function () {
+    fillVersionsList(chTrList);
+    chNkjv.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      if (currentRef && isExtraBook(currentRef.book)) return;
       closeTrLists();
+      setChosen("NKJV");
       chView = "NKJV";
+      paintVersionsBtn();
       loadChapter();
     });
+    function placeVersionList(btn, list) {
+      var r = btn.getBoundingClientRect();
+      list.style.setProperty("position", "fixed", "important");
+      list.style.setProperty("left", r.left + "px", "important");
+      list.style.setProperty("top", r.bottom + 4 + "px", "important");
+      list.style.setProperty("width", "max-content", "important");
+      list.style.setProperty("max-height", "none", "important");
+      list.style.setProperty("height", "auto", "important");
+      list.style.setProperty("overflow", "visible", "important");
+      list.style.setProperty("z-index", "200", "important");
+    }
     chTrNow.addEventListener("click", function (ev) {
       ev.stopPropagation();
+      if (currentRef && isExtraBook(currentRef.book)) return;
       var open = chTrList.hidden;
       closeTrLists();
       if (open) {
         chTrList.hidden = false;
         chTrNow.setAttribute("aria-expanded", "true");
+        placeVersionList(chTrNow, chTrList);
       }
     });
     chTrList.addEventListener("click", function (ev) {
@@ -1979,11 +2040,10 @@
       var row = ev.target.closest && ev.target.closest("[data-tr]");
       if (!row) return;
       setChosen(row.getAttribute("data-tr"));
-      chView = currentTr();
+      chView = row.getAttribute("data-tr");
       closeTrLists();
-      paintTrPick();
+      paintVersionsBtn();
       loadChapter();
-      if (prefOn()) paintPreferred();
     });
     box.addEventListener("click", closeTrLists);
     chBox.addEventListener("click", closeTrLists);
@@ -2004,7 +2064,11 @@
         revertSaved();
       });
     }
-    cancelBtn.addEventListener("click", hide);
+    cancelBtn.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      if (dirty || chPick) cancelFootnote();
+      else hide();
+    });
     chapterBtn.addEventListener("click", function () {
       openChapter();
     });
@@ -2062,19 +2126,100 @@
       ev.stopPropagation();
       shiftChapter(1);
     });
-    chBox.querySelector(".ew-chapter-x").addEventListener("click", hideChapter);
+    chList.addEventListener("mousedown", function (ev) {
+      if (chPick || !canEditVerses()) return;
+      var text = ev.target.closest && ev.target.closest(".ew-vs-text");
+      if (!text) return;
+      text.contentEditable = "true";
+    });
+    chList.addEventListener("click", function (ev) {
+      if (!chPick) return;
+      var row = ev.target.closest && ev.target.closest("[data-vs]");
+      if (!row || !chList.contains(row)) return;
+      ev.preventDefault();
+      onChapterClick({ currentTarget: row });
+    });
+    chList.addEventListener("input", noteHits);
+    chList.addEventListener("keyup", noteHits);
+    function editBlock(node) {
+      var el = node && (node.nodeType === 1 ? node : node.parentElement);
+      var hits = el && el.closest && el.closest(".ew-ch-hits");
+      if (!hits) return null;
+      while (el && el.parentElement !== hits) el = el.parentElement;
+      return el && el !== hits ? el : null;
+    }
+    function caretText(block, before) {
+      var sel = window.getSelection();
+      if (!sel || !sel.isCollapsed || !sel.rangeCount || !block) return null;
+      var range = sel.getRangeAt(0);
+      if (!block.contains(range.startContainer)) return null;
+      var slice = range.cloneRange();
+      slice.selectNodeContents(block);
+      if (before) slice.setEnd(range.startContainer, range.startOffset);
+      else slice.setStart(range.startContainer, range.startOffset);
+      return slice.toString();
+    }
+    function placeCaret(node) {
+      var sel = window.getSelection();
+      var range = document.createRange();
+      range.setStart(node, 0);
+      range.collapse(true);
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+    chList.addEventListener("keydown", function (ev) {
+      if (!canEditVerses() || chPick || ev.isComposing) return;
+      var node = ev.target;
+      var host = node && node.closest && node.closest(".ew-ch-hits");
+      if (!host) {
+        var sel = window.getSelection();
+        node = sel && sel.anchorNode;
+        if (node && node.nodeType === 3) node = node.parentElement;
+        host = node && node.closest && node.closest(".ew-ch-hits");
+      }
+      if (!host) return;
+      var key = (ev.key || "").toLowerCase();
+      if ((ev.metaKey || ev.ctrlKey) && !ev.altKey && (key === "b" || key === "i" || key === "u")) {
+        ev.preventDefault();
+        document.execCommand(key === "b" ? "bold" : key === "i" ? "italic" : "underline");
+        noteHits();
+        return;
+      }
+      var text = node.closest && node.closest(".ew-vs-text");
+      if (!text) return;
+      if (ev.key === "Backspace" && caretText(text, true) === "") {
+        var prev = text.parentElement && text.parentElement.previousElementSibling;
+        var prevText = prev && prev.querySelector && prev.querySelector(".ew-vs-text");
+        if (!prevText) return;
+        ev.preventDefault();
+        var mark = document.createTextNode("");
+        prevText.appendChild(mark);
+        while (text.firstChild) prevText.appendChild(text.firstChild);
+        text.parentElement.remove();
+        placeCaret(mark);
+        noteHits();
+        return;
+      }
+      if (ev.key === "Delete" && caretText(text, false) === "") {
+        var next = text.parentElement && text.parentElement.nextElementSibling;
+        var nextText = next && next.querySelector && next.querySelector(".ew-vs-text");
+        if (!nextText) return;
+        ev.preventDefault();
+        while (nextText.firstChild) text.appendChild(nextText.firstChild);
+        next.remove();
+        noteHits();
+      }
+    });
     document.addEventListener("keydown", function (ev) {
       if (ev.key !== "Escape") return;
-      if (dirty) return;
-      if (chBox && !chBox.hidden) hideChapter();
-      else if (box && !box.hidden) hide();
+      if ((chBox && !chBox.hidden) || (box && !box.hidden)) cancelFootnote();
     });
     document.addEventListener("mousedown", function (ev) {
-      if (!box || box.hidden) return;
-      if (dirty) return;
+      var open = (chBox && !chBox.hidden) || (box && !box.hidden);
+      if (!open) return;
       var t = ev.target;
       if (t.closest && t.closest("#ew-verse, #ew-chapter, a.ref, #ew-pick, #ew-ref-menu")) return;
-      hide();
+      cancelFootnote();
     });
     return box;
   }
@@ -2100,7 +2245,8 @@
   }
   function markClean() {
     dirty = false;
-    snapshot = body ? body.innerHTML : "";
+    var hits = chList && chList.querySelector(".ew-ch-hits");
+    snapshot = hits ? hits.innerHTML : body ? body.innerHTML : "";
     syncChrome();
   }
   function markDirty() {
@@ -2123,13 +2269,11 @@
     if (saveCloseBtn) {
       saveCloseBtn.hidden = !edit || !dirty;
       saveCloseBtn.disabled = !edit || !dirty;
+      saveCloseBtn.textContent = "Save and Close";
     }
-    if (revertBtn) {
-      revertBtn.hidden = !edit;
-      revertBtn.disabled = !edit || !dirty || !savedCopy;
-    }
+    if (revertBtn) revertBtn.hidden = true;
     cancelBtn.hidden = false;
-    cancelBtn.textContent = edit && dirty ? "Cancel" : "Close";
+    cancelBtn.textContent = edit && (dirty || chPick) ? "Cancel" : "Close";
     cancelBtn.disabled = false;
     syncPref();
   }
@@ -2148,7 +2292,6 @@
         row.classList.toggle("on", row.getAttribute("data-tr") === cur);
       });
     }
-    if (chTrNow) chTrNow.textContent = trShort(cur);
     if (chTrList) {
       Array.prototype.forEach.call(chTrList.querySelectorAll("[data-tr]"), function (row) {
         row.classList.toggle("on", row.getAttribute("data-tr") === cur && chView !== "NKJV");
@@ -2236,9 +2379,19 @@
     if (!chPickBtn) return;
     chPickBtn.hidden = !canEditVerses();
     chPickBtn.classList.toggle("on", chPick);
-    if (!chPick) chPickBtn.textContent = "Change the popup verses";
-    else if (chStart && !chEnd) chPickBtn.textContent = "Now click the last verse.";
-    else chPickBtn.textContent = "Click the first verse, then the last";
+    chPickBtn.textContent = "Modify";
+    var msg = chBox && chBox.querySelector(".ew-fn-msg");
+    if (msg) {
+      msg.hidden = !chPick;
+      msg.textContent = !chStart ? "Click the first verse" : "Click the second verse";
+    }
+    var hits = chList && chList.querySelector(".ew-ch-hits");
+    if (hits) {
+      hits.contentEditable = "false";
+      Array.prototype.forEach.call(hits.querySelectorAll(".ew-vs-text"), function (text) {
+        text.contentEditable = canEditVerses() && !chPick ? "true" : "false";
+      });
+    }
   }
   function bookByNum(n) {
     var i;
@@ -2307,7 +2460,8 @@
     setRefRange(chStart, chEnd);
     chPick = false;
     syncPickBtn();
-    fillFromChapter();
+    markDirty();
+    loadChapter();
   }
   function openChapter() {
     if (!currentRef) return;
@@ -2322,48 +2476,120 @@
     syncPickBtn();
     loadChapter();
   }
+  function sameChapter() {
+    return !!(
+      chBrowse &&
+      currentRef &&
+      currentRef.book === chBrowse.book &&
+      Number(currentRef.ch1) === Number(chBrowse.ch)
+    );
+  }
   function loadChapter() {
     if (!chBrowse || !chList) return;
-    var tr = chView === "NKJV" ? "NKJV" : currentTr();
-    setAbbrTitle(chTitle, chBrowse.name + " " + chBrowse.ch, isExtraBook(chBrowse.book) ? "" : tr);
+    var tr = chView || "NKJV";
+    var heading = chBrowse.name + " " + chBrowse.ch;
+    if (sameChapter() && currentRef.label) heading = currentRef.label;
+    if (chTitle) chTitle.textContent = heading;
     syncChNav();
-    paintTrPick();
+    paintVersionsBtn();
     chList.textContent = "Opening…";
-    fetchChapter(tr, chBrowse.book, chBrowse.ch)
-      .then(function (rows) {
-        chRows = rows || [];
+    var storedJob =
+      currentRef && currentRef.label
+        ? fetchStored(currentRef.label).catch(function () {
+            return null;
+          })
+        : Promise.resolve(null);
+    Promise.all([fetchChapter(tr, chBrowse.book, chBrowse.ch), storedJob])
+      .then(function (pair) {
+        var rows = pair[0] || [];
+        var stored = pair[1];
+        var storedMap = stored && stored.text ? verseMapFromHtml(storedHtml(stored.text)) : {};
+        chRows = rows;
         chList.innerHTML = "";
-        if (!chRows.length) {
+        if (!rows.length) {
           chList.textContent = "Could not open that chapter.";
           return;
         }
-        chRows.forEach(function (row) {
-          var btn = document.createElement("button");
-          btn.type = "button";
-          btn.className = "ew-ch-row";
-          btn.setAttribute("data-vs", String(row.verse));
-          btn.innerHTML = "<sup>" + row.verse + "</sup> " + cleanVerse(row.text, tr).replace(/</g, "&lt;");
-          btn.addEventListener("click", onChapterClick);
-          chList.appendChild(btn);
+        if (currentRef && isExtraBook(currentRef.book)) {
+          var warn = document.createElement("div");
+          warn.innerHTML = extraWarningHtml(currentRef);
+          if (warn.firstChild) chList.appendChild(warn.firstChild);
+        }
+        var hit = sameChapter() ? refHitRange() : null;
+        var before = document.createElement("div");
+        var hits = document.createElement("div");
+        hits.className = "ew-ch-hits";
+        hits.contentEditable = "false";
+        var after = document.createElement("div");
+        rows.forEach(function (row) {
+          var n = Number(row.verse);
+          var inHit = !!(hit && n >= hit.a && n <= hit.b);
+          var inner =
+            inHit && storedMap[n] ? storedMap[n] : cleanVerse(row.text, tr).replace(/</g, "&lt;");
+          var el = document.createElement(inHit ? "p" : "div");
+          el.className = "ew-ch-row" + (inHit ? " hit" : "");
+          el.setAttribute("data-vs", String(n));
+          var words = String(inner || "").replace(/^\s*<sup\b[^>]*>\s*\d+\s*<\/sup>\s*/i, "");
+          var num = document.createElement("span");
+          num.className = "ew-vs";
+          num.setAttribute("contenteditable", "false");
+          num.textContent = String(n);
+          var text = document.createElement("span");
+          text.className = "ew-vs-text";
+          if (inHit && canEditVerses() && !chPick) text.contentEditable = "true";
+          text.innerHTML = words;
+          el.appendChild(num);
+          el.appendChild(document.createTextNode(" "));
+          el.appendChild(text);
+          if (hit && n > hit.b) after.appendChild(el);
+          else if (inHit) hits.appendChild(el);
+          else if (hit && n < hit.a) before.appendChild(el);
+          else after.appendChild(el);
         });
+        if (before.childNodes.length) chList.appendChild(before);
+        if (hits.childNodes.length) chList.appendChild(hits);
+        if (after.childNodes.length) chList.appendChild(after);
+        if (!dirty) snapshot = hits.innerHTML;
         paintChapterRows();
+        sizeFootnoteList();
         scrollHitToMiddle();
+        syncChrome();
       })
       .catch(function () {
         chList.textContent = "Could not open that chapter.";
       });
   }
+  function sizeFootnoteList() {
+    if (!chBox) return;
+    var portrait = window.matchMedia("(orientation: portrait)").matches;
+    var width = portrait ? "80vw" : "60vw";
+    chBox.style.setProperty("transform", "none", "important");
+    chBox.style.setProperty("left", portrait ? "10vw" : "20vw", "important");
+    chBox.style.setProperty("top", "10vh", "important");
+    chBox.style.setProperty("width", width, "important");
+    chBox.style.setProperty("max-width", width, "important");
+    chBox.style.setProperty("height", "80vh", "important");
+    chBox.style.setProperty("max-height", "80vh", "important");
+    if (!chList) return;
+    chList.style.setProperty("max-height", "none", "important");
+    chList.style.setProperty("height", "auto", "important");
+    chList.style.flex = "1 1 auto";
+  }
   function scrollHitToMiddle() {
     if (!chList) return;
     requestAnimationFrame(function () {
-      var hits = chList.querySelectorAll(".ew-ch-row.hit");
-      if (!hits.length) return;
-      var first = hits[0].getBoundingClientRect();
-      var last = hits[hits.length - 1].getBoundingClientRect();
+      var hits = chList.querySelector(".ew-ch-hits");
+      if (!hits) return;
+      chList.style.setProperty("padding-top", "0px", "important");
+      chList.style.setProperty("padding-bottom", "0px", "important");
       var list = chList.getBoundingClientRect();
-      var mid = (first.top + last.bottom) / 2;
-      var centre = list.top + list.height / 2;
-      chList.scrollTop += mid - centre;
+      var hb = hits.getBoundingClientRect();
+      var delta = hb.top + hb.height / 2 - (list.top + list.height / 2);
+      var next = chList.scrollTop + delta;
+      var max = Math.max(0, chList.scrollHeight - chList.clientHeight);
+      if (next < 0) next = 0;
+      if (next > max) next = max;
+      chList.scrollTop = next;
     });
   }
   function isExtraBook(n) {
@@ -2374,11 +2600,94 @@
     if (box) box.classList.toggle("ew-extra", extra);
     if (chBox) chBox.classList.toggle("ew-extra", extra);
     var tools = box && box.querySelector(".ew-verse-tools");
-    if (tools) tools.hidden = extra;
-    if (prefBtn) prefBtn.hidden = extra;
-    if (altWrap) altWrap.hidden = extra || !prefOn();
-    if (chNkjv) chNkjv.hidden = extra;
+    if (tools) tools.hidden = true;
+    if (prefBtn) prefBtn.hidden = true;
+    if (altWrap) altWrap.hidden = true;
+    if (chTrList && extra) chTrList.hidden = true;
+    paintVersionsBtn();
+  }
+  function paintVersionsBtn() {
+    var extra = !!(currentRef && isExtraBook(currentRef.book));
+    var other = !extra && chView && chView !== "NKJV";
+    if (chNkjv) {
+      chNkjv.textContent = extra ? extraBookName(currentRef) || "Extra-biblical" : "NKJV";
+      chNkjv.classList.toggle("on", !extra && !other);
+    }
     if (chTrPick) chTrPick.hidden = extra;
+    if (chTrNow) {
+      chTrNow.hidden = extra;
+      chTrNow.textContent = "Versions";
+      chTrNow.classList.toggle("on", !!other);
+    }
+    var verNow = chBox && chBox.querySelector(".ew-ver-now");
+    if (verNow) {
+      var picked = trById(chView);
+      verNow.hidden = false;
+      verNow.textContent = other ? (picked && picked.label) || chView : "";
+      verNow.classList.toggle("on", !!other);
+    }
+    if (!chTrList) return;
+    if (extra) chTrList.hidden = true;
+    Array.prototype.forEach.call(chTrList.querySelectorAll("[data-tr]"), function (row) {
+      row.classList.toggle("on", !extra && row.getAttribute("data-tr") === chView);
+    });
+  }
+  function noteHits() {
+    if (!canEditVerses() || chPick) return;
+    var hits = chList && chList.querySelector(".ew-ch-hits");
+    if (!hits) return;
+    if ((hits.innerHTML || "") !== snapshot) markDirty();
+    else {
+      dirty = false;
+      syncChrome();
+    }
+  }
+  function cancelFootnote() {
+    if (savedLink && linkSnap) {
+      if (linkSnap.ref) savedLink.setAttribute("data-ref", linkSnap.ref);
+      savedLink.textContent = linkSnap.text || "";
+      var host = savedLink.closest && savedLink.closest("[contenteditable='true']");
+      if (host) host.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+    hide();
+  }
+  function ensureFootnoteStyle() {
+    var el = document.getElementById("ew-fn-pop-style");
+    if (!el) {
+      el = document.createElement("style");
+      el.id = "ew-fn-pop-style";
+      el.textContent =
+        "#ew-chapter.ew-fn-pop{position:fixed;z-index:90;left:20vw;right:auto;top:10vh;bottom:auto;transform:none!important;width:60vw!important;max-width:60vw!important;height:80vh!important;max-height:80vh!important;background:transparent;box-shadow:none!important;flex-direction:column;box-sizing:border-box}" +
+        "#ew-chapter.ew-fn-pop:not([hidden]){display:flex!important}" +
+        "#ew-chapter.ew-fn-pop[hidden]{display:none!important}" +
+        "@media (orientation:portrait){#ew-chapter.ew-fn-pop{left:10vw!important;width:80vw!important;max-width:80vw!important}}" +
+        "#ew-chapter.ew-fn-pop .ew-fn-card{background:#eaf6e8!important;color:#1b3a4b;border:2px solid #1b3a4b!important;border-radius:6px;box-shadow:18px 28px 48px rgba(20,40,30,.55)!important;height:100%!important;max-height:100%!important;overflow:hidden!important;display:flex;flex-direction:column;box-sizing:border-box}" +
+        "#ew-chapter.ew-fn-pop .ew-fn-bar{display:flex!important;flex-wrap:nowrap!important;align-items:center;gap:.4rem;margin:0 0 .7rem}" +
+        "#ew-chapter.ew-fn-pop .ew-fn-bar button{width:auto!important;min-width:0!important;min-height:0!important;flex:0 0 auto!important;display:inline-block!important;margin:0!important;padding:.22rem .65rem!important;font:600 13px/1.2 Arial,Helvetica,sans-serif!important;white-space:nowrap!important;border:1px solid #c5d0d4;background:#fff;color:#1b3a4b;border-radius:4px;cursor:pointer}" +
+        "#ew-chapter.ew-fn-pop .ew-fn-bar button[hidden]{display:none!important}" +
+        "#ew-chapter.ew-fn-pop .ew-ch-nkjv.on,#ew-chapter.ew-fn-pop .ew-versions-btn.on{background:#e8eef6!important;color:#005eb8!important;border-color:#005eb8!important}" +
+        "#ew-chapter.ew-fn-pop .ew-ch-tr{display:inline-flex!important;align-items:center;gap:.35rem;flex:0 0 auto}" +
+        "#ew-chapter.ew-fn-pop .ew-ver-now{display:inline-block!important;box-sizing:border-box;width:4.8ch;min-width:4.8ch;visibility:hidden;overflow:hidden;text-align:left;font:600 13px/1.2 Arial,Helvetica,sans-serif;color:#005eb8;white-space:nowrap}" +
+        "#ew-chapter.ew-fn-pop .ew-ver-now.on{visibility:visible}" +
+        "#ew-chapter.ew-fn-pop .ew-ch-prev,#ew-chapter.ew-fn-pop .ew-ch-next{border:0!important;background:transparent!important;color:#1b3a4b;padding:0 .35rem!important}" +
+        "#ew-chapter.ew-fn-pop .ew-ch-prev::before,#ew-chapter.ew-fn-pop .ew-ch-next::before{content:none;display:none}" +
+        "#ew-chapter.ew-fn-pop .ew-chapter-title{flex:0 1 auto;color:#005eb8;font-weight:400;white-space:nowrap}" +
+        "#ew-chapter.ew-fn-pop .ew-ch-nkjv.on{background:#e8eef6;color:#005eb8;border-color:#005eb8}" +
+        "#ew-chapter.ew-fn-pop .ew-fn-mod{position:relative;display:inline-flex;flex:0 0 auto}" +
+        "#ew-chapter.ew-fn-pop .ew-fn-msg{position:absolute;top:calc(100% + 4px);left:0;z-index:6;background:#fff;border:1px solid #c5d0d4;border-radius:4px;padding:.2rem .5rem;font:600 13px/1.2 Arial,Helvetica,sans-serif;color:#1b3a4b;white-space:nowrap;box-shadow:0 6px 16px rgba(27,58,75,.12)}" +
+        "#ew-chapter.ew-fn-pop .ew-chapter-list{background:transparent!important;overflow:auto;flex:1 1 auto!important;min-height:0;height:auto!important;max-height:none!important}" +
+        "#ew-chapter.ew-fn-pop .ew-ch-row{display:block;width:100%;text-align:left;border:0;background:transparent;padding:.12rem .2rem;font:400 .98rem/1.35 Arial,Helvetica,sans-serif;color:#1b3a4b}" +
+        "#ew-chapter.ew-fn-pop .ew-vs{color:#1f6f78;font-weight:700;padding-right:.15rem;-webkit-user-select:none;user-select:none}" +
+        "#ew-chapter.ew-fn-pop .ew-vs-text[contenteditable='true']{cursor:text;-webkit-user-modify:read-write;-webkit-user-select:text!important;user-select:text!important}" +
+        "#ew-chapter.ew-fn-pop .ew-tr-list{position:fixed!important;width:max-content!important;max-height:none!important;height:auto!important;overflow:visible!important;z-index:200!important}" +
+        "#ew-chapter.ew-fn-pop .ew-tr-list [data-tr]{display:grid!important;grid-template-columns:max-content max-content!important;column-gap:1.2rem!important}" +
+        "#ew-chapter.ew-fn-pop .ew-ch-row.hit,#ew-chapter.ew-fn-pop .ew-ch-hits p{background:#dce8f2!important;margin:0}" +
+        "#ew-chapter.ew-fn-pop .ew-ch-row sup{color:#1f6f78;font-weight:700;padding-right:.25rem}" +
+        "#ew-chapter.ew-fn-pop .ew-tr-list{max-height:none!important;height:auto!important;overflow:visible!important}" +
+        "#ew-chapter.ew-fn-pop .ew-extra-note{color:#0a7a22;font-weight:700;margin:0 0 .6rem}" +
+        "#ew-verse{display:none!important}";
+    }
+    document.body.appendChild(el);
   }
   function markExtraRefs() {
     document.querySelectorAll("a.ref").forEach(function (a) {
@@ -2446,75 +2755,37 @@
   }
   function lookupThenShow() {
     ensureBox();
+    linkSnap = savedLink
+      ? { ref: savedLink.getAttribute("data-ref") || "", text: savedLink.textContent || "" }
+      : null;
+    if (box) box.hidden = true;
+    chPick = false;
+    chStart = 0;
+    chEnd = 0;
+    chView = currentRef && !isExtraBook(currentRef.book) ? chosen() : "NKJV";
+    chBrowse = currentRef
+      ? { book: currentRef.book, name: currentRef.name, ch: currentRef.ch1 || 1 }
+      : null;
+    chBox.hidden = false;
+    markExtraChrome();
+    paintVersionsBtn();
+    syncPickBtn();
     if (!currentRef.vs1) {
-      waitForVerses();
+      loadChapter();
+      if (canEditVerses()) {
+        chPick = true;
+        syncPickBtn();
+      }
       return;
     }
-    nkjvHtml = "";
-    inFile = false;
-    fetchStored(currentRef.label)
-      .then(function (d) {
-        if (d && d.found && d.text) {
-          inFile = true;
-          showPopup();
-          if (!applyPopupVerses(d.text, [])) {
-            setPopupHtml(storedHtml(d.text));
-            savedCopy = nkjvHtml;
-            markHitPassages();
-          }
-          markClean();
-          return;
-        }
-        if (canEditVerses()) {
-          waitForVerses();
-          return;
-        }
-        showPopup();
-        return loadPassage(currentRef, "NKJV").then(function (verses) {
-          var kept = {};
-          addMissingVerses(kept, verses);
-          var htmlLive = htmlFromVerseMap(kept, currentRef.vs1, vs2Safe(currentRef));
-          if (!htmlLive) {
-            body.textContent = "That passage is not in the scriptures file yet.";
-            markClean();
-            return;
-          }
-          setPopupHtml(htmlLive);
-          savedCopy = nkjvHtml;
-          markHitPassages();
-          markClean();
-        });
-      })
-      .catch(function () {
-        if (canEditVerses()) waitForVerses();
-        else {
-          showPopup();
-          return loadPassage(currentRef, "NKJV")
-            .then(function (verses) {
-              var kept = {};
-              addMissingVerses(kept, verses);
-              var htmlCatch = htmlFromVerseMap(kept, currentRef.vs1, vs2Safe(currentRef));
-              if (!htmlCatch) {
-                body.textContent = "Could not open the NKJV.";
-                markClean();
-                return;
-              }
-              setPopupHtml(htmlCatch);
-              savedCopy = nkjvHtml;
-              markHitPassages();
-              markClean();
-            })
-            .catch(function () {
-              body.textContent = "Could not open the NKJV.";
-              markClean();
-            });
-        }
-      });
+    loadChapter();
   }
   function bodyHtml() {
     return body ? body.innerHTML : "";
   }
   function htmlToSave() {
+    var hits = chList && chList.querySelector(".ew-ch-hits");
+    if (hits && String(hits.innerHTML || "").trim()) return hits.innerHTML;
     return bodyHtml();
   }
   function revertSaved() {
@@ -2559,9 +2830,13 @@
         if (out.r.ok) {
           inFile = true;
           nkjvHtml = html;
-          if (body && body.innerHTML !== html) body.innerHTML = html;
           savedCopy = html;
+          snapshot = html;
+          if (savedLink) {
+            linkSnap = { ref: savedLink.getAttribute("data-ref") || "", text: savedLink.textContent || "" };
+          }
           rememberSaved(currentRef.label, html);
+          updateSavedLink();
           scripturesFile = null;
           markClean();
           if (andClose) hide();
