@@ -721,6 +721,94 @@
     }
     return html;
   }
+  function sameWord(a, b) {
+    if (a === b) return true;
+    if (a.length > 4 && b.length > 4 && (a === b + "s" || b === a + "s")) return true;
+    return false;
+  }
+  function findPhrase(prefNorms, phraseNorms) {
+    var n = phraseNorms.length;
+    if (!n || !prefNorms.length) return null;
+    var best = null;
+    var i, j, pi, start;
+    for (i = 0; i < prefNorms.length; i++) {
+      pi = 0;
+      start = -1;
+      for (j = i; j < prefNorms.length && pi < n && j < i + n + 3; j++) {
+        if (!sameWord(prefNorms[j], phraseNorms[pi])) continue;
+        if (start < 0) start = j;
+        pi += 1;
+        if (pi === n) {
+          var extra = j + 1 - start - n;
+          if (!best || extra < best.extra) best = { start: start, end: j + 1, extra: extra };
+          break;
+        }
+      }
+    }
+    return best && best.extra <= 2 ? best : null;
+  }
+  function nkjvPhrases(html) {
+    var out = [];
+    nkjvShape(html).forEach(function (s) {
+      if (s.type !== "words" || !s.sample || (!s.bold && !s.italic)) return;
+      var words = s.sample.map(normWord).filter(Boolean);
+      if (words.length) out.push({ words: words, bold: !!s.bold, italic: !!s.italic });
+    });
+    return out;
+  }
+  function formatWithPhrases(plain, phrases, nkjvInner) {
+    var words = splitWords(plain);
+    if (!words.length) return "";
+    var norms = words.map(normWord);
+    var boldMarks = [];
+    var italicMarks = [];
+    var k;
+    for (k = 0; k < words.length; k++) {
+      boldMarks[k] = false;
+      italicMarks[k] = false;
+    }
+    (phrases || []).forEach(function (ph) {
+      var win = findPhrase(norms, ph.words);
+      if (!win) return;
+      var i;
+      for (i = win.start; i < win.end; i++) {
+        if (ph.bold) boldMarks[i] = true;
+        if (ph.italic) italicMarks[i] = true;
+      }
+    });
+    var shaped = nkjvInner ? shapeLike(nkjvInner, plain) : "";
+    var breakAt = {};
+    if (shaped.indexOf("<br>") >= 0) {
+      var seen = 0;
+      var segs = nkjvShape(nkjvInner);
+      var nkjvN = 0;
+      segs.forEach(function (s) {
+        if (s.type === "words") nkjvN += s.n;
+      });
+      segs.forEach(function (s) {
+        if (s.type === "words") seen += s.n;
+        else if (s.type === "break" && seen && nkjvN) {
+          var at = Math.round((seen / nkjvN) * words.length);
+          if (at > 0 && at < words.length) breakAt[at] = true;
+        }
+      });
+    }
+    var html = "";
+    var i = 0;
+    while (i < words.length) {
+      var bold = !!boldMarks[i];
+      var italic = !!italicMarks[i];
+      var j = i + 1;
+      while (j < words.length && !!boldMarks[j] === bold && !!italicMarks[j] === italic && !breakAt[j]) j++;
+      var chunk = escTxt(words.slice(i, j).join(" "));
+      if (italic) chunk = "<i>" + chunk + "</i>";
+      if (bold) chunk = "<b>" + chunk + "</b>";
+      if (html) html += breakAt[i] ? "<br>" : " ";
+      html += chunk;
+      i = j;
+    }
+    return html;
+  }
   function verseMapFromHtml(html) {
     var map = {};
     var raw = String(html || "");
@@ -2035,6 +2123,7 @@
       list.style.setProperty("position", "fixed", "important");
       list.style.setProperty("left", r.left + "px", "important");
       list.style.setProperty("top", r.bottom + 4 + "px", "important");
+      list.style.setProperty("min-width", "0", "important");
       list.style.setProperty("width", "max-content", "important");
       list.style.setProperty("max-height", "none", "important");
       list.style.setProperty("height", "auto", "important");
@@ -2521,6 +2610,7 @@
         var rows = pair[0] || [];
         var stored = pair[1];
         var storedMap = stored && stored.text ? verseMapFromHtml(storedHtml(stored.text)) : {};
+        var phrases = tr !== "NKJV" && stored && stored.text ? nkjvPhrases(stored.text) : [];
         chRows = rows;
         chList.innerHTML = "";
         if (!rows.length) {
@@ -2543,7 +2633,7 @@
           var inHit = !!(hit && n >= hit.a && n <= hit.b);
           var plain = cleanVerse(row.text, tr);
           var inner = escTxt(plain);
-          if (inHit && storedMap[n] && tr !== "NKJV") inner = shapeLike(storedMap[n], plain) || inner;
+          if (inHit && tr !== "NKJV" && phrases.length) inner = formatWithPhrases(plain, phrases, storedMap[n]) || inner;
           else if (inHit && storedMap[n]) inner = storedMap[n];
           var el = document.createElement(inHit ? "p" : "div");
           el.className = "ew-ch-row" + (inHit ? " hit" : "");
@@ -2736,11 +2826,12 @@
         "#ew-chapter.ew-fn-pop .ew-ch-row{display:block;width:100%;text-align:left;border:0;background:transparent;padding:.12rem .2rem;font:400 .98rem/1.35 Arial,Helvetica,sans-serif;color:#1b3a4b}" +
         "#ew-chapter.ew-fn-pop .ew-vs{color:#1f6f78;font-weight:700;padding-right:.15rem;-webkit-user-select:none;user-select:none}" +
         "#ew-chapter.ew-fn-pop .ew-vs-text[contenteditable='true']{cursor:text;-webkit-user-modify:read-write;-webkit-user-select:text!important;user-select:text!important}" +
-        "#ew-chapter.ew-fn-pop .ew-tr-list{position:fixed!important;width:max-content!important;max-height:none!important;height:auto!important;overflow:visible!important;z-index:200!important}" +
-        "#ew-chapter.ew-fn-pop .ew-tr-list [data-tr]{display:grid!important;grid-template-columns:max-content max-content!important;column-gap:1.2rem!important}" +
+        "#ew-chapter.ew-fn-pop .ew-tr-list{position:fixed!important;width:max-content!important;min-width:0!important;max-width:max-content!important;max-height:none!important;height:auto!important;overflow:visible!important;z-index:200!important;padding:.15rem 0!important}" +
+        "#ew-chapter.ew-fn-pop .ew-tr-list [data-tr]{display:grid!important;grid-template-columns:max-content 4.6ch!important;column-gap:.9rem!important;width:auto!important;min-width:0!important;padding:.15rem .55rem!important}" +
+        "#ew-chapter.ew-fn-pop .ew-tr-year{text-align:right!important;justify-self:end!important}" +
         "#ew-chapter.ew-fn-pop .ew-ch-row.hit,#ew-chapter.ew-fn-pop .ew-ch-hits p{background:#dce8f2!important;margin:0}" +
         "#ew-chapter.ew-fn-pop .ew-ch-row sup{color:#1f6f78;font-weight:700;padding-right:.25rem}" +
-        "#ew-chapter.ew-fn-pop .ew-tr-list{max-height:none!important;height:auto!important;overflow:visible!important}" +
+
         "#ew-chapter.ew-fn-pop .ew-extra-note{color:#0a7a22;font-weight:700;margin:0 0 .6rem}" +
         "#ew-verse{display:none!important}";
     }
