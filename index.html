@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eternal Wellspring — scripture on the meaning of the Word</title>
+  <meta name="description" content="Scripture websites: Waiting for the sons of God and Scripture Narratives. The Word opens beside the story, from Genesis to Revelation." />
+  <link rel="icon" href="images/icon.jpg" />
+  <link rel="stylesheet" href="index.css?v=15" />
+</head>
+<body class="home-page">
+  <header class="home-top">
+    <a class="ew-mark" href="home.html">
+      <img src="images/icon.jpg" alt="" />
+      <span class="ew-words">Eternal<br />Wellspring</span>
+    </a>
+  </header>
+
+  <main class="ew-find">
+    <h1>Eternal Wellspring</h1>
+    <p>A set of scripture websites. The Word opens beside the story. Choose the site that fits what you want to read.</p>
+
+    <h2>Categories</h2>
+    <div id="categories" class="ew-pick" role="listbox" aria-label="Categories">
+      <button type="button" class="on" role="option" aria-selected="true" data-category="End Times Prophecies">End Times Prophecies (2)</button>
+    </div>
+
+    <h2>Websites</h2>
+    <div id="site-list" class="ew-sites">
+      <a class="ew-site" href="/Waiting-for-the-sons-of-God" data-folder="Waiting-for-the-sons-of-God" data-category="End Times Prophecies">
+        <strong>Waiting for the sons of God</strong>
+        <span>Creation is waiting for you.</span>
+        <span class="ew-site-more">The story behind the scenes of Creation, from Genesis to Revelation. Passages that seemed strange begin to fit. The Word opens beside the story.</span>
+      </a>
+      <a class="ew-site" href="/Scripture-Narratives" data-folder="Scripture-Narratives" data-category="End Times Prophecies">
+        <strong>Scripture Narratives</strong>
+        <span>Scripture for Biblical Narratives</span>
+        <span class="ew-site-more">Find the scriptures relating to key events in history and prophesied events.</span>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    var categories = [];
+    var chosenCat = "End Times Prophecies";
+
+    function $(id) {
+      return document.getElementById(id);
+    }
+
+    function catName(c) {
+      return String((c && c.name) || "").trim();
+    }
+
+    function sameCat(a, b) {
+      return String(a || "").trim().toLowerCase() === String(b || "").trim().toLowerCase();
+    }
+
+    function isWellspring(s) {
+      var f = String((s && s.folder) || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+      var n = String((s && s.name) || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+      return f === "eternalwellspring" || n === "eternalwellspring";
+    }
+
+    function listedSites() {
+      return Array.prototype.slice.call(document.querySelectorAll("#site-list .ew-site"));
+    }
+
+    function countIn(name) {
+      var n = 0;
+      listedSites().forEach(function (a) {
+        if (sameCat(a.getAttribute("data-category"), name)) n += 1;
+      });
+      return n;
+    }
+
+    function categoriesWithSites() {
+      var have = {};
+      listedSites().forEach(function (a) {
+        var n = String(a.getAttribute("data-category") || "").trim();
+        if (!n) return;
+        var k = n.toLowerCase();
+        if (!have[k]) have[k] = n;
+      });
+      var out = [];
+      (categories || []).forEach(function (c) {
+        var name = catName(c);
+        if (!name) return;
+        var k = name.toLowerCase();
+        if (have[k]) {
+          out.push(have[k]);
+          delete have[k];
+        }
+      });
+      Object.keys(have).sort().forEach(function (k) {
+        out.push(have[k]);
+      });
+      return out;
+    }
+
+    function fillCategories() {
+      var box = $("categories");
+      if (!box) return;
+      var names = categoriesWithSites();
+      if (!names.length) {
+        box.innerHTML = "";
+        chosenCat = "";
+        filterSites();
+        return;
+      }
+      if (!chosenCat || names.every(function (n) { return !sameCat(n, chosenCat); })) {
+        chosenCat = names[0];
+      }
+      box.innerHTML = "";
+      names.forEach(function (name) {
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.setAttribute("role", "option");
+        btn.setAttribute("data-category", name);
+        btn.textContent = name + " (" + countIn(name) + ")";
+        var on = sameCat(name, chosenCat);
+        btn.className = on ? "on" : "";
+        btn.setAttribute("aria-selected", on ? "true" : "false");
+        btn.addEventListener("click", function () {
+          chosenCat = name;
+          fillCategories();
+        });
+        box.appendChild(btn);
+      });
+      filterSites();
+    }
+
+    function filterSites() {
+      listedSites().forEach(function (a) {
+        a.hidden = !!(chosenCat && !sameCat(a.getAttribute("data-category"), chosenCat));
+      });
+    }
+
+    function addSiteFromJson(s) {
+      if (!s || !s.href || !s.name || isWellspring(s) || s.showOnWeb === false) return;
+      var folder = String(s.folder || "").trim();
+      if (!folder) return;
+      if (document.querySelector('#site-list .ew-site[data-folder="' + folder + '"]')) return;
+      var a = document.createElement("a");
+      a.className = "ew-site";
+      a.href = String(s.href || "").replace(/\/+$/, "") || "/" + folder;
+      a.setAttribute("data-folder", folder);
+      a.setAttribute("data-category", s.category || "");
+      var strong = document.createElement("strong");
+      strong.textContent = s.name;
+      a.appendChild(strong);
+      if (s.tagline) {
+        var tag = document.createElement("span");
+        tag.textContent = s.tagline;
+        a.appendChild(tag);
+      }
+      var more = String(s.description || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+      if (more) {
+        var extra = document.createElement("span");
+        extra.className = "ew-site-more";
+        extra.textContent = more;
+        a.appendChild(extra);
+      }
+      $("site-list").appendChild(a);
+    }
+
+    fillCategories();
+
+    Promise.all([
+      fetch("categories.json").then(function (r) { return r.ok ? r.json() : { categories: [] }; }).catch(function () { return { categories: [] }; }),
+      fetch("sites.json").then(function (r) { return r.ok ? r.json() : { sites: [] }; }).catch(function () { return { sites: [] }; })
+    ]).then(function (pair) {
+      categories = pair[0].categories || [];
+      (pair[1].sites || []).forEach(addSiteFromJson);
+      fillCategories();
+    });
+  </script>
+  <script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
