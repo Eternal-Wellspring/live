@@ -1214,8 +1214,9 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .end-sub-tabs[data-for="s1"] .sub-tab.active { background:#ffffff; border-top-color:#ffffff }
 .tab-dock-end .tab[data-sec="294"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="294"].active { border-top-color:#ffffff; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+h2[data-heading="295"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f6f78; padding:0px; margin-top:0px; margin-bottom:-23px; text-align:left }
 .subsec-frame[data-heading="295"] { font-weight:400; font-style:normal; border-style:solid; border-color:#919191; border-width:0px 0px 0px 0px; padding:5px; margin-top:20px; margin-bottom:-4px; text-align:left }
-h2[data-heading="453"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ffffff; background:#0042aa; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
+h2[data-heading="453"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ffffff; background:#0042aa; padding:0px; margin-top:15px; margin-bottom:0px; text-align:left }
 .subsec-frame[data-heading="453"] { font-size:calc(22px * var(--ew-font, 1)); font-weight:400; font-style:normal; background:#dcfff4; border-style:solid; border-color:#919191; border-width:2.0px 2.0px 2.0px 2.0px; padding:5px; margin-top:0px; margin-bottom:13px; text-align:left }
 .tab[data-sec="s-p2-qa"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="s-p2-qa"] { background:#fefcdd }

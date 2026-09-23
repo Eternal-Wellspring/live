@@ -608,18 +608,18 @@
     var wrap = document.createElement("div");
     wrap.innerHTML = html || "";
     var segs = [];
-    function pushWords(str, bold) {
+    function pushWords(str, bold, italic) {
       var words = splitWords(str);
-      if (words.length) segs.push({ type: "words", n: words.length, bold: !!bold, sample: words });
+      if (words.length) segs.push({ type: "words", n: words.length, bold: !!bold, italic: !!italic, sample: words });
     }
-    function walk(node, bold) {
+    function walk(node, bold, italic) {
       if (!node) return;
       if (node.nodeType === 3) {
         String(node.nodeValue || "")
           .split(/\n/)
           .forEach(function (bit, i) {
             if (i) segs.push({ type: "break" });
-            pushWords(bit, bold);
+            pushWords(bit, bold, italic);
           });
         return;
       }
@@ -630,10 +630,11 @@
         return;
       }
       if (tag === "SUP") return;
-      var now = bold || tag === "B" || tag === "STRONG";
-      for (var i = 0; i < node.childNodes.length; i++) walk(node.childNodes[i], now);
+      var nowBold = bold || tag === "B" || tag === "STRONG";
+      var nowItalic = italic || tag === "I" || tag === "EM";
+      for (var i = 0; i < node.childNodes.length; i++) walk(node.childNodes[i], nowBold, nowItalic);
     }
-    walk(wrap, false);
+    walk(wrap, false, false);
     return segs;
   }
   function overlapScore(a, b) {
@@ -675,12 +676,25 @@
     });
     if (!nkjvN) return escTxt(words.join(" "));
     var boldMarks = [];
-    for (var k = 0; k < words.length; k++) boldMarks[k] = false;
+    var italicMarks = [];
+    for (var k = 0; k < words.length; k++) {
+      boldMarks[k] = false;
+      italicMarks[k] = false;
+    }
     segs.forEach(function (s) {
-      if (s.type !== "words" || !s.bold || !s.sample) return;
-      var win = markBold(words, s.sample);
-      if (!win) return;
-      for (var i = win.start; i < win.end; i++) boldMarks[i] = true;
+      if (s.type !== "words" || !s.sample) return;
+      if (s.bold) {
+        var win = markBold(words, s.sample);
+        if (win) {
+          for (var i = win.start; i < win.end; i++) boldMarks[i] = true;
+        }
+      }
+      if (s.italic) {
+        var iwin = markBold(words, s.sample);
+        if (iwin) {
+          for (var j = iwin.start; j < iwin.end; j++) italicMarks[j] = true;
+        }
+      }
     });
     var breakAt = {};
     var seen = 0;
@@ -695,11 +709,14 @@
     var i = 0;
     while (i < words.length) {
       var bold = !!boldMarks[i];
+      var italic = !!italicMarks[i];
       var j = i + 1;
-      while (j < words.length && !!boldMarks[j] === bold && !breakAt[j]) j++;
+      while (j < words.length && !!boldMarks[j] === bold && !!italicMarks[j] === italic && !breakAt[j]) j++;
       var chunk = escTxt(words.slice(i, j).join(" "));
+      if (italic) chunk = "<i>" + chunk + "</i>";
+      if (bold) chunk = "<b>" + chunk + "</b>";
       if (html) html += breakAt[i] ? "<br>" : " ";
-      html += bold ? "<strong>" + chunk + "</strong>" : chunk;
+      html += chunk;
       i = j;
     }
     return html;
@@ -2524,8 +2541,10 @@
         rows.forEach(function (row) {
           var n = Number(row.verse);
           var inHit = !!(hit && n >= hit.a && n <= hit.b);
-          var inner =
-            inHit && storedMap[n] ? storedMap[n] : cleanVerse(row.text, tr).replace(/</g, "&lt;");
+          var plain = cleanVerse(row.text, tr);
+          var inner = escTxt(plain);
+          if (inHit && storedMap[n] && tr !== "NKJV") inner = shapeLike(storedMap[n], plain) || inner;
+          else if (inHit && storedMap[n]) inner = storedMap[n];
           var el = document.createElement(inHit ? "p" : "div");
           el.className = "ew-ch-row" + (inHit ? " hit" : "");
           el.setAttribute("data-vs", String(n));
@@ -2546,6 +2565,44 @@
           else if (hit && n < hit.a) before.appendChild(el);
           else after.appendChild(el);
         });
+        if (hit) {
+          var seenHit = {};
+          Array.prototype.forEach.call(hits.querySelectorAll("[data-vs]"), function (el) {
+            seenHit[Number(el.getAttribute("data-vs"))] = true;
+          });
+          for (var miss = hit.a; miss <= hit.b; miss++) {
+            if (seenHit[miss]) continue;
+            var missPlain = storedMap[miss] ? cleanVerse(storedMap[miss], "NKJV") : "";
+            var missInner = missPlain
+              ? tr !== "NKJV" && storedMap[miss]
+                ? shapeLike(storedMap[miss], missPlain) || escTxt(missPlain)
+                : storedMap[miss]
+              : "…";
+            var missEl = document.createElement("p");
+            missEl.className = "ew-ch-row hit";
+            missEl.setAttribute("data-vs", String(miss));
+            var missNum = document.createElement("span");
+            missNum.className = "ew-vs";
+            missNum.setAttribute("contenteditable", "false");
+            missNum.textContent = String(miss);
+            var missText = document.createElement("span");
+            missText.className = "ew-vs-text";
+            if (canEditVerses() && !chPick) missText.contentEditable = "true";
+            missText.innerHTML = missInner;
+            missEl.appendChild(missNum);
+            missEl.appendChild(document.createTextNode(" "));
+            missEl.appendChild(missText);
+            var placed = false;
+            Array.prototype.forEach.call(hits.querySelectorAll("[data-vs]"), function (el) {
+              if (placed) return;
+              if (Number(el.getAttribute("data-vs")) > miss) {
+                hits.insertBefore(missEl, el);
+                placed = true;
+              }
+            });
+            if (!placed) hits.appendChild(missEl);
+          }
+        }
         if (before.childNodes.length) chList.appendChild(before);
         if (hits.childNodes.length) chList.appendChild(hits);
         if (after.childNodes.length) chList.appendChild(after);
