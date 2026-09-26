@@ -4398,6 +4398,20 @@
     "description": "End Times Harvest — At the End - 1 Cor 15, Of rule authority & power."
   },
   {
+    "topic_id": 140,
+    "ref": "2Co 5:1-10",
+    "from": 1,
+    "to": 10,
+    "description": "End Times Harvest."
+  },
+  {
+    "topic_id": 140,
+    "ref": "Rev 20:7",
+    "from": 7,
+    "to": 7,
+    "description": "End Times Harvest — Resurrection of unbelievers after the millennium - Rev 20, Satan is in prison during the."
+  },
+  {
     "topic_id": 178,
     "ref": "1Co 15:20-23",
     "from": 20,
@@ -5448,11 +5462,5 @@
     "from": 1,
     "to": 10,
     "description": "God is preparing our eternal House currently in heaven"
-  },
-  {
-    "topic_id": 136,
-    "ref": "Rev 20:7",
-    "from": 7,
-    "to": 7
   }
 ]

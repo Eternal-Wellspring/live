@@ -1,1 +1,0 @@
-../Website Builder/shared footnotes/footnotes.js

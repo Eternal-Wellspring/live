@@ -541,11 +541,11 @@ button.ew-hidden-sub {
   max-width: 100%;
   margin: 0.25rem 0 var(--para-gap, 0px);
   padding: 0.22rem 0.55rem;
-  border: 1px solid #c5d0d4;
+  border: 1px solid #1f6f78;
   border-radius: 2px;
-  background: #e4eaec;
-  color: #5a6d75;
-  font: 400 0.88em Arial, Helvetica, sans-serif;
+  background: #1f6f78;
+  color: #f6f7eb;
+  font: 700 22px Arial, Helvetica, sans-serif;
   line-height: 1.25;
   cursor: pointer;
   user-select: none;
