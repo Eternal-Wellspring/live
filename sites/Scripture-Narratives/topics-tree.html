@@ -122,6 +122,26 @@
       font-weight: 700;
     }
     .tbtn-green.open:hover { background: #32663a; }
+    .tbtn-info {
+      z-index: 45;
+      background: #003a70;
+      color: #fff;
+      border-color: #003a70;
+    }
+    .tbtn-info.zero { opacity: 0.5; }
+    .tbtn-info:hover { background: #002a52; }
+    .tbtn-info.open { background: #005eb8; border-color: #005eb8; }
+    .tbtn-i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.15em;
+      height: 1.15em;
+      border: 1.5px solid #fff;
+      border-radius: 50%;
+      font: 700 11px/1 Arial, Helvetica, sans-serif;
+      color: #fff;
+    }
     .thead { cursor: default; }
     .tdesc {
       position: fixed;
@@ -182,6 +202,8 @@
       padding: 0.2rem 0.4rem;
       border-bottom: 1px solid var(--line);
       background: var(--panel);
+      overflow-x: auto;
+      overflow-y: hidden;
     }
     .tverse-bar-left {
       display: flex;
@@ -234,6 +256,12 @@
       background: #e8eef6;
       color: var(--title);
       border-color: var(--title);
+    }
+    .ew-ver-title {
+      flex: 0 0 auto;
+      color: var(--ink);
+      font: 600 13px/1.2 Arial, Helvetica, sans-serif;
+      white-space: nowrap;
     }
     .ew-ch-prev,
     .ew-ch-next {
@@ -329,6 +357,10 @@
       width: max-content;
       max-height: none;
       overflow: visible;
+      display: grid;
+      grid-template-columns: max-content max-content;
+      column-gap: 0.45rem;
+      padding: 0.12rem 0;
       background: #fff;
       border: 1px solid #d5dee2;
       border-radius: 4px;
@@ -338,16 +370,17 @@
     .ew-tr-list[hidden] { display: none !important; }
     .ew-tr-list [data-tr] {
       display: grid;
-      grid-template-columns: max-content max-content;
-      column-gap: 0.4rem;
+      grid-column: 1 / -1;
+      grid-template-columns: subgrid;
       align-items: baseline;
-      padding: 0.18rem 0.4rem;
+      padding: 0.18rem 0.45rem;
       cursor: pointer;
       font: inherit;
       white-space: nowrap;
     }
     .ew-tr-code { font-weight: 700; }
     .ew-tr-year {
+      justify-self: end;
       text-align: right;
       color: var(--muted);
       font-weight: 500;
@@ -413,6 +446,7 @@
       box-shadow: none;
       background: transparent;
     }
+    .tverse-pick[hidden] { display: none !important; }
     .tverse-pick {
       flex: 0 0 auto;
       display: inline-block;
@@ -508,9 +542,10 @@
     <button type="button" data-in="1">In a level</button>
     <button type="button" data-delete="1">Delete</button>
     <button type="button" data-move="1">Move</button>
+    <button type="button" data-move-to="1">Move To</button>
     <button type="button" data-yes="1">Yes</button>
     <button type="button" data-no="1">No</button>
   </div>
-  <script src="topics-tree.js?v=344"></script>
+  <script src="topics-tree.js?v=359"></script>
 </body>
 </html>

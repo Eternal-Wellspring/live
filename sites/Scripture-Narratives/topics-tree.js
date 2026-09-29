@@ -33,6 +33,16 @@
   var verseEditRef = "";
   var verseBoxEl = null;
   var colScroll = {};
+  var colDelta = {};
+  function clampChildTop(top, innerH, natural, view, roomTop) {
+    var bottom = (view || 0) - PAD;
+    var hi = natural;
+    var lo = natural;
+    if (natural + innerH > bottom) lo = Math.min(natural, bottom - innerH);
+    if (top > hi) top = hi;
+    if (top < lo) top = lo;
+    return Math.round(top);
+  }
   var drag = null;
   var topicDrag = null;
   var skipTopicClick = false;
@@ -58,6 +68,7 @@
     "One below": "[data-add-below]",
     "Delete": "[data-delete]",
     "Move": "[data-move]",
+    "Move To": "[data-move-to]",
     "Yes": "[data-yes]",
     "No": "[data-no]",
     "Add a ref": "[data-add-ref]",
@@ -141,7 +152,7 @@
     }
     return out;
   }
-  var SIB_CAP = 10;
+  var SIB_CAP = 50;
   var editAfterPaint = "";
   var editAfterPaintRef = "";
   function addRefToTopic(t) {
@@ -184,6 +195,27 @@
     }
     return null;
   }
+  function scripturesTopic() {
+    var root = rootId ? find(topics, rootId) : null;
+    var list, i, guard = 0;
+    if (!root) {
+      list = bySeq();
+      for (i = 0; i < list.length; i++) {
+        if ((list[i].level || 1) === 1) { root = list[i]; break; }
+      }
+    }
+    while (root && (root.level || 1) > 1 && guard < 12) {
+      root = parentOf(root);
+      guard += 1;
+    }
+    return root && root.folder ? String(root.folder) : "";
+  }
+  function scripturesQuery(ref) {
+    var q = "ref=" + encodeURIComponent(ref) + "&folder=" + encodeURIComponent(siteFolder());
+    var topic = scripturesTopic();
+    if (topic) q += "&topic=" + encodeURIComponent(topic);
+    return q;
+  }
   function sameTopic(a, b) {
     return !!(a && b && sid(a.id) === sid(b.id));
   }
@@ -221,16 +253,9 @@
     lv = (from.level || 1) + (below ? 1 : 0);
     if (lv < 2) lv = 2;
     parent = below ? from : parentOf(from);
-    if (siblingCount(parent, lv) >= SIB_CAP + extraSibs) {
-      if (extraSibs >= 2) {
-        st = document.getElementById("status");
-        if (st) st.textContent = "That's the limit.";
-        return;
-      }
-      askTwoMore(function () {
-        extraSibs = 2;
-        insertRelative(from, below);
-      });
+    if (siblingCount(parent, lv) >= SIB_CAP) {
+      st = document.getElementById("status");
+      if (st) st.textContent = "That's the limit.";
       return;
     }
     full = bySeq();
@@ -300,16 +325,9 @@
       }
       parent = dest;
     }
-    if (siblingCount(parent, n, from.id) >= SIB_CAP + extraSibs) {
-      if (extraSibs >= 2) {
-        st = document.getElementById("status");
-        if (st) st.textContent = "That's the limit.";
-        return;
-      }
-      askTwoMore(function () {
-        extraSibs = 2;
-        bumpLevel(from, d);
-      });
+    if (siblingCount(parent, n, from.id) >= SIB_CAP) {
+      st = document.getElementById("status");
+      if (st) st.textContent = "That's the limit.";
       return;
     }
     branch = takeBranch(list, i);
@@ -337,6 +355,12 @@
     sel = sid(from.id);
     saveTopics();
     paint();
+  }
+  function byTitle(a, b) {
+    return String(a.title || "").localeCompare(String(b.title || ""), undefined, { numeric: true, sensitivity: "base" });
+  }
+  function alphaTopics(list) {
+    return (list || []).slice().sort(byTitle);
   }
   function kids(items, parent) {
     var i, start = -1, lv = parent.level || 1, out = [];
@@ -682,6 +706,43 @@
     saveTopicRefs();
     paint();
   }
+  function moveRefRecord(label, fromId, dest) {
+    var want, idxs, i, r, lab, p;
+    if (!dest || fromId == null || fromId === "") return false;
+    if (sid(fromId) === sid(dest.id)) return false;
+    label = String(label || "").trim();
+    if (!label) return false;
+    want = parseRefParts(label);
+    idxs = [];
+    for (i = 0; i < topicRefs.length; i++) {
+      r = topicRefs[i];
+      if (sid(r.topic_id) !== sid(fromId)) continue;
+      lab = String(r.ref || "").trim();
+      if (!lab) continue;
+      if (lab === label || sameRef(lab, label)) { idxs.push(i); continue; }
+      if (!want) continue;
+      p = parseRefParts(lab);
+      if (!p || p.book !== want.book || p.ch !== want.ch) continue;
+      if (p.a >= want.a && p.b <= want.b) idxs.push(i);
+    }
+    if (!idxs.length) return false;
+    var oldIds = [];
+    for (i = 0; i < idxs.length; i++) oldIds.push(topicRefs[idxs[i]].topic_id);
+    for (i = 0; i < idxs.length; i++) topicRefs[idxs[i]].topic_id = dest.id;
+    saveTopicRefs(function (d) {
+      if (!d || d.error || d.ok === false) {
+        for (i = 0; i < idxs.length; i++) topicRefs[idxs[i]].topic_id = oldIds[i];
+        paint();
+        return;
+      }
+      pendingMove = null;
+      sel = sid(dest.id);
+      lastRefTopic = sel;
+      openRef = label;
+      loadTopics(paint);
+    });
+    return true;
+  }
   function moveRefToTopic(label, fromId, dest) {
     var src = find(topics, fromId);
     var ids = {}, br, i, idxs, j, idx, r, destIdx, fa, fb, del, rng;
@@ -903,7 +964,7 @@
     pendingRefEdit = acts.edit || null;
     spec = rhm[part] || { title: part || "Menu", items: [] };
     items = spec.items ? spec.items.slice() : [];
-    if (part === "topic" && acts.move && items.indexOf("Move") < 0) items.push("Move");
+    if (part === "topic" && acts.moveTo && items.indexOf("Move To") < 0) items.push("Move To");
     tit = m.querySelector(".sn-rhm-title");
     if (tit) tit.textContent = spec.title || part || "Menu";
     btns = m.querySelectorAll("button");
@@ -1111,7 +1172,7 @@
     return fetch("/scriptures", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ reference: ref, text: html, folder: siteFolder() })
+      body: JSON.stringify({ reference: ref, text: html, folder: siteFolder(), topic: scripturesTopic() })
     })
       .then(function (r) { return r.ok; })
       .then(function (ok) {
@@ -1268,6 +1329,10 @@
       done(lines);
     }
     function fromStore(chapter) {
+      if ((verseTr || "NKJV") !== "NKJV") {
+        finish(chapter && chapter.length ? chapter : []);
+        return;
+      }
       var chRef = "";
       var thisChap = sameOrigChap();
       if (viewChap && chapter && chapter.length) {
@@ -1276,7 +1341,7 @@
       var jobs = [];
       if (thisChap && ref) {
         jobs.push(
-          fetch("/scriptures?ref=" + encodeURIComponent(ref) + "&folder=" + encodeURIComponent(siteFolder()), { cache: "no-store" })
+          fetch("/scriptures?" + scripturesQuery(ref), { cache: "no-store" })
             .then(function (r) { return r.ok ? r.json() : {}; })
             .catch(function () { return {}; })
         );
@@ -1285,7 +1350,7 @@
       }
       if (chRef && chRef !== ref) {
         jobs.push(
-          fetch("/scriptures?ref=" + encodeURIComponent(chRef) + "&folder=" + encodeURIComponent(siteFolder()), { cache: "no-store" })
+          fetch("/scriptures?" + scripturesQuery(chRef), { cache: "no-store" })
             .then(function (r) { return r.ok ? r.json() : {}; })
             .catch(function () { return {}; })
         );
@@ -1426,7 +1491,6 @@
     openStack = [];
     list = ownRefs(first);
     openRef = list.length ? list[0] : null;
-    openDesc(first);
   }
   function pickTopic(t) {
     var id = sid(t.id);
@@ -1543,11 +1607,18 @@
       noteSnapRef = openRef || "";
       if (document.activeElement === oldNote) noteEditing = true;
     }
+    oldCols = document.querySelectorAll("body > .ew-tr-list");
+    for (oi = 0; oi < oldCols.length; oi++) {
+      if (oldCols[oi].parentNode) oldCols[oi].parentNode.removeChild(oldCols[oi]);
+    }
     oldCols = document.querySelectorAll(".tcol");
     for (oi = 0; oi < oldCols.length; oi++) {
       oc = oldCols[oi];
       ok = oc.getAttribute("data-col");
-      if (ok) colScroll[ok] = oc._y;
+      if (ok) {
+        colScroll[ok] = oc._y;
+        if (oc._parented) colDelta[ok] = (oc._y || 0) - (oc._natural != null ? oc._natural : (oc._y || 0));
+      }
     }
     if (!board) return;
     var items = visible();
@@ -1562,7 +1633,7 @@
     var l1 = items[0];
     if (!sel) openFirstTopic();
     pruneToSel();
-    var colLists = [{ list: kids(items, l1), parent: null }];
+    var colLists = [{ list: alphaTopics(kids(items, l1)), parent: null }];
     var iOpen, o, par, nxt;
     for (iOpen = 0; iOpen < openStack.length; iOpen++) {
       o = openStack[iOpen];
@@ -1572,7 +1643,7 @@
         break;
       }
       if (o.mode !== "topics") break;
-      nxt = kids(items, par);
+      nxt = alphaTopics(kids(items, par));
       colLists.push({ list: nxt, parent: par });
     }
     var refTopic = sel ? find(items, sel) : null;
@@ -1608,8 +1679,8 @@
     var GREEN_W = BOX_H;
     var HAS_KIDS = true;
     function colSpan(nameW) {
-      var w = nameW + OWN_W - JOIN;
-      if (HAS_KIDS) w += GAP_BTN + BOX_H;
+      var w = nameW + BOX_H + OWN_W;
+      if (HAS_KIDS) w += BOX_H;
       return w;
     }
     var wRef = refList.length ? colNameW(refList) : 0;
@@ -1651,8 +1722,22 @@
       name.className = "tname";
       name.textContent = t.title || "";
       b.appendChild(name);
+      var info = mkBtn("info", "", false, function () {
+        if (descOpen && sid(descId) === sid(t.id)) hideDesc();
+        else openDesc(t);
+      });
+      var mark = document.createElement("span");
       var own = mkBtn("green", ownN(t), greenOpen, function () { toggleRefs(t); });
       var teal;
+      mark.className = "tbtn-i";
+      mark.textContent = "i";
+      info.textContent = "";
+      info.appendChild(mark);
+      info.dataset.id = sid(t.id);
+      info.setAttribute("aria-label", "Description");
+      if (!String(descText(t) || "").trim()) info.classList.add("zero");
+      if (descOpen && sid(descId) === sid(t.id)) info.classList.add("open");
+      b._info = info;
       own.dataset.id = sid(t.id);
       if (ownN(t) === 0) own.classList.add("zero");
       own.addEventListener("contextmenu", function (ev) {
@@ -1710,9 +1795,8 @@
           inn: function () { bumpLevel(t, 1); }
         };
         if (pendingMove && sid(pendingMove.fromId) !== sid(t.id)) {
-          acts.move = function () {
-            moveRefToTopic(pendingMove.label, pendingMove.fromId, t);
-            pendingMove = null;
+          acts.moveTo = function () {
+            moveRefRecord(pendingMove.label, pendingMove.fromId, t);
           };
         }
         showRefMenu(ev, "topic", acts);
@@ -1735,11 +1819,10 @@
           if (ev.detail > 1) return;
           if (name.querySelector("input")) return;
           pickTopic(t);
-          if (sid(sel) === sid(t.id)) openDesc(t);
-          else hideDesc();
         });
       }
       board.appendChild(b);
+      board.appendChild(info);
       board.appendChild(own);
       if (teal) board.appendChild(teal);
       return b;
@@ -1820,9 +1903,10 @@
       el._y = y;
       el._w = colW;
       el._h = h || BOX_H;
+      if (el._info) put(el._info, x + colW, y, BOX_H, BOX_H);
       if (el._own) {
-        put(el._own, x + colW - JOIN, y, OWN_W, BOX_H);
-        if (el._teal) put(el._teal, x + colW - JOIN + OWN_W + GAP_BTN, y, BOX_H, BOX_H);
+        put(el._own, x + colW + BOX_H, y, OWN_W, BOX_H);
+        if (el._teal) put(el._teal, x + colW + BOX_H + OWN_W, y, BOX_H, BOX_H);
       }
     }
     function stack(els, x, y0, colW) {
@@ -1871,17 +1955,24 @@
       var maxBot = viewH - PAD;
       var availH = Math.max(80, maxBot - minTop);
       var innerH = els.length * BOX_H + Math.max(0, els.length - 1) * GAP_Y;
-      var y0;
+      var y0, natural = null;
       if (parent) {
-        y0 = boardY(parent) + BOX_H / 2 - innerH / 2;
+        natural = boardY(parent) + BOX_H / 2 - innerH / 2;
+        if (natural < minTop) natural = minTop;
+        natural = Math.round(natural);
+        y0 = natural;
+        if (colKey && colDelta[colKey]) y0 = clampChildTop(natural + colDelta[colKey], innerH, natural, viewH, minTop);
       } else {
         y0 = minTop + (availH - innerH) / 2;
+        if (y0 < minTop) y0 = minTop;
+        y0 = Math.round(y0);
+        if (colKey && colScroll[colKey] != null) {
+          y0 = clampColTop(colScroll[colKey], innerH);
+        } else {
+          y0 = clampColTop(y0, innerH);
+          if (y0 < band) y0 = band;
+        }
       }
-      if (y0 < minTop) y0 = minTop;
-      y0 = Math.round(y0);
-      if (colKey && String(colKey).indexOf("r:") !== 0 && colScroll[colKey] != null) {
-        y0 = clampColTop(colScroll[colKey], innerH);
-      } else if (!parent) y0 = clampColTop(y0, innerH);
       var pane = document.createElement("div");
       pane.className = "tcol";
       if (colKey) pane.setAttribute("data-col", colKey);
@@ -1897,9 +1988,14 @@
       pane._w = paneW;
       pane._y = y0;
       pane._innerH = innerH;
+      pane._natural = natural != null ? natural : y0;
+      pane._parented = !!parent;
+      pane._viewH = viewH;
+      pane._roomTop = minTop;
       var y = 0, i;
       for (i = 0; i < els.length; i++) {
         pane.appendChild(els[i]);
+        if (els[i]._info) pane.appendChild(els[i]._info);
         if (els[i]._own) pane.appendChild(els[i]._own);
         if (els[i]._teal) pane.appendChild(els[i]._teal);
         if (els[i]._green) pane.appendChild(els[i]._green);
@@ -2102,7 +2198,108 @@
       nav.appendChild(refLab);
       nav.appendChild(nextBtn);
       left.appendChild(nav);
-      if (sameOrigChap()) {
+      var nkjvBtn = document.createElement("button");
+      nkjvBtn.type = "button";
+      nkjvBtn.className = "ew-ch-nkjv" + ((verseTr || "NKJV") === "NKJV" ? " on" : "");
+      nkjvBtn.textContent = "NKJV";
+      nkjvBtn.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        if ((verseTr || "NKJV") === "NKJV") return;
+        verseTr = "NKJV";
+        paint();
+      });
+      var verTitle = document.createElement("span");
+      verTitle.className = "ew-ver-title";
+      verTitle.textContent = "Version";
+      var pick = document.createElement("div");
+      pick.className = "ew-tr-pick ew-ch-tr" + ((verseTr || "NKJV") !== "NKJV" ? " on" : "");
+      var trNow = document.createElement("button");
+      trNow.type = "button";
+      trNow.className = "ew-tr-now";
+      trNow.setAttribute("aria-haspopup", "listbox");
+      trNow.setAttribute("aria-expanded", "false");
+      trNow.setAttribute("aria-label", "Version");
+      var trList = document.createElement("div");
+      trList.className = "ew-tr-list";
+      trList.setAttribute("role", "listbox");
+      trList.hidden = true;
+      var ti, trow, tcode, tyear, tr, trs, shownLabel;
+      shownLabel = verseTr || "NKJV";
+      trs = TRANSLATIONS.slice().sort(function (a, b) {
+        return String(a.label || a.id).localeCompare(String(b.label || b.id));
+      });
+      for (ti = 0; ti < trs.length; ti++) {
+        tr = trs[ti];
+        if (tr.id === (verseTr || "NKJV")) shownLabel = tr.label || tr.id;
+        trow = document.createElement("div");
+        trow.setAttribute("role", "option");
+        trow.setAttribute("data-tr", tr.id);
+        trow.className = verseTr === tr.id ? "on" : "";
+        tcode = document.createElement("span");
+        tcode.className = "ew-tr-code";
+        tcode.textContent = tr.label;
+        tyear = document.createElement("span");
+        tyear.className = "ew-tr-year";
+        tyear.textContent = tr.year || "";
+        trow.appendChild(tcode);
+        trow.appendChild(tyear);
+        trow.addEventListener("click", function (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          verseTr = this.getAttribute("data-tr");
+          paint();
+        });
+        trList.appendChild(trow);
+      }
+      trNow.textContent = shownLabel;
+      trNow.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        var open = trList.hidden;
+        var br, need, room, top, w, left;
+        trList.hidden = !open;
+        trNow.setAttribute("aria-expanded", open ? "true" : "false");
+        if (!open) {
+          if (trList.parentNode === document.body && pick) pick.appendChild(trList);
+          trList.style.position = "";
+          trList.style.zIndex = "";
+          trList.style.left = "";
+          trList.style.top = "";
+          trList.style.right = "";
+          trList.style.maxHeight = "";
+          trList.style.overflowY = "";
+          return;
+        }
+        document.body.appendChild(trList);
+        trList.style.position = "fixed";
+        trList.style.zIndex = "80";
+        trList.style.right = "auto";
+        trList.style.maxHeight = "none";
+        trList.style.overflowY = "visible";
+        br = trNow.getBoundingClientRect();
+        need = trList.scrollHeight;
+        room = Math.floor(window.innerHeight - br.bottom - 8);
+        top = Math.round(br.bottom + 2);
+        if (need > room && room > 40) {
+          trList.style.maxHeight = room + "px";
+          trList.style.overflowY = "auto";
+        } else if (top + need > window.innerHeight - 8) {
+          top = Math.max(8, Math.round(br.top - need - 2));
+        }
+        w = trList.offsetWidth;
+        left = Math.round(br.right - w);
+        if (left + w > window.innerWidth - 8) left = window.innerWidth - 8 - w;
+        if (left < 8) left = 8;
+        trList.style.top = top + "px";
+        trList.style.left = left + "px";
+      });
+      pick.appendChild(trNow);
+      pick.appendChild(trList);
+      left.appendChild(nkjvBtn);
+      left.appendChild(verTitle);
+      left.appendChild(pick);
+      if (sameOrigChap() && canEditChapter()) {
         var pickBtn = document.createElement("button");
         pickBtn.type = "button";
         pickBtn.className = "tverse-pick" + (hitPick ? " on" : "");
@@ -2153,69 +2350,7 @@
         left.appendChild(saveBtn);
         left.appendChild(cancelBtn);
       }
-      var right = document.createElement("div");
-      right.className = "tverse-bar-right";
-      var pick = document.createElement("div");
-      pick.className = "ew-tr-pick ew-ch-tr";
-      var trNow = document.createElement("button");
-      trNow.type = "button";
-      trNow.className = "ew-tr-now";
-      trNow.setAttribute("aria-haspopup", "listbox");
-      trNow.setAttribute("aria-expanded", "false");
-      trNow.textContent = verseTr || "NKJV";
-      var trList = document.createElement("div");
-      trList.className = "ew-tr-list";
-      trList.setAttribute("role", "listbox");
-      trList.hidden = true;
-      var ti, trow, tcode, tyear, tr, trs;
-      trs = TRANSLATIONS.slice().sort(function (a, b) {
-        return String(a.label || a.id).localeCompare(String(b.label || b.id));
-      });
-      for (ti = 0; ti < trs.length; ti++) {
-        tr = trs[ti];
-        trow = document.createElement("div");
-        trow.setAttribute("role", "option");
-        trow.setAttribute("data-tr", tr.id);
-        trow.className = verseTr === tr.id ? "on" : "";
-        tcode = document.createElement("span");
-        tcode.className = "ew-tr-code";
-        tcode.textContent = tr.label;
-        tyear = document.createElement("span");
-        tyear.className = "ew-tr-year";
-        tyear.textContent = tr.year || "";
-        trow.appendChild(tcode);
-        trow.appendChild(tyear);
-        trow.addEventListener("click", function (ev) {
-          ev.preventDefault();
-          ev.stopPropagation();
-          verseTr = this.getAttribute("data-tr");
-          paint();
-        });
-        trList.appendChild(trow);
-      }
-      trNow.addEventListener("click", function (ev) {
-        ev.preventDefault();
-        ev.stopPropagation();
-        var open = trList.hidden;
-        trList.hidden = !open;
-        trNow.setAttribute("aria-expanded", open ? "true" : "false");
-        if (open) {
-          trList.style.maxHeight = "none";
-          trList.style.overflowY = "visible";
-          var need = trList.scrollHeight;
-          var box = (versesWrap || document.getElementById("wrap") || document.documentElement).getBoundingClientRect();
-          var room = Math.floor(box.bottom - trList.getBoundingClientRect().top - 4);
-          if (need > room && room > 40) {
-            trList.style.maxHeight = room + "px";
-            trList.style.overflowY = "auto";
-          }
-        }
-      });
-      pick.appendChild(trNow);
-      pick.appendChild(trList);
-      right.appendChild(pick);
       bar.appendChild(left);
-      bar.appendChild(right);
       versesWrap.appendChild(bar);
 
       var noteBox = document.createElement("div");
@@ -2327,7 +2462,7 @@
           }
           versesEl.appendChild(p);
         }
-        if (verseDirty && verseEditRef === openRef && verseDraft) {
+        if (verseDirty && verseEditRef === openRef && verseDraft && (verseTr || "NKJV") === "NKJV") {
           versesEl.innerHTML = verseDraft;
         }
         if (canEditChapter() && (verseTr || "NKJV") === "NKJV" && !hitPick) {
@@ -2420,6 +2555,7 @@
     var box;
     while (el && el !== document.documentElement) {
       if (el.id === "tdesc") return true;
+      if (el.classList && el.classList.contains("tbtn-info") && sid(el.dataset.id) === sid(descId)) return true;
       if (el.classList && el.classList.contains("tbox") && !el.dataset.ref && sid(el.dataset.id) === sid(descId)) return true;
       if (el.classList && String(el.className || "").indexOf("tcol") >= 0) {
         box = topicBoxEl(descId);
@@ -2442,7 +2578,15 @@
     }
     descOpen = false;
     descId = "";
+    markInfo();
     if (d) d.hidden = true;
+  }
+  function markInfo() {
+    var nodes = document.querySelectorAll(".tbtn-info");
+    var i;
+    for (i = 0; i < nodes.length; i++) {
+      nodes[i].classList.toggle("open", !!(descOpen && sid(nodes[i].dataset.id) === sid(descId)));
+    }
   }
   function openDesc(t) {
     if (!t) {
@@ -2452,20 +2596,24 @@
     descOpen = true;
     descId = sid(t.id);
     descLock = Date.now() + 400;
+    markInfo();
     placePop();
   }
   function placePop() {
     var d = document.getElementById("tdesc");
     var ta = document.getElementById("tdesc-ta");
-    var vsEl = document.querySelector(".tverse-wrap");
     var topic = descOpen ? find(topics, descId) : null;
-    var box, w, left, top, need, maxH, h, vw, vh, vr;
+    var box, w, left, top, need, maxH, h, vh, vr;
     if (!d) return;
     if (!topic) {
       d.hidden = true;
       return;
     }
     box = topicBoxEl(topic.id);
+    if (!box) {
+      d.hidden = true;
+      return;
+    }
     d.hidden = false;
     if (ta) {
       ta.readOnly = !canEditDesc();
@@ -2474,21 +2622,19 @@
         ta.dataset.topic = sid(topic.id);
       }
     }
-    vw = window.innerWidth;
     vh = window.innerHeight;
-    left = PAD;
-    top = PAD;
-    if (vsEl) {
-      vr = vsEl.getBoundingClientRect();
-      w = Math.max(80, Math.floor(vsEl._w || vsEl.offsetWidth || VERSE_W));
-      if (left + w > vr.left - PAD) w = Math.max(80, vr.left - PAD - left);
-    } else {
-      w = Math.max(80, Math.min(VERSE_W, Math.floor(vw * 0.5) - left));
-    }
+    vr = box.getBoundingClientRect();
+    left = 0;
+    w = Math.round(vr.right) - left;
+    if (w < 8) w = 8;
     need = descH(ta ? ta.value : descText(topic), w);
-    maxH = Math.max(80, Math.floor(vh * 0.45));
+    maxH = Math.max(DESC_H, vh - PAD * 2);
     h = Math.min(Math.max(need, DESC_H), maxH);
-    if (left < PAD) left = PAD;
+    top = Math.round(vr.top - h - GAP_BTN);
+    if (top < PAD) {
+      if (Math.round(vr.bottom + GAP_BTN) + h <= vh - PAD) top = Math.round(vr.bottom + GAP_BTN);
+      else top = PAD;
+    }
     d.style.left = Math.round(left) + "px";
     d.style.top = Math.round(top) + "px";
     d.style.width = w + "px";
@@ -2520,8 +2666,8 @@
   function loadTopics(done) {
     saveWait.then(function () {
       return Promise.all([
-      fetch(dataFile("topics.json"), { cache: "no-store" }).then(function (r) { return r.json(); }),
-      fetch(dataFile("topic-refs.json"), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }),
+      fetch("/dotl/topics?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.json(); }),
+      fetch("/dotl/topic-refs?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }),
       fetch(dataFile("rhm.json"), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
     ]);
     }).then(function (pair) {
@@ -2586,6 +2732,11 @@
       var topic = id ? find(topics, id) : null;
       if (!canEditDesc() || !topic) return;
       topic.description = ta.value;
+      var nodes = document.querySelectorAll(".tbtn-info");
+      var bi, empty = !String(ta.value || "").trim();
+      for (bi = 0; bi < nodes.length; bi++) {
+        if (sid(nodes[bi].dataset.id) === sid(id)) nodes[bi].classList.toggle("zero", empty);
+      }
       placePop();
     });
     ta.addEventListener("blur", function () {
@@ -2638,23 +2789,35 @@
       if (!col) return false;
       innerH = col._innerH || col.offsetHeight;
       box = boxH || 22;
-      mid = visH() / 2;
-      maxTop = mid - box / 2;
-      minTop = maxTop - Math.max(0, innerH - box);
-      next = (col._y || 0) - deltaY;
-      if (next > maxTop) next = maxTop;
-      if (next < minTop) next = minTop;
-      next = Math.round(next);
+      if (col._parented) {
+        next = clampChildTop((col._y || 0) - deltaY, innerH, col._natural != null ? col._natural : (col._y || 0), col._viewH || visH(), col._roomTop != null ? col._roomTop : PAD);
+      } else {
+        mid = visH() / 2;
+        maxTop = mid - box / 2;
+        minTop = maxTop - Math.max(0, innerH - box);
+        next = (col._y || 0) - deltaY;
+        if (next > maxTop) next = maxTop;
+        if (next < minTop) next = minTop;
+        next = Math.round(next);
+      }
       if (next === col._y) return false;
       col._y = next;
       col._top = next;
       col.style.top = next + "px";
       key = col.getAttribute("data-col");
-      if (key) colScroll[key] = next;
+      if (key) {
+        colScroll[key] = next;
+        if (col._parented) colDelta[key] = next - (col._natural != null ? col._natural : next);
+      }
       return true;
     }
     window.snWheel = snWheel;
     function onWheel(ev) {
+      var n = ev.target;
+      while (n && n !== document.body) {
+        if (n.classList && (n.classList.contains("tverses") || n.classList.contains("tverse-wrap") || n.classList.contains("tverse-note"))) return;
+        n = n.parentNode;
+      }
       if (snWheel(ev.deltaY, ev.clientX, ev.clientY)) ev.preventDefault();
     }
     wrap.addEventListener("wheel", onWheel, { passive: false });
@@ -2711,12 +2874,26 @@
     if (drag) endRefDrag(ev);
   });
   document.addEventListener("pointerdown", function (ev) {
-    var list = document.querySelector(".tverse-bar .ew-tr-list");
+    var list = document.querySelector(".ew-tr-list");
     var now = document.querySelector(".tverse-bar .ew-tr-now");
     var menu = document.getElementById("sn-ref-menu");
+    var inTr = ev.target.closest && (ev.target.closest(".tverse-bar") || ev.target.closest(".ew-tr-list"));
     if (descOpen && !descKeep(ev.target)) hideDesc();
-    if (list && !ev.target.closest(".tverse-bar")) list.hidden = true;
-    if (now && !ev.target.closest(".tverse-bar")) now.setAttribute("aria-expanded", "false");
+    if (list && !inTr) {
+      list.hidden = true;
+      list.style.position = "";
+      list.style.zIndex = "";
+      list.style.left = "";
+      list.style.top = "";
+      list.style.right = "";
+      list.style.maxHeight = "";
+      list.style.overflowY = "";
+      if (list.parentNode === document.body) {
+        var back = document.querySelector(".ew-tr-pick");
+        if (back) back.appendChild(list);
+      }
+    }
+    if (now && !inTr) now.setAttribute("aria-expanded", "false");
     if (Date.now() < rhmLock) return;
     if (menu && !menu.hidden && !(ev.target && ev.target.closest && ev.target.closest("#sn-ref-menu"))) hideRefMenu();
   });
@@ -2739,6 +2916,7 @@
       if (btn.getAttribute("data-add-below") === "1" && acts.addBelow) acts.addBelow();
       if (btn.getAttribute("data-delete") === "1" && acts.del) acts.del();
       if (btn.getAttribute("data-move") === "1" && acts.move) acts.move();
+      if (btn.getAttribute("data-move-to") === "1" && acts.moveTo) acts.moveTo();
       if (btn.getAttribute("data-yes") === "1" && acts.yes) acts.yes();
       if (btn.getAttribute("data-no") === "1" && acts.no) acts.no();
     });

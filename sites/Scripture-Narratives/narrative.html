@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Topics — Scripture Narratives</title>
   <link rel="icon" href="images/icon.jpg">
-  <link rel="stylesheet" href="site.css?v=tools74" />
+  <link rel="stylesheet" href="site.css?v=tools76" />
   <style>
     html, body { height: 100%; overflow: hidden; }
     .page-frame {
@@ -340,11 +340,11 @@
     <div class="stick-top">
       <button type="button" id="ew-full">Full Screen</button>
       <div class="head-banners">
-        <a class="ew-mark" href="/" target="_parent">
-          <img src="/images/icon.jpg" alt="" />
-          <span class="ew-words">Eternal<br>Wellspring</span>
-        </a>
         <header class="top">
+          <a class="ew-mark" href="/" target="_parent">
+            <img src="/images/icon.jpg" alt="" />
+            <span class="ew-words">Eternal<br>Wellspring</span>
+          </a>
           <div class="brand-row">
             <div class="who">
               <a class="site" href="home.html">Scripture Narratives</a>
@@ -451,7 +451,7 @@
     }
     paintTabs();
     function treeUrl() {
-      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=344";
+      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=359";
     }
     function verseUrl() {
       return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=390";
@@ -508,7 +508,7 @@
       return t && t.live !== false;
     }
     function saveLiveFlag(topic, on) {
-      fetch("data/topics.json?t=" + Date.now(), { cache: "no-store" })
+      fetch("/dotl/topics?t=" + Date.now(), { cache: "no-store" })
         .then(function (r) { return r.json(); })
         .then(function (rows) {
           (rows || []).forEach(function (row) {
@@ -525,7 +525,7 @@
     }
     var l1MenuTopic = null;
     var l1MenuMode = "main";
-    var SIB_CAP = 10;
+    var SIB_CAP = 50;
     function hideL1Menu() {
       var m = document.getElementById("sn-l1-menu");
       if (m) m.hidden = true;
@@ -560,7 +560,7 @@
       m.style.top = Math.max(8, Math.min(y, window.innerHeight - h - 8)) + "px";
     }
     function loadTopicsFile() {
-      return fetch("data/topics.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.json(); });
+      return fetch("/dotl/topics?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.json(); });
     }
     function postTopics(rows) {
       return fetch("/dotl/topics", {
@@ -569,13 +569,16 @@
         body: JSON.stringify({ topics: rows })
       }).then(function (r) { return r.json(); });
     }
+    function byTitle(a, b) {
+      return String(a.title || "").localeCompare(String(b.title || ""), undefined, { numeric: true, sensitivity: "base" });
+    }
     function refreshL1(rows) {
       var hide = {
         "his finished work": 1,
         "waiting for the sons of god": 1
       };
       allL1 = (rows || []).filter(function (t) { return (t.level || 1) === 1; })
-        .sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); })
+        .sort(byTitle)
         .filter(function (t) {
           return !hide[String(t.title || "").replace(/\s+/g, " ").trim().toLowerCase()];
         });
@@ -678,7 +681,7 @@
         rows.forEach(function (x, k) { x.seq = k + 1; });
         keep = rows;
         return postTopics(keep).then(function () {
-          return fetch("data/topic-refs.json?t=" + Date.now(), { cache: "no-store" })
+          return fetch("/dotl/topic-refs?t=" + Date.now(), { cache: "no-store" })
             .then(function (r) { return r.ok ? r.json() : []; })
             .catch(function () { return []; })
             .then(function (refs) {
@@ -815,7 +818,7 @@
         isLive = !onBuilder;
         document.body.classList.toggle("sn-live", isLive);
         paintTabs();
-        return fetch("data/topics.json", { cache: "no-store" }).then(function (r) { return r.json(); });
+        return fetch("/dotl/topics?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.json(); });
       })
       .then(function (rows) {
         var hide = {
@@ -823,7 +826,7 @@
           "waiting for the sons of god": 1
         };
         allL1 = (rows || []).filter(function (t) { return (t.level || 1) === 1; })
-          .sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); })
+          .sort(byTitle)
           .filter(function (t) {
             return !hide[String(t.title || "").replace(/\s+/g, " ").trim().toLowerCase()];
           });
@@ -852,7 +855,7 @@
     });
   </script>
   <script>window.ewFolder="Scripture-Narratives"</script>
-  <script src="site.js?v=11"></script>
+  <script src="site.js?v=12"></script>
   <script src="/bible.js?v=121"></script>
   <script>
     window.addEventListener("contextmenu", function (ev) {

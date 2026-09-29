@@ -201,7 +201,7 @@
     var pending = null;
     var editing = null;
     var holdTimer = null;
-    var SIB_CAP = 10;
+    var SIB_CAP = 50;
     var DEPTH_CAP = 5;
     var rootId = (function () {
       var q = location.search.replace(/^\?/, "").split("&");
@@ -381,7 +381,7 @@
       return m;
     }
     function maxSiblings() {
-      return SIB_CAP + extra;
+      return SIB_CAP;
     }
     function parentOf(t) {
       var list = bySeq();
@@ -423,7 +423,7 @@
     }
     function canPlace(lv, parent, exceptId) {
       if (lv < 2) return "Level 2 is the first.";
-      if (siblingCount(parent, lv, exceptId) >= maxSiblings()) return extra >= 2 ? "That's the limit." : "more";
+      if (siblingCount(parent, lv, exceptId) >= maxSiblings()) return "That's the limit.";
       return "";
     }
     function takeBranch(list, i) {
@@ -870,7 +870,7 @@
       if (rowMenu.contains(ev.target)) return;
       commitEdit();
     });
-    fetch("data/topics.json", { cache: "no-store" })
+    fetch("/dotl/topics?t=" + Date.now(), { cache: "no-store" })
       .then(function (r) { return r.json(); })
       .then(function (rows) {
         topics = rows || [];

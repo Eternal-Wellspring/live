@@ -127,6 +127,9 @@
     }
     return out;
   }
+  function byTitle(a, b) {
+    return String(a.title || "").localeCompare(String(b.title || ""), undefined, { numeric: true, sensitivity: "base" });
+  }
   function kids(items, parent) {
     var i, start = -1, lv = parent.level || 1, out = [];
     for (i = 0; i < items.length; i++) {
@@ -528,7 +531,7 @@
       if (!t) return;
       out.push(t);
       if (!topicExpanded(t)) return;
-      k = kids(items, t);
+      k = kids(items, t).slice().sort(byTitle);
       for (i = 0; i < k.length; i++) walk(k[i]);
     }
     if (items[0]) walk(items[0]);
@@ -1065,8 +1068,8 @@
   }
   function loadTopics(done) {
     Promise.all([
-      fetch("data/topics.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.json(); }),
-      fetch("data/topic-refs.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }),
+      fetch("/dotl/topics?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.json(); }),
+      fetch("/dotl/topic-refs?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }),
       fetch("data/sections.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })
     ]).then(function (pair) {
       var sections = pair[2];

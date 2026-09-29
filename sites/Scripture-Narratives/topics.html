@@ -323,7 +323,7 @@
         st.textContent = d.error || ("Saved " + (d.count || topics.length) + " topics.");
       }).catch(function (err) { st.textContent = String(err); });
     };
-    fetch("data/topics.json", { cache: "no-store" })
+    fetch("/dotl/topics?t=" + Date.now(), { cache: "no-store" })
       .then(function (r) { return r.json(); })
       .then(function (rows) {
         topics = rows || [];
