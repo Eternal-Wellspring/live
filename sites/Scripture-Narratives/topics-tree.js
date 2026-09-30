@@ -353,8 +353,15 @@
   function byTitle(a, b) {
     return String(a.title || "").localeCompare(String(b.title || ""), undefined, { numeric: true, sensitivity: "base" });
   }
-  function alphaTopics(list) {
-    return (list || []).slice().sort(byTitle);
+  function alphaTopics(list, heb) {
+    var src = (list || []).slice();
+    if (!heb) return src.sort(byTitle);
+    return src.sort(function (a, b) {
+      var aa = /^across\b/i.test(String(a.title || ""));
+      var ba = /^across\b/i.test(String(b.title || ""));
+      if (aa !== ba) return aa ? 1 : -1;
+      return byTitle(a, b);
+    });
   }
   function kids(items, parent) {
     var i, start = -1, lv = parent.level || 1, out = [];
@@ -1578,9 +1585,10 @@
       return;
     }
     var l1 = items[0];
+    var heb = !!(l1 && String(l1.title || "") === "Hebrews");
     if (!sel) openFirstTopic();
     pruneToSel();
-    var colLists = [{ list: alphaTopics(kids(items, l1)), parent: null }];
+    var colLists = [{ list: alphaTopics(kids(items, l1), heb), parent: null }];
     var iOpen, o, par, nxt;
     for (iOpen = 0; iOpen < openStack.length; iOpen++) {
       o = openStack[iOpen];
@@ -1590,7 +1598,7 @@
         break;
       }
       if (o.mode !== "topics") break;
-      nxt = alphaTopics(kids(items, par));
+      nxt = alphaTopics(kids(items, par), heb);
       colLists.push({ list: nxt, parent: par });
     }
     var refTopic = sel ? find(items, sel) : null;
@@ -1626,6 +1634,7 @@
     var GREEN_W = BOX_H;
     var HAS_KIDS = true;
     var showInfo = false;
+    var showRefs = true;
     function colSpan(nameW) {
       var w = nameW + OWN_W;
       if (showInfo) w += BOX_H;
@@ -1673,7 +1682,7 @@
       b.appendChild(name);
       var info = null;
       var mark;
-      var own = mkBtn("green", ownN(t), greenOpen, function (ev) { toggleRefs(t, ev.clientX); });
+      var own = null;
       var teal;
       if (showInfo) {
         info = mkBtn("info", "", false, function () {
@@ -1704,16 +1713,19 @@
         if (descOpen && sid(descId) === sid(t.id)) info.classList.add("open");
         b._info = info;
       }
-      own.dataset.id = sid(t.id);
-      if (ownN(t) === 0) own.classList.add("zero");
-      own.addEventListener("contextmenu", function (ev) {
-        ev.preventDefault();
-        ev.stopPropagation();
-        showRefMenu(ev, "refsBox", {
-          addRef: function () { addRefToTopic(t); }
+      if (showRefs) {
+        own = mkBtn("green", ownN(t), greenOpen, function (ev) { toggleRefs(t, ev.clientX); });
+        own.dataset.id = sid(t.id);
+        if (ownN(t) === 0) own.classList.add("zero");
+        own.addEventListener("contextmenu", function (ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+          showRefMenu(ev, "refsBox", {
+            addRef: function () { addRefToTopic(t); }
+          });
         });
-      });
-      b._own = own;
+        b._own = own;
+      }
       if (n > 0) {
         teal = mkBtn("teal", n, tealOpen, function (ev) { toggleTopics(t, ev.clientX); });
         teal.dataset.id = sid(t.id);
@@ -1790,7 +1802,7 @@
       }
       board.appendChild(b);
       if (info) board.appendChild(info);
-      board.appendChild(own);
+      if (own) board.appendChild(own);
       if (teal) board.appendChild(teal);
       return b;
     }
@@ -1874,11 +1886,10 @@
       el._w = colW;
       el._h = h || BOX_H;
       var infoW = el._info ? BOX_H : 0;
+      var ownW = el._own ? OWN_W : 0;
       if (el._info) put(el._info, x + colW, y, BOX_H, BOX_H);
-      if (el._own) {
-        put(el._own, x + colW + infoW, y, OWN_W, BOX_H);
-        if (el._teal) put(el._teal, x + colW + infoW + OWN_W, y, BOX_H, BOX_H);
-      }
+      if (el._own) put(el._own, x + colW + infoW, y, OWN_W, BOX_H);
+      if (el._teal) put(el._teal, x + colW + infoW + ownW, y, BOX_H, BOX_H);
     }
     function stack(els, x, y0, colW) {
       var y = y0, i;
@@ -2007,10 +2018,17 @@
       for (si = 0; si < cl.list.length; si++) {
         if (String(descText(cl.list[si]) || "").trim()) { showInfo = true; break; }
       }
+      showRefs = true;
+      if (heb && onLive()) {
+        showRefs = false;
+        for (si = 0; si < cl.list.length; si++) {
+          if (ownN(cl.list[si]) > 1) { showRefs = true; break; }
+        }
+      }
       boxes = cl.list.map(function (t) { return box(t, String(t.level || 1)); }).filter(Boolean);
       parentBox = (cl.parent && colBuilt.length) ? findBox(colBuilt[colBuilt.length - 1].boxes, cl.parent.id) : null;
       HAS_KIDS = cl.list.some(function (t) { return kids(items, t).length > 0; });
-      OWN_W = BOX_H;
+      OWN_W = showRefs ? BOX_H : 0;
       GREEN_W = HAS_KIDS ? BOX_H : 0;
       pane = layoutCol(boxes, x, cw, parentBox, null, false, cl.parent ? "t:" + sid(cl.parent.id) : "t:root");
       colBuilt.push({ boxes: boxes, pane: pane, w: cw, x: x });

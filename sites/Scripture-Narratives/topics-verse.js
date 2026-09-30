@@ -131,6 +131,16 @@
   function byTitle(a, b) {
     return String(a.title || "").localeCompare(String(b.title || ""), undefined, { numeric: true, sensitivity: "base" });
   }
+  function sortTopics(list, heb) {
+    var src = (list || []).slice();
+    if (!heb) return src.sort(byTitle);
+    return src.sort(function (a, b) {
+      var aa = /^across\b/i.test(String(a.title || ""));
+      var ba = /^across\b/i.test(String(b.title || ""));
+      if (aa !== ba) return aa ? 1 : -1;
+      return byTitle(a, b);
+    });
+  }
   function kids(items, parent) {
     var i, start = -1, lv = parent.level || 1, out = [];
     for (i = 0; i < items.length; i++) {
@@ -532,7 +542,7 @@
       if (!t) return;
       out.push(t);
       if (!topicExpanded(t)) return;
-      k = kids(items, t).slice().sort(byTitle);
+      k = sortTopics(kids(items, t), items[0] && String(items[0].title || "") === "Hebrews");
       for (i = 0; i < k.length; i++) walk(k[i]);
     }
     if (items[0]) walk(items[0]);
@@ -1308,6 +1318,7 @@
     });
     if (BOX_H < 8) BOX_H = 8;
     boxH = BOX_H;
+    var showRefs = true;
     function colNameW(list) {
       var w = 0;
       list.forEach(function (t) {
@@ -1317,7 +1328,13 @@
       return w < 8 ? 8 : w;
     }
     function colSpan(nameW) {
-      return nameW + GAP_BTN + BOX_H + GAP_BTN + BOX_H;
+      var w = nameW + GAP_BTN + BOX_H;
+      if (showRefs) w += GAP_BTN + BOX_H;
+      return w;
+    }
+    function onLive() {
+      var p = String(location.port || "");
+      return p !== "8775" && p !== "8776" && p !== "8778" && p !== "8779";
     }
     function mkBtn(kind, label, open, onClick) {
       var c = document.createElement("button");
@@ -1353,10 +1370,13 @@
       var teal = mkBtn("teal", nFit, tealOpen && nFit > 0, function () { toggleTealPrune(t); });
       teal.dataset.id = sid(t.id);
       b._teal = teal;
-      var nGreen = refsFor(t).length;
-      var green = mkBtn("green", nGreen, sid(refTopicId) === sid(t.id), function () { toggleGreenRefs(t); });
-      green.dataset.id = sid(t.id);
-      b._green = green;
+      var green = null;
+      if (showRefs) {
+        var nGreen = refsFor(t).length;
+        green = mkBtn("green", nGreen, sid(refTopicId) === sid(t.id), function () { toggleGreenRefs(t); });
+        green.dataset.id = sid(t.id);
+        b._green = green;
+      }
       function startEdit(ev) {
         if (ev) { ev.preventDefault(); ev.stopPropagation(); }
         if (name.querySelector("input")) return;
@@ -1394,7 +1414,7 @@
       });
       board.appendChild(b);
       board.appendChild(teal);
-      board.appendChild(green);
+      if (green) board.appendChild(green);
       return b;
     }
     function refBox(label, col, topic) {
@@ -2323,6 +2343,13 @@
     nameW = colNameW(items);
     refW = maxRefNameW();
     shown = shownTopics();
+    showRefs = true;
+    if (items[0] && String(items[0].title || "") === "Hebrews" && onLive()) {
+      showRefs = false;
+      for (var ri = 0; ri < shown.length; ri++) {
+        if (refsFor(shown[ri]).length > 1) { showRefs = true; break; }
+      }
+    }
     topicEls = shown.map(function (t) { return box(t); });
     pane = layoutCol(topicEls, x, nameW, null, null, false, "t:root");
     refTopic = refTopicId ? find(items, refTopicId) : null;

@@ -23,22 +23,29 @@
       margin-bottom: 0;
       position: relative;
       z-index: 40;
-      padding-top: 0.45rem;
+      padding-top: 0.2rem;
     }
     .head-banners {
       background: #f6f7eb;
       row-gap: 0;
       align-items: start;
     }
+    header.top .brand-row,
+    .who {
+      align-items: end;
+    }
+    .who .site {
+      line-height: 1;
+    }
     .title-bar,
     .title-bar-inner {
       min-height: 0;
       margin: 0;
-      padding-top: 0.12rem;
+      padding-top: 0;
       padding-bottom: 0;
     }
     .title-bar h1 {
-      line-height: 1.1;
+      line-height: 1;
       margin: 0;
     }
     html:not(.ew-phone) .stick-top > .page-nav-bar {
@@ -46,7 +53,7 @@
     }
     .tab-dock {
       margin-bottom: 0;
-      padding-top: 0.15rem;
+      padding-top: 0;
       padding-bottom: 0;
       overflow: visible;
     }
@@ -55,7 +62,25 @@
     .tab-dock .tab.active {
       margin-bottom: -1px;
       padding-bottom: calc(0.4rem + 1px);
-      border-bottom: 1px solid #fff;
+      border-bottom: 1px solid #f6f7eb;
+    }
+    .page-frame,
+    .stick-top {
+      background: #f6f7eb;
+    }
+    .title-bar,
+    .title-bar-inner,
+    .title-bar h1,
+    .tab-dock,
+    .tabs {
+      background: transparent;
+    }
+    .tab-dock {
+      padding-top: 0;
+    }
+    .tab-dock > .title-bar {
+      margin: 2px -1.2rem 0;
+      padding: 0;
     }
     main {
       flex: 1 1 auto;
@@ -372,10 +397,9 @@
             </div>
           </div>
         </header>
-        <div class="title-bar"><div class="title-bar-inner"><h1 id="page-title">Topics</h1></div></div>
       </div>
       <div class="page-nav-bar"><span class="page-nav prev"></span><span class="page-nav-name" id="page-nav-name">Topics</span><span class="page-nav next"></span></div>
-      <div class="tab-dock"><div class="tabs" id="tabs-top"></div></div>
+      <div class="tab-dock"><div class="title-bar"><div class="title-bar-inner"><h1 id="page-title">Topics</h1></div></div><div class="tabs" id="tabs-top"></div></div>
     </div>
     <main>
       <div class="tab-panel active" id="s-l1" data-sec="s-l1">
@@ -478,10 +502,10 @@
     }
     paintTabs();
     function treeUrl() {
-      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=376";
+      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=377";
     }
     function verseUrl() {
-      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=399";
+      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=400";
     }
     function showTree() {
       var fr = document.getElementById("tree-frame");
