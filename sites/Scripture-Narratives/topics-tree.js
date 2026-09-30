@@ -1322,7 +1322,7 @@
         for (i = 0; i < rows.length; i++) {
           row = rows[i] || {};
           n = Number(row.verse);
-          t = String(row.text || "").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").trim();
+          t = String(row.text || "").replace(/<br\b[^>]*>/gi, " ").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").trim();
           if (n) chapter.push({ n: n, t: t });
         }
         if (chapter.length) finish(chapter);

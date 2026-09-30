@@ -406,6 +406,7 @@
       .replace(/<sup\b[^>]*>[\s\S]*?<\/sup>/gi, "")
       .replace(/<\/?sup\b[^>]*>/gi, "")
       .replace(/\{(?:H|G)?\d+\}/gi, "")
+      .replace(/<br\b[^>]*>/gi, " ")
       .replace(/<[^>]+>/g, "")
       .replace(/&nbsp;/g, " ")
       .replace(/\s+/g, " ")

@@ -5,6 +5,7 @@ const { URL } = require("url");
 
 const scriptures = require("./scriptures.js");
 const bible = require("./bible.js");
+const dotl = require("./dotl.js");
 
 const ROOT = path.join(__dirname, "..");
 const SITES = path.join(ROOT, "sites");
@@ -17,6 +18,7 @@ const RESERVED = new Set([
   "scriptures",
   "published",
   "sky-images",
+  "dotl",
 ]);
 const ALIAS = {
   sons: "sons-of-god-arise",
@@ -133,6 +135,12 @@ function handler(req, res) {
 
   if (p === "/scriptures") {
     scriptures(vercelReq(req, url), vercelRes(res));
+    return;
+  }
+  if (p === "/dotl/topics" || p === "/dotl/topic-refs" || p === "/dotl/sections") {
+    const qreq = vercelReq(req, url);
+    qreq.query.part = p === "/dotl/topic-refs" ? "refs" : p === "/dotl/sections" ? "sections" : "topics";
+    dotl(qreq, vercelRes(res));
     return;
   }
   if (p === "/bible") {
