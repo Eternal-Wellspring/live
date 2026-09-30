@@ -9,24 +9,53 @@
       if (mark) h = mark.getBoundingClientRect().height;
     }
     if (h < 8) return;
-    words.style.height = h + "px";
-    words.style.fontSize = (h / 2.12) + "px";
-    words.style.lineHeight = "1.06";
-    words.style.alignSelf = "stretch";
+    var topEl = document.querySelector("header.top");
+    if (topEl) topEl.style.position = "relative";
+    var site = document.querySelector(".who .site");
+    words.style.height = "";
+    words.style.lineHeight = "1.05";
+    words.style.alignSelf = "center";
+    words.style.textDecoration = "none";
+    if (site) words.style.fontSize = getComputedStyle(site).fontSize;
+    if (topEl) {
+      var wordH = words.scrollHeight || words.getBoundingClientRect().height;
+      if (wordH > 8) topEl.style.minHeight = Math.ceil(wordH + 8) + "px";
+    }
     var mark = document.querySelector(".ew-mark");
-    if (!mark) return;
+    if (mark) mark.style.textDecoration = "none";
+    var who = document.querySelector(".who");
+    var inner = document.querySelector(".title-bar-inner");
+    var title = document.getElementById("page-title");
+    if (title) title.style.textAlign = "center";
+    if (!mark || !who || !inner) return;
+    who.style.paddingLeft = "";
+    who.style.paddingRight = "";
+    inner.style.paddingLeft = "";
+    inner.style.paddingRight = "";
     var markR = mark.getBoundingClientRect();
-    [document.querySelector(".who"), document.querySelector(".title-bar-inner")].forEach(function (el) {
-      var r, left, avail, right;
-      if (!el) return;
-      r = el.getBoundingClientRect();
-      left = Math.max(0, Math.ceil(markR.right - r.left));
-      avail = r.width - left;
-      right = Math.min(left, Math.max(0, Math.floor(avail - 96)));
+    function inset(el) {
+      var r = el.getBoundingClientRect();
+      var left = Math.max(0, Math.ceil(markR.right - r.left) + 12);
+      var right = left;
+      if (r.width - left - right < 180) right = Math.max(8, r.width - left - 180);
       el.style.boxSizing = "border-box";
       el.style.paddingLeft = left + "px";
       el.style.paddingRight = right + "px";
-    });
+    }
+    inset(who);
+    inset(inner);
+    var titleBar = document.querySelector(".title-bar");
+    if (!site || !title || !titleBar || getComputedStyle(titleBar).display === "none") return;
+    var siteR = site.getBoundingClientRect();
+    var titleR = title.getBoundingClientRect();
+    if (titleR.width < 1) return;
+    var shift = ((siteR.left + siteR.right) / 2) - ((titleR.left + titleR.right) / 2);
+    if (Math.abs(shift) >= 1) {
+      var pl = parseFloat(inner.style.paddingLeft) || 0;
+      var pr = parseFloat(inner.style.paddingRight) || 0;
+      inner.style.paddingLeft = Math.max(0, pl - shift) + "px";
+      inner.style.paddingRight = Math.max(0, pr + shift) + "px";
+    }
   }
   function onEwWords() {
     fitEwWords();
@@ -139,6 +168,7 @@
     document.querySelectorAll(".tab-notes").forEach(function(b){
       b.classList.toggle("on", notesOn);
     });
+    fitEwWords();
   }
   function nudge(which, dir) {
     var cur = which === "page" ? pageZ : fontZ;

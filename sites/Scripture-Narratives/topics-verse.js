@@ -33,6 +33,7 @@
   var openRef = "";
   var tealFlip = {};
   var leftPaintKey = "";
+  var colScroll = {};
   var verseAuto = true;
   var expandByRef = false;
   var pendingEdit = null;
@@ -1187,13 +1188,63 @@
     var el = document.getElementById("verse-heading");
     if (el) el.textContent = verseHeading();
   }
-  function placeHeading(x, w) {
+  function placeHeading() {
     var el = document.getElementById("verse-heading");
+    var wrap, viewW, mid, textW, left, site, frame, range, sr, fr;
     if (!el) return 20;
     el.textContent = verseHeading();
-    el.style.left = Math.round(x) + "px";
-    el.style.width = Math.round(w) + "px";
+    el.style.width = "auto";
+    el.style.left = "0px";
+    wrap = document.getElementById("wrap");
+    viewW = wrap ? wrap.clientWidth : window.innerWidth;
+    mid = viewW / 2;
+    try {
+      site = window.parent && window.parent.document && window.parent.document.querySelector(".who .site");
+      frame = window.frameElement;
+      if (site && frame && site.ownerDocument) {
+        range = site.ownerDocument.createRange();
+        range.selectNodeContents(site);
+        sr = range.getBoundingClientRect();
+        fr = frame.getBoundingClientRect();
+        mid = (sr.left + sr.right) / 2 - fr.left;
+      }
+    } catch (err) {}
+    textW = el.offsetWidth;
+    left = Math.round(mid - textW / 2);
+    if (left < 8) left = 8;
+    if (left + textW > viewW - 8) left = Math.max(8, Math.round(viewW - 8 - textW));
+    el.style.left = left + "px";
     return Math.max(18, el.offsetHeight);
+  }
+  function clampVerseCol(top, innerH, natural, view, parented) {
+    var bottom = Math.max(PAD, (view || 0) - PAD);
+    var hi = natural;
+    var lo = natural;
+    if (innerH <= bottom) {
+      if (natural < 0) hi = 0;
+    } else {
+      lo = bottom - innerH;
+      if (parented && natural < 0) hi = 0;
+      if (!parented) hi = Math.min(natural, 0);
+      if (lo > hi) lo = hi;
+    }
+    if (top > hi) top = hi;
+    if (top < lo) top = lo;
+    return Math.round(top);
+  }
+  function fitCol(pane) {
+    var i, el, y, bottom = 0;
+    if (!pane) return;
+    for (i = 0; i < pane.children.length; i++) {
+      el = pane.children[i];
+      y = (el._y || 0) + (el.offsetHeight || el._h || 0);
+      if (y > bottom) bottom = y;
+    }
+    if (bottom > (pane._innerH || 0)) {
+      pane._innerH = bottom;
+      pane._h = bottom;
+      pane.style.height = bottom + "px";
+    }
   }
   function paint() {
     var board = document.getElementById("board");
@@ -1208,6 +1259,15 @@
       refTopicId = "";
     }
     tellHeading();
+    (function () {
+      var oldCols = board.querySelectorAll(".tcol");
+      var oi, oc, ok;
+      for (oi = 0; oi < oldCols.length; oi++) {
+        oc = oldCols[oi];
+        ok = oc.getAttribute("data-col");
+        if (ok && oc._y != null) colScroll[ok] = oc._y;
+      }
+    })();
     board.innerHTML = "";
     board.style.position = "relative";
     board.style.display = "block";
@@ -1388,10 +1448,10 @@
       if (!pane || String(pane.className || "").indexOf("tcol") < 0) return el._x || 0;
       return (pane._x || 0) + (el._x || 0);
     }
-    function layoutCol(els, x, nameW, parent, minTop, noBtns) {
+    function layoutCol(els, x, nameW, parent, minTop, noBtns, colKey) {
       if (!els || !els.length) return null;
       var IND = Math.round(textSize("xx").w);
-      var maxInd = 0, i, lv, ind, hitAt = 0, y0, paneW, innerH, visH, paneH, pane, y;
+      var maxInd = 0, i, lv, ind, hitAt = 0, y0, paneW, innerH, paneH, pane, y;
       if (!noBtns) {
         for (i = 0; i < els.length; i++) {
           lv = Math.max(1, Number(els[i].dataset.level) || 1);
@@ -1404,7 +1464,6 @@
         }
       }
       paneW = (noBtns ? nameW : colSpan(nameW)) + maxInd;
-      visH = (chart && chart.clientHeight) ? chart.clientHeight : viewH;
       innerH = els.length * BOX_H + Math.max(0, els.length - 1) * GAP_Y;
       if (parent && noBtns) {
         y0 = boardY(parent) - hitAt * (BOX_H + GAP_Y);
@@ -1415,9 +1474,13 @@
       }
       if (!(parent && noBtns) && y0 < 0) y0 = 0;
       y0 = Math.round(y0);
-      paneH = Math.max(80, innerH);
+      var natural = y0;
+      var view = (chart && chart.clientHeight) ? chart.clientHeight : viewH;
+      if (colKey && colScroll[colKey] != null) y0 = clampVerseCol(colScroll[colKey], innerH, natural, view, !!(parent && noBtns));
+      paneH = Math.max(innerH, 8);
       pane = document.createElement("div");
       pane.className = "tcol";
+      if (colKey) pane.setAttribute("data-col", colKey);
       board.appendChild(pane);
       pane.style.left = Math.round(x) + "px";
       pane.style.top = y0 + "px";
@@ -1428,6 +1491,10 @@
       pane._x = x;
       pane._w = paneW;
       pane._y = y0;
+      pane._innerH = innerH;
+      pane._natural = natural;
+      pane._parented = !!(parent && noBtns);
+      pane._viewH = view;
       y = 0;
       for (i = 0; i < els.length; i++) {
         pane.appendChild(els[i]);
@@ -1818,7 +1885,7 @@
     var maxW = Math.max(200, viewW - PAD * 2 - 80);
     if (vsW0 > maxW) vsW0 = maxW;
     if (vsW0 < 200) vsW0 = 200;
-    var headH = placeHeading(PAD, vsW0);
+    var headH = placeHeading();
     var boxTop = headH + 2;
     var chartTop = boxTop;
     var band = PAD;
@@ -1831,7 +1898,7 @@
     if (keepLeft) {
       versesWrap = oldVs;
       vsW = oldVs.offsetWidth || vsW0;
-      headH = placeHeading(PAD, vsW);
+      headH = placeHeading();
       boxTop = headH + 2;
       chartTop = boxTop;
       vsH = Math.max(160, viewH - boxTop - PAD);
@@ -2114,7 +2181,7 @@
     if (need < 200) need = 200;
     vsW = userSize > 0 ? Math.max(userSize, need) : need;
     if (vsW > maxW) vsW = maxW;
-    headH = placeHeading(PAD, vsW);
+    headH = placeHeading();
     boxTop = headH + 2;
     chartTop = boxTop;
     vsH = Math.max(160, viewH - boxTop - PAD);
@@ -2228,7 +2295,7 @@
     refW = maxRefNameW();
     shown = shownTopics();
     topicEls = shown.map(function (t) { return box(t); });
-    pane = layoutCol(topicEls, x, nameW, null);
+    pane = layoutCol(topicEls, x, nameW, null, null, false, "t:root");
     refTopic = refTopicId ? find(items, refTopicId) : null;
     function placeChapRefs(col) {
       var pne = col.pane;
@@ -2264,6 +2331,7 @@
       colBuilt.push({ pane: pane, boxes: topicEls, w: nameW, x: x });
       panes.push(pane);
       placeChapRefs(colBuilt[colBuilt.length - 1]);
+      fitCol(pane);
       x += (pane._w || colSpan(nameW)) + GAP_X;
     }
     refList = refTopic ? refsFor(refTopic) : [];
@@ -2272,7 +2340,7 @@
       wRef = refW;
       parentBox = findBox(topicEls, refTopic.id);
       cRef = refList.map(function (lab) { return refBox(lab, "", refTopic); });
-      pane = layoutCol(cRef, x, wRef, parentBox, null, true);
+      pane = layoutCol(cRef, x, wRef, parentBox, null, true, refTopic ? ("r:" + sid(refTopic.id)) : "r");
       if (pane) {
         colBuilt.push({ pane: pane, boxes: cRef, w: wRef, x: x });
         panes.push(pane);
@@ -2663,6 +2731,56 @@
       hideRhm();
       if (btn && btn.getAttribute("data-edit") === "1" && fn) fn();
     });
+  })();
+  (function () {
+    var wrap = document.getElementById("wrap");
+    if (!wrap) return;
+    function overChapter(el) {
+      while (el && el !== document.body) {
+        if (el.id === "tdesc") return true;
+        if (el.classList && (
+          el.classList.contains("tverse-wrap") ||
+          el.classList.contains("tverses") ||
+          el.classList.contains("tverse-note") ||
+          el.classList.contains("tverse-bar") ||
+          el.classList.contains("ew-tr-list") ||
+          el.classList.contains("ew-book-list") ||
+          el.classList.contains("ew-ch-grid")
+        )) return true;
+        el = el.parentNode;
+      }
+      return false;
+    }
+    function colFromPoint(x, y) {
+      var n = document.elementFromPoint(x, y);
+      if (overChapter(n)) return null;
+      while (n && n !== document.documentElement) {
+        if (n.classList && n.classList.contains("tcol")) return n;
+        n = n.parentNode;
+      }
+      return null;
+    }
+    function snWheel(deltaY, x, y) {
+      var col = colFromPoint(x, y);
+      var innerH, next, key;
+      if (!col) return false;
+      innerH = col._innerH || col.offsetHeight;
+      next = clampVerseCol((col._y || 0) - deltaY, innerH, col._natural != null ? col._natural : (col._y || 0), col._viewH || 0, !!col._parented);
+      if (next === col._y) return false;
+      col._y = next;
+      col._top = next;
+      col.style.top = next + "px";
+      key = col.getAttribute("data-col");
+      if (key) colScroll[key] = next;
+      return true;
+    }
+    window.snWheel = snWheel;
+    function onWheel(ev) {
+      if (overChapter(ev.target)) return;
+      if (snWheel(ev.deltaY, ev.clientX, ev.clientY)) ev.preventDefault();
+    }
+    wrap.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("wheel", onWheel, { passive: false, capture: true });
   })();
   loadTopics(paint);
 })();

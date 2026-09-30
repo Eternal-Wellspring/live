@@ -36,6 +36,7 @@
       position: absolute;
       z-index: 2;
       overflow: visible;
+      overscroll-behavior: contain;
     }
     .board { position: relative; display: block; min-width: 100%; min-height: 100%; }
     .tbox {
@@ -175,6 +176,7 @@
       word-wrap: break-word;
       overflow-x: hidden;
       overflow-y: auto;
+      overscroll-behavior: contain;
       resize: none;
       box-sizing: border-box;
     }
@@ -185,6 +187,7 @@
       z-index: 2;
       display: flex;
       flex-direction: column;
+      overscroll-behavior: contain;
       margin: 0;
       border: 1px solid var(--line);
       background: var(--panel);
@@ -438,6 +441,7 @@
       word-wrap: break-word;
       overflow-x: hidden;
       overflow-y: auto;
+      overscroll-behavior: contain;
     }
     .tverses p {
       margin: 0;
@@ -546,6 +550,6 @@
     <button type="button" data-yes="1">Yes</button>
     <button type="button" data-no="1">No</button>
   </div>
-  <script src="topics-tree.js?v=359"></script>
+  <script src="topics-tree.js?v=367"></script>
 </body>
 </html>

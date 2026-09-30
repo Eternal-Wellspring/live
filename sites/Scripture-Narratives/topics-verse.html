@@ -35,6 +35,7 @@
       color: var(--title);
       background: transparent;
       text-align: center;
+      white-space: nowrap;
       pointer-events: none;
     }
     .board-wrap {
@@ -48,13 +49,15 @@
       position: absolute;
       z-index: 1;
       overflow-x: auto;
-      overflow-y: auto;
+      overflow-y: hidden;
+      overscroll-behavior: contain;
       background: var(--panel);
     }
     .tcol {
       position: absolute;
       z-index: 2;
       overflow: hidden;
+      overscroll-behavior: contain;
     }
     .vcol {
       position: absolute;
@@ -254,6 +257,7 @@
       z-index: 2;
       display: flex;
       flex-direction: column;
+      overscroll-behavior: contain;
       margin: 0;
       border: 1px solid var(--line);
       background: var(--panel);
@@ -539,6 +543,7 @@
       word-wrap: break-word;
       overflow-x: hidden;
       overflow-y: auto;
+      overscroll-behavior: contain;
     }
     .tverses p {
       margin: 0;
@@ -719,6 +724,6 @@
     <div class="sn-rhm-title">Topic</div>
     <button type="button" data-edit="1">Edit</button>
   </div>
-  <script src="topics-verse.js?v=391"></script>
+  <script src="topics-verse.js?v=393"></script>
 </body>
 </html>

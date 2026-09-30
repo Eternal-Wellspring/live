@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Topics — Scripture Narratives</title>
   <link rel="icon" href="images/icon.jpg">
-  <link rel="stylesheet" href="site.css?v=tools76" />
+  <link rel="stylesheet" href="site.css?v=tools77" />
   <style>
     html, body { height: 100%; overflow: hidden; }
     .page-frame {
@@ -451,10 +451,10 @@
     }
     paintTabs();
     function treeUrl() {
-      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=360";
+      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=367";
     }
     function verseUrl() {
-      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=390";
+      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=393";
     }
     function showTree() {
       var fr = document.getElementById("tree-frame");
@@ -855,7 +855,7 @@
     });
   </script>
   <script>window.ewFolder="Scripture-Narratives"</script>
-  <script src="site.js?v=12"></script>
+  <script src="site.js?v=15"></script>
   <script src="/bible.js?v=121"></script>
   <script>
     window.addEventListener("contextmenu", function (ev) {
@@ -867,19 +867,23 @@
   </script>
   <script>
   (function () {
-    var tree = document.getElementById("s-tree");
-    if (!tree) return;
-    tree.addEventListener("wheel", function (ev) {
-      var fr = document.getElementById("tree-frame");
-      var win, rect, x, y;
-      if (!fr) return;
-      try { win = fr.contentWindow; } catch (err) { return; }
-      if (!win || typeof win.snWheel !== "function") return;
-      rect = fr.getBoundingClientRect();
-      x = ev.clientX - rect.left;
-      y = ev.clientY - rect.top;
-      if (win.snWheel(ev.deltaY, x, y)) ev.preventDefault();
-    }, { passive: false });
+    function bindWheel(panelId, frameId) {
+      var panel = document.getElementById(panelId);
+      if (!panel) return;
+      panel.addEventListener("wheel", function (ev) {
+        var fr = document.getElementById(frameId);
+        var win, rect, x, y;
+        if (!fr) return;
+        try { win = fr.contentWindow; } catch (err) { return; }
+        if (!win || typeof win.snWheel !== "function") return;
+        rect = fr.getBoundingClientRect();
+        x = ev.clientX - rect.left;
+        y = ev.clientY - rect.top;
+        if (win.snWheel(ev.deltaY, x, y)) ev.preventDefault();
+      }, { passive: false });
+    }
+    bindWheel("s-tree", "tree-frame");
+    bindWheel("s-verse", "verse-frame");
   })();
   </script>
   <script src="/ew-sky.js?v=15"></script>

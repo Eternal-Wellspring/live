@@ -210,12 +210,6 @@
     }
     return root && root.folder ? String(root.folder) : "";
   }
-  function scripturesQuery(ref) {
-    var q = "ref=" + encodeURIComponent(ref) + "&folder=" + encodeURIComponent(siteFolder());
-    var topic = scripturesTopic();
-    if (topic) q += "&topic=" + encodeURIComponent(topic);
-    return q;
-  }
   function sameTopic(a, b) {
     return !!(a && b && sid(a.id) === sid(b.id));
   }
@@ -671,9 +665,23 @@
     }
     return out;
   }
-  function editRefLabel(oldLabel, newLabel) {
-    var owner = refOwner();
+  function shownRef(owner, typed) {
+    var list = ownRefs(owner);
+    var i, p, want = parseRefParts(typed);
+    for (i = 0; i < list.length; i++) {
+      if (list[i] === typed || sameRef(list[i], typed)) return list[i];
+    }
+    if (!want) return typed;
+    for (i = 0; i < list.length; i++) {
+      p = parseRefParts(list[i]);
+      if (p && p.book === want.book && p.ch === want.ch && p.a <= want.a && p.b >= want.b) return list[i];
+    }
+    return typed;
+  }
+  function editRefLabel(oldLabel, newLabel, topicId) {
+    var owner = (topicId != null && topicId !== "") ? find(topics, topicId) : null;
     var ids = {}, idxs, p, del, i;
+    if (!owner) owner = refOwner();
     newLabel = String(newLabel || "").trim();
     if (!owner) return;
     if (!newLabel || newLabel === oldLabel) {
@@ -702,7 +710,19 @@
         description: keepDesc
       });
     }
-    if (openRef === oldLabel) openRef = newLabel;
+    sel = sid(owner.id);
+    lastRefTopic = sel;
+    openRef = shownRef(owner, newLabel);
+    viewChap = chapterOf(openRef);
+    lastOpenRef = openRef;
+    hitPick = false;
+    hitStart = 0;
+    hitEnd = 0;
+    if (verseEditRef === oldLabel) {
+      verseDirty = false;
+      verseDraft = "";
+      verseEditRef = "";
+    }
     saveTopicRefs();
     paint();
   }
@@ -1123,18 +1143,6 @@
     var p = String(location.port || "");
     return p === "8775" || p === "8776" || p === "8777";
   }
-  function storedToLines(html) {
-    var map = {};
-    String(html || "").replace(/<p[^>]*>\s*<sup>\s*(\d+)\s*<\/sup>\s*([\s\S]*?)<\/p>/gi, function (_, n, inner) {
-      map[Number(n)] = String(inner || "").replace(/^\s+|\s+$/g, "");
-      return "";
-    });
-    var keys = Object.keys(map).map(Number).sort(function (a, b) { return a - b; });
-    if (keys.length) {
-      return keys.map(function (n) { return { n: n, t: map[n] }; });
-    }
-    return verseLines(html);
-  }
   function chapterStoreRef(lines) {
     if (!viewChap) return openRef || "";
     var first = lines && lines[0] && lines[0].n;
@@ -1201,22 +1209,6 @@
       return /^<\/?(?:strong|b|i|em|u|br)>$/i.test(m) ? m : "";
     });
     return s;
-  }
-  function verseLines(text) {
-    var raw = String(text || "").split(/\n/);
-    var out = [], i, m, cur = null, line;
-    for (i = 0; i < raw.length; i++) {
-      line = raw[i];
-      m = String(line || "").match(/^(\d+)\s+(.*)$/);
-      if (m) {
-        if (cur) out.push(cur);
-        cur = { n: Number(m[1]), t: m[2] };
-      } else if (cur && String(line || "").trim()) {
-        cur.t += "\n" + line;
-      }
-    }
-    if (cur) out.push(cur);
-    return out;
   }
   function refSpan(ref) {
     var m = String(ref || "").trim().match(/^(\S+)\s+(\d+)\s*:\s*(\d+)(?:\s*[-–—]\s*(?:(\d+)\s*:)?(\d+))?$/);
@@ -1304,20 +1296,6 @@
     }
     return out;
   }
-  function overlayStored(chapter, stored) {
-    var by = {}, i, n, t, out = [];
-    for (i = 0; i < stored.length; i++) {
-      n = stored[i].n;
-      t = String(stored[i].t || "").trim();
-      if (n && t && t !== "...") by[n] = stored[i];
-    }
-    if (!chapter.length) return stored;
-    for (i = 0; i < chapter.length; i++) {
-      n = chapter[i].n;
-      out.push(by[n] || chapter[i]);
-    }
-    return out;
-  }
   function loadVerses(ref, done) {
     var key = cacheKey(ref);
     if (verseCache[key]) {
@@ -1328,48 +1306,12 @@
       verseCache[key] = lines;
       done(lines);
     }
-    function fromStore(chapter) {
-      if ((verseTr || "NKJV") !== "NKJV") {
-        finish(chapter && chapter.length ? chapter : []);
-        return;
-      }
-      var chRef = "";
-      var thisChap = sameOrigChap();
-      if (viewChap && chapter && chapter.length) {
-        chRef = viewChap.abbr + " " + viewChap.ch + ":" + chapter[0].n + "-" + chapter[chapter.length - 1].n;
-      }
-      var jobs = [];
-      if (thisChap && ref) {
-        jobs.push(
-          fetch("/scriptures?" + scripturesQuery(ref), { cache: "no-store" })
-            .then(function (r) { return r.ok ? r.json() : {}; })
-            .catch(function () { return {}; })
-        );
-      } else {
-        jobs.push(Promise.resolve({}));
-      }
-      if (chRef && chRef !== ref) {
-        jobs.push(
-          fetch("/scriptures?" + scripturesQuery(chRef), { cache: "no-store" })
-            .then(function (r) { return r.ok ? r.json() : {}; })
-            .catch(function () { return {}; })
-        );
-      } else {
-        jobs.push(Promise.resolve({}));
-      }
-      Promise.all(jobs).then(function (pair) {
-        var refStored = storedToLines((pair[0] && pair[0].text) || "");
-        var chapStored = pair[1] && pair[1].text ? storedToLines(pair[1].text) : [];
-        var merged = overlayStored(chapter || [], chapStored);
-        if (thisChap) merged = overlayStored(merged, refStored);
-        if (!merged.length) merged = chapter && chapter.length ? chapter : (thisChap ? refStored : []);
-        if (!merged.length && thisChap && ref) finish(completeSpan([], ref));
-        else finish(merged);
-      });
+    function fresh() {
+      finish(sameOrigChap() && ref ? completeSpan([], ref) : []);
     }
     var ch = viewChap || chapterOf(ref);
     if (!ch || !ch.num) {
-      fromStore(null);
+      fresh();
       return;
     }
     fetch("/bible?tr=" + encodeURIComponent(trSlug(verseTr || "NKJV")) + "&book=" + ch.num + "&chapter=" + ch.ch, { cache: "no-store" })
@@ -1383,9 +1325,10 @@
           t = String(row.text || "").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").trim();
           if (n) chapter.push({ n: n, t: t });
         }
-        fromStore(chapter);
+        if (chapter.length) finish(chapter);
+        else fresh();
       })
-      .catch(function () { fromStore(null); });
+      .catch(function () { fresh(); });
   }
   function parentTopic(t) {
     var list = bySeq();
@@ -1492,14 +1435,14 @@
     list = ownRefs(first);
     openRef = list.length ? list[0] : null;
   }
-  function pickTopic(t) {
+  function pickTopic(t, x) {
     var id = sid(t.id);
     var list;
     if (sid(sel) === id) {
       if (!guardPick()) return;
       closeBranch(t);
       sel = parentSel(t);
-      hideDesc();
+      if (!descPast(x)) hideDesc();
     } else {
       sel = id;
       pickGuard = Date.now() + 400;
@@ -1509,10 +1452,10 @@
     openRef = list.length ? list[0] : null;
     loadTopics(paint);
   }
-  function toggleTopics(t) {
+  function toggleTopics(t, x) {
     var list, kidsList, first;
     if (!guardPick()) return;
-    hideDesc();
+    if (!descPast(x)) hideDesc();
     var lv = t.level || 1;
     var id = sid(t.id);
     var depth = lv - 2;
@@ -1542,10 +1485,10 @@
     }
     loadTopics(paint);
   }
-  function toggleLowerRefs(t) {
+  function toggleLowerRefs(t, x) {
     var lv, id, depth, kidsList, i, first, list, same;
     if (!guardPick()) return;
-    hideDesc();
+    if (!descPast(x)) hideDesc();
     lv = t.level || 1;
     id = sid(t.id);
     depth = lv - 2;
@@ -1578,10 +1521,10 @@
     }
     loadTopics(paint);
   }
-  function toggleRefs(t) {
+  function toggleRefs(t, x) {
     var list;
     if (!guardPick()) return;
-    hideDesc();
+    if (!descPast(x)) hideDesc();
     sel = sid(t.id);
     lastRefTopic = sel;
     list = ownRefs(t);
@@ -1697,7 +1640,7 @@
       c.addEventListener("click", function (ev) {
         ev.preventDefault();
         ev.stopPropagation();
-        if (onClick) onClick();
+        if (onClick) onClick(ev);
       });
       return c;
     }
@@ -1723,11 +1666,21 @@
       name.textContent = t.title || "";
       b.appendChild(name);
       var info = mkBtn("info", "", false, function () {
+        var picking = sid(sel) !== sid(t.id);
+        var list;
+        if (picking) {
+          sel = sid(t.id);
+          lastRefTopic = sel;
+          list = ownRefs(t);
+          openRef = list.length ? list[0] : null;
+          pickGuard = Date.now() + 400;
+        }
         if (descOpen && sid(descId) === sid(t.id)) hideDesc();
         else openDesc(t);
+        if (picking) paint();
       });
       var mark = document.createElement("span");
-      var own = mkBtn("green", ownN(t), greenOpen, function () { toggleRefs(t); });
+      var own = mkBtn("green", ownN(t), greenOpen, function (ev) { toggleRefs(t, ev.clientX); });
       var teal;
       mark.className = "tbtn-i";
       mark.textContent = "i";
@@ -1749,7 +1702,7 @@
       });
       b._own = own;
       if (n > 0) {
-        teal = mkBtn("teal", n, tealOpen, function () { toggleTopics(t); });
+        teal = mkBtn("teal", n, tealOpen, function (ev) { toggleTopics(t, ev.clientX); });
         teal.dataset.id = sid(t.id);
         b._teal = teal;
       }
@@ -1809,6 +1762,7 @@
         b.addEventListener("mousedown", function (ev) {
           if (ev.button !== 0) return;
           if (name.querySelector("input")) return;
+          if (document.activeElement && document.activeElement.tagName === "INPUT") return;
           ev.preventDefault();
           beginTopicDrag(t, ev);
         });
@@ -1818,7 +1772,7 @@
           if (skipTopicClick) { skipTopicClick = false; return; }
           if (ev.detail > 1) return;
           if (name.querySelector("input")) return;
-          pickTopic(t);
+          pickTopic(t, ev.clientX);
         });
       }
       board.appendChild(b);
@@ -1848,13 +1802,15 @@
         name.appendChild(inp);
         inp.focus();
         inp.select();
+        var done = false;
         function commit() {
-          if (!inp.parentNode) return;
-          editRefLabel(label, inp.value);
+          if (done || !inp.parentNode) return;
+          done = true;
+          editRefLabel(label, inp.value, topicId);
         }
         inp.addEventListener("keydown", function (kev) {
-          if (kev.key === "Enter") { kev.preventDefault(); commit(); }
-          if (kev.key === "Escape") { kev.preventDefault(); paint(); }
+          if (kev.key === "Enter") { kev.preventDefault(); kev.stopPropagation(); commit(); }
+          if (kev.key === "Escape") { kev.preventDefault(); done = true; paint(); }
         });
         inp.addEventListener("blur", commit);
         inp.addEventListener("click", function (cev) { cev.stopPropagation(); });
@@ -1877,6 +1833,7 @@
       b.addEventListener("mousedown", function (ev) {
         if (ev.button !== 0) return;
         if (name.querySelector("input")) return;
+        if (document.activeElement && document.activeElement.tagName === "INPUT") return;
         ev.preventDefault();
         beginRefDrag(label, ev);
       });
@@ -2551,19 +2508,34 @@
     }
     return null;
   }
-  function descKeep(el) {
-    var box;
+  function inChapterBox(el) {
     while (el && el !== document.documentElement) {
-      if (el.id === "tdesc") return true;
-      if (el.classList && el.classList.contains("tbtn-info") && sid(el.dataset.id) === sid(descId)) return true;
-      if (el.classList && el.classList.contains("tbox") && !el.dataset.ref && sid(el.dataset.id) === sid(descId)) return true;
-      if (el.classList && String(el.className || "").indexOf("tcol") >= 0) {
-        box = topicBoxEl(descId);
-        if (box && box.parentNode === el) return true;
-      }
+      if (el.classList && (
+        el.classList.contains("tverse-wrap") ||
+        el.classList.contains("tverses") ||
+        el.classList.contains("tverse-note") ||
+        el.classList.contains("tverse-bar") ||
+        el.classList.contains("ew-tr-list")
+      )) return true;
       el = el.parentNode;
     }
     return false;
+  }
+  function descPast(x) {
+    var d = document.getElementById("tdesc");
+    if (!d || d.hidden || x == null) return false;
+    return x > d.getBoundingClientRect().right;
+  }
+  function descKeep(el, x) {
+    if (descPast(x)) return true;
+    while (el && el !== document.documentElement) {
+      if (el.id === "tdesc") return true;
+      if (el.classList && el.classList.contains("tbtn-info")) return true;
+      if (inChapterBox(el)) return true;
+      if (el.classList && (el.classList.contains("tbox") || el.classList.contains("tbtn"))) return false;
+      el = el.parentNode;
+    }
+    return true;
   }
   function hideDesc() {
     var d = document.getElementById("tdesc");
@@ -2761,27 +2733,28 @@
       } catch (err) {}
       return h;
     }
+    function overChapter(el) {
+      while (el && el !== document.body) {
+        if (el.id === "tdesc") return true;
+        if (el.classList && (
+          el.classList.contains("tverse-wrap") ||
+          el.classList.contains("tverses") ||
+          el.classList.contains("tverse-note") ||
+          el.classList.contains("tverse-bar") ||
+          el.classList.contains("ew-tr-list")
+        )) return true;
+        el = el.parentNode;
+      }
+      return false;
+    }
     function colFromPoint(x, y) {
       var n = document.elementFromPoint(x, y);
-      var col = null;
-      var cols, i, r, best = Infinity, d;
-      while (n && n !== wrap && n !== document.body) {
-        if (n.classList && String(n.className || "").indexOf("tcol") >= 0) {
-          return n;
-        }
+      if (overChapter(n)) return null;
+      while (n && n !== document.documentElement) {
+        if (n.classList && n.classList.contains("tcol")) return n;
         n = n.parentNode;
       }
-      cols = wrap.querySelectorAll(".tcol");
-      for (i = 0; i < cols.length; i++) {
-        r = cols[i].getBoundingClientRect();
-        if (x >= r.left && x <= r.right) return cols[i];
-        d = x < r.left ? r.left - x : x - r.right;
-        if (d < best) {
-          best = d;
-          col = cols[i];
-        }
-      }
-      return col;
+      return null;
     }
     function snWheel(deltaY, x, y) {
       var col = colFromPoint(x, y);
@@ -2813,11 +2786,7 @@
     }
     window.snWheel = snWheel;
     function onWheel(ev) {
-      var n = ev.target;
-      while (n && n !== document.body) {
-        if (n.classList && (n.classList.contains("tverses") || n.classList.contains("tverse-wrap") || n.classList.contains("tverse-note"))) return;
-        n = n.parentNode;
-      }
+      if (overChapter(ev.target)) return;
       if (snWheel(ev.deltaY, ev.clientX, ev.clientY)) ev.preventDefault();
     }
     wrap.addEventListener("wheel", onWheel, { passive: false });
@@ -2878,7 +2847,7 @@
     var now = document.querySelector(".tverse-bar .ew-tr-now");
     var menu = document.getElementById("sn-ref-menu");
     var inTr = ev.target.closest && (ev.target.closest(".tverse-bar") || ev.target.closest(".ew-tr-list"));
-    if (descOpen && !descKeep(ev.target)) hideDesc();
+    if (descOpen && !descKeep(ev.target, ev.clientX)) hideDesc();
     if (list && !inTr) {
       list.hidden = true;
       list.style.position = "";
