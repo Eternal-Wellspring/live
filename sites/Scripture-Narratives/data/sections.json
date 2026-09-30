@@ -19,5 +19,12 @@
     "ref": "",
     "filter": true,
     "tr": "NKJV"
+  },
+  "267": {
+    "book": "Gen",
+    "chapter": 1,
+    "ref": "Gen 1:1-31",
+    "filter": true,
+    "tr": "NIV"
   }
 }

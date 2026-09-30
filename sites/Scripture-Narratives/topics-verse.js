@@ -30,6 +30,7 @@
   var colPruned = {};
   var colClosed = {};
   var refTopicId = "";
+  var liveOpen = {};
   var openRef = "";
   var tealFlip = {};
   var leftPaintKey = "";
@@ -87,6 +88,15 @@
     if (m) return decodeURIComponent(m[1]);
     return "Scripture-Narratives";
   }
+  function scripturesTopic() {
+    var list = bySeq();
+    var i, root = null;
+    for (i = 0; i < list.length; i++) {
+      if (rootId && sid(list[i].id) === sid(rootId)) { root = list[i]; break; }
+      if (!root && (list[i].level || 1) === 1) root = list[i];
+    }
+    return root && root.folder ? String(root.folder) : "";
+  }
   function bySeq() {
     return topics.slice().sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); });
   }
@@ -131,13 +141,18 @@
   function byTitle(a, b) {
     return String(a.title || "").localeCompare(String(b.title || ""), undefined, { numeric: true, sensitivity: "base" });
   }
+  function hebRank(t) {
+    var title = String((t && t.title) || "");
+    if (/^across\b/i.test(title)) return 2;
+    if (title === "Answer") return 1;
+    return 0;
+  }
   function sortTopics(list, heb) {
     var src = (list || []).slice();
     if (!heb) return src.sort(byTitle);
     return src.sort(function (a, b) {
-      var aa = /^across\b/i.test(String(a.title || ""));
-      var ba = /^across\b/i.test(String(b.title || ""));
-      if (aa !== ba) return aa ? 1 : -1;
+      var ra = hebRank(a), rb = hebRank(b);
+      if (ra !== rb) return ra - rb;
       return byTitle(a, b);
     });
   }
@@ -256,6 +271,29 @@
     });
     return out;
   }
+  function isHebQuestion(t) {
+    var i, lv, title;
+    if (!t) return false;
+    lv = t.level || 1;
+    title = String(t.title || "");
+    if (!(lv >= 4 || (lv === 3 && /^\d+$/.test(title)))) return false;
+    for (i = 0; i < topics.length; i++) {
+      if ((topics[i].level || 1) === 1 && String(topics[i].title || "") === "Hebrews") return true;
+    }
+    return false;
+  }
+  function sortHebFirst(out) {
+    var heb = [], rest = [], i, m;
+    for (i = 0; i < out.length; i++) {
+      m = String(out[i] || "").trim().match(/^(\S+)/);
+      if (m && m[1] === "Heb") heb.push(out[i]);
+      else rest.push(out[i]);
+    }
+    return sortRefLabs(heb).concat(sortRefLabs(rest));
+  }
+  function orderRefs(t, labs) {
+    return isHebQuestion(t) ? sortHebFirst(labs) : labs;
+  }
   function refsFor(t) {
     var out = [], seen = {}, i, r, lab, ids = {}, br;
     if (!t) return out;
@@ -269,7 +307,7 @@
       seen[lab] = 1;
       out.push(lab);
     }
-    return sortRefLabs(combineRefs(out));
+    return orderRefs(t, sortRefLabs(combineRefs(out)));
   }
   function ownRefs(t) {
     var out = [], seen = {}, i, r, lab;
@@ -282,7 +320,7 @@
       seen[lab] = 1;
       out.push(lab);
     }
-    return sortRefLabs(combineRefs(out));
+    return orderRefs(t, sortRefLabs(combineRefs(out)));
   }
   function homeRef(t) {
     var labs = ownChapRefs(t);
@@ -519,9 +557,39 @@
   function topicExpanded(t) {
     if (!t) return false;
     if ((t.level || 1) <= 1) return true;
+    if (liveOpen[sid(t.id)]) return true;
     var open = topicInChap(t);
     if (tealFlip[sid(t.id)]) open = !open;
     return open;
+  }
+  function openLiveBranch(t) {
+    var items, p, cur, list, guard;
+    if (!t) return;
+    items = visible();
+    liveOpen = {};
+    p = t;
+    while (p) {
+      liveOpen[sid(p.id)] = 1;
+      p = parentTopic(p);
+    }
+    function mark(node) {
+      var kidsNow, i;
+      liveOpen[sid(node.id)] = 1;
+      kidsNow = sortTopics(kids(items, node), true);
+      for (i = 0; i < kidsNow.length; i++) mark(kidsNow[i]);
+    }
+    mark(t);
+    cur = t;
+    guard = 0;
+    while (guard++ < 12) {
+      list = sortTopics(kids(items, cur), true);
+      if (!list.length) break;
+      cur = list[0];
+    }
+    refTopicId = sid(cur.id);
+    sel = refTopicId;
+    hideDesc();
+    paint();
   }
   function toggleTealPrune(t) {
     var id = sid(t.id);
@@ -1053,6 +1121,54 @@
     vn = p.querySelector(".vn");
     return vn ? Number(vn.textContent) : 0;
   }
+  function scripturesQuery(ref) {
+    var q = "ref=" + encodeURIComponent(ref) + "&folder=" + encodeURIComponent(siteFolder());
+    var topic = scripturesTopic();
+    if (topic) q += "&topic=" + encodeURIComponent(topic);
+    return q;
+  }
+  function verseLines(text) {
+    var raw = String(text || "").split(/\n/);
+    var out = [], i, m, cur = null, line;
+    for (i = 0; i < raw.length; i++) {
+      line = raw[i];
+      m = String(line || "").match(/^(\d+)\s+(.*)$/);
+      if (m) {
+        if (cur) out.push(cur);
+        cur = { n: Number(m[1]), t: m[2] };
+      } else if (cur && String(line || "").trim()) {
+        cur.t += "\n" + line;
+      }
+    }
+    if (cur) out.push(cur);
+    return out;
+  }
+  function storedToLines(html) {
+    var map = {};
+    String(html || "").replace(/<p[^>]*>\s*<sup>\s*(\d+)\s*<\/sup>\s*([\s\S]*?)<\/p>/gi, function (_, n, inner) {
+      map[Number(n)] = String(inner || "").replace(/^\s+|\s+$/g, "");
+      return "";
+    });
+    var keys = Object.keys(map).map(Number).sort(function (a, b) { return a - b; });
+    if (keys.length) {
+      return keys.map(function (n) { return { n: n, t: map[n] }; });
+    }
+    return verseLines(html);
+  }
+  function overlayStored(chapter, stored) {
+    var by = {}, i, n, t, out = [];
+    for (i = 0; i < stored.length; i++) {
+      n = stored[i].n;
+      t = String(stored[i].t || "").trim();
+      if (n && t && t !== "...") by[n] = stored[i];
+    }
+    if (!chapter.length) return stored;
+    for (i = 0; i < chapter.length; i++) {
+      n = chapter[i].n;
+      out.push(by[n] || chapter[i]);
+    }
+    return out;
+  }
   function loadVerses(done, chap) {
     chap = chap || viewChap;
     var num = chap && (chap.num || bookNum(chap.abbr));
@@ -1061,8 +1177,51 @@
       done(verseCache[key]);
       return;
     }
+    function finish(lines) {
+      if (lines && lines.length) verseCache[key] = lines;
+      done(lines || []);
+    }
+    function fromStore(chapter) {
+      var chRef, refHit, jobs;
+      if ((verseTr || "NKJV") !== "NKJV") {
+        finish(chapter && chapter.length ? chapter : []);
+        return;
+      }
+      chRef = "";
+      if (chap && chapter && chapter.length) {
+        chRef = chap.abbr + " " + chap.ch + ":" + chapter[0].n + "-" + chapter[chapter.length - 1].n;
+      }
+      refHit = "";
+      if (openRef && chap) {
+        var orig = String(openRef).trim().match(/^(\S+)\s+(\d+)/);
+        if (orig && orig[1] === chap.abbr && Number(orig[2]) === chap.ch) refHit = openRef;
+      }
+      jobs = [];
+      if (refHit) {
+        jobs.push(
+          fetch("/scriptures?" + scripturesQuery(refHit), { cache: "no-store" })
+            .then(function (r) { return r.ok ? r.json() : {}; })
+            .catch(function () { return {}; })
+        );
+      } else jobs.push(Promise.resolve({}));
+      if (chRef && chRef !== refHit) {
+        jobs.push(
+          fetch("/scriptures?" + scripturesQuery(chRef), { cache: "no-store" })
+            .then(function (r) { return r.ok ? r.json() : {}; })
+            .catch(function () { return {}; })
+        );
+      } else jobs.push(Promise.resolve({}));
+      Promise.all(jobs).then(function (pair) {
+        var refStored = storedToLines((pair[0] && pair[0].text) || "");
+        var chapStored = pair[1] && pair[1].text ? storedToLines(pair[1].text) : [];
+        var merged = overlayStored(chapter || [], chapStored);
+        if (refHit) merged = overlayStored(merged, refStored);
+        if (!merged.length) merged = chapter && chapter.length ? chapter : refStored;
+        finish(merged);
+      });
+    }
     if (!chap || !num) {
-      done([]);
+      fromStore(null);
       return;
     }
     fetch("/bible?tr=" + encodeURIComponent(trSlug(verseTr || "NKJV")) + "&book=" + num + "&chapter=" + chap.ch, { cache: "no-store" })
@@ -1076,10 +1235,9 @@
           t = String(row.text || "").replace(/<br\b[^>]*>/gi, " ").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").trim();
           if (n) chapter.push({ n: n, t: t });
         }
-        if (chapter.length) verseCache[key] = chapter;
-        done(chapter);
+        fromStore(chapter);
       })
-      .catch(function () { done([]); });
+      .catch(function () { fromStore(null); });
   }
   function isSelOrAbove(t) {
     var p;
@@ -1294,6 +1452,7 @@
       verseChapKey = chapNow;
       tealFlip = {};
       verseOpen = [];
+      liveOpen = {};
       refTopicId = "";
     }
     tellHeading();
@@ -1319,6 +1478,7 @@
     if (BOX_H < 8) BOX_H = 8;
     boxH = BOX_H;
     var showRefs = true;
+    var showNums = true;
     function colNameW(list) {
       var w = 0;
       list.forEach(function (t) {
@@ -1328,7 +1488,8 @@
       return w < 8 ? 8 : w;
     }
     function colSpan(nameW) {
-      var w = nameW + GAP_BTN + BOX_H;
+      var w = nameW;
+      if (showNums) w += GAP_BTN + BOX_H;
       if (showRefs) w += GAP_BTN + BOX_H;
       return w;
     }
@@ -1367,9 +1528,12 @@
       name.className = "tname";
       name.textContent = t.title || "";
       b.appendChild(name);
-      var teal = mkBtn("teal", nFit, tealOpen && nFit > 0, function () { toggleTealPrune(t); });
-      teal.dataset.id = sid(t.id);
-      b._teal = teal;
+      var teal = null;
+      if (showNums) {
+        teal = mkBtn("teal", nFit, tealOpen && nFit > 0, function () { toggleTealPrune(t); });
+        teal.dataset.id = sid(t.id);
+        b._teal = teal;
+      }
       var green = null;
       if (showRefs) {
         var nGreen = refsFor(t).length;
@@ -1408,12 +1572,13 @@
         ev.preventDefault();
         ev.stopPropagation();
         if (name.querySelector("input")) return;
+        if (!showNums) { openLiveBranch(t); return; }
         pickTopic(t);
         if (sid(sel) === sid(t.id)) openDesc(t);
         else hideDesc();
       });
       board.appendChild(b);
-      board.appendChild(teal);
+      if (teal) board.appendChild(teal);
       if (green) board.appendChild(green);
       return b;
     }
@@ -2342,14 +2507,10 @@
     }
     nameW = colNameW(items);
     refW = maxRefNameW();
+    showNums = !(items[0] && String(items[0].title || "") === "Hebrews" && onLive());
+    if (showNums) liveOpen = {};
+    showRefs = showNums;
     shown = shownTopics();
-    showRefs = true;
-    if (items[0] && String(items[0].title || "") === "Hebrews" && onLive()) {
-      showRefs = false;
-      for (var ri = 0; ri < shown.length; ri++) {
-        if (refsFor(shown[ri]).length > 1) { showRefs = true; break; }
-      }
-    }
     topicEls = shown.map(function (t) { return box(t); });
     pane = layoutCol(topicEls, x, nameW, null, null, false, "t:root");
     refTopic = refTopicId ? find(items, refTopicId) : null;
