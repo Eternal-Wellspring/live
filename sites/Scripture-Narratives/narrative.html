@@ -23,9 +23,30 @@
       margin-bottom: 0;
       position: relative;
       z-index: 40;
+      padding-top: 0.45rem;
+    }
+    .head-banners {
+      background: #f6f7eb;
+      row-gap: 0;
+      align-items: start;
+    }
+    .title-bar,
+    .title-bar-inner {
+      min-height: 0;
+      margin: 0;
+      padding-top: 0.12rem;
+      padding-bottom: 0;
+    }
+    .title-bar h1 {
+      line-height: 1.1;
+      margin: 0;
+    }
+    html:not(.ew-phone) .stick-top > .page-nav-bar {
+      display: none;
     }
     .tab-dock {
       margin-bottom: 0;
+      padding-top: 0.15rem;
       padding-bottom: 0;
       overflow: visible;
     }
@@ -420,6 +441,12 @@
       if (frame) frame.classList.toggle("hide-end-tabs", id === "s-tree" || id === "s-verse");
       if (id === "s-l1") setTitle("Topics");
       else setTitle(chosenTitle || "Topics");
+      if (id !== "s-tree") {
+        try {
+          var treeFr = document.getElementById("tree-frame");
+          if (treeFr && treeFr.contentWindow && typeof treeFr.contentWindow.snHideDesc === "function") treeFr.contentWindow.snHideDesc();
+        } catch (err) {}
+      }
       if (id === "s-tree") showTree();
       if (id === "s-verse") showVerse();
     }
@@ -451,10 +478,10 @@
     }
     paintTabs();
     function treeUrl() {
-      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=368";
+      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=376";
     }
     function verseUrl() {
-      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=394";
+      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=399";
     }
     function showTree() {
       var fr = document.getElementById("tree-frame");

@@ -1015,6 +1015,34 @@
     });
     return s;
   }
+  function spaceRefVerses(box) {
+    var old = box.querySelectorAll("p.gap");
+    var i, p, hit, prev, g, ps;
+    for (i = old.length - 1; i >= 0; i--) {
+      if (old[i].parentNode) old[i].parentNode.removeChild(old[i]);
+    }
+    function gap() {
+      g = document.createElement("p");
+      g.className = "gap";
+      return g;
+    }
+    ps = box.querySelectorAll("p:not(.gap)");
+    prev = false;
+    for (i = 0; i < ps.length; i++) {
+      p = ps[i];
+      hit = p.classList.contains("hit");
+      if (hit && !prev && verseNo(p) !== 1) p.parentNode.insertBefore(gap(), p);
+      if (!hit && prev) p.parentNode.insertBefore(gap(), p);
+      prev = hit;
+    }
+  }
+  function verseNo(p) {
+    var n = p.getAttribute("data-vs");
+    var vn;
+    if (n) return Number(n);
+    vn = p.querySelector(".vn");
+    return vn ? Number(vn.textContent) : 0;
+  }
   function loadVerses(done, chap) {
     chap = chap || viewChap;
     var num = chap && (chap.num || bookNum(chap.abbr));
@@ -2256,6 +2284,7 @@
         }
         versesEl.appendChild(p);
       }
+      spaceRefVerses(versesEl);
       requestAnimationFrame(function () { centerHits(versesEl, !!selVs); });
     }
     var cached = verseCache[cacheKey()];
@@ -2525,6 +2554,7 @@
             p.appendChild(body);
             rVerses.appendChild(p);
           }
+          spaceRefVerses(rVerses);
           requestAnimationFrame(function () {
             requestAnimationFrame(function () { centerHits(rVerses); });
           });

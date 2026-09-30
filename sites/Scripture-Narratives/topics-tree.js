@@ -1139,6 +1139,9 @@
     var p = String(location.port || "");
     return p === "8775" || p === "8776" || p === "8778" || p === "8779";
   }
+  function onLive() {
+    return !canEditChapter();
+  }
   function canEditDesc() {
     var p = String(location.port || "");
     return p === "8775" || p === "8776" || p === "8777";
@@ -1442,10 +1445,11 @@
       if (!guardPick()) return;
       closeBranch(t);
       sel = parentSel(t);
-      if (!descPast(x)) hideDesc();
+      hideDesc();
     } else {
       sel = id;
       pickGuard = Date.now() + 400;
+      hideDesc();
     }
     list = sel ? ownRefs(find(topics, sel)) : [];
     lastRefTopic = sel;
@@ -1455,7 +1459,7 @@
   function toggleTopics(t, x) {
     var list, kidsList, first;
     if (!guardPick()) return;
-    if (!descPast(x)) hideDesc();
+    hideDesc();
     var lv = t.level || 1;
     var id = sid(t.id);
     var depth = lv - 2;
@@ -1488,7 +1492,7 @@
   function toggleLowerRefs(t, x) {
     var lv, id, depth, kidsList, i, first, list, same;
     if (!guardPick()) return;
-    if (!descPast(x)) hideDesc();
+    hideDesc();
     lv = t.level || 1;
     id = sid(t.id);
     depth = lv - 2;
@@ -1524,7 +1528,7 @@
   function toggleRefs(t, x) {
     var list;
     if (!guardPick()) return;
-    if (!descPast(x)) hideDesc();
+    hideDesc();
     sel = sid(t.id);
     lastRefTopic = sel;
     list = ownRefs(t);
@@ -1621,8 +1625,10 @@
     var OWN_W = BOX_H;
     var GREEN_W = BOX_H;
     var HAS_KIDS = true;
+    var showInfo = false;
     function colSpan(nameW) {
-      var w = nameW + BOX_H + OWN_W;
+      var w = nameW + OWN_W;
+      if (showInfo) w += BOX_H;
       if (HAS_KIDS) w += BOX_H;
       return w;
     }
@@ -1665,32 +1671,39 @@
       name.className = "tname";
       name.textContent = t.title || "";
       b.appendChild(name);
-      var info = mkBtn("info", "", false, function () {
-        var picking = sid(sel) !== sid(t.id);
-        var list;
-        if (picking) {
-          sel = sid(t.id);
-          lastRefTopic = sel;
-          list = ownRefs(t);
-          openRef = list.length ? list[0] : null;
-          pickGuard = Date.now() + 400;
-        }
-        if (descOpen && sid(descId) === sid(t.id)) hideDesc();
-        else openDesc(t);
-        if (picking) paint();
-      });
-      var mark = document.createElement("span");
+      var info = null;
+      var mark;
       var own = mkBtn("green", ownN(t), greenOpen, function (ev) { toggleRefs(t, ev.clientX); });
       var teal;
-      mark.className = "tbtn-i";
-      mark.textContent = "i";
-      info.textContent = "";
-      info.appendChild(mark);
-      info.dataset.id = sid(t.id);
-      info.setAttribute("aria-label", "Description");
-      if (!String(descText(t) || "").trim()) info.classList.add("zero");
-      if (descOpen && sid(descId) === sid(t.id)) info.classList.add("open");
-      b._info = info;
+      if (showInfo) {
+        info = mkBtn("info", "", false, function () {
+          var picking = sid(sel) !== sid(t.id);
+          var list;
+          var empty = !String(descText(t) || "").trim();
+          if (picking) {
+            sel = sid(t.id);
+            lastRefTopic = sel;
+            list = ownRefs(t);
+            openRef = list.length ? list[0] : null;
+            pickGuard = Date.now() + 400;
+          }
+          if (empty && onLive()) {
+            if (descOpen) hideDesc();
+          } else if (descOpen && sid(descId) === sid(t.id)) hideDesc();
+          else openDesc(t);
+          if (picking) paint();
+        });
+        mark = document.createElement("span");
+        mark.className = "tbtn-i";
+        mark.textContent = "i";
+        info.textContent = "";
+        info.appendChild(mark);
+        info.dataset.id = sid(t.id);
+        info.setAttribute("aria-label", "Description");
+        if (!String(descText(t) || "").trim()) info.classList.add("zero");
+        if (descOpen && sid(descId) === sid(t.id)) info.classList.add("open");
+        b._info = info;
+      }
       own.dataset.id = sid(t.id);
       if (ownN(t) === 0) own.classList.add("zero");
       own.addEventListener("contextmenu", function (ev) {
@@ -1776,7 +1789,7 @@
         });
       }
       board.appendChild(b);
-      board.appendChild(info);
+      if (info) board.appendChild(info);
       board.appendChild(own);
       if (teal) board.appendChild(teal);
       return b;
@@ -1860,10 +1873,11 @@
       el._y = y;
       el._w = colW;
       el._h = h || BOX_H;
+      var infoW = el._info ? BOX_H : 0;
       if (el._info) put(el._info, x + colW, y, BOX_H, BOX_H);
       if (el._own) {
-        put(el._own, x + colW + BOX_H, y, OWN_W, BOX_H);
-        if (el._teal) put(el._teal, x + colW + BOX_H + OWN_W, y, BOX_H, BOX_H);
+        put(el._own, x + colW + infoW, y, OWN_W, BOX_H);
+        if (el._teal) put(el._teal, x + colW + infoW + OWN_W, y, BOX_H, BOX_H);
       }
     }
     function stack(els, x, y0, colW) {
@@ -1985,10 +1999,14 @@
     var band = PAD;
     var x = PAD;
     var colBuilt = [];
-    var ci, cl, cw, boxes, parentBox, pane;
+    var ci, cl, cw, boxes, parentBox, pane, si;
     for (ci = 0; ci < colLists.length; ci++) {
       cl = colLists[ci];
       cw = colNameW(cl.list);
+      showInfo = false;
+      for (si = 0; si < cl.list.length; si++) {
+        if (String(descText(cl.list[si]) || "").trim()) { showInfo = true; break; }
+      }
       boxes = cl.list.map(function (t) { return box(t, String(t.level || 1)); }).filter(Boolean);
       parentBox = (cl.parent && colBuilt.length) ? findBox(colBuilt[colBuilt.length - 1].boxes, cl.parent.id) : null;
       HAS_KIDS = cl.list.some(function (t) { return kids(items, t).length > 0; });
@@ -2378,6 +2396,34 @@
       versesWrap.appendChild(versesEl);
       var rng = sameOrigChap() ? rangeFor(verseTopic, openRef) : { from: 0, to: 0 };
       var cached = verseCache[cacheKey(openRef)];
+      function spaceRefVerses(box) {
+        var old = box.querySelectorAll("p.gap");
+        var i, p, hit, prev, g;
+        for (i = old.length - 1; i >= 0; i--) {
+          if (old[i].parentNode) old[i].parentNode.removeChild(old[i]);
+        }
+        function gap() {
+          g = document.createElement("p");
+          g.className = "gap";
+          return g;
+        }
+        var ps = box.querySelectorAll("p:not(.gap)");
+        prev = false;
+        for (i = 0; i < ps.length; i++) {
+          p = ps[i];
+          hit = p.classList.contains("hit");
+          if (hit && !prev && verseNo(p) !== 1) p.parentNode.insertBefore(gap(), p);
+          if (!hit && prev) p.parentNode.insertBefore(gap(), p);
+          prev = hit;
+        }
+      }
+      function verseNo(p) {
+        var n = p.getAttribute("data-vs");
+        var vn;
+        if (n) return Number(n);
+        vn = p.querySelector(".vn");
+        return vn ? Number(vn.textContent) : 0;
+      }
       function drawLines(lines) {
         versesEl.innerHTML = "";
         var li, p, vn, n, hit, a = rng.from, b = rng.to || rng.from, sp;
@@ -2454,6 +2500,7 @@
             el.addEventListener("click", function (ev) { ev.stopPropagation(); });
           });
         }
+        spaceRefVerses(versesEl);
         versesEl._h = versesEl.clientHeight;
         requestAnimationFrame(function () {
           showFirstHit(versesEl);
@@ -2521,25 +2568,106 @@
     }
     return false;
   }
-  function descPast(x) {
+  function descNode() {
     var d = document.getElementById("tdesc");
-    if (!d || d.hidden || x == null) return false;
-    return x > d.getBoundingClientRect().right;
+    if (d) return d;
+    try {
+      if (window.parent && window.parent.document) return window.parent.document.getElementById("tdesc");
+    } catch (err) {}
+    return null;
   }
-  function descKeep(el, x) {
-    if (descPast(x)) return true;
-    while (el && el !== document.documentElement) {
-      if (el.id === "tdesc") return true;
-      if (el.classList && el.classList.contains("tbtn-info")) return true;
-      if (inChapterBox(el)) return true;
-      if (el.classList && (el.classList.contains("tbox") || el.classList.contains("tbtn"))) return false;
-      el = el.parentNode;
+  function descField(d) {
+    var ta;
+    if (d) {
+      ta = d.querySelector("textarea");
+      if (ta) return ta;
     }
+    return document.getElementById("tdesc-ta");
+  }
+  function liftDesc(d) {
+    var doc, st;
+    try {
+      if (window.parent && window.parent !== window && window.parent.document && window.parent.document.body) {
+        doc = window.parent.document;
+      }
+    } catch (err) {}
+    if (doc) bindDescClose(doc);
+    if (!doc || d.ownerDocument === doc) return;
+    if (!doc.getElementById("sn-desc-style")) {
+      st = doc.createElement("style");
+      st.id = "sn-desc-style";
+      st.textContent = ".tdesc{position:fixed;z-index:60;box-sizing:border-box;display:flex;flex-direction:column;align-items:stretch;margin:5px;padding:0;border:1px solid #444;border-radius:4px;background:#eaf6e8;box-shadow:22px 24px 36px rgba(0,0,0,0.42);min-height:26px;overflow:hidden;color:#1b3a4b}.tdesc[hidden]{display:none !important}.tdesc textarea{display:block;flex:1 1 auto;min-height:0;width:100%;height:auto;margin:0;padding:0.2rem 0.45rem;border:0;background:transparent;font:400 13px/1.2 Arial,Helvetica,sans-serif;color:#1b3a4b;white-space:pre-wrap;overflow-wrap:break-word;word-wrap:break-word;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;resize:none;box-sizing:border-box}.tdesc textarea:focus{outline:0;background:transparent}.tdesc textarea[readonly]{cursor:default;background:transparent}";
+      doc.head.appendChild(st);
+    }
+    doc.body.appendChild(d);
+  }
+  function descPast(x) {
+    var d = descNode();
+    var right, frame;
+    if (!d || d.hidden || x == null) return false;
+    right = d.getBoundingClientRect().right;
+    if (d.ownerDocument !== document) {
+      try {
+        frame = window.frameElement;
+        if (frame) right -= frame.getBoundingClientRect().left;
+      } catch (err) {}
+    }
+    return x > right;
+  }
+  function descRect(inFrame) {
+    var d = descNode();
+    var r, frame, fr;
+    if (!d || d.hidden) return null;
+    r = d.getBoundingClientRect();
+    if (!inFrame || d.ownerDocument === document) return r;
+    try { frame = window.frameElement; } catch (err) { frame = null; }
+    if (!frame) return r;
+    fr = frame.getBoundingClientRect();
+    return {
+      top: r.top - fr.top,
+      right: r.right - fr.left,
+      bottom: r.bottom - fr.top,
+      left: r.left - fr.left
+    };
+  }
+  function descKeep(el, x, y) {
+    var node = el;
+    var id = "";
+    var rect;
+    while (node && node !== document.documentElement) {
+      if (node.id === "tdesc") return true;
+      if (node.classList && node.classList.contains("tbtn-info") && sid(node.dataset.id) === sid(descId)) return true;
+      if (!id && node.dataset && node.dataset.id && node.classList && (node.classList.contains("tbox") || node.classList.contains("tbtn"))) id = sid(node.dataset.id);
+      node = node.parentNode;
+    }
+    if (id && id !== sid(descId)) return false;
+    rect = descRect(true);
+    if (rect && y != null && y > rect.bottom) return false;
     return true;
   }
+  function bindDescClose(doc) {
+    if (!doc) return;
+    if (doc.__snDescClose) doc.removeEventListener("pointerdown", doc.__snDescClose, true);
+    function onDown(ev) {
+      var d, r, t;
+      if (!descOpen) return;
+      d = descNode();
+      if (!d || d.hidden) return;
+      t = ev.target;
+      if (!t || t.id === "tdesc" || (t.closest && t.closest("#tdesc"))) return;
+      r = d.getBoundingClientRect();
+      if (ev.clientY > r.bottom) {
+        hideDesc();
+        return;
+      }
+      if (t.closest && (t.closest(".stick-top") || t.closest("header") || t.closest("#ew-full"))) hideDesc();
+    }
+    doc.__snDescClose = onDown;
+    doc.addEventListener("pointerdown", onDown, true);
+  }
   function hideDesc() {
-    var d = document.getElementById("tdesc");
-    var ta = document.getElementById("tdesc-ta");
+    var d = descNode();
+    var ta = descField(d);
     var topic;
     if (descOpen && ta && canEditDesc()) {
       topic = find(topics, ta.dataset.topic);
@@ -2572,11 +2700,11 @@
     placePop();
   }
   function placePop() {
-    var d = document.getElementById("tdesc");
-    var ta = document.getElementById("tdesc-ta");
-    var topic = descOpen ? find(topics, descId) : null;
-    var box, w, left, top, need, maxH, h, vh, vr;
+    var d = descNode();
+    var ta, topic, box, w, left, need, maxH, h, vh, vr, frame;
     if (!d) return;
+    ta = descField(d);
+    topic = descOpen ? find(topics, descId) : null;
     if (!topic) {
       d.hidden = true;
       return;
@@ -2587,28 +2715,32 @@
       return;
     }
     d.hidden = false;
+    liftDesc(d);
     if (ta) {
       ta.readOnly = !canEditDesc();
-      if (document.activeElement !== ta) {
+      if (ta.ownerDocument.activeElement !== ta) {
         ta.value = descText(topic);
         ta.dataset.topic = sid(topic.id);
       }
     }
     vh = window.innerHeight;
+    try {
+      if (d.ownerDocument !== document && d.ownerDocument.defaultView) vh = d.ownerDocument.defaultView.innerHeight;
+    } catch (err) {}
     vr = box.getBoundingClientRect();
     left = 0;
-    w = Math.round(vr.right) - left;
+    frame = null;
+    if (d.ownerDocument !== document) {
+      try { frame = window.frameElement; } catch (err) {}
+      if (frame) left = frame.getBoundingClientRect().left;
+    }
+    w = Math.round(vr.right);
     if (w < 8) w = 8;
     need = descH(ta ? ta.value : descText(topic), w);
     maxH = Math.max(DESC_H, vh - PAD * 2);
     h = Math.min(Math.max(need, DESC_H), maxH);
-    top = Math.round(vr.top - h - GAP_BTN);
-    if (top < PAD) {
-      if (Math.round(vr.bottom + GAP_BTN) + h <= vh - PAD) top = Math.round(vr.bottom + GAP_BTN);
-      else top = PAD;
-    }
     d.style.left = Math.round(left) + "px";
-    d.style.top = Math.round(top) + "px";
+    d.style.top = "0px";
     d.style.width = w + "px";
     d.style.height = h + "px";
     if (ta) ta.style.overflowY = need > maxH ? "auto" : "hidden";
@@ -2680,11 +2812,15 @@
     });
   };
   window.snSaveTopics = saveTopics;
+  window.snHideDesc = hideDesc;
   (function () {
     var ta = document.getElementById("tdesc-ta");
     var d = document.getElementById("tdesc");
     if (!ta) return;
-    if (d) d.addEventListener("click", function (ev) { ev.stopPropagation(); });
+    if (d) {
+      d.addEventListener("click", function (ev) { ev.stopPropagation(); });
+      d.addEventListener("wheel", function (ev) { ev.stopPropagation(); }, { passive: true });
+    }
     ta.addEventListener("click", function (ev) { ev.stopPropagation(); });
     ta.addEventListener("focus", function () {
       var id = ta.dataset.topic;
@@ -2847,7 +2983,7 @@
     var now = document.querySelector(".tverse-bar .ew-tr-now");
     var menu = document.getElementById("sn-ref-menu");
     var inTr = ev.target.closest && (ev.target.closest(".tverse-bar") || ev.target.closest(".ew-tr-list"));
-    if (descOpen && !descKeep(ev.target, ev.clientX)) hideDesc();
+    if (descOpen && !descKeep(ev.target, ev.clientX, ev.clientY)) hideDesc();
     if (list && !inTr) {
       list.hidden = true;
       list.style.position = "";
