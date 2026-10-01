@@ -1,0 +1,81 @@
+{
+  "redirects": [
+    {
+      "source": "/:site((?!bible|scriptures|sky-images|api|images|sites|topics|dotl)[^/.]+)",
+      "destination": "/:site/",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    { "source": "/bible", "destination": "/api/bible" },
+    { "source": "/scriptures", "destination": "/api/scriptures" },
+    { "source": "/dotl/topics", "destination": "/api/dotl?part=topics" },
+    { "source": "/dotl/topic-refs", "destination": "/api/dotl?part=refs" },
+    { "source": "/dotl/sections", "destination": "/api/dotl?part=sections" },
+    { "source": "/sky-images", "destination": "/images/sky/list.json" },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "sons.eternalwellspring.com" }],
+      "destination": "/sites/sons-of-god-arise/index.html"
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "sons.eternalwellspring.com" }],
+      "destination": "/sites/sons-of-god-arise/:path*"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "soga.eternalwellspring.com" }],
+      "destination": "/sites/sons-of-god-arise/index.html"
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "soga.eternalwellspring.com" }],
+      "destination": "/sites/sons-of-god-arise/:path*"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "sonsofgodarise.eternalwellspring.com" }],
+      "destination": "/sites/sons-of-god-arise/index.html"
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "sonsofgodarise.eternalwellspring.com" }],
+      "destination": "/sites/sons-of-god-arise/:path*"
+    },
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "sons-of-god-arise.eternalwellspring.com" }],
+      "destination": "/sites/sons-of-god-arise/index.html"
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "sons-of-god-arise.eternalwellspring.com" }],
+      "destination": "/sites/sons-of-god-arise/:path*"
+    },
+    { "source": "/topics", "destination": "/index.html" },
+    { "source": "/topics/", "destination": "/index.html" },
+    { "source": "/soga", "destination": "/sites/sons-of-god-arise/" },
+    { "source": "/soga/", "destination": "/sites/sons-of-god-arise/index.html" },
+    { "source": "/soga/:path*", "destination": "/sites/sons-of-god-arise/:path*" },
+    { "source": "/sonsofgodarise", "destination": "/sites/sons-of-god-arise/" },
+    { "source": "/sonsofgodarise/", "destination": "/sites/sons-of-god-arise/index.html" },
+    { "source": "/sonsofgodarise/:path*", "destination": "/sites/sons-of-god-arise/:path*" },
+    {
+      "source": "/:site((?!bible|scriptures|sky-images|api|images|sites|topics|dotl)[^/.]+)/",
+      "destination": "/sites/:site/index.html"
+    },
+    {
+      "source": "/:site((?!bible|scriptures|sky-images|api|images|sites|topics|dotl)[^/.]+)/:path*",
+      "destination": "/sites/:site/:path*"
+    }
+  ],
+  "functions": {
+    "api/scriptures.js": {
+      "includeFiles": "{scriptures.json,sites/scriptures.json}"
+    },
+    "api/dotl.js": {
+      "includeFiles": "sites/Scripture-Narratives/data/**"
+    }
+  }
+}
