@@ -123,19 +123,6 @@
       font-weight: 700;
     }
     .tbtn-green.open:hover { background: #32663a; }
-    .tbtn-info {
-      z-index: 45;
-      background: #003a70;
-      color: #fff;
-      border-color: #003a70;
-    }
-    .tbtn-info.zero { opacity: 0.5; }
-    .tbtn-info:hover { background: #002a52; }
-    .tbtn-info.open { background: #005eb8; border-color: #005eb8; }
-    .tbtn-i {
-      font: 700 16px/1 Arial, Helvetica, sans-serif;
-      color: #fff;
-    }
     .thead { cursor: default; }
     .tdesc {
       position: fixed;
@@ -161,7 +148,7 @@
       width: 100%;
       height: auto;
       margin: 0;
-      padding: 0.2rem 0.45rem;
+      padding: 0.2rem 1.35rem 0.2rem 0.45rem;
       border: 0;
       background: transparent;
       font: 400 13px/1.2 Arial, Helvetica, sans-serif;
@@ -176,6 +163,21 @@
       box-sizing: border-box;
     }
     .tdesc textarea:focus { outline: 0; background: transparent; }
+    .tdesc-x {
+      position: absolute;
+      top: 1px;
+      right: 1px;
+      z-index: 2;
+      width: 22px;
+      height: 22px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #1b3a4b;
+      font: 700 15px/22px Arial, Helvetica, sans-serif;
+      cursor: pointer;
+    }
     .tdesc textarea[readonly] { cursor: default; background: transparent; }
     .tverse-wrap {
       position: absolute;
@@ -532,7 +534,7 @@
 </head>
 <body>
   <div class="board-wrap" id="wrap">
-    <div class="tdesc" id="tdesc" hidden><textarea id="tdesc-ta" title="Description"></textarea></div>
+    <div class="tdesc" id="tdesc" hidden><button type="button" class="tdesc-x" aria-label="Close">X</button><textarea id="tdesc-ta" title="Description"></textarea></div>
     <div class="board" id="board"></div>
   </div>
   <span class="note" id="status"></span>
@@ -551,6 +553,6 @@
     <button type="button" data-yes="1">Yes</button>
     <button type="button" data-no="1">No</button>
   </div>
-  <script src="topics-tree.js?v=382"></script>
+  <script src="topics-tree.js?v=385"></script>
 </body>
 </html>

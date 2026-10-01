@@ -238,7 +238,7 @@
       width: 100%;
       height: auto;
       margin: 0;
-      padding: 0.2rem 0.45rem;
+      padding: 0.2rem 1.35rem 0.2rem 0.45rem;
       border: 0;
       background: transparent;
       font: 400 13px/1.2 Arial, Helvetica, sans-serif;
@@ -252,6 +252,21 @@
       box-sizing: border-box;
     }
     .tdesc textarea:focus { outline: 0; background: transparent; }
+    .tdesc-x {
+      position: absolute;
+      top: 1px;
+      right: 1px;
+      z-index: 2;
+      width: 22px;
+      height: 22px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #1b3a4b;
+      font: 700 15px/22px Arial, Helvetica, sans-serif;
+      cursor: pointer;
+    }
     .tverse-wrap {
       --fs: 13px;
       --fs-lg: calc(var(--fs) * 16 / 13);
@@ -722,7 +737,7 @@
 <body>
   <div class="board-wrap" id="wrap">
     <h1 class="verse-heading" id="verse-heading"></h1>
-    <div class="tdesc" id="tdesc" hidden><textarea id="tdesc-ta" title="Description"></textarea></div>
+    <div class="tdesc" id="tdesc" hidden><button type="button" class="tdesc-x" aria-label="Close">X</button><textarea id="tdesc-ta" title="Description"></textarea></div>
     <div class="chart-scroll" id="chart">
       <div class="board" id="board"></div>
     </div>
@@ -732,6 +747,6 @@
     <div class="sn-rhm-title">Topic</div>
     <button type="button" data-edit="1">Edit</button>
   </div>
-  <script src="topics-verse.js?v=404"></script>
+  <script src="topics-verse.js?v=405"></script>
 </body>
 </html>

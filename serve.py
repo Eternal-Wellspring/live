@@ -15,7 +15,9 @@ LIVE = Path(__file__).resolve().parent
 SKY_EXTS = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
 SOGA = LIVE / "soga"
 PUBLISHED = LIVE / "sites"
-_RESERVED = {"api", "images", "sites", "bible", "scriptures", "published"}
+_RESERVED = {"api", "images", "sites", "bible", "scriptures", "published", "dotl"}
+_TOPIC_FILE = re.compile(r"^topic-(\d+)\.json$")
+_REF_FILE = re.compile(r"^ref-(\d+)-(\d+)\.json$")
 SCRIPTURES = LIVE / "sites" / "scriptures.json"
 SCRIPTURES_FALLBACK = LIVE / "scriptures.json"
 _REF_SPAN = re.compile(
@@ -241,6 +243,78 @@ def pretty_site_target(path: str, host: str = ""):
     return site, "/".join(rest)
 
 
+def sn_data_dir() -> Path:
+    return PUBLISHED / "Scripture-Narratives" / "data"
+
+
+def sn_topic_dirs():
+    root = sn_data_dir()
+    if not root.is_dir():
+        return []
+    return [p for p in root.iterdir() if p.is_dir() and not p.name.startswith(".") and p.name != "BU"]
+
+
+def load_sn_topics():
+    rows = []
+    for folder in sn_topic_dirs():
+        for path in folder.glob("topic-*.json"):
+            if not _TOPIC_FILE.match(path.name):
+                continue
+            try:
+                item = json.loads(path.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            if not isinstance(item, dict) or item.get("id") is None:
+                continue
+            item = dict(item)
+            item["folder"] = folder.name
+            rows.append(item)
+    rows.sort(key=lambda r: (int(r.get("seq") or 0), int(r.get("id") or 0)))
+    return rows
+
+
+def load_sn_refs():
+    seq = {}
+    for topic in load_sn_topics():
+        try:
+            seq[int(topic.get("id"))] = int(topic.get("seq") or 0)
+        except (TypeError, ValueError):
+            continue
+    rows = []
+    for folder in sn_topic_dirs():
+        for path in folder.glob("ref-*.json"):
+            match = _REF_FILE.match(path.name)
+            if not match:
+                continue
+            try:
+                item = json.loads(path.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            if not isinstance(item, dict):
+                continue
+            ref = str(item.get("ref") or "").strip()
+            if item.get("topic_id") is None or not ref:
+                continue
+            item = dict(item)
+            item["_n"] = int(match.group(2))
+            rows.append(item)
+    rows.sort(key=lambda r: (seq.get(int(r.get("topic_id") or 0), 10**9), int(r.get("_n") or 0)))
+    for row in rows:
+        row.pop("_n", None)
+    return rows
+
+
+def load_sn_sections():
+    path = sn_data_dir() / "sections.json"
+    if not path.is_file():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
 class Handler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         SimpleHTTPRequestHandler.__init__(self, *args, directory=str(LIVE), **kwargs)
@@ -300,6 +374,12 @@ class Handler(SimpleHTTPRequestHandler):
                 layers["3"] = ["/images/ew-sky.jpg"]
                 flat = layers["3"][:]
             return self._json(200, {"images": flat, "layers": layers})
+        if path == "/dotl/topics":
+            return self._json(200, load_sn_topics())
+        if path == "/dotl/topic-refs":
+            return self._json(200, load_sn_refs())
+        if path == "/dotl/sections":
+            return self._json(200, load_sn_sections())
         if path == "/scriptures":
             q = parse_qs(urlparse(self.path).query)
             ref = (q.get("ref") or [""])[0]

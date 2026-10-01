@@ -1586,25 +1586,38 @@
     lastRefTopic = sel;
     list = ownRefs(cur);
     openRef = list.length ? list[0] : null;
-    loadTopics(paint);
+    loadTopics(function () {
+      paint();
+      showTopicPop(t);
+    });
+  }
+  function rootTitle() {
+    var i;
+    for (i = 0; i < topics.length; i++) {
+      if ((topics[i].level || 1) === 1) return String(topics[i].title || "");
+    }
+    return "";
+  }
+  function showTopicPop(t) {
+    if (!t) return;
+    if (!String(descText(t) || "").trim() && (onLive() || rootTitle() === "Hebrews")) return;
+    openDesc(t);
   }
   function pickTopic(t, x) {
     var id = sid(t.id);
     var list;
-    if (sid(sel) === id) {
-      if (!guardPick()) return;
-      closeBranch(t);
-      sel = parentSel(t);
-      hideDesc();
-    } else {
+    if (sid(sel) !== id) {
       sel = id;
       pickGuard = Date.now() + 400;
-      hideDesc();
     }
-    list = sel ? ownRefs(find(topics, sel)) : [];
+    hideDesc();
+    list = ownRefs(find(topics, sel) || t);
     lastRefTopic = sel;
     openRef = list.length ? list[0] : null;
-    loadTopics(paint);
+    loadTopics(function () {
+      paint();
+      showTopicPop(t);
+    });
   }
   function toggleTopics(t, x) {
     var list, kidsList, first;
@@ -1776,12 +1789,10 @@
     var OWN_W = BOX_H;
     var GREEN_W = BOX_H;
     var HAS_KIDS = true;
-    var showInfo = false;
     var showRefs = true;
     var showNums = true;
     function colSpan(nameW) {
       var w = nameW + OWN_W;
-      if (showInfo) w += BOX_H;
       if (HAS_KIDS) w += BOX_H;
       return w;
     }
@@ -1824,39 +1835,8 @@
       name.className = "tname";
       name.textContent = t.title || "";
       b.appendChild(name);
-      var info = null;
-      var mark;
       var own = null;
       var teal;
-      if (showInfo) {
-        info = mkBtn("info", "", false, function () {
-          var picking = sid(sel) !== sid(t.id);
-          var list;
-          var empty = !String(descText(t) || "").trim();
-          if (picking) {
-            sel = sid(t.id);
-            lastRefTopic = sel;
-            list = ownRefs(t);
-            openRef = list.length ? list[0] : null;
-            pickGuard = Date.now() + 400;
-          }
-          if (empty && onLive()) {
-            if (descOpen) hideDesc();
-          } else if (descOpen && sid(descId) === sid(t.id)) hideDesc();
-          else openDesc(t);
-          if (picking) paint();
-        });
-        mark = document.createElement("span");
-        mark.className = "tbtn-i";
-        mark.textContent = "?";
-        info.textContent = "";
-        info.appendChild(mark);
-        info.dataset.id = sid(t.id);
-        info.setAttribute("aria-label", "Description");
-        if (!String(descText(t) || "").trim()) info.classList.add("zero");
-        if (descOpen && sid(descId) === sid(t.id)) info.classList.add("open");
-        b._info = info;
-      }
       if (showRefs) {
         own = mkBtn("green", ownN(t), greenOpen, function (ev) { toggleRefs(t, ev.clientX); });
         own.dataset.id = sid(t.id);
@@ -1941,12 +1921,15 @@
           if (skipTopicClick) { skipTopicClick = false; return; }
           if (ev.detail > 1) return;
           if (name.querySelector("input")) return;
+          if (descOpen && sid(descId) === sid(t.id)) {
+            hideDesc();
+            return;
+          }
           if (!showNums) { openToBottom(t); return; }
           pickTopic(t, ev.clientX);
         });
       }
       board.appendChild(b);
-      if (info) board.appendChild(info);
       if (own) board.appendChild(own);
       if (teal) board.appendChild(teal);
       return b;
@@ -2160,10 +2143,6 @@
     for (ci = 0; ci < colLists.length; ci++) {
       cl = colLists[ci];
       cw = colNameW(cl.list);
-      showInfo = false;
-      for (si = 0; si < cl.list.length; si++) {
-        if (String(descText(cl.list[si]) || "").trim()) { showInfo = true; break; }
-      }
       showRefs = showNums;
       boxes = cl.list.map(function (t) { return box(t, String(t.level || 1)); }).filter(Boolean);
       parentBox = (cl.parent && colBuilt.length) ? findBox(colBuilt[colBuilt.length - 1].boxes, cl.parent.id) : null;
@@ -2754,7 +2733,7 @@
     if (!doc.getElementById("sn-desc-style")) {
       st = doc.createElement("style");
       st.id = "sn-desc-style";
-      st.textContent = ".tdesc{position:fixed;z-index:60;box-sizing:border-box;display:flex;flex-direction:column;align-items:stretch;margin:5px;padding:0;border:1px solid #444;border-radius:4px;background:#eaf6e8;box-shadow:22px 24px 36px rgba(0,0,0,0.42);min-height:26px;overflow:hidden;color:#1b3a4b}.tdesc[hidden]{display:none !important}.tdesc textarea{display:block;flex:1 1 auto;min-height:0;width:100%;height:auto;margin:0;padding:0.2rem 0.45rem;border:0;background:transparent;font:400 13px/1.2 Arial,Helvetica,sans-serif;color:#1b3a4b;white-space:pre-wrap;overflow-wrap:break-word;word-wrap:break-word;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;resize:none;box-sizing:border-box}.tdesc textarea:focus{outline:0;background:transparent}.tdesc textarea[readonly]{cursor:default;background:transparent}";
+      st.textContent = ".tdesc{position:fixed;z-index:60;box-sizing:border-box;display:flex;flex-direction:column;align-items:stretch;margin:5px;padding:0;border:1px solid #444;border-radius:4px;background:#eaf6e8;box-shadow:22px 24px 36px rgba(0,0,0,0.42);min-height:26px;overflow:hidden;color:#1b3a4b}.tdesc[hidden]{display:none !important}.tdesc-x{position:absolute;top:1px;right:1px;z-index:2;width:22px;height:22px;margin:0;padding:0;border:0;background:transparent;color:#1b3a4b;font:700 15px/22px Arial,Helvetica,sans-serif;cursor:pointer}.tdesc textarea{display:block;flex:1 1 auto;min-height:0;width:100%;height:auto;margin:0;padding:0.2rem 1.35rem 0.2rem 0.45rem;border:0;background:transparent;font:400 13px/1.2 Arial,Helvetica,sans-serif;color:#1b3a4b;white-space:pre-wrap;overflow-wrap:break-word;word-wrap:break-word;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;resize:none;box-sizing:border-box}.tdesc textarea:focus{outline:0;background:transparent}.tdesc textarea[readonly]{cursor:default;background:transparent}";
       doc.head.appendChild(st);
     }
     doc.body.appendChild(d);
@@ -2894,6 +2873,12 @@
     }
     w = Math.round(vr.right);
     if (w < 8) w = 8;
+    var vw = window.innerWidth;
+    try {
+      if (d.ownerDocument !== document && d.ownerDocument.defaultView) vw = d.ownerDocument.defaultView.innerWidth;
+    } catch (err2) {}
+    var room = Math.round(vw - left - 8);
+    if (room > 40 && w > room) w = room;
     need = descH(ta ? ta.value : descText(topic), w);
     maxH = Math.max(DESC_H, vh - PAD * 2);
     h = Math.min(Math.max(need, DESC_H), maxH);
@@ -2978,6 +2963,12 @@
     if (d) {
       d.addEventListener("click", function (ev) { ev.stopPropagation(); });
       d.addEventListener("wheel", function (ev) { ev.stopPropagation(); }, { passive: true });
+      var xbtn = d.querySelector(".tdesc-x");
+      if (xbtn) xbtn.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        hideDesc();
+      });
     }
     ta.addEventListener("click", function (ev) { ev.stopPropagation(); });
     ta.addEventListener("focus", function () {
@@ -3141,7 +3132,8 @@
     var now = document.querySelector(".tverse-bar .ew-tr-now");
     var menu = document.getElementById("sn-ref-menu");
     var inTr = ev.target.closest && (ev.target.closest(".tverse-bar") || ev.target.closest(".ew-tr-list"));
-    if (descOpen && !descKeep(ev.target, ev.clientX, ev.clientY)) hideDesc();
+    var onTopic = ev.target && ev.target.closest && ev.target.closest(".tbox");
+    if (descOpen && !onTopic && !descKeep(ev.target, ev.clientX, ev.clientY)) hideDesc();
     if (list && !inTr) {
       list.hidden = true;
       list.style.position = "";

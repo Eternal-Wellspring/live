@@ -1572,7 +1572,12 @@
         ev.preventDefault();
         ev.stopPropagation();
         if (name.querySelector("input")) return;
-        if (!showNums) { openLiveBranch(t); return; }
+        if (descOpen && sid(descId) === sid(t.id)) { hideDesc(); return; }
+        if (!showNums) {
+          openLiveBranch(t);
+          if (!(onLive() && !String(descText(t) || "").trim())) openDesc(t);
+          return;
+        }
         pickTopic(t);
         if (sid(sel) === sid(t.id)) openDesc(t);
         else hideDesc();
@@ -2881,7 +2886,15 @@
     var ta = document.getElementById("tdesc-ta");
     var d = document.getElementById("tdesc");
     if (!ta) return;
-    if (d) d.addEventListener("click", function (ev) { ev.stopPropagation(); });
+    if (d) {
+      d.addEventListener("click", function (ev) { ev.stopPropagation(); });
+      var xbtn = d.querySelector(".tdesc-x");
+      if (xbtn) xbtn.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        hideDesc();
+      });
+    }
     ta.addEventListener("click", function (ev) { ev.stopPropagation(); });
     ta.addEventListener("focus", function () {
       var id = ta.dataset.topic;
