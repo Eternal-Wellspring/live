@@ -85,7 +85,7 @@
       flex: 1 1 auto;
       min-width: 0;
       padding: 0.2rem 0.45rem;
-      white-space: nowrap;
+      white-space: pre;
       overflow: hidden;
       font-weight: 400;
     }
@@ -145,8 +145,8 @@
     .tdesc[hidden] { display: none !important; }
     .tdesc-body {
       display: block;
-      flex: 1 1 auto;
-      min-height: 0;
+      flex: 0 0 auto;
+      min-height: auto;
       width: 100%;
       height: auto;
       margin: 0;
@@ -160,7 +160,7 @@
       overflow-wrap: break-word;
       word-wrap: break-word;
       overflow-x: hidden;
-      overflow-y: auto;
+      overflow-y: visible;
       overscroll-behavior: contain;
       box-sizing: border-box;
     }
@@ -201,16 +201,17 @@
       position: relative;
       z-index: 6;
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       gap: 0.4rem;
       padding: 0.2rem 0.4rem;
       border-bottom: 1px solid var(--line);
       background: var(--panel);
-      overflow-x: auto;
-      overflow-y: hidden;
+      overflow: visible;
     }
     .tverse-bar-left {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       gap: 0.35rem;
       min-width: 0;
@@ -224,10 +225,12 @@
     }
     .tverse-bar-right {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       gap: 0.35rem;
       margin-left: auto;
       flex: 0 0 auto;
+      max-width: 100%;
     }
     .tverse-ref {
       flex: 0 0 auto;
@@ -398,33 +401,33 @@
       position: relative;
       z-index: 1;
       margin: 0.3rem 0.45rem 0.15rem;
-      padding: 0.2rem 0.45rem;
+      padding: 0;
       min-height: 0;
       border: 1px solid #c5d0d4;
       background: #fff;
       color: inherit;
-      font: 400 13px/1.35 Arial, Helvetica, sans-serif;
-      white-space: pre-wrap;
     }
-    .tverse-note textarea {
+    .tverse-note-body {
       display: block;
+      min-height: 1.2em;
       width: 100%;
-      min-height: 0;
-      height: auto;
       margin: 0;
-      padding: 0;
+      padding: 0.2rem 0.45rem;
       border: 0;
       background: transparent;
+      font: 400 13px/1.2 Arial, Helvetica, sans-serif;
       color: inherit;
-      font: 400 13px/1.35 Arial, Helvetica, sans-serif;
-      line-height: 1.35;
       white-space: pre-wrap;
+      tab-size: 4;
       overflow-wrap: break-word;
-      overflow: hidden;
-      resize: none;
+      word-wrap: break-word;
+      outline: 0;
       box-sizing: border-box;
     }
-    .tverse-note textarea:focus { outline: 0; background: #fff; }
+    .tverse-note-body:focus { outline: 0; background: #fff; }
+    .tverse-note-body p,
+    .tverse-note-body div { margin: 0; padding: 0 0 0.35em; }
+    .tverse-note-body[contenteditable="false"] { cursor: default; }
     .tverse-pad { flex: 0 0 auto; }
     .tverses {
       flex: 1 1 auto;
@@ -557,6 +560,6 @@
     <button type="button" data-yes="1">Yes</button>
     <button type="button" data-no="1">No</button>
   </div>
-  <script src="topics-tree.js?v=393"></script>
+  <script src="topics-tree.js?v=402"></script>
 </body>
 </html>
