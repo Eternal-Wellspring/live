@@ -91,6 +91,12 @@
     { id: "LSB", label: "LSB", year: "2021" },
     { id: "GNT", label: "GNT", year: "1976" }
   ];
+  (function () {
+    var v = "", i, ok = false;
+    try { v = localStorage.getItem("sn.verseTr") || ""; } catch (e) {}
+    for (i = 0; i < TRANSLATIONS.length; i++) if (TRANSLATIONS[i].id === v) ok = true;
+    if (ok) verseTr = v;
+  })();
   var CHAPS = [0, 50, 40, 27, 36, 34, 24, 21, 4, 31, 24, 22, 25, 29, 36, 10, 13, 10, 42, 150, 31, 12, 8, 66, 52, 5, 48, 12, 14, 3, 9, 1, 4, 7, 3, 3, 3, 2, 14, 4, 28, 16, 24, 21, 28, 16, 16, 13, 6, 6, 4, 4, 5, 3, 6, 4, 3, 1, 13, 5, 5, 3, 5, 1, 1, 1, 22];
   var EXTRA_CH = { 67: 9, 68: 14, 69: 16, 70: 19, 71: 51, 72: 1, 73: 5, 74: 16, 75: 15, 76: 1, 77: 16, 78: 1, 79: 1, 88: 1, 90: 50 };
   var rootId = (function () {
@@ -350,23 +356,9 @@
     saveTopics();
     paint();
   }
-  function byTitle(a, b) {
-    return String(a.title || "").localeCompare(String(b.title || ""), undefined, { numeric: true, sensitivity: "base" });
-  }
-  function hebRank(t) {
-    var title = String((t && t.title) || "");
-    if (/^across\b/i.test(title)) return 2;
-    if (title === "Answer") return 1;
-    return 0;
-  }
-  function alphaTopics(list, heb) {
-    var src = (list || []).slice();
-    if (!heb) return src.sort(byTitle);
-    return src.sort(function (a, b) {
-      var ra = hebRank(a), rb = hebRank(b);
-      if (ra !== rb) return ra - rb;
-      return byTitle(a, b);
-    });
+  function alphaTopics(list) {
+    // Column order is the stored hierarchy sequence. Sub-topics stay under their topic.
+    return (list || []).slice();
   }
   function kids(items, parent) {
     var i, start = -1, lv = parent.level || 1, out = [];
@@ -399,6 +391,50 @@
   function descText(topic) {
     return topic ? String(topic.description || topic.notes || "") : "";
   }
+  function descMarked(text) {
+    return /<\/?(b|i|u|strong|em|br|p|div)\b/i.test(String(text || ""));
+  }
+  function descRead(el) {
+    var html;
+    if (!el) return "";
+    if (el.tagName === "TEXTAREA") return el.value || "";
+    html = el.innerHTML || "";
+    if (!descMarked(html)) return el.innerText || "";
+    return html;
+  }
+  function descWrite(el, text) {
+    var s = String(text || "");
+    if (!el) return;
+    if (el.tagName === "TEXTAREA") { el.value = s; return; }
+    if (descMarked(s)) el.innerHTML = s;
+    else el.textContent = s;
+  }
+  function descKeys(ev) {
+    var el = ev.currentTarget || ev.target;
+    var doc = (el && el.ownerDocument) || document;
+    var k;
+    if (!el || el.getAttribute("contenteditable") === "false") return;
+    if (ev.key === "Enter") {
+      ev.preventDefault();
+      ev.stopPropagation();
+      doc.execCommand(ev.shiftKey ? "insertLineBreak" : "insertParagraph");
+      return;
+    }
+    if (ev.key === "Tab") {
+      ev.preventDefault();
+      ev.stopPropagation();
+      doc.execCommand("insertText", false, "\t");
+      return;
+    }
+    if ((ev.metaKey || ev.ctrlKey) && !ev.altKey) {
+      k = (ev.key || "").toLowerCase();
+      if (k === "b" || k === "i" || k === "u") {
+        ev.preventDefault();
+        ev.stopPropagation();
+        doc.execCommand(k === "b" ? "bold" : k === "i" ? "italic" : "underline");
+      }
+    }
+  }
   function refLabelW(text) {
     var p = document.createElement("span");
     p.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;white-space:nowrap;font:700 16px/1.2 Arial,Helvetica,sans-serif;padding:0 0.15rem";
@@ -427,16 +463,14 @@
     return s;
   }
   function descH(text, colW) {
-    var box, ta, h;
+    var box, h;
     if (!colW) return boxH;
     box = document.createElement("div");
-    ta = document.createElement("textarea");
-    box.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;box-sizing:border-box;border:1px solid #c5d0d4;width:" + Math.max(8, colW) + "px";
-    ta.style.cssText = "display:block;width:100%;height:auto;margin:0;padding:0.2rem 0.45rem;border:0;font:400 13px/1.2 Arial,Helvetica,sans-serif;white-space:pre-wrap;overflow-wrap:break-word;word-wrap:break-word;overflow:hidden;resize:none;box-sizing:border-box";
-    ta.value = text || "";
-    box.appendChild(ta);
+    box.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;box-sizing:border-box;width:" + Math.max(8, colW) + "px;padding:0.2rem 1.35rem 0.2rem 0.45rem;font:400 13px/1.2 Arial,Helvetica,sans-serif;white-space:pre-wrap;tab-size:4;overflow-wrap:break-word";
+    if (descMarked(text)) box.innerHTML = text || "";
+    else box.textContent = text || "";
     document.body.appendChild(box);
-    h = Math.max(DESC_H, ta.scrollHeight + 2);
+    h = Math.max(DESC_H, box.offsetHeight + 2);
     document.body.removeChild(box);
     return h;
   }
@@ -973,6 +1007,7 @@
     if (hit) moveTopicInLevel(from, hit.dest, hit.after);
   }
   function beginRefDrag(label, ev) {
+    if (onWww()) return;
     var owner = refOwner();
     drag = {
       label: label,
@@ -1175,6 +1210,37 @@
   function onLive() {
     return !canEditChapter();
   }
+  function onWww() {
+    var p = String(location.port || "");
+    if (p === "8780") return true;
+    if (p === "8775" || p === "8776" || p === "8777" || p === "8778" || p === "8779") return false;
+    var host = String(location.hostname || "");
+    return host !== "127.0.0.1" && host !== "localhost";
+  }
+  function keepVerseTr(id) {
+    var i, ok = false;
+    id = String(id || "");
+    for (i = 0; i < TRANSLATIONS.length; i++) if (TRANSLATIONS[i].id === id) ok = true;
+    verseTr = ok ? id : "NKJV";
+    try { localStorage.setItem("sn.verseTr", verseTr); } catch (e) {}
+  }
+  function yahwehText(s) {
+    s = String(s || "");
+    s = s.replace(/[Tt]he\s+LORD(?:'S|'s|\u2019s)\b/g, "Yahweh's");
+    s = s.replace(/[Tt]he\s+GOD(?:'S|'s|\u2019s)\b/g, "Yahweh's");
+    s = s.replace(/[Tt]he\s+LORD\b/g, "Yahweh");
+    s = s.replace(/[Tt]he\s+GOD\b/g, "Yahweh");
+    s = s.replace(/LORD(?:'S|'s|\u2019s)\b/g, "Yahweh's");
+    s = s.replace(/GOD(?:'S|'s|\u2019s)\b/g, "Yahweh's");
+    s = s.replace(/\bLORD\b/g, "Yahweh");
+    s = s.replace(/\bGOD\b/g, "Yahweh");
+    s = s.replace(/\b[Tt]he Yahweh's\b/g, "Yahweh's");
+    s = s.replace(/\b[Tt]he Yahweh\b/g, "Yahweh");
+    return s;
+  }
+  function versePlain(s) {
+    return yahwehText(String(s || "").replace(/<[^>]+>/g, " ").replace(/&nbsp;|\u00a0/g, " ")).replace(/\s+/g, " ").trim();
+  }
   function canEditDesc() {
     var p = String(location.port || "");
     return p === "8775" || p === "8776" || p === "8777";
@@ -1208,7 +1274,7 @@
     return lines;
   }
   function saveChapterText() {
-    if (!canEditChapter() || (verseTr || "NKJV") !== "NKJV" || !openRef) return Promise.resolve(false);
+    if (!canEditChapter() || (verseTr || "NKJV") !== "NKJV" || !openRef || !scripturesTopic()) return Promise.resolve(false);
     var html = htmlFromVerseBox();
     if (!html) return Promise.resolve(false);
     var lines = linesFromVerseBox();
@@ -1221,6 +1287,8 @@
       .then(function (r) { return r.ok; })
       .then(function (ok) {
         if (ok) {
+          localEditedTopic = "";
+          localEditedRows = null;
           verseCache[cacheKey(openRef)] = lines;
           verseDirty = false;
           verseDraft = "";
@@ -1332,11 +1400,65 @@
     }
     return out;
   }
-  function scripturesQuery(ref) {
-    var q = "ref=" + encodeURIComponent(ref) + "&folder=" + encodeURIComponent(siteFolder());
+  var localEditedTopic = "";
+  var localEditedRows = null;
+  function normRef(s) {
+    return String(s || "").replace(/\u2013|\u2014/g, "-").replace(/\s+/g, " ").replace(/\s*:\s*/g, ":").replace(/\s*-\s*/g, "-").trim();
+  }
+  function refSpanOf(ref) {
+    var m = String(ref || "").trim().match(/^(\S+)\s+(\d+)(?::(\d+)(?:\s*[-–—]\s*(?:(\d+)\s*:)?(\d+))?)?/);
+    if (!m) return null;
+    var ch = Number(m[2]);
+    var vs1 = m[3] ? Number(m[3]) : 0;
+    var ch2 = m[4] ? Number(m[4]) : ch;
+    var vs2 = m[5] ? Number(m[5]) : (vs1 || 0);
+    if (ch2 !== ch) return null;
+    return { abbr: m[1], ch: ch, vs1: vs1, vs2: vs2, w: vs1 ? (vs2 - vs1) : 9999 };
+  }
+  function loadEditedRows() {
     var topic = scripturesTopic();
-    if (topic) q += "&topic=" + encodeURIComponent(topic);
-    return q;
+    if (!topic) return Promise.resolve([]);
+    if (localEditedTopic === topic && localEditedRows) return Promise.resolve(localEditedRows);
+    var url = "/sites/" + encodeURIComponent(siteFolder()) + "/data/" + encodeURIComponent(topic) + "/scriptures.json?t=" + Date.now();
+    return fetch(url, { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : {}; })
+      .then(function (data) {
+        var rows = [], i, list = (data && data.verses) || [];
+        for (i = 0; i < list.length; i++) {
+          if (list[i] && String(list[i].source || "") === "edited") rows.push(list[i]);
+        }
+        localEditedTopic = topic;
+        localEditedRows = rows;
+        return rows;
+      })
+      .catch(function () { return []; });
+  }
+  function linesForLocal(rows, qref) {
+    var want = normRef(qref);
+    var hit = refSpanOf(qref);
+    var i, row, sp, lines, by = {}, n, ordered;
+    if (!want || !hit) return [];
+    for (i = 0; i < rows.length; i++) {
+      if (normRef(rows[i].reference) === want) return storedToLines(rows[i].text || "");
+    }
+    ordered = rows.slice().sort(function (a, b) {
+      var sa = refSpanOf(a.reference), sb = refSpanOf(b.reference);
+      return ((sb && sb.w) || 0) - ((sa && sa.w) || 0);
+    });
+    for (i = 0; i < ordered.length; i++) {
+      row = ordered[i];
+      sp = refSpanOf(row.reference);
+      if (!sp || sp.abbr !== hit.abbr || sp.ch !== hit.ch) continue;
+      lines = storedToLines(row.text || "");
+      for (n = 0; n < lines.length; n++) {
+        if (!lines[n].n || by[lines[n].n]) continue;
+        if (hit.vs1 && (lines[n].n < hit.vs1 || lines[n].n > hit.vs2)) continue;
+        by[lines[n].n] = lines[n].t;
+      }
+    }
+    return Object.keys(by).map(Number).sort(function (a, b) { return a - b; }).map(function (vn) {
+      return { n: vn, t: by[vn] };
+    });
   }
   function verseLines(text) {
     var raw = String(text || "").split(/\n/);
@@ -1366,17 +1488,21 @@
     }
     return verseLines(html);
   }
-  function overlayStored(chapter, stored) {
-    var by = {}, i, n, t, out = [];
+  function applyLocalFormat(fresh, stored) {
+    var by = {}, i, n, t, out = [], html, plainFresh, plainStored;
+    if (!stored || !stored.length) return fresh;
     for (i = 0; i < stored.length; i++) {
       n = stored[i].n;
       t = String(stored[i].t || "").trim();
-      if (n && t && t !== "...") by[n] = stored[i];
+      if (n && t && t !== "...") by[n] = t;
     }
-    if (!chapter.length) return stored;
-    for (i = 0; i < chapter.length; i++) {
-      n = chapter[i].n;
-      out.push(by[n] || chapter[i]);
+    for (i = 0; i < fresh.length; i++) {
+      n = fresh[i].n;
+      html = by[n] || "";
+      plainFresh = versePlain(fresh[i].t);
+      plainStored = html ? versePlain(html) : "";
+      if (html && plainStored && plainStored === plainFresh) out.push({ n: n, t: yahwehText(html) });
+      else out.push(fresh[i]);
     }
     return out;
   }
@@ -1390,43 +1516,38 @@
       verseCache[key] = lines;
       done(lines);
     }
+    function freshLines(chapter) {
+      var out = [], i, row;
+      chapter = chapter || [];
+      for (i = 0; i < chapter.length; i++) {
+        row = chapter[i];
+        out.push({ n: row.n, t: yahwehText(row.t) });
+      }
+      return out;
+    }
+    function pullLocal(qref) {
+      if (!qref || !scripturesTopic()) return Promise.resolve([]);
+      return loadEditedRows().then(function (rows) { return linesForLocal(rows, qref); });
+    }
     function fromStore(chapter) {
-      if ((verseTr || "NKJV") !== "NKJV") {
-        finish(chapter && chapter.length ? chapter : []);
+      var fresh = freshLines(chapter);
+      var chRef = "";
+      var refHit = "";
+      if (!fresh.length || !scripturesTopic()) {
+        finish(fresh);
         return;
       }
-      var chRef = "";
-      var thisChap = sameOrigChap();
-      if (viewChap && chapter && chapter.length) {
-        chRef = viewChap.abbr + " " + viewChap.ch + ":" + chapter[0].n + "-" + chapter[chapter.length - 1].n;
-      }
-      var jobs = [];
-      if (thisChap && ref) {
-        jobs.push(
-          fetch("/scriptures?" + scripturesQuery(ref), { cache: "no-store" })
-            .then(function (r) { return r.ok ? r.json() : {}; })
-            .catch(function () { return {}; })
-        );
-      } else {
-        jobs.push(Promise.resolve({}));
-      }
-      if (chRef && chRef !== ref) {
-        jobs.push(
-          fetch("/scriptures?" + scripturesQuery(chRef), { cache: "no-store" })
-            .then(function (r) { return r.ok ? r.json() : {}; })
-            .catch(function () { return {}; })
-        );
-      } else {
-        jobs.push(Promise.resolve({}));
-      }
-      Promise.all(jobs).then(function (pair) {
-        var refStored = storedToLines((pair[0] && pair[0].text) || "");
-        var chapStored = pair[1] && pair[1].text ? storedToLines(pair[1].text) : [];
-        var merged = overlayStored(chapter || [], chapStored);
-        if (thisChap) merged = overlayStored(merged, refStored);
-        if (!merged.length) merged = chapter && chapter.length ? chapter : (thisChap ? refStored : []);
-        if (!merged.length && thisChap && ref) finish(completeSpan([], ref));
-        else finish(merged);
+      if (viewChap) chRef = viewChap.abbr + " " + viewChap.ch + ":" + fresh[0].n + "-" + fresh[fresh.length - 1].n;
+      if (sameOrigChap() && ref) refHit = ref;
+      pullLocal(chRef).then(function (chapStored) {
+        var merged = applyLocalFormat(fresh, chapStored);
+        if (!refHit || refHit === chRef) {
+          finish(merged);
+          return;
+        }
+        pullLocal(refHit).then(function (refStored) {
+          finish(applyLocalFormat(merged, refStored));
+        });
       });
     }
     var ch = viewChap || chapterOf(ref);
@@ -1442,7 +1563,7 @@
         for (i = 0; i < rows.length; i++) {
           row = rows[i] || {};
           n = Number(row.verse);
-          t = String(row.text || "").replace(/<br\b[^>]*>/gi, " ").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").trim();
+          t = yahwehText(String(row.text || "").replace(/<br\b[^>]*>/gi, " ").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").trim());
           if (n) chapter.push({ n: n, t: t });
         }
         fromStore(chapter);
@@ -1974,6 +2095,7 @@
         requestAnimationFrame(function () { startRefEdit(); });
       }
       b.addEventListener("contextmenu", function (ev) {
+        if (onWww()) return;
         if (drag) endRefDrag(null);
         showRefMenu(ev, "ref", {
           edit: function () { startRefEdit(); },
@@ -2318,7 +2440,7 @@
         ev.preventDefault();
         ev.stopPropagation();
         if ((verseTr || "NKJV") === "NKJV") return;
-        verseTr = "NKJV";
+        keepVerseTr("NKJV");
         paint();
       });
       var verTitle = document.createElement("span");
@@ -2359,7 +2481,7 @@
         trow.addEventListener("click", function (ev) {
           ev.preventDefault();
           ev.stopPropagation();
-          verseTr = this.getAttribute("data-tr");
+          keepVerseTr(this.getAttribute("data-tr"));
           paint();
         });
         trList.appendChild(trow);
@@ -2716,7 +2838,7 @@
   function descField(d) {
     var ta;
     if (d) {
-      ta = d.querySelector("textarea");
+      ta = d.querySelector(".tdesc-body");
       if (ta) return ta;
     }
     return document.getElementById("tdesc-ta");
@@ -2733,7 +2855,7 @@
     if (!doc.getElementById("sn-desc-style")) {
       st = doc.createElement("style");
       st.id = "sn-desc-style";
-      st.textContent = ".tdesc{position:fixed;z-index:60;box-sizing:border-box;display:flex;flex-direction:column;align-items:stretch;margin:5px;padding:0;border:1px solid #444;border-radius:4px;background:#eaf6e8;box-shadow:22px 24px 36px rgba(0,0,0,0.42);min-height:26px;overflow:hidden;color:#1b3a4b}.tdesc[hidden]{display:none !important}.tdesc-x{position:absolute;top:1px;right:1px;z-index:2;width:22px;height:22px;margin:0;padding:0;border:0;background:transparent;color:#1b3a4b;font:700 15px/22px Arial,Helvetica,sans-serif;cursor:pointer}.tdesc textarea{display:block;flex:1 1 auto;min-height:0;width:100%;height:auto;margin:0;padding:0.2rem 1.35rem 0.2rem 0.45rem;border:0;background:transparent;font:400 13px/1.2 Arial,Helvetica,sans-serif;color:#1b3a4b;white-space:pre-wrap;overflow-wrap:break-word;word-wrap:break-word;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;resize:none;box-sizing:border-box}.tdesc textarea:focus{outline:0;background:transparent}.tdesc textarea[readonly]{cursor:default;background:transparent}";
+      st.textContent = ".tdesc{position:fixed;z-index:60;box-sizing:border-box;display:flex;flex-direction:column;align-items:stretch;margin:5px;padding:0;border:1px solid #444;border-radius:4px;background:#eaf6e8;box-shadow:22px 24px 36px rgba(0,0,0,0.42);min-height:26px;overflow:hidden;color:#1b3a4b}.tdesc[hidden]{display:none !important}.tdesc-x{position:absolute;top:1px;right:1px;z-index:2;width:22px;height:22px;margin:0;padding:0;border:0;background:transparent;color:#1b3a4b;font:700 15px/22px Arial,Helvetica,sans-serif;cursor:pointer}.tdesc .tdesc-body{display:block;flex:1 1 auto;min-height:0;width:100%;height:auto;margin:0;padding:0.2rem 1.35rem 0.2rem 0.45rem;border:0;background:transparent;font:400 13px/1.2 Arial,Helvetica,sans-serif;color:#1b3a4b;white-space:pre-wrap;tab-size:4;overflow-wrap:break-word;word-wrap:break-word;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;resize:none;box-sizing:border-box}.tdesc .tdesc-body:focus{outline:0;background:transparent}.tdesc .tdesc-body p,.tdesc .tdesc-body div{margin:0;padding:0 0 0.35em}.tdesc .tdesc-body[contenteditable=false]{cursor:default;background:transparent}";
       doc.head.appendChild(st);
     }
     doc.body.appendChild(d);
@@ -2809,7 +2931,7 @@
     if (descOpen && ta && canEditDesc()) {
       topic = find(topics, ta.dataset.topic);
       if (topic) {
-        topic.description = ta.value;
+        topic.description = descRead(ta);
         saveTopics();
       }
     }
@@ -2854,32 +2976,39 @@
     d.hidden = false;
     liftDesc(d);
     if (ta) {
-      ta.readOnly = !canEditDesc();
+      ta.contentEditable = canEditDesc() ? "true" : "false";
       if (ta.ownerDocument.activeElement !== ta) {
-        ta.value = descText(topic);
+        descWrite(ta, descText(topic));
         ta.dataset.topic = sid(topic.id);
       }
     }
     vh = window.innerHeight;
+    var view = window;
+    var doc = document;
     try {
-      if (d.ownerDocument !== document && d.ownerDocument.defaultView) vh = d.ownerDocument.defaultView.innerHeight;
+      if (d.ownerDocument !== document && d.ownerDocument.defaultView) {
+        view = d.ownerDocument.defaultView;
+        doc = d.ownerDocument;
+        vh = view.innerHeight;
+      }
     } catch (err) {}
-    vr = box.getBoundingClientRect();
-    left = 0;
-    frame = null;
-    if (d.ownerDocument !== document) {
-      try { frame = window.frameElement; } catch (err) {}
-      if (frame) left = frame.getBoundingClientRect().left;
+    var page = null;
+    try { page = doc.querySelector(".page-frame"); } catch (errPage) {}
+    var vw = view.innerWidth || window.innerWidth || 800;
+    var pageLeft = 0;
+    var pageW = vw;
+    if (page && page.getBoundingClientRect) {
+      var pr = page.getBoundingClientRect();
+      pageLeft = pr.left;
+      if (pr.width) pageW = pr.width;
     }
-    w = Math.round(vr.right);
+    var right = pageLeft + pageW * 0.40;
+    left = pageLeft;
+    if (left < 0 || right > vw) left = 0;
+    if (right < left + 20) right = left + 20;
+    w = Math.round(right - left - 10);
     if (w < 8) w = 8;
-    var vw = window.innerWidth;
-    try {
-      if (d.ownerDocument !== document && d.ownerDocument.defaultView) vw = d.ownerDocument.defaultView.innerWidth;
-    } catch (err2) {}
-    var room = Math.round(vw - left - 8);
-    if (room > 40 && w > room) w = room;
-    need = descH(ta ? ta.value : descText(topic), w);
+    need = descH(ta ? descRead(ta) : descText(topic), w);
     maxH = Math.max(DESC_H, vh - PAD * 2);
     h = Math.min(Math.max(need, DESC_H), maxH);
     d.style.left = Math.round(left) + "px";
@@ -2973,10 +3102,11 @@
     ta.addEventListener("click", function (ev) { ev.stopPropagation(); });
     ta.addEventListener("focus", function () {
       var id = ta.dataset.topic;
-      if (id) descSnap[id] = ta.value;
+      if (id) descSnap[id] = descRead(ta);
     });
     ta.addEventListener("keydown", function (ev) {
       var id, topic;
+      descKeys(ev);
       if (ev.key !== "Escape") return;
       ev.preventDefault();
       id = ta.dataset.topic;
@@ -2988,9 +3118,9 @@
       var id = ta.dataset.topic;
       var topic = id ? find(topics, id) : null;
       if (!canEditDesc() || !topic) return;
-      topic.description = ta.value;
+      topic.description = descRead(ta);
       var nodes = document.querySelectorAll(".tbtn-info");
-      var bi, empty = !String(ta.value || "").trim();
+      var bi, empty = !String(descRead(ta) || "").trim();
       for (bi = 0; bi < nodes.length; bi++) {
         if (sid(nodes[bi].dataset.id) === sid(id)) nodes[bi].classList.toggle("zero", empty);
       }
@@ -3000,7 +3130,7 @@
       var id = ta.dataset.topic;
       var topic = id ? find(topics, id) : null;
       if (!canEditDesc() || !topic) return;
-      topic.description = ta.value;
+      topic.description = descRead(ta);
       saveTopics();
     });
   })();

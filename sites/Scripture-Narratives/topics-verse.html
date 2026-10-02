@@ -231,7 +231,7 @@
       overflow: hidden;
     }
     .tdesc[hidden] { display: none !important; }
-    .tdesc textarea {
+    .tdesc-body {
       display: block;
       flex: 1 1 auto;
       min-height: 0;
@@ -244,14 +244,16 @@
       font: 400 13px/1.2 Arial, Helvetica, sans-serif;
       color: inherit;
       white-space: pre-wrap;
+      tab-size: 4;
       overflow-wrap: break-word;
       word-wrap: break-word;
       overflow-x: hidden;
       overflow-y: auto;
-      resize: none;
       box-sizing: border-box;
     }
-    .tdesc textarea:focus { outline: 0; background: transparent; }
+    .tdesc-body:focus { outline: 0; background: transparent; }
+    .tdesc-body p,
+    .tdesc-body div { margin: 0; padding: 0 0 0.35em; }
     .tdesc-x {
       position: absolute;
       top: 1px;
@@ -737,7 +739,7 @@
 <body>
   <div class="board-wrap" id="wrap">
     <h1 class="verse-heading" id="verse-heading"></h1>
-    <div class="tdesc" id="tdesc" hidden><button type="button" class="tdesc-x" aria-label="Close">X</button><textarea id="tdesc-ta" title="Description"></textarea></div>
+    <div class="tdesc" id="tdesc" hidden><button type="button" class="tdesc-x" aria-label="Close">X</button><div id="tdesc-ta" class="tdesc-body" contenteditable="true" role="textbox" aria-multiline="true" title="Description"></div></div>
     <div class="chart-scroll" id="chart">
       <div class="board" id="board"></div>
     </div>
@@ -747,6 +749,6 @@
     <div class="sn-rhm-title">Topic</div>
     <button type="button" data-edit="1">Edit</button>
   </div>
-  <script src="topics-verse.js?v=405"></script>
+  <script src="topics-verse.js?v=411"></script>
 </body>
 </html>

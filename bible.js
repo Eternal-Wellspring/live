@@ -225,18 +225,25 @@
     return String(ref || "").replace(/\s+/g, " ").trim().toLowerCase();
   }
   var scripturesFile = null;
+  function snNarratives() {
+    return window.ewFolder === "Scripture-Narratives";
+  }
   function loadScripturesFile() {
     if (scripturesFile) return Promise.resolve(scripturesFile);
     var urls = [];
-    urls.push("/sites/scriptures.json");
-    urls.push("/scriptures.json");
-    if (window.ewFolder) {
+    if (snNarratives()) {
       urls.push("/sites/" + encodeURIComponent(window.ewFolder) + "/scriptures.json");
+    } else {
+      urls.push("/sites/scriptures.json");
+      urls.push("/scriptures.json");
+      if (window.ewFolder) {
+        urls.push("/sites/" + encodeURIComponent(window.ewFolder) + "/scriptures.json");
+      }
+      try {
+        urls.push(new URL("scriptures.json", location.href).href);
+      } catch (e) {}
+      urls.push("scriptures.json");
     }
-    try {
-      urls.push(new URL("scriptures.json", location.href).href);
-    } catch (e) {}
-    urls.push("scriptures.json");
     function next(i) {
       if (i >= urls.length) {
         scripturesFile = { verses: [] };
@@ -251,6 +258,14 @@
         })
         .then(function (data) {
           if (!data || typeof data !== "object" || !Array.isArray(data.verses)) throw new Error("bad");
+          if (snNarratives()) {
+            data = {
+              translation: data.translation || "NKJV",
+              verses: data.verses.filter(function (row) {
+                return row && String(row.source || "") === "edited";
+              }),
+            };
+          }
           scripturesFile = data;
           return scripturesFile;
         })
@@ -295,6 +310,7 @@
     list.push({ reference: ref, text: html, source: "edited" });
   }
   function fetchStored(ref) {
+    if (snNarratives()) return findStored(ref);
     if (hasLocalApi()) {
       var q = "/scriptures?ref=" + encodeURIComponent(ref);
       if (window.ewFolder) q += "&folder=" + encodeURIComponent(window.ewFolder);

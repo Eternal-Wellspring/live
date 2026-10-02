@@ -141,7 +141,7 @@
       overflow: hidden;
     }
     .tdesc[hidden] { display: none !important; }
-    .tdesc textarea {
+    .tdesc-body {
       display: block;
       flex: 1 1 auto;
       min-height: 0;
@@ -154,15 +154,17 @@
       font: 400 13px/1.2 Arial, Helvetica, sans-serif;
       color: inherit;
       white-space: pre-wrap;
+      tab-size: 4;
       overflow-wrap: break-word;
       word-wrap: break-word;
       overflow-x: hidden;
       overflow-y: auto;
       overscroll-behavior: contain;
-      resize: none;
       box-sizing: border-box;
     }
-    .tdesc textarea:focus { outline: 0; background: transparent; }
+    .tdesc-body:focus { outline: 0; background: transparent; }
+    .tdesc-body p,
+    .tdesc-body div { margin: 0; padding: 0 0 0.35em; }
     .tdesc-x {
       position: absolute;
       top: 1px;
@@ -178,7 +180,7 @@
       font: 700 15px/22px Arial, Helvetica, sans-serif;
       cursor: pointer;
     }
-    .tdesc textarea[readonly] { cursor: default; background: transparent; }
+    .tdesc-body[contenteditable="false"] { cursor: default; background: transparent; }
     .tverse-wrap {
       position: absolute;
       z-index: 2;
@@ -534,7 +536,7 @@
 </head>
 <body>
   <div class="board-wrap" id="wrap">
-    <div class="tdesc" id="tdesc" hidden><button type="button" class="tdesc-x" aria-label="Close">X</button><textarea id="tdesc-ta" title="Description"></textarea></div>
+    <div class="tdesc" id="tdesc" hidden><button type="button" class="tdesc-x" aria-label="Close">X</button><div id="tdesc-ta" class="tdesc-body" contenteditable="true" role="textbox" aria-multiline="true" title="Description"></div></div>
     <div class="board" id="board"></div>
   </div>
   <span class="note" id="status"></span>
@@ -553,6 +555,6 @@
     <button type="button" data-yes="1">Yes</button>
     <button type="button" data-no="1">No</button>
   </div>
-  <script src="topics-tree.js?v=385"></script>
+  <script src="topics-tree.js?v=391"></script>
 </body>
 </html>
