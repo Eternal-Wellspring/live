@@ -38,6 +38,55 @@
   var verseAuto = true;
   var expandByRef = false;
   var pendingEdit = null;
+  function onLivePort() {
+    var p = String(location.port || "");
+    return p !== "8775" && p !== "8776" && p !== "8778" && p !== "8779";
+  }
+  function hideCountBtns(title) {
+    var i;
+    title = String(title || "");
+    if (!title) {
+      for (i = 0; i < topics.length; i++) {
+        if ((topics[i].level || 1) === 1) {
+          title = String(topics[i].title || "");
+          break;
+        }
+      }
+    }
+    if (title === "Feasts: Yahweh's Appointed Times") return true;
+    if (title === "Hebrews") return onLivePort();
+    return false;
+  }
+  function rgbParts(c) {
+    var m, n;
+    c = String(c || "");
+    m = c.match(/(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+    if (m) return [Number(m[1]), Number(m[2]), Number(m[3])];
+    m = c.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+    if (m) {
+      n = m[1];
+      if (n.length === 3) n = n[0] + n[0] + n[1] + n[1] + n[2] + n[2];
+      return [parseInt(n.slice(0, 2), 16), parseInt(n.slice(2, 4), 16), parseInt(n.slice(4, 6), 16)];
+    }
+    return [246, 239, 200];
+  }
+  function faintTopicFill(color) {
+    var rgb = rgbParts(color);
+    var t = 0.55;
+    return "rgb(" + Math.round(rgb[0] + (255 - rgb[0]) * t) + ", " + Math.round(rgb[1] + (255 - rgb[1]) * t) + ", " + Math.round(rgb[2] + (255 - rgb[2]) * t) + ")";
+  }
+  function topicOnColor(el) {
+    var c;
+    if (el && el.nodeType === 1) {
+      c = window.getComputedStyle(el).backgroundColor;
+      if (c && c !== "transparent" && c !== "rgba(0, 0, 0, 0)") return c;
+    }
+    return "#f6efc8";
+  }
+  function paintTopicPop(d, el) {
+    if (!d) return;
+    d.style.background = faintTopicFill(topicOnColor(el));
+  }
   var rhmLock = 0;
   var PATH_COLORS = ["#15803d", "#b91c1c", "#005eb8", "#c45c26", "#6d28d9"];
   var JOIN_FILL = "#f6efc8";
@@ -191,10 +240,21 @@
   }
   function descWrite(el, text) {
     var s = String(text || "");
+    var doc, lines, i, row, line;
     if (!el) return;
     if (el.tagName === "TEXTAREA") { el.value = s; return; }
-    if (descMarked(s)) el.innerHTML = s;
-    else el.textContent = s;
+    doc = el.ownerDocument || document;
+    if (/<(div|p)\b/i.test(s)) { el.innerHTML = s; return; }
+    el.innerHTML = "";
+    lines = s.split(/\n/);
+    for (i = 0; i < lines.length; i++) {
+      row = doc.createElement("div");
+      line = lines[i];
+      if (!line) row.appendChild(doc.createElement("br"));
+      else if (descMarked(line)) row.innerHTML = line;
+      else row.textContent = line;
+      el.appendChild(row);
+    }
   }
   function descKeys(ev) {
     var el = ev.currentTarget || ev.target;
@@ -2627,7 +2687,7 @@
     }
     nameW = colNameW(items);
     refW = maxRefNameW();
-    showNums = !(items[0] && String(items[0].title || "") === "Hebrews" && onLive());
+    showNums = !hideCountBtns(items[0] && items[0].title);
     if (showNums) liveOpen = {};
     showRefs = showNums;
     shown = shownTopics();
@@ -2991,21 +3051,23 @@
     w = Math.round(right - left - 10);
     if (w < 8) w = 8;
     d.hidden = false;
+    paintTopicPop(d, topicBoxEl(topic.id));
     if (ta && document.activeElement !== ta) {
       ta.contentEditable = "true";
       descWrite(ta, descText(topic));
       ta.dataset.topic = sid(topic.id);
     }
-    need = descH(ta ? descRead(ta) : descText(topic), w);
     vh = window.innerHeight;
-    maxH = Math.max(80, Math.floor(vh * 0.45));
-    h = Math.min(Math.max(need, DESC_H), maxH);
     top = PAD;
     d.style.left = Math.round(left) + "px";
     d.style.top = Math.round(top) + "px";
     d.style.width = w + "px";
-    d.style.height = h + "px";
-    if (ta) ta.style.overflowY = need > maxH ? "auto" : "hidden";
+    d.style.height = "auto";
+    d.style.maxHeight = Math.max(DESC_H, vh - top - 10) + "px";
+    if (ta) {
+      ta.style.maxHeight = Math.max(DESC_H, vh - top - 14) + "px";
+      ta.style.overflowY = "auto";
+    }
   }
 
   window.snPaintVerse = paint;

@@ -404,10 +404,21 @@
   }
   function descWrite(el, text) {
     var s = String(text || "");
+    var doc, lines, i, row, line;
     if (!el) return;
     if (el.tagName === "TEXTAREA") { el.value = s; return; }
-    if (descMarked(s)) el.innerHTML = s;
-    else el.textContent = s;
+    doc = el.ownerDocument || document;
+    if (/<(div|p)\b/i.test(s)) { el.innerHTML = s; return; }
+    el.innerHTML = "";
+    lines = s.split(/\n/);
+    for (i = 0; i < lines.length; i++) {
+      row = doc.createElement("div");
+      line = lines[i];
+      if (!line) row.appendChild(doc.createElement("br"));
+      else if (descMarked(line)) row.innerHTML = line;
+      else row.textContent = line;
+      el.appendChild(row);
+    }
   }
   function descKeys(ev) {
     var el = ev.currentTarget || ev.target;
@@ -1719,6 +1730,42 @@
     }
     return "";
   }
+  function hideCountBtns(title) {
+    title = String(title != null ? title : rootTitle());
+    if (title === "Feasts: Yahweh's Appointed Times") return true;
+    if (title === "Hebrews") return onLive();
+    return false;
+  }
+  function rgbParts(c) {
+    var m, n;
+    c = String(c || "");
+    m = c.match(/(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+    if (m) return [Number(m[1]), Number(m[2]), Number(m[3])];
+    m = c.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+    if (m) {
+      n = m[1];
+      if (n.length === 3) n = n[0] + n[0] + n[1] + n[1] + n[2] + n[2];
+      return [parseInt(n.slice(0, 2), 16), parseInt(n.slice(2, 4), 16), parseInt(n.slice(4, 6), 16)];
+    }
+    return [246, 239, 200];
+  }
+  function faintTopicFill(color) {
+    var rgb = rgbParts(color);
+    var t = 0.55;
+    return "rgb(" + Math.round(rgb[0] + (255 - rgb[0]) * t) + ", " + Math.round(rgb[1] + (255 - rgb[1]) * t) + ", " + Math.round(rgb[2] + (255 - rgb[2]) * t) + ")";
+  }
+  function topicOnColor(el) {
+    var c;
+    if (el && el.nodeType === 1) {
+      c = window.getComputedStyle(el).backgroundColor;
+      if (c && c !== "transparent" && c !== "rgba(0, 0, 0, 0)") return c;
+    }
+    return "#f6efc8";
+  }
+  function paintTopicPop(d, el) {
+    if (!d) return;
+    d.style.background = faintTopicFill(topicOnColor(el));
+  }
   function showTopicPop(t) {
     if (!t) return;
     if (!String(descText(t) || "").trim() && (onLive() || rootTitle() === "Hebrews")) return;
@@ -2261,7 +2308,7 @@
     var x = PAD;
     var colBuilt = [];
     var ci, cl, cw, boxes, parentBox, pane, si;
-    showNums = !(heb && onLive());
+    showNums = !hideCountBtns(l1 && l1.title);
     for (ci = 0; ci < colLists.length; ci++) {
       cl = colLists[ci];
       cw = colNameW(cl.list);
@@ -2855,7 +2902,7 @@
     if (!doc.getElementById("sn-desc-style")) {
       st = doc.createElement("style");
       st.id = "sn-desc-style";
-      st.textContent = ".tdesc{position:fixed;z-index:60;box-sizing:border-box;display:flex;flex-direction:column;align-items:stretch;margin:5px;padding:0;border:1px solid #444;border-radius:4px;background:#eaf6e8;box-shadow:22px 24px 36px rgba(0,0,0,0.42);min-height:26px;overflow:hidden;color:#1b3a4b}.tdesc[hidden]{display:none !important}.tdesc-x{position:absolute;top:1px;right:1px;z-index:2;width:22px;height:22px;margin:0;padding:0;border:0;background:transparent;color:#1b3a4b;font:700 15px/22px Arial,Helvetica,sans-serif;cursor:pointer}.tdesc .tdesc-body{display:block;flex:1 1 auto;min-height:0;width:100%;height:auto;margin:0;padding:0.2rem 1.35rem 0.2rem 0.45rem;border:0;background:transparent;font:400 13px/1.2 Arial,Helvetica,sans-serif;color:#1b3a4b;white-space:pre-wrap;tab-size:4;overflow-wrap:break-word;word-wrap:break-word;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;resize:none;box-sizing:border-box}.tdesc .tdesc-body:focus{outline:0;background:transparent}.tdesc .tdesc-body p,.tdesc .tdesc-body div{margin:0;padding:0 0 0.35em}.tdesc .tdesc-body[contenteditable=false]{cursor:default;background:transparent}";
+      st.textContent = ".tdesc{position:fixed;z-index:60;box-sizing:border-box;display:flex;flex-direction:column;align-items:stretch;margin:5px;padding:0;border:1px solid #444;border-radius:4px;background:color-mix(in srgb, var(--topic-on,#f6efc8) 45%, #fff);box-shadow:22px 24px 36px rgba(0,0,0,0.42);min-height:26px;overflow:hidden;color:#1b3a4b}.tdesc[hidden]{display:none !important}.tdesc-x{position:absolute;top:1px;right:1px;z-index:2;width:22px;height:22px;margin:0;padding:0;border:0;background:transparent;color:#1b3a4b;font:700 15px/22px Arial,Helvetica,sans-serif;cursor:pointer}.tdesc .tdesc-body{display:block;flex:1 1 auto;min-height:0;width:100%;height:auto;margin:0;padding:0.2rem 1.35rem 0.2rem 0.45rem;border:0;background:transparent;font:400 13px/1.2 Arial,Helvetica,sans-serif;color:#1b3a4b;white-space:pre-wrap;tab-size:4;overflow-wrap:break-word;word-wrap:break-word;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;resize:none;box-sizing:border-box}.tdesc .tdesc-body:focus{outline:0;background:transparent}.tdesc .tdesc-body p,.tdesc .tdesc-body div{margin:0;padding:0 0 0.35em}.tdesc .tdesc-body[contenteditable=false]{cursor:default;background:transparent}";
       doc.head.appendChild(st);
     }
     doc.body.appendChild(d);
@@ -2975,6 +3022,7 @@
     }
     d.hidden = false;
     liftDesc(d);
+    paintTopicPop(d, box);
     if (ta) {
       ta.contentEditable = canEditDesc() ? "true" : "false";
       if (ta.ownerDocument.activeElement !== ta) {
@@ -3008,14 +3056,15 @@
     if (right < left + 20) right = left + 20;
     w = Math.round(right - left - 10);
     if (w < 8) w = 8;
-    need = descH(ta ? descRead(ta) : descText(topic), w);
-    maxH = Math.max(DESC_H, vh - PAD * 2);
-    h = Math.min(Math.max(need, DESC_H), maxH);
     d.style.left = Math.round(left) + "px";
     d.style.top = "0px";
     d.style.width = w + "px";
-    d.style.height = h + "px";
-    if (ta) ta.style.overflowY = need > maxH ? "auto" : "hidden";
+    d.style.height = "auto";
+    d.style.maxHeight = Math.max(DESC_H, vh - 10) + "px";
+    if (ta) {
+      ta.style.maxHeight = Math.max(DESC_H, vh - 14) + "px";
+      ta.style.overflowY = "auto";
+    }
   }
   function saveTopics(msg) {
     if (!canEditDesc()) return saveWait;
