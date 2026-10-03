@@ -61,6 +61,11 @@
     }
     .tbox[data-ref]:hover { background: #f6efc8; }
     .tbox.on, .tbox.on:hover { background: var(--topic-on); }
+    .tbox[data-ref].on,
+    .tbox[data-ref].on:hover {
+      background: #eaf6e8;
+      color: inherit;
+    }
     .tbox[data-ref] { cursor: grab; }
     .topic-drop-line {
       position: fixed;
@@ -560,6 +565,6 @@
     <button type="button" data-yes="1">Yes</button>
     <button type="button" data-no="1">No</button>
   </div>
-  <script src="topics-tree.js?v=402"></script>
+  <script src="topics-tree.js?v=403"></script>
 </body>
 </html>

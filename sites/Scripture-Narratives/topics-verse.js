@@ -1836,7 +1836,7 @@
       var name = document.createElement("span");
       var ownerId = topic ? sid(topic.id) : "";
       b.type = "button";
-      b.className = "tbox" + (refIsChap(label) ? " hit" : "") + (openRef === label ? " on" : "");
+      b.className = "tbox" + (refIsChap(label) ? " hit" : "") + ((sameRef(openRef, label) || sameRef(label, selChapRef)) ? " on" : "");
       b.dataset.ref = label;
       name.className = "tname";
       name.textContent = label;
