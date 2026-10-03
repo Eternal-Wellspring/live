@@ -120,7 +120,18 @@
       height: 100%;
       position: relative;
       overflow: hidden;
-      background: #fff;
+    }
+    #s-tree.active {
+      background: #f6f7eb url("images/parchment.webp") center / cover no-repeat;
+    }
+    #s-verse.active {
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+        #f6f7eb url("images/parchment.webp") center / cover no-repeat;
+    }
+    #s-tree .topics-frame,
+    #s-verse .topics-frame {
+      background: transparent;
     }
     #s-hierarchy.active {
       display: block !important;
@@ -509,10 +520,10 @@
     }
     paintTabs();
     function treeUrl() {
-      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=419";
+      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=420";
     }
     function verseUrl() {
-      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=429";
+      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=430";
     }
     function showTree() {
       var fr = document.getElementById("tree-frame");
@@ -988,8 +999,35 @@
     function isAppFull(){
       return document.documentElement.classList.contains("ew-app-full");
     }
+    var leaving = false;
+    function inNative(){
+      return !!(document.fullscreenElement || document.webkitFullscreenElement);
+    }
     function isFull(){
-      return isAppFull() || !!(document.fullscreenElement || document.webkitFullscreenElement);
+      return isAppFull() || inNative();
+    }
+    function fullEl(){
+      return document.querySelector(".page-frame") || document.documentElement;
+    }
+    function enterNative(){
+      var el, req, out;
+      if (leaving || inNative()) return;
+      el = fullEl();
+      req = el.requestFullscreen || el.webkitRequestFullscreen || el.webkitRequestFullScreen;
+      if (!req) return;
+      try {
+        out = req.call(el, { navigationUI: "hide" });
+        if (out && out.catch) out.catch(function(){});
+      } catch (err) {
+        try { req.call(el); } catch (err2) {}
+      }
+    }
+    function exitNative(){
+      if (!inNative()) return;
+      try {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      } catch (err) {}
     }
     function fitAppFull(){
       var frame = document.querySelector(".page-frame");
@@ -1006,13 +1044,22 @@
         frame.style.maxHeight = "";
         return;
       }
+      frame.style.margin = "0";
+      frame.style.maxHeight = "none";
+      if (inNative()) {
+        frame.style.left = "0";
+        frame.style.top = "0";
+        frame.style.right = "0";
+        frame.style.bottom = "0";
+        frame.style.width = "100%";
+        frame.style.height = "100%";
+        return;
+      }
       vv = window.visualViewport;
       left = vv ? vv.offsetLeft : 0;
       top = vv ? vv.offsetTop : 0;
       w = vv ? vv.width : window.innerWidth;
       h = vv ? vv.height : window.innerHeight;
-      frame.style.margin = "0";
-      frame.style.maxHeight = "none";
       frame.style.right = "auto";
       frame.style.bottom = "auto";
       frame.style.left = left + "px";
@@ -1021,7 +1068,9 @@
       frame.style.height = h + "px";
     }
     function leaveAppFull(){
+      leaving = true;
       document.documentElement.classList.remove("ew-app-full");
+      exitNative();
       fitAppFull();
       paint();
     }
@@ -1033,8 +1082,10 @@
       if (isPad()) {
         if (isAppFull()) leaveAppFull();
         else {
+          leaving = false;
           document.documentElement.classList.add("ew-app-full");
           fitAppFull();
+          enterNative();
           paint();
         }
         return;
@@ -1054,8 +1105,22 @@
         go();
       }
     });
-    document.addEventListener("fullscreenchange", paint);
-    document.addEventListener("webkitfullscreenchange", paint);
+    function onNative(){
+      paint();
+      if (leaving) {
+        if (!inNative()) leaving = false;
+        return;
+      }
+      if (isPad() && isAppFull() && !inNative()) enterNative();
+    }
+    function keepNative(){
+      if (leaving || !isPad() || !isAppFull() || inNative()) return;
+      enterNative();
+    }
+    document.addEventListener("fullscreenchange", onNative);
+    document.addEventListener("webkitfullscreenchange", onNative);
+    document.addEventListener("touchend", keepNative, true);
+    document.addEventListener("pointerup", keepNative, true);
     document.addEventListener("keydown", function(ev){
       if (ev.key !== "Escape" || !isAppFull()) return;
       ev.preventDefault();
