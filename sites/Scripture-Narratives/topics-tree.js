@@ -1774,8 +1774,21 @@
     lastRefTopic = sid(t.id);
     openRef = list.length ? list[0] : null;
   }
+  function firstRefDown(t) {
+    var cur, list, labs, guard;
+    cur = t;
+    guard = 0;
+    while (cur && guard++ < 12) {
+      labs = ownRefs(cur);
+      if (labs.length) return { topic: cur, ref: labs[0] };
+      list = alphaTopics(kids(bySeq(), cur));
+      if (!list.length) break;
+      cur = list[0];
+    }
+    return null;
+  }
   function fillSelectPath(t) {
-    var anc, p, cur, list, guard, i, depth, packed;
+    var anc, p, cur, list, guard, i, depth, packed, hit;
     if (!t) return;
     anc = [];
     p = t;
@@ -1802,9 +1815,14 @@
     }
     openStack = packed;
     sel = sid(cur.id);
-    lastRefTopic = sel;
-    list = ownRefs(cur);
-    openRef = list.length ? list[0] : null;
+    hit = firstRefDown(t);
+    if (hit) {
+      lastRefTopic = sid(hit.topic.id);
+      openRef = hit.ref;
+    } else {
+      lastRefTopic = sel;
+      openRef = null;
+    }
   }
   function openFirstTopic() {
     var vis, first, list;
@@ -2039,7 +2057,7 @@
     var walk, walkLabs;
     if (openRef && !held) openRef = null;
     if (held) lastRefTopic = sid(held.id);
-    if (!openRef) {
+    if (!openRef && !hideCountBtns()) {
       walk = refTopic;
       while (walk) {
         walkLabs = ownRefs(walk);

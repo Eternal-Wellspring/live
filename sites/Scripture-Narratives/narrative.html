@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Topics — Scripture Narratives</title>
   <link rel="icon" href="images/icon.jpg">
-  <link rel="stylesheet" href="site.css?v=tools77" />
+  <link rel="stylesheet" href="site.css?v=tools78" />
   <style>
     html, body { height: 100%; overflow: hidden; }
     .page-frame {
@@ -58,11 +58,37 @@
       overflow: visible;
     }
     .tab-dock .tabs { border-bottom: 1px solid var(--line); }
-    .tab-dock .tab { margin-bottom: 0; }
-    .tab-dock .tab.active {
+    .tab-dock .tab,
+    .tab-dock-end .tab {
+      margin-bottom: 0;
+      background: #fff;
+    }
+    .tab-dock .tab.active,
+    .tab-dock-end .tab.active {
       margin-bottom: -1px;
       padding-bottom: calc(0.4rem + 1px);
+      background: #f6f7eb url("images/parchment.webp") center / cover no-repeat;
       border-bottom: 1px solid #f6f7eb;
+    }
+    .tab-dock .tab[data-tab="s-verse"].active,
+    .tab-dock-end .tab[data-tab="s-verse"].active {
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+        #f6f7eb url("images/parchment.webp") center / cover no-repeat;
+    }
+    .tab-dock .tab[data-tab="s-hierarchy"].active,
+    .tab-dock-end .tab[data-tab="s-hierarchy"].active {
+      background: #fff;
+      border-bottom-color: #fff;
+    }
+    .tab-dock-end .tab.active {
+      margin-top: -1px;
+      margin-bottom: 0;
+      border-top: 1px solid #f6f7eb;
+      border-bottom: 1px solid var(--line);
+    }
+    .tab-dock-end .tab[data-tab="s-hierarchy"].active {
+      border-top-color: #fff;
     }
     .page-frame,
     .stick-top {
@@ -268,8 +294,16 @@
       inset: 0;
       width: 100%;
       height: 100%;
+      margin: 0;
       overflow: hidden;
       overscroll-behavior: none;
+      background: #f6f7eb;
+    }
+    html.ew-app-full #ew-full {
+      top: calc(0.4rem + env(safe-area-inset-top, 0px));
+    }
+    html.ew-app-full .stick-top {
+      padding-top: calc(0.2rem + env(safe-area-inset-top, 0px));
     }
     html.ew-app-full .page-frame {
       position: fixed;
@@ -284,6 +318,7 @@
       margin: 0;
       overflow: hidden;
       overscroll-behavior: none;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
     }
     .tab-dock-end, .page-nav-bar-bottom, .date-updated { flex: 0 0 auto; }
     .tab-dock, .tab-dock-end { position: relative; z-index: 40; }
@@ -520,7 +555,7 @@
     }
     paintTabs();
     function treeUrl() {
-      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=420";
+      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=421";
     }
     function verseUrl() {
       return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=430";
@@ -1000,27 +1035,27 @@
       return document.documentElement.classList.contains("ew-app-full");
     }
     var leaving = false;
+    var entering = false;
     function inNative(){
       return !!(document.fullscreenElement || document.webkitFullscreenElement);
     }
     function isFull(){
       return isAppFull() || inNative();
     }
-    function fullEl(){
-      return document.querySelector(".page-frame") || document.documentElement;
-    }
     function enterNative(){
       var el, req, out;
-      if (leaving || inNative()) return;
-      el = fullEl();
+      if (leaving || entering || inNative()) return;
+      el = document.documentElement;
       req = el.requestFullscreen || el.webkitRequestFullscreen || el.webkitRequestFullScreen;
       if (!req) return;
+      entering = true;
       try {
-        out = req.call(el, { navigationUI: "hide" });
-        if (out && out.catch) out.catch(function(){});
+        out = req.call(el);
+        if (out && out.then) out.then(function(){ entering = false; }, function(){ entering = false; });
       } catch (err) {
-        try { req.call(el); } catch (err2) {}
+        entering = false;
       }
+      setTimeout(function(){ entering = false; }, 500);
     }
     function exitNative(){
       if (!inNative()) return;
@@ -1106,15 +1141,13 @@
       }
     });
     function onNative(){
+      entering = false;
       paint();
-      if (leaving) {
-        if (!inNative()) leaving = false;
-        return;
-      }
-      if (isPad() && isAppFull() && !inNative()) enterNative();
+      fitAppFull();
+      if (leaving && !inNative()) leaving = false;
     }
     function keepNative(){
-      if (leaving || !isPad() || !isAppFull() || inNative()) return;
+      if (leaving || entering || !isPad() || !isAppFull() || inNative()) return;
       enterNative();
     }
     document.addEventListener("fullscreenchange", onNative);
