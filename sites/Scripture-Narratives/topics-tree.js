@@ -2188,7 +2188,21 @@
           saveTopics();
         }
         inp.addEventListener("keydown", function (kev) {
-          if (kev.key === "Enter") kev.stopPropagation();
+          if (kev.key === "Enter") {
+            var start, end;
+            kev.preventDefault();
+            kev.stopPropagation();
+            if (kev.shiftKey) {
+              start = inp.selectionStart;
+              end = inp.selectionEnd;
+              inp.value = inp.value.slice(0, start) + "\n" + inp.value.slice(end);
+              inp.selectionStart = inp.selectionEnd = start + 1;
+              grow();
+              return;
+            }
+            inp.blur();
+            return;
+          }
           if (kev.key === "Escape") {
             kev.preventDefault();
             kev.stopPropagation();
@@ -2452,6 +2466,48 @@
       }
       return pane;
     }
+    function joinSeg(x, y, w, h) {
+      var el = document.createElement("div");
+      el.className = "tjoin";
+      el.style.left = Math.round(x) + "px";
+      el.style.top = Math.round(y) + "px";
+      el.style.width = Math.max(JOIN, Math.round(w)) + "px";
+      el.style.height = Math.max(JOIN, Math.round(h)) + "px";
+      board.appendChild(el);
+    }
+    function midY(el) {
+      return boardY(el) + (el._h || BOX_H) / 2;
+    }
+    function joinFan(leftEls, rightEls) {
+      var left = [], right = [], i, el, paneL, paneR, tx, rx, gap, stub, spineX, ysL, ysR, yTop, yBot;
+      for (i = 0; i < (leftEls || []).length; i++) {
+        el = leftEls[i];
+        if (el) left.push(el);
+      }
+      for (i = 0; i < (rightEls || []).length; i++) {
+        el = rightEls[i];
+        if (el) right.push(el);
+      }
+      if (!left.length || !right.length) return;
+      paneL = left[0].parentNode;
+      paneR = right[0].parentNode;
+      if (!paneL || !paneR) return;
+      tx = (paneL._x || 0) + (paneL._w || 0);
+      rx = (paneR._x || 0) + (right[0]._x || 0);
+      gap = rx - tx;
+      if (gap < JOIN + 4) return;
+      stub = Math.max(3, Math.min(8, Math.floor((gap - JOIN) / 2)));
+      spineX = tx + stub;
+      ysL = [];
+      ysR = [];
+      for (i = 0; i < left.length; i++) ysL.push(midY(left[i]));
+      for (i = 0; i < right.length; i++) ysR.push(midY(right[i]));
+      yTop = Math.min.apply(null, ysL.concat(ysR));
+      yBot = Math.max.apply(null, ysL.concat(ysR));
+      for (i = 0; i < ysL.length; i++) joinSeg(tx, ysL[i] - JOIN / 2, stub, JOIN);
+      joinSeg(spineX, yTop - JOIN / 2, JOIN, (yBot - yTop) + JOIN);
+      for (i = 0; i < ysR.length; i++) joinSeg(spineX, ysR[i] - JOIN / 2, rx - spineX, JOIN);
+    }
     function yInBox(el, box) {
       var er = el.getBoundingClientRect();
       var br = box.getBoundingClientRect();
@@ -2478,6 +2534,7 @@
     var colBuilt = [];
     var ci, cl, cw, boxes, parentBox, pane, si;
     var selectOpen = hideCountBtns(l1 && l1.title);
+    var lastJoin = [];
     showNums = !selectOpen;
     function findBuiltBox(id) {
       var bi, found;
@@ -2509,12 +2566,17 @@
       x += colSpan(cw) + GAP_X;
       if (selectOpen) {
         var pathT = pathTopicInList(cl.list);
+        var pathBox = pathT ? findBox(boxes, pathT.id) : null;
+        if (pathBox && lastJoin.length) joinFan(lastJoin, [pathBox]);
+        lastJoin = pathBox ? [pathBox] : [];
         var pathLabs = ownRefs(pathT);
         if (pathT && pathLabs.length) {
           var wPath = colNameW(pathLabs);
           var pathRefs = pathLabs.map(function (lab) { return refBox(lab, pathT.id); });
-          pane = layoutCol(pathRefs, x, wPath, findBox(boxes, pathT.id), band, true, "r:" + sid(pathT.id));
+          pane = layoutCol(pathRefs, x, wPath, pathBox, band, true, "r:" + sid(pathT.id));
           colBuilt.push({ boxes: pathRefs, pane: pane, w: wPath, x: x });
+          joinFan(pathBox ? [pathBox] : [], pathRefs);
+          lastJoin = pathRefs;
           x += wPath + GAP_X;
         }
       }
@@ -2568,6 +2630,7 @@
       xVs = x + wRef + PAD;
       pane = layoutCol(cRef, x, wRef, parentBox, band, true, "r:" + sid(refTopic.id));
       colBuilt.push({ boxes: cRef, pane: pane, w: wRef, x: x });
+      joinFan(parentBox ? [parentBox] : [], cRef);
     }
 
     var versesEl = null;

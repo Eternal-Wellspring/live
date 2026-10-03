@@ -1816,7 +1816,21 @@
           saveTopics();
         }
         inp.addEventListener("keydown", function (kev) {
-          if (kev.key === "Enter") kev.stopPropagation();
+          if (kev.key === "Enter") {
+            var start, end;
+            kev.preventDefault();
+            kev.stopPropagation();
+            if (kev.shiftKey) {
+              start = inp.selectionStart;
+              end = inp.selectionEnd;
+              inp.value = inp.value.slice(0, start) + "\n" + inp.value.slice(end);
+              inp.selectionStart = inp.selectionEnd = start + 1;
+              grow();
+              return;
+            }
+            inp.blur();
+            return;
+          }
           if (kev.key === "Escape") {
             kev.preventDefault();
             kev.stopPropagation();
