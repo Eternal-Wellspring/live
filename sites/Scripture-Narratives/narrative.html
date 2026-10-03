@@ -263,7 +263,14 @@
     html.ew-app-full .page-frame {
       position: fixed;
       left: 0;
-      width: 100%;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: auto;
+      height: auto;
+      max-width: none;
+      max-height: none;
+      margin: 0;
       overflow: hidden;
       overscroll-behavior: none;
     }
@@ -986,18 +993,37 @@
     }
     function fitAppFull(){
       var frame = document.querySelector(".page-frame");
-      var vv, top, h;
+      var vv, left, top, w, h;
       if (!frame) return;
       if (!isAppFull()) {
+        frame.style.left = "";
         frame.style.top = "";
+        frame.style.right = "";
+        frame.style.bottom = "";
+        frame.style.width = "";
         frame.style.height = "";
+        frame.style.margin = "";
+        frame.style.maxHeight = "";
         return;
       }
       vv = window.visualViewport;
+      left = vv ? vv.offsetLeft : 0;
+      top = vv ? vv.offsetTop : 0;
+      w = vv ? vv.width : window.innerWidth;
       h = vv ? vv.height : window.innerHeight;
-      frame.style.top = "0";
+      frame.style.margin = "0";
+      frame.style.maxHeight = "none";
+      frame.style.right = "auto";
+      frame.style.bottom = "auto";
+      frame.style.left = left + "px";
+      frame.style.top = top + "px";
+      frame.style.width = w + "px";
       frame.style.height = h + "px";
-      window.scrollTo(0, 0);
+    }
+    function leaveAppFull(){
+      document.documentElement.classList.remove("ew-app-full");
+      fitAppFull();
+      paint();
     }
     function paint(){
       var btn = document.getElementById("ew-full");
@@ -1005,9 +1031,12 @@
     }
     function go(){
       if (isPad()) {
-        document.documentElement.classList.toggle("ew-app-full");
-        fitAppFull();
-        paint();
+        if (isAppFull()) leaveAppFull();
+        else {
+          document.documentElement.classList.add("ew-app-full");
+          fitAppFull();
+          paint();
+        }
         return;
       }
       if (isFull()) {
@@ -1027,10 +1056,16 @@
     });
     document.addEventListener("fullscreenchange", paint);
     document.addEventListener("webkitfullscreenchange", paint);
+    document.addEventListener("keydown", function(ev){
+      if (ev.key !== "Escape" || !isAppFull()) return;
+      ev.preventDefault();
+      leaveAppFull();
+    });
     window.addEventListener("resize", fitAppFull);
     window.addEventListener("orientationchange", fitAppFull);
     if (window.visualViewport) {
       window.visualViewport.addEventListener("resize", fitAppFull);
+      window.visualViewport.addEventListener("scroll", fitAppFull);
     }
     paint();
   })();
