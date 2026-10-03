@@ -32,6 +32,7 @@
   var noteRepaint = false;
   var noteCancel = false;
   var verseDirty = false;
+  var verseCancel = false;
   var verseDraft = "";
   var verseEditRef = "";
   var verseBoxEl = null;
@@ -1314,6 +1315,18 @@
   }
   function yahwehText(s) {
     s = String(s || "");
+    // 3050 is Yah. 3068 is Yahweh. The pair is Yah, Yahweh.
+    s = s.replace(/(?:[Tt]he\s+)?(?:LORD|GOD|JEHOVAH|Jehovah|YAH)\s*<S>\s*3050\s*<\/S>/g, "Yah");
+    s = s.replace(/(?:[Tt]he\s+)?(?:LORD|GOD|JEHOVAH|Jehovah)\s*<S>\s*3068\s*<\/S>/g, "Yahweh");
+    s = s.replace(/<S\b[^>]*>[\s\S]*?<\/S>/gi, "");
+    s = s.replace(/<\/?S\b[^>]*>/gi, "");
+    s = s.replace(/\bYAH,\s+[Tt]he\s+LORD\b/g, "Yah, Yahweh");
+    s = s.replace(/\bYAH\b/g, "Yah");
+    s = s.replace(/\bthe LORD JEHOVAH\b/g, "Yah, Yahweh");
+    s = s.replace(/\bYahweh JEHOVAH\b/g, "Yah, Yahweh");
+    s = s.replace(/\b[Tt]he LORD GOD\b/g, "Yah, Yahweh");
+    s = s.replace(/\bin GOD the LORD\b/g, "in Yah, Yahweh");
+    s = s.replace(/\bJEHOVAH\b/g, "Yahweh");
     s = s.replace(/[Tt]he\s+LORD(?:'S|'s|\u2019s)\b/g, "Yahweh's");
     s = s.replace(/[Tt]he\s+GOD(?:'S|'s|\u2019s)\b/g, "Yahweh's");
     s = s.replace(/[Tt]he\s+LORD\b/g, "Yahweh");
@@ -1324,6 +1337,8 @@
     s = s.replace(/\bGOD\b/g, "Yahweh");
     s = s.replace(/\b[Tt]he Yahweh's\b/g, "Yahweh's");
     s = s.replace(/\b[Tt]he Yahweh\b/g, "Yahweh");
+    s = s.replace(/(?<!THE )Yahweh Yahweh\b/g, "Yah, Yahweh");
+    s = s.replace(/\bYah Yahweh\b/g, "Yah, Yahweh");
     return s;
   }
   function versePlain(s) {
@@ -1361,12 +1376,14 @@
     });
     return lines;
   }
-  function saveChapterText() {
-    if (onLive() || (verseTr || "NKJV") !== "NKJV" || !openRef || !scripturesTopic()) return Promise.resolve(false);
-    var html = htmlFromVerseBox();
+  function saveChapterText(html, lines, refNow, storeRef, cacheAt) {
+    var draftAt = verseDraft;
+    refNow = refNow || openRef;
+    if (onLive() || (verseTr || "NKJV") !== "NKJV" || !refNow || !scripturesTopic()) return Promise.resolve(false);
+    if (!html) html = htmlFromVerseBox();
+    if (!lines) lines = linesFromVerseBox();
     if (!html) return Promise.resolve(false);
-    var lines = linesFromVerseBox();
-    var ref = chapterStoreRef(lines) || openRef;
+    var ref = storeRef || chapterStoreRef(lines) || refNow;
     return fetch("/scriptures", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -1374,15 +1391,17 @@
     })
       .then(function (r) { return r.ok; })
       .then(function (ok) {
-        if (ok) {
-          localEditedTopic = "";
-          localEditedRows = null;
-          verseCache[cacheKey(openRef)] = lines;
+        if (!ok) return false;
+        localEditedTopic = "";
+        localEditedRows = null;
+        verseCache[cacheAt || cacheKey(refNow)] = lines;
+        if (verseDraft === draftAt) {
           verseDirty = false;
           verseDraft = "";
           verseEditRef = "";
+          return true;
         }
-        return ok;
+        return false;
       })
       .catch(function () { return false; });
   }
@@ -1527,7 +1546,11 @@
     var i, row, sp, lines, by = {}, n, ordered;
     if (!want || !hit) return [];
     for (i = 0; i < rows.length; i++) {
-      if (normRef(rows[i].reference) === want) return storedToLines(rows[i].text || "");
+      if (normRef(rows[i].reference) === want) {
+        lines = storedToLines(rows[i].text || "");
+        lines.exact = true;
+        return lines;
+      }
     }
     ordered = rows.slice().sort(function (a, b) {
       var sa = refSpanOf(a.reference), sb = refSpanOf(b.reference);
@@ -1576,7 +1599,7 @@
     }
     return verseLines(html);
   }
-  function applyLocalFormat(fresh, stored) {
+  function applyLocalFormat(fresh, stored, trustWords) {
     var by = {}, i, n, t, out = [], html, plainFresh, plainStored;
     if (!stored || !stored.length) return fresh;
     for (i = 0; i < stored.length; i++) {
@@ -1589,7 +1612,7 @@
       html = by[n] || "";
       plainFresh = versePlain(fresh[i].t);
       plainStored = html ? versePlain(html) : "";
-      if (html && plainStored && plainStored === plainFresh) out.push({ n: n, t: yahwehText(html) });
+      if (html && plainStored && (trustWords || plainStored === plainFresh)) out.push({ n: n, t: yahwehText(html) });
       else out.push(fresh[i]);
     }
     return out;
@@ -1628,13 +1651,13 @@
       if (viewChap) chRef = viewChap.abbr + " " + viewChap.ch + ":" + fresh[0].n + "-" + fresh[fresh.length - 1].n;
       if (sameOrigChap() && ref) refHit = ref;
       pullLocal(chRef).then(function (chapStored) {
-        var merged = applyLocalFormat(fresh, chapStored);
+        var merged = applyLocalFormat(fresh, chapStored, !!(chapStored && chapStored.exact));
         if (!refHit || refHit === chRef) {
           finish(merged);
           return;
         }
         pullLocal(refHit).then(function (refStored) {
-          finish(applyLocalFormat(merged, refStored));
+          finish(applyLocalFormat(merged, refStored, false));
         });
       });
     }
@@ -2774,38 +2797,22 @@
         right.appendChild(pickBtn);
       }
       if (!onLive() && (verseTr || "NKJV") === "NKJV" && !hitPick) {
-        var saveBtn = document.createElement("button");
-        saveBtn.type = "button";
-        saveBtn.className = "tverse-pick";
-        saveBtn.textContent = "Save";
-        saveBtn.hidden = !verseDirty;
-        saveBtn.disabled = !verseDirty;
-        saveBtn.addEventListener("click", function (ev) {
-          ev.preventDefault();
-          ev.stopPropagation();
-          saveBtn.disabled = true;
-          saveChapterText().then(function (ok) {
-            saveBtn.disabled = !ok ? false : true;
-            saveBtn.hidden = !!ok;
-            if (ok) paint();
-            else saveBtn.textContent = "Could not save.";
-          });
-        });
         var cancelBtn = document.createElement("button");
         cancelBtn.type = "button";
         cancelBtn.className = "tverse-pick";
         cancelBtn.textContent = "Cancel";
         cancelBtn.hidden = !verseDirty;
+        cancelBtn.addEventListener("mousedown", function () { verseCancel = true; });
         cancelBtn.addEventListener("click", function (ev) {
           ev.preventDefault();
           ev.stopPropagation();
+          verseCancel = true;
           verseDirty = false;
           verseDraft = "";
           verseEditRef = "";
           if (openRef) delete verseCache[cacheKey(openRef)];
           paint();
         });
-        right.appendChild(saveBtn);
         right.appendChild(cancelBtn);
       }
       bar.appendChild(left);
@@ -2955,15 +2962,43 @@
               verseEditRef = openRef;
               verseDraft = versesEl.innerHTML;
               versesWrap.querySelectorAll(".tverse-pick").forEach(function (btn) {
-                var lab = btn.textContent;
-                if (lab === "Save" || lab === "Cancel" || lab === "Could not save.") {
-                  btn.hidden = false;
-                  if (lab === "Could not save.") btn.textContent = "Save";
-                  if (btn.textContent === "Save") btn.disabled = false;
-                }
+                if (btn.textContent === "Cancel") btn.hidden = false;
               });
             });
+            el.addEventListener("blur", function () {
+              var html, lines, refNow, box, storeRef, cacheAt;
+              if (verseCancel) {
+                verseCancel = false;
+                return;
+              }
+              if (!verseDirty || onLive() || (verseTr || "NKJV") !== "NKJV") return;
+              html = htmlFromVerseBox();
+              lines = linesFromVerseBox();
+              refNow = openRef;
+              storeRef = chapterStoreRef(lines) || refNow;
+              cacheAt = cacheKey(refNow);
+              box = versesEl;
+              setTimeout(function () {
+                var active = document.activeElement;
+                if (verseCancel) return;
+                if (active && box && box.contains(active)) return;
+                if (!verseDirty || !html) return;
+                saveChapterText(html, lines, refNow, storeRef, cacheAt).then(function (ok) {
+                  if (ok) paint();
+                });
+              }, 0);
+            });
             el.addEventListener("keydown", function (ev) {
+              if (ev.key === "Escape") {
+                ev.preventDefault();
+                verseCancel = true;
+                verseDirty = false;
+                verseDraft = "";
+                verseEditRef = "";
+                if (openRef) delete verseCache[cacheKey(openRef)];
+                paint();
+                return;
+              }
               if (ev.key === "Enter") {
                 ev.preventDefault();
                 document.execCommand(ev.shiftKey ? "insertLineBreak" : "insertParagraph");

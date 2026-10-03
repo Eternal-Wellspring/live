@@ -1262,7 +1262,11 @@
     var i, row, sp, lines, by = {}, n, ordered;
     if (!want || !hit) return [];
     for (i = 0; i < rows.length; i++) {
-      if (normRef(rows[i].reference) === want) return storedToLines(rows[i].text || "");
+      if (normRef(rows[i].reference) === want) {
+        lines = storedToLines(rows[i].text || "");
+        lines.exact = true;
+        return lines;
+      }
     }
     ordered = rows.slice().sort(function (a, b) {
       var sa = refSpanOf(a.reference), sb = refSpanOf(b.reference);
@@ -1320,6 +1324,18 @@
   }
   function yahwehText(s) {
     s = String(s || "");
+    // 3050 is Yah. 3068 is Yahweh. The pair is Yah, Yahweh.
+    s = s.replace(/(?:[Tt]he\s+)?(?:LORD|GOD|JEHOVAH|Jehovah|YAH)\s*<S>\s*3050\s*<\/S>/g, "Yah");
+    s = s.replace(/(?:[Tt]he\s+)?(?:LORD|GOD|JEHOVAH|Jehovah)\s*<S>\s*3068\s*<\/S>/g, "Yahweh");
+    s = s.replace(/<S\b[^>]*>[\s\S]*?<\/S>/gi, "");
+    s = s.replace(/<\/?S\b[^>]*>/gi, "");
+    s = s.replace(/\bYAH,\s+[Tt]he\s+LORD\b/g, "Yah, Yahweh");
+    s = s.replace(/\bYAH\b/g, "Yah");
+    s = s.replace(/\bthe LORD JEHOVAH\b/g, "Yah, Yahweh");
+    s = s.replace(/\bYahweh JEHOVAH\b/g, "Yah, Yahweh");
+    s = s.replace(/\b[Tt]he LORD GOD\b/g, "Yah, Yahweh");
+    s = s.replace(/\bin GOD the LORD\b/g, "in Yah, Yahweh");
+    s = s.replace(/\bJEHOVAH\b/g, "Yahweh");
     s = s.replace(/[Tt]he\s+LORD(?:'S|'s|\u2019s)\b/g, "Yahweh's");
     s = s.replace(/[Tt]he\s+GOD(?:'S|'s|\u2019s)\b/g, "Yahweh's");
     s = s.replace(/[Tt]he\s+LORD\b/g, "Yahweh");
@@ -1330,12 +1346,14 @@
     s = s.replace(/\bGOD\b/g, "Yahweh");
     s = s.replace(/\b[Tt]he Yahweh's\b/g, "Yahweh's");
     s = s.replace(/\b[Tt]he Yahweh\b/g, "Yahweh");
+    s = s.replace(/(?<!THE )Yahweh Yahweh\b/g, "Yah, Yahweh");
+    s = s.replace(/\bYah Yahweh\b/g, "Yah, Yahweh");
     return s;
   }
   function versePlain(s) {
     return yahwehText(String(s || "").replace(/<[^>]+>/g, " ").replace(/&nbsp;|\u00a0/g, " ")).replace(/\s+/g, " ").trim();
   }
-  function applyLocalFormat(fresh, stored) {
+  function applyLocalFormat(fresh, stored, trustWords) {
     var by = {}, i, n, t, out = [], html, plainFresh, plainStored;
     if (!stored || !stored.length) return fresh;
     for (i = 0; i < stored.length; i++) {
@@ -1348,7 +1366,7 @@
       html = by[n] || "";
       plainFresh = versePlain(fresh[i].t);
       plainStored = html ? versePlain(html) : "";
-      if (html && plainStored && plainStored === plainFresh) out.push({ n: n, t: yahwehText(html) });
+      if (html && plainStored && (trustWords || plainStored === plainFresh)) out.push({ n: n, t: yahwehText(html) });
       else out.push(fresh[i]);
     }
     return out;
@@ -1393,13 +1411,13 @@
         if (orig && orig[1] === chap.abbr && Number(orig[2]) === chap.ch) refHit = openRef;
       }
       pullLocal(chRef).then(function (chapStored) {
-        var merged = applyLocalFormat(fresh, chapStored);
+        var merged = applyLocalFormat(fresh, chapStored, !!(chapStored && chapStored.exact));
         if (!refHit || refHit === chRef) {
           finish(merged);
           return;
         }
         pullLocal(refHit).then(function (refStored) {
-          finish(applyLocalFormat(merged, refStored));
+          finish(applyLocalFormat(merged, refStored, false));
         });
       });
     }

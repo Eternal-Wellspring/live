@@ -92,6 +92,7 @@
       margin: 0;
       padding: 0;
       border: 1px solid var(--line);
+      border-radius: 4px;
       background: var(--panel);
       font: 400 13px/1.2 Arial, Helvetica, sans-serif;
       color: inherit;
@@ -121,22 +122,18 @@
     .tbox.stream .tname { color: #8a1f1f; }
     .tbox[data-level="1"] .tname { color: #8a1f1f; }
     .tbox.dim, .tbox.dim .tname { color: #888; }
-    .tbox[data-ref],
-    .tbox[data-ref]:hover {
-      background: #cdebc8;
+    .tbox[data-ref] {
+      background: #f2faf1;
       color: #1b3a4b;
       cursor: pointer;
     }
-    .tbox[data-ref].hit,
-    .tbox[data-ref].hit:hover {
-      background: #cdebc8;
+    .tbox[data-ref].hit {
+      background: #f2faf1;
       color: #1b3a4b;
     }
     .tbox[data-ref].on,
-    .tbox[data-ref].on:hover,
-    .tbox[data-ref].hit.on,
-    .tbox[data-ref].hit.on:hover {
-      background: #eaf6e8;
+    .tbox[data-ref].hit.on {
+      background: #dce7da;
       color: #1b3a4b;
     }
     .tpath {
@@ -158,6 +155,7 @@
       margin: 0;
       padding: 0.2rem 0.45rem;
       border: 1px solid var(--line);
+      border-radius: 4px;
       background: #eaf6e8;
       font: 400 13px/1.2 Arial, Helvetica, sans-serif;
       color: var(--ink);
@@ -753,6 +751,6 @@
     <button type="button" data-edit="1">Edit</button>
     <button type="button" data-delete="1" hidden>Delete</button>
   </div>
-  <script src="topics-verse.js?v=419"></script>
+  <script src="topics-verse.js?v=427"></script>
 </body>
 </html>

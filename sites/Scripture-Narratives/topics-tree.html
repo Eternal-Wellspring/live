@@ -49,7 +49,8 @@
       margin: 0;
       padding: 0;
       border: 1px solid var(--line);
-      background: var(--panel);
+      border-radius: 4px;
+      background: #fcf8e8;
       font: 400 13px/1.2 Arial, Helvetica, sans-serif;
       color: inherit;
       text-align: left;
@@ -59,14 +60,13 @@
       -webkit-appearance: none;
       appearance: none;
     }
-    .tbox[data-ref]:hover { background: #f6efc8; }
-    .tbox.on, .tbox.on:hover { background: var(--topic-on); }
-    .tbox[data-ref].on,
-    .tbox[data-ref].on:hover {
-      background: #eaf6e8;
+    .tbox[data-ref] { cursor: grab; background: #f2faf1; }
+    .tbox.on:not([data-ref]),
+    .tbox.on:not([data-ref]):hover { background: var(--topic-on); }
+    .tbox[data-ref].on {
+      background: #dce7da;
       color: inherit;
     }
-    .tbox[data-ref] { cursor: grab; }
     .topic-drop-line {
       position: fixed;
       z-index: 90;
@@ -81,6 +81,7 @@
       margin: 0;
       padding: 0.2rem 0.45rem;
       border: 1px solid var(--line);
+      border-radius: 4px;
       background: #f6efc8;
       font: 400 13px/1.2 Arial, Helvetica, sans-serif;
       color: var(--ink);
@@ -565,6 +566,6 @@
     <button type="button" data-yes="1">Yes</button>
     <button type="button" data-no="1">No</button>
   </div>
-  <script src="topics-tree.js?v=403"></script>
+  <script src="topics-tree.js?v=412"></script>
 </body>
 </html>

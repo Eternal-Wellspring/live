@@ -403,6 +403,18 @@
   }
   function nkjvYahweh(text) {
     var s = String(text || "");
+    // 3050 is Yah. 3068 is Yahweh. The pair is Yah, Yahweh.
+    s = s.replace(/(?:[Tt]he\s+)?(?:LORD|GOD|JEHOVAH|Jehovah|YAH)\s*<S>\s*3050\s*<\/S>/g, "Yah");
+    s = s.replace(/(?:[Tt]he\s+)?(?:LORD|GOD|JEHOVAH|Jehovah)\s*<S>\s*3068\s*<\/S>/g, "Yahweh");
+    s = s.replace(/<S\b[^>]*>[\s\S]*?<\/S>/gi, "");
+    s = s.replace(/<\/?S\b[^>]*>/gi, "");
+    s = s.replace(/\bYAH,\s+[Tt]he\s+LORD\b/g, "Yah, Yahweh");
+    s = s.replace(/\bYAH\b/g, "Yah");
+    s = s.replace(/\bthe LORD JEHOVAH\b/g, "Yah, Yahweh");
+    s = s.replace(/\bYahweh JEHOVAH\b/g, "Yah, Yahweh");
+    s = s.replace(/\b[Tt]he LORD GOD\b/g, "Yah, Yahweh");
+    s = s.replace(/\bin GOD the LORD\b/g, "in Yah, Yahweh");
+    s = s.replace(/\bJEHOVAH\b/g, "Yahweh");
     s = s.replace(/[Tt]he\s+LORD(?:'S|'s|\u2019s)\b/g, "Yahweh's");
     s = s.replace(/[Tt]he\s+GOD(?:'S|'s|\u2019s)\b/g, "Yahweh's");
     s = s.replace(/[Tt]he\s+LORD\b/g, "Yahweh");
@@ -413,12 +425,12 @@
     s = s.replace(/\bGOD\b/g, "Yahweh");
     s = s.replace(/\b[Tt]he Yahweh's\b/g, "Yahweh's");
     s = s.replace(/\b[Tt]he Yahweh\b/g, "Yahweh");
+    s = s.replace(/(?<!THE )Yahweh Yahweh\b/g, "Yah, Yahweh");
+    s = s.replace(/\bYah Yahweh\b/g, "Yah, Yahweh");
     return s;
   }
   function cleanVerse(html, tr) {
-    var t = String(html || "")
-      .replace(/<S\b[^>]*>[\s\S]*?<\/S>/gi, "")
-      .replace(/<\/?S\b[^>]*>/gi, "")
+    var t = nkjvYahweh(html)
       .replace(/<sup\b[^>]*>[\s\S]*?<\/sup>/gi, "")
       .replace(/<\/?sup\b[^>]*>/gi, "")
       .replace(/\{(?:H|G)?\d+\}/gi, "")
