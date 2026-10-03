@@ -664,8 +664,22 @@
     if (tealFlip[sid(t.id)]) open = !open;
     return open;
   }
+  function firstRefDown(t) {
+    var cur, list, labs, guard, items;
+    items = visible();
+    cur = t;
+    guard = 0;
+    while (cur && guard++ < 12) {
+      labs = ownRefs(cur);
+      if (labs.length) return { topic: cur, ref: labs[0] };
+      list = sortTopics(kids(items, cur), true);
+      if (!list.length) break;
+      cur = list[0];
+    }
+    return null;
+  }
   function openLiveBranch(t) {
-    var items, p, cur, list, guard;
+    var items, p, cur, list, guard, hit;
     if (!t) return;
     items = visible();
     liveOpen = {};
@@ -688,8 +702,15 @@
       if (!list.length) break;
       cur = list[0];
     }
-    refTopicId = sid(cur.id);
-    sel = refTopicId;
+    sel = sid(cur.id);
+    hit = firstRefDown(t);
+    if (hit) {
+      refTopicId = sid(hit.topic.id);
+      openRef = hit.ref;
+    } else {
+      refTopicId = "";
+      openRef = "";
+    }
     hideDesc();
     paint();
   }
@@ -2835,7 +2856,7 @@
       fitCol(pane);
       x += (pane._w || colSpan(nameW)) + GAP_X;
     }
-    refList = refTopic ? refsFor(refTopic) : [];
+    refList = refTopic ? (showNums ? refsFor(refTopic) : ownRefs(refTopic)) : [];
     xVs = x;
     if (refTopic && refList.length) {
       wRef = refW;

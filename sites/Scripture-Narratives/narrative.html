@@ -558,7 +558,7 @@
       return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=421";
     }
     function verseUrl() {
-      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=430";
+      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=431";
     }
     function showTree() {
       var fr = document.getElementById("tree-frame");
@@ -1150,15 +1150,36 @@
       if (leaving || entering || !isPad() || !isAppFull() || inNative()) return;
       enterNative();
     }
-    document.addEventListener("fullscreenchange", onNative);
-    document.addEventListener("webkitfullscreenchange", onNative);
-    document.addEventListener("touchend", keepNative, true);
-    document.addEventListener("pointerup", keepNative, true);
-    document.addEventListener("keydown", function(ev){
+    function onEsc(ev){
       if (ev.key !== "Escape" || !isAppFull()) return;
       ev.preventDefault();
       leaveAppFull();
-    });
+    }
+    function watchDoc(doc){
+      if (!doc || doc.__ewFullWatch) return;
+      doc.__ewFullWatch = true;
+      doc.addEventListener("touchend", keepNative, true);
+      doc.addEventListener("pointerup", keepNative, true);
+      doc.addEventListener("keydown", onEsc, true);
+    }
+    function watchFrame(frame){
+      var doc;
+      try { doc = frame.contentDocument; } catch (err) { return; }
+      watchDoc(doc);
+    }
+    function watchFrames(){
+      var list = document.querySelectorAll("iframe");
+      var i;
+      for (i = 0; i < list.length; i++) watchFrame(list[i]);
+    }
+    document.addEventListener("fullscreenchange", onNative);
+    document.addEventListener("webkitfullscreenchange", onNative);
+    document.addEventListener("load", function(ev){
+      var t = ev.target;
+      if (t && t.tagName === "IFRAME") watchFrame(t);
+    }, true);
+    watchDoc(document);
+    watchFrames();
     window.addEventListener("resize", fitAppFull);
     window.addEventListener("orientationchange", fitAppFull);
     if (window.visualViewport) {
