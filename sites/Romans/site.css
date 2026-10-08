@@ -265,20 +265,6 @@ body {
 .who { display: flex; align-items: center; justify-content: center; width: 100%; min-width: 0; grid-column: 1 / -1; grid-row: 1; z-index: 1; text-align: center; padding: 0; }
 .top { overflow: visible; }
 .page-tools { display: none !important; }
-#ew-full {
-  position: absolute;
-  top: 0.4rem;
-  right: 0.5rem;
-  z-index: 50;
-  padding: 0.28rem 0.7rem;
-  border: 1px solid #9aa8ae;
-  background: #fff;
-  color: #1b3a4b;
-  font: 700 0.82rem Arial, Helvetica, sans-serif;
-  cursor: pointer;
-}
-#ew-full:hover { background: #e7ead8; }
-html.ew-phone #ew-full { display: none !important; }
 .page-nav-name {
   display: none;
   flex: 1 1 auto;
@@ -1127,7 +1113,7 @@ a.ref, .col a.ref, .col-text a.ref, .para a.ref {
 #ew-info-modal .ew-info-body .bit.indent { font-weight:400 }
 .title-bar h1 { font-family:Arial, Helvetica, sans-serif; font-size:calc(23px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#004d97; background:#f6f7eb; border-style:solid; border-color:#004d97; border-width:0px 0px 0px 0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center }
 .title-bar h1 { border-width:0 !important }
-.tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f6f78; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
 .subsec-frame { font-weight:400; font-style:normal; border-style:solid; border-color:#919191; border-width:2.0px 2.0px 2.0px 2.0px; padding:5px; margin-top:0px; margin-bottom:13px; text-align:left }
 .para { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#ffffff; border-style:solid; border-color:#e2e2e2; border-width:1.0px 0px 0px 0px; padding:0px; margin-top:12px; margin-bottom:-2px; text-align:left; line-height:1.45; --para-gap:18px }
@@ -1158,7 +1144,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 #ew-text-modal .ew-text-body, #ew-text-modal .ew-text-body p { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#333333; line-height:1.25 }
 .ew-chapter-list, .ew-ch-row { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.25 }
 .page-nav, .page-nav .page-nav-word, .page-nav .page-nav-tip, .page-tools, .page-tools button { font-weight:400; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#5a6a72 }
-.tab[data-sec="2"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="2"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="2"] { background:#ffffff }
 .tab-panel[data-sec="2"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s0"] .sub-tab { background:#ffffff }
@@ -1168,7 +1154,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .end-sub-tabs[data-for="s0"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
 .tab-dock-end .tab[data-sec="2"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="2"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="3"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="3"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="3"] { background:#ffffff }
 .tab-panel[data-sec="3"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s1"] .sub-tab { background:#ffffff }
@@ -1178,7 +1164,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .end-sub-tabs[data-for="s1"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
 .tab-dock-end .tab[data-sec="3"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="3"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="6"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="6"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="6"] { background:#ffffff }
 .tab-panel[data-sec="6"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s0"] .sub-tab { background:#ffffff }
@@ -1188,7 +1174,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .end-sub-tabs[data-for="s0"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
 .tab-dock-end .tab[data-sec="6"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="6"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="8"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="8"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="8"] { background:#ffffff }
 .tab-panel[data-sec="8"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s1"] .sub-tab { background:#ffffff }
@@ -1198,7 +1184,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .end-sub-tabs[data-for="s1"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
 .tab-dock-end .tab[data-sec="8"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="8"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="7"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="7"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="7"] { background:#ffffff }
 .tab-panel[data-sec="7"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s2"] .sub-tab { background:#ffffff }
@@ -1208,7 +1194,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .end-sub-tabs[data-for="s2"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
 .tab-dock-end .tab[data-sec="7"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="7"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="10"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="10"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="10"] { background:#ffffff }
 .tab-panel[data-sec="10"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s0"] .sub-tab { background:#ffffff }
@@ -1218,7 +1204,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .end-sub-tabs[data-for="s0"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
 .tab-dock-end .tab[data-sec="10"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="10"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="20"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="20"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="20"] { background:#ffffff }
 .tab-panel[data-sec="20"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s1"] .sub-tab { background:#ffffff }
@@ -1228,7 +1214,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .end-sub-tabs[data-for="s1"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
 .tab-dock-end .tab[data-sec="20"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="20"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="12"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="12"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="12"] { background:#ffffff }
 .tab-panel[data-sec="12"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s2"] .sub-tab { background:#ffffff }
@@ -1238,7 +1224,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .end-sub-tabs[data-for="s2"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
 .tab-dock-end .tab[data-sec="12"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="12"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="11"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="11"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="11"] { background:#ffffff }
 .tab-panel[data-sec="11"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s3"] .sub-tab { background:#ffffff }
@@ -1248,7 +1234,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .end-sub-tabs[data-for="s3"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
 .tab-dock-end .tab[data-sec="11"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="11"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="25"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="25"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="25"] { background:#ffffff }
 .tab-panel[data-sec="25"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s0"] .sub-tab { background:#ffffff }
@@ -1258,7 +1244,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .end-sub-tabs[data-for="s0"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
 .tab-dock-end .tab[data-sec="25"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="25"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="26"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#fefcdd; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="26"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="26"] { background:#ffffff }
 .tab-panel[data-sec="26"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s1"] .sub-tab { background:#ffffff }
@@ -1277,6 +1263,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .tab-dock-end .tab.active { margin-top:-1px; margin-bottom:0; border-top-color:#f6f7eb; background:#f6f7eb }
 .end-sub-tabs .sub-tab { border-radius:0 0 7px 7px; border-top:0 }
 .end-sub-tabs .sub-tab.active { margin-top:-1px; border-top-color:#f6f7eb; background:#f6f7eb }
+.tab.tab-notes, .tab.tab-settings { background:#ffffff }
 .col-title:empty { display:none; margin:0 }
 .title-bar { background:#f6f7eb }
 .title-bar-inner { background:#f6f7eb }
@@ -1441,7 +1428,6 @@ html:not(.ew-phone) .stick-top>.page-nav-bar{display:none!important}
 html.ew-phone .title-bar{display:none!important}
 html.ew-phone .page-nav-name{display:block;flex:1 1 auto;min-width:0;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:min(calc(13px * var(--ew-font, 1)),13px);color:var(--title,#005eb8)}
 html.ew-phone .who .site{font-size:min(calc(15px * var(--ew-font, 1)),15px)!important}
-html.ew-phone #ew-full{display:none!important}
 .page-tools{display:none!important}
 .top{overflow:visible}
 .top{padding-top:0px}
