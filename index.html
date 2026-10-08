@@ -92,8 +92,15 @@
           delete have[k];
         }
       });
-      Object.keys(have).sort().forEach(function (k) {
+      Object.keys(have).forEach(function (k) {
         out.push(have[k]);
+      });
+      out.sort(function (a, b) {
+        var x = String(a || "").toLowerCase();
+        var y = String(b || "").toLowerCase();
+        if (x < y) return -1;
+        if (x > y) return 1;
+        return 0;
       });
       return out;
     }
