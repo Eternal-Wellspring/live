@@ -24,14 +24,11 @@
     var mark = document.querySelector(".ew-mark");
     if (mark) mark.style.textDecoration = "none";
     var who = document.querySelector(".who");
-    var inner = document.querySelector(".title-bar-inner");
     var title = document.getElementById("page-title");
     if (title) title.style.textAlign = "center";
-    if (!mark || !who || !inner) return;
+    if (!mark || !who) return;
     who.style.paddingLeft = "";
     who.style.paddingRight = "";
-    inner.style.paddingLeft = "";
-    inner.style.paddingRight = "";
     var markR = mark.getBoundingClientRect();
     function inset(el) {
       var r = el.getBoundingClientRect();
@@ -43,18 +40,10 @@
       el.style.paddingRight = right + "px";
     }
     inset(who);
-    inset(inner);
-    var titleBar = document.querySelector(".title-bar");
-    if (!site || !title || !titleBar || getComputedStyle(titleBar).display === "none") return;
-    var siteR = site.getBoundingClientRect();
-    var titleR = title.getBoundingClientRect();
-    if (titleR.width < 1) return;
-    var shift = ((siteR.left + siteR.right) / 2) - ((titleR.left + titleR.right) / 2);
-    if (Math.abs(shift) >= 1) {
-      var pl = parseFloat(inner.style.paddingLeft) || 0;
-      var pr = parseFloat(inner.style.paddingRight) || 0;
-      inner.style.paddingLeft = Math.max(0, pl - shift) + "px";
-      inner.style.paddingRight = Math.max(0, pr + shift) + "px";
+    if (topEl) {
+      var whoH = who.scrollHeight || who.getBoundingClientRect().height;
+      var need = Math.max(wordH, whoH) + 8;
+      if (need > 8) topEl.style.minHeight = Math.ceil(need) + "px";
     }
   }
   function onEwWords() {
@@ -120,6 +109,14 @@
       window.parent.postMessage({ type: "ew-settings", footnotes: readNotes(), sky: readSky() }, "*");
     }
   }
+  function tellFont() {
+    var msg = { type: "ew-font", font: fontZ };
+    document.querySelectorAll("iframe").forEach(function (fr) {
+      try {
+        if (fr.contentWindow) fr.contentWindow.postMessage(msg, "*");
+      } catch (e) {}
+    });
+  }
   function apply() {
     var f = document.querySelector(".page-frame");
     var main = document.querySelector("main");
@@ -129,20 +126,29 @@
       if (pageZ < 1) {
         f.style.width = (pageZ * 100) + "%";
         f.style.maxWidth = (pageZ * 100) + "%";
+        f.style.height = "";
+        f.style.maxHeight = "";
+        f.style.marginTop = "";
+        f.style.marginBottom = "";
         f.style.marginLeft = "auto";
         f.style.marginRight = "auto";
       } else {
-        f.style.width = "auto";
+        f.style.width = "100%";
         f.style.maxWidth = "none";
-        f.style.marginLeft = "1.25rem";
-        f.style.marginRight = "1.25rem";
+        f.style.height = "100%";
+        f.style.maxHeight = "none";
+        f.style.marginTop = "0";
+        f.style.marginRight = "0";
+        f.style.marginBottom = "0";
+        f.style.marginLeft = "0";
       }
     }
     document.documentElement.style.setProperty("--ew-font", String(fontZ));
+    tellFont();
     document.documentElement.classList.toggle("ew-notes-off", !readNotes());
     if (main) main.style.zoom = "";
     if (tabs) tabs.style.zoom = "";
-    document.querySelectorAll(".title-bar h1, .page-end-title").forEach(function(el){ el.style.zoom = ""; });
+    document.querySelectorAll(".title-bar h1, #page-title, .page-end-title").forEach(function(el){ el.style.zoom = ""; });
     document.querySelectorAll(".page-minus").forEach(function(b){ b.disabled = pageZ <= STEPS[0]; });
     document.querySelectorAll(".page-plus").forEach(function(b){ b.disabled = pageZ >= 1; });
     document.querySelectorAll(".font-minus").forEach(function(b){ b.disabled = fontZ <= STEPS[0]; });
@@ -223,6 +229,13 @@
     col.addEventListener("input", paintSky);
     col.addEventListener("change", paintSky);
   }
+  document.addEventListener("load", function (ev) {
+    var t = ev.target;
+    if (!t || String(t.tagName || "").toUpperCase() !== "IFRAME") return;
+    try {
+      if (t.contentWindow) t.contentWindow.postMessage({ type: "ew-font", font: fontZ }, "*");
+    } catch (e) {}
+  }, true);
   document.addEventListener("ew-page-swap", function(){
     apply();
     bindSky();

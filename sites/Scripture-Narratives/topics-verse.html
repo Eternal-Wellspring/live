@@ -14,11 +14,12 @@
       --title: #005eb8;
       --topic-on: #f6efc8;
       --topic-pop: color-mix(in srgb, var(--topic-on) 45%, #fff);
+      --ew-font: 1;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: transparent; }
     body {
-      font: 400 13px/1.2 Arial, Helvetica, sans-serif;
+      font: 400 calc(13px * var(--ew-font, 1))/1.2 Arial, Helvetica, sans-serif;
       color: var(--ink);
       background: transparent;
       display: flex;
@@ -94,7 +95,7 @@
       border: 1px solid var(--line);
       border-radius: 4px;
       background: var(--panel);
-      font: 400 13px/1.2 Arial, Helvetica, sans-serif;
+      font: 400 calc(13px * var(--ew-font, 1))/1.2 Arial, Helvetica, sans-serif;
       color: inherit;
       text-align: left;
       white-space: nowrap;
@@ -157,7 +158,7 @@
       border: 1px solid var(--line);
       border-radius: 4px;
       background: #eaf6e8;
-      font: 400 13px/1.2 Arial, Helvetica, sans-serif;
+      font: 400 calc(13px * var(--ew-font, 1))/1.2 Arial, Helvetica, sans-serif;
       color: var(--ink);
       white-space: nowrap;
     }
@@ -179,7 +180,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font: 400 13px/1.2 Arial, Helvetica, sans-serif;
+      font: 400 calc(13px * var(--ew-font, 1))/1.2 Arial, Helvetica, sans-serif;
       cursor: pointer;
       user-select: none;
       -webkit-user-select: none;
@@ -241,7 +242,7 @@
       padding: 0.2rem 1.35rem 0.2rem 0.45rem;
       border: 0;
       background: transparent;
-      font: 400 13px/1.2 Arial, Helvetica, sans-serif;
+      font: 400 calc(13px * var(--ew-font, 1))/1.2 Arial, Helvetica, sans-serif;
       color: inherit;
       white-space: pre-wrap;
       tab-size: 4;
@@ -270,7 +271,7 @@
       cursor: pointer;
     }
     .tverse-wrap {
-      --fs: 13px;
+      --fs: calc(13px * var(--ew-font, 1));
       --fs-lg: calc(var(--fs) * 16 / 13);
       position: absolute;
       z-index: 2;
@@ -394,7 +395,7 @@
       flex: 0 0 auto;
       box-sizing: border-box;
       color: var(--title);
-      font: 700 var(--fs-lg, 16px)/1.2 Arial, Helvetica, sans-serif;
+      font: 700 calc(16px * var(--ew-font, 1))/1.2 Arial, Helvetica, sans-serif;
       white-space: nowrap;
       overflow: visible;
       text-overflow: clip;
@@ -555,7 +556,7 @@
       border: 0;
       box-shadow: none;
       background: var(--panel);
-      font: 400 var(--fs, 13px)/1.45 Arial, Helvetica, sans-serif;
+      font: 400 calc(13px * var(--ew-font, 1))/1.45 Arial, Helvetica, sans-serif;
       color: inherit;
       white-space: pre-wrap;
       overflow-wrap: break-word;
@@ -751,6 +752,8 @@
     <button type="button" data-edit="1">Edit</button>
     <button type="button" data-delete="1" hidden>Delete</button>
   </div>
-  <script src="topics-verse.js?v=431"></script>
+  <script>window.ewOwnChapter=true;</script>
+  <script src="/bible.js"></script>
+  <script src="topics-verse.js?v=435"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Topics — Scripture Narratives</title>
   <link rel="icon" href="images/icon.jpg">
-  <link rel="stylesheet" href="site.css?v=tools78" />
+  <link rel="stylesheet" href="site.css?v=tools82" />
   <style>
     html, body { height: 100%; overflow: hidden; }
     .page-frame {
@@ -32,21 +32,27 @@
     }
     header.top .brand-row,
     .who {
-      align-items: end;
+      align-items: center;
+    }
+    .who {
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
     }
     .who .site {
-      line-height: 1;
+      line-height: 1.1;
+      font-size: calc(21px * var(--ew-font, 1));
+      color: #1f6f78;
     }
-    .title-bar,
-    .title-bar-inner {
-      min-height: 0;
+    .who #page-title {
       margin: 0;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-    .title-bar h1 {
-      line-height: 1;
-      margin: 0;
+      padding: 0;
+      width: 100%;
+      line-height: 1.1;
+      font: 400 calc(23px * var(--ew-font, 1)) / 1.1 Arial, Helvetica, sans-serif;
+      color: #004d97;
+      text-align: center;
+      background: transparent;
     }
     html:not(.ew-phone) .stick-top > .page-nav-bar {
       display: none;
@@ -90,9 +96,11 @@
     .tab-dock-end .tab[data-tab="s-hierarchy"].active {
       border-top-color: #fff;
     }
-    .page-frame,
-    .stick-top {
+    .page-frame {
       background: #f6f7eb;
+    }
+    .stick-top {
+      background: transparent;
     }
     .title-bar,
     .title-bar-inner,
@@ -125,7 +133,7 @@
       min-height: 0;
       border: 1px solid var(--line);
       border-top: 0;
-      background: #fff;
+      background: transparent;
       border-radius: 0 7px 7px 0;
       overflow: hidden;
       box-sizing: border-box;
@@ -431,6 +439,8 @@
       z-index: 1;
       overflow: visible;
     }
+    #tabs-top, #tabs-end { display: flex; width: 100%; }
+    #tabs-top > .tab-settings, #tabs-end > .tab-settings { margin-left: auto; }
   </style>
 </head>
 <body>
@@ -447,12 +457,13 @@
           <div class="brand-row">
             <div class="who">
               <a class="site" href="home.html">Scripture Narratives</a>
+              <h1 id="page-title">Topics</h1>
             </div>
           </div>
         </header>
       </div>
       <div class="page-nav-bar"><span class="page-nav prev"></span><span class="page-nav-name" id="page-nav-name">Topics</span><span class="page-nav next"></span></div>
-      <div class="tab-dock"><div class="title-bar"><div class="title-bar-inner"><h1 id="page-title">Topics</h1></div></div><div class="tabs" id="tabs-top"></div></div>
+      <div class="tab-dock"><div class="tabs" id="tabs-top"></div></div>
     </div>
     <main>
       <div class="tab-panel active" id="s-l1" data-sec="s-l1">
@@ -479,12 +490,12 @@
     <div class="tab-dock-end"><div class="tabs" id="tabs-end"></div></div>
     <div class="page-nav-bar page-nav-bar-bottom"><span class="page-nav prev"></span><span class="page-nav-name" id="page-nav-name-end">Topics</span><span class="page-nav next"></span></div>
     <footer class="date-updated">Updated: <span class="ew-date-updated"></span></footer>
-    <div id="ew-settings-pop" hidden><div class="ew-settings-scrim"></div><div class="ew-settings-card"><div class="set-box">
+  </div>
+  <div id="ew-settings-pop" hidden><div class="ew-settings-scrim"></div><div class="ew-settings-card"><div class="set-box">
       <h2>Settings</h2>
       <div class="set-row"><span class="set-label">Page</span><span class="set-zoom"><button type="button" class="page-minus" aria-label="Page narrower">−</button><button type="button" class="page-plus" aria-label="Page wider">+</button></span></div>
       <div class="set-row"><span class="set-label">Font</span><span class="set-zoom"><button type="button" class="font-minus" aria-label="Font smaller">−</button><button type="button" class="font-plus" aria-label="Font bigger">+</button></span></div>
     </div><button type="button" class="ew-settings-x" aria-label="Close">Close</button></div></div>
-  </div>
   <div id="sn-l1-menu" hidden>
     <div class="sn-rhm-title" id="sn-l1-title">Topic</div>
     <button type="button" data-l1="edit">Edit</button>
@@ -546,19 +557,18 @@
         '<button type="button" class="tab" data-tab="s-verse" data-sec="s-verse">By Verse</button>';
       if (!isLive) {
         tabsHtml +=
-          '<button type="button" class="tab" data-tab="s-hierarchy" data-sec="s-hierarchy">Hierarchy</button>' +
-          '<button type="button" class="tab tab-notes" data-notes-toggle="1">Footnotes</button>';
+          '<button type="button" class="tab" data-tab="s-hierarchy" data-sec="s-hierarchy">Hierarchy</button>';
       }
-      tabsHtml += '<button type="button" class="tab tab-settings" data-settings-open="1">Settings</button>';
+      tabsHtml += '<button type="button" class="tab tab-settings" data-settings-open="1" style="margin-left:auto">Settings</button>';
       document.getElementById("tabs-top").innerHTML = tabsHtml;
       document.getElementById("tabs-end").innerHTML = tabsHtml;
     }
     paintTabs();
     function treeUrl() {
-      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=421";
+      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=424";
     }
     function verseUrl() {
-      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=431";
+      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=435";
     }
     function showTree() {
       var fr = document.getElementById("tree-frame");
@@ -918,7 +928,7 @@
       .catch(function () { return {}; })
       .then(function (env) {
         var port = String(location.port || "");
-        var onBuilder = port === "8775" || port === "8776" || port === "8777";
+        var onBuilder = port === "8775" || port === "8776" || port === "8777" || !!(env && env.builder) || String(location.hostname || "") === "builder.eternalwellspring.com";
         isLive = !onBuilder;
         document.body.classList.toggle("sn-live", isLive);
         paintTabs();
@@ -959,7 +969,7 @@
     });
   </script>
   <script>window.ewFolder="Scripture-Narratives"</script>
-  <script src="site.js?v=15"></script>
+  <script src="site.js?v=17"></script>
   <script src="/bible.js?v=139"></script>
   <script>
     window.addEventListener("contextmenu", function (ev) {
@@ -1073,10 +1083,7 @@
         frame.style.top = "";
         frame.style.right = "";
         frame.style.bottom = "";
-        frame.style.width = "";
-        frame.style.height = "";
-        frame.style.margin = "";
-        frame.style.maxHeight = "";
+        document.dispatchEvent(new Event("ew-page-swap"));
         return;
       }
       frame.style.margin = "0";

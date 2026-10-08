@@ -40,8 +40,9 @@
   var pendingEdit = null;
   var pendingDelete = null;
   function onLivePort() {
+    if (String(location.hostname || "") === "builder.eternalwellspring.com") return false;
     var p = String(location.port || "");
-    return p !== "8775" && p !== "8776" && p !== "8778" && p !== "8779";
+    return p !== "8775" && p !== "8776" && p !== "8777" && p !== "8778" && p !== "8779";
   }
   function hideCountBtns(title) {
     var i;
@@ -290,7 +291,7 @@
   }
   function refLabelW(text) {
     var p = document.createElement("span");
-    p.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;white-space:nowrap;font:700 16px/1.2 Arial,Helvetica,sans-serif;padding:0 0.15rem";
+    p.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;white-space:nowrap;font:700 calc(16px * var(--ew-font, 1))/1.2 Arial,Helvetica,sans-serif;padding:0 0.15rem";
     p.textContent = text || "";
     document.body.appendChild(p);
     var w = Math.ceil(p.offsetWidth);
@@ -299,7 +300,7 @@
   }
   function textSize(title) {
     var p = document.createElement("span");
-    p.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;white-space:pre;font:400 13px/1.2 Arial,Helvetica,sans-serif;padding:0.2rem 0.45rem;border:1px solid #c5d0d4;display:inline-block;box-sizing:border-box";
+    p.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;white-space:pre;font:400 calc(13px * var(--ew-font, 1))/1.2 Arial,Helvetica,sans-serif;padding:0.2rem 0.45rem;border:1px solid #c5d0d4;display:inline-block;box-sizing:border-box";
     var shown = String(title || "");
     if (shown.slice(-1) === "\n") shown += "\u200b";
     p.textContent = shown;
@@ -312,7 +313,7 @@
     var box, h;
     if (!colW) return boxH;
     box = document.createElement("div");
-    box.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;box-sizing:border-box;width:" + Math.max(8, colW) + "px;padding:0.2rem 1.35rem 0.2rem 0.45rem;font:400 13px/1.2 Arial,Helvetica,sans-serif;white-space:pre-wrap;tab-size:4;overflow-wrap:break-word";
+    box.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;box-sizing:border-box;width:" + Math.max(8, colW) + "px;padding:0.2rem 1.35rem 0.2rem 0.45rem;font:400 calc(13px * var(--ew-font, 1))/1.2 Arial,Helvetica,sans-serif;white-space:pre-wrap;tab-size:4;overflow-wrap:break-word";
     if (descMarked(text)) box.innerHTML = text || "";
     else box.textContent = text || "";
     document.body.appendChild(box);
@@ -1217,32 +1218,7 @@
     return s;
   }
   function spaceRefVerses(box) {
-    var old = box.querySelectorAll("p.gap");
-    var i, p, hit, prev, g, ps;
-    for (i = old.length - 1; i >= 0; i--) {
-      if (old[i].parentNode) old[i].parentNode.removeChild(old[i]);
-    }
-    function gap() {
-      g = document.createElement("p");
-      g.className = "gap";
-      return g;
-    }
-    ps = box.querySelectorAll("p:not(.gap)");
-    prev = false;
-    for (i = 0; i < ps.length; i++) {
-      p = ps[i];
-      hit = p.classList.contains("hit");
-      if (hit && !prev && verseNo(p) !== 1) p.parentNode.insertBefore(gap(), p);
-      if (!hit && prev) p.parentNode.insertBefore(gap(), p);
-      prev = hit;
-    }
-  }
-  function verseNo(p) {
-    var n = p.getAttribute("data-vs");
-    var vn;
-    if (n) return Number(n);
-    vn = p.querySelector(".vn");
-    return vn ? Number(vn.textContent) : 0;
+    if (window.ewSpaceRefVerses) window.ewSpaceRefVerses(box);
   }
   var localEditedTopic = "";
   var localEditedRows = null;
@@ -1613,15 +1589,23 @@
     if (r.bottom > window.innerHeight - 8) m.style.top = Math.max(8, window.innerHeight - r.height - 8) + "px";
   }
 
+  function ewFontZ() {
+    var z = 1;
+    try { z = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--ew-font")); } catch (e) {}
+    if (!(z > 0)) z = 1;
+    return z;
+  }
   function fitHeadings(wrap, bar) {
-    var fs;
+    var fs, fs0, floor;
     if (!wrap || !bar) return;
-    for (fs = 13; fs >= MIN_FS; fs--) {
+    fs0 = Math.max(1, Math.round(13 * ewFontZ()));
+    floor = Math.min(MIN_FS, fs0);
+    for (fs = fs0; fs >= floor; fs--) {
       wrap.style.setProperty("--fs", fs + "px");
       if (bar.scrollWidth <= bar.clientWidth + 1) return fs;
     }
-    wrap.style.setProperty("--fs", MIN_FS + "px");
-    return MIN_FS;
+    wrap.style.setProperty("--fs", floor + "px");
+    return floor;
   }
 
   function bookFull(abbr) {
@@ -1743,8 +1727,9 @@
       return w;
     }
     function onLive() {
+      if (String(location.hostname || "") === "builder.eternalwellspring.com") return false;
       var p = String(location.port || "");
-      return p !== "8775" && p !== "8776" && p !== "8778" && p !== "8779";
+      return p !== "8775" && p !== "8776" && p !== "8777" && p !== "8778" && p !== "8779";
     }
     function mkBtn(kind, label, open, onClick) {
       var c = document.createElement("button");
@@ -2687,7 +2672,7 @@
     bar.appendChild(left);
     bar.appendChild(right);
     versesWrap.appendChild(bar);
-    var fs = 13;
+    var fs = Math.max(1, Math.round(13 * ewFontZ()));
     var need;
     versesWrap.style.setProperty("--fs", fs + "px");
     need = Math.ceil(bar.scrollWidth + 8);
@@ -3380,5 +3365,24 @@
     wrap.addEventListener("wheel", onWheel, { passive: false });
     window.addEventListener("wheel", onWheel, { passive: false, capture: true });
   })();
+  function applyEwFont(z) {
+    var cur;
+    z = parseFloat(z);
+    if (!(z > 0)) return;
+    cur = document.documentElement.style.getPropertyValue("--ew-font");
+    if (cur && Math.abs(parseFloat(cur) - z) < 0.001) return;
+    document.documentElement.style.setProperty("--ew-font", String(z));
+    if (topics && topics.length && document.getElementById("board")) paint();
+  }
+  try {
+    if (window.parent && window.parent !== window) {
+      applyEwFont(window.parent.getComputedStyle(window.parent.document.documentElement).getPropertyValue("--ew-font"));
+    }
+  } catch (eFont) {}
+  window.addEventListener("message", function (ev) {
+    var d = ev.data;
+    if (!d || d.type !== "ew-font") return;
+    applyEwFont(d.font);
+  });
   loadTopics(paint);
 })();

@@ -483,7 +483,7 @@
   }
   function refLabelW(text) {
     var p = document.createElement("span");
-    p.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;white-space:nowrap;font:700 16px/1.2 Arial,Helvetica,sans-serif;padding:0 0.15rem";
+    p.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;white-space:nowrap;font:700 calc(16px * var(--ew-font, 1))/1.2 Arial,Helvetica,sans-serif;padding:0 0.15rem";
     p.textContent = text || "";
     document.body.appendChild(p);
     var w = Math.ceil(p.offsetWidth);
@@ -492,7 +492,7 @@
   }
   function textSize(title) {
     var p = document.createElement("span");
-    p.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;white-space:pre;font:400 13px/1.2 Arial,Helvetica,sans-serif;padding:0.2rem 0.45rem;border:1px solid #c5d0d4;display:inline-block;box-sizing:border-box";
+    p.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;white-space:pre;font:400 calc(13px * var(--ew-font, 1))/1.2 Arial,Helvetica,sans-serif;padding:0.2rem 0.45rem;border:1px solid #c5d0d4;display:inline-block;box-sizing:border-box";
     var shown = String(title || "");
     if (shown.slice(-1) === "\n") shown += "\u200b";
     p.textContent = shown;
@@ -503,7 +503,7 @@
   }
   function wrapSize(text, width) {
     var p = document.createElement("div");
-    p.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;white-space:pre-wrap;overflow-wrap:break-word;word-wrap:break-word;font:400 13px/1.2 Arial,Helvetica,sans-serif;padding:0.2rem 0.45rem;border:1px solid #c5d0d4;box-sizing:border-box;width:" + Math.max(8, width) + "px";
+    p.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;white-space:pre-wrap;overflow-wrap:break-word;word-wrap:break-word;font:400 calc(13px * var(--ew-font, 1))/1.2 Arial,Helvetica,sans-serif;padding:0.2rem 0.45rem;border:1px solid #c5d0d4;box-sizing:border-box;width:" + Math.max(8, width) + "px";
     p.textContent = text || "";
     document.body.appendChild(p);
     var s = { w: Math.ceil(p.offsetWidth), h: Math.ceil(p.offsetHeight) };
@@ -514,7 +514,7 @@
     var box, h;
     if (!colW) return boxH;
     box = document.createElement("div");
-    box.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;box-sizing:border-box;width:" + Math.max(8, colW) + "px;padding:0.2rem 1.35rem 0.2rem 0.45rem;font:400 13px/1.2 Arial,Helvetica,sans-serif;white-space:pre-wrap;tab-size:4;overflow-wrap:break-word";
+    box.style.cssText = "position:absolute;left:0;top:0;visibility:hidden;box-sizing:border-box;width:" + Math.max(8, colW) + "px;padding:0.2rem 1.35rem 0.2rem 0.45rem;font:400 calc(13px * var(--ew-font, 1))/1.2 Arial,Helvetica,sans-serif;white-space:pre-wrap;tab-size:4;overflow-wrap:break-word";
     if (descMarked(text)) box.innerHTML = text || "";
     else box.textContent = text || "";
     document.body.appendChild(box);
@@ -1292,9 +1292,12 @@
     hitPick = false;
     applyHighlight(hitStart, hitEnd);
   }
+  function onRemoteBuilder() {
+    return String(location.hostname || "") === "builder.eternalwellspring.com";
+  }
   function canEditChapter() {
     var p = String(location.port || "");
-    return p === "8775" || p === "8776" || p === "8778" || p === "8779";
+    return p === "8775" || p === "8776" || p === "8777" || p === "8778" || p === "8779" || onRemoteBuilder();
   }
   function onLive() {
     return !canEditChapter();
@@ -1303,6 +1306,7 @@
     var p = String(location.port || "");
     if (p === "8780") return true;
     if (p === "8775" || p === "8776" || p === "8777" || p === "8778" || p === "8779") return false;
+    if (onRemoteBuilder()) return false;
     var host = String(location.hostname || "");
     return host !== "127.0.0.1" && host !== "localhost";
   }
@@ -1346,7 +1350,7 @@
   }
   function canEditDesc() {
     var p = String(location.port || "");
-    return p === "8775" || p === "8776" || p === "8777";
+    return p === "8775" || p === "8776" || p === "8777" || onRemoteBuilder();
   }
   function chapterStoreRef(lines) {
     if (!viewChap) return openRef || "";
@@ -2964,32 +2968,7 @@
       var rng = sameOrigChap() ? rangeFor(verseTopic, openRef) : { from: 0, to: 0 };
       var cached = verseCache[cacheKey(openRef)];
       function spaceRefVerses(box) {
-        var old = box.querySelectorAll("p.gap");
-        var i, p, hit, prev, g;
-        for (i = old.length - 1; i >= 0; i--) {
-          if (old[i].parentNode) old[i].parentNode.removeChild(old[i]);
-        }
-        function gap() {
-          g = document.createElement("p");
-          g.className = "gap";
-          return g;
-        }
-        var ps = box.querySelectorAll("p:not(.gap)");
-        prev = false;
-        for (i = 0; i < ps.length; i++) {
-          p = ps[i];
-          hit = p.classList.contains("hit");
-          if (hit && !prev && verseNo(p) !== 1) p.parentNode.insertBefore(gap(), p);
-          if (!hit && prev) p.parentNode.insertBefore(gap(), p);
-          prev = hit;
-        }
-      }
-      function verseNo(p) {
-        var n = p.getAttribute("data-vs");
-        var vn;
-        if (n) return Number(n);
-        vn = p.querySelector(".vn");
-        return vn ? Number(vn.textContent) : 0;
+        if (window.ewSpaceRefVerses) window.ewSpaceRefVerses(box);
       }
       function drawLines(lines) {
         versesEl.innerHTML = "";
@@ -3191,7 +3170,7 @@
     if (!doc.getElementById("sn-desc-style")) {
       st = doc.createElement("style");
       st.id = "sn-desc-style";
-      st.textContent = ".tdesc{position:fixed;z-index:60;box-sizing:border-box;display:flex;flex-direction:column;align-items:stretch;margin:5px;padding:0;border:1px solid #444;border-radius:4px;background:color-mix(in srgb, var(--topic-on,#f6efc8) 45%, #fff);box-shadow:22px 24px 36px rgba(0,0,0,0.42);min-height:26px;overflow:hidden;color:#1b3a4b}.tdesc[hidden]{display:none !important}.tdesc-x{position:absolute;top:1px;right:1px;z-index:2;width:22px;height:22px;margin:0;padding:0;border:0;background:transparent;color:#1b3a4b;font:700 15px/22px Arial,Helvetica,sans-serif;cursor:pointer}.tdesc .tdesc-body{display:block;flex:0 0 auto;min-height:auto;width:100%;height:auto;margin:0;padding:0.2rem 1.35rem 0.2rem 0.45rem;border:0;background:transparent;font:400 13px/1.2 Arial,Helvetica,sans-serif;color:#1b3a4b;white-space:pre-wrap;tab-size:4;overflow-wrap:break-word;word-wrap:break-word;overflow-x:hidden;overflow-y:visible;overscroll-behavior:contain;resize:none;box-sizing:border-box}.tdesc .tdesc-body:focus{outline:0;background:transparent}.tdesc .tdesc-body p,.tdesc .tdesc-body div{margin:0;padding:0 0 0.35em}.tdesc .tdesc-body[contenteditable=false]{cursor:default;background:transparent}";
+      st.textContent = ".tdesc{position:fixed;z-index:60;box-sizing:border-box;display:flex;flex-direction:column;align-items:stretch;margin:5px;padding:0;border:1px solid #444;border-radius:4px;background:color-mix(in srgb, var(--topic-on,#f6efc8) 45%, #fff);box-shadow:22px 24px 36px rgba(0,0,0,0.42);min-height:26px;overflow:hidden;color:#1b3a4b}.tdesc[hidden]{display:none !important}.tdesc-x{position:absolute;top:1px;right:1px;z-index:2;width:22px;height:22px;margin:0;padding:0;border:0;background:transparent;color:#1b3a4b;font:700 15px/22px Arial,Helvetica,sans-serif;cursor:pointer}.tdesc .tdesc-body{display:block;flex:0 0 auto;min-height:auto;width:100%;height:auto;margin:0;padding:0.2rem 1.35rem 0.2rem 0.45rem;border:0;background:transparent;font:400 calc(13px * var(--ew-font, 1))/1.2 Arial,Helvetica,sans-serif;color:#1b3a4b;white-space:pre-wrap;tab-size:4;overflow-wrap:break-word;word-wrap:break-word;overflow-x:hidden;overflow-y:visible;overscroll-behavior:contain;resize:none;box-sizing:border-box}.tdesc .tdesc-body:focus{outline:0;background:transparent}.tdesc .tdesc-body p,.tdesc .tdesc-body div{margin:0;padding:0 0 0.35em}.tdesc .tdesc-body[contenteditable=false]{cursor:default;background:transparent}";
       doc.head.appendChild(st);
     }
     doc.body.appendChild(d);
@@ -3660,6 +3639,25 @@
       if (btn.getAttribute("data-no") === "1" && acts.no) acts.no();
     });
   })();
+  function applyEwFont(z) {
+    var cur;
+    z = parseFloat(z);
+    if (!(z > 0)) return;
+    cur = document.documentElement.style.getPropertyValue("--ew-font");
+    if (cur && Math.abs(parseFloat(cur) - z) < 0.001) return;
+    document.documentElement.style.setProperty("--ew-font", String(z));
+    if (topics && topics.length && document.getElementById("board")) paint();
+  }
+  try {
+    if (window.parent && window.parent !== window) {
+      applyEwFont(window.parent.getComputedStyle(window.parent.document.documentElement).getPropertyValue("--ew-font"));
+    }
+  } catch (eFont) {}
+  window.addEventListener("message", function (ev) {
+    var d = ev.data;
+    if (!d || d.type !== "ew-font") return;
+    applyEwFont(d.font);
+  });
   loadTopics(function () {
     openFirstTopic();
     paint();
