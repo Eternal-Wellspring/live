@@ -1164,36 +1164,6 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .end-sub-tabs[data-for="s1"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
 .tab-dock-end .tab[data-sec="3"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="3"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="6"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
-.tab[data-sec="6"] { background:#ffffff }
-.tab-panel[data-sec="6"] .sub-tab { background:#ffffff }
-.end-sub-tabs[data-for="s0"] .sub-tab { background:#ffffff }
-.tab[data-sec="6"].active, .tab-panel[data-sec="6"] { background:#f6f7eb }
-.tab[data-sec="6"].active { border-bottom-color:#f6f7eb }
-.tab-panel[data-sec="6"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
-.end-sub-tabs[data-for="s0"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="6"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="6"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="8"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
-.tab[data-sec="8"] { background:#ffffff }
-.tab-panel[data-sec="8"] .sub-tab { background:#ffffff }
-.end-sub-tabs[data-for="s1"] .sub-tab { background:#ffffff }
-.tab[data-sec="8"].active, .tab-panel[data-sec="8"] { background:#f6f7eb }
-.tab[data-sec="8"].active { border-bottom-color:#f6f7eb }
-.tab-panel[data-sec="8"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
-.end-sub-tabs[data-for="s1"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="8"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="8"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="7"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
-.tab[data-sec="7"] { background:#ffffff }
-.tab-panel[data-sec="7"] .sub-tab { background:#ffffff }
-.end-sub-tabs[data-for="s2"] .sub-tab { background:#ffffff }
-.tab[data-sec="7"].active, .tab-panel[data-sec="7"] { background:#f6f7eb }
-.tab[data-sec="7"].active { border-bottom-color:#f6f7eb }
-.tab-panel[data-sec="7"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
-.end-sub-tabs[data-for="s2"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="7"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="7"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
 .tab[data-sec="10"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="10"] { background:#ffffff }
 .tab-panel[data-sec="10"] .sub-tab { background:#ffffff }
@@ -1234,26 +1204,6 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .end-sub-tabs[data-for="s3"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
 .tab-dock-end .tab[data-sec="11"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="11"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="25"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
-.tab[data-sec="25"] { background:#ffffff }
-.tab-panel[data-sec="25"] .sub-tab { background:#ffffff }
-.end-sub-tabs[data-for="s0"] .sub-tab { background:#ffffff }
-.tab[data-sec="25"].active, .tab-panel[data-sec="25"] { background:#f6f7eb }
-.tab[data-sec="25"].active { border-bottom-color:#f6f7eb }
-.tab-panel[data-sec="25"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
-.end-sub-tabs[data-for="s0"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="25"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="25"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="26"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
-.tab[data-sec="26"] { background:#ffffff }
-.tab-panel[data-sec="26"] .sub-tab { background:#ffffff }
-.end-sub-tabs[data-for="s1"] .sub-tab { background:#ffffff }
-.tab[data-sec="26"].active, .tab-panel[data-sec="26"] { background:#f6f7eb }
-.tab[data-sec="26"].active { border-bottom-color:#f6f7eb }
-.tab-panel[data-sec="26"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
-.end-sub-tabs[data-for="s1"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="26"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="26"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
 .tab.active { margin-bottom:-1px; position:relative; z-index:1 }
 .tab { border-radius:7px 7px 0 0 }
 .tab-panel { border-radius:0 7px 7px 0 }
