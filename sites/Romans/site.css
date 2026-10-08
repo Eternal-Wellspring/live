@@ -1283,7 +1283,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .title-bar h1 { background:transparent; margin-bottom:0 }
 .tabs { margin-top:0 }
 .row-title[data-para="14"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
-.para[data-para="14"] .col[data-col="15"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:italic; color:#000000; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
+.para[data-para="14"] .col[data-col="15"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
 .para[data-para="14"] .col[data-col="15"] .col-text, .para[data-para="14"] .col[data-col="15"] .col-text .bit { line-height:1.2 }
 .para[data-para="14"] .col[data-col="15"] .col-text { gap:0 }
 .para[data-para="14"] .col[data-col="15"] .col-text .bit { margin:0 0 7px }
@@ -1314,7 +1314,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .para[data-para="14"] .col[data-col="27"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="14"] .col[data-col="27"] a.ref{white-space:nowrap}
 .row-title[data-para="28"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
-.para[data-para="28"] .col[data-col="29"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:italic; color:#000000; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
+.para[data-para="28"] .col[data-col="29"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
 .para[data-para="28"] .col[data-col="29"] .col-text, .para[data-para="28"] .col[data-col="29"] .col-text .bit { line-height:1.2 }
 .para[data-para="28"] .col[data-col="29"] .col-text { gap:0 }
 .para[data-para="28"] .col[data-col="29"] .col-text .bit { margin:0 0 7px }
@@ -1345,7 +1345,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .para[data-para="28"] .col[data-col="30"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="28"] .col[data-col="30"] a.ref{white-space:nowrap}
 .row-title[data-para="31"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
-.para[data-para="31"] .col[data-col="32"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:italic; color:#000000; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
+.para[data-para="31"] .col[data-col="32"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
 .para[data-para="31"] .col[data-col="32"] .col-text, .para[data-para="31"] .col[data-col="32"] .col-text .bit { line-height:1.2 }
 .para[data-para="31"] .col[data-col="32"] .col-text { gap:0 }
 .para[data-para="31"] .col[data-col="32"] .col-text .bit { margin:0 0 7px }
@@ -1376,7 +1376,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .para[data-para="31"] .col[data-col="33"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="31"] .col[data-col="33"] a.ref{white-space:nowrap}
 .row-title[data-para="34"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
-.para[data-para="34"] .col[data-col="35"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:italic; color:#000000; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
+.para[data-para="34"] .col[data-col="35"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
 .para[data-para="34"] .col[data-col="35"] .col-text, .para[data-para="34"] .col[data-col="35"] .col-text .bit { line-height:1.2 }
 .para[data-para="34"] .col[data-col="35"] .col-text { gap:0 }
 .para[data-para="34"] .col[data-col="35"] .col-text .bit { margin:0 0 7px }
@@ -1407,7 +1407,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .para[data-para="34"] .col[data-col="36"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="34"] .col[data-col="36"] a.ref{white-space:nowrap}
 .row-title[data-para="37"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
-.para[data-para="37"] .col[data-col="38"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:italic; color:#000000; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
+.para[data-para="37"] .col[data-col="38"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; padding:5px; margin-top:9px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
 .para[data-para="37"] .col[data-col="38"] .col-text, .para[data-para="37"] .col[data-col="38"] .col-text .bit { line-height:1.2 }
 .para[data-para="37"] .col[data-col="38"] .col-text { gap:0 }
 .para[data-para="37"] .col[data-col="38"] .col-text .bit { margin:0 0 7px }

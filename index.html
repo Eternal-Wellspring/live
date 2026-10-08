@@ -42,7 +42,8 @@
 
   <script>
     var categories = [];
-    var chosenCat = "End Times Prophecies";
+    var chosenCat = "";
+    var catPicked = false;
 
     function $(id) {
       return document.getElementById(id);
@@ -115,7 +116,7 @@
         filterSites();
         return;
       }
-      if (!chosenCat || names.every(function (n) { return !sameCat(n, chosenCat); })) {
+      if (!catPicked || !chosenCat || names.every(function (n) { return !sameCat(n, chosenCat); })) {
         chosenCat = names[0];
       }
       box.innerHTML = "";
@@ -129,6 +130,7 @@
         btn.className = on ? "on" : "";
         btn.setAttribute("aria-selected", on ? "true" : "false");
         btn.addEventListener("click", function () {
+          catPicked = true;
           chosenCat = name;
           fillCategories();
         });
