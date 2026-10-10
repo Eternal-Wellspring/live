@@ -132,6 +132,12 @@ function pretty(urlPath) {
 function handler(req, res) {
   const url = new URL(req.url || "/", "http://127.0.0.1");
   const p = url.pathname;
+  const siteParts = p.split("/").filter(Boolean);
+  if (siteParts.length === 1 && !p.endsWith("/") && siteParts[0].indexOf(".") < 0 && !RESERVED.has(siteParts[0]) && resolveSite(siteParts[0])) {
+    res.writeHead(307, { Location: "/" + siteParts[0] + "/" + (url.search || "") });
+    res.end();
+    return;
+  }
 
   if (p === "/scriptures") {
     scriptures(vercelReq(req, url), vercelRes(res));

@@ -139,7 +139,10 @@
       if (document.querySelector('#site-list .ew-site[data-folder="' + folder + '"]')) return;
       var a = document.createElement("a");
       a.className = "ew-site";
-      a.href = String(s.href || "").replace(/\/+$/, "") || "/" + folder;
+      var href = String(s.href || "").trim();
+      if (!href) href = "/" + folder + "/";
+      if (href.charAt(href.length - 1) !== "/") href += "/";
+      a.href = href;
       a.setAttribute("data-folder", folder);
       a.setAttribute("data-category", s.category || "");
       var strong = document.createElement("strong");
