@@ -1,3 +1,17 @@
 {
-  "sites": []
+  "sites": [
+    {
+      "folder": "Romans",
+      "name": "Romans",
+      "tagline": "Short bible talks for each Chapter of Romans",
+      "description": "<span class=\"bit\"><br></span>",
+      "category": "Bible Book Studies",
+      "contents": [
+        "Home",
+        "Chapter 2"
+      ],
+      "showOnWeb": true,
+      "href": "/Romans/"
+    }
+  ]
 }
