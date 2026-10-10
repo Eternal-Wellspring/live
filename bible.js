@@ -2619,6 +2619,47 @@
       Number(currentRef.ch1) === Number(chBrowse.ch)
     );
   }
+  function spaceRefVerses(box) {
+    if (!box) return;
+    var old = box.querySelectorAll(".ew-ch-gap, .gap");
+    var i, rows, p, hit, prev, g;
+    for (i = old.length - 1; i >= 0; i--) {
+      if (old[i].parentNode) old[i].parentNode.removeChild(old[i]);
+    }
+    function gap() {
+      g = document.createElement("div");
+      g.className = "ew-ch-gap gap";
+      g.setAttribute("aria-hidden", "true");
+      g.textContent = "\u00a0";
+      g.style.setProperty("display", "block", "important");
+      g.style.setProperty("height", "1.25em", "important");
+      g.style.setProperty("min-height", "1.25em", "important");
+      g.style.setProperty("margin", "0", "important");
+      g.style.setProperty("padding", "0", "important");
+      g.style.setProperty("border", "0", "important");
+      g.style.setProperty("background", "transparent", "important");
+      g.style.setProperty("line-height", "1.25", "important");
+      g.style.setProperty("pointer-events", "none", "important");
+      g.style.setProperty("overflow", "hidden", "important");
+      g.style.setProperty("user-select", "none", "important");
+      return g;
+    }
+    rows = box.querySelectorAll(".ew-ch-row");
+    if (!rows.length) rows = box.querySelectorAll("p[data-vs]");
+    if (!rows.length) rows = box.querySelectorAll("p:not(.gap):not(.ew-ch-gap)");
+    prev = false;
+    for (i = 0; i < rows.length; i++) {
+      p = rows[i];
+      hit = p.classList.contains("hit");
+      if (hit && !prev) p.parentNode.insertBefore(gap(), p);
+      if (!hit && prev) p.parentNode.insertBefore(gap(), p);
+      prev = hit;
+    }
+    if (prev && rows.length) {
+      p = rows[rows.length - 1];
+      if (p.parentNode) p.parentNode.appendChild(gap());
+    }
+  }
   function loadChapter() {
     if (!chBrowse || !chList) return;
     var tr = chView || "NKJV";
@@ -2725,6 +2766,7 @@
         if (before.childNodes.length) chList.appendChild(before);
         if (hits.childNodes.length) chList.appendChild(hits);
         if (after.childNodes.length) chList.appendChild(after);
+        spaceRefVerses(chList);
         if (!dirty) snapshot = hits.innerHTML;
         paintChapterRows();
         sizeFootnoteList();
@@ -2858,7 +2900,8 @@
         "#ew-chapter.ew-fn-pop .ew-tr-list{position:fixed!important;width:max-content!important;min-width:0!important;max-width:max-content!important;max-height:none!important;height:auto!important;overflow:visible!important;z-index:200!important;padding:.15rem 0!important}" +
         "#ew-chapter.ew-fn-pop .ew-tr-list [data-tr]{display:grid!important;grid-template-columns:max-content 4.6ch!important;column-gap:.9rem!important;width:auto!important;min-width:0!important;padding:.15rem .55rem!important}" +
         "#ew-chapter.ew-fn-pop .ew-tr-year{text-align:right!important;justify-self:end!important}" +
-        "#ew-chapter.ew-fn-pop .ew-ch-row.hit,#ew-chapter.ew-fn-pop .ew-ch-hits p{background:#dce8f2!important;margin:0}" +
+        "#ew-chapter.ew-fn-pop .ew-ch-row.hit,#ew-chapter.ew-fn-pop .ew-ch-hits p:not(.ew-ch-gap){background:#dce8f2!important;margin:0}" +
+        "#ew-chapter.ew-fn-pop .ew-ch-gap{display:block!important;height:1.25em!important;min-height:1.25em!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;pointer-events:none!important;line-height:1.25!important;overflow:hidden!important}" +
         "#ew-chapter.ew-fn-pop .ew-ch-row sup{color:#1f6f78;font-weight:700;padding-right:.25rem}" +
 
         "#ew-chapter.ew-fn-pop .ew-extra-note{color:#0a7a22;font-weight:700;margin:0 0 .6rem}" +
