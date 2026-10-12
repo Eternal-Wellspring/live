@@ -1,4 +1,34 @@
 (function () {
+  window.ewVerseHits = function (raw, chapter) {
+    var s = String(raw || "").replace(/\u2013|\u2014/g, "-").trim();
+    var head = s.match(/^(\S+)\s+(\d+)\s*:\s*(.+)$/);
+    if (!head) return null;
+    var ch = Number(head[2]);
+    var want = chapter == null ? ch : Number(chapter);
+    var bits = head[3].split(",");
+    var set = {};
+    var n = 0;
+    var i, bit, m, a, b, v;
+    for (i = 0; i < bits.length; i++) {
+      bit = bits[i].trim();
+      if (!bit) continue;
+      m = bit.match(/^(\d+)\s*:\s*(\d+)(?:\s*-\s*(\d+))?$/);
+      if (m) {
+        ch = Number(m[1]);
+        a = Number(m[2]);
+        b = m[3] ? Number(m[3]) : a;
+      } else {
+        m = bit.match(/^(\d+)(?:\s*-\s*(\d+))?$/);
+        if (!m) continue;
+        a = Number(m[1]);
+        b = m[2] ? Number(m[2]) : a;
+      }
+      if (b < a) { v = a; a = b; b = v; }
+      if (ch !== want) continue;
+      for (v = a; v <= b; v++) { set[v] = 1; n++; }
+    }
+    return n ? set : null;
+  };
   var _ewFetch = window.fetch;
   window.fetch = function (url, opts) {
     var method = String((opts && opts.method) || "GET").toUpperCase();
@@ -605,6 +635,12 @@
   function refLabel(ref) {
     return ref.name + " " + ref.ch1 + ":" + ref.vs1 + (ref.ch2 !== ref.ch1 || ref.vs2 !== ref.vs1 ? "-" + (ref.ch2 !== ref.ch1 ? ref.ch2 + ":" : "") + vs2Safe(ref) : "");
   }
+  function holdRef(ref, raw) {
+    currentRef = ref;
+    var s = String(raw || "").replace(/\u2013|\u2014/g, "-").replace(/\s+/g, " ").trim();
+    currentRef.raw = s;
+    currentRef.label = s.indexOf(",") >= 0 ? s : (ref.vs1 ? refLabel(ref) : ref.label);
+  }
   function vs2Safe(ref) {
     return ref.vs2;
   }
@@ -976,6 +1012,7 @@
     currentRef.vs1 = a;
     currentRef.vs2 = b;
     currentRef.ch2 = currentRef.ch1;
+    currentRef.raw = "";
     currentRef.label = refLabel(currentRef);
     if (title) setAbbrTitle(title, currentRef.label, "NKJV");
     if (chTitle) chTitle.textContent = currentRef.label;
@@ -1307,11 +1344,11 @@
         return;
       }
       if (act === "edit" && hit.a) {
-        var er = parseChapter(hit.a.getAttribute("data-ref") || hit.a.textContent);
+        var rawEdit = hit.a.getAttribute("data-ref") || hit.a.textContent;
+        var er = parseChapter(rawEdit);
         if (!er) return;
         ensureBox();
-        currentRef = er;
-        currentRef.label = er.vs1 ? refLabel(er) : er.label;
+        holdRef(er, rawEdit);
         savedLink = hit.a;
         lookupThenShow();
         return;
@@ -1338,8 +1375,7 @@
           renumberRow(a.closest(".para"));
         }
         ensureBox();
-        currentRef = nr;
-        currentRef.label = nr.vs1 ? refLabel(nr) : nr.label;
+        holdRef(nr, hit.text);
         lookupThenShow();
         return;
       }
@@ -2490,6 +2526,10 @@
     }
     return { a: a, b: b };
   }
+  function chapterHitSet() {
+    if (!sameChapter() || !currentRef || !window.ewVerseHits) return null;
+    return window.ewVerseHits(currentRef.raw || currentRef.label || "", Number(chBrowse.ch));
+  }
   function paintChapterRows() {
     if (!chList) return;
     var a = chStart;
@@ -2499,13 +2539,16 @@
       a = b;
       b = t;
     }
+    var listed = chapterHitSet();
     var hit = refHitRange();
     var same =
       !!(chBrowse && currentRef && currentRef.book === chBrowse.book && Number(currentRef.ch1) === Number(chBrowse.ch));
     Array.prototype.forEach.call(chList.querySelectorAll(".ew-ch-row"), function (row) {
       var n = Number(row.getAttribute("data-vs"));
       row.classList.remove("on", "mid", "hit");
-      if (same && hit && n >= hit.a && n <= hit.b) row.classList.add("hit");
+      if (same && listed) {
+        if (listed[n]) row.classList.add("hit");
+      } else if (same && hit && n >= hit.a && n <= hit.b) row.classList.add("hit");
       if (n === chStart || n === chEnd) row.classList.add("on");
       else if (a && b && n > a && n < b) row.classList.add("mid");
     });
@@ -2692,7 +2735,14 @@
           warn.innerHTML = extraWarningHtml(currentRef);
           if (warn.firstChild) chList.appendChild(warn.firstChild);
         }
-        var hit = sameChapter() ? refHitRange() : null;
+        var listed = chapterHitSet();
+        var hit = null;
+        var loose = false;
+        if (listed) {
+          var ks = Object.keys(listed).map(Number).sort(function (a, b) { return a - b; });
+          if (ks.length && ks[ks.length - 1] - ks[0] + 1 === ks.length) hit = { a: ks[0], b: ks[ks.length - 1] };
+          else loose = true;
+        } else hit = sameChapter() ? refHitRange() : null;
         var before = document.createElement("div");
         var hits = document.createElement("div");
         hits.className = "ew-ch-hits";
@@ -2700,7 +2750,7 @@
         var after = document.createElement("div");
         rows.forEach(function (row) {
           var n = Number(row.verse);
-          var inHit = !!(hit && n >= hit.a && n <= hit.b);
+          var inHit = loose ? !!listed[n] : !!(hit && n >= hit.a && n <= hit.b);
           var plain = cleanVerse(row.text, tr);
           var inner = escTxt(plain);
           if (inHit && tr !== "NKJV" && phrases.length) inner = formatWithPhrases(plain, phrases, storedMap[n]) || inner;
@@ -2720,7 +2770,8 @@
           el.appendChild(num);
           el.appendChild(document.createTextNode(" "));
           el.appendChild(text);
-          if (hit && n > hit.b) after.appendChild(el);
+          if (loose) after.appendChild(el);
+          else if (hit && n > hit.b) after.appendChild(el);
           else if (inHit) hits.appendChild(el);
           else if (hit && n < hit.a) before.appendChild(el);
           else after.appendChild(el);
@@ -2796,14 +2847,20 @@
   function scrollHitToMiddle() {
     if (!chList) return;
     requestAnimationFrame(function () {
-      var hits = chList.querySelector(".ew-ch-hits");
-      if (!hits) return;
+      var nodes = chList.querySelectorAll(".hit");
+      if (!nodes.length) return;
+      var first = nodes[0];
+      var last = nodes[nodes.length - 1];
       chList.style.setProperty("padding-top", "0px", "important");
       chList.style.setProperty("padding-bottom", "0px", "important");
       var list = chList.getBoundingClientRect();
-      var hb = hits.getBoundingClientRect();
-      var delta = hb.top + hb.height / 2 - (list.top + list.height / 2);
+      var topR = first.getBoundingClientRect();
+      var botR = last.getBoundingClientRect();
+      var mid = (topR.top + botR.bottom) / 2;
+      var delta = mid - (list.top + list.height / 2);
       var next = chList.scrollTop + delta;
+      var firstTop = chList.scrollTop + (topR.top - list.top);
+      if (next > firstTop) next = firstTop;
       var max = Math.max(0, chList.scrollHeight - chList.clientHeight);
       if (next < 0) next = 0;
       if (next > max) next = max;
@@ -3099,8 +3156,7 @@
     var ref = parseChapter(raw);
     if (!ref) return false;
     ensureBox();
-    currentRef = ref;
-    currentRef.label = ref.vs1 ? refLabel(ref) : ref.label;
+    holdRef(ref, raw);
     savedLink = null;
     if (wrap) wrapCurrentSelection(ref);
     lookupThenShow();
@@ -3182,8 +3238,7 @@
   function openParsed(ref, a) {
     if (!ref) return false;
     ensureBox();
-    currentRef = ref;
-    currentRef.label = ref.vs1 ? refLabel(ref) : ref.label;
+    holdRef(ref, a ? (a.getAttribute("data-ref") || a.textContent || "") : (ref.raw || ""));
     savedLink = a || null;
     lookupThenShow();
     return true;
