@@ -42,9 +42,16 @@
       overflow: visible;
       overscroll-behavior: contain;
     }
+    .tcol.can-scroll {
+      overflow-x: hidden;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .tcol.can-scroll::-webkit-scrollbar { width: 0; height: 0; display: none; }
+    .tcol-spacer { width: 1px; pointer-events: none; }
     .tjoin {
       position: absolute;
-      z-index: 1;
+      z-index: 3;
       background: var(--join);
       pointer-events: none;
     }

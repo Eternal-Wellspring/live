@@ -55,8 +55,7 @@
         }
       }
     }
-    if (title === "Feasts: Yahweh's Appointed Times") return true;
-    if (title === "Hebrews") return onLivePort();
+    if (title === "Feasts: Yahweh's Appointed Times" || title === "Hebrews") return true;
     return false;
   }
   function rgbParts(c) {
@@ -374,29 +373,6 @@
     });
     return out;
   }
-  function isHebQuestion(t) {
-    var i, lv, title;
-    if (!t) return false;
-    lv = t.level || 1;
-    title = String(t.title || "");
-    if (!(lv >= 4 || (lv === 3 && /^\d+$/.test(title)))) return false;
-    for (i = 0; i < topics.length; i++) {
-      if ((topics[i].level || 1) === 1 && String(topics[i].title || "") === "Hebrews") return true;
-    }
-    return false;
-  }
-  function sortHebFirst(out) {
-    var heb = [], rest = [], i, m;
-    for (i = 0; i < out.length; i++) {
-      m = String(out[i] || "").trim().match(/^(\S+)/);
-      if (m && m[1] === "Heb") heb.push(out[i]);
-      else rest.push(out[i]);
-    }
-    return sortRefLabs(heb).concat(sortRefLabs(rest));
-  }
-  function orderRefs(t, labs) {
-    return isHebQuestion(t) ? sortHebFirst(labs) : labs;
-  }
   function refsFor(t) {
     var out = [], seen = {}, i, r, lab, ids = {}, br;
     if (!t) return out;
@@ -410,7 +386,7 @@
       seen[lab] = 1;
       out.push(lab);
     }
-    return orderRefs(t, sortRefLabs(combineRefs(out)));
+    return sortRefLabs(combineRefs(out));
   }
   function ownRefs(t) {
     var out = [], seen = {}, i, r, lab;
@@ -423,7 +399,7 @@
       seen[lab] = 1;
       out.push(lab);
     }
-    return orderRefs(t, sortRefLabs(combineRefs(out)));
+    return sortRefLabs(combineRefs(out));
   }
   function homeRef(t) {
     var labs = ownChapRefs(t);
@@ -712,7 +688,6 @@
       refTopicId = "";
       openRef = "";
     }
-    hideDesc();
     paint();
   }
   function toggleTealPrune(t) {
@@ -734,7 +709,7 @@
       if (!t) return;
       out.push(t);
       if (!topicExpanded(t)) return;
-      k = sortTopics(kids(items, t), items[0] && String(items[0].title || "") === "Hebrews");
+      k = sortTopics(kids(items, t));
       for (i = 0; i < k.length; i++) walk(k[i]);
     }
     if (items[0]) walk(items[0]);
@@ -1451,7 +1426,6 @@
   function pickTopic(t) {
     var id = sid(t.id);
     sel = sid(sel) === id ? null : id;
-    if (sid(sel) !== id) hideDesc();
     paint();
   }
   function saveTopics() {
@@ -1855,14 +1829,13 @@
         ev.preventDefault();
         ev.stopPropagation();
         if (name.querySelector("textarea")) return;
-        if (descOpen && sid(descId) === sid(t.id)) { hideDesc(); return; }
+        armDesc(t);
         if (isSelOrAbove(t)) {
-          openDesc(t);
+          placePop();
           return;
         }
         if (!showNums) openLiveBranch(t);
         else pickTopic(t);
-        hideDesc();
       });
       board.appendChild(b);
       if (teal) board.appendChild(teal);
@@ -3116,7 +3089,6 @@
       t = ev.target;
       if (!t || t.id === "tdesc" || (t.closest && t.closest("#tdesc"))) return;
       if (t.tagName === "IFRAME" || (t.closest && t.closest("iframe"))) return;
-      hideDesc();
     }
     doc.__snVerseDescClose = onDown;
     doc.addEventListener("pointerdown", onDown, true);
@@ -3168,6 +3140,27 @@
     descOpen = false;
     descId = "";
     if (d) d.hidden = true;
+  }
+  function armDesc(t) {
+    var d, ta, topic;
+    if (!t) return;
+    if (onLivePort() && descBlank(t)) {
+      if (descOpen) hideDesc();
+      return;
+    }
+    if (descOpen && sid(descId) === sid(t.id)) return;
+    d = document.getElementById("tdesc");
+    ta = document.getElementById("tdesc-ta");
+    if (descOpen && ta) {
+      topic = find(topics, ta.dataset.topic);
+      if (topic) {
+        topic.description = descRead(ta);
+        saveTopics();
+      }
+    }
+    descOpen = true;
+    descId = sid(t.id);
+    descLock = Date.now() + 400;
   }
   function openDesc(t) {
     if (!t || (onLivePort() && descBlank(t))) {
@@ -3285,7 +3278,6 @@
     var bl = document.querySelector(".ew-book-list");
     var menu = document.getElementById("sn-ref-menu");
     var i, host;
-    if (descOpen && !descKeep(ev.target)) hideDesc();
     for (i = 0; i < lists.length; i++) {
       host = lists[i].closest(".tverse-bar");
       if (!bar || host !== bar) lists[i].hidden = true;

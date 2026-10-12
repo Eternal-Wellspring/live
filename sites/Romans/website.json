@@ -1,0 +1,21 @@
+{
+  "name": "Romans",
+  "tagline": "Short bible talks for each Chapter of Romans",
+  "description": "<span class=\"bit\"><br></span>",
+  "category": "Bible Book Studies",
+  "showOnTest": true,
+  "showOnLive": true,
+  "folder": "Romans",
+  "icon": "",
+  "iconAlt": "",
+  "sharePicture": "",
+  "shareAlt": "",
+  "searchTitle": "",
+  "searchDescription": "",
+  "keyPhrases": "",
+  "editedAt": 1791493858432,
+  "numberContents": false,
+  "showFootnotesSection": false,
+  "showSettingsBox": false,
+  "showOnWeb": true
+}

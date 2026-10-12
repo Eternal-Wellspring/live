@@ -31,7 +31,7 @@ def _web_port():
         if 1 <= n <= 65535:
             return n
     name = Path(__file__).resolve().parent.name
-    return {"Sites 1 Develop": 8778, "Sites 2 Test": 8779, "Sites 3 Live": 8780}.get(name, 8778)
+    return {"1 Develop": 8778, "2 Test": 8779, "3 Live": 8780}.get(name, 8778)
 
 PORT = _web_port()
 _PUB_FOLDER = re.compile(r"/(?:published|sites)/([^/]+)/")

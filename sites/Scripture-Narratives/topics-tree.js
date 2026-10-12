@@ -38,6 +38,7 @@
   var verseBoxEl = null;
   var colScroll = {};
   var colDelta = {};
+  var colNativeScroll = {};
   function clampChildTop(top, innerH, natural, view, roomTop) {
     var bottom = (view || 0) - PAD;
     var hi = natural;
@@ -577,28 +578,8 @@
     });
     return out;
   }
-  function isHebQuestion(t) {
-    var i, lv, title;
-    if (!t) return false;
-    lv = t.level || 1;
-    title = String(t.title || "");
-    if (!(lv >= 4 || (lv === 3 && /^\d+$/.test(title)))) return false;
-    for (i = 0; i < topics.length; i++) {
-      if ((topics[i].level || 1) === 1 && String(topics[i].title || "") === "Hebrews") return true;
-    }
-    return false;
-  }
-  function sortHebFirst(out) {
-    var heb = [], rest = [], i, m;
-    for (i = 0; i < out.length; i++) {
-      m = String(out[i] || "").trim().match(/^(\S+)/);
-      if (m && m[1] === "Heb") heb.push(out[i]);
-      else rest.push(out[i]);
-    }
-    return sortRefLabs(heb).concat(sortRefLabs(rest));
-  }
   function ownRefs(t) {
-    var out = [], seen = {}, i, r, lab, labs;
+    var out = [], seen = {}, i, r, lab;
     if (!t) return out;
     for (i = 0; i < topicRefs.length; i++) {
       r = topicRefs[i];
@@ -608,8 +589,7 @@
       seen[lab] = 1;
       out.push(lab);
     }
-    labs = sortRefLabs(combineRefs(out));
-    return isHebQuestion(t) ? sortHebFirst(labs) : labs;
+    return sortRefLabs(combineRefs(out));
   }
   function refsFor(t) {
     var out = [], seen = {}, i, r, lab, ids = {}, br;
@@ -1846,14 +1826,18 @@
   }
   function openToBottom(t) {
     if (!t || !guardPick()) return;
-    hideDesc();
+    armDesc(t);
     fillSelectPath(t);
     loadTopics(function () {
       paint();
     });
   }
   function rootTitle() {
-    var i;
+    var i, root;
+    if (rootId) {
+      root = find(topics, rootId);
+      if (root) return String(root.title || "");
+    }
     for (i = 0; i < topics.length; i++) {
       if ((topics[i].level || 1) === 1) return String(topics[i].title || "");
     }
@@ -1861,8 +1845,7 @@
   }
   function hideCountBtns(title) {
     title = String(title != null ? title : rootTitle());
-    if (title === "Feasts: Yahweh's Appointed Times") return true;
-    if (title === "Hebrews") return onLive();
+    if (title === "Feasts: Yahweh's Appointed Times" || title === "Hebrews") return true;
     return false;
   }
   function rgbParts(c) {
@@ -1895,10 +1878,33 @@
     if (!d) return;
     d.style.background = faintTopicFill(topicOnColor(el));
   }
+  function saveDescField() {
+    var d = descNode();
+    var ta = descField(d);
+    var topic;
+    if (!(descOpen && ta && canEditDesc())) return;
+    topic = find(topics, ta.dataset.topic);
+    if (!topic) return;
+    topic.description = descRead(ta);
+    saveTopics();
+  }
+  function armDesc(t) {
+    if (!t) return;
+    if (descBlank(t) && onLive()) {
+      if (descOpen) hideDesc();
+      return;
+    }
+    if (descOpen && sid(descId) === sid(t.id)) return;
+    saveDescField();
+    descOpen = true;
+    descId = sid(t.id);
+    descLock = Date.now() + 400;
+    markInfo();
+  }
   function showTopicPop(t) {
     if (!t) return;
-    if (descBlank(t) && (onLive() || rootTitle() === "Hebrews")) return;
-    openDesc(t);
+    armDesc(t);
+    placePop();
   }
   function pickTopic(t, x) {
     var id = sid(t.id);
@@ -1907,7 +1913,7 @@
       sel = id;
       pickGuard = Date.now() + 400;
     }
-    hideDesc();
+    armDesc(t);
     list = ownRefs(find(topics, sel) || t);
     lastRefTopic = sel;
     openRef = list.length ? list[0] : null;
@@ -1918,7 +1924,6 @@
   function toggleTopics(t, x) {
     var list, kidsList, first;
     if (!guardPick()) return;
-    hideDesc();
     var lv = t.level || 1;
     var id = sid(t.id);
     var depth = lv - 2;
@@ -1951,7 +1956,6 @@
   function toggleLowerRefs(t, x) {
     var lv, id, depth, kidsList, i, first, list, same;
     if (!guardPick()) return;
-    hideDesc();
     lv = t.level || 1;
     id = sid(t.id);
     depth = lv - 2;
@@ -1987,7 +1991,6 @@
   function toggleRefs(t, x) {
     var list;
     if (!guardPick()) return;
-    hideDesc();
     sel = sid(t.id);
     lastRefTopic = sel;
     list = ownRefs(t);
@@ -2039,10 +2042,9 @@
       return;
     }
     var l1 = items[0];
-    var heb = !!(l1 && String(l1.title || "") === "Hebrews");
     if (!sel) openFirstTopic();
     pruneToSel();
-    var colLists = [{ list: alphaTopics(kids(items, l1), heb), parent: null }];
+    var colLists = [{ list: alphaTopics(kids(items, l1)), parent: null }];
     var iOpen, o, par, nxt;
     for (iOpen = 0; iOpen < openStack.length; iOpen++) {
       o = openStack[iOpen];
@@ -2052,7 +2054,7 @@
         break;
       }
       if (o.mode !== "topics") break;
-      nxt = alphaTopics(kids(items, par), heb);
+      nxt = alphaTopics(kids(items, par));
       colLists.push({ list: nxt, parent: par });
     }
     var refTopic = sel ? find(items, sel) : null;
@@ -2195,8 +2197,13 @@
             n.style.top = Math.round(n._y) + "px";
           }
           b.parentNode._innerH = (b.parentNode._innerH || b.parentNode._h || 0) + delta;
-          b.parentNode._h = b.parentNode._innerH;
-          b.parentNode.style.height = b.parentNode._h + "px";
+          if (b.parentNode._native) {
+            var sp = b.parentNode.querySelector(".tcol-spacer");
+            if (sp) sp.style.height = b.parentNode._innerH + "px";
+          } else {
+            b.parentNode._h = b.parentNode._innerH;
+            b.parentNode.style.height = b.parentNode._h + "px";
+          }
         }
         inp.addEventListener("input", grow);
         inp.focus();
@@ -2281,10 +2288,6 @@
           if (skipTopicClick) { skipTopicClick = false; return; }
           if (ev.detail > 1) return;
           if (name.querySelector("textarea")) return;
-          if (descOpen && sid(descId) === sid(t.id)) {
-            hideDesc();
-            return;
-          }
           if (isSelOrAbove(t)) {
             showTopicPop(t);
             return;
@@ -2428,6 +2431,76 @@
       if (top < minTop) top = minTop;
       return Math.round(top);
     }
+    var placingCols = false;
+    function placeAnchored(pane) {
+      var anchor, roomTop, viewBottom, span, innerH, mid, ideal, top, paneH, scroll, max;
+      anchor = pane && pane._anchor;
+      if (!anchor) return;
+      roomTop = pane._roomTop != null ? pane._roomTop : band;
+      viewBottom = (pane._viewH || viewH) - PAD;
+      span = Math.max(80, viewBottom - roomTop);
+      innerH = pane._innerH || 0;
+      mid = boardY(anchor) + ((anchor._h || BOX_H) / 2);
+      ideal = Math.round(mid - innerH / 2);
+      if (!pane._native) {
+        top = ideal;
+        if (top < roomTop) top = roomTop;
+        if (top + innerH > viewBottom) top = Math.round(viewBottom - innerH);
+        if (top < roomTop) top = roomTop;
+        pane.style.top = top + "px";
+        pane._top = top;
+        pane._y = top;
+        return;
+      }
+      paneH = span;
+      pane.style.top = roomTop + "px";
+      pane.style.height = paneH + "px";
+      pane._top = roomTop;
+      pane._y = roomTop;
+      pane._h = paneH;
+      var nodes = pane.children;
+      var boxes = [];
+      var bi, edgeEl, edge;
+      for (bi = 0; bi < nodes.length; bi++) {
+        if (nodes[bi].classList && nodes[bi].classList.contains("tbox")) boxes.push(nodes[bi]);
+      }
+      edgeEl = boxes.length && mid > roomTop + paneH / 2 ? boxes[boxes.length - 1] : boxes[0];
+      if (!edgeEl) return;
+      edge = (edgeEl._y || 0) + (edgeEl._h || BOX_H) / 2;
+      scroll = roomTop + edge - mid;
+      max = Math.max(0, innerH - paneH);
+      if (scroll < 0) scroll = 0;
+      if (scroll > max) scroll = max;
+      scroll = Math.round(scroll);
+      if (pane.scrollTop !== scroll) pane.scrollTop = scroll;
+    }
+    function placeDependents(origin) {
+      var all, moved, guard, i, pane, host, progressed;
+      if (placingCols || !origin) return;
+      placingCols = true;
+      all = board.querySelectorAll(".tcol");
+      moved = [origin];
+      function already(p) {
+        var n;
+        for (n = 0; n < moved.length; n++) if (moved[n] === p) return true;
+        return false;
+      }
+      guard = 0;
+      while (guard++ < 12) {
+        progressed = false;
+        for (i = 0; i < all.length; i++) {
+          pane = all[i];
+          if (!pane._anchor || already(pane)) continue;
+          host = pane._anchor.parentNode;
+          if (!already(host)) continue;
+          placeAnchored(pane);
+          moved.push(pane);
+          progressed = true;
+        }
+        if (!progressed) break;
+      }
+      placingCols = false;
+    }
     function layoutCol(els, x, nameW, parent, minTop, plain, colKey) {
       if (!els || !els.length) return null;
       var paneW = plain ? nameW : colSpan(nameW);
@@ -2438,13 +2511,19 @@
       var rh, iH;
       for (iH = 0; iH < els.length; iH++) innerH += (els[iH]._boxH || BOX_H);
       if (els.length) innerH += Math.max(0, els.length - 1) * GAP_Y;
+      var native = innerH > availH + 2;
+      var paneH = innerH;
       var y0, natural = null;
-      if (parent) {
+      var contentW = paneW;
+      if (parent && !native) {
         natural = boardY(parent) + ((parent._h || BOX_H) / 2) - innerH / 2;
         if (natural < minTop) natural = minTop;
         natural = Math.round(natural);
         y0 = natural;
         if (colKey && colDelta[colKey]) y0 = clampChildTop(natural + colDelta[colKey], innerH, natural, viewH, minTop);
+      } else if (native) {
+        y0 = minTop;
+        paneH = availH;
       } else {
         y0 = minTop + (availH - innerH) / 2;
         if (y0 < minTop) y0 = minTop;
@@ -2457,24 +2536,38 @@
         }
       }
       var pane = document.createElement("div");
-      pane.className = "tcol";
+      pane.className = native ? "tcol can-scroll" : "tcol";
       if (colKey) pane.setAttribute("data-col", colKey);
       board.appendChild(pane);
       pane.style.left = Math.round(x) + "px";
       pane.style.top = y0 + "px";
       pane.style.width = paneW + "px";
-      pane.style.height = innerH + "px";
-      pane.style.overflow = "visible";
+      pane.style.height = paneH + "px";
+      if (native) {
+        pane.style.overflowX = "hidden";
+        pane.style.overflowY = "auto";
+      } else {
+        pane.style.overflow = "visible";
+      }
       pane._top = y0;
-      pane._h = innerH;
+      pane._h = paneH;
       pane._x = x;
       pane._w = paneW;
+      pane._contentW = contentW;
       pane._y = y0;
       pane._innerH = innerH;
       pane._natural = natural != null ? natural : y0;
       pane._parented = !!parent;
       pane._viewH = viewH;
       pane._roomTop = minTop;
+      pane._native = native;
+      pane._anchor = parent || null;
+      if (native) {
+        var spacer = document.createElement("div");
+        spacer.className = "tcol-spacer";
+        spacer.style.height = innerH + "px";
+        pane.appendChild(spacer);
+      }
       var y = 0, i;
       for (i = 0; i < els.length; i++) {
         pane.appendChild(els[i]);
@@ -2485,6 +2578,16 @@
         rh = els[i]._boxH || BOX_H;
         put(els[i], 0, y, nameW, rh);
         y += rh + GAP_Y;
+      }
+      if (pane._anchor) placeAnchored(pane);
+      if (native) {
+        if (!pane._anchor && colKey && colNativeScroll[colKey]) pane.scrollTop = colNativeScroll[colKey];
+        pane.addEventListener("scroll", function () {
+          if (colKey) colNativeScroll[colKey] = pane.scrollTop;
+          if (placingCols) return;
+          placeDependents(pane);
+          if (redrawJoins) redrawJoins();
+        });
       }
       return pane;
     }
@@ -2514,19 +2617,26 @@
       paneL = left[0].parentNode;
       paneR = right[0].parentNode;
       if (!paneL || !paneR) return;
-      tx = (paneL._x || 0) + (paneL._w || 0);
+      tx = (paneL._x || 0) + (paneL._contentW != null ? paneL._contentW : (paneL._w || 0));
+      var outer = (paneL._x || 0) + (paneL._w || 0);
       rx = (paneR._x || 0) + (right[0]._x || 0);
       gap = rx - tx;
       if (gap < JOIN + 4) return;
-      stub = Math.max(3, Math.min(8, Math.floor((gap - JOIN) / 2)));
-      spineX = tx + stub;
+      var clear = rx - outer;
+      if (clear >= JOIN + 4) {
+        stub = Math.max(3, Math.min(8, Math.floor((clear - JOIN) / 2)));
+        spineX = outer + stub;
+      } else {
+        stub = Math.max(3, Math.min(8, Math.floor((gap - JOIN) / 2)));
+        spineX = tx + stub;
+      }
       ysL = [];
       ysR = [];
       for (i = 0; i < left.length; i++) ysL.push(midY(left[i]));
       for (i = 0; i < right.length; i++) ysR.push(midY(right[i]));
       yTop = Math.min.apply(null, ysL.concat(ysR));
       yBot = Math.max.apply(null, ysL.concat(ysR));
-      for (i = 0; i < ysL.length; i++) joinSeg(tx, ysL[i] - JOIN / 2, stub, JOIN);
+      for (i = 0; i < ysL.length; i++) joinSeg(tx, ysL[i] - JOIN / 2, spineX - tx, JOIN);
       joinSeg(spineX, yTop - JOIN / 2, JOIN, (yBot - yTop) + JOIN);
       for (i = 0; i < ysR.length; i++) joinSeg(spineX, ysR[i] - JOIN / 2, rx - spineX, JOIN);
     }
@@ -2536,17 +2646,40 @@
       return er.top - br.top + box.scrollTop;
     }
     function showFirstHit(box) {
-      var hits = box.querySelectorAll(".hit");
+      var hits, first, last, top, bot, mid, h, padTop, padBot, topEl, botEl, scroll, max;
+      if (!box) return;
+      hits = box.querySelectorAll(".hit");
       if (!hits.length) return;
-      var first = hits[0];
-      var pad = 4;
-      var top = first.offsetTop;
-      var bot = top + first.offsetHeight;
-      var viewTop = box.scrollTop;
-      var viewH = box.clientHeight;
-      if (!viewH) return;
-      if (top >= viewTop + pad && bot <= viewTop + viewH - pad) return;
-      box.scrollTop = Math.max(0, Math.round(top - pad));
+      h = box.clientHeight;
+      if (!h) return;
+      var oldPads = box.querySelectorAll(".tverse-pad");
+      var pi;
+      for (pi = oldPads.length - 1; pi >= 0; pi--) {
+        if (oldPads[pi].parentNode) oldPads[pi].parentNode.removeChild(oldPads[pi]);
+      }
+      first = hits[0];
+      last = hits[hits.length - 1];
+      top = first.offsetTop;
+      bot = last.offsetTop + last.offsetHeight;
+      mid = (top + bot) / 2;
+      padTop = Math.max(0, Math.round(h / 2 - mid));
+      padBot = Math.max(0, Math.round(h / 2));
+      topEl = document.createElement("div");
+      topEl.className = "tverse-pad tverse-pad-top";
+      topEl.style.height = padTop + "px";
+      box.insertBefore(topEl, box.firstChild);
+      botEl = document.createElement("div");
+      botEl.className = "tverse-pad";
+      botEl.style.height = padBot + "px";
+      box.appendChild(botEl);
+      top = first.offsetTop;
+      bot = last.offsetTop + last.offsetHeight;
+      mid = (top + bot) / 2;
+      scroll = Math.round(mid - h / 2);
+      max = Math.max(0, box.scrollHeight - h);
+      if (scroll < 0) scroll = 0;
+      if (scroll > max) scroll = max;
+      box.scrollTop = scroll;
     }
 
     var wrap = document.getElementById("wrap");
@@ -2557,6 +2690,14 @@
     var ci, cl, cw, boxes, parentBox, pane, si;
     var selectOpen = hideCountBtns(l1 && l1.title);
     var lastJoin = [];
+    var joinPairs = [];
+    var redrawJoins = function () {};
+    function queueJoin(left, right) {
+      var L = [], R = [], i;
+      for (i = 0; i < (left || []).length; i++) if (left[i]) L.push(left[i]);
+      for (i = 0; i < (right || []).length; i++) if (right[i]) R.push(right[i]);
+      if (L.length && R.length) joinPairs.push({ left: L, right: R });
+    }
     showNums = !selectOpen;
     function findBuiltBox(id) {
       var bi, found;
@@ -2585,11 +2726,12 @@
       GREEN_W = HAS_KIDS ? BOX_H : 0;
       pane = layoutCol(boxes, x, cw, parentBox, null, false, cl.parent ? "t:" + sid(cl.parent.id) : "t:root");
       colBuilt.push({ boxes: boxes, pane: pane, w: cw, x: x });
-      x += colSpan(cw) + GAP_X;
+      if (pane) x = (pane._x || 0) + (pane._w || 0) + GAP_X;
+      else x += colSpan(cw) + GAP_X;
       if (selectOpen) {
         var pathT = pathTopicInList(cl.list);
         var pathBox = pathT ? findBox(boxes, pathT.id) : null;
-        if (pathBox && lastJoin.length) joinFan(lastJoin, [pathBox]);
+        if (lastJoin.length && boxes.length) queueJoin(lastJoin, boxes);
         lastJoin = pathBox ? [pathBox] : [];
         var pathLabs = ownRefs(pathT);
         if (pathT && pathLabs.length) {
@@ -2597,9 +2739,10 @@
           var pathRefs = pathLabs.map(function (lab) { return refBox(lab, pathT.id); });
           pane = layoutCol(pathRefs, x, wPath, pathBox, band, true, "r:" + sid(pathT.id));
           colBuilt.push({ boxes: pathRefs, pane: pane, w: wPath, x: x });
-          joinFan(pathBox ? [pathBox] : [], pathRefs);
+          queueJoin(pathBox ? [pathBox] : [], pathRefs);
           lastJoin = pathRefs;
-          x += wPath + GAP_X;
+          if (pane) x = (pane._x || 0) + (pane._w || 0) + GAP_X;
+          else x += wPath + GAP_X;
         }
       }
     }
@@ -2652,8 +2795,15 @@
       xVs = x + wRef + PAD;
       pane = layoutCol(cRef, x, wRef, parentBox, band, true, "r:" + sid(refTopic.id));
       colBuilt.push({ boxes: cRef, pane: pane, w: wRef, x: x });
-      joinFan(parentBox ? [parentBox] : [], cRef);
+      queueJoin(parentBox ? [parentBox] : [], cRef);
     }
+    redrawJoins = function () {
+      var old = board.querySelectorAll(".tjoin");
+      var i;
+      for (i = 0; i < old.length; i++) if (old[i].parentNode) old[i].parentNode.removeChild(old[i]);
+      for (i = 0; i < joinPairs.length; i++) joinFan(joinPairs[i].left, joinPairs[i].right);
+    };
+    redrawJoins();
 
     var versesEl = null;
     var versesWrap = null;
@@ -3222,7 +3372,6 @@
       t = ev.target;
       if (!t || t.id === "tdesc" || (t.closest && t.closest("#tdesc"))) return;
       if (t.tagName === "IFRAME" || (t.closest && t.closest("iframe"))) return;
-      hideDesc();
     }
     doc.__snDescClose = onDown;
     doc.addEventListener("pointerdown", onDown, true);
@@ -3284,7 +3433,7 @@
     }
   }
   function openDesc(t) {
-    if (!t || (descBlank(t) && (onLive() || rootTitle() === "Hebrews"))) {
+    if (!t || (descBlank(t) && onLive())) {
       hideDesc();
       return;
     }
@@ -3424,7 +3573,21 @@
     if (!ta) return;
     if (d) {
       d.addEventListener("click", function (ev) { ev.stopPropagation(); });
-      d.addEventListener("wheel", function (ev) { ev.stopPropagation(); }, { passive: true });
+      d.addEventListener("wheel", function (ev) {
+        var x = ev.clientX, y = ev.clientY, dy = ev.deltaY || 0, frame, fr;
+        if (ev.deltaMode === 1) dy *= 32;
+        else if (ev.deltaMode === 2) dy *= 400;
+        if (d.ownerDocument !== document) {
+          try { frame = window.frameElement; } catch (err) { frame = null; }
+          if (frame && frame.getBoundingClientRect) {
+            fr = frame.getBoundingClientRect();
+            x -= fr.left;
+            y -= fr.top;
+          }
+          if (window.snWheel && window.snWheel(dy, x, y)) ev.preventDefault();
+        }
+        ev.stopPropagation();
+      }, { passive: false });
       var xbtn = d.querySelector(".tdesc-x");
       if (xbtn) xbtn.addEventListener("click", function (ev) {
         ev.preventDefault();
@@ -3483,7 +3646,6 @@
     }
     function overChapter(el) {
       while (el && el !== document.body) {
-        if (el.id === "tdesc") return true;
         if (el.classList && (
           el.classList.contains("tverse-wrap") ||
           el.classList.contains("tverses") ||
@@ -3495,17 +3657,50 @@
       }
       return false;
     }
-    function colFromPoint(x, y) {
-      var n = document.elementFromPoint(x, y);
-      if (overChapter(n)) return null;
-      while (n && n !== document.documentElement) {
-        if (n.classList && n.classList.contains("tcol")) return n;
-        n = n.parentNode;
+    function onDesc(el) {
+      return !!(el && (el.id === "tdesc" || (el.closest && el.closest("#tdesc"))));
+    }
+    function hitAt(x, y) {
+      var list = document.elementsFromPoint ? document.elementsFromPoint(x, y) : [document.elementFromPoint(x, y)];
+      var i, n, el;
+      for (i = 0; i < list.length; i++) {
+        el = list[i];
+        if (!el || onDesc(el)) continue;
+        if (overChapter(el)) return { block: true };
+        n = el;
+        while (n && n !== document.documentElement) {
+          if (n.classList && n.classList.contains("tcol")) return { col: n };
+          n = n.parentNode;
+        }
       }
+      return {};
+    }
+    function rootOffScreen() {
+      var col = document.querySelector('.tcol[data-col="t:root"]');
+      var view, top, h;
+      if (!col) return null;
+      view = visH();
+      top = col._y || 0;
+      h = col._innerH || col.offsetHeight || 0;
+      if (top < -8 || top + h > view + 8) return col;
       return null;
     }
-    function snWheel(deltaY, x, y) {
-      var col = colFromPoint(x, y);
+    function scrollNative(col, deltaY) {
+      var max, next, key;
+      if (!col || !col._native) return false;
+      max = Math.max(0, col.scrollHeight - col.clientHeight);
+      if (max <= 0) return false;
+      next = col.scrollTop + deltaY;
+      if (next < 0) next = 0;
+      if (next > max) next = max;
+      next = Math.round(next);
+      if (next === col.scrollTop) return false;
+      col.scrollTop = next;
+      key = col.getAttribute("data-col");
+      if (key) colNativeScroll[key] = col.scrollTop;
+      return true;
+    }
+    function shiftCol(col, deltaY) {
       var innerH, box, mid, maxTop, minTop, next, key;
       if (!col) return false;
       innerH = col._innerH || col.offsetHeight;
@@ -3532,10 +3727,24 @@
       }
       return true;
     }
+    function snWheel(deltaY, x, y) {
+      var hit = hitAt(x, y);
+      var root;
+      if (hit.block) return false;
+      if (hit.col) {
+        if (hit.col._native) return scrollNative(hit.col, deltaY);
+        return false;
+      }
+      root = document.querySelector('.tcol[data-col="t:root"]');
+      if (root && root._native) return scrollNative(root, deltaY);
+      return false;
+    }
     window.snWheel = snWheel;
     function onWheel(ev) {
-      if (overChapter(ev.target)) return;
-      if (snWheel(ev.deltaY, ev.clientX, ev.clientY)) ev.preventDefault();
+      var dy = ev.deltaY || 0;
+      if (ev.deltaMode === 1) dy *= 32;
+      else if (ev.deltaMode === 2) dy *= (visH() || 400);
+      if (snWheel(dy, ev.clientX, ev.clientY)) ev.preventDefault();
     }
     wrap.addEventListener("wheel", onWheel, { passive: false });
     window.addEventListener("wheel", onWheel, { passive: false, capture: true });
@@ -3596,7 +3805,6 @@
     var menu = document.getElementById("sn-ref-menu");
     var inTr = ev.target.closest && (ev.target.closest(".tverse-bar") || ev.target.closest(".ew-tr-list"));
     var onTopic = ev.target && ev.target.closest && ev.target.closest(".tbox");
-    if (descOpen && !descKeep(ev.target)) hideDesc();
     if (list && !inTr) {
       list.hidden = true;
       list.style.position = "";
