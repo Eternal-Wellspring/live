@@ -2676,6 +2676,7 @@
       bot = last.offsetTop + last.offsetHeight;
       mid = (top + bot) / 2;
       scroll = Math.round(mid - h / 2);
+      if (scroll > top) scroll = top;
       max = Math.max(0, box.scrollHeight - h);
       if (scroll < 0) scroll = 0;
       if (scroll > max) scroll = max;
@@ -3123,6 +3124,7 @@
       function drawLines(lines) {
         versesEl.innerHTML = "";
         var li, p, vn, n, hit, a = rng.from, b = rng.to || rng.from, sp;
+        var listed = (!hitPick && sameOrigChap() && viewChap && window.ewVerseHits) ? window.ewVerseHits(openRef, viewChap.ch) : null;
         if (hitPick) {
           if (hitStart && hitEnd) {
             a = Math.min(hitStart, hitEnd);
@@ -3133,14 +3135,14 @@
             a = 0;
             b = 0;
           }
-        } else if (!a) {
+        } else if (!listed && !a) {
           sp = refSpan(openRef);
           if (sp && sameOrigChap()) { a = sp.vs1; b = sp.vs2; }
         }
         for (li = 0; li < lines.length; li++) {
           p = document.createElement("p");
           n = lines[li].n;
-          hit = a ? (n >= a && n <= b) : false;
+          hit = listed ? !!listed[n] : (a ? (n >= a && n <= b) : false);
           if (hit) p.className = "hit";
           p.setAttribute("data-vs", String(n));
           vn = document.createElement("span");

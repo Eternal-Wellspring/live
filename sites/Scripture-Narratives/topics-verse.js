@@ -414,7 +414,12 @@
       lab = String(r.ref || "").trim();
       if (!lab || seen[lab]) continue;
       p = parseRefParts(lab);
-      if (!p || p.book !== viewChap.abbr || Number(p.ch) !== Number(viewChap.ch)) continue;
+      if (p) {
+        if (p.book !== viewChap.abbr || Number(p.ch) !== Number(viewChap.ch)) continue;
+      } else {
+        var head = lab.match(/^(\S+)/);
+        if (!head || head[1] !== viewChap.abbr || !window.ewVerseHits || !window.ewVerseHits(lab, viewChap.ch)) continue;
+      }
       seen[lab] = 1;
       out.push(lab);
     }
@@ -490,10 +495,19 @@
   }
   function showRefInChap(lab) {
     var p = parseRefParts(lab);
-    if (!p) return;
-    viewChap = { abbr: p.book, ch: p.ch, num: bookNum(p.book) };
+    var head = String(lab || "").trim().match(/^(\S+)\s+(\d+)/);
+    if (!p && !head) return;
+    var book = p ? p.book : head[1];
+    var ch = p ? p.ch : Number(head[2]);
+    var hits = window.ewVerseHits ? window.ewVerseHits(lab, ch) : null;
+    var first = p ? p.a : 0;
+    var k;
+    if (!p && hits) {
+      for (k in hits) if (hits[k] && (!first || Number(k) < first)) first = Number(k);
+    }
+    viewChap = { abbr: book, ch: ch, num: bookNum(book) };
     selChapRef = lab;
-    selVs = p.a;
+    selVs = first;
     bookOpen = false;
     chapOpen = false;
     saveSection();
@@ -503,8 +517,18 @@
     var set = {}, ids, i, r, p, n, lab, seen;
     if (!viewChap) return set;
     function addRange(raw) {
+      var hits, k, head;
+      head = String(raw || "").trim().match(/^(\S+)/);
+      if (!head || head[1] !== viewChap.abbr) return;
+      if (window.ewVerseHits) {
+        hits = window.ewVerseHits(raw, viewChap.ch);
+        if (hits) {
+          for (k in hits) if (hits[k]) set[k] = 1;
+          return;
+        }
+      }
       p = parseRefParts(raw);
-      if (!p || p.book !== viewChap.abbr || p.ch !== viewChap.ch) return;
+      if (!p || p.ch !== viewChap.ch) return;
       for (n = p.a; n <= p.b; n++) set[n] = 1;
     }
     if (selChapRef) {
@@ -2316,7 +2340,7 @@
     }
     function centerHits(boxEl, prefer) {
       var hits = boxEl.querySelectorAll(prefer ? "p.on" : "p.hit");
-      var first, last, top, bot, mid, h, pad, scroll, padEl, old;
+      var first, last, top, bot, mid, h, scroll, padEl, old;
       if (!hits.length) hits = boxEl.querySelectorAll("p.hit");
       if (!hits.length) return;
       old = boxEl.querySelector(".tverse-pad");
@@ -2332,9 +2356,8 @@
       bot = last.offsetTop + last.offsetHeight;
       mid = (top + bot) / 2;
       h = boxEl.clientHeight;
-      pad = 8;
       scroll = Math.round(mid - h / 2);
-      if (scroll > top - pad) scroll = Math.max(0, top - pad);
+      if (scroll > top) scroll = top;
       if (scroll < 0) scroll = 0;
       boxEl.scrollTop = scroll;
     }
@@ -2841,8 +2864,11 @@
     if (oldRight && oldRight.parentNode) oldRight.parentNode.removeChild(oldRight);
     if (showRight) {
       rightHit = openRef ? parseRefParts(openRef) : null;
-      rightChap = rightHit
-        ? { abbr: rightHit.book, ch: rightHit.ch, num: bookNum(rightHit.book) || (CANON.indexOf(rightHit.book) >= 0 && CANON.indexOf(rightHit.book) < 66 ? CANON.indexOf(rightHit.book) + 1 : 0) }
+      var rightHead = openRef ? String(openRef).trim().match(/^(\S+)\s+(\d+)/) : null;
+      var rightBook = rightHit ? rightHit.book : (rightHead ? rightHead[1] : "");
+      var rightCh = rightHit ? rightHit.ch : (rightHead ? Number(rightHead[2]) : 0);
+      rightChap = rightBook
+        ? { abbr: rightBook, ch: rightCh, num: bookNum(rightBook) || (CANON.indexOf(rightBook) >= 0 && CANON.indexOf(rightBook) < 66 ? CANON.indexOf(rightBook) + 1 : 0) }
         : null;
       if (rightChap && !rightChap.num && viewChap && rightChap.abbr === viewChap.abbr) rightChap.num = viewChap.num;
       rightWrap = document.createElement("div");
@@ -2987,14 +3013,15 @@
         rVerses.className = "tverses";
         rightWrap.appendChild(rVerses);
         function drawRight(lines) {
-          var i, p, n, vn, body, a, b;
+          var i, p, n, vn, body, a, b, listed;
           rVerses.innerHTML = "";
           a = rightHit ? rightHit.a : 0;
           b = rightHit ? rightHit.b : 0;
+          listed = (openRef && rightChap && window.ewVerseHits) ? window.ewVerseHits(openRef, rightChap.ch) : null;
           for (i = 0; i < lines.length; i++) {
             n = lines[i].n;
             p = document.createElement("p");
-            if (n >= a && n <= b) p.className = "hit";
+            if (listed ? listed[n] : (a && n >= a && n <= b)) p.className = "hit";
             vn = document.createElement("span");
             vn.className = "vn";
             vn.textContent = String(n);
