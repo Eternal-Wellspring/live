@@ -1,0 +1,254 @@
+/* Header shared by the sites. Taken from Scripture Narratives.
+   Site name in the middle. Page name under it.
+   Icon and Eternal Wellspring on the left. Full Screen on the right.
+   A site may still set its own tab and page background. */
+
+.head-banners {
+  display: block;
+  position: relative;
+  background: #f6f7eb;
+  overflow: visible !important;
+  contain: none !important;
+  align-items: start;
+  row-gap: 0;
+}
+.head-banners > .title-bar { display: none; }
+
+header.top {
+  display: block;
+  position: relative;
+  padding: 0.35rem 0;
+  background: #f6f7eb;
+  border: 0;
+  overflow: visible;
+}
+header.top .brand-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0 7.5rem;
+  box-sizing: border-box;
+  background: transparent;
+  border: 0;
+}
+.who {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  text-align: center;
+}
+.who .site,
+a.site {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  line-height: 1.1;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: calc(21px * var(--ew-font, 1));
+  font-weight: 400;
+  font-style: normal;
+  color: #1f6f78;
+  text-align: center;
+  text-decoration: none;
+}
+.who #page-title {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  line-height: 1.1;
+  font: 400 calc(23px * var(--ew-font, 1)) / 1.1 Arial, Helvetica, sans-serif;
+  color: #004d97;
+  text-align: center;
+  background: transparent;
+}
+
+.ew-mark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+  gap: 0.45rem;
+  height: auto;
+  max-height: 100%;
+  overflow: hidden;
+  padding-left: 1.2rem;
+  box-sizing: border-box;
+  color: var(--title);
+  text-decoration: none;
+}
+.ew-mark img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  object-position: left center;
+  flex: 0 1 auto;
+}
+.ew-words {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: center;
+  text-align: left;
+  font-size: calc(22px * var(--ew-font, 1));
+  color: #005eb8;
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+#ew-full {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.5rem;
+  z-index: 50;
+  padding: 0.28rem 0.7rem;
+  border: 1px solid #9aa8ae;
+  background: #fff;
+  color: #1b3a4b;
+  font: 700 0.82rem Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+#ew-full:hover { background: #e7ead8; }
+html.ew-phone #ew-full { display: none !important; }
+
+html:not(.ew-phone) .stick-top > .page-nav-bar { display: none; }
+
+.page-nav {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28em;
+  min-width: 0;
+  max-width: 100%;
+  border: 0;
+  background: transparent;
+  color: #5a6a72;
+  font: 400 13px/1.15 Arial, Helvetica, sans-serif;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+  text-align: left;
+  z-index: 0;
+}
+.page-nav.prev:not(:empty),
+.page-nav.next:not(:empty) { padding: 0.15rem 0.2rem; }
+.page-nav:not(:empty)::before,
+.page-nav.next:not(:empty)::after {
+  content: "";
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 0.42em;
+  height: 0.42em;
+  margin: 0;
+  background: none;
+  pointer-events: none;
+  border: solid #111;
+}
+.page-nav.prev:not(:empty)::before {
+  border-width: 0 0 2px 2px;
+  transform: rotate(45deg);
+}
+.page-nav.next:not(:empty)::before { display: none; }
+.page-nav.next:not(:empty)::after {
+  border-width: 2px 2px 0 0;
+  transform: rotate(45deg);
+}
+.page-nav:hover,
+.page-nav:focus { color: #1b3a4b; z-index: 60; }
+.page-nav-word { display: inline; position: relative; font: inherit; font-weight: 400; }
+.page-nav-tip {
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 0.28rem);
+  z-index: 40;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid var(--line, #c5d0d4);
+  background: #fff;
+  color: var(--title, #1b3a4b);
+  font: inherit;
+  font-weight: 400;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.page-nav.next .page-nav-tip { left: auto; right: 0; }
+.page-nav:hover .page-nav-tip,
+.page-nav:focus .page-nav-tip { display: block; }
+.page-nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.28rem 1.6rem;
+  background: #f6f7eb;
+}
+.page-nav-bar .page-nav { flex: 0 0 auto; }
+.page-nav-bar .page-nav:empty {
+  visibility: hidden;
+  display: inline-block;
+  min-width: 3.2em;
+  pointer-events: none;
+}
+.page-nav-name { display: none; }
+html.ew-phone .page-nav-name {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  padding: 0 0.35rem;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #004d97;
+  font-size: min(calc(13px * var(--ew-font, 1)), 13px);
+}
+html.ew-phone .stick-top > .page-nav-bar { display: flex; }
+html.ew-phone .who .site {
+  font-size: min(calc(15px * var(--ew-font, 1)), 15px) !important;
+}
+.story-nav { display: inline; white-space: nowrap; margin: 0; }
+.story-nav .page-nav,
+.story-nav .page-nav.next:not(:empty) {
+  font-size: inherit;
+  line-height: inherit;
+  color: var(--title, #005eb8);
+  padding: 0;
+  gap: 0.22em;
+}
+.page-nav-bar-bottom {
+  position: static;
+  margin-top: 1.2rem;
+  border-bottom: 0;
+  border-top: 1px solid var(--line, #c5d0d4);
+}
+
+/* The strip under the title is empty. The page background shows through. */
+.stick-top,
+.tab-dock,
+.tab-dock .tabs,
+.tabs {
+  background: transparent !important;
+}
+.tab-panel {
+  background-color: transparent !important;
+}
