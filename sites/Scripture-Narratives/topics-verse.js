@@ -44,19 +44,8 @@
     var p = String(location.port || "");
     return p !== "8775" && p !== "8776" && p !== "8777" && p !== "8778" && p !== "8779";
   }
-  function hideCountBtns(title) {
-    var i;
-    title = String(title || "");
-    if (!title) {
-      for (i = 0; i < topics.length; i++) {
-        if ((topics[i].level || 1) === 1) {
-          title = String(topics[i].title || "");
-          break;
-        }
-      }
-    }
-    if (title === "Feasts: Yahweh's Appointed Times" || title === "Hebrews") return true;
-    return false;
+  function hideCountBtns() {
+    return true;
   }
   function rgbParts(c) {
     var m, n;
@@ -115,8 +104,8 @@
     if (ok) verseTr = v;
   })();
   var CHAPS = [0, 50, 40, 27, 36, 34, 24, 21, 4, 31, 24, 22, 25, 29, 36, 10, 13, 10, 42, 150, 31, 12, 8, 66, 52, 5, 48, 12, 14, 3, 9, 1, 4, 7, 3, 3, 3, 2, 14, 4, 28, 16, 24, 21, 28, 16, 16, 13, 6, 6, 4, 4, 5, 3, 6, 4, 3, 1, 13, 5, 5, 3, 5, 1, 1, 1, 22];
-  var EXTRA_CH = { 67: 9, 68: 14, 69: 16, 70: 19, 71: 51, 72: 1, 73: 5, 74: 16, 75: 15, 76: 1, 77: 16, 78: 1, 79: 1, 88: 1, 90: 50 };
-  var CANON = "Gen Exo Lev Num Deu Jos Jdg Rut 1Sa 2Sa 1Ki 2Ki 1Ch 2Ch Ezr Neh Est Job Psa Pro Ecc Sng Isa Jer Lam Ezk Dan Hos Jol Amo Oba Jon Mic Nam Hab Zep Hag Zec Mal Mat Mrk Luk Jhn Act Rom 1Co 2Co Gal Eph Php Col 1Th 2Th 1Ti 2Ti Tit Phm Heb Jas 1Pe 2Pe 1Jn 2Jn 3Jn Jud Rev 1Es Tob Jdt Wis Sir Lje Bar 1Ma 2Ma Man 2Es Sus Bel Aza Jub".split(" ");
+  var EXTRA_CH = { 67: 9, 68: 14, 69: 16, 70: 19, 71: 51, 72: 1, 73: 5, 74: 16, 75: 15, 76: 1, 77: 16, 78: 1, 79: 1, 88: 1, 90: 50, 91: 108 };
+  var CANON = "Gen Exo Lev Num Deu Jos Jdg Rut 1Sa 2Sa 1Ki 2Ki 1Ch 2Ch Ezr Neh Est Job Psa Pro Ecc Sng Isa Jer Lam Ezk Dan Hos Jol Amo Oba Jon Mic Nam Hab Zep Hag Zec Mal Mat Mrk Luk Jhn Act Rom 1Co 2Co Gal Eph Php Col 1Th 2Th 1Ti 2Ti Tit Phm Heb Jas 1Pe 2Pe 1Jn 2Jn 3Jn Jud Rev 1Es Tob Jdt Wis Sir Lje Bar 1Ma 2Ma Man 2Es Sus Bel Aza Jub 1En".split(" ");
   var BOOK_FULL = [
     "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy", "Joshua", "Judges", "Ruth",
     "1 Samuel", "2 Samuel", "1 Kings", "2 Kings", "1 Chronicles", "2 Chronicles", "Ezra", "Nehemiah", "Esther",
@@ -326,34 +315,6 @@
     if (!m) return null;
     return { book: m[1], ch: Number(m[2]), a: Number(m[3]), b: Number(m[5] || m[4] || m[3]) };
   }
-  function combineRefs(list) {
-    var parsed = [], rest = [], i, p, acc = null, out = [];
-    function joinRef(p) {
-      return p.a === p.b ? (p.book + " " + p.ch + ":" + p.a) : (p.book + " " + p.ch + ":" + p.a + "-" + p.b);
-    }
-    for (i = 0; i < list.length; i++) {
-      p = parseRefParts(list[i]);
-      if (p) parsed.push(p);
-      else rest.push(list[i]);
-    }
-    parsed.sort(function (a, b) {
-      var ia = CANON.indexOf(a.book), ib = CANON.indexOf(b.book);
-      if (ia !== ib) return ia - ib;
-      if (a.ch !== b.ch) return a.ch - b.ch;
-      return a.a - b.a;
-    });
-    for (i = 0; i < parsed.length; i++) {
-      p = parsed[i];
-      if (acc && acc.book === p.book && acc.ch === p.ch && acc.b + 1 >= p.a) {
-        acc.b = Math.max(acc.b, p.b);
-      } else {
-        if (acc) out.push(joinRef(acc));
-        acc = { book: p.book, ch: p.ch, a: p.a, b: p.b };
-      }
-    }
-    if (acc) out.push(joinRef(acc));
-    return out.concat(rest);
-  }
   function refSortKey(lab) {
     var m = String(lab || "").trim().match(/^(\S+)\s+(\d+)\s*:\s*(\d+)/);
     if (!m) return [1000, 0, 0, String(lab || "")];
@@ -386,7 +347,7 @@
       seen[lab] = 1;
       out.push(lab);
     }
-    return sortRefLabs(combineRefs(out));
+    return sortRefLabs(out);
   }
   function ownRefs(t) {
     var out = [], seen = {}, i, r, lab;
@@ -399,7 +360,7 @@
       seen[lab] = 1;
       out.push(lab);
     }
-    return sortRefLabs(combineRefs(out));
+    return sortRefLabs(out);
   }
   function homeRef(t) {
     var labs = ownChapRefs(t);
@@ -423,7 +384,7 @@
       seen[lab] = 1;
       out.push(lab);
     }
-    return combineRefs(out);
+    return sortRefLabs(out);
   }
   function descHasChapRef(t, lab) {
     var k = kids(bySeq(), t), i, j, labs;
@@ -845,7 +806,7 @@
       seen[lab] = 1;
       labs.push(lab);
     }
-    return combineRefs(labs);
+    return sortRefLabs(labs);
   }
   function topicHasRef(t, lab) {
     var i, r;
@@ -1125,7 +1086,7 @@
     var i = CANON.indexOf(abbr);
     if (i < 0) return 0;
     if (i < 66) return i + 1;
-    var extra = { "1Es": 67, "Tob": 68, "Jdt": 69, "Wis": 70, "Sir": 71, "Lje": 72, "Bar": 73, "1Ma": 74, "2Ma": 75, "Man": 76, "2Es": 77, "Sus": 78, "Bel": 79, "Aza": 88, "Jub": 90 };
+    var extra = { "1Es": 67, "Tob": 68, "Jdt": 69, "Wis": 70, "Sir": 71, "Lje": 72, "Bar": 73, "1Ma": 74, "2Ma": 75, "Man": 76, "2Es": 77, "Sus": 78, "Bel": 79, "Aza": 88, "Jub": 90, "1En": 91 };
     return extra[abbr] || 0;
   }
   function chCount(num) {
@@ -1158,19 +1119,22 @@
     var list, at, next, i, ch, max, abbr;
     if (chapFilter) {
       list = mappedChapList();
-      if (!list.length) return;
-      at = chapIndex(list);
-      if (at < 0) {
-        at = dir > 0 ? -1 : list.length;
+      if (list.length) {
+        at = chapIndex(list);
+        if (at < 0) {
+          at = dir > 0 ? -1 : list.length;
+        }
+        next = list[at + dir];
+        if (!next) return;
+        setChap(next.abbr, next.ch);
+        return;
       }
-      next = list[at + dir];
-      if (!next) return;
-      setChap(next.abbr, next.ch);
-      return;
     }
     i = CANON.indexOf(viewChap.abbr);
     if (i < 0 || i >= CANON_N) {
-      if (dir < 0) setChap(CANON[CANON_N - 1], chCount(bookNum(CANON[CANON_N - 1])));
+      ch = viewChap.ch + dir;
+      max = chCount(viewChap.num);
+      if (ch >= 1 && ch <= max) setChap(viewChap.abbr, ch);
       return;
     }
     ch = viewChap.ch + dir;
@@ -1367,6 +1331,57 @@
     }
     return out;
   }
+  function rowsOf(rows) {
+    var chapter = [], i, row, n, t;
+    if (!Array.isArray(rows)) rows = [];
+    for (i = 0; i < rows.length; i++) {
+      row = rows[i] || {};
+      n = Number(row.verse);
+      t = yahwehText(String(row.text || "").replace(/<br\b[^>]*>/gi, " ").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").trim());
+      if (n && t) chapter.push({ n: n, t: t });
+    }
+    return chapter;
+  }
+  function fetchTrChapter(slug, num, chapter) {
+    return fetch("/bible?tr=" + encodeURIComponent(slug) + "&book=" + num + "&chapter=" + chapter, { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (rows) {
+        if (!Array.isArray(rows) && rows && Array.isArray(rows.verses)) rows = rows.verses;
+        return rowsOf(rows);
+      })
+      .catch(function () { return []; });
+  }
+  function fetchEnoch(chapter) {
+    return fetch("/extra-books/1enoch.json", { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("no"); return r.json(); })
+      .then(function (data) {
+        var verses = (data && data.chapters && data.chapters[String(chapter)]) || [];
+        var rows = [], i;
+        for (i = 0; i < verses.length; i++) {
+          if (String(verses[i] || "").trim()) rows.push({ verse: i + 1, text: verses[i] });
+        }
+        return rowsOf(rows);
+      })
+      .catch(function () { return []; });
+  }
+  function faceFor(chap) {
+    if (chap && (chap.abbr === "1En" || chap.num === 91)) return { label: "1Enoch", alt: true };
+    if (chap && chap.num > 66 && chap.num !== 90) return { label: "KJV " + chap.abbr, alt: true };
+    return { label: "", alt: false };
+  }
+  function loadChapter(chap) {
+    var slug = trSlug(verseTr || "NKJV");
+    var num = chap && (chap.num || bookNum(chap.abbr));
+    if (!chap || !num) return Promise.resolve([]);
+    if (chap.abbr === "1En" || num === 91) return fetchEnoch(chap.ch);
+    if (num > 66 && slug !== "KJV") {
+      return fetchTrChapter(slug, num, chap.ch).then(function (rows) {
+        if (rows.length) return rows;
+        return fetchTrChapter("KJV", num, chap.ch);
+      });
+    }
+    return fetchTrChapter(slug, num, chap.ch);
+  }
   function loadVerses(done, chap) {
     chap = chap || viewChap;
     var num = chap && (chap.num || bookNum(chap.abbr));
@@ -1421,20 +1436,7 @@
       fromStore(null);
       return;
     }
-    fetch("/bible?tr=" + encodeURIComponent(trSlug(verseTr || "NKJV")) + "&book=" + num + "&chapter=" + chap.ch, { cache: "no-store" })
-      .then(function (r) { return r.ok ? r.json() : []; })
-      .then(function (rows) {
-        var chapter = [], i, row, n, t;
-        if (!Array.isArray(rows)) rows = Array.isArray(rows && rows.verses) ? rows.verses : [];
-        for (i = 0; i < rows.length; i++) {
-          row = rows[i] || {};
-          n = Number(row.verse);
-          t = yahwehText(String(row.text || "").replace(/<br\b[^>]*>/gi, " ").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").trim());
-          if (n) chapter.push({ n: n, t: t });
-        }
-        fromStore(chapter);
-      })
-      .catch(function () { fromStore(null); });
+    loadChapter(chap).then(function (chapter) { fromStore(chapter); }).catch(function () { fromStore(null); });
   }
   function isSelOrAbove(t) {
     var p;
@@ -2431,7 +2433,7 @@
     bar.addEventListener("click", function (ev) { ev.stopPropagation(); });
     var left = document.createElement("div");
     left.className = "tverse-bar-left";
-    var maps = bookCols(!chapFilter);
+    var maps = bookCols(true);
     var bookPick = document.createElement("div");
     bookPick.className = "ew-book-pick";
     var bookBtn = document.createElement("button");
@@ -2453,7 +2455,7 @@
         var cls = [];
         row.setAttribute("data-book", b);
         if (viewChap.abbr === b) cls.push("on");
-        if (!chapFilter && maps.by[b]) cls.push("has-topic");
+        if (maps.by[b]) cls.push("has-topic");
         row.className = cls.join(" ");
         row.textContent = b;
         row.addEventListener("click", function (ev) {
@@ -2462,7 +2464,7 @@
           var chs = Object.keys(maps.by[b] || {}).map(Number).sort(function (a, c) { return a - c; });
           wantChapOpen = true;
           chapOpen = true;
-          setChap(b, chapFilter ? (chs[0] || 1) : 1);
+          setChap(b, (chapFilter && chs.length) ? chs[0] : 1);
         });
         col.appendChild(row);
       });
@@ -2501,9 +2503,8 @@
     chGrid.className = "ew-ch-grid";
     chGrid.hidden = true;
     var chs, n, maxCh;
-    if (chapFilter) {
-      chs = Object.keys(maps.by[viewChap.abbr] || {}).map(Number).sort(function (a, c) { return a - c; });
-    } else {
+    chs = Object.keys(maps.by[viewChap.abbr] || {}).map(Number).sort(function (a, c) { return a - c; });
+    if (!(chapFilter && chs.length)) {
       maxCh = chCount(viewChap.num);
       chs = [];
       for (n = 1; n <= maxCh; n++) chs.push(n);
@@ -2579,7 +2580,7 @@
     var atMap = chapIndex(mapped);
     var iCan = CANON.indexOf(viewChap.abbr);
     if (chapFilter) prevBtn.disabled = !mapped.length || atMap <= 0;
-    else prevBtn.disabled = iCan <= 0 && viewChap.ch <= 1;
+    else prevBtn.disabled = viewChap.ch <= 1 && (iCan <= 0 || iCan >= CANON_N);
     prevBtn.addEventListener("click", function (ev) {
       ev.preventDefault();
       ev.stopPropagation();
@@ -2606,13 +2607,14 @@
     var right = document.createElement("div");
     right.className = "tverse-bar-right";
     var pick = document.createElement("div");
-    pick.className = "ew-tr-pick ew-ch-tr";
+    var face = faceFor(viewChap);
+    pick.className = "ew-tr-pick ew-ch-tr" + (face.alt || (verseTr || "NKJV") !== "NKJV" ? " on" : "");
     var trNow = document.createElement("button");
     trNow.type = "button";
     trNow.className = "ew-tr-now";
     trNow.setAttribute("aria-haspopup", "listbox");
     trNow.setAttribute("aria-expanded", "false");
-    trNow.textContent = verseTr || "NKJV";
+    trNow.textContent = face.alt ? face.label : (verseTr || "NKJV");
     var trList = document.createElement("div");
     trList.className = "ew-tr-list";
     trList.setAttribute("role", "listbox");
@@ -2896,14 +2898,14 @@
         rPrev.setAttribute("aria-label", "Previous chapter");
         rPrev.innerHTML = '<span class="ew-ch-arrow">&lt;</span><span class="page-nav-tip">Previous chapter</span>';
         var iCanR = CANON.indexOf(rightChap.abbr);
-        rPrev.disabled = iCanR <= 0 && rightChap.ch <= 1;
+        rPrev.disabled = rightChap.ch <= 1 && (iCanR <= 0 || iCanR >= CANON_N);
         rPrev.addEventListener("click", function (ev) {
           ev.preventDefault();
           ev.stopPropagation();
           var abbr = rightChap.abbr, num = rightChap.num, ch = rightChap.ch - 1, i;
           if (ch < 1) {
             i = CANON.indexOf(abbr);
-            if (i <= 0) return;
+            if (i <= 0 || i >= CANON_N) return;
             abbr = CANON[i - 1];
             num = bookNum(abbr);
             ch = chCount(num);
@@ -2948,13 +2950,14 @@
         var rRight = document.createElement("div");
         rRight.className = "tverse-bar-right";
         var rPick = document.createElement("div");
-        rPick.className = "ew-tr-pick ew-ch-tr";
+        var rFace = faceFor(rightChap);
+        rPick.className = "ew-tr-pick ew-ch-tr" + (rFace.alt || (verseTr || "NKJV") !== "NKJV" ? " on" : "");
         var rTrNow = document.createElement("button");
         rTrNow.type = "button";
         rTrNow.className = "ew-tr-now";
         rTrNow.setAttribute("aria-haspopup", "listbox");
         rTrNow.setAttribute("aria-expanded", "false");
-        rTrNow.textContent = verseTr || "NKJV";
+        rTrNow.textContent = rFace.alt ? rFace.label : (verseTr || "NKJV");
         var rTrList = document.createElement("div");
         rTrList.className = "ew-tr-list";
         rTrList.setAttribute("role", "listbox");

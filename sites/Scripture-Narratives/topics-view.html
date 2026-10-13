@@ -116,6 +116,27 @@
     }
     .dur { white-space: nowrap; }
     .desc { white-space: nowrap; font-weight: 400; min-width: 12rem; }
+    .row td.desc { vertical-align: top; }
+    .row td.desc table { border-collapse: collapse; margin-top: 0.15rem; font-weight: 400; }
+    .row td.desc table th,
+    .row td.desc table td {
+      border: 1px solid var(--line);
+      padding: 0.06rem 0.4rem;
+      background: #fff;
+      white-space: nowrap;
+      vertical-align: middle;
+      font-weight: 400;
+    }
+    .row td.desc table th { font-weight: 700; text-align: right; }
+    .row td.desc table thead tr:first-child th:first-child { text-align: left; }
+    .row td.desc table thead tr:first-child th:nth-child(3) { text-align: center; }
+    .row td.desc table td { text-align: right; }
+    .row td.desc table td:first-child { text-align: left; }
+    .row td.desc table tbody tr:last-child td { font-weight: 700; border-top: 2px solid var(--line); }
+    .row:hover td.desc table th,
+    .row:hover td.desc table td,
+    .row.on td.desc table th,
+    .row.on td.desc table td { background: #fff; }
     .head th {
       font-weight: 400;
       color: var(--muted);
@@ -332,11 +353,13 @@
         cell("title", onEdit ? "" : (t.title || ""), indent ? indent + "ch" : "");
         cell("pe", t.kind === "event" ? "E" : "P");
         cell("dur", onEdit ? "" : (t.kind === "event" ? "" : String(t.duration || "").trim()));
-        cell("desc", onEdit ? "" : String(t.description || t.notes || "").trim());
+        var descRaw = String(t.description || t.notes || "").trim();
+        cell("desc", onEdit || /<table\b/i.test(descRaw) ? "" : descRaw);
         var titleTd = tr.querySelector(".title");
         var peTd = tr.querySelector(".pe");
         var durTd = tr.querySelector(".dur");
         var descTd = tr.querySelector(".desc");
+        if (!onEdit && /<table\b/i.test(descRaw)) descTd.innerHTML = descRaw;
         if (onEdit) {
           putInput(titleTd, t.title || "", "title");
           if (t.kind !== "event") putInput(durTd, t.duration || "", "duration");

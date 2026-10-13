@@ -61,9 +61,10 @@
   var rhm = {
     topic: { title: "Topic", items: ["Edit", "Add a ref", "Add Topic", "Out a level", "In a level", "Delete"] },
     addTopic: { title: "Add Topic", items: ["Same level", "One below"] },
-    ref: { title: "Ref", items: ["Edit", "Add a ref", "Delete", "Move"] },
+    ref: { title: "Ref", items: ["Edit", "Add a ref", "Add a sub-ref", "Delete", "Move"] },
     description: { title: "Description", items: ["Edit"] },
     twoMore: { title: "Two more?", items: ["Yes", "No"] },
+    join: { title: "Join?", items: ["Yes", "No"] },
     refsBox: { title: "Refs", items: ["Add a ref"] }
   };
   var RHM_ITEM = {
@@ -77,6 +78,7 @@
     "Yes": "[data-yes]",
     "No": "[data-no]",
     "Add a ref": "[data-add-ref]",
+    "Add a sub-ref": "[data-add-sub]",
     "Out a level": "[data-out]",
     "In a level": "[data-in]"
   };
@@ -103,7 +105,7 @@
     if (ok) verseTr = v;
   })();
   var CHAPS = [0, 50, 40, 27, 36, 34, 24, 21, 4, 31, 24, 22, 25, 29, 36, 10, 13, 10, 42, 150, 31, 12, 8, 66, 52, 5, 48, 12, 14, 3, 9, 1, 4, 7, 3, 3, 3, 2, 14, 4, 28, 16, 24, 21, 28, 16, 16, 13, 6, 6, 4, 4, 5, 3, 6, 4, 3, 1, 13, 5, 5, 3, 5, 1, 1, 1, 22];
-  var EXTRA_CH = { 67: 9, 68: 14, 69: 16, 70: 19, 71: 51, 72: 1, 73: 5, 74: 16, 75: 15, 76: 1, 77: 16, 78: 1, 79: 1, 88: 1, 90: 50 };
+  var EXTRA_CH = { 67: 9, 68: 14, 69: 16, 70: 19, 71: 51, 72: 1, 73: 5, 74: 16, 75: 15, 76: 1, 77: 16, 78: 1, 79: 1, 88: 1, 90: 50, 91: 108 };
   var rootId = (function () {
     var q = location.search.replace(/^\?/, "").split("&");
     var i, p;
@@ -179,6 +181,53 @@
       from: 0,
       to: 0,
       description: ""
+    });
+    if (hideCountBtns()) {
+      sel = sid(t.id);
+      lastRefTopic = sid(t.id);
+      openRef = lab;
+      editAfterPaintRef = lab;
+      saveTopicRefs();
+      paint();
+      return;
+    }
+    depth = (t.level || 1) - 2;
+    if (depth < 0) return;
+    openStack.length = depth;
+    openStack[depth] = { id: sid(t.id), mode: "refs" };
+    lastRefTopic = sid(t.id);
+    openRef = lab;
+    sel = sid(t.id);
+    editAfterPaintRef = lab;
+    saveTopicRefs();
+    paint();
+  }
+  function labelTaken(t, lab) {
+    var i, r, have;
+    if (!t) return false;
+    for (i = 0; i < topicRefs.length; i++) {
+      r = topicRefs[i];
+      if (sid(r.topic_id) !== sid(t.id)) continue;
+      have = String(r.ref || "").trim();
+      if (have === lab || sameRef(have, lab)) return true;
+    }
+    return false;
+  }
+  function addSubRef(t, parentLab) {
+    var lab = "New", n = 2, depth;
+    parentLab = String(parentLab || "").trim();
+    if (!t || !parentLab) return;
+    while (labelTaken(t, lab)) {
+      lab = "New " + n;
+      n += 1;
+    }
+    topicRefs.push({
+      topic_id: t.id,
+      ref: lab,
+      from: 0,
+      to: 0,
+      description: "",
+      parent: parentLab
     });
     if (hideCountBtns()) {
       sel = sid(t.id);
@@ -523,7 +572,7 @@
     document.body.removeChild(box);
     return h;
   }
-  var CANON = "Gen Exo Lev Num Deu Jos Jdg Rut 1Sa 2Sa 1Ki 2Ki 1Ch 2Ch Ezr Neh Est Job Psa Pro Ecc Sng Isa Jer Lam Ezk Dan Hos Jol Amo Oba Jon Mic Nam Hab Zep Hag Zec Mal Mat Mrk Luk Jhn Act Rom 1Co 2Co Gal Eph Php Col 1Th 2Th 1Ti 2Ti Tit Phm Heb Jas 1Pe 2Pe 1Jn 2Jn 3Jn Jud Rev 1Es Tob Jdt Wis Sir Lje Bar 1Ma 2Ma Man 2Es Sus Bel Aza Jub".split(" ");
+  var CANON = "Gen Exo Lev Num Deu Jos Jdg Rut 1Sa 2Sa 1Ki 2Ki 1Ch 2Ch Ezr Neh Est Job Psa Pro Ecc Sng Isa Jer Lam Ezk Dan Hos Jol Amo Oba Jon Mic Nam Hab Zep Hag Zec Mal Mat Mrk Luk Jhn Act Rom 1Co 2Co Gal Eph Php Col 1Th 2Th 1Ti 2Ti Tit Phm Heb Jas 1Pe 2Pe 1Jn 2Jn 3Jn Jud Rev 1Es Tob Jdt Wis Sir Lje Bar 1Ma 2Ma Man 2Es Sus Bel Aza Jub 1En".split(" ");
   var CANON_N = 66;
   function refSortKey(lab) {
     var m = String(lab || "").trim().match(/^(\S+)\s+(\d+)\s*:\s*(\d+)/);
@@ -540,31 +589,6 @@
   function joinRef(p) {
     return p.a === p.b ? (p.book + " " + p.ch + ":" + p.a) : (p.book + " " + p.ch + ":" + p.a + "-" + p.b);
   }
-  function combineRefs(list) {
-    var parsed = [], rest = [], i, p, acc = null, out = [];
-    for (i = 0; i < list.length; i++) {
-      p = parseRefParts(list[i]);
-      if (p) parsed.push(p);
-      else rest.push(list[i]);
-    }
-    parsed.sort(function (a, b) {
-      var ia = CANON.indexOf(a.book), ib = CANON.indexOf(b.book);
-      if (ia !== ib) return ia - ib;
-      if (a.ch !== b.ch) return a.ch - b.ch;
-      return a.a - b.a;
-    });
-    for (i = 0; i < parsed.length; i++) {
-      p = parsed[i];
-      if (acc && acc.book === p.book && acc.ch === p.ch && acc.b + 1 >= p.a) {
-        acc.b = Math.max(acc.b, p.b);
-      } else {
-        if (acc) out.push(joinRef(acc));
-        acc = { book: p.book, ch: p.ch, a: p.a, b: p.b };
-      }
-    }
-    if (acc) out.push(joinRef(acc));
-    return out.concat(rest);
-  }
   function sortRefLabs(out) {
     // Canonical order: book, then chapter, then verse. Standing SN. Do not drop. Do not use file order.
     out.sort(function (a, b) {
@@ -578,18 +602,151 @@
     });
     return out;
   }
-  function ownRefs(t) {
-    var out = [], seen = {}, i, r, lab;
-    if (!t) return out;
+  function topicRefRows(t) {
+    var rows = [], seen = {}, i, r, lab;
+    if (!t) return rows;
     for (i = 0; i < topicRefs.length; i++) {
       r = topicRefs[i];
       if (sid(r.topic_id) !== sid(t.id)) continue;
       lab = String(r.ref || "").trim();
       if (!lab || seen[lab]) continue;
       seen[lab] = 1;
-      out.push(lab);
+      rows.push({ lab: lab, parent: String(r.parent || "").trim() });
     }
-    return sortRefLabs(combineRefs(out));
+    return rows;
+  }
+  function parentLabOn(rows, parent, selfLab) {
+    var i;
+    parent = String(parent || "").trim();
+    if (!parent) return "";
+    for (i = 0; i < rows.length; i++) {
+      if (selfLab && rows[i].lab === selfLab) continue;
+      if (rows[i].lab === parent || sameRef(rows[i].lab, parent)) return rows[i].lab;
+    }
+    return "";
+  }
+  function displayHost(tops, parentLab) {
+    var i, p, host;
+    parentLab = String(parentLab || "").trim();
+    if (!parentLab) return "";
+    p = parseRefParts(parentLab);
+    for (i = 0; i < tops.length; i++) {
+      if (tops[i] === parentLab || sameRef(tops[i], parentLab)) return tops[i];
+      host = parseRefParts(tops[i]);
+      if (p && host && p.book === host.book && p.ch === host.ch && p.a >= host.a && p.b <= host.b) return tops[i];
+    }
+    return "";
+  }
+  function ownRefs(t) {
+    var rows = topicRefRows(t);
+    var skip = {}, out = [], seen = {}, i, host;
+    for (i = 0; i < rows.length; i++) {
+      host = parentLabOn(rows, rows[i].parent, rows[i].lab);
+      if (host) skip[rows[i].lab] = 1;
+    }
+    for (i = 0; i < rows.length; i++) {
+      if (skip[rows[i].lab] || seen[rows[i].lab]) continue;
+      seen[rows[i].lab] = 1;
+      out.push(rows[i].lab);
+    }
+    return sortRefLabs(out);
+  }
+  function refDisplay(t) {
+    var rows = topicRefRows(t);
+    var kids = [], byParent = {}, i, host, tops, out = [], seen = {}, loose;
+    if (!t) return [];
+    for (i = 0; i < rows.length; i++) {
+      host = parentLabOn(rows, rows[i].parent, rows[i].lab);
+      if (host) kids.push(rows[i]);
+    }
+    if (!kids.length) {
+      return ownRefs(t).map(function (lab) { return { lab: lab, depth: 0 }; });
+    }
+    tops = ownRefs(t);
+    function putKid(key, lab) {
+      if (!byParent[key]) byParent[key] = [];
+      byParent[key].push(lab);
+    }
+    for (i = 0; i < kids.length; i++) {
+      host = displayHost(tops, kids[i].parent) || parentLabOn(rows, kids[i].parent, kids[i].lab);
+      if (!host || host === kids[i].lab) putKid("\0loose", kids[i].lab);
+      else putKid(host, kids[i].lab);
+    }
+    function walk(lab, depth) {
+      var list, n;
+      if (!lab || seen[lab] || depth > 40) return;
+      seen[lab] = 1;
+      out.push({ lab: lab, depth: depth });
+      list = (byParent[lab] || []).slice();
+      sortRefLabs(list);
+      for (n = 0; n < list.length; n++) walk(list[n], depth + 1);
+    }
+    for (i = 0; i < tops.length; i++) walk(tops[i], 0);
+    loose = (byParent["\0loose"] || []).slice();
+    sortRefLabs(loose);
+    for (i = 0; i < loose.length; i++) walk(loose[i], 0);
+    return out;
+  }
+  function familyLabs(topicId, label) {
+    var t = find(topics, topicId);
+    var rows = topicRefRows(t);
+    var byParent = {}, gone = {}, stack = [], i, host, lab, ch;
+    label = String(label || "").trim();
+    for (i = 0; i < rows.length; i++) {
+      host = parentLabOn(rows, rows[i].parent, rows[i].lab);
+      if (!host) continue;
+      if (!byParent[host]) byParent[host] = [];
+      byParent[host].push(rows[i].lab);
+    }
+    for (i = 0; i < rows.length; i++) {
+      if (rows[i].lab === label || sameRef(rows[i].lab, label)) stack.push(rows[i].lab);
+    }
+    if (!stack.length && label) stack.push(label);
+    while (stack.length) {
+      lab = stack.pop();
+      if (gone[lab]) continue;
+      gone[lab] = 1;
+      ch = byParent[lab] || [];
+      for (i = 0; i < ch.length; i++) {
+        if (!gone[ch[i]]) stack.push(ch[i]);
+      }
+    }
+    return gone;
+  }
+  function expandRefFamily(topicId, idxs) {
+    var extra = [], seen = {}, i, j, fam, lab;
+    idxs = idxs || [];
+    for (i = 0; i < idxs.length; i++) seen[idxs[i]] = 1;
+    for (i = 0; i < idxs.length; i++) {
+      lab = String(topicRefs[idxs[i]].ref || "").trim();
+      fam = familyLabs(topicId, lab);
+      for (j = 0; j < topicRefs.length; j++) {
+        if (seen[j]) continue;
+        if (sid(topicRefs[j].topic_id) !== sid(topicId)) continue;
+        if (!fam[String(topicRefs[j].ref || "").trim()]) continue;
+        seen[j] = 1;
+        extra.push(j);
+      }
+    }
+    return idxs.concat(extra);
+  }
+  function detachOrphanParents(idxs) {
+    var set = {}, i, j, r, p, kept;
+    for (i = 0; i < idxs.length; i++) set[idxs[i]] = 1;
+    for (i = 0; i < idxs.length; i++) {
+      r = topicRefs[idxs[i]];
+      if (!r) continue;
+      p = String(r.parent || "").trim();
+      if (!p) continue;
+      kept = false;
+      for (j = 0; j < idxs.length; j++) {
+        if (String(topicRefs[idxs[j]].ref || "").trim() === p || sameRef(topicRefs[idxs[j]].ref, p)) {
+          kept = true;
+          break;
+        }
+      }
+      if (!kept) delete r.parent;
+    }
   }
   function refsFor(t) {
     var out = [], seen = {}, i, r, lab, ids = {}, br;
@@ -604,7 +761,6 @@
       seen[lab] = 1;
       out.push(lab);
     }
-    out = combineRefs(out);
     return sortRefLabs(out);
   }
   function lowerRefs(t) {
@@ -626,7 +782,7 @@
     return sortRefLabs(out);
   }
   function ownN(t) {
-    return ownRefs(t).length;
+    return refDisplay(t).length;
   }
   function lowerN(t) {
     return lowerRefs(t).length;
@@ -636,11 +792,16 @@
     return list.length ? list[0] : "";
   }
   function refOnTopic(t, label) {
-    var labs, i;
+    var labs, i, r;
     if (!t || !label) return false;
     labs = ownRefs(t);
     for (i = 0; i < labs.length; i++) {
       if (labs[i] === label || sameRef(labs[i], label)) return true;
+    }
+    for (i = 0; i < topicRefs.length; i++) {
+      r = topicRefs[i];
+      if (sid(r.topic_id) !== sid(t.id)) continue;
+      if (String(r.ref || "").trim() === label || sameRef(r.ref, label)) return true;
     }
     return false;
   }
@@ -793,6 +954,18 @@
     }
     return typed;
   }
+  function retargetRefParent(topicId, oldLabel, newLabel) {
+    var i, r, p;
+    oldLabel = String(oldLabel || "").trim();
+    newLabel = String(newLabel || "").trim();
+    if (!oldLabel || !newLabel || oldLabel === newLabel) return;
+    for (i = 0; i < topicRefs.length; i++) {
+      r = topicRefs[i];
+      if (sid(r.topic_id) !== sid(topicId)) continue;
+      p = String(r.parent || "").trim();
+      if (p === oldLabel || sameRef(p, oldLabel)) r.parent = newLabel;
+    }
+  }
   function editRefLabel(oldLabel, newLabel, topicId) {
     var owner = (topicId != null && topicId !== "") ? find(topics, topicId) : null;
     var ids = {}, idxs, p, del, i;
@@ -815,6 +988,7 @@
     } else {
       del = {};
       var keepDesc = idxs.length ? String(topicRefs[idxs[0]].description || "") : "";
+      var keepParent = idxs.length ? String(topicRefs[idxs[0]].parent || "") : "";
       for (i = 0; i < idxs.length; i++) del[idxs[i]] = 1;
       if (idxs.length) topicRefs = topicRefs.filter(function (r, n) { return !del[n]; });
       topicRefs.push({
@@ -822,9 +996,11 @@
         ref: newLabel,
         from: p ? p.a : 0,
         to: p ? p.b : 0,
-        description: keepDesc
+        description: keepDesc,
+        parent: keepParent
       });
     }
+    retargetRefParent(owner.id, oldLabel, newLabel);
     sel = sid(owner.id);
     lastRefTopic = sel;
     openRef = shownRef(owner, newLabel);
@@ -840,6 +1016,110 @@
     }
     saveTopicRefs();
     paint();
+    offerJoin(owner, newLabel);
+  }
+  function rangesTouch(a, b) {
+    if (!a || !b) return false;
+    if (a.book !== b.book || a.ch !== b.ch) return false;
+    return a.b + 1 >= b.a && b.b + 1 >= a.a;
+  }
+  function refParentKey(topic, lab) {
+    var rows = topicRefRows(topic), i, host;
+    for (i = 0; i < rows.length; i++) {
+      if (rows[i].lab !== lab && !sameRef(rows[i].lab, lab)) continue;
+      host = parentLabOn(rows, rows[i].parent, rows[i].lab);
+      return host || "";
+    }
+    return "";
+  }
+  function touchingNeighbors(topic, label) {
+    var rows = topicRefRows(topic);
+    var mine = parseRefParts(label);
+    var mineParent = refParentKey(topic, label);
+    var out = [], i, p, host;
+    if (!topic || !mine) return out;
+    for (i = 0; i < rows.length; i++) {
+      if (rows[i].lab === label || sameRef(rows[i].lab, label)) continue;
+      p = parseRefParts(rows[i].lab);
+      if (!rangesTouch(mine, p)) continue;
+      host = parentLabOn(rows, rows[i].parent, rows[i].lab) || "";
+      if (host !== mineParent) continue;
+      out.push(rows[i].lab);
+    }
+    return sortRefLabs(out);
+  }
+  function boxEvent(label) {
+    var nodes = document.querySelectorAll(".tbox[data-ref]"), i, r;
+    for (i = 0; i < nodes.length; i++) {
+      if (nodes[i].getAttribute("data-ref") !== label) continue;
+      r = nodes[i].getBoundingClientRect();
+      return { clientX: r.left, clientY: r.bottom + 4, preventDefault: function () {}, stopPropagation: function () {} };
+    }
+    return { clientX: 24, clientY: 80, preventDefault: function () {}, stopPropagation: function () {} };
+  }
+  function joinTouched(topic, labels) {
+    var parts = [], i, k, r, lab, acc, joined, idxs = [], keep, desc = [], parent = "", drop = {};
+    if (!topic || !labels || labels.length < 2) return;
+    for (i = 0; i < labels.length; i++) {
+      k = parseRefParts(labels[i]);
+      if (k) parts.push(k);
+    }
+    if (parts.length < 2) return;
+    acc = { book: parts[0].book, ch: parts[0].ch, a: parts[0].a, b: parts[0].b };
+    for (i = 1; i < parts.length; i++) {
+      if (parts[i].a < acc.a) acc.a = parts[i].a;
+      if (parts[i].b > acc.b) acc.b = parts[i].b;
+    }
+    joined = joinRef(acc);
+    for (i = 0; i < topicRefs.length; i++) {
+      r = topicRefs[i];
+      if (sid(r.topic_id) !== sid(topic.id)) continue;
+      lab = String(r.ref || "").trim();
+      for (k = 0; k < labels.length; k++) {
+        if (lab === labels[k] || sameRef(lab, labels[k])) { idxs.push(i); break; }
+      }
+    }
+    if (idxs.length < 2) return;
+    keep = idxs[0];
+    for (i = 0; i < idxs.length; i++) {
+      r = topicRefs[idxs[i]];
+      lab = String(r.description || "").trim();
+      if (lab && desc.indexOf(lab) < 0) desc.push(lab);
+      if (!parent && r.parent) parent = String(r.parent);
+    }
+    topicRefs[keep].ref = joined;
+    topicRefs[keep].from = acc.a;
+    topicRefs[keep].to = acc.b;
+    if (desc.length) topicRefs[keep].description = desc.join("\n");
+    if (parent) topicRefs[keep].parent = parent;
+    for (i = 1; i < idxs.length; i++) drop[idxs[i]] = 1;
+    for (i = 0; i < topicRefs.length; i++) {
+      if (drop[i]) continue;
+      lab = String(topicRefs[i].parent || "").trim();
+      if (!lab) continue;
+      for (k = 0; k < labels.length; k++) {
+        if (lab === labels[k] || sameRef(lab, labels[k])) topicRefs[i].parent = joined;
+      }
+    }
+    topicRefs = topicRefs.filter(function (row, n) { return !drop[n]; });
+    openRef = joined;
+    lastRefTopic = sid(topic.id);
+    saveTopicRefs();
+    paint();
+  }
+  function offerJoin(topic, label) {
+    var neighbors = touchingNeighbors(topic, label);
+    var title, tit;
+    if (!neighbors.length) return;
+    title = neighbors.length === 1
+      ? ("Join with " + neighbors[0] + "?")
+      : ("Join with " + neighbors.join(" and ") + "?");
+    showRefMenu(boxEvent(label), "join", {
+      yes: function () { joinTouched(topic, [label].concat(neighbors)); },
+      no: function () {}
+    });
+    tit = document.querySelector("#sn-ref-menu .sn-rhm-title");
+    if (tit) tit.textContent = title;
   }
   function moveRefRecord(label, fromId, dest) {
     var want, idxs, i, r, lab, p;
@@ -861,6 +1141,8 @@
       if (p.a >= want.a && p.b <= want.b) idxs.push(i);
     }
     if (!idxs.length) return false;
+    idxs = expandRefFamily(fromId, idxs);
+    detachOrphanParents(idxs);
     var oldIds = [];
     for (i = 0; i < idxs.length; i++) oldIds.push(topicRefs[idxs[i]].topic_id);
     for (i = 0; i < idxs.length; i++) topicRefs[idxs[i]].topic_id = dest.id;
@@ -885,6 +1167,8 @@
     br = branchOf(src);
     for (i = 0; i < br.length; i++) ids[sid(br[i].id)] = 1;
     idxs = rowsMatchingRef(ids, label);
+    idxs = expandRefFamily(src.id, idxs);
+    detachOrphanParents(idxs);
     if (!idxs.length) {
       rng = rangeFor(src, label);
       setTopicRange(dest.id, label, rng.from || 0, rng.to || rng.from || 0);
@@ -939,13 +1223,16 @@
     paint();
   }
   function deleteRefFromTopic(label, topicId) {
+    var gone, lab;
     if (!label || topicId == null || topicId === "") return;
+    gone = familyLabs(topicId, label);
     topicRefs = topicRefs.filter(function (r) {
       if (sid(r.topic_id) !== sid(topicId)) return true;
-      if (sameRef(r.ref, label) || String(r.ref || "").trim() === label) return false;
+      lab = String(r.ref || "").trim();
+      if (gone[lab] || sameRef(r.ref, label) || lab === label) return false;
       return true;
     });
-    if (openRef && (sameRef(openRef, label) || openRef === label)) openRef = null;
+    if (openRef && (gone[openRef] || sameRef(openRef, label) || openRef === label)) openRef = null;
     saveTopicRefs();
     paint();
   }
@@ -1214,23 +1501,34 @@
     if (!found) return null;
     return collectRange(ids, ref);
   }
+  var refSave = Promise.resolve();
   function saveTopicRefs(done) {
     var payload = topicRefs.map(function (r) {
-      return {
+      var item = {
         topic_id: r.topic_id,
         ref: r.ref,
         from: r.from,
         to: r.to,
         description: String(r.description || "")
       };
+      var p = String(r.parent || "").trim();
+      if (p) item.parent = p;
+      return item;
     });
-    fetch("/dotl/topic-refs", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ refs: payload })
-    }).then(function (r) { return r.json(); }).then(function (d) {
+    var job = refSave.then(function () {
+      return fetch("/dotl/topic-refs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ refs: payload })
+      }).then(function (r) { return r.json(); });
+    }).then(function (d) {
       if (done) done(d);
-    }).catch(function () { if (done) done({ error: "Could not save." }); });
+      return d;
+    }).catch(function () {
+      if (done) done({ error: "Could not save." });
+    });
+    refSave = job.catch(function () {});
+    return job;
   }
   function applyHighlight(from, to) {
     var t = refOwner();
@@ -1417,7 +1715,7 @@
     var i = CANON.indexOf(abbr);
     if (i < 0) return 0;
     if (i < 66) return i + 1;
-    var extra = { "1Es": 67, "Tob": 68, "Jdt": 69, "Wis": 70, "Sir": 71, "Lje": 72, "Bar": 73, "1Ma": 74, "2Ma": 75, "Man": 76, "2Es": 77, "Sus": 78, "Bel": 79, "Aza": 88, "Jub": 90 };
+    var extra = { "1Es": 67, "Tob": 68, "Jdt": 69, "Wis": 70, "Sir": 71, "Lje": 72, "Bar": 73, "1Ma": 74, "2Ma": 75, "Man": 76, "2Es": 77, "Sus": 78, "Bel": 79, "Aza": 88, "Jub": 90, "1En": 91 };
     return extra[abbr] || 0;
   }
   function chapterOf(ref) {
@@ -1454,9 +1752,8 @@
     var max = chCount(viewChap.num);
     var abbr;
     if (i < 0 || i >= CANON_N) {
-      if (dir < 0) {
-        abbr = CANON[CANON_N - 1];
-        viewChap = { abbr: abbr, ch: chCount(bookNum(abbr)), num: bookNum(abbr) };
+      if (ch >= 1 && ch <= max) {
+        viewChap = { abbr: viewChap.abbr, ch: ch, num: viewChap.num || bookNum(viewChap.abbr) };
         paint();
       }
       return;
@@ -1601,9 +1898,56 @@
     }
     return out;
   }
+  function rowsOf(rows) {
+    var chapter = [], i, row, n, t;
+    if (!Array.isArray(rows)) rows = [];
+    for (i = 0; i < rows.length; i++) {
+      row = rows[i] || {};
+      n = Number(row.verse);
+      t = yahwehText(String(row.text || "").replace(/<br\b[^>]*>/gi, " ").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").trim());
+      if (n && t) chapter.push({ n: n, t: t });
+    }
+    return chapter;
+  }
+  function fetchTrChapter(slug, num, chapter) {
+    return fetch("/bible?tr=" + encodeURIComponent(slug) + "&book=" + num + "&chapter=" + chapter, { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : []; })
+      .then(rowsOf)
+      .catch(function () { return []; });
+  }
+  function fetchEnoch(chapter) {
+    return fetch("/extra-books/1enoch.json", { cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("no"); return r.json(); })
+      .then(function (data) {
+        var verses = (data && data.chapters && data.chapters[String(chapter)]) || [];
+        var rows = [], i;
+        for (i = 0; i < verses.length; i++) {
+          if (String(verses[i] || "").trim()) rows.push({ verse: i + 1, text: verses[i] });
+        }
+        return rowsOf(rows);
+      })
+      .catch(function () { return []; });
+  }
+  function faceFor(chap) {
+    if (chap && (chap.abbr === "1En" || chap.num === 91)) return { label: "1Enoch", alt: true };
+    if (chap && chap.num > 66 && chap.num !== 90) return { label: "KJV " + chap.abbr, alt: true };
+    return { label: "", alt: false };
+  }
+  function loadChapter(ch) {
+    var slug = trSlug(verseTr || "NKJV");
+    if (!ch || !ch.num) return Promise.resolve([]);
+    if (ch.abbr === "1En" || ch.num === 91) return fetchEnoch(ch.ch);
+    if (ch.num > 66 && slug !== "KJV") {
+      return fetchTrChapter(slug, ch.num, ch.ch).then(function (rows) {
+        if (rows.length) return rows;
+        return fetchTrChapter("KJV", ch.num, ch.ch);
+      });
+    }
+    return fetchTrChapter(slug, ch.num, ch.ch);
+  }
   function loadVerses(ref, done) {
     var key = cacheKey(ref);
-    if (verseCache[key]) {
+    if (verseCache[key] && verseCache[key].length) {
       done(verseCache[key]);
       return;
     }
@@ -1650,20 +1994,7 @@
       fromStore(null);
       return;
     }
-    fetch("/bible?tr=" + encodeURIComponent(trSlug(verseTr || "NKJV")) + "&book=" + ch.num + "&chapter=" + ch.ch, { cache: "no-store" })
-      .then(function (r) { return r.ok ? r.json() : []; })
-      .then(function (rows) {
-        var chapter = [], i, row, n, t;
-        if (!Array.isArray(rows)) rows = [];
-        for (i = 0; i < rows.length; i++) {
-          row = rows[i] || {};
-          n = Number(row.verse);
-          t = yahwehText(String(row.text || "").replace(/<br\b[^>]*>/gi, " ").replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").trim());
-          if (n) chapter.push({ n: n, t: t });
-        }
-        fromStore(chapter);
-      })
-      .catch(function () { fromStore(null); });
+    loadChapter(ch).then(function (chapter) { fromStore(chapter); }).catch(function () { fromStore(null); });
   }
   function parentTopic(t) {
     var list = bySeq();
@@ -1843,10 +2174,8 @@
     }
     return "";
   }
-  function hideCountBtns(title) {
-    title = String(title != null ? title : rootTitle());
-    if (title === "Feasts: Yahweh's Appointed Times" || title === "Hebrews") return true;
-    return false;
+  function hideCountBtns() {
+    return true;
   }
   function rgbParts(c) {
     var m, n;
@@ -2058,7 +2387,24 @@
       colLists.push({ list: nxt, parent: par });
     }
     var refTopic = sel ? find(items, sel) : null;
-    var refList = ownRefs(refTopic);
+    var refShown = refDisplay(refTopic);
+    var refList = refShown.map(function (row) { return row.lab; });
+    var REF_IND = Math.max(22, Math.round(textSize("xx").w));
+    function refNameW(shown) {
+      var w = 0, i, s;
+      for (i = 0; i < (shown || []).length; i++) {
+        if (shown[i].depth) continue;
+        s = textSize(shown[i].lab).w;
+        if (s > w) w = s;
+      }
+      if (!w) {
+        for (i = 0; i < (shown || []).length; i++) {
+          s = textSize(shown[i].lab).w;
+          if (s > w) w = s;
+        }
+      }
+      return w || 8;
+    }
     var held = openRef ? ownerOfRef(openRef) : null;
     var walk, walkLabs;
     if (openRef && !held) openRef = null;
@@ -2301,7 +2647,7 @@
       if (teal) board.appendChild(teal);
       return b;
     }
-    function refBox(label, topicId) {
+    function refBox(label, topicId, depth) {
       var b = document.createElement("button");
       var name = document.createElement("span");
       b.type = "button";
@@ -2311,6 +2657,11 @@
       name.className = "tname";
       name.textContent = label;
       b.appendChild(name);
+      if (depth) {
+        b.dataset.depth = String(depth);
+        b._indent = depth * REF_IND;
+        b._boxW = textSize(label).w;
+      }
       function startRefEdit(ev) {
         if (ev) { ev.preventDefault(); ev.stopPropagation(); }
         if (name.querySelector("input")) return;
@@ -2348,6 +2699,10 @@
           addRef: function () {
             var topic = topicId ? find(topics, topicId) : null;
             if (topic) addRefToTopic(topic);
+          },
+          addSub: function () {
+            var topic = topicId ? find(topics, topicId) : null;
+            if (topic) addSubRef(topic, label);
           },
           del: function () { deleteRefFromTopic(label, topicId); },
           move: function () {
@@ -2422,6 +2777,12 @@
       var pane = el.parentNode;
       if (!pane || String(pane.className || "").indexOf("tcol") < 0) return el._y || 0;
       return (pane._top || 0) + (el._y || 0) - (pane.scrollTop || 0);
+    }
+    function boardX(el) {
+      if (!el) return 0;
+      var pane = el.parentNode;
+      if (!pane || String(pane.className || "").indexOf("tcol") < 0) return el._x || 0;
+      return (pane._x || 0) + (el._x || 0);
     }
     function clampColTop(top, innerH) {
       var mid = (viewH || window.innerHeight) / 2;
@@ -2503,7 +2864,13 @@
     }
     function layoutCol(els, x, nameW, parent, minTop, plain, colKey) {
       if (!els || !els.length) return null;
-      var paneW = plain ? nameW : colSpan(nameW);
+      var span = nameW, iS, indS, bwS;
+      for (iS = 0; iS < els.length; iS++) {
+        indS = els[iS]._indent || 0;
+        bwS = els[iS]._boxW || nameW;
+        if (indS + bwS > span) span = indS + bwS;
+      }
+      var paneW = plain ? span : colSpan(nameW);
       if (minTop == null) minTop = band;
       var maxBot = viewH - PAD;
       var availH = Math.max(80, maxBot - minTop);
@@ -2568,7 +2935,7 @@
         spacer.style.height = innerH + "px";
         pane.appendChild(spacer);
       }
-      var y = 0, i;
+      var y = 0, i, ind, bw;
       for (i = 0; i < els.length; i++) {
         pane.appendChild(els[i]);
         if (els[i]._info) pane.appendChild(els[i]._info);
@@ -2576,7 +2943,9 @@
         if (els[i]._teal) pane.appendChild(els[i]._teal);
         if (els[i]._green) pane.appendChild(els[i]._green);
         rh = els[i]._boxH || BOX_H;
-        put(els[i], 0, y, nameW, rh);
+        ind = els[i]._indent || 0;
+        bw = els[i]._boxW || nameW;
+        put(els[i], ind, y, bw, rh);
         y += rh + GAP_Y;
       }
       if (pane._anchor) placeAnchored(pane);
@@ -2639,6 +3008,46 @@
       for (i = 0; i < ysL.length; i++) joinSeg(tx, ysL[i] - JOIN / 2, spineX - tx, JOIN);
       joinSeg(spineX, yTop - JOIN / 2, JOIN, (yBot - yTop) + JOIN);
       for (i = 0; i < ysR.length; i++) joinSeg(spineX, ysR[i] - JOIN / 2, rx - spineX, JOIN);
+    }
+    function joinSubRefs() {
+      var panes, p, nodes, list, i, j, b, depth, master;
+      var subLeft, subMid, mLeft, mRight, mBot, dropX;
+      if (!board) return;
+      panes = board.querySelectorAll(".tcol");
+      for (p = 0; p < panes.length; p++) {
+        nodes = panes[p].children;
+        list = [];
+        for (i = 0; i < nodes.length; i++) {
+          if (nodes[i].dataset && nodes[i].dataset.ref) list.push(nodes[i]);
+        }
+        for (i = 0; i < list.length; i++) {
+          b = list[i];
+          depth = Number(b.dataset.depth) || 0;
+          if (!depth) continue;
+          master = null;
+          for (j = i - 1; j >= 0; j--) {
+            if ((Number(list[j].dataset.depth) || 0) < depth) { master = list[j]; break; }
+          }
+          if (!master) continue;
+          subLeft = boardX(b);
+          subMid = boardY(b) + ((b._h || BOX_H) / 2);
+          mLeft = boardX(master);
+          mRight = mLeft + (master._w || 0);
+          mBot = boardY(master) + (master._h || BOX_H);
+          dropX = subLeft - 8;
+          if (dropX > mRight - JOIN) dropX = mRight - JOIN;
+          if (dropX < mLeft + 4) dropX = mLeft + 4;
+          if (subMid > mBot) joinSeg(dropX, mBot, JOIN, subMid - mBot);
+          if (subLeft > dropX) joinSeg(dropX, subMid - JOIN / 2, subLeft - dropX, JOIN);
+        }
+      }
+    }
+    function rootRefBoxes(list) {
+      var out = [], i;
+      for (i = 0; i < (list || []).length; i++) {
+        if (list[i] && !(Number(list[i].dataset.depth) > 0)) out.push(list[i]);
+      }
+      return out;
     }
     function yInBox(el, box) {
       var er = el.getBoundingClientRect();
@@ -2734,14 +3143,15 @@
         var pathBox = pathT ? findBox(boxes, pathT.id) : null;
         if (lastJoin.length && boxes.length) queueJoin(lastJoin, boxes);
         lastJoin = pathBox ? [pathBox] : [];
-        var pathLabs = ownRefs(pathT);
+        var pathShown = refDisplay(pathT);
+        var pathLabs = pathShown.map(function (row) { return row.lab; });
         if (pathT && pathLabs.length) {
-          var wPath = colNameW(pathLabs);
-          var pathRefs = pathLabs.map(function (lab) { return refBox(lab, pathT.id); });
+          var wPath = refNameW(pathShown);
+          var pathRefs = pathShown.map(function (row) { return refBox(row.lab, pathT.id, row.depth || 0); });
           pane = layoutCol(pathRefs, x, wPath, pathBox, band, true, "r:" + sid(pathT.id));
           colBuilt.push({ boxes: pathRefs, pane: pane, w: wPath, x: x });
-          queueJoin(pathBox ? [pathBox] : [], pathRefs);
-          lastJoin = pathRefs;
+          queueJoin(pathBox ? [pathBox] : [], rootRefBoxes(pathRefs));
+          lastJoin = rootRefBoxes(pathRefs);
           if (pane) x = (pane._x || 0) + (pane._w || 0) + GAP_X;
           else x += wPath + GAP_X;
         }
@@ -2786,8 +3196,8 @@
     var xVs = 0;
     if (!selectOpen && refTopic && refList.length) {
       xRef = x;
-      cRef = refList.map(function (lab) { return refBox(lab, refTopic.id); });
-      wRef = colNameW(refList);
+      wRef = refNameW(refShown);
+      cRef = refShown.map(function (row) { return refBox(row.lab, refTopic.id, row.depth || 0); });
       parentBox = null;
       for (ci = 0; ci < colBuilt.length; ci++) {
         parentBox = findBox(colBuilt[ci].boxes, refTopic.id);
@@ -2796,13 +3206,14 @@
       xVs = x + wRef + PAD;
       pane = layoutCol(cRef, x, wRef, parentBox, band, true, "r:" + sid(refTopic.id));
       colBuilt.push({ boxes: cRef, pane: pane, w: wRef, x: x });
-      queueJoin(parentBox ? [parentBox] : [], cRef);
+      queueJoin(parentBox ? [parentBox] : [], rootRefBoxes(cRef));
     }
     redrawJoins = function () {
       var old = board.querySelectorAll(".tjoin");
       var i;
       for (i = 0; i < old.length; i++) if (old[i].parentNode) old[i].parentNode.removeChild(old[i]);
       for (i = 0; i < joinPairs.length; i++) joinFan(joinPairs[i].left, joinPairs[i].right);
+      joinSubRefs();
     };
     redrawJoins();
 
@@ -2882,7 +3293,7 @@
       prevBtn.setAttribute("aria-label", "Previous chapter");
       prevBtn.innerHTML = '<span class="ew-ch-arrow">&lt;</span><span class="page-nav-tip">Previous chapter</span>';
       var iCan = viewChap ? CANON.indexOf(viewChap.abbr) : 0;
-      prevBtn.disabled = !viewChap || (iCan <= 0 && viewChap.ch <= 1);
+      prevBtn.disabled = !viewChap || (viewChap.ch <= 1 && (iCan <= 0 || iCan >= CANON_N));
       prevBtn.addEventListener("click", function (ev) {
         ev.preventDefault();
         ev.stopPropagation();
@@ -2913,9 +3324,10 @@
       nav.appendChild(refLab);
       nav.appendChild(nextBtn);
       left.appendChild(nav);
+      var face = faceFor(viewChap);
       var nkjvBtn = document.createElement("button");
       nkjvBtn.type = "button";
-      nkjvBtn.className = "ew-ch-nkjv" + ((verseTr || "NKJV") === "NKJV" ? " on" : "");
+      nkjvBtn.className = "ew-ch-nkjv" + (!face.alt && (verseTr || "NKJV") === "NKJV" ? " on" : "");
       nkjvBtn.textContent = "NKJV";
       nkjvBtn.addEventListener("click", function (ev) {
         ev.preventDefault();
@@ -2928,7 +3340,7 @@
       verTitle.className = "ew-ver-title";
       verTitle.textContent = "Version";
       var pick = document.createElement("div");
-      pick.className = "ew-tr-pick ew-ch-tr" + ((verseTr || "NKJV") !== "NKJV" ? " on" : "");
+      pick.className = "ew-tr-pick ew-ch-tr" + (face.alt || (verseTr || "NKJV") !== "NKJV" ? " on" : "");
       var trNow = document.createElement("button");
       trNow.type = "button";
       trNow.className = "ew-tr-now";
@@ -2967,7 +3379,7 @@
         });
         trList.appendChild(trow);
       }
-      trNow.textContent = shownLabel;
+      trNow.textContent = face.alt ? face.label : shownLabel;
       trNow.addEventListener("click", function (ev) {
         ev.preventDefault();
         ev.stopPropagation();
@@ -3322,7 +3734,7 @@
     if (!doc.getElementById("sn-desc-style")) {
       st = doc.createElement("style");
       st.id = "sn-desc-style";
-      st.textContent = ".tdesc{position:fixed;z-index:60;box-sizing:border-box;display:flex;flex-direction:column;align-items:stretch;margin:5px;padding:0;border:1px solid #444;border-radius:4px;background:color-mix(in srgb, var(--topic-on,#f6efc8) 45%, #fff);box-shadow:22px 24px 36px rgba(0,0,0,0.42);min-height:26px;overflow:hidden;color:#1b3a4b}.tdesc[hidden]{display:none !important}.tdesc-x{position:absolute;top:1px;right:1px;z-index:2;width:22px;height:22px;margin:0;padding:0;border:0;background:transparent;color:#1b3a4b;font:700 15px/22px Arial,Helvetica,sans-serif;cursor:pointer}.tdesc .tdesc-body{display:block;flex:0 0 auto;min-height:auto;width:100%;height:auto;margin:0;padding:0.2rem 1.35rem 0.2rem 0.45rem;border:0;background:transparent;font:400 calc(13px * var(--ew-font, 1))/1.2 Arial,Helvetica,sans-serif;color:#1b3a4b;white-space:pre-wrap;tab-size:4;overflow-wrap:break-word;word-wrap:break-word;overflow-x:hidden;overflow-y:visible;overscroll-behavior:contain;resize:none;box-sizing:border-box}.tdesc .tdesc-body:focus{outline:0;background:transparent}.tdesc .tdesc-body p,.tdesc .tdesc-body div{margin:0;padding:0 0 0.35em}.tdesc .tdesc-body[contenteditable=false]{cursor:default;background:transparent}";
+      st.textContent = ".tdesc{position:fixed;z-index:60;box-sizing:border-box;display:flex;flex-direction:column;align-items:stretch;margin:5px;padding:0;border:1px solid #444;border-radius:4px;background:color-mix(in srgb, var(--topic-on,#f6efc8) 45%, #fff);box-shadow:22px 24px 36px rgba(0,0,0,0.42);min-height:26px;overflow:hidden;color:#1b3a4b}.tdesc[hidden]{display:none !important}.tdesc-x{position:absolute;top:1px;right:1px;z-index:2;width:22px;height:22px;margin:0;padding:0;border:0;background:transparent;color:#1b3a4b;font:700 15px/22px Arial,Helvetica,sans-serif;cursor:pointer}.tdesc .tdesc-body{display:block;flex:0 0 auto;min-height:auto;width:100%;height:auto;margin:0;padding:0.2rem 1.35rem 0.2rem 0.45rem;border:0;background:transparent;font:400 calc(13px * var(--ew-font, 1))/1.2 Arial,Helvetica,sans-serif;color:#1b3a4b;white-space:pre-wrap;tab-size:4;overflow-wrap:break-word;word-wrap:break-word;overflow-x:hidden;overflow-y:visible;overscroll-behavior:contain;resize:none;box-sizing:border-box}.tdesc .tdesc-body:focus{outline:0;background:transparent}.tdesc .tdesc-body p,.tdesc .tdesc-body div{margin:0;padding:0 0 0.35em}.tdesc .tdesc-body table{border-collapse:collapse;width:max-content;margin-top:0.2rem}.tdesc .tdesc-body th,.tdesc .tdesc-body td{border:1px solid #9aa8ae;padding:0.08rem 0.4rem;white-space:nowrap;vertical-align:middle}.tdesc .tdesc-body th{font-weight:700;text-align:right}.tdesc .tdesc-body thead tr:first-child th:first-child{text-align:left}.tdesc .tdesc-body thead tr:first-child th:nth-child(3){text-align:center}.tdesc .tdesc-body td{text-align:right}.tdesc .tdesc-body td:first-child{text-align:left}.tdesc .tdesc-body tbody tr:last-child td{font-weight:700;border-top:2px solid #9aa8ae}.tdesc:has(table){width:max-content !important;max-width:calc(100vw - 16px)}.tdesc .tdesc-body:has(table){white-space:normal;overflow-x:auto}.tdesc .tdesc-body[contenteditable=false]{cursor:default;background:transparent}";
       doc.head.appendChild(st);
     }
     doc.body.appendChild(d);
@@ -3838,6 +4250,7 @@
       if (btn.getAttribute("data-edit") === "1" && acts.edit) acts.edit();
       if (btn.getAttribute("data-add") === "1" && acts.add) acts.add();
       if (btn.getAttribute("data-add-ref") === "1" && acts.addRef) acts.addRef();
+      if (btn.getAttribute("data-add-sub") === "1" && acts.addSub) acts.addSub();
       if (btn.getAttribute("data-out") === "1" && acts.out) acts.out();
       if (btn.getAttribute("data-in") === "1" && acts.inn) acts.inn();
       if (btn.getAttribute("data-add-same") === "1" && acts.addSame) acts.addSame();

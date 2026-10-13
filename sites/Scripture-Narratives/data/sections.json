@@ -26,5 +26,12 @@
     "ref": "Gen 1:1-31",
     "filter": true,
     "tr": "NIV"
+  },
+  "594": {
+    "book": "Mat",
+    "chapter": 4,
+    "ref": "",
+    "filter": false,
+    "tr": "NKJV"
   }
 }

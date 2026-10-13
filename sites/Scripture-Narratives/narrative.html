@@ -564,10 +564,10 @@
     }
     paintTabs();
     function treeUrl() {
-      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=424";
+      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=437";
     }
     function verseUrl() {
-      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=435";
+      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=445";
     }
     function showTree() {
       var fr = document.getElementById("tree-frame");
@@ -888,7 +888,7 @@
       frameId = nid ? String(nid) : "";
       markL1(frameId);
       if (!frameId) return;
-      var q = "?id=" + encodeURIComponent(frameId) + "&v=13";
+      var q = "?id=" + encodeURIComponent(frameId) + "&v=18";
       document.getElementById("topics-frame").src = "topics-view.html" + q;
       showTree();
     }

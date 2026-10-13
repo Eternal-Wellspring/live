@@ -255,6 +255,21 @@
     .tdesc-body:focus { outline: 0; background: transparent; }
     .tdesc-body p,
     .tdesc-body div { margin: 0; padding: 0 0 0.35em; }
+    .tdesc-body table { border-collapse: collapse; width: max-content; margin-top: 0.2rem; }
+    .tdesc-body th, .tdesc-body td {
+      border: 1px solid #9aa8ae;
+      padding: 0.08rem 0.4rem;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+    .tdesc-body th { font-weight: 700; text-align: right; }
+    .tdesc-body thead tr:first-child th:first-child { text-align: left; }
+    .tdesc-body thead tr:first-child th:nth-child(3) { text-align: center; }
+    .tdesc-body td { text-align: right; }
+    .tdesc-body td:first-child { text-align: left; }
+    .tdesc-body tbody tr:last-child td { font-weight: 700; border-top: 2px solid #9aa8ae; }
+    .tdesc:has(table) { width: max-content !important; max-width: calc(100vw - 16px); }
+    .tdesc-body:has(table) { white-space: normal; overflow-x: auto; }
     .tdesc-x {
       position: absolute;
       top: 1px;
@@ -754,6 +769,6 @@
   </div>
   <script>window.ewOwnChapter=true;</script>
   <script src="/bible.js?v=140"></script>
-  <script src="topics-verse.js?v=436"></script>
+  <script src="topics-verse.js?v=441"></script>
 </body>
 </html>

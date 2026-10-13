@@ -9,7 +9,7 @@
   },
   "ref": {
     "title": "Ref",
-    "items": ["Edit", "Add a ref", "Delete", "Move"]
+    "items": ["Edit", "Add a ref", "Add a sub-ref", "Delete", "Move"]
   },
   "refsBox": {
     "title": "Refs",
@@ -21,6 +21,10 @@
   },
   "twoMore": {
     "title": "Two more?",
+    "items": ["Yes", "No"]
+  },
+  "join": {
+    "title": "Join?",
     "items": ["Yes", "No"]
   }
 }
