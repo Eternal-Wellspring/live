@@ -165,6 +165,8 @@
       border-bottom: 2px solid var(--title);
       margin-bottom: 0.08rem;
     }
+    #sn-row-menu.ask { max-width: 22rem; }
+    #sn-row-menu.ask .sn-rhm-title { white-space: normal; }
     #sn-row-menu button {
       display: block;
       width: 100%;
@@ -730,6 +732,7 @@
     }
     function resetRowMenu() {
       pending = null;
+      rowMenu.classList.remove("ask");
       document.getElementById("sn-rhm-title").textContent = "Topic";
       fillInsertLevels();
       document.getElementById("sn-rhm-main").hidden = false;
@@ -754,20 +757,59 @@
     }
     function askDelete() {
       pending = { kind: "delete" };
-      document.getElementById("sn-rhm-title").textContent = "Delete?";
+      rowMenu.classList.add("ask");
+      document.getElementById("sn-rhm-title").textContent = "Do you want to go ahead and delete all the subtopics and references?";
       document.getElementById("sn-rhm-main").hidden = true;
       document.getElementById("sn-rhm-ask").hidden = false;
     }
+    function allocTopicId() {
+      return fetch("/dotl/next-topic-id", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: "{}"
+      }).then(function (r) {
+        if (!r.ok) throw new Error("Could not give an id.");
+        return r.json();
+      }).then(function (d) {
+        var n = Number(d && d.id);
+        if (!n) throw new Error("Could not give an id.");
+        return n;
+      });
+    }
     function deleteRow() {
       var t = current();
+      var list, i, n, lv, gone, removed, k;
       if (!t) return;
-      var gone = String(t.id);
-      topics = topics.filter(function (x) { return String(x.id) !== gone; });
-      renumberSeq();
+      list = bySeq();
+      i = -1;
+      for (k = 0; k < list.length; k++) {
+        if (String(list[k].id) === String(t.id)) { i = k; break; }
+      }
+      if (i < 0) return;
+      lv = list[i].level || 1;
+      n = 1;
+      while (i + n < list.length && (list[i + n].level || 1) > lv) n += 1;
+      gone = {};
+      removed = list.splice(i, n);
+      removed.forEach(function (x) { gone[String(x.id)] = 1; });
+      list.forEach(function (x, idx) { x.seq = idx + 1; });
+      topics = list;
       sel = null;
       paint();
-      saveMove();
-      document.getElementById("status").textContent = "Deleted.";
+      fetch("/dotl/topic-refs?t=" + Date.now(), { cache: "no-store" })
+        .then(function (r) { return r.ok ? r.json() : []; })
+        .catch(function () { return []; })
+        .then(function (refs) {
+          var rows = Array.isArray(refs) ? refs : (refs && refs.rows) || [];
+          rows = rows.filter(function (row) { return !gone[String(row.topic_id)]; });
+          return fetch("/dotl/topic-refs", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ refs: rows })
+          });
+        })
+        .catch(function () {})
+        .then(function () { saveMove("Deleted."); });
     }
     function insertRow(lv) {
       var now = Date.now();
@@ -792,36 +834,39 @@
         document.getElementById("status").textContent = gate;
         return;
       }
-      var maxId = 0;
-      topics.forEach(function (x) {
-        var n = Number(x.id);
-        if (n > maxId) maxId = n;
+      allocTopicId().then(function (id) {
+        var full = bySeq();
+        var at = -1;
+        var j;
+        for (j = 0; j < full.length; j++) {
+          if (String(full[j].id) === String(t.id)) { at = j; break; }
+        }
+        var after = at < 0 ? (t.seq || full.length) : (t.seq || at + 1);
+        var next = at >= 0 && at + 1 < full.length ? full[at + 1] : null;
+        var before = next ? (next.seq || after + 1) : after + 1;
+        var row = {
+          id: id,
+          lecture_id: t.lecture_id,
+          level: lv,
+          seq: (after + before) / 2,
+          kind: "period",
+          title: "New",
+          notes: "",
+          description: "",
+          duration: ""
+        };
+        if (at < 0) full.push(row);
+        else full.splice(at + 1, 0, row);
+        full.forEach(function (x, n) { x.seq = n + 1; });
+        topics = full;
+        sel = row.id;
+        paint();
+        saveMove();
+        document.getElementById("status").textContent = "Inserted level " + lv + ".";
+        setTimeout(function () { startEdit(); }, 0);
+      }).catch(function (err) {
+        document.getElementById("status").textContent = (err && err.message) || "Could not give an id.";
       });
-      var full = bySeq();
-      var at = full.indexOf(t);
-      var after = at < 0 ? (t.seq || full.length) : (t.seq || at + 1);
-      var next = at >= 0 && at + 1 < full.length ? full[at + 1] : null;
-      var before = next ? (next.seq || after + 1) : after + 1;
-      var row = {
-        id: maxId + 1,
-        lecture_id: t.lecture_id,
-        level: lv,
-        seq: (after + before) / 2,
-        kind: "period",
-        title: "New",
-        notes: "",
-        description: "",
-        duration: ""
-      };
-      if (at < 0) full.push(row);
-      else full.splice(at + 1, 0, row);
-      full.forEach(function (x, n) { x.seq = n + 1; });
-      topics = full;
-      sel = row.id;
-      paint();
-      saveMove();
-      document.getElementById("status").textContent = "Inserted level " + lv + ".";
-      setTimeout(function () { startEdit(); }, 0);
     }
     document.getElementById("list").addEventListener("contextmenu", function (ev) {
       var tr = ev.target.closest && ev.target.closest("tr.row");

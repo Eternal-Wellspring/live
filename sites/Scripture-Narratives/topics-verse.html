@@ -751,6 +751,14 @@
       cursor: pointer;
     }
     #sn-ref-menu button:hover { background: #eef3f4; }
+    #sn-ref-menu.ask { max-width: 22rem; }
+    #sn-ref-menu.ask .sn-rhm-title { white-space: normal; }
+    #sn-ref-menu.ask button[data-yes],
+    #sn-ref-menu.ask button[data-no] {
+      display: inline-block;
+      width: 50%;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -766,9 +774,11 @@
     <div class="sn-rhm-title">Topic</div>
     <button type="button" data-edit="1">Edit</button>
     <button type="button" data-delete="1" hidden>Delete</button>
+    <button type="button" data-yes="1" hidden>Yes</button>
+    <button type="button" data-no="1" hidden>No</button>
   </div>
   <script>window.ewOwnChapter=true;</script>
   <script src="/bible.js?v=140"></script>
-  <script src="topics-verse.js?v=441"></script>
+  <script src="topics-verse.js?v=449"></script>
 </body>
 </html>

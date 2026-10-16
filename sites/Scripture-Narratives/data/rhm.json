@@ -1,7 +1,7 @@
 {
   "topic": {
     "title": "Topic",
-    "items": ["Edit", "Add a ref", "Add Topic", "Out a level", "In a level", "Delete"]
+    "items": ["Edit", "Add a ref", "Add Topic", "Out a level", "In a level", "Move all references", "Delete"]
   },
   "addTopic": {
     "title": "Add Topic",

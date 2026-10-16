@@ -55,16 +55,19 @@
   var pendingRefEdit = null;
   var pendingActs = null;
   var pendingMove = null;
+  var pendingMoveRefs = null;
   var extraSibs = 0;
   var rhmLock = 0;
   var saveWait = Promise.resolve();
+  // One menu for every topic. It lives in this program. data/rhm.json must not replace it.
   var rhm = {
-    topic: { title: "Topic", items: ["Edit", "Add a ref", "Add Topic", "Out a level", "In a level", "Delete"] },
+    topic: { title: "Topic", items: ["Edit", "Add a ref", "Add Topic", "Out a level", "In a level", "Move all references", "Delete"] },
     addTopic: { title: "Add Topic", items: ["Same level", "One below"] },
     ref: { title: "Ref", items: ["Edit", "Add a ref", "Add a sub-ref", "Delete", "Move"] },
     description: { title: "Description", items: ["Edit"] },
     twoMore: { title: "Two more?", items: ["Yes", "No"] },
     join: { title: "Join?", items: ["Yes", "No"] },
+    deleteAsk: { title: "Do you want to go ahead and delete all the subtopics and references?", items: ["Yes", "No"] },
     refsBox: { title: "Refs", items: ["Add a ref"] }
   };
   var RHM_ITEM = {
@@ -75,6 +78,7 @@
     "Delete": "[data-delete]",
     "Move": "[data-move]",
     "Move To": "[data-move-to]",
+    "Move all references": "[data-move-refs]",
     "Yes": "[data-yes]",
     "No": "[data-no]",
     "Add a ref": "[data-add-ref]",
@@ -291,15 +295,19 @@
     });
     return n;
   }
-  function nextTopicId() {
-    var maxId = 0;
-    topics.forEach(function (x) {
-      var n = Number(x.id);
-      if (n > maxId) maxId = n;
+  function allocTopicId() {
+    return fetch("/dotl/next-topic-id", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: "{}"
+    }).then(function (r) {
+      if (!r.ok) throw new Error("Could not give an id.");
+      return r.json();
+    }).then(function (d) {
+      var n = Number(d && d.id);
+      if (!n) throw new Error("Could not give an id.");
+      return n;
     });
-    maxId += 1;
-    while (maxId === 3 || maxId === 54 || find(topics, maxId)) maxId += 1;
-    return maxId;
   }
   function askTwoMore(then) {
     showRefMenu(null, "twoMore", {
@@ -327,32 +335,43 @@
       if (sid(full[i].id) === sid(from.id)) { at = i; break; }
     }
     if (at < 0) return;
-    at += 1;
-    if (!below) {
-      while (at < full.length && (full[at].level || 1) > (from.level || 1)) at += 1;
-    }
-    row = {
-      id: nextTopicId(),
-      lecture_id: from.lecture_id,
-      level: lv,
-      seq: 0,
-      kind: "period",
-      title: "New",
-      notes: "",
-      description: "",
-      duration: ""
-    };
-    full.splice(at, 0, row);
-    full.forEach(function (x, n) { x.seq = n + 1; });
-    topics = full;
-    sel = sid(row.id);
-    if (below) {
-      openStack.length = Math.max(0, (from.level || 1) - 2);
-      openStack[(from.level || 1) - 2] = { id: sid(from.id), mode: "topics" };
-    }
-    editAfterPaint = sid(row.id);
-    saveTopics();
-    paint();
+    allocTopicId().then(function (id) {
+      full = bySeq();
+      at = -1;
+      for (i = 0; i < full.length; i++) {
+        if (sid(full[i].id) === sid(from.id)) { at = i; break; }
+      }
+      if (at < 0) return;
+      at += 1;
+      if (!below) {
+        while (at < full.length && (full[at].level || 1) > (from.level || 1)) at += 1;
+      }
+      row = {
+        id: id,
+        lecture_id: from.lecture_id,
+        level: lv,
+        seq: 0,
+        kind: "period",
+        title: "New",
+        notes: "",
+        description: "",
+        duration: ""
+      };
+      full.splice(at, 0, row);
+      full.forEach(function (x, n) { x.seq = n + 1; });
+      topics = full;
+      sel = sid(row.id);
+      if (below) {
+        openStack.length = Math.max(0, (from.level || 1) - 2);
+        openStack[(from.level || 1) - 2] = { id: sid(from.id), mode: "topics" };
+      }
+      editAfterPaint = sid(row.id);
+      saveTopics();
+      paint();
+    }).catch(function (err) {
+      st = document.getElementById("status");
+      if (st) st.textContent = (err && err.message) || "Could not give an id.";
+    });
   }
   function takeBranch(list, i) {
     var t = list[i];
@@ -582,7 +601,7 @@
     return [i, Number(m[2]), Number(m[3]), lab];
   }
   function parseRefParts(lab) {
-    var m = String(lab || "").trim().match(/^(\S+)\s+(\d+)\s*:\s*(\d+)(?:\s*[-–—]\s*(\d+))?$/);
+    var m = String(lab || "").trim().match(/^(\S+)\s+(\d+)\s*:\s*(\d+)(?:\s*[-–—]\s*(\d+))?(?:\s+\([^)]*\))*$/);
     if (!m) return null;
     return { book: m[1], ch: Number(m[2]), a: Number(m[3]), b: Number(m[4] || m[3]) };
   }
@@ -898,10 +917,23 @@
     }
     return best;
   }
+  function glossMark(desc) {
+    var m = String(desc || "").match(/<!--ewg:([\s\S]*?)-->/);
+    return m ? m[1] : "";
+  }
+  function stripGlossMark(desc) {
+    return String(desc || "").replace(/\s*<!--ewg:[\s\S]*?-->/g, "").replace(/\n+$/, "");
+  }
+  function keepGlossMark(note, full) {
+    var g = glossMark(full);
+    var n = stripGlossMark(note);
+    if (!g) return n;
+    return n ? (n + "<!--ewg:" + g + "-->") : ("<!--ewg:" + g + "-->");
+  }
   function descriptionForOpen(topic) {
     var i = refDescIndex(topic);
     if (i < 0) return "";
-    return String(topicRefs[i].description || "");
+    return stripGlossMark(topicRefs[i].description || "");
   }
   function saveOpenDescription(topic, text) {
     var i, p, row;
@@ -909,7 +941,7 @@
     text = String(text || "").replace(/\n+$/, "");
     i = refDescIndex(topic);
     if (i >= 0) {
-      topicRefs[i].description = text;
+      topicRefs[i].description = keepGlossMark(text, topicRefs[i].description);
     } else if (text.trim()) {
       p = parseRefParts(openRef);
       row = {
@@ -1202,6 +1234,106 @@
     saveTopicRefs();
     paint();
   }
+  function removeTopicKeepChildren(t) {
+    var list, i, start, lv, parent, id;
+    if (!t || (t.level || 1) < 2) return false;
+    list = bySeq();
+    start = -1;
+    for (i = 0; i < list.length; i++) {
+      if (sid(list[i].id) === sid(t.id)) { start = i; lv = list[i].level || 1; break; }
+    }
+    if (start < 0) return false;
+    parent = parentOf(t);
+    id = sid(t.id);
+    list.splice(start, 1);
+    for (i = start; i < list.length; i++) {
+      if ((list[i].level || 1) <= lv) break;
+      list[i].level = Math.max(2, (list[i].level || 1) - 1);
+    }
+    list.forEach(function (x, n) { x.seq = n + 1; });
+    topics = list;
+    if (descOpen && sid(descId) === id) hideDesc();
+    if (sel && sid(sel) === id) sel = parent ? sid(parent.id) : null;
+    openStack = openStack.filter(function (s) { return s && sid(s.id) !== id; });
+    return true;
+  }
+  function showDestTopic(dest) {
+    var anc = [], p;
+    if (!dest) return;
+    p = parentOf(dest);
+    while (p && (p.level || 1) >= 2) {
+      anc.unshift(p);
+      p = parentOf(p);
+    }
+    openStack = anc.map(function (x) { return { id: sid(x.id), mode: "topics" }; });
+    sel = sid(dest.id);
+    lastRefTopic = sel;
+  }
+  function moveAllRefs(from, dest) {
+    var parent, lv, nKids, after, snapRefs, snapTopics, i, j, r, lab, destIdx, del, fa, fb, st;
+    if (!from || !dest || sid(from.id) === sid(dest.id)) return;
+    if ((from.level || 1) < 2 || !canEditDesc()) return;
+    parent = parentOf(from);
+    lv = from.level || 1;
+    nKids = kids(bySeq(), from).length;
+    after = siblingCount(parent, lv, from.id) + nKids;
+    if (after > SIB_CAP) {
+      st = document.getElementById("status");
+      if (st) st.textContent = "That's the limit.";
+      pendingMoveRefs = null;
+      return;
+    }
+    snapRefs = JSON.parse(JSON.stringify(topicRefs));
+    snapTopics = JSON.parse(JSON.stringify(topics));
+    del = {};
+    for (i = 0; i < topicRefs.length; i++) {
+      r = topicRefs[i];
+      if (!r || sid(r.topic_id) !== sid(from.id)) continue;
+      lab = String(r.ref || "").trim();
+      if (!lab) { del[i] = 1; continue; }
+      destIdx = -1;
+      for (j = 0; j < topicRefs.length; j++) {
+        if (j === i || del[j]) continue;
+        if (sid(topicRefs[j].topic_id) !== sid(dest.id)) continue;
+        if (String(topicRefs[j].ref || "").trim() === lab || sameRef(topicRefs[j].ref, lab)) { destIdx = j; break; }
+      }
+      if (destIdx >= 0) {
+        fa = Number(topicRefs[destIdx].from) || 0;
+        fb = Number(topicRefs[destIdx].to) || fa;
+        if (Number(r.from)) fa = fa ? Math.min(fa, Number(r.from)) : Number(r.from);
+        if (Number(r.to)) fb = Math.max(fb, Number(r.to));
+        topicRefs[destIdx].from = fa;
+        topicRefs[destIdx].to = fb;
+        if (!String(topicRefs[destIdx].description || "").trim() && String(r.description || "").trim()) {
+          topicRefs[destIdx].description = r.description;
+        }
+        del[i] = 1;
+      } else {
+        r.topic_id = dest.id;
+      }
+    }
+    if (Object.keys(del).length) topicRefs = topicRefs.filter(function (row, n) { return !del[n]; });
+    if (!removeTopicKeepChildren(from)) {
+      topicRefs = snapRefs;
+      topics = snapTopics;
+      return;
+    }
+    pendingMove = null;
+    pendingMoveRefs = null;
+    showDestTopic(dest);
+    saveTopicRefs(function (d) {
+      if (!d || d.error || d.ok === false) {
+        topicRefs = snapRefs;
+        topics = snapTopics;
+        paint();
+        st = document.getElementById("status");
+        if (st) st.textContent = (d && d.error) || "Could not move.";
+        return;
+      }
+      saveTopics("Moved.");
+    });
+    paint();
+  }
   function deleteTopic(t) {
     var branch, gone, parent, i;
     if (!t || !canEditDesc()) return;
@@ -1398,6 +1530,7 @@
     var m = document.getElementById("sn-ref-menu");
     var r, x, y, tit, spec, items, i, sel, b, btns;
     if (!m) return;
+    m.classList.toggle("ask", part === "deleteAsk");
     if (ev) {
       ev.preventDefault();
       ev.stopPropagation();
@@ -1407,7 +1540,7 @@
     pendingRefEdit = acts.edit || null;
     spec = rhm[part] || { title: part || "Menu", items: [] };
     items = spec.items ? spec.items.slice() : [];
-    if (part === "topic" && !canEditDesc()) items = items.filter(function (it) { return it !== "Delete"; });
+    if (part === "topic" && !canEditDesc()) items = items.filter(function (it) { return it !== "Delete" && it !== "Move all references"; });
     if (part === "topic" && acts.moveTo && items.indexOf("Move To") < 0) items.push("Move To");
     tit = m.querySelector(".sn-rhm-title");
     if (tit) tit.textContent = spec.title || part || "Menu";
@@ -1540,9 +1673,15 @@
     parts = parseRefParts(openRef);
     if (!parts && viewChap) parts = { book: viewChap.abbr, ch: viewChap.ch, a: a, b: b };
     if (!parts) return;
+    var keepGloss = parts.a === a && parts.b === b;
+    var gm;
     parts.a = a;
     parts.b = b;
     newLab = joinRef(parts);
+    if (keepGloss) {
+      gm = String(openRef).match(/(\s+\([^)]*\)(?:\s+\([^)]*\))*)$/);
+      if (gm) newLab += gm[1];
+    }
     idx = refRowIndex(t.id, openRef);
     if (idx < 0) idx = refRowIndexByChap(t.id, parts.book, parts.ch);
     var keepDesc = idx >= 0 ? String(topicRefs[idx].description || "") : "";
@@ -1644,7 +1783,7 @@
     verseBoxEl.querySelectorAll("p[data-vs]").forEach(function (p) {
       var n = p.getAttribute("data-vs");
       var body = p.querySelector(".vt");
-      bits.push("<p><sup>" + n + "</sup> " + (body ? body.innerHTML : "") + "</p>");
+      bits.push("<p><sup>" + n + "</sup> " + stripGloss(body ? body.innerHTML : "") + "</p>");
     });
     return bits.join("");
   }
@@ -1654,7 +1793,7 @@
     verseBoxEl.querySelectorAll("p[data-vs]").forEach(function (p) {
       var n = Number(p.getAttribute("data-vs"));
       var body = p.querySelector(".vt");
-      lines.push({ n: n, t: body ? body.innerHTML : "" });
+      lines.push({ n: n, t: stripGloss(body ? body.innerHTML : "") });
     });
     return lines;
   }
@@ -1686,6 +1825,86 @@
         return false;
       })
       .catch(function () { return false; });
+  }
+  function refCite(ref) {
+    var s = String(ref || "");
+    if (s.indexOf(" | ") < 0) return s;
+    return s.replace(/\s+\([^)]*\)(?:\s+\([^)]*\))*$/, "");
+  }
+  function glossListFrom(tail) {
+    var out = [], re = /\(([^)]*)\)/g, m, body, bar;
+    while ((m = re.exec(String(tail || "")))) {
+      body = m[1];
+      bar = body.indexOf(" | ");
+      if (bar >= 0) out.push({ anchor: body.slice(0, bar), text: body.slice(bar + 3) });
+    }
+    return out;
+  }
+  function glossTailForVerse(raw, n) {
+    var lines, i, line, c, num;
+    raw = String(raw || "").trim();
+    if (!raw) return "";
+    if (raw.charAt(0) === "(") return raw;
+    lines = raw.split(/\n/);
+    for (i = 0; i < lines.length; i++) {
+      line = lines[i].trim();
+      c = line.indexOf(":");
+      if (c <= 0) continue;
+      num = line.slice(0, c);
+      if (!/^\d+$/.test(num)) continue;
+      if (Number(num) === Number(n)) return line.slice(c + 1).trim();
+    }
+    return "";
+  }
+  function refGlossList(ref) {
+    var cite = refCite(ref);
+    return glossListFrom(String(ref || "").slice(cite.length));
+  }
+  function glossRawFor(ref) {
+    var cite = refCite(ref);
+    var i, r, g, fallback = "", owner;
+    owner = (typeof lastRefTopic !== "undefined" && lastRefTopic) ? lastRefTopic : ((typeof sel !== "undefined" && sel) ? sel : "");
+    for (i = 0; i < topicRefs.length; i++) {
+      r = topicRefs[i];
+      if (refCite(r.ref) !== cite && String(r.ref || "").trim() !== cite) continue;
+      g = glossMark(r.description);
+      if (!g) continue;
+      if (!fallback) fallback = g;
+      if (owner && sid(r.topic_id) === sid(owner)) return g;
+    }
+    return fallback;
+  }
+  function glossesForVerse(ref, n) {
+    var cite = refCite(ref);
+    var m = cite.match(/:(\d+)\s*$/);
+    var onRef = refGlossList(ref);
+    if (onRef.length && m && Number(m[1]) === Number(n)) return onRef;
+    return glossListFrom(glossTailForVerse(glossRawFor(ref), n));
+  }
+  function escapeGloss(s) {
+    return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function stripGloss(html) {
+    return String(html || "").replace(/\s*<i class="ew-gloss">[\s\S]*?<\/i>/g, "");
+  }
+  function glossVerse(html, glosses) {
+    var left, out, re, m, s;
+    if (!glosses || !glosses.length) return html;
+    left = glosses.slice();
+    out = "";
+    re = /(<[^>]+>)|([^<]+)/g;
+    s = String(html || "");
+    while ((m = re.exec(s))) {
+      if (m[1]) { out += m[1]; continue; }
+      out += m[2].replace(/\b(gods|god|God|GOD|goddess|judges|mighty|spirit|abomination|idols|idol|images|image|angels|angel)\b/g, function (word) {
+        var g;
+        if (!left.length || word !== left[0].anchor) return word;
+        g = left.shift();
+        return word + " <i class=\"ew-gloss\">(" + escapeGloss(g.text) + ")</i>";
+      });
+    }
+    while (left.length) out += " <i class=\"ew-gloss\">(" + escapeGloss(left.shift().text) + ")</i>";
+    return out;
   }
   function verseHtml(raw) {
     var s = String(raw || "");
@@ -2606,9 +2825,24 @@
           },
           out: function () { bumpLevel(t, -1); },
           inn: function () { bumpLevel(t, 1); },
-          del: function () { deleteTopic(t); }
+          del: function () {
+            showRefMenu(null, "deleteAsk", {
+              yes: function () { deleteTopic(t); },
+              no: function () {}
+            });
+          },
+          moveRefs: function () {
+            pendingMove = null;
+            pendingMoveRefs = sid(t.id);
+            var note = document.getElementById("status");
+            if (note) note.textContent = "Right-click the topic to move them to.";
+          }
         };
-        if (pendingMove && sid(pendingMove.fromId) !== sid(t.id)) {
+        if (pendingMoveRefs && sid(pendingMoveRefs) !== sid(t.id)) {
+          acts.moveTo = function () {
+            moveAllRefs(find(topics, pendingMoveRefs), t);
+          };
+        } else if (pendingMove && sid(pendingMove.fromId) !== sid(t.id)) {
           acts.moveTo = function () {
             moveRefRecord(pendingMove.label, pendingMove.fromId, t);
           };
@@ -2647,6 +2881,27 @@
       if (teal) board.appendChild(teal);
       return b;
     }
+    function paintRefName(name, label) {
+      var m = String(label || "").match(/^([\s\S]*?)(\s+\([^)]*\)(?:\s+\([^)]*\))*)$/);
+      var re, mm, iel;
+      name.textContent = "";
+      if (refCite(label) !== String(label || "")) {
+        name.textContent = refCite(label);
+        return;
+      }
+      if (!m) {
+        name.textContent = label;
+        return;
+      }
+      name.appendChild(document.createTextNode(m[1]));
+      re = /\s+(\([^)]*\))/g;
+      while ((mm = re.exec(m[2]))) {
+        iel = document.createElement("i");
+        iel.style.fontStyle = "italic";
+        iel.textContent = " " + mm[1];
+        name.appendChild(iel);
+      }
+    }
     function refBox(label, topicId, depth) {
       var b = document.createElement("button");
       var name = document.createElement("span");
@@ -2655,12 +2910,12 @@
       b.dataset.ref = label;
       if (topicId) b.dataset.id = sid(topicId);
       name.className = "tname";
-      name.textContent = label;
+      paintRefName(name, label);
       b.appendChild(name);
       if (depth) {
         b.dataset.depth = String(depth);
         b._indent = depth * REF_IND;
-        b._boxW = textSize(label).w;
+        b._boxW = textSize(refCite(label)).w;
       }
       function startRefEdit(ev) {
         if (ev) { ev.preventDefault(); ev.stopPropagation(); }
@@ -2706,6 +2961,7 @@
           },
           del: function () { deleteRefFromTopic(label, topicId); },
           move: function () {
+            pendingMoveRefs = null;
             pendingMove = { label: label, fromId: topicId };
           }
         });
@@ -3301,7 +3557,7 @@
       });
       var refLab = document.createElement("strong");
       refLab.className = "tverse-ref";
-      refLab.textContent = sameOrigChap() ? openRef : (viewChap ? viewChap.abbr + " " + viewChap.ch : openRef);
+      refLab.textContent = sameOrigChap() ? refCite(openRef) : (viewChap ? viewChap.abbr + " " + viewChap.ch : refCite(openRef));
       var nextBtn = document.createElement("button");
       nextBtn.type = "button";
       nextBtn.className = "ew-ch-next";
@@ -3314,7 +3570,7 @@
         shiftChap(1);
       });
       var slot = Math.max(
-        refLabelW(openRef),
+        refLabelW(refCite(openRef)),
         refLabelW(viewChap ? viewChap.abbr + " " + viewChap.ch : ""),
         refLabelW("1Th 00:00-00")
       );
@@ -3501,7 +3757,7 @@
           noteEditing = false;
           descWrite(noteBody, noteUndo);
           ix = refDescIndex(verseTopic);
-          if (ix >= 0) topicRefs[ix].description = noteUndo;
+          if (ix >= 0) topicRefs[ix].description = keepGlossMark(noteUndo, topicRefs[ix].description);
           noteBody.blur();
           return;
         }
@@ -3511,7 +3767,7 @@
         var ix;
         if (!canEditDesc() || !verseTopic) return;
         ix = refDescIndex(verseTopic);
-        if (ix >= 0) topicRefs[ix].description = noteText();
+        if (ix >= 0) topicRefs[ix].description = keepGlossMark(noteText(), topicRefs[ix].description);
       });
       noteBody.addEventListener("blur", function () {
         var now;
@@ -3564,7 +3820,7 @@
           p.appendChild(document.createTextNode(" "));
           var body = document.createElement("span");
           body.className = "vt";
-          body.innerHTML = verseHtml(lines[li].t);
+          body.innerHTML = glossVerse(verseHtml(lines[li].t), glossesForVerse(openRef, n));
           p.appendChild(body);
           if (hitPick) {
             p.addEventListener("click", function (ev) {
@@ -3939,11 +4195,9 @@
     saveWait.then(function () {
       return Promise.all([
       fetch("/dotl/topics?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.json(); }),
-      fetch("/dotl/topic-refs?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; }),
-      fetch(dataFile("rhm.json"), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+      fetch("/dotl/topic-refs?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : []; }).catch(function () { return []; })
     ]);
     }).then(function (pair) {
-      if (pair[2] && typeof pair[2] === "object") rhm = pair[2];
       topics = pair[0] || [];
       var incoming;
       var keep = {};
@@ -4258,6 +4512,7 @@
       if (btn.getAttribute("data-delete") === "1" && acts.del) acts.del();
       if (btn.getAttribute("data-move") === "1" && acts.move) acts.move();
       if (btn.getAttribute("data-move-to") === "1" && acts.moveTo) acts.moveTo();
+      if (btn.getAttribute("data-move-refs") === "1" && acts.moveRefs) acts.moveRefs();
       if (btn.getAttribute("data-yes") === "1" && acts.yes) acts.yes();
       if (btn.getAttribute("data-no") === "1" && acts.no) acts.no();
     });

@@ -573,6 +573,14 @@
     }
     #sn-ref-menu button[hidden] { display: none !important; }
     #sn-ref-menu button:hover { background: #eef3f4; }
+    #sn-ref-menu.ask { max-width: 22rem; }
+    #sn-ref-menu.ask .sn-rhm-title { white-space: normal; }
+    #sn-ref-menu.ask button[data-yes],
+    #sn-ref-menu.ask button[data-no] {
+      display: inline-block;
+      width: 50%;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -591,6 +599,7 @@
     <button type="button" data-add-below="1">One below</button>
     <button type="button" data-out="1">Out a level</button>
     <button type="button" data-in="1">In a level</button>
+    <button type="button" data-move-refs="1">Move all references</button>
     <button type="button" data-delete="1">Delete</button>
     <button type="button" data-move="1">Move</button>
     <button type="button" data-move-to="1">Move To</button>
@@ -599,6 +608,6 @@
   </div>
   <script>window.ewOwnChapter=true;</script>
   <script src="/bible.js?v=140"></script>
-  <script src="topics-tree.js?v=437"></script>
+  <script src="topics-tree.js?v=443"></script>
 </body>
 </html>

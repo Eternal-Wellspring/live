@@ -39,6 +39,7 @@
   var expandByRef = false;
   var pendingEdit = null;
   var pendingDelete = null;
+  var pendingYes = null;
   function onLivePort() {
     if (String(location.hostname || "") === "builder.eternalwellspring.com") return false;
     var p = String(location.port || "");
@@ -311,7 +312,7 @@
   }
   function parseRefParts(lab) {
     var m = String(lab || "").trim().replace(/\s+/g, " ")
-      .match(/^(\S+)\s+(\d+)\s*:\s*(\d+)(?:\s*[-–—]\s*(?:(\d+)\s*:\s*)?(\d+))?$/);
+      .match(/^(\S+)\s+(\d+)\s*:\s*(\d+)(?:\s*[-–—]\s*(?:(\d+)\s*:\s*)?(\d+))?(?:\s+\([^)]*\))*$/);
     if (!m) return null;
     return { book: m[1], ch: Number(m[2]), a: Number(m[3]), b: Number(m[5] || m[4] || m[3]) };
   }
@@ -1164,6 +1165,87 @@
     saveSection();
     paint();
   }
+  function refCite(ref) {
+    var s = String(ref || "");
+    if (s.indexOf(" | ") < 0) return s;
+    return s.replace(/\s+\([^)]*\)(?:\s+\([^)]*\))*$/, "");
+  }
+  function glossMark(desc) {
+    var m = String(desc || "").match(/<!--ewg:([\s\S]*?)-->/);
+    return m ? m[1] : "";
+  }
+  function glossListFrom(tail) {
+    var out = [], re = /\(([^)]*)\)/g, m, body, bar;
+    while ((m = re.exec(String(tail || "")))) {
+      body = m[1];
+      bar = body.indexOf(" | ");
+      if (bar >= 0) out.push({ anchor: body.slice(0, bar), text: body.slice(bar + 3) });
+    }
+    return out;
+  }
+  function glossTailForVerse(raw, n) {
+    var lines, i, line, c, num;
+    raw = String(raw || "").trim();
+    if (!raw) return "";
+    if (raw.charAt(0) === "(") return raw;
+    lines = raw.split(/\n/);
+    for (i = 0; i < lines.length; i++) {
+      line = lines[i].trim();
+      c = line.indexOf(":");
+      if (c <= 0) continue;
+      num = line.slice(0, c);
+      if (!/^\d+$/.test(num)) continue;
+      if (Number(num) === Number(n)) return line.slice(c + 1).trim();
+    }
+    return "";
+  }
+  function refGlossList(ref) {
+    var cite = refCite(ref);
+    return glossListFrom(String(ref || "").slice(cite.length));
+  }
+  function glossRawFor(ref) {
+    var cite = refCite(ref);
+    var i, r, g, fallback = "", owner;
+    owner = (typeof lastRefTopic !== "undefined" && lastRefTopic) ? lastRefTopic : ((typeof sel !== "undefined" && sel) ? sel : "");
+    for (i = 0; i < topicRefs.length; i++) {
+      r = topicRefs[i];
+      if (refCite(r.ref) !== cite && String(r.ref || "").trim() !== cite) continue;
+      g = glossMark(r.description);
+      if (!g) continue;
+      if (!fallback) fallback = g;
+      if (owner && sid(r.topic_id) === sid(owner)) return g;
+    }
+    return fallback;
+  }
+  function glossesForVerse(ref, n) {
+    var cite = refCite(ref);
+    var m = cite.match(/:(\d+)\s*$/);
+    var onRef = refGlossList(ref);
+    if (onRef.length && m && Number(m[1]) === Number(n)) return onRef;
+    return glossListFrom(glossTailForVerse(glossRawFor(ref), n));
+  }
+  function escapeGloss(s) {
+    return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function glossVerse(html, glosses) {
+    var left, out, re, m, s;
+    if (!glosses || !glosses.length) return html;
+    left = glosses.slice();
+    out = "";
+    re = /(<[^>]+>)|([^<]+)/g;
+    s = String(html || "");
+    while ((m = re.exec(s))) {
+      if (m[1]) { out += m[1]; continue; }
+      out += m[2].replace(/\b(gods|god|God|GOD|goddess|judges|mighty|spirit|abomination|idols|idol|images|image|angels|angel)\b/g, function (word) {
+        var g;
+        if (!left.length || word !== left[0].anchor) return word;
+        g = left.shift();
+        return word + " <i class=\"ew-gloss\">(" + escapeGloss(g.text) + ")</i>";
+      });
+    }
+    while (left.length) out += " <i class=\"ew-gloss\">(" + escapeGloss(left.shift().text) + ")</i>";
+    return out;
+  }
   function verseHtml(raw) {
     var s = String(raw || "");
     s = s.replace(/\n/g, "<br>");
@@ -1560,9 +1642,13 @@
   }
   function hideRhm() {
     var m = document.getElementById("sn-ref-menu");
-    if (m) m.hidden = true;
+    if (m) {
+      m.hidden = true;
+      m.classList.remove("ask");
+    }
     pendingEdit = null;
     pendingDelete = null;
+    pendingYes = null;
   }
   function showRhm(ev, title, onEdit, onDelete) {
     var m = document.getElementById("sn-ref-menu");
@@ -1574,8 +1660,16 @@
     }
     pendingEdit = onEdit;
     pendingDelete = onDelete || null;
+    pendingYes = null;
+    m.classList.remove("ask");
     del = m.querySelector("[data-delete]");
     if (del) del.hidden = !onDelete;
+    var yes = m.querySelector("[data-yes]");
+    var no = m.querySelector("[data-no]");
+    if (yes) yes.hidden = true;
+    if (no) no.hidden = true;
+    var edit = m.querySelector("[data-edit]");
+    if (edit) edit.hidden = false;
     tit = m.querySelector(".sn-rhm-title");
     if (tit) tit.textContent = title || "Topic";
     rhmLock = Date.now() + 500;
@@ -1868,6 +1962,27 @@
       if (green) board.appendChild(green);
       return b;
     }
+    function paintRefName(name, label) {
+      var m = String(label || "").match(/^([\s\S]*?)(\s+\([^)]*\)(?:\s+\([^)]*\))*)$/);
+      var re, mm, iel;
+      name.textContent = "";
+      if (refCite(label) !== String(label || "")) {
+        name.textContent = refCite(label);
+        return;
+      }
+      if (!m) {
+        name.textContent = label;
+        return;
+      }
+      name.appendChild(document.createTextNode(m[1]));
+      re = /\s+(\([^)]*\))/g;
+      while ((mm = re.exec(m[2]))) {
+        iel = document.createElement("i");
+        iel.style.fontStyle = "italic";
+        iel.textContent = " " + mm[1];
+        name.appendChild(iel);
+      }
+    }
     function refBox(label, col, topic) {
       var b = document.createElement("button");
       var name = document.createElement("span");
@@ -1876,7 +1991,7 @@
       b.className = "tbox" + (refIsChap(label) ? " hit" : "") + ((sameRef(openRef, label) || sameRef(label, selChapRef)) ? " on" : "");
       b.dataset.ref = label;
       name.className = "tname";
-      name.textContent = label;
+      paintRefName(name, label);
       b.appendChild(name);
       function startRefEdit(ev) {
         if (ev) { ev.preventDefault(); ev.stopPropagation(); }
@@ -2737,7 +2852,7 @@
         p.appendChild(vn);
         p.appendChild(document.createTextNode(" "));
         var body = document.createElement("span");
-        body.innerHTML = verseHtml(lines[li].t);
+        body.innerHTML = glossVerse(verseHtml(lines[li].t), glossesForVerse(selChapRef, n));
         p.appendChild(body);
         if (hitSet[n]) {
           p.addEventListener("click", function (ev) {
@@ -2915,9 +3030,9 @@
         });
         var rLab = document.createElement("strong");
         rLab.className = "tverse-ref";
-        rLab.textContent = openRef;
+        rLab.textContent = refCite(openRef);
         var slot = Math.max(
-          refLabelW(openRef),
+          refLabelW(refCite(openRef)),
           refLabelW(rightChap.abbr + " " + rightChap.ch),
           refLabelW("1Th 00:00-00")
         );
@@ -3031,7 +3146,7 @@
             p.appendChild(vn);
             p.appendChild(document.createTextNode(" "));
             body = document.createElement("span");
-            body.innerHTML = verseHtml(lines[i].t);
+            body.innerHTML = glossVerse(verseHtml(lines[i].t), glossesForVerse(openRef, n));
             p.appendChild(body);
             rVerses.appendChild(p);
           }
@@ -3326,15 +3441,38 @@
   (function () {
     var menu = document.getElementById("sn-ref-menu");
     if (!menu) return;
+    function askDelete(run) {
+      var m = document.getElementById("sn-ref-menu");
+      var tit, edit, del, yes, no;
+      if (!m || !run) return;
+      pendingYes = run;
+      m.classList.add("ask");
+      tit = m.querySelector(".sn-rhm-title");
+      if (tit) tit.textContent = "Do you want to go ahead and delete all the subtopics and references?";
+      edit = m.querySelector("[data-edit]");
+      del = m.querySelector("[data-delete]");
+      yes = m.querySelector("[data-yes]");
+      no = m.querySelector("[data-no]");
+      if (edit) edit.hidden = true;
+      if (del) del.hidden = true;
+      if (yes) yes.hidden = false;
+      if (no) no.hidden = false;
+    }
     menu.addEventListener("click", function (ev) {
       var btn = ev.target.closest && ev.target.closest("button");
       var fn = pendingEdit;
       var del = pendingDelete;
+      var yes = pendingYes;
       ev.preventDefault();
       ev.stopPropagation();
+      if (!btn) return;
+      if (btn.getAttribute("data-delete") === "1" && del) {
+        askDelete(del);
+        return;
+      }
       hideRhm();
-      if (btn && btn.getAttribute("data-edit") === "1" && fn) fn();
-      if (btn && btn.getAttribute("data-delete") === "1" && del) del();
+      if (btn.getAttribute("data-edit") === "1" && fn) fn();
+      if (btn.getAttribute("data-yes") === "1" && yes) yes();
     });
   })();
   (function () {
