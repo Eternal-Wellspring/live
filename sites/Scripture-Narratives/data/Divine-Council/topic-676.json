@@ -2,10 +2,11 @@
   "id": 676,
   "lecture_id": 1,
   "level": 5,
-  "seq": 608,
+  "seq": 635,
   "kind": "period",
   "title": "Genesis",
   "notes": "",
   "description": "",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

@@ -2,10 +2,11 @@
   "id": 684,
   "lecture_id": 1,
   "level": 5,
-  "seq": 616,
+  "seq": 643,
   "kind": "period",
   "title": "2 Samuel",
   "notes": "",
   "description": "",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

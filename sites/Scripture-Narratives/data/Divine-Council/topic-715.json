@@ -2,10 +2,11 @@
   "id": 715,
   "lecture_id": 1,
   "level": 4,
-  "seq": 642,
+  "seq": 669,
   "kind": "period",
   "title": "Human Judges",
   "notes": "",
   "description": "<div><br></div>",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

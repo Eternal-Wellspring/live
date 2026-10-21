@@ -7,5 +7,6 @@
   "title": "Correction",
   "notes": "",
   "description": "Make restitution where possible",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

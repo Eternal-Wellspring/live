@@ -2,10 +2,11 @@
   "id": 699,
   "lecture_id": 1,
   "level": 5,
-  "seq": 631,
+  "seq": 658,
   "kind": "period",
   "title": "Amos",
   "notes": "",
   "description": "",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

@@ -2,10 +2,11 @@
   "id": 680,
   "lecture_id": 1,
   "level": 5,
-  "seq": 612,
+  "seq": 639,
   "kind": "period",
   "title": "Deuteronomy",
   "notes": "",
   "description": "",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

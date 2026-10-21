@@ -2,10 +2,11 @@
   "id": 696,
   "lecture_id": 1,
   "level": 5,
-  "seq": 628,
+  "seq": 655,
   "kind": "period",
   "title": "Daniel",
   "notes": "",
   "description": "<div><br></div>",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

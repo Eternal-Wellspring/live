@@ -116,6 +116,13 @@
     }
     .dur { white-space: nowrap; }
     .desc { white-space: nowrap; font-weight: 400; min-width: 12rem; }
+    .live { text-align: center; width: 2.2rem; }
+    .live input { margin: 0; vertical-align: middle; }
+    .head th.live {
+      color: #004d97;
+      text-align: center;
+      font: 400 0.95rem/1.3 Arial, Helvetica, sans-serif;
+    }
     .row td.desc { vertical-align: top; }
     .row td.desc table { border-collapse: collapse; margin-top: 0.15rem; font-weight: 400; }
     .row td.desc table th,
@@ -321,6 +328,25 @@
       bindEditInput(inp, field);
       return inp;
     }
+    function setLiveBranch(t, on) {
+      var list = bySeq();
+      var i, lv, hit;
+      hit = false;
+      for (i = 0; i < list.length; i++) {
+        if (!hit) {
+          if (String(list[i].id) !== String(t.id)) continue;
+          hit = true;
+          lv = list[i].level || 1;
+          list[i].live = !!on;
+          continue;
+        }
+        if ((list[i].level || 1) <= lv) break;
+        list[i].live = !!on;
+      }
+      topics = list;
+      paint();
+      saveMove();
+    }
     function paint() {
       var box = document.getElementById("list");
       box.innerHTML = "";
@@ -328,9 +354,10 @@
       var thead = document.createElement("thead");
       var hr = document.createElement("tr");
       hr.className = "head";
-      ["", "", "", "", "Description"].forEach(function (label) {
+      ["", "", "Live"].forEach(function (label) {
         var th = document.createElement("th");
         th.textContent = label;
+        if (label === "Live") th.className = "live";
         hr.appendChild(th);
       });
       thead.appendChild(hr);
@@ -353,35 +380,21 @@
         var indent = Math.max(0, lv - 2) * 4;
         var onEdit = String(t.id) === String(editing);
         cell("title", onEdit ? "" : (t.title || ""), indent ? indent + "ch" : "");
-        cell("pe", t.kind === "event" ? "E" : "P");
-        cell("dur", onEdit ? "" : (t.kind === "event" ? "" : String(t.duration || "").trim()));
-        var descRaw = String(t.description || t.notes || "").trim();
-        cell("desc", onEdit || /<table\b/i.test(descRaw) ? "" : descRaw);
+        var liveTd = document.createElement("td");
+        var liveBox = document.createElement("input");
+        liveTd.className = "live";
+        liveBox.type = "checkbox";
+        liveBox.checked = t.live !== false;
+        liveBox.setAttribute("aria-label", "Live");
+        liveBox.addEventListener("click", function (ev) { ev.stopPropagation(); });
+        liveBox.addEventListener("change", function () { setLiveBranch(t, liveBox.checked); });
+        liveTd.appendChild(liveBox);
+        tr.appendChild(liveTd);
         var titleTd = tr.querySelector(".title");
-        var peTd = tr.querySelector(".pe");
-        var durTd = tr.querySelector(".dur");
-        var descTd = tr.querySelector(".desc");
-        if (!onEdit && /<table\b/i.test(descRaw)) descTd.innerHTML = descRaw;
-        if (onEdit) {
-          putInput(titleTd, t.title || "", "title");
-          if (t.kind !== "event") putInput(durTd, t.duration || "", "duration");
-          putInput(descTd, t.description || t.notes || "", "description");
-        }
-        peTd.addEventListener("click", function (ev) {
-          ev.preventDefault();
-          ev.stopPropagation();
-          if (skipClick) { skipClick = false; return; }
-          if (editing) flushEditInputs();
-          t.kind = t.kind === "event" ? "period" : "event";
-          if (t.kind === "event") t.duration = "";
-          sel = t.id;
-          paint();
-          saveMove();
-        });
+        if (onEdit) putInput(titleTd, t.title || "", "title");
         tr.addEventListener("click", function (ev) {
           if (skipClick) { skipClick = false; return; }
           if (ev.target && ev.target.closest && ev.target.closest("input")) return;
-          if (ev.target && ev.target.closest && ev.target.closest(".pe")) return;
           if (onEdit) return;
           if (editing) commitEdit();
           if (String(t.id) === String(sel)) sel = null;
@@ -853,7 +866,8 @@
           title: "New",
           notes: "",
           description: "",
-          duration: ""
+          duration: "",
+          live: parent ? parent.live !== false : false
         };
         if (at < 0) full.push(row);
         else full.splice(at + 1, 0, row);

@@ -2,10 +2,11 @@
   "id": 706,
   "lecture_id": 1,
   "level": 5,
-  "seq": 638,
+  "seq": 665,
   "kind": "period",
   "title": "Zechariah",
   "notes": "",
   "description": "",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

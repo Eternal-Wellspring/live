@@ -2,10 +2,11 @@
   "id": 692,
   "lecture_id": 1,
   "level": 5,
-  "seq": 624,
+  "seq": 651,
   "kind": "period",
   "title": "Psalms",
   "notes": "",
   "description": "",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

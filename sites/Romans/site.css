@@ -429,7 +429,7 @@ html.ew-notes-off .col-footnotes + .col-split { display: none !important; }
 }
 .tab-panel { display: none; border: 1px solid var(--line); padding: 0.8rem 1rem 1.2rem; background: #fff; border-radius: 0 7px 7px 0; }
 .sub-tabs { display: flex; flex-wrap: wrap; gap: 4px; margin: 0 0 0.55rem; align-items: flex-end; width: max-content; max-width: 100%; }
-.sub-tab { padding: 0.3rem 0.7rem; border: 1px solid var(--line); border-bottom: 0; background: #fff; font-weight: 700; cursor: pointer; border-radius: 7px 7px 0 0; color: inherit; }
+.sub-tab { padding: 0.3rem 0.7rem; border: 1px solid var(--line); border-bottom: 0; background: #fff; font-weight: 400; cursor: pointer; border-radius: 7px 7px 0 0; color: inherit; }
 .sub-tab.active { background: #fff; position: relative; z-index: 1; margin-bottom: -1px; padding-bottom: calc(0.3rem + 1px); }
 .end-sub-tabs .sub-tab {
   border-radius: 0 0 7px 7px;
@@ -464,6 +464,7 @@ html.ew-phone.ew-portrait .col-footnotes { order: 3; }
 .row-title:empty { display: none; margin: 0; }
 .col-title { font-weight: 800; margin: 0 0 0.35rem; outline: none; line-height: normal; }
 .col-title:empty { display: none; margin: 0; }
+h3.row-title, h4.col-title { font-size: inherit; }
 .col-text {
   outline: none;
   line-height: inherit;
@@ -1107,13 +1108,12 @@ a.ref, .col a.ref, .col-text a.ref, .para a.ref {
 .bit.ew-info { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; background:#ededed; border-style:solid; border-color:#aaaaaa; border-width:1.0px 1.0px 1.0px 1.0px; box-shadow:20px 20px 20px #00000040; padding:7px; margin-top:4px; margin-bottom:4px; text-align:left }
 #ew-info-modal .ew-info-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#333333; text-align:left; line-height:1.25 }
 #ew-info-modal .ew-info-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#333333; background:#f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:1.0px 1.0px 1.0px 1.0px; box-shadow:20px 20px 20px #00000059; padding:22px; text-align:left; line-height:1.25 }
-#ew-info-modal .ew-info-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; text-decoration:underline; color:#0058B0 }
-#ew-info-modal .ew-info-x { color:#0058B0 }
+#ew-info-modal .ew-info-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; text-decoration:underline }
 #ew-info-modal .ew-info-body .bit { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#333333; line-height:1.25 }
 #ew-info-modal .ew-info-body .bit.indent { font-weight:400 }
 .title-bar h1 { font-family:Arial, Helvetica, sans-serif; font-size:calc(23px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#004d97; background:#f6f7eb; border-style:solid; border-color:#004d97; border-width:0px 0px 0px 0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center }
 .title-bar h1 { border-width:0 !important }
-.tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab, .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f6f78; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
 .subsec-frame { font-weight:400; font-style:normal; border-style:solid; border-color:#919191; border-width:2.0px 2.0px 2.0px 2.0px; padding:5px; margin-top:0px; margin-bottom:13px; text-align:left }
 .para { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#ffffff; border-style:solid; border-color:#e2e2e2; border-width:1.0px 0px 0px 0px; padding:0px; margin-top:12px; margin-bottom:-2px; text-align:left; line-height:1.45; --para-gap:18px }
@@ -1139,12 +1139,12 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .ew-verse-ref { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#005eb8 }
 .ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; text-align:left }
 .ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; text-align:left }
-#ew-text-modal .ew-text-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; background:##f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:20px 20px 20px #00000040; padding:16px; text-align:left }
-#ew-text-modal .ew-text-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; text-decoration:underline; color:#0058B0 }
+#ew-text-modal .ew-text-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; background:#f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:20px 20px 20px #00000040; padding:16px; text-align:left }
+#ew-text-modal .ew-text-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; text-decoration:underline }
 #ew-text-modal .ew-text-body, #ew-text-modal .ew-text-body p { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#333333; line-height:1.25 }
 .ew-chapter-list, .ew-ch-row { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.25 }
 .page-nav, .page-nav .page-nav-word, .page-nav .page-nav-tip, .page-tools, .page-tools button { font-weight:400; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#5a6a72 }
-.tab[data-sec="2"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="2"], .tab-panel[data-sec="2"] .sub-tab, .end-sub-tabs[data-for="s0"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="2"] { background:#ffffff }
 .tab-panel[data-sec="2"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s0"] .sub-tab { background:#ffffff }
@@ -1152,9 +1152,9 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .tab[data-sec="2"].active { border-bottom-color:#f6f7eb }
 .tab-panel[data-sec="2"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
 .end-sub-tabs[data-for="s0"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="2"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="2"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="3"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab-dock-end .tab[data-sec="2"], .end-sub-tabs[data-for="s0"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
+.tab-dock-end .tab[data-sec="2"].active, .end-sub-tabs[data-for="s0"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+.tab[data-sec="3"], .tab-panel[data-sec="3"] .sub-tab, .end-sub-tabs[data-for="s1"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="3"] { background:#ffffff }
 .tab-panel[data-sec="3"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s1"] .sub-tab { background:#ffffff }
@@ -1162,9 +1162,9 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .tab[data-sec="3"].active { border-bottom-color:#f6f7eb }
 .tab-panel[data-sec="3"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
 .end-sub-tabs[data-for="s1"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="3"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="3"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="10"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab-dock-end .tab[data-sec="3"], .end-sub-tabs[data-for="s1"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
+.tab-dock-end .tab[data-sec="3"].active, .end-sub-tabs[data-for="s1"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+.tab[data-sec="10"], .tab-panel[data-sec="10"] .sub-tab, .end-sub-tabs[data-for="s0"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="10"] { background:#ffffff }
 .tab-panel[data-sec="10"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s0"] .sub-tab { background:#ffffff }
@@ -1172,9 +1172,9 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .tab[data-sec="10"].active { border-bottom-color:#f6f7eb }
 .tab-panel[data-sec="10"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
 .end-sub-tabs[data-for="s0"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="10"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="10"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="20"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab-dock-end .tab[data-sec="10"], .end-sub-tabs[data-for="s0"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
+.tab-dock-end .tab[data-sec="10"].active, .end-sub-tabs[data-for="s0"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+.tab[data-sec="20"], .tab-panel[data-sec="20"] .sub-tab, .end-sub-tabs[data-for="s1"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="20"] { background:#ffffff }
 .tab-panel[data-sec="20"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s1"] .sub-tab { background:#ffffff }
@@ -1182,9 +1182,9 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .tab[data-sec="20"].active { border-bottom-color:#f6f7eb }
 .tab-panel[data-sec="20"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
 .end-sub-tabs[data-for="s1"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="20"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="20"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="12"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab-dock-end .tab[data-sec="20"], .end-sub-tabs[data-for="s1"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
+.tab-dock-end .tab[data-sec="20"].active, .end-sub-tabs[data-for="s1"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+.tab[data-sec="12"], .tab-panel[data-sec="12"] .sub-tab, .end-sub-tabs[data-for="s2"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="12"] { background:#ffffff }
 .tab-panel[data-sec="12"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s2"] .sub-tab { background:#ffffff }
@@ -1192,9 +1192,9 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .tab[data-sec="12"].active { border-bottom-color:#f6f7eb }
 .tab-panel[data-sec="12"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
 .end-sub-tabs[data-for="s2"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="12"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="12"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="11"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab-dock-end .tab[data-sec="12"], .end-sub-tabs[data-for="s2"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
+.tab-dock-end .tab[data-sec="12"].active, .end-sub-tabs[data-for="s2"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+.tab[data-sec="11"], .tab-panel[data-sec="11"] .sub-tab, .end-sub-tabs[data-for="s3"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="11"] { background:#ffffff }
 .tab-panel[data-sec="11"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s3"] .sub-tab { background:#ffffff }
@@ -1202,9 +1202,9 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .tab[data-sec="11"].active { border-bottom-color:#f6f7eb }
 .tab-panel[data-sec="11"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
 .end-sub-tabs[data-for="s3"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="11"] { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="11"].active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab.active { margin-bottom:-1px; position:relative; z-index:1 }
+.tab-dock-end .tab[data-sec="11"], .end-sub-tabs[data-for="s3"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
+.tab-dock-end .tab[data-sec="11"].active, .end-sub-tabs[data-for="s3"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+.tab.active, .tab-panel .sub-tab.active { margin-bottom:-1px; position:relative; z-index:1 }
 .tab { border-radius:7px 7px 0 0 }
 .tab-panel { border-radius:0 7px 7px 0 }
 .tab-dock-end .tabs, .end-sub-tabs .sub-tabs { border-top:1px solid var(--line) }
@@ -1220,7 +1220,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .title-bar h1 { background:transparent; margin-bottom:0 }
 .tabs { margin-top:0 }
 .row-title[data-para="14"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
-.para[data-para="14"] .col[data-col="15"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
+.para[data-para="14"] .col[data-col="15"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
 .para[data-para="14"] .col[data-col="15"] .col-text, .para[data-para="14"] .col[data-col="15"] .col-text .bit { line-height:1.2 }
 .para[data-para="14"] .col[data-col="15"] .col-text { gap:0 }
 .para[data-para="14"] .col[data-col="15"] .col-text .bit { margin:0 0 7px }
@@ -1234,7 +1234,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .para[data-para="14"] .col[data-col="15"]{align-self:center}
 .para[data-para="14"] .col[data-col="15"] .col-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:0px; margin-bottom:3px; text-align:left }
 .row-title[data-para="28"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
-.para[data-para="28"] .col[data-col="29"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
+.para[data-para="28"] .col[data-col="29"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
 .para[data-para="28"] .col[data-col="29"] .col-text, .para[data-para="28"] .col[data-col="29"] .col-text .bit { line-height:1.2 }
 .para[data-para="28"] .col[data-col="29"] .col-text { gap:0 }
 .para[data-para="28"] .col[data-col="29"] .col-text .bit { margin:0 0 7px }
@@ -1247,7 +1247,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .para[data-para="28"] .col[data-col="29"] .col-text .bit.indent.bullet::before, .para[data-para="28"] .col[data-col="29"] .col-text .bit.indent.numbered::before { left:4em }
 .para[data-para="28"] .col[data-col="29"]{align-self:center}
 .para[data-para="28"] .col[data-col="29"] .col-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:0px; margin-bottom:3px; text-align:left }
-.para[data-para="28"] .col[data-col="30"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="28"] .col[data-col="30"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="28"] .col[data-col="30"] .col-text, .para[data-para="28"] .col[data-col="30"] .col-text .bit { line-height:1.2 }
 .para[data-para="28"] .col[data-col="30"] .col-text { gap:0 }
 .para[data-para="28"] .col[data-col="30"] .col-text .bit { margin:0 0 5px }
@@ -1265,7 +1265,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .para[data-para="28"] .col[data-col="30"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="28"] .col[data-col="30"] a.ref{white-space:nowrap}
 .row-title[data-para="31"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
-.para[data-para="31"] .col[data-col="32"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
+.para[data-para="31"] .col[data-col="32"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
 .para[data-para="31"] .col[data-col="32"] .col-text, .para[data-para="31"] .col[data-col="32"] .col-text .bit { line-height:1.2 }
 .para[data-para="31"] .col[data-col="32"] .col-text { gap:0 }
 .para[data-para="31"] .col[data-col="32"] .col-text .bit { margin:0 0 7px }
@@ -1278,7 +1278,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .para[data-para="31"] .col[data-col="32"] .col-text .bit.indent.bullet::before, .para[data-para="31"] .col[data-col="32"] .col-text .bit.indent.numbered::before { left:4em }
 .para[data-para="31"] .col[data-col="32"]{align-self:center}
 .para[data-para="31"] .col[data-col="32"] .col-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:0px; margin-bottom:3px; text-align:left }
-.para[data-para="31"] .col[data-col="33"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="31"] .col[data-col="33"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="31"] .col[data-col="33"] .col-text, .para[data-para="31"] .col[data-col="33"] .col-text .bit { line-height:1.2 }
 .para[data-para="31"] .col[data-col="33"] .col-text { gap:0 }
 .para[data-para="31"] .col[data-col="33"] .col-text .bit { margin:0 0 5px }
@@ -1296,7 +1296,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .para[data-para="31"] .col[data-col="33"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="31"] .col[data-col="33"] a.ref{white-space:nowrap}
 .row-title[data-para="34"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
-.para[data-para="34"] .col[data-col="35"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
+.para[data-para="34"] .col[data-col="35"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
 .para[data-para="34"] .col[data-col="35"] .col-text, .para[data-para="34"] .col[data-col="35"] .col-text .bit { line-height:1.2 }
 .para[data-para="34"] .col[data-col="35"] .col-text { gap:0 }
 .para[data-para="34"] .col[data-col="35"] .col-text .bit { margin:0 0 7px }
@@ -1309,7 +1309,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .para[data-para="34"] .col[data-col="35"] .col-text .bit.indent.bullet::before, .para[data-para="34"] .col[data-col="35"] .col-text .bit.indent.numbered::before { left:4em }
 .para[data-para="34"] .col[data-col="35"]{align-self:center}
 .para[data-para="34"] .col[data-col="35"] .col-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:0px; margin-bottom:3px; text-align:left }
-.para[data-para="34"] .col[data-col="36"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="34"] .col[data-col="36"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="34"] .col[data-col="36"] .col-text, .para[data-para="34"] .col[data-col="36"] .col-text .bit { line-height:1.2 }
 .para[data-para="34"] .col[data-col="36"] .col-text { gap:0 }
 .para[data-para="34"] .col[data-col="36"] .col-text .bit { margin:0 0 5px }
@@ -1327,7 +1327,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .para[data-para="34"] .col[data-col="36"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="34"] .col[data-col="36"] a.ref{white-space:nowrap}
 .row-title[data-para="37"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
-.para[data-para="37"] .col[data-col="38"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
+.para[data-para="37"] .col[data-col="38"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
 .para[data-para="37"] .col[data-col="38"] .col-text, .para[data-para="37"] .col[data-col="38"] .col-text .bit { line-height:1.2 }
 .para[data-para="37"] .col[data-col="38"] .col-text { gap:0 }
 .para[data-para="37"] .col[data-col="38"] .col-text .bit { margin:0 0 7px }
@@ -1372,7 +1372,6 @@ html, body { background:#05070c }
 .who,.site{text-align:center}
 .title-bar h1,.page-end-title{width:100%;min-width:0;text-align:center}
 .top{position:relative}
-html:not(.ew-phone) .stick-top>.page-nav-bar{display:none!important}
 .page-nav-bar .page-nav{flex:0 0 auto}
 .page-nav-bar .page-nav:empty{visibility:hidden;display:inline-block;min-width:3.2em;pointer-events:none}
 html.ew-phone .title-bar{display:none!important}

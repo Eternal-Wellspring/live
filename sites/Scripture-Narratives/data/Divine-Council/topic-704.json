@@ -2,10 +2,11 @@
   "id": 704,
   "lecture_id": 1,
   "level": 5,
-  "seq": 636,
+  "seq": 663,
   "kind": "period",
   "title": "Zephaniah",
   "notes": "",
   "description": "",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

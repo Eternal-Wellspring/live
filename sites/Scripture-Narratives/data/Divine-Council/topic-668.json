@@ -2,10 +2,11 @@
   "id": 668,
   "lecture_id": 1,
   "level": 3,
-  "seq": 601,
+  "seq": 628,
   "kind": "period",
   "title": "Isaiah 6",
   "notes": "",
   "description": "Isaiah sees the Lord on the throne with the seraphim. He is cleansed, and he is sent.",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

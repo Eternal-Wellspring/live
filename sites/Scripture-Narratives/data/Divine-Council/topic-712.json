@@ -2,10 +2,11 @@
   "id": 712,
   "lecture_id": 1,
   "level": 4,
-  "seq": 641,
+  "seq": 668,
   "kind": "period",
   "title": "Angels",
   "notes": "",
   "description": "<div><br></div>",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

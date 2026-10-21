@@ -2,10 +2,11 @@
   "id": 664,
   "lecture_id": 1,
   "level": 2,
-  "seq": 595,
+  "seq": 622,
   "kind": "period",
   "title": "Court Scenes",
   "notes": "",
   "description": "<div>Each of these is the court itself. None of them is a figure of speech for a human court.</div>",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

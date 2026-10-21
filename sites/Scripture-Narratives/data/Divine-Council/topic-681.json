@@ -2,10 +2,11 @@
   "id": 681,
   "lecture_id": 1,
   "level": 5,
-  "seq": 613,
+  "seq": 640,
   "kind": "period",
   "title": "Joshua",
   "notes": "",
   "description": "",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

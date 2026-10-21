@@ -2,10 +2,11 @@
   "id": 703,
   "lecture_id": 1,
   "level": 5,
-  "seq": 635,
+  "seq": 662,
   "kind": "period",
   "title": "Habakkuk",
   "notes": "",
   "description": "",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

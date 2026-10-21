@@ -2,10 +2,11 @@
   "id": 702,
   "lecture_id": 1,
   "level": 5,
-  "seq": 634,
+  "seq": 661,
   "kind": "period",
   "title": "Nahum",
   "notes": "",
   "description": "",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

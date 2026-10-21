@@ -2,10 +2,11 @@
   "id": 708,
   "lecture_id": 1,
   "level": 4,
-  "seq": 640,
+  "seq": 667,
   "kind": "period",
   "title": "Divine council beings",
   "notes": "",
   "description": "<div><br></div>",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

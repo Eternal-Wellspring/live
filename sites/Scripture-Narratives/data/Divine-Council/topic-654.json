@@ -2,10 +2,11 @@
   "id": 654,
   "lecture_id": 1,
   "level": 2,
-  "seq": 585,
+  "seq": 612,
   "kind": "period",
   "title": "Method",
   "notes": "",
   "description": "<div>Yahweh presides. He stands, questions, and pronounces.&nbsp;</div><div>Lesser elohim are summoned, given an assignment or a sentence, and sometimes sent.</div>",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

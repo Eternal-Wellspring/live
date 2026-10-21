@@ -2,10 +2,11 @@
   "id": 682,
   "lecture_id": 1,
   "level": 5,
-  "seq": 614,
+  "seq": 641,
   "kind": "period",
   "title": "Judges",
   "notes": "",
   "description": "",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

@@ -2,10 +2,11 @@
   "id": 721,
   "lecture_id": 1,
   "level": 3,
-  "seq": 597,
+  "seq": 624,
   "kind": "period",
   "title": "Heavenly",
   "notes": "",
   "description": "",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

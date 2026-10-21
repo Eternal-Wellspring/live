@@ -2,10 +2,11 @@
   "id": 677,
   "lecture_id": 1,
   "level": 5,
-  "seq": 609,
+  "seq": 636,
   "kind": "period",
   "title": "Exodus",
   "notes": "",
   "description": "<div><br></div>",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

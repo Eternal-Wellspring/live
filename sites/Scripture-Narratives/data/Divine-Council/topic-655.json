@@ -2,10 +2,11 @@
   "id": 655,
   "lecture_id": 1,
   "level": 3,
-  "seq": 586,
+  "seq": 613,
   "kind": "period",
   "title": "Yahweh presides",
   "notes": "",
   "description": "He stands in the assembly, asks the questions, and gives the sentence.",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

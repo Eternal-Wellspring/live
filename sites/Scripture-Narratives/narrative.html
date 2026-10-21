@@ -463,7 +463,7 @@
           </a>
           <div class="brand-row">
             <div class="who">
-              <a class="site" href="home.html">Scripture Narratives</a>
+              <a class="site" href="index.html">Scripture Narratives</a>
               <h1 id="page-title">Topics</h1>
             </div>
           </div>
@@ -572,10 +572,10 @@
     }
     paintTabs();
     function treeUrl() {
-      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=443";
+      return "topics-tree.html?id=" + encodeURIComponent(frameId || "") + "&v=445";
     }
     function verseUrl() {
-      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=449";
+      return "topics-verse.html?id=" + encodeURIComponent(frameId || "") + "&v=451";
     }
     function showTree() {
       var fr = document.getElementById("tree-frame");
@@ -632,9 +632,21 @@
       fetch("/dotl/topics?t=" + Date.now(), { cache: "no-store" })
         .then(function (r) { return r.json(); })
         .then(function (rows) {
-          (rows || []).forEach(function (row) {
-            if (String(row.id) === String(topic.id) && (row.level || 1) === 1) row.live = !!on;
-          });
+          var i, hit, lv;
+          rows = rows || [];
+          rows.sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); });
+          hit = false;
+          for (i = 0; i < rows.length; i++) {
+            if (!hit) {
+              if (String(rows[i].id) !== String(topic.id)) continue;
+              hit = true;
+              lv = rows[i].level || 1;
+              rows[i].live = !!on;
+              continue;
+            }
+            if ((rows[i].level || 1) <= lv) break;
+            rows[i].live = !!on;
+          }
           topic.live = !!on;
           return fetch("/dotl/topics", {
             method: "POST",
@@ -788,7 +800,7 @@
             notes: "",
             description: "",
             duration: "",
-            live: true
+            live: below ? from.live !== false : false
           };
           rows.splice(at, 0, row);
           rows.forEach(function (x, n) { x.seq = n + 1; });
@@ -905,7 +917,7 @@
       frameId = nid ? String(nid) : "";
       markL1(frameId);
       if (!frameId) return;
-      var q = "?id=" + encodeURIComponent(frameId) + "&v=19";
+      var q = "?id=" + encodeURIComponent(frameId) + "&v=22";
       document.getElementById("topics-frame").src = "topics-view.html" + q;
       showTree();
     }

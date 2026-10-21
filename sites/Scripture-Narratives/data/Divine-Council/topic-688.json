@@ -2,10 +2,11 @@
   "id": 688,
   "lecture_id": 1,
   "level": 5,
-  "seq": 620,
+  "seq": 647,
   "kind": "period",
   "title": "2 Chronicles",
   "notes": "",
   "description": "",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

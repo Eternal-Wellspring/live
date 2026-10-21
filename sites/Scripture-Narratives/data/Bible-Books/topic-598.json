@@ -1,0 +1,12 @@
+{
+  "id": 598,
+  "lecture_id": 1,
+  "level": 4,
+  "seq": 274,
+  "kind": "period",
+  "title": "Territories",
+  "notes": "",
+  "description": "<div><table><thead><tr><th rowspan=\"2\">Territory</th><th colspan=\"2\">Population 1,000's</th><th colspan=\"2\">%age</th></tr><tr><th>Jewish</th><th>Gentile</th><th>Jewish</th><th>Gentile</th></tr></thead><tbody><tr><td>Syria</td><td>300</td><td>1,200</td><td>20</td><td>80</td></tr><tr><td>Judea</td><td>450</td><td>50</td><td>90</td><td>10</td></tr><tr><td>Galilee</td><td>225</td><td>25</td><td>90</td><td>10</td></tr><tr><td>Decapolis</td><td>18</td><td>158</td><td>10</td><td>90</td></tr><tr><td>Jerusalem</td><td>76</td><td>4</td><td>95</td><td>5</td></tr><tr><td>Perea</td><td>106</td><td>19</td><td>85</td><td>15</td></tr><tr><td>Total</td><td>1,175</td><td>1,456</td><td>45</td><td>55</td></tr></tbody></table></div>",
+  "duration": "",
+  "live": true
+}

@@ -2,10 +2,11 @@
   "id": 651,
   "lecture_id": 1,
   "level": 3,
-  "seq": 582,
+  "seq": 609,
   "kind": "period",
   "title": "Judgment",
   "notes": "",
   "description": "<div><b><u>Judgement</u></b></div><div>When those beings pervert justice, \nYahweh indicts them in their own assembly \nand sentences them to die <b>like men</b>.</div>",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

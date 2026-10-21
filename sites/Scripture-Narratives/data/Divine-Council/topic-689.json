@@ -2,10 +2,11 @@
   "id": 689,
   "lecture_id": 1,
   "level": 5,
-  "seq": 621,
+  "seq": 648,
   "kind": "period",
   "title": "Ezra",
   "notes": "",
   "description": "",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

@@ -2,10 +2,11 @@
   "id": 719,
   "lecture_id": 1,
   "level": 3,
-  "seq": 646,
+  "seq": 673,
   "kind": "period",
   "title": "Angels",
   "notes": "",
   "description": "<div><b><u>Angels<br></u></b></div><div>Messengers: either spiritual or human</div>",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

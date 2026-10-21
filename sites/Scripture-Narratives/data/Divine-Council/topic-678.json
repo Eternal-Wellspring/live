@@ -2,10 +2,11 @@
   "id": 678,
   "lecture_id": 1,
   "level": 5,
-  "seq": 610,
+  "seq": 637,
   "kind": "period",
   "title": "Leviticus",
   "notes": "",
   "description": "<div><br></div>",
-  "duration": ""
+  "duration": "",
+  "live": true
 }

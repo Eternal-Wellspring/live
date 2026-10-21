@@ -39,6 +39,7 @@
   var colScroll = {};
   var colDelta = {};
   var colNativeScroll = {};
+  var colCenterSel = "";
   function clampChildTop(top, innerH, natural, view, roomTop) {
     var bottom = (view || 0) - PAD;
     var hi = natural;
@@ -131,9 +132,31 @@
   function bySeq() {
     return topics.slice().sort(function (a, b) { return (a.seq || 0) - (b.seq || 0); });
   }
+  function onWebsite() {
+    var p = String(location.port || "");
+    if (p === "8775" || p === "8776" || p === "8777" || p === "8778") return false;
+    if (String(location.hostname || "") === "builder.eternalwellspring.com") return false;
+    return true;
+  }
+  function liveBranch(list) {
+    var out, stack, i, t, lv, parentOn, selfOn;
+    if (!onWebsite()) return list;
+    out = [];
+    stack = [];
+    for (i = 0; i < list.length; i++) {
+      t = list[i];
+      lv = t.level || 1;
+      while (stack.length && stack[stack.length - 1].lv >= lv) stack.pop();
+      parentOn = stack.length ? stack[stack.length - 1].on : true;
+      selfOn = !!(parentOn && t.live !== false);
+      stack.push({ lv: lv, on: selfOn });
+      if (selfOn) out.push(t);
+    }
+    return out;
+  }
   function visible() {
     var list = bySeq();
-    if (!rootId) return list;
+    if (!rootId) return liveBranch(list);
     var start = -1, rootLv = 1, i;
     for (i = 0; i < list.length; i++) {
       if (sid(list[i].id) === sid(rootId)) {
@@ -142,13 +165,13 @@
         break;
       }
     }
-    if (start < 0) return list;
+    if (start < 0) return liveBranch(list);
     var out = [list[start]];
     for (i = start + 1; i < list.length; i++) {
       if ((list[i].level || 1) <= rootLv) break;
       out.push(list[i]);
     }
-    return out;
+    return liveBranch(out);
   }
   function branchOf(t) {
     var list = bySeq();
@@ -1887,8 +1910,22 @@
   function stripGloss(html) {
     return String(html || "").replace(/\s*<i class="ew-gloss">[\s\S]*?<\/i>/g, "");
   }
+  function glossAnchorAt(text, anchor, from) {
+    var esc, re, m, i;
+    anchor = String(anchor || "");
+    if (!anchor) return -1;
+    if (/[\s-]/.test(anchor)) {
+      i = text.indexOf(anchor, from || 0);
+      return i;
+    }
+    esc = anchor.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    re = new RegExp("\\b" + esc + "\\b", "g");
+    re.lastIndex = from || 0;
+    m = re.exec(text);
+    return m ? m.index : -1;
+  }
   function glossVerse(html, glosses) {
-    var left, out, re, m, s;
+    var left, out, re, m, s, chunk, pos, at, anchor, g;
     if (!glosses || !glosses.length) return html;
     left = glosses.slice();
     out = "";
@@ -1896,12 +1933,18 @@
     s = String(html || "");
     while ((m = re.exec(s))) {
       if (m[1]) { out += m[1]; continue; }
-      out += m[2].replace(/\b(gods|god|God|GOD|goddess|judges|mighty|spirit|abomination|idols|idol|images|image|angels|angel)\b/g, function (word) {
-        var g;
-        if (!left.length || word !== left[0].anchor) return word;
+      chunk = m[2];
+      pos = 0;
+      while (left.length) {
+        anchor = left[0].anchor;
+        at = glossAnchorAt(chunk, anchor, pos);
+        if (at < 0) break;
+        out += chunk.slice(pos, at + anchor.length);
         g = left.shift();
-        return word + " <i class=\"ew-gloss\">(" + escapeGloss(g.text) + ")</i>";
-      });
+        out += " <i class=\"ew-gloss\">(" + escapeGloss(g.text) + ")</i>";
+        pos = at + anchor.length;
+      }
+      out += chunk.slice(pos);
     }
     while (left.length) out += " <i class=\"ew-gloss\">(" + escapeGloss(left.shift().text) + ")</i>";
     return out;
@@ -2578,6 +2621,7 @@
       }
     }
     if (!board) return;
+    var centerNow = sid(sel) !== colCenterSel;
     var items = visible();
     noteRepaint = true;
     board.innerHTML = "";
@@ -3204,9 +3248,34 @@
         put(els[i], ind, y, bw, rh);
         y += rh + GAP_Y;
       }
-      if (pane._anchor) placeAnchored(pane);
+      var picked = null;
+      var piSel;
+      if (sel) {
+        for (piSel = 0; piSel < els.length; piSel++) {
+          if (els[piSel].dataset.ref) continue;
+          if (sid(els[piSel].dataset.id) === sid(sel)) { picked = els[piSel]; break; }
+        }
+      }
+      function centerPicked() {
+        var mid, scroll, max;
+        mid = (picked._y || 0) + ((picked._h || BOX_H) / 2);
+        scroll = mid - paneH / 2;
+        max = Math.max(0, innerH - paneH);
+        if (scroll < 0) scroll = 0;
+        if (scroll > max) scroll = max;
+        return Math.round(scroll);
+      }
+      if (native && picked && centerNow) {
+        pane.scrollTop = centerPicked();
+        if (colKey) colNativeScroll[colKey] = pane.scrollTop;
+      } else if (native && picked && colKey && colNativeScroll[colKey] != null) {
+        pane.scrollTop = colNativeScroll[colKey];
+      } else if (pane._anchor) {
+        placeAnchored(pane);
+      } else if (native && colKey && colNativeScroll[colKey] != null) {
+        pane.scrollTop = colNativeScroll[colKey];
+      }
       if (native) {
-        if (!pane._anchor && colKey && colNativeScroll[colKey]) pane.scrollTop = colNativeScroll[colKey];
         pane.addEventListener("scroll", function () {
           if (colKey) colNativeScroll[colKey] = pane.scrollTop;
           if (placingCols) return;
@@ -3938,6 +4007,7 @@
       requestAnimationFrame(function () { revealBox(versesWrap); });
     }
     if (st) st.textContent = items.length + " topics.";
+    colCenterSel = sid(sel || "");
   }
   function topicBoxEl(id) {
     var nodes = document.querySelectorAll(".tbox[data-id]");
