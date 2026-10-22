@@ -459,7 +459,7 @@
     if (q.indexOf('notrack=0') !== -1) localStorage.removeItem('ew_notrack');
     if (localStorage.getItem('ew_notrack') === '1') return;
   } catch(e) {}
-  if (location.hostname !== 'eternalwellspring.com' && location.hostname !== 'www.eternalwellspring.com') return;
+  var h = location.hostname; if (h !== 'eternalwellspring.com' && !/\.eternalwellspring\.com$/.test(h)) return;
   var s = document.createElement('script');
   s.async = true;
   s.src = 'https://www.googletagmanager.com/gtag/js?id=G-6Y5VV790GT';
