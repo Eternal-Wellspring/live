@@ -13,6 +13,6 @@
   "category": "End Times Prophecies",
   "showOnTest": true,
   "showOnLive": true,
-  "showOnWeb": true,
+  "showOnWeb": false,
   "numberContents": true
 }
