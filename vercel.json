@@ -1,12 +1,13 @@
 {
   "redirects": [
     {
-      "source": "/:site((?!bible|scriptures|sky-images|api|images|sites|topics|dotl)[^/.]+)",
+      "source": "/:site((?!bible|scriptures|sky-images|api|images|sites|topics|dotl|Admin)[^/.]+)",
       "destination": "/:site/",
       "permanent": false
     }
   ],
   "rewrites": [
+    { "source": "/Admin", "destination": "/Admin.html" },
     { "source": "/bible", "destination": "/api/bible" },
     { "source": "/scriptures", "destination": "/api/scriptures" },
     { "source": "/dotl/topics", "destination": "/api/dotl?part=topics" },
