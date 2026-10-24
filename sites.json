@@ -1,6 +1,16 @@
 {
   "sites": [
     {
+      "folder": "Overarching-Narratives",
+      "name": "10 Minute Stories",
+      "tagline": "Short stories spanning Genesis to Revelation",
+      "description": "<span class=\"bit\">The Bible tells the story of how God is restoring His relationship with you. This story is told from different perspectives, all readable in ten minutes or less.<br><br><br></span>",
+      "category": "End Times Prophecies",
+      "contents": [],
+      "showOnWeb": false,
+      "href": "/Overarching-Narratives/"
+    },
+    {
       "folder": "His-Finished-Work",
       "name": "His Finished Work",
       "tagline": "The best is yet to come.",
@@ -9,16 +19,6 @@
       "contents": [],
       "showOnWeb": false,
       "href": "/His-Finished-Work/"
-    },
-    {
-      "folder": "Overarching-Narratives",
-      "name": "Overarching Narratives",
-      "tagline": "One story, told from different angles.",
-      "description": "<span class=\"bit\">Draft placeholder. The Narratives tell the one story of Scripture, from Genesis to Revelation, each from a different angle.</span>",
-      "category": "End Times Prophecies",
-      "contents": [],
-      "showOnWeb": false,
-      "href": "/Overarching-Narratives/"
     },
     {
       "folder": "Romans",
