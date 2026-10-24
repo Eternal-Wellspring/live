@@ -1,0 +1,46 @@
+{
+  "about": "Shared Eternal Wellspring glossary. Master copy lives in 1 Builder/glossary.json; each site folder gets its own verified copy on save/copy. Reference a term in page text with <span class=\"ew-term\" data-term=\"id\">word</span>. Scripture NKJV unless noted.",
+  "version": 1,
+  "terms": {
+    "death": {
+      "title": "Death",
+      "body": "Scripture speaks of two kinds of death.\n1. Physical: the body dies and returns to dust (Genesis 3:19).\n2. Spiritual: separation from God (Isaiah 59:2).\n\"For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord.\" (Romans 6:23)",
+      "sites": ["His-Finished-Work"]
+    },
+    "saints": {
+      "title": "Saints (Elect, Believers)",
+      "body": "Everyone who is saved by faith, Gentiles and Hebrews alike.\n\"Most assuredly, I say to you, he who hears My word and believes in Him who sent Me has everlasting life, and shall not come into judgment, but has passed from death into life.\" (John 5:24)",
+      "sites": ["His-Finished-Work"]
+    },
+    "salvation": {
+      "title": "Salvation",
+      "body": "Redeemed from death and given eternal life.\n\"that if you confess with your mouth the Lord Jesus and believe in your heart that God has raised Him from the dead, you will be saved.\" (Romans 10:9)",
+      "sites": ["His-Finished-Work"]
+    },
+    "yahweh": {
+      "title": "Yahweh",
+      "body": "The personal name of God, written YHWH in Hebrew. Most English Bibles, including the NKJV, print it as LORD in capitals. These pages write Yahweh only where the Hebrew has YHWH (Exodus 3:15).",
+      "sites": ["Overarching-Narratives", "His-Finished-Work"]
+    },
+    "sons-of-god": {
+      "title": "Sons of God",
+      "body": "In the Old Testament, a title for heavenly beings who stand before God (Job 1:6; 38:7; Genesis 6:2). In the New Testament, those who are led by the Spirit of God (Romans 8:14). Deuteronomy 32:8 reads \"sons of God\" in the ESV.",
+      "sites": ["Overarching-Narratives"]
+    },
+    "divine-council": {
+      "title": "Divine council",
+      "body": "The assembly of heavenly beings around God's throne that Scripture describes: \"God stands in the congregation of the mighty; He judges among the gods.\" (Psalm 82:1). See also 1 Kings 22:19.",
+      "sites": ["Overarching-Narratives"]
+    },
+    "seed": {
+      "title": "Seed",
+      "body": "The offspring promised in Genesis 3:15, who would crush the serpent's head. Paul identifies the promised Seed: \"He does not say, 'And to seeds,' as of many, but as of one, 'And to your Seed,' who is Christ.\" (Galatians 3:16)",
+      "sites": ["Overarching-Narratives"]
+    },
+    "firstfruits": {
+      "title": "Firstfruits",
+      "body": "The first part of the harvest, brought to Yahweh before the rest (Leviticus 23:10). \"But now Christ is risen from the dead, and has become the firstfruits of those who have fallen asleep.\" (1 Corinthians 15:20)",
+      "sites": ["Overarching-Narratives"]
+    }
+  }
+}

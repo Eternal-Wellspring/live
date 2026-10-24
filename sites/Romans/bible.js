@@ -3375,10 +3375,45 @@
       }
       var title = box.querySelector(".ew-text-title");
       var body = box.querySelector(".ew-text-body");
-      title.textContent = String(term.getAttribute("data-title") || term.textContent || "").trim();
-      body.textContent = String(term.getAttribute("data-body") || "");
+      var paint = function (g) {
+        var ownTitle = String(term.getAttribute("data-title") || "").trim();
+        var ownBody = String(term.getAttribute("data-body") || "");
+        title.textContent = ownTitle || (g && g.title) || String(term.textContent || "").trim();
+        body.textContent = ownBody || (g && g.body) || "";
+      };
+      var id = String(term.getAttribute("data-term") || "").trim().toLowerCase();
+      paint(null);
       box.classList.add("open");
+      if (id) {
+        ewGlossary(function (terms) {
+          if (box.classList.contains("open")) paint(terms[id] || null);
+        });
+      }
     }
+    // Shared glossary: one definition per term id, loaded once from this site's glossary.json.
+    var ewGlossaryData = null;
+    var ewGlossaryWait = null;
+    function ewGlossary(done) {
+      if (ewGlossaryData) return done(ewGlossaryData);
+      if (ewGlossaryWait) return ewGlossaryWait.push(done);
+      ewGlossaryWait = [done];
+      var src = window.EW_GLOSSARY_SRC || "glossary.json";
+      var finish = function (terms) {
+        ewGlossaryData = terms || {};
+        var q = ewGlossaryWait || [];
+        ewGlossaryWait = null;
+        q.forEach(function (fn) { try { fn(ewGlossaryData); } catch (e) {} });
+      };
+      try {
+        fetch(src, { cache: "default" })
+          .then(function (r) { return r.ok ? r.json() : {}; })
+          .then(function (j) { finish((j && j.terms) || {}); })
+          .catch(function () { finish({}); });
+      } catch (e) {
+        finish({});
+      }
+    }
+    window.ewGlossary = ewGlossary;
     window.ewOpenTextPopup = openTextModal;
     document.addEventListener(
       "click",

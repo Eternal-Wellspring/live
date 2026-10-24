@@ -297,6 +297,8 @@ html.ew-phone .who .site {
 .end-sub-tabs[hidden] { display: none !important; }
 main { padding-top: 0; padding-bottom: 0; }
 h1 { color: var(--title); font-size: calc(1.6rem * var(--ew-font, 1)); }
+.page-title-line { display: block; width: 100%; min-width: 0; text-align: inherit; font-size: calc(1.6rem * var(--ew-font, 1)); color: var(--title); }
+.page-title-line > h1 { display: inline; width: auto; margin: 0; font-size: inherit; color: inherit; }
 h2 { color: var(--accent); font-size: calc(1.2rem * var(--ew-font, 1)); margin: 1.2rem 0 0.4rem; }
 .tabs { display: flex; width: 100%; box-sizing: border-box; gap: 4px; margin: 0; align-items: flex-end; }
 .tab-settings { margin-left: 0; flex: 0 0 auto; }
@@ -1137,23 +1139,23 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 #ew-verse, #ew-chapter { box-shadow:none }
 .ew-verse-body, .ew-verse-body p, .ew-verse-alt, .ew-chapter-list, .ew-ch-row{box-shadow:none!important;border:0!important;background:transparent!important;padding:0!important}
 .ew-verse-ref { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#005eb8 }
-.ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; text-align:left }
-.ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; text-align:left }
-#ew-text-modal .ew-text-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; background:#f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:20px 20px 20px #00000040; padding:16px; text-align:left }
+.ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#005eb8; text-align:left }
+.ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#005eb8; text-align:left }
+#ew-text-modal .ew-text-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#005eb8; background:#f6f7eb; border-style:solid; border-color:#aaaaaa; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:20px 20px 20px #00000040; padding:16px; text-align:left }
 #ew-text-modal .ew-text-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; text-decoration:underline }
 #ew-text-modal .ew-text-body, #ew-text-modal .ew-text-body p { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#333333; line-height:1.25 }
 .ew-chapter-list, .ew-ch-row { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.25 }
 .page-nav, .page-nav .page-nav-word, .page-nav .page-nav-tip, .page-tools, .page-tools button { font-weight:400; font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#5a6a72 }
-.tab[data-sec="1"], .tab-panel[data-sec="1"] .sub-tab, .end-sub-tabs[data-for="s0"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
-.tab[data-sec="1"] { background:#ffffff }
-.tab-panel[data-sec="1"] .sub-tab { background:#ffffff }
+.tab[data-sec="636"], .tab-panel[data-sec="636"] .sub-tab, .end-sub-tabs[data-for="s0"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="636"] { background:#ffffff }
+.tab-panel[data-sec="636"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s0"] .sub-tab { background:#ffffff }
-.tab[data-sec="1"].active, .tab-panel[data-sec="1"] { background:#f6f7eb }
-.tab[data-sec="1"].active { border-bottom-color:#f6f7eb }
-.tab-panel[data-sec="1"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
+.tab[data-sec="636"].active, .tab-panel[data-sec="636"] { background:#f6f7eb }
+.tab[data-sec="636"].active { border-bottom-color:#f6f7eb }
+.tab-panel[data-sec="636"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
 .end-sub-tabs[data-for="s0"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="1"], .end-sub-tabs[data-for="s0"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="1"].active, .end-sub-tabs[data-for="s0"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+.tab-dock-end .tab[data-sec="636"], .end-sub-tabs[data-for="s0"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
+.tab-dock-end .tab[data-sec="636"].active, .end-sub-tabs[data-for="s0"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
 .tab[data-sec="s-home"], .tab-panel[data-sec="s-home"] .sub-tab, .end-sub-tabs[data-for="s1"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
 .tab[data-sec="s-home"] { background:#ffffff }
 .tab-panel[data-sec="s-home"] .sub-tab { background:#ffffff }
@@ -1164,16 +1166,16 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .end-sub-tabs[data-for="s1"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
 .tab-dock-end .tab[data-sec="s-home"], .end-sub-tabs[data-for="s1"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="s-home"].active, .end-sub-tabs[data-for="s1"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
-.tab[data-sec="s-set-p-home"], .tab-panel[data-sec="s-set-p-home"] .sub-tab, .end-sub-tabs[data-for="s2"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
-.tab[data-sec="s-set-p-home"] { background:#ffffff }
-.tab-panel[data-sec="s-set-p-home"] .sub-tab { background:#ffffff }
+.tab[data-sec="955"], .tab-panel[data-sec="955"] .sub-tab, .end-sub-tabs[data-for="s2"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:4px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="955"] { background:#ffffff }
+.tab-panel[data-sec="955"] .sub-tab { background:#ffffff }
 .end-sub-tabs[data-for="s2"] .sub-tab { background:#ffffff }
-.tab[data-sec="s-set-p-home"].active, .tab-panel[data-sec="s-set-p-home"] { background:#f6f7eb }
-.tab[data-sec="s-set-p-home"].active { border-bottom-color:#f6f7eb }
-.tab-panel[data-sec="s-set-p-home"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
+.tab[data-sec="955"].active, .tab-panel[data-sec="955"] { background:#f6f7eb }
+.tab[data-sec="955"].active { border-bottom-color:#f6f7eb }
+.tab-panel[data-sec="955"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
 .end-sub-tabs[data-for="s2"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="s-set-p-home"], .end-sub-tabs[data-for="s2"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="s-set-p-home"].active, .end-sub-tabs[data-for="s2"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+.tab-dock-end .tab[data-sec="955"], .end-sub-tabs[data-for="s2"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
+.tab-dock-end .tab[data-sec="955"].active, .end-sub-tabs[data-for="s2"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
 .tab.active, .tab-panel .sub-tab.active { margin-bottom:-1px; position:relative; z-index:1 }
 .tab { border-radius:7px 7px 0 0 }
 .tab-panel { border-radius:0 7px 7px 0 }
