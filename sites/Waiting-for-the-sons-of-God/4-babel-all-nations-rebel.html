@@ -743,6 +743,26 @@ html.ew-phone .who .site {
 /* "html" lifts these above the defaults bible.js adds while the page runs. */
 html #ew-info-modal .ew-info-title, html #ew-info-modal .ew-info-x, html #ew-text-modal .ew-text-title { color: var(--title, #005eb8); }
 </style>
+<!-- Google tag (gtag.js) -->
+<script>
+(function(){
+  try {
+    var q = location.search;
+    if (q.indexOf('notrack=1') !== -1) localStorage.setItem('ew_notrack','1');
+    if (q.indexOf('notrack=0') !== -1) localStorage.removeItem('ew_notrack');
+    if (localStorage.getItem('ew_notrack') === '1') return;
+  } catch(e) {}
+  var h = location.hostname; if (h !== 'eternalwellspring.com' && !/\.eternalwellspring\.com$/.test(h)) return;
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=G-6Y5VV790GT';
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){dataLayer.push(arguments);};
+  gtag('js', new Date());
+  gtag('config', 'G-6Y5VV790GT');
+})();
+</script>
 </head>
 <body>
   <canvas id="ew-sky" aria-hidden="true"></canvas>

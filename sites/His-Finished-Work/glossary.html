@@ -9,6 +9,26 @@
   <link rel="icon" href="images/icon.jpg">
   <link rel="stylesheet" href="site.css?v=40e53331" />
   <style>.ew-gloss{max-width:820px;margin:0 auto;padding:1rem}.ew-gloss-term{margin:0 0 1.4rem}.ew-gloss-term p{margin:.3rem 0;white-space:pre-wrap}</style>
+<!-- Google tag (gtag.js) -->
+<script>
+(function(){
+  try {
+    var q = location.search;
+    if (q.indexOf('notrack=1') !== -1) localStorage.setItem('ew_notrack','1');
+    if (q.indexOf('notrack=0') !== -1) localStorage.removeItem('ew_notrack');
+    if (localStorage.getItem('ew_notrack') === '1') return;
+  } catch(e) {}
+  var h = location.hostname; if (h !== 'eternalwellspring.com' && !/\.eternalwellspring\.com$/.test(h)) return;
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=G-6Y5VV790GT';
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function(){dataLayer.push(arguments);};
+  gtag('js', new Date());
+  gtag('config', 'G-6Y5VV790GT');
+})();
+</script>
 </head>
 <body>
 <main class="ew-gloss" data-glossary="glossary.json?v=2c880ec7">

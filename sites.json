@@ -1,14 +1,40 @@
 {
   "sites": [
     {
-      "folder": "Overarching-Narratives",
+      "folder": "10-Minute-Stories",
       "name": "10 Minute Stories",
       "tagline": "Short stories spanning Genesis to Revelation",
       "description": "<span class=\"bit\">The Bible tells the story of how God is restoring His relationship with you. This story is told from different perspectives, all readable in ten minutes or less.<br><br><br></span>",
       "category": "End Times Prophecies",
       "contents": [],
-      "showOnWeb": false,
-      "href": "/Overarching-Narratives/"
+      "showOnWeb": true,
+      "href": "/10-Minute-Stories/",
+      "stories": [
+        {
+          "title": "Paradise of God: Restored",
+          "note": "God dwelt with Mankind until they rebelled. God will return so that they may once again dwell in Paradise with God.",
+          "href": "/10-Minute-Stories/1-paradise-of-god-restored.html",
+          "onLive": true
+        },
+        {
+          "title": "Sons of God: Family of Yahweh",
+          "note": "",
+          "href": "",
+          "onLive": false
+        },
+        {
+          "title": "Feasts of God: Timing of Yahweh",
+          "note": "",
+          "href": "",
+          "onLive": false
+        },
+        {
+          "title": "The Kingdom of God: Fall and Rise",
+          "note": "",
+          "href": "",
+          "onLive": false
+        }
+      ]
     },
     {
       "folder": "His-Finished-Work",

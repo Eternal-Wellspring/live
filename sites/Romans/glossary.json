@@ -20,27 +20,27 @@
     "yahweh": {
       "title": "Yahweh",
       "body": "The personal name of God, written YHWH in Hebrew. Most English Bibles, including the NKJV, print it as LORD in capitals. These pages write Yahweh only where the Hebrew has YHWH (Exodus 3:15).",
-      "sites": ["Overarching-Narratives", "His-Finished-Work"]
+      "sites": ["10-Minute-Stories", "His-Finished-Work"]
     },
     "sons-of-god": {
       "title": "Sons of God",
       "body": "In the Old Testament, a title for heavenly beings who stand before God (Job 1:6; 38:7; Genesis 6:2). In the New Testament, those who are led by the Spirit of God (Romans 8:14). Deuteronomy 32:8 reads \"sons of God\" in the ESV.",
-      "sites": ["Overarching-Narratives"]
+      "sites": ["10-Minute-Stories"]
     },
     "divine-council": {
       "title": "Divine council",
       "body": "The assembly of heavenly beings around God's throne that Scripture describes: \"God stands in the congregation of the mighty; He judges among the gods.\" (Psalm 82:1). See also 1 Kings 22:19.",
-      "sites": ["Overarching-Narratives"]
+      "sites": ["10-Minute-Stories"]
     },
     "seed": {
       "title": "Seed",
       "body": "The offspring promised in Genesis 3:15, who would crush the serpent's head. Paul identifies the promised Seed: \"He does not say, 'And to seeds,' as of many, but as of one, 'And to your Seed,' who is Christ.\" (Galatians 3:16)",
-      "sites": ["Overarching-Narratives"]
+      "sites": ["10-Minute-Stories"]
     },
     "firstfruits": {
       "title": "Firstfruits",
       "body": "The first part of the harvest, brought to Yahweh before the rest (Leviticus 23:10). \"But now Christ is risen from the dead, and has become the firstfruits of those who have fallen asleep.\" (1 Corinthians 15:20)",
-      "sites": ["Overarching-Narratives"]
+      "sites": ["10-Minute-Stories"]
     }
   }
 }

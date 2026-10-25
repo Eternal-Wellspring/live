@@ -6,7 +6,7 @@
   <title>Eternal Wellspring — scripture on the meaning of the Word</title>
   <meta name="description" content="Scripture websites: Waiting for the sons of God and Scripture Narratives. The Word opens beside the story, from Genesis to Revelation." />
   <link rel="icon" href="images/icon.jpg" />
-  <link rel="stylesheet" href="index.css?v=15" />
+  <link rel="stylesheet" href="index.css?v=16" />
 <!-- Google tag (gtag.js) -->
 <script>
 (function(){
@@ -71,7 +71,7 @@
     }
 
     function listedSites() {
-      return Array.prototype.slice.call(document.querySelectorAll("#site-list .ew-site"));
+      return Array.prototype.slice.call(document.querySelectorAll("#site-list > .ew-site, #site-list > .ew-site-block"));
     }
 
     function countIn(name) {
@@ -180,7 +180,45 @@
         extra.textContent = more;
         a.appendChild(extra);
       }
-      $("site-list").appendChild(a);
+      var stories = Array.isArray(s.stories) ? s.stories : null;
+      if (!stories || !stories.length) {
+        $("site-list").appendChild(a);
+        return;
+      }
+      var block = document.createElement("div");
+      block.className = "ew-site-block";
+      block.setAttribute("data-folder", folder);
+      block.setAttribute("data-category", s.category || "");
+      block.appendChild(a);
+      var ul = document.createElement("ul");
+      ul.className = "ew-stories";
+      stories.forEach(function (story) {
+        if (!story) return;
+        var li = document.createElement("li");
+        var name = String(story.title || "Page");
+        var href = String(story.href || "").trim();
+        var label;
+        if (story.onLive !== false && href) {
+          label = document.createElement("a");
+          label.href = href;
+          label.textContent = name;
+        } else {
+          label = document.createElement("span");
+          label.className = "ew-story-name";
+          label.textContent = name;
+        }
+        li.appendChild(label);
+        var note = String(story.note || "").trim();
+        if (note) {
+          var n = document.createElement("span");
+          n.className = "ew-story-note";
+          n.textContent = note;
+          li.appendChild(n);
+        }
+        ul.appendChild(li);
+      });
+      block.appendChild(ul);
+      $("site-list").appendChild(block);
     }
 
     fillCategories();

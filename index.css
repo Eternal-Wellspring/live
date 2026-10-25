@@ -438,6 +438,14 @@ body { --header-h: 88px; }
 }
 .ew-site:hover strong { text-decoration: underline; }
 .ew-site[hidden] { display: none !important; }
+.ew-site-block { max-width: 36rem; }
+.ew-site-block[hidden] { display: none !important; }
+.ew-stories { list-style: none; margin: 0.15rem 0 0; padding: 0 0 0 0.7rem; }
+.ew-stories li { margin: 0.08rem 0; font-size: 0.9rem; line-height: 1.3; color: #1b3a4b; }
+.ew-stories a { color: #005EB8; text-decoration: none; }
+.ew-stories a:hover { text-decoration: underline; }
+.ew-story-name { color: #1b3a4b; }
+.ew-story-note { display: inline; margin-left: 0.45rem; color: #444; font-size: 0.88rem; }
 .ew-find .ew-pick {
   max-width: 16rem;
 }

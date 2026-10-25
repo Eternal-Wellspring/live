@@ -2,7 +2,7 @@
   "name": "10 Minute Stories",
   "tagline": "Short stories spanning Genesis to Revelation",
   "description": "<span class=\"bit\">The Bible tells the story of how God is restoring His relationship with you. This story is told from different perspectives, all readable in ten minutes or less.<br><br><br></span>",
-  "folder": "Overarching-Narratives",
+  "folder": "10-Minute-Stories",
   "icon": "",
   "iconAlt": "",
   "sharePicture": "",
@@ -14,6 +14,7 @@
   "showOnTest": true,
   "showOnLive": true,
   "numberContents": true,
-  "showOnWeb": false,
-  "editedAt": 1792873401532
+  "showOnWeb": true,
+  "editedAt": 1792949391920,
+  "homeType": "describe"
 }
