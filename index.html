@@ -155,7 +155,7 @@
     }
 
     function addSiteFromJson(s) {
-      if (!s || !s.href || !s.name || isWellspring(s) || s.showOnWeb !== true) return;
+      if (!s || !s.href || !s.name || isWellspring(s) || s.showOnWeb !== true || s.showOnLive === false) return;
       var folder = String(s.folder || "").trim();
       if (!folder) return;
       if (document.querySelector('#site-list .ew-site[data-folder="' + folder + '"]')) return;
@@ -194,7 +194,7 @@
       categories = pair[0].categories || [];
       var onWeb = {};
       (pair[1].sites || []).forEach(function (s) {
-        if (s && s.showOnWeb === true && s.folder) onWeb[String(s.folder)] = true;
+        if (s && s.showOnWeb === true && s.showOnLive !== false && s.folder) onWeb[String(s.folder)] = true;
       });
       listedSites().forEach(function (a) {
         if (!onWeb[a.getAttribute("data-folder") || ""]) a.remove();
