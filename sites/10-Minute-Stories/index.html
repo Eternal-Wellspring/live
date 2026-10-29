@@ -586,7 +586,7 @@ html #ew-info-modal .ew-info-title, html #ew-info-modal .ew-info-x, html #ew-tex
     
   </div>
   <main data-page="950">
-    <div class="tab-panel active" id="s0" data-sec="985"><div class="subsec" data-heading="986"><div class="subsec-frame" data-heading="986"><div class="row-block" data-para="989"><h3 class="row-title" data-para="989">Contents</h3><div class="para describe-para" data-para="989"><div class="describe-contents"><div class="describe-line"><a href="1-paradise-of-god-restored.html#s1" contenteditable="false">1. Paradise of God: Restored</a><div class="describe-note">God dwelt with Mankind until they rebelled. God will return so that He may once again dwell in Paradise with us.</div></div><div class="describe-line"><a href="5-what-did-god-have-in-mind.html#s1" contenteditable="false">5. What did God have in mind?</a><div class="describe-note">A clear story about God&#x27;s desire for a family. Appreciate the obstacles in His path and His strategy to have His way.</div></div></div></div></div></div></div></div>
+    <div class="tab-panel active" id="s0" data-sec="985"><div class="subsec" data-heading="986"><div class="subsec-frame" data-heading="986"><div class="row-block" data-para="989"><h3 class="row-title" data-para="989">Contents</h3><div class="para describe-para" data-para="989"><div class="describe-contents"><div class="describe-line"><a href="1-paradise-of-god-restored.html#s1" contenteditable="false">1. Paradise of God: Restored</a><div class="describe-note">God dwelt with Mankind until they rebelled. God will return so that He may once again dwell in Paradise with us.</div></div></div></div></div></div></div></div>
   </main>
   
   
@@ -757,8 +757,16 @@ html #ew-info-modal .ew-info-title, html #ew-info-modal .ew-info-x, html #ew-tex
       }
       var pics = [];
       var textCol = null;
+      function photoCol(c){
+        var imgs = c.querySelectorAll("img.col-pic");
+        var i;
+        for (i = 0; i < imgs.length; i++) {
+          if (!imgs[i].getAttribute("data-intext")) return true;
+        }
+        return false;
+      }
       cols.forEach(function(c){
-        if (c.querySelector("img.col-pic")) pics.push(c);
+        if (photoCol(c)) pics.push(c);
         else if (!textCol) textCol = c;
       });
       if (!pics.length) return;

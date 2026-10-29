@@ -462,7 +462,7 @@ html.ew-notes-off .col-footnotes + .col-split { display: none !important; }
 .para { display: flex; align-items: center; border: 1px solid var(--line); margin: 0; background: #fff; }
 .para.describe-para { display: block; border: 0; background: transparent; }
 .col { padding: 0; min-width: 4rem; display: flex; flex-direction: column; }
-.col img.col-pic { display: block; width: 100%; max-width: 100%; height: auto; object-fit: contain; box-sizing: border-box; }
+.col img.col-pic:not([data-intext]) { display: block; width: 100%; max-width: 100%; height: auto; object-fit: contain; box-sizing: border-box; }
 .col.col-photo { padding: 0; }
 .col.col-photo img.col-pic { width: 100%; max-width: 100%; height: auto; object-fit: contain; }
 html:not(.ew-portrait) .para > .col:has(img.col-pic) { box-sizing: border-box; }
@@ -675,7 +675,7 @@ button.ew-hidden-sub.open {
 }
 #ew-text-modal .ew-text-title { margin: 0 2rem 0.7rem 0; }
 #ew-text-modal .ew-text-body { white-space: pre-wrap; }
-.col-text img.col-pic {
+.col-text img.col-pic:not([data-intext]) {
   display: block;
   width: 100%;
   max-width: 100%;
