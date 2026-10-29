@@ -198,7 +198,7 @@
         var name = String(story.title || "Page");
         var href = String(story.href || "").trim();
         var label;
-        if (story.onLive !== false && href) {
+        if (href) {
           label = document.createElement("a");
           label.href = href;
           label.textContent = name;
