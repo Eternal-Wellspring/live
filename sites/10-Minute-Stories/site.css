@@ -2948,7 +2948,7 @@ h2[data-heading="1015"] { font-family:system-ui, -apple-system, "Segoe UI", sans
 .para[data-para="763"] .col[data-col="765"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="763"] .col[data-col="765"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="763"] .col[data-col="765"] a.ref{white-space:nowrap}
-.para[data-para="995"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; padding:0px; margin-top:0px; margin-bottom:16px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="995"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
 .row-title[data-para="995"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; margin-bottom:6px; text-align:left; line-height:1.55 }
 .para[data-para="995"] .col[data-col="996"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:4px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:0px }
 .para[data-para="995"] .col[data-col="996"] .col-text, .para[data-para="995"] .col[data-col="996"] .col-text .bit { line-height:1.2 }
@@ -2965,7 +2965,7 @@ h2[data-heading="1015"] { font-family:system-ui, -apple-system, "Segoe UI", sans
 .para[data-para="995"] .col[data-col="996"]{padding:0}
 .para[data-para="995"] .col[data-col="996"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
 .para[data-para="995"] .col[data-col="996"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="998"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; padding:0px; margin-top:0px; margin-bottom:16px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="998"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
 .row-title[data-para="998"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; margin-bottom:6px; text-align:left; line-height:1.55 }
 .para[data-para="998"] .col[data-col="999"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; text-align:left; line-height:1.55; --para-gap:18px }
 .para[data-para="998"] .col[data-col="999"] .col-text, .para[data-para="998"] .col[data-col="999"] .col-text .bit { line-height:1.55 }
@@ -2980,7 +2980,7 @@ h2[data-heading="1015"] { font-family:system-ui, -apple-system, "Segoe UI", sans
 .para[data-para="998"] .col[data-col="999"] .col-text .bit.indent.bullet::before, .para[data-para="998"] .col[data-col="999"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="998"] .col[data-col="999"]{align-self:center}
 .para[data-para="998"] .col[data-col="999"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1001"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; padding:0px; margin-top:0px; margin-bottom:16px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1001"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
 .row-title[data-para="1001"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; margin-bottom:6px; text-align:left; line-height:1.55 }
 .para[data-para="1001"] .col[data-col="1002"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; text-align:left; line-height:1.55; --para-gap:18px }
 .para[data-para="1001"] .col[data-col="1002"] .col-text, .para[data-para="1001"] .col[data-col="1002"] .col-text .bit { line-height:1.55 }
@@ -2995,7 +2995,7 @@ h2[data-heading="1015"] { font-family:system-ui, -apple-system, "Segoe UI", sans
 .para[data-para="1001"] .col[data-col="1002"] .col-text .bit.indent.bullet::before, .para[data-para="1001"] .col[data-col="1002"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="1001"] .col[data-col="1002"]{align-self:center}
 .para[data-para="1001"] .col[data-col="1002"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1004"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; padding:0px; margin-top:0px; margin-bottom:16px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1004"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
 .row-title[data-para="1004"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; margin-bottom:6px; text-align:left; line-height:1.55 }
 .para[data-para="1004"] .col[data-col="1005"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; text-align:left; line-height:1.55; --para-gap:18px }
 .para[data-para="1004"] .col[data-col="1005"] .col-text, .para[data-para="1004"] .col[data-col="1005"] .col-text .bit { line-height:1.55 }
@@ -3010,7 +3010,7 @@ h2[data-heading="1015"] { font-family:system-ui, -apple-system, "Segoe UI", sans
 .para[data-para="1004"] .col[data-col="1005"] .col-text .bit.indent.bullet::before, .para[data-para="1004"] .col[data-col="1005"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="1004"] .col[data-col="1005"]{align-self:center}
 .para[data-para="1004"] .col[data-col="1005"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1007"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; padding:0px; margin-top:0px; margin-bottom:16px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1007"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
 .row-title[data-para="1007"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; margin-bottom:6px; text-align:left; line-height:1.55 }
 .para[data-para="1007"] .col[data-col="1008"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; text-align:left; line-height:1.55; --para-gap:18px }
 .para[data-para="1007"] .col[data-col="1008"] .col-text, .para[data-para="1007"] .col[data-col="1008"] .col-text .bit { line-height:1.55 }
@@ -3025,7 +3025,7 @@ h2[data-heading="1015"] { font-family:system-ui, -apple-system, "Segoe UI", sans
 .para[data-para="1007"] .col[data-col="1008"] .col-text .bit.indent.bullet::before, .para[data-para="1007"] .col[data-col="1008"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="1007"] .col[data-col="1008"]{align-self:center}
 .para[data-para="1007"] .col[data-col="1008"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1010"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; padding:0px; margin-top:0px; margin-bottom:16px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1010"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
 .row-title[data-para="1010"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; margin-bottom:6px; text-align:left; line-height:1.55 }
 .para[data-para="1010"] .col[data-col="1011"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; text-align:left; line-height:1.55; --para-gap:18px }
 .para[data-para="1010"] .col[data-col="1011"] .col-text, .para[data-para="1010"] .col[data-col="1011"] .col-text .bit { line-height:1.55 }
@@ -3040,7 +3040,7 @@ h2[data-heading="1015"] { font-family:system-ui, -apple-system, "Segoe UI", sans
 .para[data-para="1010"] .col[data-col="1011"] .col-text .bit.indent.bullet::before, .para[data-para="1010"] .col[data-col="1011"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="1010"] .col[data-col="1011"]{align-self:center}
 .para[data-para="1010"] .col[data-col="1011"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1013"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; padding:0px; margin-top:0px; margin-bottom:16px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1013"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
 .row-title[data-para="1013"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; margin-bottom:6px; text-align:left; line-height:1.55 }
 .para[data-para="1013"] .col[data-col="1014"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; text-align:left; line-height:1.55; --para-gap:18px }
 .para[data-para="1013"] .col[data-col="1014"] .col-text, .para[data-para="1013"] .col[data-col="1014"] .col-text .bit { line-height:1.55 }
@@ -3055,7 +3055,7 @@ h2[data-heading="1015"] { font-family:system-ui, -apple-system, "Segoe UI", sans
 .para[data-para="1013"] .col[data-col="1014"] .col-text .bit.indent.bullet::before, .para[data-para="1013"] .col[data-col="1014"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="1013"] .col[data-col="1014"]{align-self:center}
 .para[data-para="1013"] .col[data-col="1014"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1016"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; padding:0px; margin-top:0px; margin-bottom:16px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1016"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
 .row-title[data-para="1016"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; margin-bottom:6px; text-align:left; line-height:1.55 }
 .para[data-para="1016"] .col[data-col="1017"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; text-align:left; line-height:1.55; --para-gap:18px }
 .para[data-para="1016"] .col[data-col="1017"] .col-text, .para[data-para="1016"] .col[data-col="1017"] .col-text .bit { line-height:1.55 }
