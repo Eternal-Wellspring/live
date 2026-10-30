@@ -1036,9 +1036,14 @@ html #ew-info-modal .ew-info-title, html #ew-info-modal .ew-info-x, html #ew-tex
     document.querySelectorAll(".font-minus").forEach(function(b){ b.disabled = fontZ <= STEPS[0]; });
     document.querySelectorAll(".font-plus").forEach(function(b){ b.disabled = fontZ >= STEPS[STEPS.length - 1]; });
     var sky = readSky();
-    var stars = !sky || sky === "stars";
+    var windowBg = document.documentElement.getAttribute("data-window") || "";
+    var stars = !windowBg && (!sky || sky === "stars");
     var canvas = document.getElementById("ew-sky");
-    if (stars) {
+    if (windowBg) {
+      document.documentElement.style.background = windowBg;
+      document.body.style.background = windowBg;
+      if (canvas) canvas.style.setProperty("display", "none", "important");
+    } else if (stars) {
       document.documentElement.style.background = "#05070c";
       document.body.style.background = "#05070c";
       if (canvas) canvas.style.setProperty("display", "block", "important");
