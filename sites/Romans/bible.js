@@ -1101,7 +1101,7 @@
     var s = document.createElement("style");
     s.id = "ew-ref-style";
     s.textContent =
-      "a.ref,.col a.ref,.col-text a.ref,.para a.ref{color:var(--title,#005eb8)!important;font-weight:400!important;font-size:calc(1em - 2px)!important;text-decoration:underline;text-underline-offset:0.15em;cursor:pointer;white-space:nowrap}" +
+      "a.ref,.col a.ref,.col-text a.ref,.para a.ref{color:var(--title,#005eb8)!important;font-weight:400!important;font-size:calc(1em - 2px)!important;text-decoration:underline;text-underline-offset:0.15em;cursor:pointer;white-space:normal;overflow-wrap:anywhere}" +
       "#ew-ref-menu{position:fixed;z-index:200;min-width:12rem;background:#fff;border:1px solid #c5d0d4;box-shadow:0 8px 22px rgba(0,0,0,.16);padding:0.15rem 0 0.35rem}" +
       "#ew-ref-menu[hidden]{display:none!important}" +
       "#ew-ref-menu .ew-ref-title{padding:0.3rem 0.75rem 0.15rem;font:800 0.82rem Arial,Helvetica,sans-serif;color:#1f6f78}" +

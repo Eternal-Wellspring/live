@@ -1101,7 +1101,7 @@
     var s = document.createElement("style");
     s.id = "ew-ref-style";
     s.textContent =
-      "a.ref,.col a.ref,.col-text a.ref,.para a.ref{color:var(--title,#005eb8)!important;font-weight:400!important;font-size:calc(1em - 2px)!important;text-decoration:underline;text-underline-offset:0.15em;cursor:pointer;white-space:nowrap}" +
+      "a.ref,.col a.ref,.col-text a.ref,.para a.ref{color:var(--title,#005eb8)!important;font-weight:400!important;font-size:calc(1em - 2px)!important;text-decoration:underline;text-underline-offset:0.15em;cursor:pointer;white-space:normal;overflow-wrap:anywhere}" +
       "#ew-ref-menu{position:fixed;z-index:200;min-width:12rem;background:#fff;border:1px solid #c5d0d4;box-shadow:0 8px 22px rgba(0,0,0,.16);padding:0.15rem 0 0.35rem}" +
       "#ew-ref-menu[hidden]{display:none!important}" +
       "#ew-ref-menu .ew-ref-title{padding:0.3rem 0.75rem 0.15rem;font:800 0.82rem Arial,Helvetica,sans-serif;color:#1f6f78}" +
@@ -3375,10 +3375,45 @@
       }
       var title = box.querySelector(".ew-text-title");
       var body = box.querySelector(".ew-text-body");
-      title.textContent = String(term.getAttribute("data-title") || term.textContent || "").trim();
-      body.textContent = String(term.getAttribute("data-body") || "");
+      var paint = function (g) {
+        var ownTitle = String(term.getAttribute("data-title") || "").trim();
+        var ownBody = String(term.getAttribute("data-body") || "");
+        title.textContent = ownTitle || (g && g.title) || String(term.textContent || "").trim();
+        body.textContent = ownBody || (g && g.body) || "";
+      };
+      var id = String(term.getAttribute("data-term") || "").trim().toLowerCase();
+      paint(null);
       box.classList.add("open");
+      if (id) {
+        ewGlossary(function (terms) {
+          if (box.classList.contains("open")) paint(terms[id] || null);
+        });
+      }
     }
+    // Shared glossary: one definition per term id, loaded once from this site's glossary.json.
+    var ewGlossaryData = null;
+    var ewGlossaryWait = null;
+    function ewGlossary(done) {
+      if (ewGlossaryData) return done(ewGlossaryData);
+      if (ewGlossaryWait) return ewGlossaryWait.push(done);
+      ewGlossaryWait = [done];
+      var src = window.EW_GLOSSARY_SRC || "glossary.json";
+      var finish = function (terms) {
+        ewGlossaryData = terms || {};
+        var q = ewGlossaryWait || [];
+        ewGlossaryWait = null;
+        q.forEach(function (fn) { try { fn(ewGlossaryData); } catch (e) {} });
+      };
+      try {
+        fetch(src, { cache: "default" })
+          .then(function (r) { return r.ok ? r.json() : {}; })
+          .then(function (j) { finish((j && j.terms) || {}); })
+          .catch(function () { finish({}); });
+      } catch (e) {
+        finish({});
+      }
+    }
+    window.ewGlossary = ewGlossary;
     window.ewOpenTextPopup = openTextModal;
     document.addEventListener(
       "click",
