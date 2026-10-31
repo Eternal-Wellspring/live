@@ -58,7 +58,10 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .ew-verse-body p, .ew-verse-alt p { margin-bottom:6px }
 .ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; text-align:left }
 .ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; text-align:left }
-#ew-text-modal .ew-text-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; background:#f6f7eb; border-style:solid; border-color:#0058B0; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:0px 2px 6px #00000040; padding:16px; text-align:left }
+#ew-text-modal .ew-text-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#005eb8; background:#f6f7eb; border-style:solid; border-color:#0058B0; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:0px 2px 6px #00000040; padding:16px; text-align:left }
+#ew-text-modal .ew-text-card { text-decoration:none }
+#ew-text-modal .ew-text-body b, #ew-text-modal .ew-text-body strong, .col-text b, .col-text strong, b .ew-term, strong .ew-term, .ew-term b, .ew-term strong { font-weight:700 }
+#ew-text-modal .ew-text-body u, .col-text u { text-decoration:underline }
 #ew-text-modal .ew-text-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; text-decoration:underline; color:#0058B0 }
 #ew-text-modal .ew-text-body, #ew-text-modal .ew-text-body p { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#333333; line-height:1.25 }
 .ew-chapter-list, .ew-ch-row { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.25 }
@@ -372,7 +375,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(22px * var(--ew-fo
 .fn:hover .fn-tip,.fn:focus .fn-tip{display:block}
 .fn{text-decoration:none!important}
 a.ref .fn,.col-footnotes .fn{text-decoration:none!important;display:inline-block;position:relative;white-space:pre}
-a.ref, .col a.ref, .col-text a.ref, .para a.ref { color:var(--title); font-weight:400; font-size:calc(1em - 2px); text-decoration:underline; white-space:normal; overflow-wrap:anywhere }
+a.ref, .col a.ref, .col-text a.ref, .para a.ref { color:var(--title); font-family:inherit; font-size:inherit; font-weight:inherit; font-style:inherit; text-decoration:underline; white-space:normal; overflow-wrap:anywhere }
 html { --ew-sky-creep:18; --ew-sky-stars:50; --ew-sky-zoom:1.4; --ew-sky-zoom-mins:12; --ew-sky-twinkle:1; --ew-sky-bright:70; --ew-sky-twinkle-speed:6; --ew-sky-fade:3 }
 html, body { background:#05070c }
 #ew-sky { display:block }
@@ -1396,7 +1399,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
     setOpen(btn, !btn.classList.contains("open"));
   });
 })();
-</script><script>window.EW_GLOSSARY_SRC="glossary.json?v=39db1fef";</script><script src="footnotes.js?v=cfec519d"></script><script defer src="bible.js?v=5d5c0c50"></script><script src="/ew-sky.js?v=15"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
+</script><script>window.EW_GLOSSARY_SRC="glossary.json?v=39db1fef";</script><script src="footnotes.js?v=e3abc8d6"></script><script defer src="bible.js?v=2cb4db21"></script><script src="/ew-sky.js?v=15"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
 (function(){
   var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   var last = "";

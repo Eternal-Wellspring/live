@@ -1,0 +1,12 @@
+{
+  "modes": [
+    "website-data",
+    "website-programs"
+  ],
+  "website-data": [
+    "10-Minute-Stories"
+  ],
+  "website-programs": [
+    "10-Minute-Stories"
+  ]
+}
