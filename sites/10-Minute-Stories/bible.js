@@ -1004,6 +1004,7 @@
   var chBox, chList, chTitle, chHint, chPickBtn, chPrev, chNext, chPick = false, chBrowse;
   var currentRef, nkjvHtml, savedLink, linkSnap, inFile;
   var chStart, chEnd, chRows;
+  var refMode = false, rbClose;
 
   function setRefRange(start, end) {
     var a = Number(start);
@@ -1260,6 +1261,10 @@
       "#ew-ref-menu .ew-rhm-ref-line{display:flex;align-items:center;gap:0.35rem;margin:0.1rem 0.75rem 0.15rem}" +
       "#ew-ref-menu .ew-rhm-ref-line button{display:inline-block;width:auto;flex:0 0 auto;padding:0.1rem 0.35rem;white-space:nowrap}" +
       "#ew-ref-menu .ew-rhm-ref-line input.ew-rhm-lookup{display:block;width:auto;flex:1 1 5.5rem;min-width:4.5rem;margin:0;height:1.55rem;padding:0 0.35rem;border:1px solid #c5d0d4;font:400 0.82rem Arial,Helvetica,sans-serif;box-sizing:border-box}" +
+      "#ew-ref-menu .ew-rhm-open-line{display:flex;align-items:center;gap:0.35rem;margin:0.1rem 0.75rem 0.15rem}" +
+      "#ew-ref-menu .ew-rhm-open-line button{display:inline-block;width:auto;flex:0 0 auto;padding:0.1rem 0.35rem;border:1px solid #c5d0d4;border-radius:3px;white-space:nowrap}" +
+      "#ew-ref-menu .ew-rhm-open-line button.on{background:#e8eef6;color:#005eb8;border-color:#005eb8}" +
+      "#ew-ref-menu .ew-rhm-open-line button:disabled{opacity:.45;cursor:default}" +
       "#ew-ref-menu button:hover{background:#eef3f4}" +
       "#ew-ref-menu .ew-rhm-size-pair{display:flex;align-items:stretch;gap:0.35rem;margin:0.08rem 0.75rem 0.3rem}" +
       "#ew-ref-menu .ew-rhm-size-row{display:flex;align-items:stretch;margin:0;width:4.7rem;height:1.55rem;border:1px solid #c5d0d4;background:#fff;box-sizing:border-box}" +
@@ -1325,6 +1330,31 @@
   function hideRefMenu() {
     if (refMenu) refMenu.hidden = true;
   }
+  function openFirst(a) {
+    return a && a.getAttribute && a.getAttribute("data-open") === "chapter" ? "chapter" : "ref";
+  }
+  function rhmLink() {
+    var a = refMenu && (refMenu._lookup || (refMenu._hit && refMenu._hit.a));
+    return a && a.isConnected && a.classList && a.classList.contains("ref") ? a : null;
+  }
+  function paintRhmOpen() {
+    if (!refMenu) return;
+    var a = rhmLink();
+    var first = openFirst(a);
+    Array.prototype.forEach.call(refMenu.querySelectorAll("[data-act='open-ref'], [data-act='open-chapter']"), function (btn) {
+      btn.disabled = !a;
+      btn.classList.toggle("on", !!a && btn.getAttribute("data-act") === "open-" + first);
+    });
+  }
+  function applyOpenFirst(act) {
+    var a = rhmLink();
+    if (!a) return false;
+    if (act === "open-chapter") a.setAttribute("data-open", "chapter");
+    else a.removeAttribute("data-open");
+    bumpHost(a);
+    paintRhmOpen();
+    return true;
+  }
   function selectedText() {
     var sel = window.getSelection();
     if (!sel || sel.isCollapsed) return "";
@@ -1369,6 +1399,10 @@
       '<div class="ew-rhm-ref-line">' +
       '<button type="button" data-act="lookup">Ref Lookup</button>' +
       '<input id="ew-rhm-lookup" class="ew-rhm-lookup" type="text" placeholder="Eph 1:4" spellcheck="false" aria-label="Scripture" />' +
+      "</div>" +
+      '<div class="ew-rhm-open-line">' +
+      '<button type="button" data-act="open-ref" title="Opens the Ref Box first">Ref Box</button>' +
+      '<button type="button" data-act="open-chapter" title="Opens the Chapter Box first">Chapter Box</button>' +
       "</div>" +
       '<div class="ew-ref-title ew-rhm-font">Font Size</div>' +
       '<div class="ew-rhm-size-pair">' +
@@ -1519,6 +1553,11 @@
       }
       if (act === "remove") {
         removeAnyLookup();
+        return;
+      }
+      if (act === "open-ref" || act === "open-chapter") {
+        if (!applyOpenFirst(act)) return;
+        hideRefMenu();
         return;
       }
       var hit = refMenu._hit;
@@ -2252,6 +2291,7 @@
     menu.style.visibility = "";
     fillRhmFields(ev && ev.target);
     fillRhmListStart(menu._bits);
+    paintRhmOpen();
     restoreRhmRange();
     return true;
   }
@@ -2296,6 +2336,7 @@
       '<div class="ew-verse-bar ew-fn-bar">' +
       '<button type="button" class="ew-ch-prev" aria-label="Previous chapter">&lt;</button>' +
       '<strong class="ew-chapter-title"></strong>' +
+      '<span class="ew-rb-tr">NKJV</span>' +
       '<button type="button" class="ew-ch-next" aria-label="Next chapter">&gt;</button>' +
       '<button type="button" class="ew-ch-nkjv">NKJV</button>' +
       '<div class="ew-tr-pick ew-ch-tr">' +
@@ -2310,8 +2351,13 @@
       '<button type="button" class="ew-save" hidden>Save</button>' +
       '<button type="button" class="ew-save-close" hidden>Save and Close</button>' +
       '<button type="button" class="ew-chapter-x">Close</button>' +
+      '<button type="button" class="ew-rb-x" aria-label="Close">×</button>' +
       "</div>" +
       '<div class="ew-chapter-list"></div>' +
+      '<div class="ew-rb-foot">' +
+      '<button type="button" class="ew-rb-context">Context</button>' +
+      '<button type="button" class="ew-rb-close">Close</button>' +
+      "</div>" +
       "</div>";
     ensureFootnoteStyle();
     document.body.appendChild(chBox);
@@ -2428,6 +2474,18 @@
       if (dirty || chPick) cancelFootnote();
       else hide();
     });
+    rbClose = chBox.querySelector(".ew-rb-close");
+    [chBox.querySelector(".ew-rb-x"), rbClose].forEach(function (btn) {
+      btn.addEventListener("click", function (ev) {
+        ev.stopPropagation();
+        if (dirty || chPick) cancelFootnote();
+        else hide();
+      });
+    });
+    chBox.querySelector(".ew-rb-context").addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      expandRefBox();
+    });
     chapterBtn.addEventListener("click", function () {
       openChapter();
     });
@@ -2468,6 +2526,7 @@
       chPickBtn.addEventListener("click", function (ev) {
         ev.stopPropagation();
         if (!canEditVerses()) return;
+        if (refMode) expandRefBox();
         chPick = !chPick;
         if (chPick) {
           chStart = 0;
@@ -2594,6 +2653,7 @@
   }
   function hideChapter() {
     closeTrLists();
+    setRefMode(false);
     chPick = false;
     syncPickBtn();
     if (chBox) chBox.hidden = true;
@@ -2644,6 +2704,7 @@
     cancelBtn.hidden = false;
     cancelBtn.textContent = edit && (dirty || chPick) ? "Cancel" : "Close";
     cancelBtn.disabled = false;
+    if (rbClose) rbClose.textContent = cancelBtn.textContent;
     syncPref();
   }
   function syncTools() {
@@ -3028,6 +3089,22 @@
   }
   function sizeFootnoteList() {
     if (!chBox) return;
+    if (refMode) {
+      var rbWidth = "min(36rem, 92vw)";
+      chBox.style.setProperty("transform", "translateX(-50%)", "important");
+      chBox.style.setProperty("left", "50%", "important");
+      chBox.style.setProperty("top", "12vh", "important");
+      chBox.style.setProperty("width", rbWidth, "important");
+      chBox.style.setProperty("max-width", rbWidth, "important");
+      chBox.style.setProperty("height", "auto", "important");
+      chBox.style.setProperty("max-height", "76vh", "important");
+      if (chList) {
+        chList.style.setProperty("max-height", "none", "important");
+        chList.style.setProperty("height", "auto", "important");
+        chList.style.flex = "1 1 auto";
+      }
+      return;
+    }
     var portrait = window.matchMedia("(orientation: portrait)").matches;
     var width = portrait ? "80vw" : "60vw";
     chBox.style.setProperty("transform", "none", "important");
@@ -3086,6 +3163,8 @@
       chNkjv.textContent = extra ? extraBookName(currentRef) || "Extra-biblical" : "NKJV";
       chNkjv.classList.toggle("on", !extra && !other);
     }
+    var rbTr = chBox && chBox.querySelector(".ew-rb-tr");
+    if (rbTr) rbTr.textContent = extra ? extraBookName(currentRef) || "Extra-biblical" : "NKJV";
     if (chTrPick) chTrPick.hidden = extra;
     if (chTrNow) {
       chTrNow.hidden = extra;
@@ -3160,7 +3239,21 @@
         "#ew-chapter.ew-fn-pop .ew-ch-row sup{color:#1f6f78;font-weight:700;padding-right:.25rem}" +
 
         "#ew-chapter.ew-fn-pop .ew-extra-note{color:#0a7a22;font-weight:700;margin:0 0 .6rem}" +
-        "#ew-verse{display:none!important}";
+        "#ew-verse{display:none!important}" +
+        "#ew-chapter.ew-fn-pop .ew-rb-tr,#ew-chapter.ew-fn-pop .ew-fn-bar .ew-rb-x,#ew-chapter.ew-fn-pop .ew-rb-foot{display:none!important}" +
+        "#ew-chapter.ew-refbox .ew-fn-bar .ew-ch-prev,#ew-chapter.ew-refbox .ew-fn-bar .ew-ch-next,#ew-chapter.ew-refbox .ew-fn-bar .ew-ch-nkjv,#ew-chapter.ew-refbox .ew-ch-tr,#ew-chapter.ew-refbox .ew-fn-bar .ew-chapter-x{display:none!important}" +
+        "#ew-chapter.ew-refbox .ew-fn-card{height:auto!important;max-height:76vh!important}" +
+        "#ew-chapter.ew-refbox .ew-fn-bar{margin:0 0 .5rem}" +
+        "#ew-chapter.ew-refbox .ew-chapter-title{font-weight:700}" +
+        "#ew-chapter.ew-refbox .ew-rb-tr{display:inline-block!important;font:600 12px/1.2 Arial,Helvetica,sans-serif;color:#5a6d75;white-space:nowrap}" +
+        "#ew-chapter.ew-refbox .ew-fn-bar .ew-rb-x{display:inline-block!important;margin-left:auto!important;padding:0 .15rem!important;border:0!important;background:transparent!important;color:#1b3a4b;font:700 22px/1 Arial,Helvetica,sans-serif!important}" +
+        "#ew-chapter.ew-refbox .ew-fn-bar .ew-fn-mod{margin-left:auto}" +
+        "#ew-chapter.ew-refbox .ew-fn-bar .ew-fn-mod~.ew-rb-x{margin-left:.2rem!important}" +
+        "#ew-chapter.ew-refbox .ew-ch-row:not(.hit),#ew-chapter.ew-refbox .ew-ch-gap{display:none!important}" +
+        "#ew-chapter.ew-refbox .ew-ch-row.hit,#ew-chapter.ew-refbox .ew-ch-hits p:not(.ew-ch-gap){background:transparent!important}" +
+        "#ew-chapter.ew-refbox .ew-rb-foot{display:flex!important;justify-content:space-between;align-items:center;gap:.5rem;margin:.6rem 0 0;flex:0 0 auto}" +
+        "#ew-chapter.ew-refbox .ew-rb-foot button{width:auto!important;min-width:0!important;margin:0!important;padding:.22rem .8rem!important;font:600 13px/1.2 Arial,Helvetica,sans-serif!important;white-space:nowrap;border:1px solid #c5d0d4;background:#fff;color:#1b3a4b;border-radius:4px;cursor:pointer}" +
+        "#ew-chapter.ew-refbox .ew-rb-foot button:hover{background:#e8eef6;color:#005eb8;border-color:#005eb8}";
     }
     document.body.appendChild(el);
   }
@@ -3173,6 +3266,24 @@
       var hit = noteRefForFn(fn);
       fn.classList.toggle("ew-extra", !!(hit && hit.ref && isExtraBook(hit.ref.book)));
     });
+  }
+  function setRefMode(on) {
+    refMode = !!on;
+    if (chBox) chBox.classList.toggle("ew-refbox", refMode);
+  }
+  function expandRefBox() {
+    if (!refMode) return;
+    setRefMode(false);
+    sizeFootnoteList();
+    var want = currentRef && !isExtraBook(currentRef.book) ? chosen() : "NKJV";
+    if (want !== chView && !dirty) {
+      chView = want;
+      paintVersionsBtn();
+      loadChapter();
+      return;
+    }
+    paintVersionsBtn();
+    scrollHitToMiddle();
   }
   function showPopup() {
     ensureBox();
@@ -3228,7 +3339,7 @@
     nkjvHtml = "";
     markClean();
   }
-  function lookupThenShow() {
+  function lookupThenShow(first) {
     ensureBox();
     linkSnap = savedLink
       ? { ref: savedLink.getAttribute("data-ref") || "", html: savedLink.innerHTML || "" }
@@ -3237,11 +3348,14 @@
     chPick = false;
     chStart = 0;
     chEnd = 0;
-    chView = currentRef && !isExtraBook(currentRef.book) ? chosen() : "NKJV";
+    var asRef = !!(currentRef && currentRef.vs1) && (first || openFirst(savedLink)) !== "chapter";
+    setRefMode(asRef);
+    chView = currentRef && !isExtraBook(currentRef.book) && !asRef ? chosen() : "NKJV";
     chBrowse = currentRef
       ? { book: currentRef.book, name: currentRef.name, ch: currentRef.ch1 || 1 }
       : null;
     chBox.hidden = false;
+    sizeFootnoteList();
     markExtraChrome();
     paintVersionsBtn();
     syncPickBtn();
@@ -3713,6 +3827,11 @@
     menu._lookup = link || menu._hit.a || null;
     markLookup(menu._lookup);
   };
+  window.ewRhmOpenFirst = function () {
+    ensureRefMenu();
+    var a = rhmLink();
+    return a ? openFirst(a) : "";
+  };
   window.ewRemoveLookup = function () {
     return removeAnyLookup();
   };
@@ -3724,6 +3843,10 @@
   };
   window.ewRhmAct = function (act) {
     if (act === "remove") return removeAnyLookup();
+    if (act === "open-ref" || act === "open-chapter") {
+      ensureRefMenu();
+      return applyOpenFirst(act);
+    }
     var menu = ensureRefMenu();
     var btn = menu.querySelector('[data-act="' + act + '"]');
     if (btn) btn.click();
