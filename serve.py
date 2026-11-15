@@ -47,16 +47,44 @@ def scripture_key(ref: str) -> str:
     return re.sub(r"\s+", " ", str(ref or "")).strip().lower()
 
 
-def scriptures_file() -> Path:
-    if SCRIPTURES.is_file():
-        return SCRIPTURES
-    if SCRIPTURES_FALLBACK.is_file():
-        return SCRIPTURES_FALLBACK
-    return SCRIPTURES
+def scriptures_file(folder: str = "") -> Path:
+    site = resolve_site_dir(folder) if folder else None
+    if site is not None:
+        return site / "scriptures.json"
+    return PUBLISHED / ".none" / "scriptures.json"
 
 
-def load_scriptures() -> dict:
-    path = scriptures_file()
+def folder_from_scripture_request(handler) -> str:
+    q = parse_qs(urlparse(handler.path).query)
+    folder = (q.get("folder") or [""])[0].strip()
+    if folder:
+        site = resolve_site_dir(folder)
+        return site.name if site is not None else site_folder_key(folder)
+    ref = handler.headers.get("Referer") or ""
+    m = _PUB_FOLDER.search(ref)
+    if m:
+        site = resolve_site_dir(m.group(1))
+        if site is not None:
+            return site.name
+    host = handler.headers.get("Host") or ""
+    parsed = urlparse(handler.path)
+    mapped = pretty_site_target(urlparse(ref).path if ref else parsed.path, host)
+    if mapped:
+        return mapped[0].name
+    folder = folder_from_host(host)
+    if folder:
+        site = resolve_site_dir(folder)
+        return site.name if site is not None else folder
+    segs = [p for p in urlparse(ref or parsed.path).path.strip("/").split("/") if p]
+    if segs and segs[0] not in _RESERVED and "." not in segs[0]:
+        site = resolve_site_dir(segs[0])
+        if site is not None:
+            return site.name
+    return ""
+
+
+def load_scriptures(folder: str = "") -> dict:
+    path = scriptures_file(folder)
     if not path.is_file():
         return {"translation": "NKJV", "verses": []}
     try:
@@ -167,8 +195,8 @@ def _absorb_verses(store: dict, book, ch, vs1, vs2, by_vs: dict):
     return added
 
 
-def assemble_scripture(ref: str):
-    store = load_scriptures()
+def assemble_scripture(ref: str, folder: str = ""):
+    store = load_scriptures(folder)
     exact = find_in_store(store, ref)
     if exact:
         return exact
@@ -384,10 +412,11 @@ class Handler(SimpleHTTPRequestHandler):
             q = parse_qs(urlparse(self.path).query)
             ref = (q.get("ref") or [""])[0]
             want = scripture_key(ref)
-            data = load_scriptures()
+            folder = folder_from_scripture_request(self)
+            data = load_scriptures(folder)
             if not want:
                 return self._json(200, {"translation": "NKJV", "count": len(data.get("verses") or [])})
-            row = assemble_scripture(ref)
+            row = assemble_scripture(ref, folder)
             if not row:
                 return self._json(200, {"found": False, "reference": ref, "text": ""})
             shown_ref = row.get("reference") or ref

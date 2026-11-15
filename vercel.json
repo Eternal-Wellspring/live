@@ -73,7 +73,7 @@
   ],
   "functions": {
     "api/scriptures.js": {
-      "includeFiles": "{scriptures.json,sites/scriptures.json}"
+      "includeFiles": "sites/*/scriptures.json"
     },
     "api/dotl.js": {
       "includeFiles": "sites/Scripture-Narratives/data/**"

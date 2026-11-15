@@ -218,7 +218,6 @@
       urls.push(new URL("scriptures.json", location.href).href);
     } catch (e) {}
     urls.push("scriptures.json");
-    if (!window.ewFolder) urls.push("/scriptures.json");
     function next(i) {
       if (i >= urls.length) {
         scripturesFile = { verses: [] };

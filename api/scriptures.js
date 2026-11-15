@@ -10,12 +10,28 @@ function scriptureKey(ref) {
     .toLowerCase();
 }
 
-function scripturesFile() {
+function safeFolder(name) {
+  return String(name || "")
+    .replace(/\\/g, "/")
+    .split("/")
+    .filter(Boolean)[0] || "";
+}
+
+function folderFromReq(req) {
+  const q = (req && req.query) || {};
+  if (q.folder) return safeFolder(q.folder);
+  const ref = String((req && req.headers && (req.headers.referer || req.headers.Referer)) || "");
+  const m = ref.match(/\/(?:sites|published)\/([^/]+)\//i) || ref.match(/https?:\/\/[^/]+\/([^/.]+)(?:\/|$)/i);
+  if (m) return safeFolder(m[1]);
+  return "";
+}
+
+function scripturesFile(folder) {
+  folder = safeFolder(folder);
+  if (!folder) return "";
   const names = [
-    path.join(process.cwd(), "sites", "scriptures.json"),
-    path.join(__dirname, "..", "sites", "scriptures.json"),
-    path.join(process.cwd(), "scriptures.json"),
-    path.join(__dirname, "..", "scriptures.json"),
+    path.join(process.cwd(), "sites", folder, "scriptures.json"),
+    path.join(__dirname, "..", "sites", folder, "scriptures.json"),
   ];
   for (let i = 0; i < names.length; i++) {
     if (fs.existsSync(names[i])) return names[i];
@@ -23,9 +39,11 @@ function scripturesFile() {
   return names[0];
 }
 
-function loadScriptures() {
+function loadScriptures(folder) {
+  const file = scripturesFile(folder);
+  if (!file) return { translation: "NKJV", verses: [] };
   try {
-    const data = JSON.parse(fs.readFileSync(scripturesFile(), "utf8"));
+    const data = JSON.parse(fs.readFileSync(file, "utf8"));
     if (!data || typeof data !== "object" || !Array.isArray(data.verses)) {
       return { translation: "NKJV", verses: [] };
     }
@@ -135,8 +153,8 @@ function absorbVerses(store, book, ch, vs1, vs2, byVs) {
   }
 }
 
-function assembleScripture(ref) {
-  const store = loadScriptures();
+function assembleScripture(ref, folder) {
+  const store = loadScriptures(folder);
   const exact = findInStore(store, ref);
   if (exact) return exact;
   const span = parseRefSpan(ref);
@@ -163,14 +181,15 @@ module.exports = function handler(req, res) {
     res.status(405).json({ error: "GET only." });
     return;
   }
-  const data = loadScriptures();
+  const folder = folderFromReq(req);
+  const data = loadScriptures(folder);
   const raw = String((req.query && req.query.ref) || "");
   const want = scriptureKey(raw);
   if (!want) {
     res.status(200).json({ translation: "NKJV", count: (data.verses || []).length });
     return;
   }
-  const row = assembleScripture(raw);
+  const row = assembleScripture(raw, folder);
   if (!row) {
     res.status(200).json({ found: false, reference: raw, text: "" });
     return;
