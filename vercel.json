@@ -1,4 +1,16 @@
 {
+  "routes": [
+    {
+      "src": "^/$",
+      "has": [{ "type": "host", "value": "romans.eternalwellspring.com" }],
+      "dest": "/sites/Romans/index.html"
+    },
+    {
+      "src": "^/(?!(?:api|sites|_vercel|dotl)/|bible$|scriptures$|sky-images$)(.+)$",
+      "has": [{ "type": "host", "value": "romans.eternalwellspring.com" }],
+      "dest": "/sites/Romans/$1"
+    }
+  ],
   "redirects": [
     {
       "source": "/:site((?!bible|scriptures|sky-images|api|images|sites|topics|dotl|Admin)[^/.]+)",
