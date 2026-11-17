@@ -585,7 +585,7 @@
       return extraBookChapter(book, chapter);
     });
   }
-  var EXTRA_BOOK_FILES = { 90: "/extra-books/jubilees.json", 91: "/extra-books/1enoch.json" };
+  var EXTRA_BOOK_ROOT = (function () { var m = /^\/(test|live)\//.exec(location.pathname || ""); return m ? "/" + m[1] : ""; })(); var EXTRA_BOOK_FILES = { 90: EXTRA_BOOK_ROOT + "/extra-books/jubilees.json", 91: EXTRA_BOOK_ROOT + "/extra-books/1enoch.json" };
   function extraBookChapter(book, chapter) {
     var href = EXTRA_BOOK_FILES[Number(book)];
     if (!href) return Promise.resolve([]);
