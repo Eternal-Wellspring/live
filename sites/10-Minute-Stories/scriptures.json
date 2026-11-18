@@ -688,8 +688,8 @@
     },
     {
       "reference": "Rom 5:12",
-      "text": "Rom 5:12\n12 Therefore, just as through one man sin entered the world, and death through sin, and thus death spread to all men, because all sinned.",
-      "source": "hfw"
+      "text": "Rom 5:12<br>12 Therefore, just as through one man <b>sin entered the world</b>, <br>and <b>death through sin</b>, <br>and thus death spread to <b>all men</b>, <br>because all <b>sinned</b>.",
+      "source": "edited"
     },
     {
       "reference": "Rom 5:19",
@@ -900,6 +900,11 @@
       "reference": "Jude 6",
       "text": "Jude 6\n6 And the angels who did not keep their proper domain, but left their own abode, He has reserved in everlasting chains under darkness for the judgment of the great day;",
       "source": "nkjv"
+    },
+    {
+      "reference": "Gen 3:19",
+      "text": "Gen 3:19<br>19 In the sweat of your face you shall eat bread <br>Till you <b>return to the ground</b>, <br>For out of it you were taken; <br>For dust you are, <br>And <b>to dust you shall return</b>.”",
+      "source": "edited"
     }
   ]
 }
