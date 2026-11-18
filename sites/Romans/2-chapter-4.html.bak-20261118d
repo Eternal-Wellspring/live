@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-page="1040" data-footnotes-fixed="on">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Chapter 4 — Romans</title>
+  <meta name="description" content="&lt;span class=&quot;bit&quot;&gt;&lt;br&gt;&lt;/span&gt;" />
+  <link rel="canonical" href="https://www.eternalwellspring.com/Romans/2-chapter-4.html" />
+  <link rel="icon" href="images/icon.jpg">
+  <link rel="stylesheet" href="site.css?v=tools80" />
+  <style id="ew-format">
+/* writer format */
+.site { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); color:#1f6f78; font-weight:400 }
+.ew-words { font-size:calc(18px * var(--ew-font, 1)) }
+.who, .site { text-align:left }
+.site { display:block; width:100%; padding:0; margin:0; border:0; background:transparent }
+.who .site, a.site { font-weight:400; font-style:normal; text-decoration:none }
+.top .brand-row { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f6f78; border-style:solid; border-color:#c5d0d4; border-width:0px 0px 1.0px 0px; padding:11px }
+.ew-book-pick .ew-chap-btn, .ew-book-pick .ew-tr-now { font-family:Arial, Helvetica, sans-serif; font-size:calc(13px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#005eb8; background:#e8eef6; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:4px; text-align:left }
+.ew-ch-pick .ew-chap-btn, .ew-ch-pick .ew-tr-now { font-family:Arial, Helvetica, sans-serif; font-size:calc(13px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#005eb8; background:#e8eef6; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:4px; text-align:left }
+.ew-ch-prev { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; text-align:left }
+.ew-ch-prev::before { content:none; display:none }
+.ew-ch-next { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; text-align:left }
+.ew-ch-next::before { content:none; display:none }
+.bit.ew-info { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; background:#ededed; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:7px; margin-top:4px; margin-bottom:4px; text-align:left }
+#ew-info-modal .ew-info-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#333333; text-align:left; line-height:1.25 }
+#ew-info-modal .ew-info-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#333333; background:#f6f7eb; border-style:solid; border-color:#0058B0; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:0px 10px 30px #00000059; padding:22px; text-align:left; line-height:1.25 }
+#ew-info-modal .ew-info-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; text-decoration:underline; color:#0058B0 }
+#ew-info-modal .ew-info-x { color:#0058B0 }
+#ew-info-modal .ew-info-body .bit { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#333333; line-height:1.25 }
+#ew-info-modal .ew-info-body .bit.indent { font-weight:400 }
+.title-bar h1 { font-family:Arial, Helvetica, sans-serif; font-size:calc(26px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#005eb8; text-align:left }
+.title-bar h1 { border-width:0 !important }
+.tab, .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
+h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f6f78; margin-top:19px; margin-bottom:6px; text-align:left }
+.subsec-frame { font-weight:400; font-style:normal; text-align:left }
+.para { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#ffffff; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:10px; margin-top:10px; margin-bottom:10px; text-align:left; line-height:1.45; --para-gap:18px }
+.row-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:6px; text-align:left }
+.col-title:not(:empty) { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:6px; text-align:left }
+.col { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.45; --para-gap:18px }
+.col .col-text, .col .col-text .bit { line-height:1.45 }
+.col .col-text { gap:0 }
+.col .col-text .bit { margin:0 0 18px }
+.col .col-text .bit:last-child { margin-bottom:0 }
+.col .col-text .bit { padding-left:0em }
+.col .col-text .bit.indent { padding-left:2em }
+.col .col-text .bit.bullet, .col .col-text .bit.numbered { padding-left:1.75em }
+.col .col-text .bit.indent.bullet, .col .col-text .bit.indent.numbered { padding-left:3.75em }
+.col .col-text .bit.bullet::before, .col .col-text .bit.numbered::before { left:0em }
+.col .col-text .bit.indent.bullet::before, .col .col-text .bit.indent.numbered::before { left:2em }
+.col{align-self:center}
+.ew-verse-body, .ew-verse-alt { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.45 }
+.ew-verse-card, .ew-chapter-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#ffffff; border-style:solid; border-color:#d5dee2; border-width:1.0px 1.0px 1.0px 1.0px; padding:12px; text-align:left; line-height:1.45; --para-gap:6px }
+.ew-verse-card, .ew-chapter-card { box-shadow:none }
+#ew-verse, #ew-chapter { box-shadow:0px 2px 6px #00000040 }
+.ew-verse-body, .ew-verse-body p, .ew-verse-alt, .ew-chapter-list, .ew-ch-row{box-shadow:none!important;border:0!important;background:transparent!important;padding:0!important}
+.ew-verse-ref { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#005eb8 }
+.ew-verse-body p, .ew-verse-alt p { margin-bottom:6px }
+.ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; text-align:left }
+.ew-term { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#005eb8; text-align:left }
+#ew-text-modal .ew-text-card { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#005eb8; background:#f6f7eb; border-style:solid; border-color:#0058B0; border-width:2.0px 2.0px 2.0px 2.0px; box-shadow:0px 2px 6px #00000040; padding:16px; text-align:left }
+#ew-text-modal .ew-text-card { text-decoration:none }
+#ew-text-modal .ew-text-body b, #ew-text-modal .ew-text-body strong, .col-text b, .col-text strong, b .ew-term, strong .ew-term, .ew-term b, .ew-term strong { font-weight:700 }
+#ew-text-modal .ew-text-body u, .col-text u { text-decoration:underline }
+#ew-text-modal .ew-text-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; text-decoration:underline; color:#0058B0 }
+#ew-text-modal .ew-text-body, #ew-text-modal .ew-text-body p { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#333333; line-height:1.25 }
+.ew-chapter-list, .ew-ch-row { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.25 }
+.page-nav, .page-nav .page-nav-word, .page-nav .page-nav-tip, .page-tools, .page-tools button { font-weight:400; font-family:Arial, Helvetica, sans-serif; font-size:9px; color:#5a6a72 }
+.tab[data-sec="1041"], .tab-panel[data-sec="1041"] .sub-tab, .end-sub-tabs[data-for="s0"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
+.tab[data-sec="1041"] { background:#ffffff }
+.tab-panel[data-sec="1041"] .sub-tab { background:#ffffff }
+.end-sub-tabs[data-for="s0"] .sub-tab { background:#ffffff }
+.tab[data-sec="1041"].active, .tab-panel[data-sec="1041"] { background:#f6f7eb }
+.tab[data-sec="1041"].active { border-bottom-color:#f6f7eb }
+.tab-panel[data-sec="1041"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
+.end-sub-tabs[data-for="s0"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab-dock-end .tab[data-sec="1041"], .end-sub-tabs[data-for="s0"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
+.tab-dock-end .tab[data-sec="1041"].active, .end-sub-tabs[data-for="s0"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+.tab[data-sec="1042"], .tab-panel[data-sec="1042"] .sub-tab, .end-sub-tabs[data-for="s1"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
+.tab[data-sec="1042"] { background:#ffffff }
+.tab-panel[data-sec="1042"] .sub-tab { background:#ffffff }
+.end-sub-tabs[data-for="s1"] .sub-tab { background:#ffffff }
+.tab[data-sec="1042"].active, .tab-panel[data-sec="1042"] { background:#f6f7eb }
+.tab[data-sec="1042"].active { border-bottom-color:#f6f7eb }
+.tab-panel[data-sec="1042"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
+.end-sub-tabs[data-for="s1"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab-dock-end .tab[data-sec="1042"], .end-sub-tabs[data-for="s1"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
+.tab-dock-end .tab[data-sec="1042"].active, .end-sub-tabs[data-for="s1"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+.page-frame h2[data-heading="1022"] { font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f2933; background:transparent; border-style:solid; border-color:#d6d6d6; border-width:3.0px 0px 0px 0px; margin-top:40px; margin-bottom:13px; text-align:left }
+.subsec-frame[data-heading="1022"] { font-weight:400; font-style:normal; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
+.page-frame h2[data-heading="1025"] { font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f2933; background:transparent; border-style:solid; border-color:#d6d6d6; border-width:3.0px 0px 0px 0px; margin-top:40px; margin-bottom:13px; text-align:left }
+.subsec-frame[data-heading="1025"] { font-weight:400; font-style:normal; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
+.page-frame h2[data-heading="1028"] { font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f2933; background:transparent; border-style:solid; border-color:#d6d6d6; border-width:3.0px 0px 0px 0px; margin-top:40px; margin-bottom:13px; text-align:left }
+.subsec-frame[data-heading="1028"] { font-weight:400; font-style:normal; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
+.page-frame h2[data-heading="1031"] { font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f2933; background:transparent; border-style:solid; border-color:#d6d6d6; border-width:3.0px 0px 0px 0px; margin-top:40px; margin-bottom:13px; text-align:left }
+.subsec-frame[data-heading="1031"] { font-weight:400; font-style:normal; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
+.page-frame h2[data-heading="1034"] { font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f2933; background:transparent; border-style:solid; border-color:#d6d6d6; border-width:3.0px 0px 0px 0px; margin-top:40px; margin-bottom:13px; text-align:left }
+.subsec-frame[data-heading="1034"] { font-weight:400; font-style:normal; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
+.page-frame h2[data-heading="1037"] { font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f2933; background:transparent; border-style:solid; border-color:#d6d6d6; border-width:3.0px 0px 0px 0px; margin-top:40px; margin-bottom:13px; text-align:left }
+.subsec-frame[data-heading="1037"] { font-weight:400; font-style:normal; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="1066"], .tab-panel[data-sec="1066"] .sub-tab, .end-sub-tabs[data-for="s2"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
+.tab[data-sec="1066"] { background:#ffffff }
+.tab-panel[data-sec="1066"] .sub-tab { background:#ffffff }
+.end-sub-tabs[data-for="s2"] .sub-tab { background:#ffffff }
+.tab[data-sec="1066"].active, .tab-panel[data-sec="1066"] { background:#f6f7eb }
+.tab[data-sec="1066"].active { border-bottom-color:#f6f7eb }
+.tab-panel[data-sec="1066"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
+.end-sub-tabs[data-for="s2"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab-dock-end .tab[data-sec="1066"], .end-sub-tabs[data-for="s2"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
+.tab-dock-end .tab[data-sec="1066"].active, .end-sub-tabs[data-for="s2"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+.page-frame h2[data-heading="1063"] { font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f2933; background:transparent; border-style:solid; border-color:#d6d6d6; border-width:3.0px 0px 0px 0px; margin-top:40px; margin-bottom:13px; text-align:left }
+.subsec-frame[data-heading="1063"] { font-weight:400; font-style:normal; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="1067"], .tab-panel[data-sec="1067"] .sub-tab, .end-sub-tabs[data-for="s3"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
+.tab[data-sec="1067"] { background:#ffffff }
+.tab-panel[data-sec="1067"] .sub-tab { background:#ffffff }
+.end-sub-tabs[data-for="s3"] .sub-tab { background:#ffffff }
+.tab[data-sec="1067"].active, .tab-panel[data-sec="1067"] { background:#f6f7eb }
+.tab[data-sec="1067"].active { border-bottom-color:#f6f7eb }
+.tab-panel[data-sec="1067"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
+.end-sub-tabs[data-for="s3"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab-dock-end .tab[data-sec="1067"], .end-sub-tabs[data-for="s3"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
+.tab-dock-end .tab[data-sec="1067"].active, .end-sub-tabs[data-for="s3"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+.page-frame h2[data-heading="1071"] { font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f2933; background:transparent; border-style:solid; border-color:#d6d6d6; border-width:3.0px 0px 0px 0px; margin-top:40px; margin-bottom:13px; text-align:left }
+.subsec-frame[data-heading="1071"] { font-weight:400; font-style:normal; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
+.page-frame h2[data-heading="1074"] { font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f2933; background:transparent; border-style:solid; border-color:#d6d6d6; border-width:3.0px 0px 0px 0px; margin-top:40px; margin-bottom:13px; text-align:left }
+.subsec-frame[data-heading="1074"] { font-weight:400; font-style:normal; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
+.page-frame h2[data-heading="1077"] { font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f2933; background:transparent; border-style:solid; border-color:#d6d6d6; border-width:3.0px 0px 0px 0px; margin-top:40px; margin-bottom:13px; text-align:left }
+.subsec-frame[data-heading="1077"] { font-weight:400; font-style:normal; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
+.page-frame h2[data-heading="1080"] { font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f2933; background:transparent; border-style:solid; border-color:#d6d6d6; border-width:3.0px 0px 0px 0px; margin-top:40px; margin-bottom:13px; text-align:left }
+.subsec-frame[data-heading="1080"] { font-weight:400; font-style:normal; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
+.page-frame h2[data-heading="1083"] { font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f2933; background:transparent; border-style:solid; border-color:#d6d6d6; border-width:3.0px 0px 0px 0px; margin-top:40px; margin-bottom:13px; text-align:left }
+.subsec-frame[data-heading="1083"] { font-weight:400; font-style:normal; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
+.page-frame h2[data-heading="1086"] { font-size:calc(22px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1f2933; background:transparent; border-style:solid; border-color:#d6d6d6; border-width:3.0px 0px 0px 0px; margin-top:40px; margin-bottom:13px; text-align:left }
+.subsec-frame[data-heading="1086"] { font-weight:400; font-style:normal; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left }
+.tab[data-sec="1043"], .tab-panel[data-sec="1043"] .sub-tab, .end-sub-tabs[data-for="s4"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
+.tab[data-sec="1043"] { background:#ffffff }
+.tab-panel[data-sec="1043"] .sub-tab { background:#ffffff }
+.end-sub-tabs[data-for="s4"] .sub-tab { background:#ffffff }
+.tab[data-sec="1043"].active, .tab-panel[data-sec="1043"] { background:#f6f7eb }
+.tab[data-sec="1043"].active { border-bottom-color:#f6f7eb }
+.tab-panel[data-sec="1043"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
+.end-sub-tabs[data-for="s4"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab-dock-end .tab[data-sec="1043"], .end-sub-tabs[data-for="s4"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
+.tab-dock-end .tab[data-sec="1043"].active, .end-sub-tabs[data-for="s4"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+.tab.active, .tab-panel .sub-tab.active { margin-bottom:-1px; position:relative; z-index:1 }
+.tab { border-radius:7px 7px 0 0 }
+.tab-panel { border-radius:0 7px 7px 0 }
+.tab-dock-end .tabs, .end-sub-tabs .sub-tabs { border-top:1px solid var(--line) }
+.tab-dock-end .tab { border-radius:0 0 7px 7px; border-top:0 }
+.tab-dock-end .tab, .end-sub-tabs .sub-tab { background:#ffffff }
+.tab-dock-end .tab.active { margin-top:-1px; margin-bottom:0; border-top-color:#f6f7eb; background:#f6f7eb }
+.end-sub-tabs .sub-tab { border-radius:0 0 7px 7px; border-top:0 }
+.end-sub-tabs .sub-tab.active { margin-top:-1px; border-top-color:#f6f7eb; background:#f6f7eb }
+.tab.tab-notes, .tab.tab-settings { background:#ffffff }
+.col-title:empty { display:none; margin:0 }
+.para[data-para="1023"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1023"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1023"] .col[data-col="1024"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:3px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1023"] .col[data-col="1024"] .col-text, .para[data-para="1023"] .col[data-col="1024"] .col-text .bit { line-height:1.55 }
+.para[data-para="1023"] .col[data-col="1024"] .col-text { gap:0 }
+.para[data-para="1023"] .col[data-col="1024"] .col-text .bit { margin:0 0 18px }
+.para[data-para="1023"] .col[data-col="1024"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1023"] .col[data-col="1024"] .col-text .bit { padding-left:0em }
+.para[data-para="1023"] .col[data-col="1024"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1023"] .col[data-col="1024"] .col-text .bit.bullet, .para[data-para="1023"] .col[data-col="1024"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1023"] .col[data-col="1024"] .col-text .bit.indent.bullet, .para[data-para="1023"] .col[data-col="1024"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1023"] .col[data-col="1024"] .col-text .bit.bullet::before, .para[data-para="1023"] .col[data-col="1024"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1023"] .col[data-col="1024"] .col-text .bit.indent.bullet::before, .para[data-para="1023"] .col[data-col="1024"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1023"] .col[data-col="1024"]{align-self:center}
+.para[data-para="1023"] .col[data-col="1024"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1023"] .col[data-col="1089"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1023"] .col[data-col="1089"] .col-text, .para[data-para="1023"] .col[data-col="1089"] .col-text .bit { line-height:1.2 }
+.para[data-para="1023"] .col[data-col="1089"] .col-text { gap:0 }
+.para[data-para="1023"] .col[data-col="1089"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1023"] .col[data-col="1089"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1023"] .col[data-col="1089"] .col-text .bit { padding-left:0em }
+.para[data-para="1023"] .col[data-col="1089"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1023"] .col[data-col="1089"] .col-text .bit.bullet, .para[data-para="1023"] .col[data-col="1089"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1023"] .col[data-col="1089"] .col-text .bit.indent.bullet, .para[data-para="1023"] .col[data-col="1089"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1023"] .col[data-col="1089"] .col-text .bit.bullet::before, .para[data-para="1023"] .col[data-col="1089"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1023"] .col[data-col="1089"] .col-text .bit.indent.bullet::before, .para[data-para="1023"] .col[data-col="1089"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1023"] .col[data-col="1089"]{align-self:center}
+.para[data-para="1023"] .col[data-col="1089"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1023"] .col[data-col="1089"] .col-text,.para[data-para="1023"] .col[data-col="1089"] .bit{white-space:normal!important}
+.para[data-para="1023"] .col[data-col="1089"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1023"] .col[data-col="1089"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1023"] .col[data-col="1089"] a.ref{white-space:nowrap}
+.para[data-para="1026"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1026"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1026"] .col[data-col="1027"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:3px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1026"] .col[data-col="1027"] .col-text, .para[data-para="1026"] .col[data-col="1027"] .col-text .bit { line-height:1.55 }
+.para[data-para="1026"] .col[data-col="1027"] .col-text { gap:0 }
+.para[data-para="1026"] .col[data-col="1027"] .col-text .bit { margin:0 0 18px }
+.para[data-para="1026"] .col[data-col="1027"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1026"] .col[data-col="1027"] .col-text .bit { padding-left:0em }
+.para[data-para="1026"] .col[data-col="1027"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1026"] .col[data-col="1027"] .col-text .bit.bullet, .para[data-para="1026"] .col[data-col="1027"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1026"] .col[data-col="1027"] .col-text .bit.indent.bullet, .para[data-para="1026"] .col[data-col="1027"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1026"] .col[data-col="1027"] .col-text .bit.bullet::before, .para[data-para="1026"] .col[data-col="1027"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1026"] .col[data-col="1027"] .col-text .bit.indent.bullet::before, .para[data-para="1026"] .col[data-col="1027"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1026"] .col[data-col="1027"]{align-self:center}
+.para[data-para="1026"] .col[data-col="1027"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1026"] .col[data-col="1090"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1026"] .col[data-col="1090"] .col-text, .para[data-para="1026"] .col[data-col="1090"] .col-text .bit { line-height:1.2 }
+.para[data-para="1026"] .col[data-col="1090"] .col-text { gap:0 }
+.para[data-para="1026"] .col[data-col="1090"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1026"] .col[data-col="1090"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1026"] .col[data-col="1090"] .col-text .bit { padding-left:0em }
+.para[data-para="1026"] .col[data-col="1090"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1026"] .col[data-col="1090"] .col-text .bit.bullet, .para[data-para="1026"] .col[data-col="1090"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1026"] .col[data-col="1090"] .col-text .bit.indent.bullet, .para[data-para="1026"] .col[data-col="1090"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1026"] .col[data-col="1090"] .col-text .bit.bullet::before, .para[data-para="1026"] .col[data-col="1090"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1026"] .col[data-col="1090"] .col-text .bit.indent.bullet::before, .para[data-para="1026"] .col[data-col="1090"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1026"] .col[data-col="1090"]{align-self:center}
+.para[data-para="1026"] .col[data-col="1090"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1026"] .col[data-col="1090"] .col-text,.para[data-para="1026"] .col[data-col="1090"] .bit{white-space:normal!important}
+.para[data-para="1026"] .col[data-col="1090"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1026"] .col[data-col="1090"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1026"] .col[data-col="1090"] a.ref{white-space:nowrap}
+.para[data-para="1029"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1029"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1029"] .col[data-col="1030"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:3px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1029"] .col[data-col="1030"] .col-text, .para[data-para="1029"] .col[data-col="1030"] .col-text .bit { line-height:1.55 }
+.para[data-para="1029"] .col[data-col="1030"] .col-text { gap:0 }
+.para[data-para="1029"] .col[data-col="1030"] .col-text .bit { margin:0 0 18px }
+.para[data-para="1029"] .col[data-col="1030"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1029"] .col[data-col="1030"] .col-text .bit { padding-left:0em }
+.para[data-para="1029"] .col[data-col="1030"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1029"] .col[data-col="1030"] .col-text .bit.bullet, .para[data-para="1029"] .col[data-col="1030"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1029"] .col[data-col="1030"] .col-text .bit.indent.bullet, .para[data-para="1029"] .col[data-col="1030"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1029"] .col[data-col="1030"] .col-text .bit.bullet::before, .para[data-para="1029"] .col[data-col="1030"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1029"] .col[data-col="1030"] .col-text .bit.indent.bullet::before, .para[data-para="1029"] .col[data-col="1030"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1029"] .col[data-col="1030"]{align-self:center}
+.para[data-para="1029"] .col[data-col="1030"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1029"] .col[data-col="1091"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1029"] .col[data-col="1091"] .col-text, .para[data-para="1029"] .col[data-col="1091"] .col-text .bit { line-height:1.2 }
+.para[data-para="1029"] .col[data-col="1091"] .col-text { gap:0 }
+.para[data-para="1029"] .col[data-col="1091"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1029"] .col[data-col="1091"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1029"] .col[data-col="1091"] .col-text .bit { padding-left:0em }
+.para[data-para="1029"] .col[data-col="1091"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1029"] .col[data-col="1091"] .col-text .bit.bullet, .para[data-para="1029"] .col[data-col="1091"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1029"] .col[data-col="1091"] .col-text .bit.indent.bullet, .para[data-para="1029"] .col[data-col="1091"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1029"] .col[data-col="1091"] .col-text .bit.bullet::before, .para[data-para="1029"] .col[data-col="1091"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1029"] .col[data-col="1091"] .col-text .bit.indent.bullet::before, .para[data-para="1029"] .col[data-col="1091"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1029"] .col[data-col="1091"]{align-self:center}
+.para[data-para="1029"] .col[data-col="1091"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1029"] .col[data-col="1091"] .col-text,.para[data-para="1029"] .col[data-col="1091"] .bit{white-space:normal!important}
+.para[data-para="1029"] .col[data-col="1091"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1029"] .col[data-col="1091"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1029"] .col[data-col="1091"] a.ref{white-space:nowrap}
+.para[data-para="1032"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1032"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1032"] .col[data-col="1033"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:3px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1032"] .col[data-col="1033"] .col-text, .para[data-para="1032"] .col[data-col="1033"] .col-text .bit { line-height:1.55 }
+.para[data-para="1032"] .col[data-col="1033"] .col-text { gap:0 }
+.para[data-para="1032"] .col[data-col="1033"] .col-text .bit { margin:0 0 18px }
+.para[data-para="1032"] .col[data-col="1033"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1032"] .col[data-col="1033"] .col-text .bit { padding-left:0em }
+.para[data-para="1032"] .col[data-col="1033"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1032"] .col[data-col="1033"] .col-text .bit.bullet, .para[data-para="1032"] .col[data-col="1033"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1032"] .col[data-col="1033"] .col-text .bit.indent.bullet, .para[data-para="1032"] .col[data-col="1033"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1032"] .col[data-col="1033"] .col-text .bit.bullet::before, .para[data-para="1032"] .col[data-col="1033"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1032"] .col[data-col="1033"] .col-text .bit.indent.bullet::before, .para[data-para="1032"] .col[data-col="1033"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1032"] .col[data-col="1033"]{align-self:center}
+.para[data-para="1032"] .col[data-col="1033"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1032"] .col[data-col="1092"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1032"] .col[data-col="1092"] .col-text, .para[data-para="1032"] .col[data-col="1092"] .col-text .bit { line-height:1.2 }
+.para[data-para="1032"] .col[data-col="1092"] .col-text { gap:0 }
+.para[data-para="1032"] .col[data-col="1092"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1032"] .col[data-col="1092"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1032"] .col[data-col="1092"] .col-text .bit { padding-left:0em }
+.para[data-para="1032"] .col[data-col="1092"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1032"] .col[data-col="1092"] .col-text .bit.bullet, .para[data-para="1032"] .col[data-col="1092"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1032"] .col[data-col="1092"] .col-text .bit.indent.bullet, .para[data-para="1032"] .col[data-col="1092"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1032"] .col[data-col="1092"] .col-text .bit.bullet::before, .para[data-para="1032"] .col[data-col="1092"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1032"] .col[data-col="1092"] .col-text .bit.indent.bullet::before, .para[data-para="1032"] .col[data-col="1092"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1032"] .col[data-col="1092"]{align-self:center}
+.para[data-para="1032"] .col[data-col="1092"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1032"] .col[data-col="1092"] .col-text,.para[data-para="1032"] .col[data-col="1092"] .bit{white-space:normal!important}
+.para[data-para="1032"] .col[data-col="1092"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1032"] .col[data-col="1092"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1032"] .col[data-col="1092"] a.ref{white-space:nowrap}
+.para[data-para="1035"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1035"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1035"] .col[data-col="1036"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:3px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1035"] .col[data-col="1036"] .col-text, .para[data-para="1035"] .col[data-col="1036"] .col-text .bit { line-height:1.55 }
+.para[data-para="1035"] .col[data-col="1036"] .col-text { gap:0 }
+.para[data-para="1035"] .col[data-col="1036"] .col-text .bit { margin:0 0 18px }
+.para[data-para="1035"] .col[data-col="1036"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1035"] .col[data-col="1036"] .col-text .bit { padding-left:0em }
+.para[data-para="1035"] .col[data-col="1036"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1035"] .col[data-col="1036"] .col-text .bit.bullet, .para[data-para="1035"] .col[data-col="1036"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1035"] .col[data-col="1036"] .col-text .bit.indent.bullet, .para[data-para="1035"] .col[data-col="1036"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1035"] .col[data-col="1036"] .col-text .bit.bullet::before, .para[data-para="1035"] .col[data-col="1036"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1035"] .col[data-col="1036"] .col-text .bit.indent.bullet::before, .para[data-para="1035"] .col[data-col="1036"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1035"] .col[data-col="1036"]{align-self:center}
+.para[data-para="1035"] .col[data-col="1036"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1035"] .col[data-col="1093"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1035"] .col[data-col="1093"] .col-text, .para[data-para="1035"] .col[data-col="1093"] .col-text .bit { line-height:1.2 }
+.para[data-para="1035"] .col[data-col="1093"] .col-text { gap:0 }
+.para[data-para="1035"] .col[data-col="1093"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1035"] .col[data-col="1093"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1035"] .col[data-col="1093"] .col-text .bit { padding-left:0em }
+.para[data-para="1035"] .col[data-col="1093"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1035"] .col[data-col="1093"] .col-text .bit.bullet, .para[data-para="1035"] .col[data-col="1093"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1035"] .col[data-col="1093"] .col-text .bit.indent.bullet, .para[data-para="1035"] .col[data-col="1093"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1035"] .col[data-col="1093"] .col-text .bit.bullet::before, .para[data-para="1035"] .col[data-col="1093"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1035"] .col[data-col="1093"] .col-text .bit.indent.bullet::before, .para[data-para="1035"] .col[data-col="1093"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1035"] .col[data-col="1093"]{align-self:center}
+.para[data-para="1035"] .col[data-col="1093"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1035"] .col[data-col="1093"] .col-text,.para[data-para="1035"] .col[data-col="1093"] .bit{white-space:normal!important}
+.para[data-para="1035"] .col[data-col="1093"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1035"] .col[data-col="1093"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1035"] .col[data-col="1093"] a.ref{white-space:nowrap}
+.para[data-para="1038"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1038"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1038"] .col[data-col="1039"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:3px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1038"] .col[data-col="1039"] .col-text, .para[data-para="1038"] .col[data-col="1039"] .col-text .bit { line-height:1.55 }
+.para[data-para="1038"] .col[data-col="1039"] .col-text { gap:0 }
+.para[data-para="1038"] .col[data-col="1039"] .col-text .bit { margin:0 0 18px }
+.para[data-para="1038"] .col[data-col="1039"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1038"] .col[data-col="1039"] .col-text .bit { padding-left:0em }
+.para[data-para="1038"] .col[data-col="1039"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1038"] .col[data-col="1039"] .col-text .bit.bullet, .para[data-para="1038"] .col[data-col="1039"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1038"] .col[data-col="1039"] .col-text .bit.indent.bullet, .para[data-para="1038"] .col[data-col="1039"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1038"] .col[data-col="1039"] .col-text .bit.bullet::before, .para[data-para="1038"] .col[data-col="1039"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1038"] .col[data-col="1039"] .col-text .bit.indent.bullet::before, .para[data-para="1038"] .col[data-col="1039"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1038"] .col[data-col="1039"]{align-self:center}
+.para[data-para="1038"] .col[data-col="1039"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1038"] .col[data-col="1094"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1038"] .col[data-col="1094"] .col-text, .para[data-para="1038"] .col[data-col="1094"] .col-text .bit { line-height:1.2 }
+.para[data-para="1038"] .col[data-col="1094"] .col-text { gap:0 }
+.para[data-para="1038"] .col[data-col="1094"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1038"] .col[data-col="1094"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1038"] .col[data-col="1094"] .col-text .bit { padding-left:0em }
+.para[data-para="1038"] .col[data-col="1094"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1038"] .col[data-col="1094"] .col-text .bit.bullet, .para[data-para="1038"] .col[data-col="1094"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1038"] .col[data-col="1094"] .col-text .bit.indent.bullet, .para[data-para="1038"] .col[data-col="1094"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1038"] .col[data-col="1094"] .col-text .bit.bullet::before, .para[data-para="1038"] .col[data-col="1094"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1038"] .col[data-col="1094"] .col-text .bit.indent.bullet::before, .para[data-para="1038"] .col[data-col="1094"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1038"] .col[data-col="1094"]{align-self:center}
+.para[data-para="1038"] .col[data-col="1094"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1038"] .col[data-col="1094"] .col-text,.para[data-para="1038"] .col[data-col="1094"] .bit{white-space:normal!important}
+.para[data-para="1038"] .col[data-col="1094"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1038"] .col[data-col="1094"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1038"] .col[data-col="1094"] a.ref{white-space:nowrap}
+.para[data-para="1064"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1064"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1064"] .col[data-col="1065"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:3px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1064"] .col[data-col="1065"] .col-text, .para[data-para="1064"] .col[data-col="1065"] .col-text .bit { line-height:1.55 }
+.para[data-para="1064"] .col[data-col="1065"] .col-text { gap:0 }
+.para[data-para="1064"] .col[data-col="1065"] .col-text .bit { margin:0 0 18px }
+.para[data-para="1064"] .col[data-col="1065"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1064"] .col[data-col="1065"] .col-text .bit { padding-left:0em }
+.para[data-para="1064"] .col[data-col="1065"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1064"] .col[data-col="1065"] .col-text .bit.bullet, .para[data-para="1064"] .col[data-col="1065"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1064"] .col[data-col="1065"] .col-text .bit.indent.bullet, .para[data-para="1064"] .col[data-col="1065"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1064"] .col[data-col="1065"] .col-text .bit.bullet::before, .para[data-para="1064"] .col[data-col="1065"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1064"] .col[data-col="1065"] .col-text .bit.indent.bullet::before, .para[data-para="1064"] .col[data-col="1065"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1064"] .col[data-col="1065"]{align-self:center}
+.para[data-para="1064"] .col[data-col="1065"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1072"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1072"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1072"] .col[data-col="1073"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:3px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1072"] .col[data-col="1073"] .col-text, .para[data-para="1072"] .col[data-col="1073"] .col-text .bit { line-height:1.55 }
+.para[data-para="1072"] .col[data-col="1073"] .col-text { gap:0 }
+.para[data-para="1072"] .col[data-col="1073"] .col-text .bit { margin:0 0 18px }
+.para[data-para="1072"] .col[data-col="1073"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1072"] .col[data-col="1073"] .col-text .bit { padding-left:0em }
+.para[data-para="1072"] .col[data-col="1073"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1072"] .col[data-col="1073"] .col-text .bit.bullet, .para[data-para="1072"] .col[data-col="1073"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1072"] .col[data-col="1073"] .col-text .bit.indent.bullet, .para[data-para="1072"] .col[data-col="1073"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1072"] .col[data-col="1073"] .col-text .bit.bullet::before, .para[data-para="1072"] .col[data-col="1073"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1072"] .col[data-col="1073"] .col-text .bit.indent.bullet::before, .para[data-para="1072"] .col[data-col="1073"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1072"] .col[data-col="1073"]{align-self:center}
+.para[data-para="1072"] .col[data-col="1073"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1075"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1075"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1075"] .col[data-col="1076"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:3px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1075"] .col[data-col="1076"] .col-text, .para[data-para="1075"] .col[data-col="1076"] .col-text .bit { line-height:1.55 }
+.para[data-para="1075"] .col[data-col="1076"] .col-text { gap:0 }
+.para[data-para="1075"] .col[data-col="1076"] .col-text .bit { margin:0 0 18px }
+.para[data-para="1075"] .col[data-col="1076"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1075"] .col[data-col="1076"] .col-text .bit { padding-left:0em }
+.para[data-para="1075"] .col[data-col="1076"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1075"] .col[data-col="1076"] .col-text .bit.bullet, .para[data-para="1075"] .col[data-col="1076"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1075"] .col[data-col="1076"] .col-text .bit.indent.bullet, .para[data-para="1075"] .col[data-col="1076"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1075"] .col[data-col="1076"] .col-text .bit.bullet::before, .para[data-para="1075"] .col[data-col="1076"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1075"] .col[data-col="1076"] .col-text .bit.indent.bullet::before, .para[data-para="1075"] .col[data-col="1076"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1075"] .col[data-col="1076"]{align-self:center}
+.para[data-para="1075"] .col[data-col="1076"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1075"] .col[data-col="1095"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1075"] .col[data-col="1095"] .col-text, .para[data-para="1075"] .col[data-col="1095"] .col-text .bit { line-height:1.2 }
+.para[data-para="1075"] .col[data-col="1095"] .col-text { gap:0 }
+.para[data-para="1075"] .col[data-col="1095"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1075"] .col[data-col="1095"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1075"] .col[data-col="1095"] .col-text .bit { padding-left:0em }
+.para[data-para="1075"] .col[data-col="1095"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1075"] .col[data-col="1095"] .col-text .bit.bullet, .para[data-para="1075"] .col[data-col="1095"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1075"] .col[data-col="1095"] .col-text .bit.indent.bullet, .para[data-para="1075"] .col[data-col="1095"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1075"] .col[data-col="1095"] .col-text .bit.bullet::before, .para[data-para="1075"] .col[data-col="1095"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1075"] .col[data-col="1095"] .col-text .bit.indent.bullet::before, .para[data-para="1075"] .col[data-col="1095"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1075"] .col[data-col="1095"]{align-self:center}
+.para[data-para="1075"] .col[data-col="1095"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1075"] .col[data-col="1095"] .col-text,.para[data-para="1075"] .col[data-col="1095"] .bit{white-space:normal!important}
+.para[data-para="1075"] .col[data-col="1095"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1075"] .col[data-col="1095"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1075"] .col[data-col="1095"] a.ref{white-space:nowrap}
+.para[data-para="1078"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1078"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1078"] .col[data-col="1079"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:3px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1078"] .col[data-col="1079"] .col-text, .para[data-para="1078"] .col[data-col="1079"] .col-text .bit { line-height:1.55 }
+.para[data-para="1078"] .col[data-col="1079"] .col-text { gap:0 }
+.para[data-para="1078"] .col[data-col="1079"] .col-text .bit { margin:0 0 18px }
+.para[data-para="1078"] .col[data-col="1079"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1078"] .col[data-col="1079"] .col-text .bit { padding-left:0em }
+.para[data-para="1078"] .col[data-col="1079"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1078"] .col[data-col="1079"] .col-text .bit.bullet, .para[data-para="1078"] .col[data-col="1079"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1078"] .col[data-col="1079"] .col-text .bit.indent.bullet, .para[data-para="1078"] .col[data-col="1079"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1078"] .col[data-col="1079"] .col-text .bit.bullet::before, .para[data-para="1078"] .col[data-col="1079"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1078"] .col[data-col="1079"] .col-text .bit.indent.bullet::before, .para[data-para="1078"] .col[data-col="1079"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1078"] .col[data-col="1079"]{align-self:center}
+.para[data-para="1078"] .col[data-col="1079"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1078"] .col[data-col="1096"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1078"] .col[data-col="1096"] .col-text, .para[data-para="1078"] .col[data-col="1096"] .col-text .bit { line-height:1.2 }
+.para[data-para="1078"] .col[data-col="1096"] .col-text { gap:0 }
+.para[data-para="1078"] .col[data-col="1096"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1078"] .col[data-col="1096"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1078"] .col[data-col="1096"] .col-text .bit { padding-left:0em }
+.para[data-para="1078"] .col[data-col="1096"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1078"] .col[data-col="1096"] .col-text .bit.bullet, .para[data-para="1078"] .col[data-col="1096"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1078"] .col[data-col="1096"] .col-text .bit.indent.bullet, .para[data-para="1078"] .col[data-col="1096"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1078"] .col[data-col="1096"] .col-text .bit.bullet::before, .para[data-para="1078"] .col[data-col="1096"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1078"] .col[data-col="1096"] .col-text .bit.indent.bullet::before, .para[data-para="1078"] .col[data-col="1096"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1078"] .col[data-col="1096"]{align-self:center}
+.para[data-para="1078"] .col[data-col="1096"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1078"] .col[data-col="1096"] .col-text,.para[data-para="1078"] .col[data-col="1096"] .bit{white-space:normal!important}
+.para[data-para="1078"] .col[data-col="1096"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1078"] .col[data-col="1096"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1078"] .col[data-col="1096"] a.ref{white-space:nowrap}
+.para[data-para="1081"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1081"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1081"] .col[data-col="1082"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:3px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1081"] .col[data-col="1082"] .col-text, .para[data-para="1081"] .col[data-col="1082"] .col-text .bit { line-height:1.55 }
+.para[data-para="1081"] .col[data-col="1082"] .col-text { gap:0 }
+.para[data-para="1081"] .col[data-col="1082"] .col-text .bit { margin:0 0 18px }
+.para[data-para="1081"] .col[data-col="1082"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1081"] .col[data-col="1082"] .col-text .bit { padding-left:0em }
+.para[data-para="1081"] .col[data-col="1082"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1081"] .col[data-col="1082"] .col-text .bit.bullet, .para[data-para="1081"] .col[data-col="1082"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1081"] .col[data-col="1082"] .col-text .bit.indent.bullet, .para[data-para="1081"] .col[data-col="1082"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1081"] .col[data-col="1082"] .col-text .bit.bullet::before, .para[data-para="1081"] .col[data-col="1082"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1081"] .col[data-col="1082"] .col-text .bit.indent.bullet::before, .para[data-para="1081"] .col[data-col="1082"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1081"] .col[data-col="1082"]{align-self:center}
+.para[data-para="1081"] .col[data-col="1082"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1081"] .col[data-col="1097"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1081"] .col[data-col="1097"] .col-text, .para[data-para="1081"] .col[data-col="1097"] .col-text .bit { line-height:1.2 }
+.para[data-para="1081"] .col[data-col="1097"] .col-text { gap:0 }
+.para[data-para="1081"] .col[data-col="1097"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1081"] .col[data-col="1097"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1081"] .col[data-col="1097"] .col-text .bit { padding-left:0em }
+.para[data-para="1081"] .col[data-col="1097"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1081"] .col[data-col="1097"] .col-text .bit.bullet, .para[data-para="1081"] .col[data-col="1097"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1081"] .col[data-col="1097"] .col-text .bit.indent.bullet, .para[data-para="1081"] .col[data-col="1097"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1081"] .col[data-col="1097"] .col-text .bit.bullet::before, .para[data-para="1081"] .col[data-col="1097"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1081"] .col[data-col="1097"] .col-text .bit.indent.bullet::before, .para[data-para="1081"] .col[data-col="1097"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1081"] .col[data-col="1097"]{align-self:center}
+.para[data-para="1081"] .col[data-col="1097"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1081"] .col[data-col="1097"] .col-text,.para[data-para="1081"] .col[data-col="1097"] .bit{white-space:normal!important}
+.para[data-para="1081"] .col[data-col="1097"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1081"] .col[data-col="1097"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1081"] .col[data-col="1097"] a.ref{white-space:nowrap}
+.para[data-para="1084"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1084"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1084"] .col[data-col="1085"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:3px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1084"] .col[data-col="1085"] .col-text, .para[data-para="1084"] .col[data-col="1085"] .col-text .bit { line-height:1.55 }
+.para[data-para="1084"] .col[data-col="1085"] .col-text { gap:0 }
+.para[data-para="1084"] .col[data-col="1085"] .col-text .bit { margin:0 0 18px }
+.para[data-para="1084"] .col[data-col="1085"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1084"] .col[data-col="1085"] .col-text .bit { padding-left:0em }
+.para[data-para="1084"] .col[data-col="1085"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1084"] .col[data-col="1085"] .col-text .bit.bullet, .para[data-para="1084"] .col[data-col="1085"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1084"] .col[data-col="1085"] .col-text .bit.indent.bullet, .para[data-para="1084"] .col[data-col="1085"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1084"] .col[data-col="1085"] .col-text .bit.bullet::before, .para[data-para="1084"] .col[data-col="1085"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1084"] .col[data-col="1085"] .col-text .bit.indent.bullet::before, .para[data-para="1084"] .col[data-col="1085"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1084"] .col[data-col="1085"]{align-self:center}
+.para[data-para="1084"] .col[data-col="1085"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1084"] .col[data-col="1098"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1084"] .col[data-col="1098"] .col-text, .para[data-para="1084"] .col[data-col="1098"] .col-text .bit { line-height:1.2 }
+.para[data-para="1084"] .col[data-col="1098"] .col-text { gap:0 }
+.para[data-para="1084"] .col[data-col="1098"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1084"] .col[data-col="1098"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1084"] .col[data-col="1098"] .col-text .bit { padding-left:0em }
+.para[data-para="1084"] .col[data-col="1098"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1084"] .col[data-col="1098"] .col-text .bit.bullet, .para[data-para="1084"] .col[data-col="1098"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1084"] .col[data-col="1098"] .col-text .bit.indent.bullet, .para[data-para="1084"] .col[data-col="1098"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1084"] .col[data-col="1098"] .col-text .bit.bullet::before, .para[data-para="1084"] .col[data-col="1098"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1084"] .col[data-col="1098"] .col-text .bit.indent.bullet::before, .para[data-para="1084"] .col[data-col="1098"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1084"] .col[data-col="1098"]{align-self:center}
+.para[data-para="1084"] .col[data-col="1098"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1084"] .col[data-col="1098"] .col-text,.para[data-para="1084"] .col[data-col="1098"] .bit{white-space:normal!important}
+.para[data-para="1084"] .col[data-col="1098"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1084"] .col[data-col="1098"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1084"] .col[data-col="1098"] a.ref{white-space:nowrap}
+.para[data-para="1087"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1087"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1087"] .col[data-col="1088"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:3px; text-align:left; line-height:1.55; --para-gap:18px }
+.para[data-para="1087"] .col[data-col="1088"] .col-text, .para[data-para="1087"] .col[data-col="1088"] .col-text .bit { line-height:1.55 }
+.para[data-para="1087"] .col[data-col="1088"] .col-text { gap:0 }
+.para[data-para="1087"] .col[data-col="1088"] .col-text .bit { margin:0 0 18px }
+.para[data-para="1087"] .col[data-col="1088"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1087"] .col[data-col="1088"] .col-text .bit { padding-left:0em }
+.para[data-para="1087"] .col[data-col="1088"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1087"] .col[data-col="1088"] .col-text .bit.bullet, .para[data-para="1087"] .col[data-col="1088"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1087"] .col[data-col="1088"] .col-text .bit.indent.bullet, .para[data-para="1087"] .col[data-col="1088"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1087"] .col[data-col="1088"] .col-text .bit.bullet::before, .para[data-para="1087"] .col[data-col="1088"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1087"] .col[data-col="1088"] .col-text .bit.indent.bullet::before, .para[data-para="1087"] .col[data-col="1088"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1087"] .col[data-col="1088"]{align-self:center}
+.para[data-para="1087"] .col[data-col="1088"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1087"] .col[data-col="1099"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1087"] .col[data-col="1099"] .col-text, .para[data-para="1087"] .col[data-col="1099"] .col-text .bit { line-height:1.2 }
+.para[data-para="1087"] .col[data-col="1099"] .col-text { gap:0 }
+.para[data-para="1087"] .col[data-col="1099"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1087"] .col[data-col="1099"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1087"] .col[data-col="1099"] .col-text .bit { padding-left:0em }
+.para[data-para="1087"] .col[data-col="1099"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1087"] .col[data-col="1099"] .col-text .bit.bullet, .para[data-para="1087"] .col[data-col="1099"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1087"] .col[data-col="1099"] .col-text .bit.indent.bullet, .para[data-para="1087"] .col[data-col="1099"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1087"] .col[data-col="1099"] .col-text .bit.bullet::before, .para[data-para="1087"] .col[data-col="1099"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1087"] .col[data-col="1099"] .col-text .bit.indent.bullet::before, .para[data-para="1087"] .col[data-col="1099"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1087"] .col[data-col="1099"]{align-self:center}
+.para[data-para="1087"] .col[data-col="1099"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1087"] .col[data-col="1099"] .col-text,.para[data-para="1087"] .col[data-col="1099"] .bit{white-space:normal!important}
+.para[data-para="1087"] .col[data-col="1099"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1087"] .col[data-col="1099"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1087"] .col[data-col="1099"] a.ref{white-space:nowrap}
+.fn-keep{white-space:nowrap}
+.fn { font-size:1em; font-weight:700; line-height:inherit; vertical-align:baseline; cursor:pointer; color:var(--title); display:inline-block; position:relative; padding:0; white-space:pre }
+.fn-mark { font-size:.7em; font-weight:700; line-height:1; vertical-align:super }
+.fn-tip{display:none;position:absolute;left:0;bottom:calc(100% + .28rem);z-index:80;padding:.15rem .45rem;border:1px solid var(--line);background:#fff;color:var(--title);font:400 .85em Arial,Helvetica,sans-serif;white-space:nowrap;pointer-events:none}
+.fn:hover .fn-tip,.fn:focus .fn-tip{display:block}
+.fn{text-decoration:none!important}
+a.ref .fn,.col-footnotes .fn{text-decoration:none!important;display:inline-block;position:relative;white-space:pre}
+a.ref, .col a.ref, .col-text a.ref, .para a.ref { color:var(--title); font-family:inherit; font-size:inherit; font-weight:inherit; font-style:inherit; text-decoration:underline; white-space:normal; overflow-wrap:anywhere }
+html, body { background:#e9ebe6 !important }
+.page-frame { background:#f6f7eb }
+.stick-top { background:transparent }
+.tab-dock { background:transparent }
+.page-frame{max-width:none;width:auto;margin:1.25rem;border:1px solid #9aa8ae;box-sizing:border-box}
+@media (min-width:1040px){.page-frame{max-width:1000px;margin-left:auto;margin-right:auto}}
+.top,.title-bar,.tab-dock,.tab-dock-end,.end-sub-tabs,main{max-width:none;margin-left:0;margin-right:0;padding-left:1.2rem;padding-right:1.2rem;box-sizing:border-box}
+.top{display:block;border:0;padding-left:0;padding-right:0}
+.head-banners{display:block;position:relative;overflow:visible!important;contain:none!important}
+.head-banners>.top{grid-column:1;grid-row:1}
+.head-banners>.title-bar{display:none}
+.top .brand-row{display:grid;grid-template-columns:minmax(0,1fr);align-items:center;width:100%;max-width:none;margin:0;padding:0 7.5rem;box-sizing:border-box}
+.title-bar{padding-left:0;padding-right:0}
+.title-bar-inner{display:flex;align-items:center;justify-content:center;padding-left:1.2rem;padding-right:1.2rem;padding-top:0;padding-bottom:0;box-sizing:border-box}
+.page-nav-bar{display:flex;justify-content:space-between;align-items:center;width:100%;box-sizing:border-box;padding:0.28rem 1.6rem;background:#fff}
+.ew-mark{position:absolute;left:0;top:0;bottom:0;display:flex;align-items:stretch;z-index:2;gap:0.45rem;max-height:100%;overflow:hidden;padding-left:1.2rem;text-align:left;box-sizing:border-box}
+.ew-mark img{display:block;height:100%;width:auto;max-height:100%;min-height:0;min-width:0;object-fit:contain;object-position:left center;flex:0 1 auto}
+.ew-words{font-size:calc(18px * var(--ew-font, 1));text-align:left;align-items:flex-start;align-self:center;justify-content:center}
+@media (max-width:760px){html header.top{display:flex;align-items:center;gap:0.6rem;padding-left:0.6rem;padding-right:0.6rem}html header.top .ew-mark{position:static;flex:0 0 auto;align-self:center;height:auto;max-height:none;padding-left:0;overflow:visible}html header.top .ew-mark img{height:2.6rem;max-height:2.6rem;width:auto}html header.top .ew-words{font-size:15px;white-space:nowrap}html header.top .brand-row{flex:1 1 auto;min-width:0;padding:0 var(--full-w,0px) 0 0}}
+html.ew-head-tight header.top{display:flex;align-items:center;gap:0.6rem;padding-left:0.6rem;padding-right:0.6rem}html.ew-head-tight header.top .ew-mark{position:static;flex:0 0 auto;align-self:center;height:auto;max-height:none;padding-left:0;overflow:visible}html.ew-head-tight header.top .ew-mark img{height:2.6rem;max-height:2.6rem;width:auto}html.ew-head-tight header.top .ew-words{font-size:15px;white-space:nowrap}html.ew-head-tight header.top .brand-row{flex:1 1 auto;min-width:0;padding:0 var(--full-w,0px) 0 0}
+html.ew-phone header.top .brand-row{padding-right:0}
+.who{grid-column:1/-1;grid-row:1;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-width:0;padding:0;text-align:center}
+.who,.site{text-align:center}
+.title-bar h1,.page-end-title{width:100%;min-width:0;text-align:center}
+.top{position:relative}
+.page-nav-bar .page-nav{flex:0 0 auto}
+.page-nav-bar .page-nav:empty{visibility:hidden;display:inline-block;min-width:3.2em;pointer-events:none}
+html.ew-phone .title-bar{display:none!important}
+html.ew-phone .page-nav-name{display:block;flex:1 1 auto;min-width:0;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:min(calc(13px * var(--ew-font, 1)),13px);color:var(--title,#005eb8)}
+html.ew-phone .who .site{font-size:min(calc(15px * var(--ew-font, 1)),15px)!important}
+.page-tools{display:none!important}
+.top{overflow:visible}
+.tab-dock{background:transparent}
+.col.col-footnotes{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.col.col-footnotes .col-text,.col.col-footnotes .bit{white-space:normal!important}
+.col.col-footnotes .fn-keep{display:block;white-space:nowrap}
+.col.col-footnotes .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.col.col-footnotes a.ref{white-space:nowrap}
+.col-text img.col-pic[data-intext="Wrap left"]{float:left;width:40%;max-width:40%;height:auto;margin:0.2em 0.8em 0.45em 0;display:block;object-fit:contain;box-sizing:border-box}
+.col-text img.col-pic[data-intext="Wrap right"]{float:right;width:40%;max-width:40%;height:auto;margin:0.2em 0 0.45em 0.8em;display:block;object-fit:contain;box-sizing:border-box}
+.col-text img.col-pic[data-intext="White Grey left"]{float:left;width:40%;max-width:40%;height:auto;margin:0.2em 0.8em 0.45em 0;display:block;object-fit:contain;box-sizing:border-box}
+.col-text img.col-pic[data-intext="White Grey right"]{float:right;width:40%;max-width:40%;height:auto;margin:0.2em 0 0.45em 0.8em;display:block;object-fit:contain;box-sizing:border-box}
+</style>
+  <style id="ew-header">/* Header shared by the sites. Taken from Scripture Narratives.
+   Site name in the middle. Page name under it.
+   Icon and Eternal Wellspring on the left. Full Screen on the right.
+   A site may still set its own tab and page background. */
+
+.head-banners {
+  display: block;
+  position: relative;
+  background: #f6f7eb;
+  overflow: visible !important;
+  contain: none !important;
+  align-items: start;
+  row-gap: 0;
+}
+.head-banners > .title-bar { display: none; }
+
+header.top {
+  display: block;
+  position: relative;
+  padding: 0.35rem 0;
+  background: #f6f7eb;
+  border: 0;
+  overflow: visible;
+}
+header.top .brand-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0 7.5rem;
+  box-sizing: border-box;
+  background: transparent;
+  border: 0;
+}
+.who {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  text-align: center;
+}
+.who .site,
+a.site {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  line-height: 1.1;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: calc(21px * var(--ew-font, 1));
+  font-weight: 400;
+  font-style: normal;
+  color: #1f6f78;
+  text-align: center;
+  text-decoration: none;
+}
+.who #page-title {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  line-height: 1.1;
+  font: 400 calc(23px * var(--ew-font, 1)) / 1.1 Arial, Helvetica, sans-serif;
+  color: #004d97;
+  text-align: center;
+  background: transparent;
+}
+
+.ew-mark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+  gap: 0.45rem;
+  height: auto;
+  max-height: 100%;
+  overflow: hidden;
+  padding-left: 1.2rem;
+  box-sizing: border-box;
+  color: var(--title);
+  text-decoration: none;
+}
+.ew-mark img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  object-position: left center;
+  flex: 0 1 auto;
+}
+.ew-words {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  align-self: center;
+  text-align: left;
+  font-size: calc(22px * var(--ew-font, 1));
+  color: #005eb8;
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+#ew-full {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.5rem;
+  z-index: 50;
+  padding: 0.28rem 0.7rem;
+  border: 1px solid #9aa8ae;
+  background: #fff;
+  color: #1b3a4b;
+  font: 700 0.82rem Arial, Helvetica, sans-serif;
+  cursor: pointer;
+}
+#ew-full:hover { background: #e7ead8; }
+html.ew-phone #ew-full { display: none !important; }
+
+/* Page title signs: the bottom bar's "<" and ">" sit on the title line, left and right of the title.
+   They are the same .page-nav arrows. The page name shows underneath on hover or focus. */
+.who #page-title .title-sign {
+  display: inline-flex;
+  justify-content: center;
+  width: 1.4em;
+  margin: 0 0.3em;
+  padding-top: 0;
+  padding-bottom: 0;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+.who #page-title .title-sign:empty { visibility: hidden; pointer-events: none; }
+.who #page-title .title-sign .page-nav-tip { bottom: auto; top: calc(100% + 0.28rem); }
+.head-banners:has(.title-sign:hover, .title-sign:focus) { overflow: visible; }
+/* Phone: the title column is narrow, so the signs take less room beside the title. */
+html.ew-phone .who #page-title .title-sign { width: auto; margin: 0 0.15em; }
+
+.page-nav {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28em;
+  min-width: 0;
+  max-width: 100%;
+  border: 0;
+  background: transparent;
+  color: #5a6a72;
+  font: 400 13px/1.15 Arial, Helvetica, sans-serif;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  white-space: nowrap;
+  text-align: left;
+  z-index: 0;
+}
+.page-nav.prev:not(:empty),
+.page-nav.next:not(:empty) { padding: 0.15rem 0.2rem; }
+.page-nav:not(:empty)::before,
+.page-nav.next:not(:empty)::after {
+  content: "";
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 0.42em;
+  height: 0.42em;
+  margin: 0;
+  background: none;
+  pointer-events: none;
+  border: solid #111;
+}
+.page-nav.prev:not(:empty)::before {
+  border-width: 0 0 2px 2px;
+  transform: rotate(45deg);
+}
+.page-nav.next:not(:empty)::before { display: none; }
+.page-nav.next:not(:empty)::after {
+  border-width: 2px 2px 0 0;
+  transform: rotate(45deg);
+}
+.page-nav:hover,
+.page-nav:focus { color: #1b3a4b; z-index: 60; }
+.page-nav-word { display: inline; position: relative; font: inherit; font-weight: 400; }
+.page-nav-tip {
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 0.28rem);
+  z-index: 40;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid var(--line, #c5d0d4);
+  background: #fff;
+  color: var(--title, #1b3a4b);
+  font: inherit;
+  font-weight: 400;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.page-nav.next .page-nav-tip { left: auto; right: 0; }
+.page-nav:hover .page-nav-tip,
+.page-nav:focus .page-nav-tip { display: block; }
+.page-nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.28rem 1.6rem;
+  background: #f6f7eb;
+}
+.page-nav-bar .page-nav { flex: 0 0 auto; }
+.page-nav-bar .page-nav:empty {
+  visibility: hidden;
+  display: inline-block;
+  min-width: 3.2em;
+  pointer-events: none;
+}
+.page-nav-name { display: none; }
+html.ew-phone .page-nav-name {
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  padding: 0 0.35rem;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 400;
+  line-height: 1.2;
+  color: #004d97;
+  font-size: min(calc(13px * var(--ew-font, 1)), 13px);
+}
+html.ew-phone .who .site {
+  font-size: min(calc(15px * var(--ew-font, 1)), 15px) !important;
+}
+.story-nav { display: inline; white-space: nowrap; margin: 0; }
+.story-nav .page-nav,
+.story-nav .page-nav.next:not(:empty) {
+  font-size: inherit;
+  line-height: inherit;
+  color: var(--title, #005eb8);
+  padding: 0;
+  gap: 0.22em;
+}
+.page-nav-bar-bottom {
+  position: static;
+  margin-top: 1.2rem;
+  border-bottom: 0;
+  border-top: 1px solid var(--line, #c5d0d4);
+}
+
+/* The sticky strip under the title is solid cream, so page content does not show through
+   behind the tabs when scrolling. The tabs keep their own colours. */
+.stick-top {
+  background: #f6f7eb !important;
+}
+.tab-dock,
+.tab-dock .tabs,
+.tabs {
+  background: transparent !important;
+}
+.tab-panel {
+  background-color: transparent !important;
+}
+
+/* Pop-up titles use the theme blue on every site. */
+/* "html" lifts these above the defaults bible.js adds while the page runs. */
+html #ew-info-modal .ew-info-title, html #ew-info-modal .ew-info-x, html #ew-text-modal .ew-text-title { color: var(--title, #005eb8); }
+</style>
+
+</head>
+<body>
+  <div class="page-frame">
+  <div class="stick-top">
+    <div class="head-banners">
+      <header class="top">
+        <a class="ew-mark" href="/" target="_parent">
+          <img src="images/icon.jpg" alt="" />
+          <span class="ew-words">Eternal<br>Wellspring</span>
+        </a>
+        <div class="brand-row">
+          <div class="who">
+            <a class="site" data-id="website" href="index.html">Romans</a>
+            <div class="page-title-line"><a class="page-nav prev title-sign" href="1-chapter-2.html#s1" aria-label="Chapter 2"><span class="page-nav-tip">Chapter 2</span></a><h1 id="page-title" data-id="1040">Chapter 4</h1><span class="page-nav next title-sign"></span></div>
+          </div>
+        </div>
+      </header>
+    </div>
+    <div class="tab-dock"><div class="tabs"><button type="button" class="tab" data-tab="s0" data-sec="1041">Contents</button><button type="button" class="tab active" data-tab="s1" data-sec="1042">God Promised</button><button type="button" class="tab" data-tab="s2" data-sec="1066">Promises Video</button><button type="button" class="tab" data-tab="s3" data-sec="1067">Fulfilled Promises</button></div></div>
+  </div>
+  <main data-page="1040">
+    <div class="tab-panel" id="s0" data-sec="1041"><ol class="contents-list"><li><a href="index.html#s0">Home</a></li><li><a href="1-chapter-2.html#s1">Chapter 2</a></li><li><a href="2-chapter-4.html#s1" class="here">Chapter 4</a></li></ol></div><div class="tab-panel active" id="s1" data-sec="1042"><div class="subsec" data-heading="1022"><h2 class="edit-heading" data-heading="1022">What did God actually Promise?</h2><div class="subsec-frame" data-heading="1022"><div class="row-block" data-para="1023"><div class="para" data-para="1023"><div class="col" data-col="1024" style="flex:1366.359375 1 0"><div class="col-text"><span class="bit">Paul refers to God&#x27;s promises 10 times in Romans, and half of them are in Chapter 4.<br>(You can read them all, if you want to, by clicking on the references.)</span><span class="bit">Unfortunately, most of them did not say what the promises are, apart from:<br>&quot;Abraham and his seed being the heir of the world.&quot;<span class="fn"> <span class="fn">2</span> </span><span class="fn"> </span><span class="fn"><br></span><br><span class="fn"></span>and &quot;I have made you a father of many nations&quot;<span class="fn"> <span class="fn">3</span> </span></span><span class="bit">Paul and the Jews in Rome, would have been familiar with God&#x27;s promises because most of the promises are for them.  Both the Jews and the Gentiles would have been taught which prophecies Jesus had fulfilled. None of them would have read Revelation.  </span><span class="bit">Based on the OT prophecies and the whole of the NT, I put together a short video to give you some idea of how Abraham and his seed may become heirs of the world and how the Gentiles could fit in.</span><span class="bit">I know that Jesus has more prophecies to fulfil, and Abraham and his descendants have not yet inherited the world!  </span><span class="bit"><span class="fn"></span>Before we watch it, let&#x27;s go through what it means for Abraham and his seed/descendants to inherit the world.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="1089" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Rom 1:1-2">Rom 1:1-2</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Rom 4:13-16">Rom 4:13-16</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Rom 4:17-18">Rom 4:17-18</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Rom 4:20-21">Rom 4:20-21</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Rom 9:4">Rom 9:4</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Rom 9:8-9">Rom 9:8-9</a></span><span class="bit"><span class="fn">7 </span><a class="ref" href="#ref" data-ref="Rom 15:8">Rom 15:8</a></span></div></div></div></div></div></div><div class="subsec" data-heading="1025"><h2 class="edit-heading" data-heading="1025">The Land, Forever</h2><div class="subsec-frame" data-heading="1025"><div class="row-block" data-para="1026"><div class="para" data-para="1026"><div class="col" data-col="1027" style="flex:1.0 1 0"><div class="col-text"><span class="bit"><img class="col-pic" src="/sites/Romans/images/1-the-land-forever.webp" alt="The scriptures on the right are God" data-intext="White Grey left" />Time and time again, Yahweh promises<span style="font-size:calc(18px * var(--ew-font, 1))">, &quot;All the land I give to you and your descendants forever.&quot;</span></span><span class="bit">The scriptures on the right are God&#x27;s promises to Abraham, Isaac and Jacob about the land.</span><span class="bit">After <b>reading</b> all these 10 verses, I was convinced that Yahweh will keep this promise.</span><span class="bit">It will start when Jesus returns as King of kings and Lord of lords. What else could they all mean?</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="1090" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 12:7">Gen 12:7</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gen 13:15-17">Gen 13:15-17</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Gen 15:7">Gen 15:7</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Gen 15:18">Gen 15:18</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Gen 17:8">Gen 17:8</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Gen 26:3">Gen 26:3</a></span><span class="bit"><span class="fn">7 </span><a class="ref" href="#ref" data-ref="Gen 28:13">Gen 28:13</a></span><span class="bit"><span class="fn">8 </span><a class="ref" href="#ref" data-ref="Gen 35:12">Gen 35:12</a></span></div></div></div></div></div></div><div class="subsec" data-heading="1028"><h2 class="edit-heading" data-heading="1028">As the Dust and the Stars</h2><div class="subsec-frame" data-heading="1028"><div class="row-block" data-para="1029"><div class="para" data-para="1029"><div class="col" data-col="1030" style="flex:1.0 1 0"><div class="col-text"><span class="bit"><img class="col-pic" src="/sites/Romans/images/2-as-the-dust-and-the-stars.webp" alt="Paul teaches in Romans that Abraham" data-intext="White Grey right" />Yahweh promised that Abraham&#x27;s descendant would be like the dust of the earth and the stars in the sky.</span><span class="bit">Paul teaches in Romans that Abraham&#x27;s believing descendants will inherit the whole world.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="1091" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 13:16">Gen 13:16</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gen 15:5">Gen 15:5</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Gen 22:17">Gen 22:17</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Gen 26:4">Gen 26:4</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Gen 28:14">Gen 28:14</a></span></div></div></div></div></div></div><div class="subsec" data-heading="1031"><h2 class="edit-heading" data-heading="1031">A King for the Nations</h2><div class="subsec-frame" data-heading="1031"><div class="row-block" data-para="1032"><div class="para" data-para="1032"><div class="col" data-col="1033" style="flex:1.0 1 0"><div class="col-text"><span class="bit"><img class="col-pic" src="/sites/Romans/images/3-a-king-for-the-nations.webp" alt="It does not look like this today, but one day it will be fulfilled. And He said something very personal: &amp;quot;I will be their God.&amp;quot;" data-intext="White Grey left" />Yahweh made Abraham father of many nations and promised that kings shall come from him.<span class="fn"> <span class="fn">1</span> </span></span><span class="bit">It does not look like this today, but one day it will be fulfilled. And He said something very personal: &quot;I will be their God.&quot;</span><span class="bit">Right at the start of Romans, the good news is about God&#x27;s Son, born into David&#x27;s family.</span><span class="bit">It is for the<b> Jew first,</b> and also for the rest of the world.</span><span class="bit">Genesis had already said, &quot;In you all the nations shall be blessed.&quot;</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="1092" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 17:4-6">Gen 17:4-6</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gen 17:4-6">4-6</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Rom 4:17-18">Rom 4:17-18</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Gen 17:15-16">Gen 17:15-16</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Gen 35:11">Gen 35:11</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Gen 17:7-8">Gen 17:7-8</a></span><span class="bit"><span class="fn">7 </span><a class="ref" href="#ref" data-ref="Rom 1:1-3">Rom 1:1-3</a></span><span class="bit"><span class="fn">8 </span><a class="ref" href="#ref" data-ref="Rom 1:16">Rom 1:16</a></span><span class="bit"><span class="fn">9 </span><a class="ref" href="#ref" data-ref="Gen 12:3">Gen 12:3</a></span><span class="bit"><span class="fn">10 </span><a class="ref" href="#ref" data-ref="Gen 18:18">Gen 18:18</a></span><span class="bit"><span class="fn">11 </span><a class="ref" href="#ref" data-ref="Gen 22:18">Gen 22:18</a></span><span class="bit"><span class="fn">12 </span><a class="ref" href="#ref" data-ref="Gen 26:4">Gen 26:4</a></span><span class="bit"><span class="fn">13 </span><a class="ref" href="#ref" data-ref="Gen 28:14">Gen 28:14</a></span><span class="bit"><span class="fn">14 </span><a class="ref" href="#ref" data-ref="Gal 3:8">Gal 3:8</a></span></div></div></div></div></div></div><div class="subsec" data-heading="1034"><h2 class="edit-heading" data-heading="1034">Heir of the World</h2><div class="subsec-frame" data-heading="1034"><div class="row-block" data-para="1035"><div class="para" data-para="1035"><div class="col" data-col="1036" style="flex:1.0 1 0"><div class="col-text"><span class="bit"><img class="col-pic" src="/sites/Romans/images/4-heir-of-the-world.webp" alt="Then he says this is for us too." data-intext="White Grey right" />This week&#x27;s verse goes even wider. Paul says Abraham would be &quot;heir of the world.&quot;</span><span class="bit">Then he says this is for us too.</span><span class="bit">If you belong to Christ, you are Abraham&#x27;s family, and you share the same promise.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="1093" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Rom 4:13">Rom 4:13</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Rom 4:23-24">Rom 4:23-24</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Gal 3:29">Gal 3:29</a></span></div></div></div></div></div></div><div class="subsec" data-heading="1037"><h2 class="edit-heading" data-heading="1037">Life to the Dead</h2><div class="subsec-frame" data-heading="1037"><div class="row-block" data-para="1038"><div class="para" data-para="1038"><div class="col" data-col="1039" style="flex:1.0 1 0"><div class="col-text"><span class="bit"><img class="col-pic" src="/sites/Romans/images/5-life-to-the-dead.webp" alt="Paul calls God the One who &amp;quot;gives life to the dead.&amp;quot;" data-intext="White Grey left" />God also promised to deal with the things that break us. Christ came to put away sin, and He will come again.</span><span class="bit">Paul calls God the One who &quot;gives life to the dead.&quot;</span><span class="bit">He raised Jesus from the dead.</span><span class="bit">Here is the heart of it. The promise is sure, not because we are strong, but because it rests on God.</span><span class="bit">Abraham was fully convinced that what God had promised, He was also able to do.</span><span class="bit">God keeps His word. Let&#x27;s see what that might look  like.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="1094" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Heb 9:26-28">Heb 9:26-28</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Rom 4:17-19">Rom 4:17-19</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Heb 11:19">Heb 11:19</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Rom 4:24">Rom 4:24</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Rom 4:16">Rom 4:16</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Rom 4:21">Rom 4:21</a></span></div></div></div></div></div></div></div><div class="tab-panel" id="s2" data-sec="1066"><div class="subsec" data-heading="1063"><h2 class="edit-heading" data-heading="1063">King of Kings and Lord of Lords</h2><div class="subsec-frame" data-heading="1063"><div class="row-block" data-para="1064"><div class="para" data-para="1064"><div class="col" data-col="1065" style="flex:1.0 1 0"><div class="col-text"><span class="bit"><video class="col-vid" src="/sites/Romans/images/king-of-kings-web.mp4" data-speed="90" controls playsinline preload="metadata" contenteditable="false"></video></span></div></div></div></div></div></div></div><div class="tab-panel" id="s3" data-sec="1067"><div class="subsec" data-heading="1071"><h2 class="edit-heading" data-heading="1071">The promises, kept</h2><div class="subsec-frame" data-heading="1071"><div class="row-block" data-para="1072"><div class="para" data-para="1072"><div class="col" data-col="1073" style="flex:1.0 1 0"><div class="col-text"><span class="bit"><img class="col-pic" src="/sites/Romans/images/6-the-promises-kept.webp" alt="So what brought me to this particular understanding?" data-intext="White Grey left" />The Video is my understanding of how Yahweh&#x27;s promises could be fulfilled.</span><span class="bit">So what brought me to this particular understanding?</span><span class="bit">Years of reading scriptures from Genesis to Revelation.</span></div></div></div></div></div></div><div class="subsec" data-heading="1074"><h2 class="edit-heading" data-heading="1074">Yahweh comes home</h2><div class="subsec-frame" data-heading="1074"><div class="row-block" data-para="1075"><div class="para" data-para="1075"><div class="col" data-col="1076" style="flex:1.0 1 0"><div class="col-text"><span class="bit"><img class="col-pic" src="/sites/Romans/images/7-god-comes-home.webp" alt="God will live with mankind again. He will wipe away every tear. There will be no more death, and nothing less than perfection." data-intext="White Grey right" />In the beginning, God walked with Adam and Eve in a garden, but mankind rebelled and were expelled. Yahweh promised Abraham, &quot;I will be their God.&quot;</span><span class="bit">God will live with mankind again. He will wipe away every tear. There will be no more death, and nothing less than perfection.</span><span class="bit">The earth will be made new, like that very first garden was, and this time it will last. It will be a world at peace, with the nations at rest and Yahweh at home with His children.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="1095" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 3:23-24">Gen 3:23-24</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gen 17:7-8">Gen 17:7-8</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Rev 21:3-4">Rev 21:3-4</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Rev 21:1-3">Rev 21:1-3</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Rev 22:1-3">Rev 22:1-3</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Isa 2:4">Isa 2:4</a></span></div></div></div></div></div></div><div class="subsec" data-heading="1077"><h2 class="edit-heading" data-heading="1077">One</h2><div class="subsec-frame" data-heading="1077"><div class="row-block" data-para="1078"><div class="para" data-para="1078"><div class="col" data-col="1079" style="flex:1.0 1 0"><div class="col-text"><span class="bit">One man’s Promise for the whole world<img class="col-pic" src="/sites/Romans/images/8-one-man-the-whole-world.webp" alt="" data-intext="White Grey left" />God’s promise to Abraham family is heir of His kingdom. They will inherit the whole world.<br>This isn&#x27;t some vague abstract mystery for theologians. A renewed earth will become Yahweh’s home for His family. And if you belong to His Son, Jesus, His home will be for you.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="1096" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Rom 4:13">Rom 4:13</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Rom 8:16-17">Rom 8:16-17</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Gal 3:29">Gal 3:29</a></span></div></div></div></div></div></div><div class="subsec" data-heading="1080"><h2 class="edit-heading" data-heading="1080">Abraham waited</h2><div class="subsec-frame" data-heading="1080"><div class="row-block" data-para="1081"><div class="para" data-para="1081"><div class="col" data-col="1082" style="flex:1.0 1 0"><div class="col-text"><span class="bit"><img class="col-pic" src="/sites/Romans/images/9-abraham-waited.webp" alt="We know the end from the beginning because He revealed it in the Bible." data-intext="White Grey right" />Some of us feel a long way from all this. Abraham did too. He waited, and he didn&#x27;t see the whole promise finished in his lifetime. But he trusted the One who spoke it.</span><span class="bit">We know the end from the beginning because He revealed it in the Bible.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="1097" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Heb 11:8-10">Heb 11:8-10</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Heb 11:13">Heb 11:13</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Isa 46:9-10">Isa 46:9-10</a></span></div></div></div></div></div></div><div class="subsec" data-heading="1083"><h2 class="edit-heading" data-heading="1083">Why can we be sure?</h2><div class="subsec-frame" data-heading="1083"><div class="row-block" data-para="1084"><div class="para" data-para="1084"><div class="col" data-col="1085" style="flex:1.0 1 0"><div class="col-text"><span class="bit"><img class="col-pic" src="/sites/Romans/images/10-why-we-can-be-sure.webp" alt="The promise doesn" data-intext="White Grey left" />If your heart is weary and your thoughts are troubled, this is for you.</span><span class="bit">The promise doesn&#x27;t depend on how strong you feel today or how good you are. It rests on God. The God who gives life to the dead.</span><span class="bit">Abraham looked at his own body, as good as dead, and he still trusted God. And God has already done the greatest by giving us His only begotten Son.</span><span class="bit">Yahweh raised Jesus from the dead as proof. Proof of what?</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="1098" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Rom 4:16-17">Rom 4:16-17</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Rom 4:19-21">Rom 4:19-21</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="John 3:16">John 3:16</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Rom 8:32">Rom 8:32</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Acts 17:31">Acts 17:31</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Rom 4:24-25">Rom 4:24-25</a></span></div></div></div></div></div></div><div class="subsec" data-heading="1086"><h2 class="edit-heading" data-heading="1086">I will be his God</h2><div class="subsec-frame" data-heading="1086"><div class="row-block" data-para="1087"><div class="para" data-para="1087"><div class="col" data-col="1088" style="flex:1.0 1 0"><div class="col-text"><span class="bit"><img class="col-pic" src="/sites/Romans/images/11-i-will-be-his-god.webp" alt="You don" data-intext="White Grey right" />The video closed with God&#x27;s own words: the one who overcomes shall inherit all things. &quot;I will be his God, and he shall be My son.&quot;</span><span class="bit">You don&#x27;t need to be an expert in the future. You do need to know the One who promised you a future. You don’t need to know when it will happen. But like Abraham, you need to know that it will happen.</span><span class="bit">Believe the same God who raised Jesus, He will be back to dwell with His people who are in Christ.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="1099" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Rev 21:7">Rev 21:7</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Acts 1:11">Acts 1:11</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Rev 21:3">Rev 21:3</a></span></div></div></div></div></div></div></div>
+  </main>
+  <div class="tab-dock-end"><div class="tabs"><button type="button" class="tab" data-tab="s0" data-sec="1041">Contents</button><button type="button" class="tab active" data-tab="s1" data-sec="1042">God Promised</button><button type="button" class="tab" data-tab="s2" data-sec="1066">Promises Video</button><button type="button" class="tab" data-tab="s3" data-sec="1067">Fulfilled Promises</button></div></div>
+  
+  <div class="page-nav-bar page-nav-bar-bottom"><a class="page-nav prev" href="1-chapter-2.html#s1" aria-label="Chapter 2"><span class="page-nav-word">Prev Page</span><span class="page-nav-tip">Chapter 2</span></a><span class="page-nav-name">Chapter 4</span><span class="page-nav next"></span></div>
+  <footer class="date-updated">Updated: <span class="ew-date-updated"></span></footer>
+  
+  </div>
+  <script>
+function showTab(id){
+  if (!id || !document.getElementById(id)) return;
+  document.querySelectorAll(".tab[data-tab]").forEach(function(b){ b.classList.toggle("active", b.dataset.tab===id); });
+  document.querySelectorAll(".tab-panel").forEach(function(p){ p.classList.toggle("active", p.id===id); });
+  document.querySelectorAll(".end-sub-tabs").forEach(function(el){ el.hidden = el.getAttribute("data-for") !== id; });
+  var panel = document.getElementById(id);
+  if (panel) {
+    panel.querySelectorAll(".ew-hidden-sub").forEach(function(btn){
+      btn.classList.remove("open");
+      btn.setAttribute("aria-expanded", "false");
+      var wrap = btn.closest && btn.closest(".subsec");
+      if (wrap) wrap.classList.remove("open");
+    });
+  }
+  if (window.ewFitHead) requestAnimationFrame(function(){ window.ewFitHead(); });
+}
+function pageFile(href){
+  var path = String(href || "").split("#")[0].split("?")[0];
+  return path ? path.split("/").pop() : "";
+}
+function isHomeName(f){
+  f = String(f || "");
+  return f === "home.html" || f === "index.html" || f === "1-home.html";
+}
+function samePage(href){
+  var file = pageFile(href);
+  var here = pageFile(location.pathname) || "index.html";
+  if (!file || file === here) return true;
+  return isHomeName(file) && isHomeName(here);
+}
+function tabFromHref(href){
+  var i = String(href || "").indexOf("#");
+  return i >= 0 ? href.slice(i + 1) : "";
+}
+document.addEventListener("click", function(ev){
+  var sub = ev.target.closest(".sub-tab");
+  if (sub && sub.dataset.sub) {
+    var wrap = sub.closest(".tab-panel");
+    if (!wrap) {
+      var end = sub.closest(".end-sub-tabs");
+      var forId = end && end.getAttribute("data-for");
+      wrap = forId ? document.getElementById(forId) : null;
+    }
+    if (!wrap) return;
+    var id = sub.dataset.sub;
+    wrap.querySelectorAll(".sub-tab").forEach(function(b){ b.classList.toggle("active", b.dataset.sub===id); });
+    wrap.querySelectorAll(".sub-tab-panel").forEach(function(p){ p.classList.toggle("active", p.dataset.sub===id); });
+    var endBar = document.querySelector('.end-sub-tabs[data-for="' + wrap.id + '"]');
+    if (endBar) endBar.querySelectorAll(".sub-tab").forEach(function(b){ b.classList.toggle("active", b.dataset.sub===id); });
+    if (window.ewFitHead) requestAnimationFrame(function(){ window.ewFitHead(); });
+    return;
+  }
+  var btn = ev.target.closest(".tab");
+  if (btn && btn.dataset.tab) {
+    var id = btn.dataset.tab;
+    showTab(id);
+    if (id && location.hash.slice(1) !== id) {
+      if (history.replaceState) history.replaceState(null, "", "#" + id);
+      else location.hash = id;
+    }
+    return;
+  }
+  var a = ev.target.closest(".contents-list a");
+  if (!a) return;
+  if (!samePage(a.getAttribute("href") || "")) return;
+  ev.preventDefault();
+  var tid = tabFromHref(a.getAttribute("href") || "") || "s1";
+  showTab(tid);
+  if (tid && history.replaceState) history.replaceState(null, "", "#" + tid);
+  else if (tid) location.hash = tid;
+  window.scrollTo(0, 0);
+});
+window.addEventListener("hashchange", function(){
+  if (location.hash) showTab(location.hash.slice(1));
+  window.scrollTo(0, 0);
+});
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+var startTab = location.hash ? location.hash.slice(1) : "s1";
+if (location.hash && history.replaceState) history.replaceState(null, "", location.pathname + location.search);
+showTab(startTab);
+window.scrollTo(0, 0);
+window.addEventListener("load", function(){ window.scrollTo(0, 0); });
+</script><script>
+(function(){
+  if (window.ewVideoBound) return;
+  window.ewVideoBound = true;
+  var d = document;
+  function rate(v){
+    var n = parseFloat(v.getAttribute("data-speed"));
+    if (!(n >= 25 && n <= 400)) n = 100;
+    return n / 100;
+  }
+  function apply(v){
+    if (!v || v.tagName !== "VIDEO" || !v.classList || !v.classList.contains("col-vid")) return;
+    var r = rate(v);
+    try { v.defaultPlaybackRate = r; v.playbackRate = r; } catch (e) {}
+  }
+  function ratio(v){
+    if (v.videoWidth && v.videoHeight) v.style.setProperty("--ew-vr", (v.videoWidth / v.videoHeight).toFixed(4));
+  }
+  // Normal view: the whole video fits in the window below the sticky header and tabs.
+  function fit(){
+    var top = 0;
+    d.querySelectorAll(".stick-top").forEach(function(el){ top = Math.max(top, el.offsetHeight || 0); });
+    var room = Math.max(120, (window.innerHeight || d.documentElement.clientHeight || 600) - top - 24);
+    d.documentElement.style.setProperty("--ew-vid-room", room + "px");
+  }
+  d.addEventListener("loadedmetadata", function(e){ if (e.target && e.target.tagName === "VIDEO") { ratio(e.target); apply(e.target); } }, true);
+  var started = typeof WeakSet === "function" ? new WeakSet() : null;
+  d.addEventListener("play", function(e){
+    var v = e.target;
+    if (started && started.has(v)) return;
+    if (started) started.add(v);
+    apply(v);
+  }, true);
+  function reapply(){ d.querySelectorAll("video.col-vid").forEach(function(v){ setTimeout(function(){ apply(v); }, 0); }); fit(); }
+  d.addEventListener("fullscreenchange", reapply);
+  d.addEventListener("webkitfullscreenchange", reapply);
+  d.addEventListener("webkitendfullscreen", function(e){ apply(e.target); }, true);
+  function all(){
+    fit();
+    d.querySelectorAll("video.col-vid").forEach(function(v){ if (v.readyState > 0) ratio(v); apply(v); });
+  }
+  window.addEventListener("resize", fit);
+  window.addEventListener("orientationchange", fit);
+  window.addEventListener("load", fit);
+  d.addEventListener("ew-page-swap", all);
+  if (d.readyState === "loading") d.addEventListener("DOMContentLoaded", all);
+  else all();
+})();
+</script><script>
+(function(){
+  var home = "/";
+  document.querySelectorAll("a.ew-mark").forEach(function(a){ a.href = home; });
+})();
+</script><script>
+(function(){
+  function isFull(){
+    return !!(document.fullscreenElement || document.webkitFullscreenElement);
+  }
+  function paint(){
+    var btn = document.getElementById("ew-full");
+    if (btn) btn.textContent = isFull() ? "Exit Full Screen" : "Full Screen";
+  }
+  function go(){
+    if (isFull()) {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      return;
+    }
+    var el = document.documentElement;
+    var req = el.requestFullscreen || el.webkitRequestFullscreen || el.webkitRequestFullScreen;
+    if (req) req.call(el);
+  }
+  function pageFile(href){
+    var path = String(href || "").split("#")[0].split("?")[0];
+    return path ? path.split("/").pop() : "";
+  }
+  function hereFile(){
+    return pageFile(location.pathname) || "index.html";
+  }
+  function isHomeName(f){
+    f = String(f || "");
+    return f === "home.html" || f === "index.html" || f === "1-home.html";
+  }
+  function isOtherHtml(href){
+    var file = pageFile(href);
+    var here = hereFile();
+    if (!file || !/\.html$/i.test(file)) return false;
+    if (file === here) return false;
+    if (isHomeName(file) && isHomeName(here)) return false;
+    return true;
+  }
+  function swapTo(href){
+    fetch(href, { credentials: "same-origin" })
+      .then(function(r){ if (!r.ok) throw new Error("nav"); return r.text(); })
+      .then(function(html){
+        var doc = new DOMParser().parseFromString(html, "text/html");
+        var next = doc.querySelector(".page-frame");
+        var cur = document.querySelector(".page-frame");
+        if (!next || !cur) { location.href = href; return; }
+        cur.innerHTML = next.innerHTML;
+        document.title = doc.title;
+        var dp = doc.documentElement.getAttribute("data-page");
+        if (dp) document.documentElement.setAttribute("data-page", dp);
+        var fmt = doc.getElementById("ew-format");
+        var mine = document.getElementById("ew-format");
+        if (fmt && mine) mine.textContent = fmt.textContent;
+        try { history.pushState({ ew: 1 }, "", href); } catch (e) {}
+        paint();
+        var hash = "";
+        var hi = String(href).indexOf("#");
+        if (hi >= 0) hash = href.slice(hi + 1);
+        if (hash && window.showTab) window.showTab(hash);
+        document.dispatchEvent(new Event("ew-page-swap"));
+        window.scrollTo(0, 0);
+        document.querySelectorAll("a.ew-mark").forEach(function(a){
+          a.href = "/";
+        });
+      })
+      .catch(function(){ location.href = href; });
+  }
+  document.addEventListener("click", function(ev){
+    if (ev.target.closest("#ew-full")) {
+      ev.preventDefault();
+      go();
+      return;
+    }
+    if (!isFull()) return;
+    var a = ev.target.closest("a.page-nav, .contents-list a");
+    if (!a) return;
+    var href = a.getAttribute("href") || "";
+    if (!href || href.charAt(0) === "#") return;
+    if (!isOtherHtml(href)) return;
+    ev.preventDefault();
+    swapTo(href);
+  });
+  window.addEventListener("popstate", function(){
+    if (!isFull()) return;
+    swapTo(location.pathname + location.search + location.hash);
+  });
+  document.addEventListener("fullscreenchange", paint);
+  document.addEventListener("webkitfullscreenchange", paint);
+  paint();
+})();
+</script><script>
+(function(){
+  function isPhone(){
+    var ua = navigator.userAgent || "";
+    if (/iPad/i.test(ua)) return false;
+    if (/Macintosh/i.test(ua) && (navigator.maxTouchPoints || 0) > 1) return false;
+    if (/iPhone|iPod/i.test(ua)) return true;
+    if (/Android/i.test(ua) && /Mobile/i.test(ua)) return true;
+    return false;
+  }
+  function markPhone(){
+    var phone = isPhone();
+    document.documentElement.classList.toggle("ew-phone", phone);
+    var portrait = phone && window.matchMedia && window.matchMedia("(orientation: portrait)").matches;
+    document.documentElement.classList.toggle("ew-portrait", !!portrait);
+    var btn = document.getElementById("ew-full");
+    if (btn) {
+      if (phone) btn.style.setProperty("display", "none", "important");
+      else btn.style.removeProperty("display");
+    }
+  }
+  function contentHeight(col){
+    var inner = col.querySelector(".col-text") || col;
+    var kids = [];
+    for (var i = 0; i < inner.children.length; i++) {
+      var ch = inner.children[i];
+      if (ch.classList && ch.classList.contains("col-pic-alt") && !String(ch.textContent || "").trim()) continue;
+      kids.push(ch);
+    }
+    var body = 0;
+    if (kids.length) {
+      body = Math.round(kids[kids.length - 1].getBoundingClientRect().bottom - kids[0].getBoundingClientRect().top);
+    } else {
+      body = inner.scrollHeight;
+    }
+    var cs = getComputedStyle(col);
+    var pad = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0);
+    return Math.max(1, body + pad);
+  }
+  function equalisePics(){
+    var portrait = document.documentElement.classList.contains("ew-portrait");
+    document.querySelectorAll(".para").forEach(function(row){
+      var panel = row.closest(".tab-panel");
+      if (panel && !panel.classList.contains("active")) return;
+      if (row.clientWidth < 8) return;
+      var cols = [];
+      for (var i = 0; i < row.children.length; i++) {
+        var el = row.children[i];
+        if (el.classList && el.classList.contains("col") && !el.classList.contains("col-footnotes")) cols.push(el);
+      }
+      var pics = [];
+      var textCol = null;
+      function photoCol(c){
+        var imgs = c.querySelectorAll("img.col-pic");
+        var i;
+        for (i = 0; i < imgs.length; i++) {
+          if (!imgs[i].getAttribute("data-intext")) return true;
+        }
+        return false;
+      }
+      cols.forEach(function(c){
+        if (photoCol(c)) pics.push(c);
+        else if (!textCol) textCol = c;
+      });
+      if (!pics.length) return;
+      function clearPicSize(picCol){
+        var img = picCol.querySelector("img.col-pic");
+        if (!img) return;
+        img.style.height = "";
+        img.style.maxHeight = "";
+        img.style.width = "";
+        img.style.maxWidth = "";
+        img.style.objectFit = "";
+        img.style.objectPosition = "";
+        picCol.style.flex = "";
+        picCol.style.width = "";
+        picCol.style.maxWidth = "";
+        picCol.style.minWidth = "";
+        picCol.style.marginLeft = "";
+        picCol.style.marginRight = "";
+      }
+      pics.forEach(clearPicSize);
+      if (portrait) return;
+      var rowW = row.clientWidth;
+      var nCols = Math.max(1, cols.length);
+      var maxPic = Math.max(1, Math.floor(rowW / nCols));
+      function setPic(picCol, tw, capPct){
+        var img = picCol.querySelector("img.col-pic");
+        if (!img) return;
+        var nw = img.naturalWidth || img.width;
+        var nh = img.naturalHeight || img.height;
+        if (!nw || !nh) return;
+        tw = Math.max(1, Math.round(tw));
+        var ih = Math.round(tw * nh / nw);
+        img.style.boxSizing = "border-box";
+        img.style.width = tw + "px";
+        img.style.maxWidth = tw + "px";
+        img.style.height = ih + "px";
+        img.style.maxHeight = ih + "px";
+        img.style.objectFit = "fill";
+        img.style.objectPosition = "center center";
+        picCol.style.flex = "0 0 " + tw + "px";
+        picCol.style.width = tw + "px";
+        picCol.style.maxWidth = (capPct != null ? capPct : (100 / nCols)) + "%";
+        picCol.style.minWidth = "0";
+      }
+      function placePhoto(picCol){
+        var n = 0;
+        var i;
+        for (i = 0; i < row.children.length; i++) {
+          if (row.children[i].classList && row.children[i].classList.contains("col")) n++;
+        }
+        if (n !== 1 || !picCol.style.width) return;
+        var align = (getComputedStyle(picCol).textAlign || "").toLowerCase();
+        if (align === "center" || align === "centre") {
+          picCol.style.marginLeft = "auto";
+          picCol.style.marginRight = "auto";
+        } else if (align === "right" || align === "end") {
+          picCol.style.marginLeft = "auto";
+          picCol.style.marginRight = "0px";
+        } else {
+          picCol.style.marginLeft = "0px";
+          picCol.style.marginRight = "auto";
+        }
+      }
+      var growCol = null;
+      pics.forEach(function(picCol){
+        var pct = parseFloat(picCol.getAttribute("data-photo-pct") || "0");
+        if (pct > 0) {
+          if (pct > 100) pct = 100;
+          setPic(picCol, rowW * pct / 100, pct);
+          placePhoto(picCol);
+        } else {
+          growCol = picCol;
+        }
+      });
+      if (!growCol) return;
+      var picCol = growCol;
+      var img = picCol.querySelector("img.col-pic");
+      if (!img) return;
+      function setGrow(tw){
+        if (tw > maxPic) tw = maxPic;
+        setPic(picCol, tw, 100 / nCols);
+      }
+      function textWouldWrap(){
+        if (!textCol) return false;
+        var inner = textCol.querySelector(".col-text") || textCol;
+        var bits = inner.querySelectorAll(".bit");
+        var nodes = bits.length ? bits : [inner];
+        var i, n, prev, overflow;
+        for (i = 0; i < nodes.length; i++) {
+          n = nodes[i];
+          if (!n) continue;
+          if (n.classList && n.classList.contains("col-pic-alt") && !String(n.textContent || "").trim()) continue;
+          prev = n.style.whiteSpace;
+          n.style.whiteSpace = "nowrap";
+          overflow = n.scrollWidth > n.clientWidth + 1;
+          n.style.whiteSpace = prev;
+          if (overflow) return true;
+        }
+        return false;
+      }
+      if (!textCol) {
+        setGrow(maxPic);
+        return;
+      }
+      picCol.style.flex = "0 0 0px";
+      picCol.style.width = "0px";
+      picCol.style.maxWidth = "0px";
+      img.style.width = "0px";
+      img.style.maxWidth = "0px";
+      if (textWouldWrap()) {
+        var th = contentHeight(textCol);
+        var nw = img.naturalWidth || img.width;
+        var nh = img.naturalHeight || img.height;
+        var tw = (th >= 24 && nw && nh) ? Math.round(th * nw / nh) : maxPic;
+        setGrow(tw);
+        return;
+      }
+      var lo = 0, hi = maxPic, best = 0, mid;
+      while (lo <= hi) {
+        mid = (lo + hi) >> 1;
+        setGrow(mid);
+        if (textWouldWrap()) hi = mid - 1;
+        else { best = mid; lo = mid + 1; }
+      }
+      setGrow(best > 0 ? best : maxPic);
+    });
+  }
+  function setGutter(){
+    var banners = document.querySelector(".head-banners");
+    if (!banners) return;
+    var bb = banners.getBoundingClientRect();
+    var mark = document.querySelector(".ew-mark");
+    if (mark) {
+      var mb = mark.getBoundingClientRect();
+      var markW = Math.ceil(Math.max(0, mb.right - bb.left) + 12);
+      if (markW) banners.style.setProperty("--mark-w", markW + "px");
+    }
+    var btn = document.getElementById("ew-full");
+    var fullW = 19;
+    if (btn) {
+      var cs = window.getComputedStyle(btn);
+      if (cs.display !== "none" && cs.visibility !== "hidden") {
+        var fb = btn.getBoundingClientRect();
+        fullW = Math.ceil(Math.max(0, bb.right - fb.left) + 8);
+      }
+    }
+    banners.style.setProperty("--full-w", fullW + "px");
+  }
+  function fit(el){
+    if (!el) return;
+    el.style.fontSize = "";
+    var phone = document.documentElement.classList.contains("ew-phone");
+    var base = parseFloat(window.getComputedStyle(el).fontSize) || 16;
+    var cap = 15;
+    if (el.classList && el.classList.contains("page-nav-name")) cap = 13;
+    if (phone && base > cap) {
+      base = cap;
+      el.style.fontSize = cap + "px";
+    }
+    var size = base;
+    var n = 0;
+    var floor = phone ? 9 : 8;
+    while (el.scrollWidth > el.clientWidth + 1 && size > floor && n < 50) {
+      size *= 0.92;
+      el.style.fontSize = size + "px";
+      n++;
+    }
+  }
+  function tightHead(){
+    var root = document.documentElement;
+    var mark = document.querySelector("header.top .ew-mark");
+    var who = document.querySelector("header.top .who");
+    if (!mark || !who || !document.createTreeWalker) return;
+    root.classList.remove("ew-head-tight");
+    var boxes = [mark.getBoundingClientRect()];
+    var btn = document.getElementById("ew-full");
+    if (btn && window.getComputedStyle(btn).display !== "none") boxes.push(btn.getBoundingClientRect());
+    function hits(q){
+      if (!q.width || !q.height) return false;
+      for (var j = 0; j < boxes.length; j++) {
+        var b = boxes[j];
+        if (q.left < b.right + 16 && q.right > b.left - 16 && q.top < b.bottom && q.bottom > b.top) return true;
+      }
+      return false;
+    }
+    var walk = document.createTreeWalker(who, NodeFilter.SHOW_TEXT, null), t, r = document.createRange(), rects, i;
+    while ((t = walk.nextNode())) {
+      if (!String(t.nodeValue || "").trim()) continue;
+      if (t.parentNode && t.parentNode.closest && t.parentNode.closest(".page-nav-tip")) continue;
+      r.selectNodeContents(t);
+      rects = r.getClientRects();
+      for (i = 0; i < rects.length; i++) if (hits(rects[i])) { root.classList.add("ew-head-tight"); return; }
+    }
+    var signs = who.querySelectorAll(".title-sign");
+    for (i = 0; i < signs.length; i++) if (hits(signs[i].getBoundingClientRect())) { root.classList.add("ew-head-tight"); return; }
+  }
+  function fitHead(){
+    markPhone();
+    tightHead();
+    setGutter();
+    requestAnimationFrame(function(){
+      setGutter();
+      document.querySelectorAll(".who .page-title-line, .who > #page-title, .title-bar h1, .page-end-title, .page-nav-name").forEach(fit);
+      equalisePics();
+    });
+  }
+  window.addEventListener("resize", fitHead);
+  window.addEventListener("orientationchange", fitHead);
+  document.addEventListener("ew-page-swap", fitHead);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitHead);
+  else window.addEventListener("load", fitHead);
+  var img = document.querySelector(".ew-mark img");
+  if (img && !img.complete) img.addEventListener("load", fitHead);
+  document.querySelectorAll("img.col-pic").forEach(function(pic){
+    if (!pic.complete) pic.addEventListener("load", fitHead);
+  });
+  fitHead();
+  setTimeout(fitHead, 50);
+  setTimeout(fitHead, 250);
+  window.ewFitHead = fitHead;
+})();
+</script><script>
+(function(){
+  var PAGE_KEY = "ew.page";
+  var FONT_KEY = "ew.font";
+  var NOTES_KEY = "ew.notes";
+  var STEPS = [0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.25, 1.4];
+  var defaults = window.ewDefaults || { notes: false };
+  function nearest(v) {
+    var best = STEPS[0], d = 99, i;
+    for (i = 0; i < STEPS.length; i++) {
+      var x = Math.abs(STEPS[i] - v);
+      if (x < d) { d = x; best = STEPS[i]; }
+    }
+    return best;
+  }
+  function read(key, fallback) {
+    var v = fallback;
+    try { v = parseFloat(localStorage.getItem(key) || "") || fallback; } catch (e) {}
+    if (key === PAGE_KEY && (v === fallback)) {
+      try { v = parseFloat(localStorage.getItem("ew.screen") || "") || fallback; } catch (e2) {}
+    }
+    return nearest(v);
+  }
+  function readNotes() {
+    try {
+      var v = localStorage.getItem(NOTES_KEY);
+      if (v === "1") return true;
+      if (v === "0") return false;
+    } catch (e) {}
+    return !!defaults.notes;
+  }
+  var pageZ = read(PAGE_KEY, 1);
+  var fontZ = read(FONT_KEY, 1);
+  function tellSettings() {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: "ew-settings", footnotes: readNotes() }, "*");
+    }
+  }
+  function apply() {
+    var f = document.querySelector(".page-frame");
+    var main = document.querySelector("main");
+    var tabs = document.querySelector(".tab-dock");
+    if (f) {
+      f.style.zoom = "";
+      if (pageZ < 1) {
+        f.style.width = (pageZ * 100) + "%";
+        f.style.maxWidth = "min(" + (pageZ * 100) + "%, 1000px)";
+        f.style.marginLeft = "auto";
+        f.style.marginRight = "auto";
+      } else {
+        // Leave width to the page CSS: full width, but never wider than 1000px on big screens.
+        f.style.width = "";
+        f.style.maxWidth = "";
+        f.style.marginLeft = "";
+        f.style.marginRight = "";
+      }
+    }
+    document.documentElement.style.setProperty("--ew-font", String(fontZ));
+    var fixedNotes = document.documentElement.getAttribute("data-footnotes-fixed");
+    var notesAllowed = document.documentElement.getAttribute("data-show-footnotes") !== "0";
+    if (fixedNotes === "on") document.documentElement.classList.remove("ew-notes-off");
+    else if (fixedNotes === "off") document.documentElement.classList.add("ew-notes-off");
+    else document.documentElement.classList.toggle("ew-notes-off", !notesAllowed || !readNotes());
+    if (main) main.style.zoom = "";
+    if (tabs) tabs.style.zoom = "";
+    document.querySelectorAll(".who .page-title-line, .who > #page-title, .title-bar h1, .page-end-title").forEach(function(el){ el.style.zoom = ""; });
+    document.querySelectorAll(".page-minus").forEach(function(b){ b.disabled = pageZ <= STEPS[0]; });
+    document.querySelectorAll(".page-plus").forEach(function(b){ b.disabled = pageZ >= 1; });
+    document.querySelectorAll(".font-minus").forEach(function(b){ b.disabled = fontZ <= STEPS[0]; });
+    document.querySelectorAll(".font-plus").forEach(function(b){ b.disabled = fontZ >= STEPS[STEPS.length - 1]; });
+    var windowBg = document.documentElement.getAttribute("data-window") || "";
+    document.documentElement.style.background = windowBg;
+    document.body.style.background = windowBg;
+    var notesOn = readNotes();
+    document.querySelectorAll(".tab-notes").forEach(function(b){
+      b.classList.toggle("on", notesOn);
+    });
+  }
+  function nudge(which, dir) {
+    var cur = which === "page" ? pageZ : fontZ;
+    var i = STEPS.indexOf(nearest(cur));
+    i = Math.max(0, Math.min(STEPS.length - 1, i + dir));
+    cur = STEPS[i];
+    if (which === "page") pageZ = cur;
+    else fontZ = cur;
+    try { localStorage.setItem(which === "page" ? PAGE_KEY : FONT_KEY, String(cur)); } catch (e) {}
+    apply();
+    tellSettings();
+  }
+  function setNotes(on) {
+    try { localStorage.setItem(NOTES_KEY, on ? "1" : "0"); } catch (e) {}
+    apply();
+    tellSettings();
+  }
+  document.addEventListener("click", function (ev) {
+    if (ev.target.closest(".page-minus")) nudge("page", -1);
+    else if (ev.target.closest(".page-plus")) nudge("page", 1);
+    else if (ev.target.closest(".font-minus")) nudge("font", -1);
+    else if (ev.target.closest(".font-plus")) nudge("font", 1);
+    else if (ev.target.closest("[data-notes-toggle]")) {
+      ev.preventDefault();
+      setNotes(!readNotes());
+    } else if (ev.target.closest("[data-settings-open]")) {
+      ev.preventDefault();
+      var pop = document.getElementById("ew-settings-pop");
+      if (pop) {
+        pop.hidden = false;
+        document.documentElement.classList.add("ew-settings-open");
+      }
+    } else if (ev.target.closest(".ew-settings-scrim") || ev.target.closest(".ew-settings-x")) {
+      ev.preventDefault();
+      var pop2 = document.getElementById("ew-settings-pop");
+      if (pop2) pop2.hidden = true;
+      document.documentElement.classList.remove("ew-settings-open");
+    }
+  });
+  document.addEventListener("ew-page-swap", function(){
+    apply();
+  });
+  apply();
+})();
+</script><script>window.ewDefaults={"notes": false}</script><script>window.ewFolder="Romans"</script><script>
+(function(){
+  if (window.ewDetailsBound) return;
+  window.ewDetailsBound = true;
+  function setOpen(btn, on){
+    if (!btn || !btn.classList) return;
+    btn.classList.toggle("open", !!on);
+    btn.setAttribute("aria-expanded", on ? "true" : "false");
+    if (btn.classList.contains("ew-details")) btn.textContent = on ? "Hide Details" : "Additional Details";
+  }
+  function setHiddenSubOpen(btn, on){
+    if (!btn || !btn.classList) return;
+    btn.classList.toggle("open", !!on);
+    btn.setAttribute("aria-expanded", on ? "true" : "false");
+    var wrap = btn.closest && btn.closest(".subsec");
+    if (wrap) wrap.classList.toggle("open", !!on);
+  }
+  document.addEventListener("click", function(ev){
+    var hbtn = ev.target.closest && ev.target.closest(".ew-hidden-sub");
+    if (hbtn) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      if (ev.stopImmediatePropagation) ev.stopImmediatePropagation();
+      setHiddenSubOpen(hbtn, !hbtn.classList.contains("open"));
+      return;
+    }
+    var btn = ev.target.closest && ev.target.closest(".bit.ew-details");
+    if (!btn) return;
+    ev.preventDefault();
+    ev.stopPropagation();
+    if (ev.stopImmediatePropagation) ev.stopImmediatePropagation();
+    setOpen(btn, !btn.classList.contains("open"));
+  }, true);
+  document.addEventListener("keydown", function(ev){
+    var btn = ev.target && ev.target.classList && ev.target.classList.contains("ew-details") ? ev.target : null;
+    if (!btn) return;
+    if (ev.key !== "Enter" && ev.key !== " ") return;
+    ev.preventDefault();
+    setOpen(btn, !btn.classList.contains("open"));
+  });
+})();
+</script><script>window.EW_GLOSSARY_SRC="glossary.json?v=39db1fef";</script><script src="footnotes.js?v=e3abc8d6"></script><script defer src="bible.js?v=8c491c7c"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
+(function(){
+  var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var last = "";
+  function show(t){
+    var el = document.querySelector(".ew-date-updated");
+    if (!el) return;
+    t = String(t || "").trim().split("\n")[0];
+    var m = t.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})/);
+    last = m ? (parseInt(m[3],10) + " " + months[parseInt(m[2],10)-1] + " " + m[1] + " " + m[4] + ":" + m[5]) : t;
+    el.textContent = last;
+  }
+  function fill(){
+    var el = document.querySelector(".ew-date-updated");
+    if (!el) return;
+    if (last) { el.textContent = last; return; }
+    var folder = window.ewFolder || "";
+    var urls = ["date-updated.txt"];
+    if (folder) urls.push("/sites/" + folder + "/date-updated.txt");
+    function next(i){
+      if (i >= urls.length) return;
+      fetch(urls[i], {cache:"no-store"}).then(function(r){
+        if (!r.ok) return next(i + 1);
+        return r.text().then(show);
+      }).catch(function(){ next(i + 1); });
+    }
+    next(0);
+  }
+  document.addEventListener("ew-page-swap", fill);
+  fill();
+})();
+</script>
+</body>
+</html>
