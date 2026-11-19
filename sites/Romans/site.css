@@ -1279,6 +1279,36 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .end-sub-tabs[data-for="s4"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
 .tab-dock-end .tab[data-sec="1043"], .end-sub-tabs[data-for="s4"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
 .tab-dock-end .tab[data-sec="1043"].active, .end-sub-tabs[data-for="s4"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+.tab[data-sec="1106"], .tab-panel[data-sec="1106"] .sub-tab, .end-sub-tabs[data-for="s0"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
+.tab[data-sec="1106"] { background:#ffffff }
+.tab-panel[data-sec="1106"] .sub-tab { background:#ffffff }
+.end-sub-tabs[data-for="s0"] .sub-tab { background:#ffffff }
+.tab[data-sec="1106"].active, .tab-panel[data-sec="1106"] { background:#f6f7eb }
+.tab[data-sec="1106"].active { border-bottom-color:#f6f7eb }
+.tab-panel[data-sec="1106"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
+.end-sub-tabs[data-for="s0"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab-dock-end .tab[data-sec="1106"], .end-sub-tabs[data-for="s0"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
+.tab-dock-end .tab[data-sec="1106"].active, .end-sub-tabs[data-for="s0"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+.tab[data-sec="1108"], .tab-panel[data-sec="1108"] .sub-tab, .end-sub-tabs[data-for="s1"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
+.tab[data-sec="1108"] { background:#ffffff }
+.tab-panel[data-sec="1108"] .sub-tab { background:#ffffff }
+.end-sub-tabs[data-for="s1"] .sub-tab { background:#ffffff }
+.tab[data-sec="1108"].active, .tab-panel[data-sec="1108"] { background:#f6f7eb }
+.tab[data-sec="1108"].active { border-bottom-color:#f6f7eb }
+.tab-panel[data-sec="1108"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
+.end-sub-tabs[data-for="s1"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab-dock-end .tab[data-sec="1108"], .end-sub-tabs[data-for="s1"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
+.tab-dock-end .tab[data-sec="1108"].active, .end-sub-tabs[data-for="s1"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+.tab[data-sec="1107"], .tab-panel[data-sec="1107"] .sub-tab, .end-sub-tabs[data-for="s2"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
+.tab[data-sec="1107"] { background:#ffffff }
+.tab-panel[data-sec="1107"] .sub-tab { background:#ffffff }
+.end-sub-tabs[data-for="s2"] .sub-tab { background:#ffffff }
+.tab[data-sec="1107"].active, .tab-panel[data-sec="1107"] { background:#f6f7eb }
+.tab[data-sec="1107"].active { border-bottom-color:#f6f7eb }
+.tab-panel[data-sec="1107"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
+.end-sub-tabs[data-for="s2"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab-dock-end .tab[data-sec="1107"], .end-sub-tabs[data-for="s2"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
+.tab-dock-end .tab[data-sec="1107"].active, .end-sub-tabs[data-for="s2"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
 .tab.active, .tab-panel .sub-tab.active { margin-bottom:-1px; position:relative; z-index:1 }
 .tab { border-radius:7px 7px 0 0 }
 .tab-panel { border-radius:0 7px 7px 0 }
@@ -1318,7 +1348,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .para[data-para="28"] .col[data-col="29"] .col-text .bit.indent.bullet::before, .para[data-para="28"] .col[data-col="29"] .col-text .bit.indent.numbered::before { left:4em }
 .para[data-para="28"] .col[data-col="29"]{align-self:center}
 .para[data-para="28"] .col[data-col="29"] .col-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:0px; margin-bottom:3px; text-align:left }
-.para[data-para="28"] .col[data-col="30"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="28"] .col[data-col="30"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="28"] .col[data-col="30"] .col-text, .para[data-para="28"] .col[data-col="30"] .col-text .bit { line-height:1.2 }
 .para[data-para="28"] .col[data-col="30"] .col-text { gap:0 }
 .para[data-para="28"] .col[data-col="30"] .col-text .bit { margin:0 0 5px }
@@ -1349,7 +1379,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .para[data-para="31"] .col[data-col="32"] .col-text .bit.indent.bullet::before, .para[data-para="31"] .col[data-col="32"] .col-text .bit.indent.numbered::before { left:4em }
 .para[data-para="31"] .col[data-col="32"]{align-self:center}
 .para[data-para="31"] .col[data-col="32"] .col-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:0px; margin-bottom:3px; text-align:left }
-.para[data-para="31"] .col[data-col="33"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="31"] .col[data-col="33"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="31"] .col[data-col="33"] .col-text, .para[data-para="31"] .col[data-col="33"] .col-text .bit { line-height:1.2 }
 .para[data-para="31"] .col[data-col="33"] .col-text { gap:0 }
 .para[data-para="31"] .col[data-col="33"] .col-text .bit { margin:0 0 5px }
@@ -1380,7 +1410,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .para[data-para="34"] .col[data-col="35"] .col-text .bit.indent.bullet::before, .para[data-para="34"] .col[data-col="35"] .col-text .bit.indent.numbered::before { left:4em }
 .para[data-para="34"] .col[data-col="35"]{align-self:center}
 .para[data-para="34"] .col[data-col="35"] .col-title { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:0px; margin-bottom:3px; text-align:left }
-.para[data-para="34"] .col[data-col="36"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="34"] .col[data-col="36"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="34"] .col[data-col="36"] .col-text, .para[data-para="34"] .col[data-col="36"] .col-text .bit { line-height:1.2 }
 .para[data-para="34"] .col[data-col="36"] .col-text { gap:0 }
 .para[data-para="34"] .col[data-col="36"] .col-text .bit { margin:0 0 5px }
@@ -1426,7 +1456,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .para[data-para="1023"] .col[data-col="1024"] .col-text .bit.indent.bullet::before, .para[data-para="1023"] .col[data-col="1024"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="1023"] .col[data-col="1024"]{align-self:center}
 .para[data-para="1023"] .col[data-col="1024"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1023"] .col[data-col="1089"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1023"] .col[data-col="1089"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="1023"] .col[data-col="1089"] .col-text, .para[data-para="1023"] .col[data-col="1089"] .col-text .bit { line-height:1.2 }
 .para[data-para="1023"] .col[data-col="1089"] .col-text { gap:0 }
 .para[data-para="1023"] .col[data-col="1089"] .col-text .bit { margin:0 0 5px }
@@ -1458,7 +1488,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .para[data-para="1026"] .col[data-col="1027"] .col-text .bit.indent.bullet::before, .para[data-para="1026"] .col[data-col="1027"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="1026"] .col[data-col="1027"]{align-self:center}
 .para[data-para="1026"] .col[data-col="1027"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1026"] .col[data-col="1090"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1026"] .col[data-col="1090"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="1026"] .col[data-col="1090"] .col-text, .para[data-para="1026"] .col[data-col="1090"] .col-text .bit { line-height:1.2 }
 .para[data-para="1026"] .col[data-col="1090"] .col-text { gap:0 }
 .para[data-para="1026"] .col[data-col="1090"] .col-text .bit { margin:0 0 5px }
@@ -1490,7 +1520,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .para[data-para="1029"] .col[data-col="1030"] .col-text .bit.indent.bullet::before, .para[data-para="1029"] .col[data-col="1030"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="1029"] .col[data-col="1030"]{align-self:center}
 .para[data-para="1029"] .col[data-col="1030"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1029"] .col[data-col="1091"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1029"] .col[data-col="1091"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="1029"] .col[data-col="1091"] .col-text, .para[data-para="1029"] .col[data-col="1091"] .col-text .bit { line-height:1.2 }
 .para[data-para="1029"] .col[data-col="1091"] .col-text { gap:0 }
 .para[data-para="1029"] .col[data-col="1091"] .col-text .bit { margin:0 0 5px }
@@ -1522,7 +1552,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .para[data-para="1032"] .col[data-col="1033"] .col-text .bit.indent.bullet::before, .para[data-para="1032"] .col[data-col="1033"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="1032"] .col[data-col="1033"]{align-self:center}
 .para[data-para="1032"] .col[data-col="1033"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1032"] .col[data-col="1092"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1032"] .col[data-col="1092"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="1032"] .col[data-col="1092"] .col-text, .para[data-para="1032"] .col[data-col="1092"] .col-text .bit { line-height:1.2 }
 .para[data-para="1032"] .col[data-col="1092"] .col-text { gap:0 }
 .para[data-para="1032"] .col[data-col="1092"] .col-text .bit { margin:0 0 5px }
@@ -1554,7 +1584,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .para[data-para="1035"] .col[data-col="1036"] .col-text .bit.indent.bullet::before, .para[data-para="1035"] .col[data-col="1036"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="1035"] .col[data-col="1036"]{align-self:center}
 .para[data-para="1035"] .col[data-col="1036"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1035"] .col[data-col="1093"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1035"] .col[data-col="1093"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="1035"] .col[data-col="1093"] .col-text, .para[data-para="1035"] .col[data-col="1093"] .col-text .bit { line-height:1.2 }
 .para[data-para="1035"] .col[data-col="1093"] .col-text { gap:0 }
 .para[data-para="1035"] .col[data-col="1093"] .col-text .bit { margin:0 0 5px }
@@ -1586,7 +1616,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .para[data-para="1038"] .col[data-col="1039"] .col-text .bit.indent.bullet::before, .para[data-para="1038"] .col[data-col="1039"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="1038"] .col[data-col="1039"]{align-self:center}
 .para[data-para="1038"] .col[data-col="1039"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1038"] .col[data-col="1094"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1038"] .col[data-col="1094"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="1038"] .col[data-col="1094"] .col-text, .para[data-para="1038"] .col[data-col="1094"] .col-text .bit { line-height:1.2 }
 .para[data-para="1038"] .col[data-col="1094"] .col-text { gap:0 }
 .para[data-para="1038"] .col[data-col="1094"] .col-text .bit { margin:0 0 5px }
@@ -1648,7 +1678,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .para[data-para="1075"] .col[data-col="1076"] .col-text .bit.indent.bullet::before, .para[data-para="1075"] .col[data-col="1076"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="1075"] .col[data-col="1076"]{align-self:center}
 .para[data-para="1075"] .col[data-col="1076"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1075"] .col[data-col="1095"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1075"] .col[data-col="1095"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="1075"] .col[data-col="1095"] .col-text, .para[data-para="1075"] .col[data-col="1095"] .col-text .bit { line-height:1.2 }
 .para[data-para="1075"] .col[data-col="1095"] .col-text { gap:0 }
 .para[data-para="1075"] .col[data-col="1095"] .col-text .bit { margin:0 0 5px }
@@ -1680,7 +1710,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .para[data-para="1078"] .col[data-col="1079"] .col-text .bit.indent.bullet::before, .para[data-para="1078"] .col[data-col="1079"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="1078"] .col[data-col="1079"]{align-self:center}
 .para[data-para="1078"] .col[data-col="1079"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1078"] .col[data-col="1096"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1078"] .col[data-col="1096"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="1078"] .col[data-col="1096"] .col-text, .para[data-para="1078"] .col[data-col="1096"] .col-text .bit { line-height:1.2 }
 .para[data-para="1078"] .col[data-col="1096"] .col-text { gap:0 }
 .para[data-para="1078"] .col[data-col="1096"] .col-text .bit { margin:0 0 5px }
@@ -1712,7 +1742,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .para[data-para="1081"] .col[data-col="1082"] .col-text .bit.indent.bullet::before, .para[data-para="1081"] .col[data-col="1082"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="1081"] .col[data-col="1082"]{align-self:center}
 .para[data-para="1081"] .col[data-col="1082"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1081"] .col[data-col="1097"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1081"] .col[data-col="1097"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="1081"] .col[data-col="1097"] .col-text, .para[data-para="1081"] .col[data-col="1097"] .col-text .bit { line-height:1.2 }
 .para[data-para="1081"] .col[data-col="1097"] .col-text { gap:0 }
 .para[data-para="1081"] .col[data-col="1097"] .col-text .bit { margin:0 0 5px }
@@ -1744,7 +1774,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .para[data-para="1084"] .col[data-col="1085"] .col-text .bit.indent.bullet::before, .para[data-para="1084"] .col[data-col="1085"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="1084"] .col[data-col="1085"]{align-self:center}
 .para[data-para="1084"] .col[data-col="1085"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1084"] .col[data-col="1098"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1084"] .col[data-col="1098"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="1084"] .col[data-col="1098"] .col-text, .para[data-para="1084"] .col[data-col="1098"] .col-text .bit { line-height:1.2 }
 .para[data-para="1084"] .col[data-col="1098"] .col-text { gap:0 }
 .para[data-para="1084"] .col[data-col="1098"] .col-text .bit { margin:0 0 5px }
@@ -1776,7 +1806,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .para[data-para="1087"] .col[data-col="1088"] .col-text .bit.indent.bullet::before, .para[data-para="1087"] .col[data-col="1088"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="1087"] .col[data-col="1088"]{align-self:center}
 .para[data-para="1087"] .col[data-col="1088"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
-.para[data-para="1087"] .col[data-col="1099"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1087"] .col[data-col="1099"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
 .para[data-para="1087"] .col[data-col="1099"] .col-text, .para[data-para="1087"] .col[data-col="1099"] .col-text .bit { line-height:1.2 }
 .para[data-para="1087"] .col[data-col="1099"] .col-text { gap:0 }
 .para[data-para="1087"] .col[data-col="1099"] .col-text .bit { margin:0 0 5px }
@@ -1793,6 +1823,758 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .para[data-para="1087"] .col[data-col="1099"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="1087"] .col[data-col="1099"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="1087"] .col[data-col="1099"] a.ref{white-space:nowrap}
+.para[data-para="1111"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1111"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
+.para[data-para="1111"] .col[data-col="1112"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="1111"] .col[data-col="1112"] .col-text, .para[data-para="1111"] .col[data-col="1112"] .col-text .bit { line-height:1.2 }
+.para[data-para="1111"] .col[data-col="1112"] .col-text { gap:0 }
+.para[data-para="1111"] .col[data-col="1112"] .col-text .bit { margin:0 0 3px }
+.para[data-para="1111"] .col[data-col="1112"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1111"] .col[data-col="1112"] .col-text .bit { padding-left:0em }
+.para[data-para="1111"] .col[data-col="1112"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1111"] .col[data-col="1112"] .col-text .bit.bullet, .para[data-para="1111"] .col[data-col="1112"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1111"] .col[data-col="1112"] .col-text .bit.indent.bullet, .para[data-para="1111"] .col[data-col="1112"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1111"] .col[data-col="1112"] .col-text .bit.bullet::before, .para[data-para="1111"] .col[data-col="1112"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1111"] .col[data-col="1112"] .col-text .bit.indent.bullet::before, .para[data-para="1111"] .col[data-col="1112"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1111"] .col[data-col="1112"]{align-self:center}
+.para[data-para="1111"] .col[data-col="1112"]{padding:0}
+.para[data-para="1111"] .col[data-col="1112"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="1111"] .col[data-col="1112"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1111"] .col[data-col="1113"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; text-decoration:underline; color:#006d8f; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
+.para[data-para="1111"] .col[data-col="1113"] .col-text, .para[data-para="1111"] .col[data-col="1113"] .col-text .bit { line-height:1.2 }
+.para[data-para="1111"] .col[data-col="1113"] .col-text { gap:0 }
+.para[data-para="1111"] .col[data-col="1113"] .col-text .bit { margin:0 0 7px }
+.para[data-para="1111"] .col[data-col="1113"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1111"] .col[data-col="1113"] .col-text .bit { padding-left:0em }
+.para[data-para="1111"] .col[data-col="1113"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1111"] .col[data-col="1113"] .col-text .bit.bullet, .para[data-para="1111"] .col[data-col="1113"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1111"] .col[data-col="1113"] .col-text .bit.indent.bullet, .para[data-para="1111"] .col[data-col="1113"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1111"] .col[data-col="1113"] .col-text .bit.bullet::before, .para[data-para="1111"] .col[data-col="1113"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1111"] .col[data-col="1113"] .col-text .bit.indent.bullet::before, .para[data-para="1111"] .col[data-col="1113"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1111"] .col[data-col="1113"]{align-self:center}
+.para[data-para="1111"] .col[data-col="1113"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1111"] .col[data-col="1114"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1111"] .col[data-col="1114"] .col-text, .para[data-para="1111"] .col[data-col="1114"] .col-text .bit { line-height:1.2 }
+.para[data-para="1111"] .col[data-col="1114"] .col-text { gap:0 }
+.para[data-para="1111"] .col[data-col="1114"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1111"] .col[data-col="1114"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1111"] .col[data-col="1114"] .col-text .bit { padding-left:0em }
+.para[data-para="1111"] .col[data-col="1114"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1111"] .col[data-col="1114"] .col-text .bit.bullet, .para[data-para="1111"] .col[data-col="1114"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1111"] .col[data-col="1114"] .col-text .bit.indent.bullet, .para[data-para="1111"] .col[data-col="1114"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1111"] .col[data-col="1114"] .col-text .bit.bullet::before, .para[data-para="1111"] .col[data-col="1114"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1111"] .col[data-col="1114"] .col-text .bit.indent.bullet::before, .para[data-para="1111"] .col[data-col="1114"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1111"] .col[data-col="1114"]{align-self:center}
+.para[data-para="1111"] .col[data-col="1114"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1111"] .col[data-col="1114"] .col-text,.para[data-para="1111"] .col[data-col="1114"] .bit{white-space:normal!important}
+.para[data-para="1111"] .col[data-col="1114"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1111"] .col[data-col="1114"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1111"] .col[data-col="1114"] a.ref{white-space:nowrap}
+.para[data-para="1115"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1115"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
+.para[data-para="1115"] .col[data-col="1116"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="1115"] .col[data-col="1116"] .col-text, .para[data-para="1115"] .col[data-col="1116"] .col-text .bit { line-height:1.2 }
+.para[data-para="1115"] .col[data-col="1116"] .col-text { gap:0 }
+.para[data-para="1115"] .col[data-col="1116"] .col-text .bit { margin:0 0 3px }
+.para[data-para="1115"] .col[data-col="1116"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1115"] .col[data-col="1116"] .col-text .bit { padding-left:0em }
+.para[data-para="1115"] .col[data-col="1116"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1115"] .col[data-col="1116"] .col-text .bit.bullet, .para[data-para="1115"] .col[data-col="1116"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1115"] .col[data-col="1116"] .col-text .bit.indent.bullet, .para[data-para="1115"] .col[data-col="1116"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1115"] .col[data-col="1116"] .col-text .bit.bullet::before, .para[data-para="1115"] .col[data-col="1116"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1115"] .col[data-col="1116"] .col-text .bit.indent.bullet::before, .para[data-para="1115"] .col[data-col="1116"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1115"] .col[data-col="1116"]{align-self:center}
+.para[data-para="1115"] .col[data-col="1116"]{padding:0}
+.para[data-para="1115"] .col[data-col="1116"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="1115"] .col[data-col="1116"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1115"] .col[data-col="1117"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
+.para[data-para="1115"] .col[data-col="1117"] .col-text, .para[data-para="1115"] .col[data-col="1117"] .col-text .bit { line-height:1.2 }
+.para[data-para="1115"] .col[data-col="1117"] .col-text { gap:0 }
+.para[data-para="1115"] .col[data-col="1117"] .col-text .bit { margin:0 0 7px }
+.para[data-para="1115"] .col[data-col="1117"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1115"] .col[data-col="1117"] .col-text .bit { padding-left:0em }
+.para[data-para="1115"] .col[data-col="1117"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1115"] .col[data-col="1117"] .col-text .bit.bullet, .para[data-para="1115"] .col[data-col="1117"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1115"] .col[data-col="1117"] .col-text .bit.indent.bullet, .para[data-para="1115"] .col[data-col="1117"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1115"] .col[data-col="1117"] .col-text .bit.bullet::before, .para[data-para="1115"] .col[data-col="1117"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1115"] .col[data-col="1117"] .col-text .bit.indent.bullet::before, .para[data-para="1115"] .col[data-col="1117"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1115"] .col[data-col="1117"]{align-self:center}
+.para[data-para="1115"] .col[data-col="1117"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1115"] .col[data-col="1118"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1115"] .col[data-col="1118"] .col-text, .para[data-para="1115"] .col[data-col="1118"] .col-text .bit { line-height:1.2 }
+.para[data-para="1115"] .col[data-col="1118"] .col-text { gap:0 }
+.para[data-para="1115"] .col[data-col="1118"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1115"] .col[data-col="1118"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1115"] .col[data-col="1118"] .col-text .bit { padding-left:0em }
+.para[data-para="1115"] .col[data-col="1118"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1115"] .col[data-col="1118"] .col-text .bit.bullet, .para[data-para="1115"] .col[data-col="1118"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1115"] .col[data-col="1118"] .col-text .bit.indent.bullet, .para[data-para="1115"] .col[data-col="1118"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1115"] .col[data-col="1118"] .col-text .bit.bullet::before, .para[data-para="1115"] .col[data-col="1118"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1115"] .col[data-col="1118"] .col-text .bit.indent.bullet::before, .para[data-para="1115"] .col[data-col="1118"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1115"] .col[data-col="1118"]{align-self:center}
+.para[data-para="1115"] .col[data-col="1118"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1115"] .col[data-col="1118"] .col-text,.para[data-para="1115"] .col[data-col="1118"] .bit{white-space:normal!important}
+.para[data-para="1115"] .col[data-col="1118"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1115"] .col[data-col="1118"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1115"] .col[data-col="1118"] a.ref{white-space:nowrap}
+.para[data-para="1119"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1119"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
+.para[data-para="1119"] .col[data-col="1120"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="1119"] .col[data-col="1120"] .col-text, .para[data-para="1119"] .col[data-col="1120"] .col-text .bit { line-height:1.2 }
+.para[data-para="1119"] .col[data-col="1120"] .col-text { gap:0 }
+.para[data-para="1119"] .col[data-col="1120"] .col-text .bit { margin:0 0 3px }
+.para[data-para="1119"] .col[data-col="1120"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1119"] .col[data-col="1120"] .col-text .bit { padding-left:0em }
+.para[data-para="1119"] .col[data-col="1120"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1119"] .col[data-col="1120"] .col-text .bit.bullet, .para[data-para="1119"] .col[data-col="1120"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1119"] .col[data-col="1120"] .col-text .bit.indent.bullet, .para[data-para="1119"] .col[data-col="1120"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1119"] .col[data-col="1120"] .col-text .bit.bullet::before, .para[data-para="1119"] .col[data-col="1120"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1119"] .col[data-col="1120"] .col-text .bit.indent.bullet::before, .para[data-para="1119"] .col[data-col="1120"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1119"] .col[data-col="1120"]{align-self:center}
+.para[data-para="1119"] .col[data-col="1120"]{padding:0}
+.para[data-para="1119"] .col[data-col="1120"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="1119"] .col[data-col="1120"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1119"] .col[data-col="1121"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
+.para[data-para="1119"] .col[data-col="1121"] .col-text, .para[data-para="1119"] .col[data-col="1121"] .col-text .bit { line-height:1.2 }
+.para[data-para="1119"] .col[data-col="1121"] .col-text { gap:0 }
+.para[data-para="1119"] .col[data-col="1121"] .col-text .bit { margin:0 0 7px }
+.para[data-para="1119"] .col[data-col="1121"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1119"] .col[data-col="1121"] .col-text .bit { padding-left:0em }
+.para[data-para="1119"] .col[data-col="1121"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1119"] .col[data-col="1121"] .col-text .bit.bullet, .para[data-para="1119"] .col[data-col="1121"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1119"] .col[data-col="1121"] .col-text .bit.indent.bullet, .para[data-para="1119"] .col[data-col="1121"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1119"] .col[data-col="1121"] .col-text .bit.bullet::before, .para[data-para="1119"] .col[data-col="1121"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1119"] .col[data-col="1121"] .col-text .bit.indent.bullet::before, .para[data-para="1119"] .col[data-col="1121"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1119"] .col[data-col="1121"]{align-self:center}
+.para[data-para="1119"] .col[data-col="1121"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1119"] .col[data-col="1122"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1119"] .col[data-col="1122"] .col-text, .para[data-para="1119"] .col[data-col="1122"] .col-text .bit { line-height:1.2 }
+.para[data-para="1119"] .col[data-col="1122"] .col-text { gap:0 }
+.para[data-para="1119"] .col[data-col="1122"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1119"] .col[data-col="1122"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1119"] .col[data-col="1122"] .col-text .bit { padding-left:0em }
+.para[data-para="1119"] .col[data-col="1122"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1119"] .col[data-col="1122"] .col-text .bit.bullet, .para[data-para="1119"] .col[data-col="1122"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1119"] .col[data-col="1122"] .col-text .bit.indent.bullet, .para[data-para="1119"] .col[data-col="1122"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1119"] .col[data-col="1122"] .col-text .bit.bullet::before, .para[data-para="1119"] .col[data-col="1122"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1119"] .col[data-col="1122"] .col-text .bit.indent.bullet::before, .para[data-para="1119"] .col[data-col="1122"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1119"] .col[data-col="1122"]{align-self:center}
+.para[data-para="1119"] .col[data-col="1122"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1119"] .col[data-col="1122"] .col-text,.para[data-para="1119"] .col[data-col="1122"] .bit{white-space:normal!important}
+.para[data-para="1119"] .col[data-col="1122"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1119"] .col[data-col="1122"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1119"] .col[data-col="1122"] a.ref{white-space:nowrap}
+.para[data-para="1123"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1123"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
+.para[data-para="1123"] .col[data-col="1124"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="1123"] .col[data-col="1124"] .col-text, .para[data-para="1123"] .col[data-col="1124"] .col-text .bit { line-height:1.2 }
+.para[data-para="1123"] .col[data-col="1124"] .col-text { gap:0 }
+.para[data-para="1123"] .col[data-col="1124"] .col-text .bit { margin:0 0 3px }
+.para[data-para="1123"] .col[data-col="1124"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1123"] .col[data-col="1124"] .col-text .bit { padding-left:0em }
+.para[data-para="1123"] .col[data-col="1124"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1123"] .col[data-col="1124"] .col-text .bit.bullet, .para[data-para="1123"] .col[data-col="1124"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1123"] .col[data-col="1124"] .col-text .bit.indent.bullet, .para[data-para="1123"] .col[data-col="1124"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1123"] .col[data-col="1124"] .col-text .bit.bullet::before, .para[data-para="1123"] .col[data-col="1124"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1123"] .col[data-col="1124"] .col-text .bit.indent.bullet::before, .para[data-para="1123"] .col[data-col="1124"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1123"] .col[data-col="1124"]{align-self:center}
+.para[data-para="1123"] .col[data-col="1124"]{padding:0}
+.para[data-para="1123"] .col[data-col="1124"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="1123"] .col[data-col="1124"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1123"] .col[data-col="1125"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
+.para[data-para="1123"] .col[data-col="1125"] .col-text, .para[data-para="1123"] .col[data-col="1125"] .col-text .bit { line-height:1.2 }
+.para[data-para="1123"] .col[data-col="1125"] .col-text { gap:0 }
+.para[data-para="1123"] .col[data-col="1125"] .col-text .bit { margin:0 0 7px }
+.para[data-para="1123"] .col[data-col="1125"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1123"] .col[data-col="1125"] .col-text .bit { padding-left:0em }
+.para[data-para="1123"] .col[data-col="1125"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1123"] .col[data-col="1125"] .col-text .bit.bullet, .para[data-para="1123"] .col[data-col="1125"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1123"] .col[data-col="1125"] .col-text .bit.indent.bullet, .para[data-para="1123"] .col[data-col="1125"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1123"] .col[data-col="1125"] .col-text .bit.bullet::before, .para[data-para="1123"] .col[data-col="1125"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1123"] .col[data-col="1125"] .col-text .bit.indent.bullet::before, .para[data-para="1123"] .col[data-col="1125"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1123"] .col[data-col="1125"]{align-self:center}
+.para[data-para="1123"] .col[data-col="1125"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1123"] .col[data-col="1126"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1123"] .col[data-col="1126"] .col-text, .para[data-para="1123"] .col[data-col="1126"] .col-text .bit { line-height:1.2 }
+.para[data-para="1123"] .col[data-col="1126"] .col-text { gap:0 }
+.para[data-para="1123"] .col[data-col="1126"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1123"] .col[data-col="1126"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1123"] .col[data-col="1126"] .col-text .bit { padding-left:0em }
+.para[data-para="1123"] .col[data-col="1126"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1123"] .col[data-col="1126"] .col-text .bit.bullet, .para[data-para="1123"] .col[data-col="1126"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1123"] .col[data-col="1126"] .col-text .bit.indent.bullet, .para[data-para="1123"] .col[data-col="1126"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1123"] .col[data-col="1126"] .col-text .bit.bullet::before, .para[data-para="1123"] .col[data-col="1126"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1123"] .col[data-col="1126"] .col-text .bit.indent.bullet::before, .para[data-para="1123"] .col[data-col="1126"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1123"] .col[data-col="1126"]{align-self:center}
+.para[data-para="1123"] .col[data-col="1126"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1123"] .col[data-col="1126"] .col-text,.para[data-para="1123"] .col[data-col="1126"] .bit{white-space:normal!important}
+.para[data-para="1123"] .col[data-col="1126"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1123"] .col[data-col="1126"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1123"] .col[data-col="1126"] a.ref{white-space:nowrap}
+.para[data-para="1127"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1127"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
+.para[data-para="1127"] .col[data-col="1128"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="1127"] .col[data-col="1128"] .col-text, .para[data-para="1127"] .col[data-col="1128"] .col-text .bit { line-height:1.2 }
+.para[data-para="1127"] .col[data-col="1128"] .col-text { gap:0 }
+.para[data-para="1127"] .col[data-col="1128"] .col-text .bit { margin:0 0 3px }
+.para[data-para="1127"] .col[data-col="1128"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1127"] .col[data-col="1128"] .col-text .bit { padding-left:0em }
+.para[data-para="1127"] .col[data-col="1128"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1127"] .col[data-col="1128"] .col-text .bit.bullet, .para[data-para="1127"] .col[data-col="1128"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1127"] .col[data-col="1128"] .col-text .bit.indent.bullet, .para[data-para="1127"] .col[data-col="1128"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1127"] .col[data-col="1128"] .col-text .bit.bullet::before, .para[data-para="1127"] .col[data-col="1128"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1127"] .col[data-col="1128"] .col-text .bit.indent.bullet::before, .para[data-para="1127"] .col[data-col="1128"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1127"] .col[data-col="1128"]{align-self:center}
+.para[data-para="1127"] .col[data-col="1128"]{padding:0}
+.para[data-para="1127"] .col[data-col="1128"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="1127"] .col[data-col="1128"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1127"] .col[data-col="1129"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
+.para[data-para="1127"] .col[data-col="1129"] .col-text, .para[data-para="1127"] .col[data-col="1129"] .col-text .bit { line-height:1.2 }
+.para[data-para="1127"] .col[data-col="1129"] .col-text { gap:0 }
+.para[data-para="1127"] .col[data-col="1129"] .col-text .bit { margin:0 0 7px }
+.para[data-para="1127"] .col[data-col="1129"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1127"] .col[data-col="1129"] .col-text .bit { padding-left:0em }
+.para[data-para="1127"] .col[data-col="1129"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1127"] .col[data-col="1129"] .col-text .bit.bullet, .para[data-para="1127"] .col[data-col="1129"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1127"] .col[data-col="1129"] .col-text .bit.indent.bullet, .para[data-para="1127"] .col[data-col="1129"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1127"] .col[data-col="1129"] .col-text .bit.bullet::before, .para[data-para="1127"] .col[data-col="1129"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1127"] .col[data-col="1129"] .col-text .bit.indent.bullet::before, .para[data-para="1127"] .col[data-col="1129"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1127"] .col[data-col="1129"]{align-self:center}
+.para[data-para="1127"] .col[data-col="1129"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1127"] .col[data-col="1130"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1127"] .col[data-col="1130"] .col-text, .para[data-para="1127"] .col[data-col="1130"] .col-text .bit { line-height:1.2 }
+.para[data-para="1127"] .col[data-col="1130"] .col-text { gap:0 }
+.para[data-para="1127"] .col[data-col="1130"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1127"] .col[data-col="1130"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1127"] .col[data-col="1130"] .col-text .bit { padding-left:0em }
+.para[data-para="1127"] .col[data-col="1130"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1127"] .col[data-col="1130"] .col-text .bit.bullet, .para[data-para="1127"] .col[data-col="1130"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1127"] .col[data-col="1130"] .col-text .bit.indent.bullet, .para[data-para="1127"] .col[data-col="1130"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1127"] .col[data-col="1130"] .col-text .bit.bullet::before, .para[data-para="1127"] .col[data-col="1130"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1127"] .col[data-col="1130"] .col-text .bit.indent.bullet::before, .para[data-para="1127"] .col[data-col="1130"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1127"] .col[data-col="1130"]{align-self:center}
+.para[data-para="1127"] .col[data-col="1130"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1127"] .col[data-col="1130"] .col-text,.para[data-para="1127"] .col[data-col="1130"] .bit{white-space:normal!important}
+.para[data-para="1127"] .col[data-col="1130"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1127"] .col[data-col="1130"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1127"] .col[data-col="1130"] a.ref{white-space:nowrap}
+.para[data-para="1131"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1131"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
+.para[data-para="1131"] .col[data-col="1132"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="1131"] .col[data-col="1132"] .col-text, .para[data-para="1131"] .col[data-col="1132"] .col-text .bit { line-height:1.2 }
+.para[data-para="1131"] .col[data-col="1132"] .col-text { gap:0 }
+.para[data-para="1131"] .col[data-col="1132"] .col-text .bit { margin:0 0 3px }
+.para[data-para="1131"] .col[data-col="1132"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1131"] .col[data-col="1132"] .col-text .bit { padding-left:0em }
+.para[data-para="1131"] .col[data-col="1132"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1131"] .col[data-col="1132"] .col-text .bit.bullet, .para[data-para="1131"] .col[data-col="1132"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1131"] .col[data-col="1132"] .col-text .bit.indent.bullet, .para[data-para="1131"] .col[data-col="1132"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1131"] .col[data-col="1132"] .col-text .bit.bullet::before, .para[data-para="1131"] .col[data-col="1132"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1131"] .col[data-col="1132"] .col-text .bit.indent.bullet::before, .para[data-para="1131"] .col[data-col="1132"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1131"] .col[data-col="1132"]{align-self:center}
+.para[data-para="1131"] .col[data-col="1132"]{padding:0}
+.para[data-para="1131"] .col[data-col="1132"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="1131"] .col[data-col="1132"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1131"] .col[data-col="1133"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
+.para[data-para="1131"] .col[data-col="1133"] .col-text, .para[data-para="1131"] .col[data-col="1133"] .col-text .bit { line-height:1.2 }
+.para[data-para="1131"] .col[data-col="1133"] .col-text { gap:0 }
+.para[data-para="1131"] .col[data-col="1133"] .col-text .bit { margin:0 0 7px }
+.para[data-para="1131"] .col[data-col="1133"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1131"] .col[data-col="1133"] .col-text .bit { padding-left:0em }
+.para[data-para="1131"] .col[data-col="1133"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1131"] .col[data-col="1133"] .col-text .bit.bullet, .para[data-para="1131"] .col[data-col="1133"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1131"] .col[data-col="1133"] .col-text .bit.indent.bullet, .para[data-para="1131"] .col[data-col="1133"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1131"] .col[data-col="1133"] .col-text .bit.bullet::before, .para[data-para="1131"] .col[data-col="1133"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1131"] .col[data-col="1133"] .col-text .bit.indent.bullet::before, .para[data-para="1131"] .col[data-col="1133"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1131"] .col[data-col="1133"]{align-self:center}
+.para[data-para="1131"] .col[data-col="1133"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1131"] .col[data-col="1134"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1131"] .col[data-col="1134"] .col-text, .para[data-para="1131"] .col[data-col="1134"] .col-text .bit { line-height:1.2 }
+.para[data-para="1131"] .col[data-col="1134"] .col-text { gap:0 }
+.para[data-para="1131"] .col[data-col="1134"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1131"] .col[data-col="1134"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1131"] .col[data-col="1134"] .col-text .bit { padding-left:0em }
+.para[data-para="1131"] .col[data-col="1134"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1131"] .col[data-col="1134"] .col-text .bit.bullet, .para[data-para="1131"] .col[data-col="1134"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1131"] .col[data-col="1134"] .col-text .bit.indent.bullet, .para[data-para="1131"] .col[data-col="1134"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1131"] .col[data-col="1134"] .col-text .bit.bullet::before, .para[data-para="1131"] .col[data-col="1134"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1131"] .col[data-col="1134"] .col-text .bit.indent.bullet::before, .para[data-para="1131"] .col[data-col="1134"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1131"] .col[data-col="1134"]{align-self:center}
+.para[data-para="1131"] .col[data-col="1134"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1131"] .col[data-col="1134"] .col-text,.para[data-para="1131"] .col[data-col="1134"] .bit{white-space:normal!important}
+.para[data-para="1131"] .col[data-col="1134"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1131"] .col[data-col="1134"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1131"] .col[data-col="1134"] a.ref{white-space:nowrap}
+.para[data-para="1136"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1136"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
+.para[data-para="1136"] .col[data-col="1137"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="1136"] .col[data-col="1137"] .col-text, .para[data-para="1136"] .col[data-col="1137"] .col-text .bit { line-height:1.2 }
+.para[data-para="1136"] .col[data-col="1137"] .col-text { gap:0 }
+.para[data-para="1136"] .col[data-col="1137"] .col-text .bit { margin:0 0 3px }
+.para[data-para="1136"] .col[data-col="1137"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1136"] .col[data-col="1137"] .col-text .bit { padding-left:0em }
+.para[data-para="1136"] .col[data-col="1137"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1136"] .col[data-col="1137"] .col-text .bit.bullet, .para[data-para="1136"] .col[data-col="1137"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1136"] .col[data-col="1137"] .col-text .bit.indent.bullet, .para[data-para="1136"] .col[data-col="1137"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1136"] .col[data-col="1137"] .col-text .bit.bullet::before, .para[data-para="1136"] .col[data-col="1137"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1136"] .col[data-col="1137"] .col-text .bit.indent.bullet::before, .para[data-para="1136"] .col[data-col="1137"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1136"] .col[data-col="1137"]{align-self:center}
+.para[data-para="1136"] .col[data-col="1137"]{padding:0}
+.para[data-para="1136"] .col[data-col="1137"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="1136"] .col[data-col="1137"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1136"] .col[data-col="1138"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
+.para[data-para="1136"] .col[data-col="1138"] .col-text, .para[data-para="1136"] .col[data-col="1138"] .col-text .bit { line-height:1.2 }
+.para[data-para="1136"] .col[data-col="1138"] .col-text { gap:0 }
+.para[data-para="1136"] .col[data-col="1138"] .col-text .bit { margin:0 0 7px }
+.para[data-para="1136"] .col[data-col="1138"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1136"] .col[data-col="1138"] .col-text .bit { padding-left:0em }
+.para[data-para="1136"] .col[data-col="1138"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1136"] .col[data-col="1138"] .col-text .bit.bullet, .para[data-para="1136"] .col[data-col="1138"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1136"] .col[data-col="1138"] .col-text .bit.indent.bullet, .para[data-para="1136"] .col[data-col="1138"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1136"] .col[data-col="1138"] .col-text .bit.bullet::before, .para[data-para="1136"] .col[data-col="1138"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1136"] .col[data-col="1138"] .col-text .bit.indent.bullet::before, .para[data-para="1136"] .col[data-col="1138"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1136"] .col[data-col="1138"]{align-self:center}
+.para[data-para="1136"] .col[data-col="1138"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1136"] .col[data-col="1139"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1136"] .col[data-col="1139"] .col-text, .para[data-para="1136"] .col[data-col="1139"] .col-text .bit { line-height:1.2 }
+.para[data-para="1136"] .col[data-col="1139"] .col-text { gap:0 }
+.para[data-para="1136"] .col[data-col="1139"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1136"] .col[data-col="1139"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1136"] .col[data-col="1139"] .col-text .bit { padding-left:0em }
+.para[data-para="1136"] .col[data-col="1139"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1136"] .col[data-col="1139"] .col-text .bit.bullet, .para[data-para="1136"] .col[data-col="1139"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1136"] .col[data-col="1139"] .col-text .bit.indent.bullet, .para[data-para="1136"] .col[data-col="1139"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1136"] .col[data-col="1139"] .col-text .bit.bullet::before, .para[data-para="1136"] .col[data-col="1139"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1136"] .col[data-col="1139"] .col-text .bit.indent.bullet::before, .para[data-para="1136"] .col[data-col="1139"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1136"] .col[data-col="1139"]{align-self:center}
+.para[data-para="1136"] .col[data-col="1139"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1136"] .col[data-col="1139"] .col-text,.para[data-para="1136"] .col[data-col="1139"] .bit{white-space:normal!important}
+.para[data-para="1136"] .col[data-col="1139"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1136"] .col[data-col="1139"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1136"] .col[data-col="1139"] a.ref{white-space:nowrap}
+.para[data-para="1140"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1140"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
+.para[data-para="1140"] .col[data-col="1141"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="1140"] .col[data-col="1141"] .col-text, .para[data-para="1140"] .col[data-col="1141"] .col-text .bit { line-height:1.2 }
+.para[data-para="1140"] .col[data-col="1141"] .col-text { gap:0 }
+.para[data-para="1140"] .col[data-col="1141"] .col-text .bit { margin:0 0 3px }
+.para[data-para="1140"] .col[data-col="1141"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1140"] .col[data-col="1141"] .col-text .bit { padding-left:0em }
+.para[data-para="1140"] .col[data-col="1141"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1140"] .col[data-col="1141"] .col-text .bit.bullet, .para[data-para="1140"] .col[data-col="1141"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1140"] .col[data-col="1141"] .col-text .bit.indent.bullet, .para[data-para="1140"] .col[data-col="1141"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1140"] .col[data-col="1141"] .col-text .bit.bullet::before, .para[data-para="1140"] .col[data-col="1141"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1140"] .col[data-col="1141"] .col-text .bit.indent.bullet::before, .para[data-para="1140"] .col[data-col="1141"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1140"] .col[data-col="1141"]{align-self:center}
+.para[data-para="1140"] .col[data-col="1141"]{padding:0}
+.para[data-para="1140"] .col[data-col="1141"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="1140"] .col[data-col="1141"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1140"] .col[data-col="1142"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
+.para[data-para="1140"] .col[data-col="1142"] .col-text, .para[data-para="1140"] .col[data-col="1142"] .col-text .bit { line-height:1.2 }
+.para[data-para="1140"] .col[data-col="1142"] .col-text { gap:0 }
+.para[data-para="1140"] .col[data-col="1142"] .col-text .bit { margin:0 0 7px }
+.para[data-para="1140"] .col[data-col="1142"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1140"] .col[data-col="1142"] .col-text .bit { padding-left:0em }
+.para[data-para="1140"] .col[data-col="1142"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1140"] .col[data-col="1142"] .col-text .bit.bullet, .para[data-para="1140"] .col[data-col="1142"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1140"] .col[data-col="1142"] .col-text .bit.indent.bullet, .para[data-para="1140"] .col[data-col="1142"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1140"] .col[data-col="1142"] .col-text .bit.bullet::before, .para[data-para="1140"] .col[data-col="1142"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1140"] .col[data-col="1142"] .col-text .bit.indent.bullet::before, .para[data-para="1140"] .col[data-col="1142"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1140"] .col[data-col="1142"]{align-self:center}
+.para[data-para="1140"] .col[data-col="1142"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1140"] .col[data-col="1143"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1140"] .col[data-col="1143"] .col-text, .para[data-para="1140"] .col[data-col="1143"] .col-text .bit { line-height:1.2 }
+.para[data-para="1140"] .col[data-col="1143"] .col-text { gap:0 }
+.para[data-para="1140"] .col[data-col="1143"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1140"] .col[data-col="1143"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1140"] .col[data-col="1143"] .col-text .bit { padding-left:0em }
+.para[data-para="1140"] .col[data-col="1143"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1140"] .col[data-col="1143"] .col-text .bit.bullet, .para[data-para="1140"] .col[data-col="1143"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1140"] .col[data-col="1143"] .col-text .bit.indent.bullet, .para[data-para="1140"] .col[data-col="1143"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1140"] .col[data-col="1143"] .col-text .bit.bullet::before, .para[data-para="1140"] .col[data-col="1143"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1140"] .col[data-col="1143"] .col-text .bit.indent.bullet::before, .para[data-para="1140"] .col[data-col="1143"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1140"] .col[data-col="1143"]{align-self:center}
+.para[data-para="1140"] .col[data-col="1143"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1140"] .col[data-col="1143"] .col-text,.para[data-para="1140"] .col[data-col="1143"] .bit{white-space:normal!important}
+.para[data-para="1140"] .col[data-col="1143"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1140"] .col[data-col="1143"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1140"] .col[data-col="1143"] a.ref{white-space:nowrap}
+.para[data-para="1144"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1144"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
+.para[data-para="1144"] .col[data-col="1145"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="1144"] .col[data-col="1145"] .col-text, .para[data-para="1144"] .col[data-col="1145"] .col-text .bit { line-height:1.2 }
+.para[data-para="1144"] .col[data-col="1145"] .col-text { gap:0 }
+.para[data-para="1144"] .col[data-col="1145"] .col-text .bit { margin:0 0 3px }
+.para[data-para="1144"] .col[data-col="1145"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1144"] .col[data-col="1145"] .col-text .bit { padding-left:0em }
+.para[data-para="1144"] .col[data-col="1145"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1144"] .col[data-col="1145"] .col-text .bit.bullet, .para[data-para="1144"] .col[data-col="1145"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1144"] .col[data-col="1145"] .col-text .bit.indent.bullet, .para[data-para="1144"] .col[data-col="1145"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1144"] .col[data-col="1145"] .col-text .bit.bullet::before, .para[data-para="1144"] .col[data-col="1145"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1144"] .col[data-col="1145"] .col-text .bit.indent.bullet::before, .para[data-para="1144"] .col[data-col="1145"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1144"] .col[data-col="1145"]{align-self:center}
+.para[data-para="1144"] .col[data-col="1145"]{padding:0}
+.para[data-para="1144"] .col[data-col="1145"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="1144"] .col[data-col="1145"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1144"] .col[data-col="1146"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
+.para[data-para="1144"] .col[data-col="1146"] .col-text, .para[data-para="1144"] .col[data-col="1146"] .col-text .bit { line-height:1.2 }
+.para[data-para="1144"] .col[data-col="1146"] .col-text { gap:0 }
+.para[data-para="1144"] .col[data-col="1146"] .col-text .bit { margin:0 0 7px }
+.para[data-para="1144"] .col[data-col="1146"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1144"] .col[data-col="1146"] .col-text .bit { padding-left:0em }
+.para[data-para="1144"] .col[data-col="1146"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1144"] .col[data-col="1146"] .col-text .bit.bullet, .para[data-para="1144"] .col[data-col="1146"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1144"] .col[data-col="1146"] .col-text .bit.indent.bullet, .para[data-para="1144"] .col[data-col="1146"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1144"] .col[data-col="1146"] .col-text .bit.bullet::before, .para[data-para="1144"] .col[data-col="1146"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1144"] .col[data-col="1146"] .col-text .bit.indent.bullet::before, .para[data-para="1144"] .col[data-col="1146"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1144"] .col[data-col="1146"]{align-self:center}
+.para[data-para="1144"] .col[data-col="1146"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1144"] .col[data-col="1147"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1144"] .col[data-col="1147"] .col-text, .para[data-para="1144"] .col[data-col="1147"] .col-text .bit { line-height:1.2 }
+.para[data-para="1144"] .col[data-col="1147"] .col-text { gap:0 }
+.para[data-para="1144"] .col[data-col="1147"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1144"] .col[data-col="1147"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1144"] .col[data-col="1147"] .col-text .bit { padding-left:0em }
+.para[data-para="1144"] .col[data-col="1147"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1144"] .col[data-col="1147"] .col-text .bit.bullet, .para[data-para="1144"] .col[data-col="1147"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1144"] .col[data-col="1147"] .col-text .bit.indent.bullet, .para[data-para="1144"] .col[data-col="1147"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1144"] .col[data-col="1147"] .col-text .bit.bullet::before, .para[data-para="1144"] .col[data-col="1147"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1144"] .col[data-col="1147"] .col-text .bit.indent.bullet::before, .para[data-para="1144"] .col[data-col="1147"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1144"] .col[data-col="1147"]{align-self:center}
+.para[data-para="1144"] .col[data-col="1147"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1144"] .col[data-col="1147"] .col-text,.para[data-para="1144"] .col[data-col="1147"] .bit{white-space:normal!important}
+.para[data-para="1144"] .col[data-col="1147"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1144"] .col[data-col="1147"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1144"] .col[data-col="1147"] a.ref{white-space:nowrap}
+.para[data-para="1148"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1148"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
+.para[data-para="1148"] .col[data-col="1149"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="1148"] .col[data-col="1149"] .col-text, .para[data-para="1148"] .col[data-col="1149"] .col-text .bit { line-height:1.2 }
+.para[data-para="1148"] .col[data-col="1149"] .col-text { gap:0 }
+.para[data-para="1148"] .col[data-col="1149"] .col-text .bit { margin:0 0 3px }
+.para[data-para="1148"] .col[data-col="1149"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1148"] .col[data-col="1149"] .col-text .bit { padding-left:0em }
+.para[data-para="1148"] .col[data-col="1149"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1148"] .col[data-col="1149"] .col-text .bit.bullet, .para[data-para="1148"] .col[data-col="1149"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1148"] .col[data-col="1149"] .col-text .bit.indent.bullet, .para[data-para="1148"] .col[data-col="1149"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1148"] .col[data-col="1149"] .col-text .bit.bullet::before, .para[data-para="1148"] .col[data-col="1149"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1148"] .col[data-col="1149"] .col-text .bit.indent.bullet::before, .para[data-para="1148"] .col[data-col="1149"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1148"] .col[data-col="1149"]{align-self:center}
+.para[data-para="1148"] .col[data-col="1149"]{padding:0}
+.para[data-para="1148"] .col[data-col="1149"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="1148"] .col[data-col="1149"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1148"] .col[data-col="1150"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
+.para[data-para="1148"] .col[data-col="1150"] .col-text, .para[data-para="1148"] .col[data-col="1150"] .col-text .bit { line-height:1.2 }
+.para[data-para="1148"] .col[data-col="1150"] .col-text { gap:0 }
+.para[data-para="1148"] .col[data-col="1150"] .col-text .bit { margin:0 0 7px }
+.para[data-para="1148"] .col[data-col="1150"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1148"] .col[data-col="1150"] .col-text .bit { padding-left:0em }
+.para[data-para="1148"] .col[data-col="1150"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1148"] .col[data-col="1150"] .col-text .bit.bullet, .para[data-para="1148"] .col[data-col="1150"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1148"] .col[data-col="1150"] .col-text .bit.indent.bullet, .para[data-para="1148"] .col[data-col="1150"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1148"] .col[data-col="1150"] .col-text .bit.bullet::before, .para[data-para="1148"] .col[data-col="1150"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1148"] .col[data-col="1150"] .col-text .bit.indent.bullet::before, .para[data-para="1148"] .col[data-col="1150"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1148"] .col[data-col="1150"]{align-self:center}
+.para[data-para="1148"] .col[data-col="1150"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1148"] .col[data-col="1151"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1148"] .col[data-col="1151"] .col-text, .para[data-para="1148"] .col[data-col="1151"] .col-text .bit { line-height:1.2 }
+.para[data-para="1148"] .col[data-col="1151"] .col-text { gap:0 }
+.para[data-para="1148"] .col[data-col="1151"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1148"] .col[data-col="1151"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1148"] .col[data-col="1151"] .col-text .bit { padding-left:0em }
+.para[data-para="1148"] .col[data-col="1151"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1148"] .col[data-col="1151"] .col-text .bit.bullet, .para[data-para="1148"] .col[data-col="1151"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1148"] .col[data-col="1151"] .col-text .bit.indent.bullet, .para[data-para="1148"] .col[data-col="1151"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1148"] .col[data-col="1151"] .col-text .bit.bullet::before, .para[data-para="1148"] .col[data-col="1151"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1148"] .col[data-col="1151"] .col-text .bit.indent.bullet::before, .para[data-para="1148"] .col[data-col="1151"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1148"] .col[data-col="1151"]{align-self:center}
+.para[data-para="1148"] .col[data-col="1151"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1148"] .col[data-col="1151"] .col-text,.para[data-para="1148"] .col[data-col="1151"] .bit{white-space:normal!important}
+.para[data-para="1148"] .col[data-col="1151"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1148"] .col[data-col="1151"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1148"] .col[data-col="1151"] a.ref{white-space:nowrap}
+.para[data-para="1152"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1152"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
+.para[data-para="1152"] .col[data-col="1153"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="1152"] .col[data-col="1153"] .col-text, .para[data-para="1152"] .col[data-col="1153"] .col-text .bit { line-height:1.2 }
+.para[data-para="1152"] .col[data-col="1153"] .col-text { gap:0 }
+.para[data-para="1152"] .col[data-col="1153"] .col-text .bit { margin:0 0 3px }
+.para[data-para="1152"] .col[data-col="1153"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1152"] .col[data-col="1153"] .col-text .bit { padding-left:0em }
+.para[data-para="1152"] .col[data-col="1153"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1152"] .col[data-col="1153"] .col-text .bit.bullet, .para[data-para="1152"] .col[data-col="1153"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1152"] .col[data-col="1153"] .col-text .bit.indent.bullet, .para[data-para="1152"] .col[data-col="1153"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1152"] .col[data-col="1153"] .col-text .bit.bullet::before, .para[data-para="1152"] .col[data-col="1153"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1152"] .col[data-col="1153"] .col-text .bit.indent.bullet::before, .para[data-para="1152"] .col[data-col="1153"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1152"] .col[data-col="1153"]{align-self:center}
+.para[data-para="1152"] .col[data-col="1153"]{padding:0}
+.para[data-para="1152"] .col[data-col="1153"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="1152"] .col[data-col="1153"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1152"] .col[data-col="1154"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
+.para[data-para="1152"] .col[data-col="1154"] .col-text, .para[data-para="1152"] .col[data-col="1154"] .col-text .bit { line-height:1.2 }
+.para[data-para="1152"] .col[data-col="1154"] .col-text { gap:0 }
+.para[data-para="1152"] .col[data-col="1154"] .col-text .bit { margin:0 0 7px }
+.para[data-para="1152"] .col[data-col="1154"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1152"] .col[data-col="1154"] .col-text .bit { padding-left:0em }
+.para[data-para="1152"] .col[data-col="1154"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1152"] .col[data-col="1154"] .col-text .bit.bullet, .para[data-para="1152"] .col[data-col="1154"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1152"] .col[data-col="1154"] .col-text .bit.indent.bullet, .para[data-para="1152"] .col[data-col="1154"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1152"] .col[data-col="1154"] .col-text .bit.bullet::before, .para[data-para="1152"] .col[data-col="1154"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1152"] .col[data-col="1154"] .col-text .bit.indent.bullet::before, .para[data-para="1152"] .col[data-col="1154"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1152"] .col[data-col="1154"]{align-self:center}
+.para[data-para="1152"] .col[data-col="1154"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1152"] .col[data-col="1155"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1152"] .col[data-col="1155"] .col-text, .para[data-para="1152"] .col[data-col="1155"] .col-text .bit { line-height:1.2 }
+.para[data-para="1152"] .col[data-col="1155"] .col-text { gap:0 }
+.para[data-para="1152"] .col[data-col="1155"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1152"] .col[data-col="1155"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1152"] .col[data-col="1155"] .col-text .bit { padding-left:0em }
+.para[data-para="1152"] .col[data-col="1155"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1152"] .col[data-col="1155"] .col-text .bit.bullet, .para[data-para="1152"] .col[data-col="1155"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1152"] .col[data-col="1155"] .col-text .bit.indent.bullet, .para[data-para="1152"] .col[data-col="1155"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1152"] .col[data-col="1155"] .col-text .bit.bullet::before, .para[data-para="1152"] .col[data-col="1155"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1152"] .col[data-col="1155"] .col-text .bit.indent.bullet::before, .para[data-para="1152"] .col[data-col="1155"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1152"] .col[data-col="1155"]{align-self:center}
+.para[data-para="1152"] .col[data-col="1155"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1152"] .col[data-col="1155"] .col-text,.para[data-para="1152"] .col[data-col="1155"] .bit{white-space:normal!important}
+.para[data-para="1152"] .col[data-col="1155"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1152"] .col[data-col="1155"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1152"] .col[data-col="1155"] a.ref{white-space:nowrap}
+.para[data-para="1156"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1156"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
+.para[data-para="1156"] .col[data-col="1157"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="1156"] .col[data-col="1157"] .col-text, .para[data-para="1156"] .col[data-col="1157"] .col-text .bit { line-height:1.2 }
+.para[data-para="1156"] .col[data-col="1157"] .col-text { gap:0 }
+.para[data-para="1156"] .col[data-col="1157"] .col-text .bit { margin:0 0 3px }
+.para[data-para="1156"] .col[data-col="1157"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1156"] .col[data-col="1157"] .col-text .bit { padding-left:0em }
+.para[data-para="1156"] .col[data-col="1157"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1156"] .col[data-col="1157"] .col-text .bit.bullet, .para[data-para="1156"] .col[data-col="1157"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1156"] .col[data-col="1157"] .col-text .bit.indent.bullet, .para[data-para="1156"] .col[data-col="1157"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1156"] .col[data-col="1157"] .col-text .bit.bullet::before, .para[data-para="1156"] .col[data-col="1157"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1156"] .col[data-col="1157"] .col-text .bit.indent.bullet::before, .para[data-para="1156"] .col[data-col="1157"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1156"] .col[data-col="1157"]{align-self:center}
+.para[data-para="1156"] .col[data-col="1157"]{padding:0}
+.para[data-para="1156"] .col[data-col="1157"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="1156"] .col[data-col="1157"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1156"] .col[data-col="1158"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
+.para[data-para="1156"] .col[data-col="1158"] .col-text, .para[data-para="1156"] .col[data-col="1158"] .col-text .bit { line-height:1.2 }
+.para[data-para="1156"] .col[data-col="1158"] .col-text { gap:0 }
+.para[data-para="1156"] .col[data-col="1158"] .col-text .bit { margin:0 0 7px }
+.para[data-para="1156"] .col[data-col="1158"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1156"] .col[data-col="1158"] .col-text .bit { padding-left:0em }
+.para[data-para="1156"] .col[data-col="1158"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1156"] .col[data-col="1158"] .col-text .bit.bullet, .para[data-para="1156"] .col[data-col="1158"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1156"] .col[data-col="1158"] .col-text .bit.indent.bullet, .para[data-para="1156"] .col[data-col="1158"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1156"] .col[data-col="1158"] .col-text .bit.bullet::before, .para[data-para="1156"] .col[data-col="1158"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1156"] .col[data-col="1158"] .col-text .bit.indent.bullet::before, .para[data-para="1156"] .col[data-col="1158"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1156"] .col[data-col="1158"]{align-self:center}
+.para[data-para="1156"] .col[data-col="1158"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1156"] .col[data-col="1159"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1156"] .col[data-col="1159"] .col-text, .para[data-para="1156"] .col[data-col="1159"] .col-text .bit { line-height:1.2 }
+.para[data-para="1156"] .col[data-col="1159"] .col-text { gap:0 }
+.para[data-para="1156"] .col[data-col="1159"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1156"] .col[data-col="1159"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1156"] .col[data-col="1159"] .col-text .bit { padding-left:0em }
+.para[data-para="1156"] .col[data-col="1159"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1156"] .col[data-col="1159"] .col-text .bit.bullet, .para[data-para="1156"] .col[data-col="1159"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1156"] .col[data-col="1159"] .col-text .bit.indent.bullet, .para[data-para="1156"] .col[data-col="1159"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1156"] .col[data-col="1159"] .col-text .bit.bullet::before, .para[data-para="1156"] .col[data-col="1159"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1156"] .col[data-col="1159"] .col-text .bit.indent.bullet::before, .para[data-para="1156"] .col[data-col="1159"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1156"] .col[data-col="1159"]{align-self:center}
+.para[data-para="1156"] .col[data-col="1159"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1156"] .col[data-col="1159"] .col-text,.para[data-para="1156"] .col[data-col="1159"] .bit{white-space:normal!important}
+.para[data-para="1156"] .col[data-col="1159"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1156"] .col[data-col="1159"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1156"] .col[data-col="1159"] a.ref{white-space:nowrap}
+.para[data-para="1160"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1160"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
+.para[data-para="1160"] .col[data-col="1161"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="1160"] .col[data-col="1161"] .col-text, .para[data-para="1160"] .col[data-col="1161"] .col-text .bit { line-height:1.2 }
+.para[data-para="1160"] .col[data-col="1161"] .col-text { gap:0 }
+.para[data-para="1160"] .col[data-col="1161"] .col-text .bit { margin:0 0 3px }
+.para[data-para="1160"] .col[data-col="1161"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1160"] .col[data-col="1161"] .col-text .bit { padding-left:0em }
+.para[data-para="1160"] .col[data-col="1161"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1160"] .col[data-col="1161"] .col-text .bit.bullet, .para[data-para="1160"] .col[data-col="1161"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1160"] .col[data-col="1161"] .col-text .bit.indent.bullet, .para[data-para="1160"] .col[data-col="1161"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1160"] .col[data-col="1161"] .col-text .bit.bullet::before, .para[data-para="1160"] .col[data-col="1161"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1160"] .col[data-col="1161"] .col-text .bit.indent.bullet::before, .para[data-para="1160"] .col[data-col="1161"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1160"] .col[data-col="1161"]{align-self:center}
+.para[data-para="1160"] .col[data-col="1161"]{padding:0}
+.para[data-para="1160"] .col[data-col="1161"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="1160"] .col[data-col="1161"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1160"] .col[data-col="1162"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
+.para[data-para="1160"] .col[data-col="1162"] .col-text, .para[data-para="1160"] .col[data-col="1162"] .col-text .bit { line-height:1.2 }
+.para[data-para="1160"] .col[data-col="1162"] .col-text { gap:0 }
+.para[data-para="1160"] .col[data-col="1162"] .col-text .bit { margin:0 0 7px }
+.para[data-para="1160"] .col[data-col="1162"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1160"] .col[data-col="1162"] .col-text .bit { padding-left:0em }
+.para[data-para="1160"] .col[data-col="1162"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1160"] .col[data-col="1162"] .col-text .bit.bullet, .para[data-para="1160"] .col[data-col="1162"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1160"] .col[data-col="1162"] .col-text .bit.indent.bullet, .para[data-para="1160"] .col[data-col="1162"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1160"] .col[data-col="1162"] .col-text .bit.bullet::before, .para[data-para="1160"] .col[data-col="1162"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1160"] .col[data-col="1162"] .col-text .bit.indent.bullet::before, .para[data-para="1160"] .col[data-col="1162"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1160"] .col[data-col="1162"]{align-self:center}
+.para[data-para="1160"] .col[data-col="1162"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1160"] .col[data-col="1163"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1160"] .col[data-col="1163"] .col-text, .para[data-para="1160"] .col[data-col="1163"] .col-text .bit { line-height:1.2 }
+.para[data-para="1160"] .col[data-col="1163"] .col-text { gap:0 }
+.para[data-para="1160"] .col[data-col="1163"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1160"] .col[data-col="1163"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1160"] .col[data-col="1163"] .col-text .bit { padding-left:0em }
+.para[data-para="1160"] .col[data-col="1163"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1160"] .col[data-col="1163"] .col-text .bit.bullet, .para[data-para="1160"] .col[data-col="1163"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1160"] .col[data-col="1163"] .col-text .bit.indent.bullet, .para[data-para="1160"] .col[data-col="1163"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1160"] .col[data-col="1163"] .col-text .bit.bullet::before, .para[data-para="1160"] .col[data-col="1163"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1160"] .col[data-col="1163"] .col-text .bit.indent.bullet::before, .para[data-para="1160"] .col[data-col="1163"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1160"] .col[data-col="1163"]{align-self:center}
+.para[data-para="1160"] .col[data-col="1163"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1160"] .col[data-col="1163"] .col-text,.para[data-para="1160"] .col[data-col="1163"] .bit{white-space:normal!important}
+.para[data-para="1160"] .col[data-col="1163"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1160"] .col[data-col="1163"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1160"] .col[data-col="1163"] a.ref{white-space:nowrap}
+.para[data-para="1164"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1164"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
+.para[data-para="1164"] .col[data-col="1165"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="1164"] .col[data-col="1165"] .col-text, .para[data-para="1164"] .col[data-col="1165"] .col-text .bit { line-height:1.2 }
+.para[data-para="1164"] .col[data-col="1165"] .col-text { gap:0 }
+.para[data-para="1164"] .col[data-col="1165"] .col-text .bit { margin:0 0 3px }
+.para[data-para="1164"] .col[data-col="1165"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1164"] .col[data-col="1165"] .col-text .bit { padding-left:0em }
+.para[data-para="1164"] .col[data-col="1165"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1164"] .col[data-col="1165"] .col-text .bit.bullet, .para[data-para="1164"] .col[data-col="1165"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1164"] .col[data-col="1165"] .col-text .bit.indent.bullet, .para[data-para="1164"] .col[data-col="1165"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1164"] .col[data-col="1165"] .col-text .bit.bullet::before, .para[data-para="1164"] .col[data-col="1165"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1164"] .col[data-col="1165"] .col-text .bit.indent.bullet::before, .para[data-para="1164"] .col[data-col="1165"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1164"] .col[data-col="1165"]{align-self:center}
+.para[data-para="1164"] .col[data-col="1165"]{padding:0}
+.para[data-para="1164"] .col[data-col="1165"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="1164"] .col[data-col="1165"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1164"] .col[data-col="1166"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
+.para[data-para="1164"] .col[data-col="1166"] .col-text, .para[data-para="1164"] .col[data-col="1166"] .col-text .bit { line-height:1.2 }
+.para[data-para="1164"] .col[data-col="1166"] .col-text { gap:0 }
+.para[data-para="1164"] .col[data-col="1166"] .col-text .bit { margin:0 0 7px }
+.para[data-para="1164"] .col[data-col="1166"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1164"] .col[data-col="1166"] .col-text .bit { padding-left:0em }
+.para[data-para="1164"] .col[data-col="1166"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1164"] .col[data-col="1166"] .col-text .bit.bullet, .para[data-para="1164"] .col[data-col="1166"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1164"] .col[data-col="1166"] .col-text .bit.indent.bullet, .para[data-para="1164"] .col[data-col="1166"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1164"] .col[data-col="1166"] .col-text .bit.bullet::before, .para[data-para="1164"] .col[data-col="1166"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1164"] .col[data-col="1166"] .col-text .bit.indent.bullet::before, .para[data-para="1164"] .col[data-col="1166"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1164"] .col[data-col="1166"]{align-self:center}
+.para[data-para="1164"] .col[data-col="1166"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1164"] .col[data-col="1167"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1164"] .col[data-col="1167"] .col-text, .para[data-para="1164"] .col[data-col="1167"] .col-text .bit { line-height:1.2 }
+.para[data-para="1164"] .col[data-col="1167"] .col-text { gap:0 }
+.para[data-para="1164"] .col[data-col="1167"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1164"] .col[data-col="1167"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1164"] .col[data-col="1167"] .col-text .bit { padding-left:0em }
+.para[data-para="1164"] .col[data-col="1167"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1164"] .col[data-col="1167"] .col-text .bit.bullet, .para[data-para="1164"] .col[data-col="1167"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1164"] .col[data-col="1167"] .col-text .bit.indent.bullet, .para[data-para="1164"] .col[data-col="1167"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1164"] .col[data-col="1167"] .col-text .bit.bullet::before, .para[data-para="1164"] .col[data-col="1167"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1164"] .col[data-col="1167"] .col-text .bit.indent.bullet::before, .para[data-para="1164"] .col[data-col="1167"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1164"] .col[data-col="1167"]{align-self:center}
+.para[data-para="1164"] .col[data-col="1167"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1164"] .col[data-col="1167"] .col-text,.para[data-para="1164"] .col[data-col="1167"] .bit{white-space:normal!important}
+.para[data-para="1164"] .col[data-col="1167"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1164"] .col[data-col="1167"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1164"] .col[data-col="1167"] a.ref{white-space:nowrap}
+.para[data-para="1168"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1168"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
+.para[data-para="1168"] .col[data-col="1169"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="1168"] .col[data-col="1169"] .col-text, .para[data-para="1168"] .col[data-col="1169"] .col-text .bit { line-height:1.2 }
+.para[data-para="1168"] .col[data-col="1169"] .col-text { gap:0 }
+.para[data-para="1168"] .col[data-col="1169"] .col-text .bit { margin:0 0 3px }
+.para[data-para="1168"] .col[data-col="1169"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1168"] .col[data-col="1169"] .col-text .bit { padding-left:0em }
+.para[data-para="1168"] .col[data-col="1169"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1168"] .col[data-col="1169"] .col-text .bit.bullet, .para[data-para="1168"] .col[data-col="1169"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1168"] .col[data-col="1169"] .col-text .bit.indent.bullet, .para[data-para="1168"] .col[data-col="1169"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1168"] .col[data-col="1169"] .col-text .bit.bullet::before, .para[data-para="1168"] .col[data-col="1169"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1168"] .col[data-col="1169"] .col-text .bit.indent.bullet::before, .para[data-para="1168"] .col[data-col="1169"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1168"] .col[data-col="1169"]{align-self:center}
+.para[data-para="1168"] .col[data-col="1169"]{padding:0}
+.para[data-para="1168"] .col[data-col="1169"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="1168"] .col[data-col="1169"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1168"] .col[data-col="1170"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
+.para[data-para="1168"] .col[data-col="1170"] .col-text, .para[data-para="1168"] .col[data-col="1170"] .col-text .bit { line-height:1.2 }
+.para[data-para="1168"] .col[data-col="1170"] .col-text { gap:0 }
+.para[data-para="1168"] .col[data-col="1170"] .col-text .bit { margin:0 0 7px }
+.para[data-para="1168"] .col[data-col="1170"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1168"] .col[data-col="1170"] .col-text .bit { padding-left:0em }
+.para[data-para="1168"] .col[data-col="1170"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1168"] .col[data-col="1170"] .col-text .bit.bullet, .para[data-para="1168"] .col[data-col="1170"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1168"] .col[data-col="1170"] .col-text .bit.indent.bullet, .para[data-para="1168"] .col[data-col="1170"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1168"] .col[data-col="1170"] .col-text .bit.bullet::before, .para[data-para="1168"] .col[data-col="1170"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1168"] .col[data-col="1170"] .col-text .bit.indent.bullet::before, .para[data-para="1168"] .col[data-col="1170"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1168"] .col[data-col="1170"]{align-self:center}
+.para[data-para="1168"] .col[data-col="1170"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1168"] .col[data-col="1171"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1168"] .col[data-col="1171"] .col-text, .para[data-para="1168"] .col[data-col="1171"] .col-text .bit { line-height:1.2 }
+.para[data-para="1168"] .col[data-col="1171"] .col-text { gap:0 }
+.para[data-para="1168"] .col[data-col="1171"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1168"] .col[data-col="1171"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1168"] .col[data-col="1171"] .col-text .bit { padding-left:0em }
+.para[data-para="1168"] .col[data-col="1171"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1168"] .col[data-col="1171"] .col-text .bit.bullet, .para[data-para="1168"] .col[data-col="1171"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1168"] .col[data-col="1171"] .col-text .bit.indent.bullet, .para[data-para="1168"] .col[data-col="1171"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1168"] .col[data-col="1171"] .col-text .bit.bullet::before, .para[data-para="1168"] .col[data-col="1171"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1168"] .col[data-col="1171"] .col-text .bit.indent.bullet::before, .para[data-para="1168"] .col[data-col="1171"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1168"] .col[data-col="1171"]{align-self:center}
+.para[data-para="1168"] .col[data-col="1171"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1168"] .col[data-col="1171"] .col-text,.para[data-para="1168"] .col[data-col="1171"] .bit{white-space:normal!important}
+.para[data-para="1168"] .col[data-col="1171"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1168"] .col[data-col="1171"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1168"] .col[data-col="1171"] a.ref{white-space:nowrap}
+.para[data-para="1172"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; padding:0px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.55; --para-gap:18px }
+.row-title[data-para="1172"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#1b3a4b; padding:0px; margin-top:9px; margin-bottom:8px; text-align:left }
+.para[data-para="1172"] .col[data-col="1173"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(20px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:3px }
+.para[data-para="1172"] .col[data-col="1173"] .col-text, .para[data-para="1172"] .col[data-col="1173"] .col-text .bit { line-height:1.2 }
+.para[data-para="1172"] .col[data-col="1173"] .col-text { gap:0 }
+.para[data-para="1172"] .col[data-col="1173"] .col-text .bit { margin:0 0 3px }
+.para[data-para="1172"] .col[data-col="1173"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1172"] .col[data-col="1173"] .col-text .bit { padding-left:0em }
+.para[data-para="1172"] .col[data-col="1173"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1172"] .col[data-col="1173"] .col-text .bit.bullet, .para[data-para="1172"] .col[data-col="1173"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1172"] .col[data-col="1173"] .col-text .bit.indent.bullet, .para[data-para="1172"] .col[data-col="1173"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1172"] .col[data-col="1173"] .col-text .bit.bullet::before, .para[data-para="1172"] .col[data-col="1173"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1172"] .col[data-col="1173"] .col-text .bit.indent.bullet::before, .para[data-para="1172"] .col[data-col="1173"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1172"] .col[data-col="1173"]{align-self:center}
+.para[data-para="1172"] .col[data-col="1173"]{padding:0}
+.para[data-para="1172"] .col[data-col="1173"] img.col-pic{display:block;width:100%;max-width:100%;height:auto;object-fit:contain;box-sizing:border-box}
+.para[data-para="1172"] .col[data-col="1173"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1172"] .col[data-col="1174"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(24px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#006d8f; background:transparent; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:7px }
+.para[data-para="1172"] .col[data-col="1174"] .col-text, .para[data-para="1172"] .col[data-col="1174"] .col-text .bit { line-height:1.2 }
+.para[data-para="1172"] .col[data-col="1174"] .col-text { gap:0 }
+.para[data-para="1172"] .col[data-col="1174"] .col-text .bit { margin:0 0 7px }
+.para[data-para="1172"] .col[data-col="1174"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1172"] .col[data-col="1174"] .col-text .bit { padding-left:0em }
+.para[data-para="1172"] .col[data-col="1174"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1172"] .col[data-col="1174"] .col-text .bit.bullet, .para[data-para="1172"] .col[data-col="1174"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1172"] .col[data-col="1174"] .col-text .bit.indent.bullet, .para[data-para="1172"] .col[data-col="1174"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1172"] .col[data-col="1174"] .col-text .bit.bullet::before, .para[data-para="1172"] .col[data-col="1174"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1172"] .col[data-col="1174"] .col-text .bit.indent.bullet::before, .para[data-para="1172"] .col[data-col="1174"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1172"] .col[data-col="1174"]{align-self:center}
+.para[data-para="1172"] .col[data-col="1174"] .col-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f2933; background:transparent; border:0; margin-bottom:6px; text-align:left; line-height:1.55 }
+.para[data-para="1172"] .col[data-col="1175"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
+.para[data-para="1172"] .col[data-col="1175"] .col-text, .para[data-para="1172"] .col[data-col="1175"] .col-text .bit { line-height:1.2 }
+.para[data-para="1172"] .col[data-col="1175"] .col-text { gap:0 }
+.para[data-para="1172"] .col[data-col="1175"] .col-text .bit { margin:0 0 5px }
+.para[data-para="1172"] .col[data-col="1175"] .col-text .bit:last-child { margin-bottom:0 }
+.para[data-para="1172"] .col[data-col="1175"] .col-text .bit { padding-left:0em }
+.para[data-para="1172"] .col[data-col="1175"] .col-text .bit.indent { padding-left:2em }
+.para[data-para="1172"] .col[data-col="1175"] .col-text .bit.bullet, .para[data-para="1172"] .col[data-col="1175"] .col-text .bit.numbered { padding-left:1.75em }
+.para[data-para="1172"] .col[data-col="1175"] .col-text .bit.indent.bullet, .para[data-para="1172"] .col[data-col="1175"] .col-text .bit.indent.numbered { padding-left:3.75em }
+.para[data-para="1172"] .col[data-col="1175"] .col-text .bit.bullet::before, .para[data-para="1172"] .col[data-col="1175"] .col-text .bit.numbered::before { left:0em }
+.para[data-para="1172"] .col[data-col="1175"] .col-text .bit.indent.bullet::before, .para[data-para="1172"] .col[data-col="1175"] .col-text .bit.indent.numbered::before { left:2em }
+.para[data-para="1172"] .col[data-col="1175"]{align-self:center}
+.para[data-para="1172"] .col[data-col="1175"]{flex:0 0 auto!important;width:max-content!important;max-width:42%!important;min-width:0!important;box-sizing:border-box;padding:0.15rem 0.4rem!important;text-align:left!important;white-space:normal!important}
+.para[data-para="1172"] .col[data-col="1175"] .col-text,.para[data-para="1172"] .col[data-col="1175"] .bit{white-space:normal!important}
+.para[data-para="1172"] .col[data-col="1175"] .fn-keep{display:block;white-space:nowrap}
+.para[data-para="1172"] .col[data-col="1175"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
+.para[data-para="1172"] .col[data-col="1175"] a.ref{white-space:nowrap}
 .fn-keep{white-space:nowrap}
 .fn { font-size:1em; font-weight:700; line-height:inherit; vertical-align:baseline; cursor:pointer; color:var(--title); display:inline-block; position:relative; padding:0; white-space:pre }
 .fn-mark { font-size:.7em; font-weight:700; line-height:1; vertical-align:super }

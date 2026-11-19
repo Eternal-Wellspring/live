@@ -243,8 +243,8 @@
     },
     {
       "reference": "Gen 12:3",
-      "text": "Gen 12:3\n3 I will bless those who bless you,\nAnd I will curse him who curses you;\nAnd in you all the families of the earth shall be blessed.”",
-      "source": "nkjv"
+      "text": "Gen 12:3<br>3 I will bless those who bless you,<br>And I will curse him who curses you;<br>And in you <b>all the families of the earth</b> shall be blessed.”",
+      "source": "edited"
     },
     {
       "reference": "Gen 18:18",
@@ -263,7 +263,7 @@
     },
     {
       "reference": "Rom 4:13",
-      "text": "Rom 4:13<br>13 For <b>the promise that he would be the heir of the world</b> <i>was</i> not to <b>Abraham</b> or to his seed through the law, but <b>through the righteousness of faith</b>.",
+      "text": "Rom 4:13<br>13 For the promise that he would be the<b> heir of the world</b> <br><i>was</i> not to <b>Abraham</b> or to his seed <b>through the law</b>, <br>but <b>through the righteousness of faith</b>.",
       "source": "edited"
     },
     {
@@ -273,8 +273,8 @@
     },
     {
       "reference": "Gal 3:29",
-      "text": "Gal 3:29\n29 And if you <i>are</i> Christ’s, then you are Abraham’s seed, and heirs according to the promise.",
-      "source": "nkjv"
+      "text": "Gal 3:29<br>29 And if you <i>are</i> <b>Christ’s</b>, <br>then you are <b>Abraham’s seed</b>, <br>and <b>heirs according to the promise</b>.",
+      "source": "edited"
     },
     {
       "reference": "Heb 9:26-28",
@@ -298,8 +298,8 @@
     },
     {
       "reference": "Rom 4:16",
-      "text": "Rom 4:16\n16 Therefore <i>it</i> <i>is</i> of faith that <i>it</i> <i>might</i> <i>be</i> according to grace, so that the promise might be sure to all the seed, not only to those who are of the law, but also to those who are of the faith of Abraham, who is the father of us all",
-      "source": "nkjv"
+      "text": "Rom 4:16<br>16 Therefore <i>it</i> <i>is</i> of faith that <i>it</i> <i>might</i> <i>be</i> according to grace, <br>so that the <b>promise </b>might be sure to <b>all the seed</b>, <br>not only to those who are of the law, <br>but also to those who are of the<b> faith of Abraham</b>, <br>who is the <b>father of us all.</b>",
+      "source": "edited"
     },
     {
       "reference": "Rom 4:21",
@@ -343,8 +343,8 @@
     },
     {
       "reference": "Heb 11:13",
-      "text": "Heb 11:13\n13 These all died in faith, not having received the promises, but having seen them afar off were assured of them, embraced <i>them</i> and confessed that they were strangers and pilgrims on the earth.",
-      "source": "nkjv"
+      "text": "Heb 11:13<br>13 These all died in faith, <b>not having received the promises</b>, <br>but having seen them afar off were assured of them, <br>embraced <i>them</i> and confessed <br>that they were <b>strangers and pilgrims on the earth</b>.",
+      "source": "edited"
     },
     {
       "reference": "Isa 46:9-10",
@@ -383,8 +383,8 @@
     },
     {
       "reference": "Rev 21:7",
-      "text": "Rev 21:7\n7 He who overcomes shall inherit all things, and I will be his God and he shall be My son.",
-      "source": "nkjv"
+      "text": "Rev 21:7<br>7 He who <b>overcomes</b> <b>shall inherit all things</b>, <br>and <b>I will be his God and he shall be My son</b>.",
+      "source": "edited"
     },
     {
       "reference": "Acts 1:11",
@@ -404,6 +404,111 @@
     {
       "reference": "Gen 17:15-16",
       "text": "Gen 17:15-16<br>15 Then God said to Abraham, <br>“As for Sarai your wife, <br>you shall not call her name Sarai, but Sarah shall be her name.<br>16 And I will bless her and also give you a son by her; <br>then I will bless her, <br>and she shall be a <b>mother of nations</b>; <br><b>kings of peoples</b> shall be from her.”",
+      "source": "edited"
+    },
+    {
+      "reference": "2Ti 1:1",
+      "text": "2Ti 1:1<br>1 Paul, an apostle of Jesus Christ by the will of God, <br>according to the <b>promise of life</b> which is in Christ Jesus,",
+      "source": "edited"
+    },
+    {
+      "reference": "Psa 16:11",
+      "text": "Psa 16:11<br>11 You will show me the path of life; <br><b>In Your presence <i>is</i> fullness of joy</b>; <br>At Your right hand <i>are</i> pleasures forevermore.",
+      "source": "edited"
+    },
+    {
+      "reference": "Gal 3:16",
+      "text": "Gal 3:16<br>16 Now to <b>Abraham and his Seed</b> were the promises made. <br>He does not say, “And to seeds,” as of many, but as of one, <br>“And to your Seed,” who is Christ.",
+      "source": "edited"
+    },
+    {
+      "reference": "Rev 19:16",
+      "text": "Rev 19:16<br>16 And He has on <i>His</i> robe and on His thigh a name written: <br><b>KING OF KINGS AND LORD OF LORDS</b>.",
+      "source": "edited"
+    },
+    {
+      "reference": "Dan 12:1",
+      "text": "Dan 12:1<br>1 “At that time Michael shall stand up, The great prince who stands <i>watch</i> over the sons of your people;  And there shall be a time of trouble, Such as never was since there was a nation, <i>Even</i> to that time. And at that time your people shall be delivered, Every one who is found written in the book.",
+      "source": "edited"
+    },
+    {
+      "reference": "Rev 13:7",
+      "text": "Rev 13:7<br>7 It was granted to him to <b>make war with the saints </b>and to <b>overcome</b> them. And authority was given him over every tribe, tongue, and nation.",
+      "source": "edited"
+    },
+    {
+      "reference": "Rev 19:14",
+      "text": "Rev 19:14<br>14 And the <b>armies</b> in heaven, <br>clothed in <b>fine linen, white</b> and clean, <br>followed Him on<b> white horses</b>.",
+      "source": "edited"
+    },
+    {
+      "reference": "Mat 24:31",
+      "text": "Mat 24:31<br>31 And He will send His angels with a great sound of a trumpet,<br>and they will <b>gather together His elect</b> <br>from the <b>four winds</b>,<br>from one end of <b>heaven</b> to the other.",
+      "source": "edited"
+    },
+    {
+      "reference": "1Th 4:16-17",
+      "text": "1Th 4:16-17<br>16 For the <b>Lord Himself will descend</b> from heaven with a shout, <br>with the voice of an archangel,<br> and with the trumpet of God. <br><b>And the dead in Christ will rise first</b>.<br>17 Then we who are <b>alive</b> <i>and</i> remain <br>shall be <b>caught up together </b>with them in the clouds <br>to <b>meet the Lord </b>in the air. <br>And thus we <b>shall always be with the Lord</b>.",
+      "source": "edited"
+    },
+    {
+      "reference": "Rev 19:20",
+      "text": "Rev 19:20<br>20 Then the <b>beast</b> was captured, <br>and with him the false prophet who worked signs in his presence, <br>by which he <b>deceived</b> those who received the <b>mark of the</b> <b>beast</b> <br>and those who <b>worshiped his image</b>. <br>These two were <b>cast alive into the lake of fire</b> burning with brimstone.",
+      "source": "edited"
+    },
+    {
+      "reference": "2Th 1:6-8",
+      "text": "2Th 1:6-8<br>6 since <i>it</i> <i>is</i> a righteous thing with God<br>to <b>repay</b> with <b>tribulation</b> those <u><b>who</b> <b>trouble</b> <b>you</b></u>,<br>7 and to <i>give</i> you who are troubled rest with us<br>when the Lord Jesus is revealed from heaven<br><b>with His mighty angels</b>,<br>8 in <b>flaming fire taking vengeance</b><br>on those who do not know God,<br>and on those who <b>do not obey</b> <b>the</b> <b>gospel</b><br>of our Lord Jesus Christ.",
+      "source": "edited"
+    },
+    {
+      "reference": "Isa 2:3-4",
+      "text": "Isa 2:3-4<br>3 <b>Many</b> <b>people</b> shall come and say,<br>“<b>Come, and let us go up to the mountain of Yahweh</b>,<br>To the house of the God of Jacob;<br><b>He will teach us His ways</b>,<br>And we shall walk in His paths.”<br><b>For out of Zion shall go forth the law</b>,<br>And the word of Yahweh from Jerusalem.<br>4 <b>He shall judge between the nations</b>,<br>And <b>rebuke many people</b>;<br>They shall beat their swords into plowshares,<br>And their spears into pruning hooks;<br>Nation shall not <b>lift up sword</b> against nation,<br>Neither shall they <b>learn war </b>anymore.",
+      "source": "edited"
+    },
+    {
+      "reference": "Zec 14:16",
+      "text": "Zec 14:16<br>16 And it shall come to pass <i>that</i> <b>everyone </b><br>who is left of <b>all the nations </b><br>which came against Jerusalem <br>shall<b> go up</b> from year to year <b>to worship the King</b>, <br><b>Yahweh</b> <b>of</b> <b>hosts</b>, <br>and to keep the Feast of Tabernacles.",
+      "source": "edited"
+    },
+    {
+      "reference": "Rev 2:26",
+      "text": "Rev 2:26<br>26 And he who <b>overcomes</b>, <br>and keeps <b>My works </b>until the end, <br>to him I will<b> give power over the nations</b>—",
+      "source": "edited"
+    },
+    {
+      "reference": "Rev 20:6",
+      "text": "Rev 20:6<br>6 Blessed and holy <i>is</i> he who has part in the first resurrection. <br>Over such the second death has no power, <br>but they shall be <b>priests of God </b>and of Christ, <br>and shall <b>reign with Him a thousand years</b>.",
+      "source": "edited"
+    },
+    {
+      "reference": "1Co 15:24",
+      "text": "1Co 15:24<br>24 Then <i>comes</i> the <b>end</b>,<br>when He delivers the <b>kingdom to God the Father</b>,<br>when He puts an end to <b>all rule and all authority and power</b>.",
+      "source": "edited"
+    },
+    {
+      "reference": "Rev 21:1",
+      "text": "Rev 21:1<br>1 Now I saw a <b>new heaven and a new earth</b>, <br>for the first heaven and the first earth had passed away. <br>Also there was no more sea.",
+      "source": "edited"
+    },
+    {
+      "reference": "Rev 22:5",
+      "text": "Rev 22:5<br>5 There shall be no night there: <br>They need no lamp nor light of the sun, <br>for the Lord God gives them light. <br>And <b>they shall reign forever and ever</b>.",
+      "source": "edited"
+    },
+    {
+      "reference": "Rev 19:11-16",
+      "text": "Rev 19:11-16<br>11 Now I saw heaven opened, and behold, a <b>white horse</b>.<br>And He who sat on him was called <b>Faithful and True</b>,<br>and <b>in righteousness He judges and makes war</b>.<br>12 His eyes were like a flame of fire,<br>and <b>on His head were many crowns</b>.<br>He had a name written that <b><u>no one knew except Himself</u></b>.<br>13 He was clothed with a robe dipped in blood, and<br><b>His name is called The Word of God</b>.<br>14 And <b>the armies in heaven</b>, clothed in fine linen, white and clean, <br>followed Him on <b>white horses</b>.<br>15 Now <b>out of His mouth goes a sharp sword,<br>that with it He should strike the nations</b>.<br>And He Himself will <b>rule them with a rod of iron</b>.<br>He Himself <b>treads the winepress<br>of the fierceness and wrath of Almighty God</b>.<br>16 And He has on <i>His</i> robe and on His thigh a name written:<br><b>KING OF KINGS AND LORD OF LORDS</b>.",
+      "source": "edited"
+    },
+    {
+      "reference": "Rev 13:4-7",
+      "text": "Rev 13:4-7<br>4 So they worshiped the dragon who gave authority to the <b>beast</b>; <br>and they worshiped the <b>beast</b>, saying, “Who is like the beast? <b>Who is able to make war with him?</b>”<br>5 And he was given a mouth speaking great things and <b>blasphemies</b>, <br>and he was given authority to continue for forty-two months.<br>6 Then he opened his mouth in <b>blasphemy against God</b>, <br>to blaspheme His name, His tabernacle, and those who dwell in heaven.<br>7 It was granted to him to make <b>war with the saints</b> and to <b>overcome</b> them. <br>And authority was given him over every tribe, tongue, and nation.",
+      "source": "edited"
+    },
+    {
+      "reference": "Rev 13:3-7",
+      "text": "Rev 13:3-7<br>3 And I saw one of his heads as if it had been mortally wounded,<br>and his deadly wound was healed.<br><b>And all the world marveled and followed the beast</b>.<br>4 So they worshiped the <b>Dragon</b> <i>(Satan/Devil)</i><br>who gave authority to the <b>Beast</b> <i>(anti-Christ)</i>;<br>and <b>they worshiped the beast</b>, saying,<br>\"Who is like the beast? Who is able to make war with him?\"<br>5 And he was given a mouth <b>speaking great things and blasphemies,</b><br>and he was given authority to continue for forty-two months.<br>6 Then he opened his mouth in <b>blasphemy against God</b>,<br>to blaspheme His name, His tabernacle, and those who dwell in heaven.<br>7 It was granted to him to <b>make war with the saints </b>and to <b>overcome</b> them. And authority was given him over every tribe, tongue, and nation.",
       "source": "edited"
     }
   ]

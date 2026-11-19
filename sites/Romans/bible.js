@@ -461,6 +461,16 @@
     t = nkjvYahweh(t);
     return t;
   }
+  // Romans only: fresh verse text from the Bible keeps the source's poetic line breaks (a <br> or a
+  // double space in the bolls.life text) where the next phrase starts with a capital letter.
+  function poemLines(html, tr) {
+    var s = String(html || "").replace(/<br\b[^>]*>\s*/gi, "\uE000").replace(/ {2,}/g, "\uE000");
+    s = s.replace(/\uE000(?=\s*(?:<[^>]+>\s*)*[\u201c\u2018"'(]?[A-Z])/g, " \uE001 ").replace(/\uE000/g, " ");
+    return escTxt(cleanVerse(s, tr))
+      .replace(/\s*\uE001\s*/g, "<br>")
+      .replace(/^(?:<br>)+|(?:<br>)+$/g, "")
+      .replace(/(?:<br>){2,}/g, "<br>");
+  }
   function trById(id) {
     return TRANSLATIONS.filter(function (t) { return t.id === id; })[0];
   }
@@ -989,7 +999,7 @@
   var trNow, trList, chNkjv, chTrPick, chTrNow, chTrList, chView = "NKJV";
   var chBox, chList, chTitle, chHint, chPickBtn, chPrev, chNext, chPick = false, chBrowse;
   var currentRef, nkjvHtml, savedLink, linkSnap, inFile;
-  var chStart, chEnd, chRows;
+  var chStart, chEnd, chRows, chFreshRange = false;
   var refMode = false, rbClose;
 
   function setRefRange(start, end) {
@@ -2884,6 +2894,9 @@
     chPick = false;
     syncPickBtn();
     markDirty();
+    // Romans only: a range picked with Modify takes every verse from the selected translation,
+    // not from the site's stored pieces, so gap dots are never shown or saved.
+    chFreshRange = saveFolder() === "Romans";
     loadChapter();
   }
   function openChapter() {
@@ -2957,8 +2970,10 @@
     syncChNav();
     paintVersionsBtn();
     chList.textContent = "Opening…";
+    var freshRange = chFreshRange;
+    chFreshRange = false;
     var storedJob =
-      currentRef && currentRef.label
+      currentRef && currentRef.label && !freshRange
         ? fetchStored(currentRef.label).catch(function () {
             return null;
           })
@@ -2997,7 +3012,7 @@
           var n = Number(row.verse);
           var inHit = loose ? !!listed[n] : !!(hit && n >= hit.a && n <= hit.b);
           var plain = cleanVerse(row.text, tr);
-          var inner = escTxt(plain);
+          var inner = inHit && saveFolder() === "Romans" ? poemLines(row.text, tr) : escTxt(plain);
           if (inHit && tr !== "NKJV" && phrases.length) inner = formatWithPhrases(plain, phrases, storedMap[n]) || inner;
           else if (inHit && storedMap[n]) inner = storedMap[n];
           var el = document.createElement(inHit ? "p" : "div");
