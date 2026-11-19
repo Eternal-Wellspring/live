@@ -13,9 +13,10 @@
   "searchTitle": "",
   "searchDescription": "",
   "keyPhrases": "",
-  "editedAt": 1794914297397,
+  "editedAt": 1795082384173,
   "numberContents": false,
-  "showFootnotesSection": false,
+  "showFootnotesSection": true,
   "showSettingsBox": false,
-  "showOnWeb": true
+  "showOnWeb": true,
+  "homeType": "describe"
 }

@@ -464,101 +464,18 @@ html #ew-info-modal .ew-info-title, html #ew-info-modal .ew-info-x, html #ew-tex
         </div>
       </header>
     </div>
-    <div class="tab-dock"><div class="tabs"><button type="button" class="tab active" data-tab="s0" data-sec="637">Contents</button></div></div>
+    
   </div>
   <main data-page="635">
-    <div class="tab-panel active" id="s0" data-sec="637"><ol class="contents-list"><li><a href="index.html#s0" class="here">Home</a></li><li><a href="1-chapter-2.html#s1">Chapter 2</a></li><li><a href="2-chapter-4.html#s1">Chapter 4</a></li></ol></div>
+    <div class="tab-panel active" id="s0" data-sec="1100"><div class="subsec" data-heading="1101"><div class="subsec-frame" data-heading="1101"><div class="row-block" data-para="1104"><h3 class="row-title" data-para="1104">Contents</h3><div class="para describe-para" data-para="1104"><div class="describe-contents contents-wrap"><div class="describe-line"><label class="describe-live" contenteditable="false"><input type="checkbox" data-field="on-live" data-page="640" checked aria-label="On live" /></label><a href="1-chapter-2.html#s1" contenteditable="false">Chapter 2</a><div class="describe-note">Judgement: God&#x27;s and Man&#x27;s</div></div><div class="describe-line describe-off"><label class="describe-live" contenteditable="false"><input type="checkbox" data-field="on-live" data-page="1040" aria-label="On live" /></label><a href="2-chapter-4.html#s1" contenteditable="false">Chapter 4</a><div class="describe-note">The Promise of Life</div></div></div></div></div></div></div></div>
   </main>
-  <div class="tab-dock-end"><div class="tabs"><button type="button" class="tab active" data-tab="s0" data-sec="637">Contents</button></div></div>
+  
   
   <div class="page-nav-bar page-nav-bar-bottom"><span class="page-nav prev"></span><span class="page-nav-name">Home</span><a class="page-nav next" href="1-chapter-2.html#s1" aria-label="Chapter 2"><span class="page-nav-word">Next Page</span><span class="page-nav-tip">Chapter 2</span></a></div>
   <footer class="date-updated">Updated: <span class="ew-date-updated"></span></footer>
   
   </div>
   <script>
-function showTab(id){
-  if (!id || !document.getElementById(id)) return;
-  document.querySelectorAll(".tab[data-tab]").forEach(function(b){ b.classList.toggle("active", b.dataset.tab===id); });
-  document.querySelectorAll(".tab-panel").forEach(function(p){ p.classList.toggle("active", p.id===id); });
-  document.querySelectorAll(".end-sub-tabs").forEach(function(el){ el.hidden = el.getAttribute("data-for") !== id; });
-  var panel = document.getElementById(id);
-  if (panel) {
-    panel.querySelectorAll(".ew-hidden-sub").forEach(function(btn){
-      btn.classList.remove("open");
-      btn.setAttribute("aria-expanded", "false");
-      var wrap = btn.closest && btn.closest(".subsec");
-      if (wrap) wrap.classList.remove("open");
-    });
-  }
-  if (window.ewFitHead) requestAnimationFrame(function(){ window.ewFitHead(); });
-}
-function pageFile(href){
-  var path = String(href || "").split("#")[0].split("?")[0];
-  return path ? path.split("/").pop() : "";
-}
-function isHomeName(f){
-  f = String(f || "");
-  return f === "home.html" || f === "index.html" || f === "1-home.html";
-}
-function samePage(href){
-  var file = pageFile(href);
-  var here = pageFile(location.pathname) || "index.html";
-  if (!file || file === here) return true;
-  return isHomeName(file) && isHomeName(here);
-}
-function tabFromHref(href){
-  var i = String(href || "").indexOf("#");
-  return i >= 0 ? href.slice(i + 1) : "";
-}
-document.addEventListener("click", function(ev){
-  var sub = ev.target.closest(".sub-tab");
-  if (sub && sub.dataset.sub) {
-    var wrap = sub.closest(".tab-panel");
-    if (!wrap) {
-      var end = sub.closest(".end-sub-tabs");
-      var forId = end && end.getAttribute("data-for");
-      wrap = forId ? document.getElementById(forId) : null;
-    }
-    if (!wrap) return;
-    var id = sub.dataset.sub;
-    wrap.querySelectorAll(".sub-tab").forEach(function(b){ b.classList.toggle("active", b.dataset.sub===id); });
-    wrap.querySelectorAll(".sub-tab-panel").forEach(function(p){ p.classList.toggle("active", p.dataset.sub===id); });
-    var endBar = document.querySelector('.end-sub-tabs[data-for="' + wrap.id + '"]');
-    if (endBar) endBar.querySelectorAll(".sub-tab").forEach(function(b){ b.classList.toggle("active", b.dataset.sub===id); });
-    if (window.ewFitHead) requestAnimationFrame(function(){ window.ewFitHead(); });
-    return;
-  }
-  var btn = ev.target.closest(".tab");
-  if (btn && btn.dataset.tab) {
-    var id = btn.dataset.tab;
-    showTab(id);
-    if (id && location.hash.slice(1) !== id) {
-      if (history.replaceState) history.replaceState(null, "", "#" + id);
-      else location.hash = id;
-    }
-    return;
-  }
-  var a = ev.target.closest(".contents-list a");
-  if (!a) return;
-  if (!samePage(a.getAttribute("href") || "")) return;
-  ev.preventDefault();
-  var tid = tabFromHref(a.getAttribute("href") || "") || "s0";
-  showTab(tid);
-  if (tid && history.replaceState) history.replaceState(null, "", "#" + tid);
-  else if (tid) location.hash = tid;
-  window.scrollTo(0, 0);
-});
-window.addEventListener("hashchange", function(){
-  if (location.hash) showTab(location.hash.slice(1));
-  window.scrollTo(0, 0);
-});
-if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-var startTab = location.hash ? location.hash.slice(1) : "s0";
-if (location.hash && history.replaceState) history.replaceState(null, "", location.pathname + location.search);
-showTab(startTab);
-window.scrollTo(0, 0);
-window.addEventListener("load", function(){ window.scrollTo(0, 0); });
-</script><script>
 (function(){
   if (window.ewVideoBound) return;
   window.ewVideoBound = true;
@@ -1146,7 +1063,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
     setOpen(btn, !btn.classList.contains("open"));
   });
 })();
-</script><script>window.EW_GLOSSARY_SRC="glossary.json?v=39db1fef";</script><script src="footnotes.js?v=e3abc8d6"></script><script defer src="bible.js?v=8c491c7c"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
+</script><script>window.EW_GLOSSARY_SRC="glossary.json?v=39db1fef";</script><script src="footnotes.js?v=e3abc8d6"></script><script defer src="bible.js?v=a201c95d"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
 (function(){
   var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   var last = "";
