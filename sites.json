@@ -51,7 +51,7 @@
       "description": "<span class=\"bit\">The story of what is happening behind the scenes of Creation - from Genesis to Revelation.</span><span class=\"bit\">Understand passages there were a little strange instead of passing over them.  You will see and understand the bible like you never did before.</span><span class=\"bit\">As you read this story, the Word of God will open up next to it with a single click or tap.</span>",
       "category": "End Times Prophecies",
       "contents": [],
-      "showOnWeb": false,
+      "showOnWeb": true,
       "href": "/His-Finished-Work/",
       "stories": [
         {
@@ -147,10 +147,16 @@
           "onLive": true
         },
         {
+          "title": "Chapter 4 v2",
+          "note": "The Promise of Life",
+          "href": "/Romans/2-chapter-4-v2.html",
+          "onLive": false
+        },
+        {
           "title": "Chapter 4",
           "note": "The Promise of Life",
-          "href": "/Romans/2-chapter-4.html",
-          "onLive": false
+          "href": "/Romans/3-chapter-4.html",
+          "onLive": true
         }
       ],
       "showOnLive": true,

@@ -990,6 +990,7 @@
   var chBox, chList, chTitle, chHint, chPickBtn, chPrev, chNext, chPick = false, chBrowse;
   var currentRef, nkjvHtml, savedLink, linkSnap, inFile;
   var chStart, chEnd, chRows;
+  var refMode = false, rbClose;
 
   function setRefRange(start, end) {
     var a = Number(start);
@@ -1010,7 +1011,9 @@
   function updateSavedLink() {
     if (!savedLink || !currentRef || !currentRef.vs1) return;
     savedLink.setAttribute("data-ref", currentRef.label);
-    savedLink.textContent = currentRef.label;
+    var shown = String(savedLink.textContent || "").replace(/\s+/g, " ").trim();
+    var label = String(currentRef.label || "").replace(/\s+/g, " ").trim();
+    if (!shown || shown.toLowerCase() === label.toLowerCase() || parseChapter(shown)) savedLink.textContent = currentRef.label;
     var host = savedLink.closest && savedLink.closest("[contenteditable='true']");
     if (host) host.dispatchEvent(new Event("input", { bubbles: true }));
   }
@@ -1037,6 +1040,73 @@
     a.remove();
     if (host) host.dispatchEvent(new Event("input", { bubbles: true }));
   }
+  function linkFromNode(node) {
+    var el = node && node.nodeType === 1 ? node : node && node.parentNode;
+    if (!el || !el.closest) return null;
+    var a = el.closest("a.ref");
+    if (a) return a;
+    var fn = el.closest(".fn");
+    if (!fn) return null;
+    var hit = noteRefForFn(fn);
+    return hit && hit.a ? hit.a : null;
+  }
+  function linkInRange(range) {
+    if (!range) return null;
+    var direct = linkFromNode(range.startContainer) || linkFromNode(range.endContainer);
+    if (direct) return direct;
+    var root = range.commonAncestorContainer;
+    var el = root && root.nodeType === 1 ? root : root && root.parentNode;
+    if (!el || !el.querySelectorAll) return null;
+    var list = el.querySelectorAll("a.ref");
+    for (var i = 0; i < list.length; i++) {
+      try {
+        if (range.intersectsNode(list[i])) return list[i];
+      } catch (err) {}
+    }
+    return null;
+  }
+  function linkAtEvent(ev) {
+    var found = ev ? linkFromNode(ev.target) : null;
+    if (found) return found;
+    if (ev && ev.clientX != null && document.caretRangeFromPoint) {
+      var caret = null;
+      try { caret = document.caretRangeFromPoint(ev.clientX, ev.clientY); } catch (err) {}
+      found = caret ? linkFromNode(caret.startContainer) : null;
+      if (found) return found;
+    }
+    var sel = window.getSelection();
+    if (sel && sel.rangeCount && !sel.isCollapsed) return linkInRange(sel.getRangeAt(0));
+    return null;
+  }
+  function markLookup(a) {
+    var old = document.querySelectorAll("a.ref[data-ew-hit]");
+    for (var i = 0; i < old.length; i++) {
+      if (old[i] !== a) old[i].removeAttribute("data-ew-hit");
+    }
+    if (a && a.setAttribute) a.setAttribute("data-ew-hit", "1");
+  }
+  function removeAnyLookup() {
+    var menu = refMenu || ensureRefMenu();
+    var link = menu._lookup || (menu._hit && menu._hit.a) || null;
+    if (link && (!link.isConnected || !link.classList || !link.classList.contains("ref"))) link = null;
+    if (!link) link = document.querySelector("a.ref[data-ew-hit]");
+    if (!link && selectLookupMark()) {
+      var sel = window.getSelection();
+      link = (sel && sel.rangeCount && linkInRange(sel.getRangeAt(0))) || refFromSelection();
+    }
+    if (!link && menu._range) link = linkInRange(menu._range);
+    if (!link) {
+      var live = window.getSelection();
+      if (live && live.rangeCount) link = linkInRange(live.getRangeAt(0)) || refFromSelection();
+    }
+    hideRefMenu();
+    if (!link) return false;
+    link.removeAttribute("data-ew-hit");
+    unwrapRef(link);
+    menu._lookup = null;
+    if (menu._hit) menu._hit.a = null;
+    return true;
+  }
   function wrapCurrentSelection(ref) {
     var existing = refFromSelection();
     if (existing) {
@@ -1059,6 +1129,85 @@
     savedLink = a;
     bumpHost(a);
     return a;
+  }
+  var lookupMark = null;
+  function lookupHostOf(node) {
+    var el = node && node.nodeType === 1 ? node : node && node.parentNode;
+    return el && el.closest ? el.closest("[contenteditable='true']") : null;
+  }
+  function offsetInHost(host, node, offset) {
+    var walker = document.createTreeWalker(host, NodeFilter.SHOW_TEXT);
+    var count = 0;
+    var n;
+    while ((n = walker.nextNode())) {
+      if (n === node) return count + offset;
+      count += n.nodeValue.length;
+    }
+    return -1;
+  }
+  function rememberLookupRange() {
+    lookupMark = null;
+    var sel = window.getSelection();
+    if (!sel || !sel.rangeCount || sel.isCollapsed) return;
+    var range = sel.getRangeAt(0);
+    var host = lookupHostOf(range.commonAncestorContainer);
+    if (!host || !host.contains(range.startContainer) || !host.contains(range.endContainer)) return;
+    var start = offsetInHost(host, range.startContainer, range.startOffset);
+    var end = offsetInHost(host, range.endContainer, range.endOffset);
+    if (start < 0 || end < 0 || end <= start) return;
+    lookupMark = { host: host, start: start, end: end };
+  }
+  function selectLookupMark() {
+    if (!lookupMark || !lookupMark.host || !lookupMark.host.isConnected) return false;
+    var host = lookupMark.host;
+    var walker = document.createTreeWalker(host, NodeFilter.SHOW_TEXT);
+    var n;
+    var count = 0;
+    var startNode = null;
+    var startOff = 0;
+    var endNode = null;
+    var endOff = 0;
+    while ((n = walker.nextNode())) {
+      var next = count + n.nodeValue.length;
+      if (!startNode && lookupMark.start < next) {
+        startNode = n;
+        startOff = lookupMark.start - count;
+      }
+      if (lookupMark.end <= next) {
+        endNode = n;
+        endOff = lookupMark.end - count;
+        break;
+      }
+      count = next;
+    }
+    if (!startNode || !endNode) return false;
+    var range = document.createRange();
+    try {
+      range.setStart(startNode, startOff);
+      range.setEnd(endNode, endOff);
+    } catch (err) {
+      return false;
+    }
+    var sel = window.getSelection();
+    if (!sel) return false;
+    sel.removeAllRanges();
+    sel.addRange(range);
+    return !sel.isCollapsed;
+  }
+  function applyTextLookup(ref) {
+    if (!ref) return false;
+    if (!selectLookupMark()) restoreRhmRange();
+    var live = window.getSelection();
+    if (!live || !live.rangeCount || live.isCollapsed) return false;
+    var a = wrapCurrentSelection(ref);
+    if (!a) return false;
+    a.className = "ref";
+    a.href = "#ref";
+    a.setAttribute("data-ref", ref.label);
+    bumpHost(a);
+    if (savedLink === a) savedLink = null;
+    lookupMark = null;
+    return true;
   }
   function wrapNode(node, ref) {
     if (!node || !ref) return null;
@@ -1087,7 +1236,7 @@
     var s = document.createElement("style");
     s.id = "ew-ref-style";
     s.textContent =
-      "a.ref,.col a.ref,.col-text a.ref,.para a.ref{color:var(--title,#005eb8)!important;font-weight:400!important;font-size:calc(1em - 2px)!important;text-decoration:underline;text-underline-offset:0.15em;cursor:pointer;white-space:normal;overflow-wrap:anywhere}" +
+      "a.ref,.col a.ref,.col-text a.ref,.para a.ref{color:var(--title,#005eb8)!important;font-family:inherit!important;font-size:inherit!important;font-weight:inherit!important;font-style:inherit!important;text-decoration:underline;text-underline-offset:0.15em;cursor:pointer;white-space:normal;overflow-wrap:anywhere}" +
       "#ew-ref-menu{position:fixed;z-index:200;min-width:12rem;background:#fff;border:1px solid #c5d0d4;box-shadow:0 8px 22px rgba(0,0,0,.16);padding:0.15rem 0 0.35rem}" +
       "#ew-ref-menu[hidden]{display:none!important}" +
       "#ew-ref-menu .ew-ref-title{padding:0.3rem 0.75rem 0.15rem;font:800 0.82rem Arial,Helvetica,sans-serif;color:#1f6f78}" +
@@ -1095,6 +1244,13 @@
       "#ew-ref-menu .ew-ref-title.ew-rhm-font{border-top:2px solid var(--title,#004d97);margin-top:0.08rem;padding-top:0.22rem}" +
       "#ew-ref-menu button{display:block;width:100%;text-align:left;border:0;background:none;padding:0.35rem 0.75rem;font:700 0.88rem Arial,Helvetica,sans-serif;color:#1b3a4b;cursor:pointer}" +
       "#ew-ref-menu button[data-act]{padding:0.1rem 0.75rem}" +
+      "#ew-ref-menu .ew-rhm-ref-line{display:flex;align-items:center;gap:0.35rem;margin:0.1rem 0.75rem 0.15rem}" +
+      "#ew-ref-menu .ew-rhm-ref-line button{display:inline-block;width:auto;flex:0 0 auto;padding:0.1rem 0.35rem;white-space:nowrap}" +
+      "#ew-ref-menu .ew-rhm-ref-line input.ew-rhm-lookup{display:block;width:auto;flex:1 1 5.5rem;min-width:4.5rem;margin:0;height:1.55rem;padding:0 0.35rem;border:1px solid #c5d0d4;font:400 0.82rem Arial,Helvetica,sans-serif;box-sizing:border-box}" +
+      "#ew-ref-menu .ew-rhm-open-line{display:flex;align-items:center;gap:0.35rem;margin:0.1rem 0.75rem 0.15rem}" +
+      "#ew-ref-menu .ew-rhm-open-line button{display:inline-block;width:auto;flex:0 0 auto;padding:0.1rem 0.35rem;border:1px solid #c5d0d4;border-radius:3px;white-space:nowrap}" +
+      "#ew-ref-menu .ew-rhm-open-line button.on{background:#e8eef6;color:#005eb8;border-color:#005eb8}" +
+      "#ew-ref-menu .ew-rhm-open-line button:disabled{opacity:.45;cursor:default}" +
       "#ew-ref-menu button:hover{background:#eef3f4}" +
       "#ew-ref-menu .ew-rhm-size-pair{display:flex;align-items:stretch;gap:0.35rem;margin:0.08rem 0.75rem 0.3rem}" +
       "#ew-ref-menu .ew-rhm-size-row{display:flex;align-items:stretch;margin:0;width:4.7rem;height:1.55rem;border:1px solid #c5d0d4;background:#fff;box-sizing:border-box}" +
@@ -1160,6 +1316,31 @@
   function hideRefMenu() {
     if (refMenu) refMenu.hidden = true;
   }
+  function openFirst(a) {
+    return a && a.getAttribute && a.getAttribute("data-open") === "chapter" ? "chapter" : "ref";
+  }
+  function rhmLink() {
+    var a = refMenu && (refMenu._lookup || (refMenu._hit && refMenu._hit.a));
+    return a && a.isConnected && a.classList && a.classList.contains("ref") ? a : null;
+  }
+  function paintRhmOpen() {
+    if (!refMenu) return;
+    var a = rhmLink();
+    var first = openFirst(a);
+    Array.prototype.forEach.call(refMenu.querySelectorAll("[data-act='open-ref'], [data-act='open-chapter']"), function (btn) {
+      btn.disabled = !a;
+      btn.classList.toggle("on", !!a && btn.getAttribute("data-act") === "open-" + first);
+    });
+  }
+  function applyOpenFirst(act) {
+    var a = rhmLink();
+    if (!a) return false;
+    if (act === "open-chapter") a.setAttribute("data-open", "chapter");
+    else a.removeAttribute("data-open");
+    bumpHost(a);
+    paintRhmOpen();
+    return true;
+  }
   function selectedText() {
     var sel = window.getSelection();
     if (!sel || sel.isCollapsed) return "";
@@ -1201,6 +1382,14 @@
       '<button type="button" data-act="new">New</button>' +
       '<button type="button" data-act="remove">Remove</button>' +
       '<button type="button" data-act="footnote">Foot note</button>' +
+      '<div class="ew-rhm-ref-line">' +
+      '<button type="button" data-act="lookup">Ref Lookup</button>' +
+      '<input id="ew-rhm-lookup" class="ew-rhm-lookup" type="text" placeholder="Eph 1:4" spellcheck="false" aria-label="Scripture" />' +
+      "</div>" +
+      '<div class="ew-rhm-open-line">' +
+      '<button type="button" data-act="open-ref" title="Opens the Ref Box first">Ref Box</button>' +
+      '<button type="button" data-act="open-chapter" title="Opens the Chapter Box first">Chapter Box</button>' +
+      "</div>" +
       '<div class="ew-ref-title ew-rhm-font">Font Size</div>' +
       '<div class="ew-rhm-size-pair">' +
       '<div class="ew-rhm-size-row">' +
@@ -1241,6 +1430,19 @@
       ev.stopPropagation();
       if (ev.target.closest && ev.target.closest("[data-size], [data-para]")) ev.preventDefault();
     });
+    var lookupField = refMenu.querySelector("#ew-rhm-lookup");
+    if (lookupField) {
+      lookupField.addEventListener("keydown", function (ev) {
+        if (ev.key !== "Enter") return;
+        ev.preventDefault();
+        ev.stopPropagation();
+        var rawLookup = String(lookupField.value || "").replace(/\s+/g, " ").trim();
+        var lookupRef = parseChapter(rawLookup);
+        if (!lookupRef) return;
+        if (!applyTextLookup(lookupRef)) return;
+        hideRefMenu();
+      });
+    }
     refMenu.addEventListener("click", function (ev) {
       if (ev.target.closest && ev.target.closest("input, .ew-rhm-size-box, .ew-rhm-color-row")) {
         if (ev.target.id === "ew-rhm-color-clear" || (ev.target.closest && ev.target.closest("#ew-rhm-color-clear"))) {
@@ -1326,13 +1528,27 @@
       ev.preventDefault();
       ev.stopPropagation();
       var act = btn.getAttribute("data-act");
+      if (act === "lookup") {
+        var field = refMenu.querySelector("#ew-rhm-lookup");
+        var rawLookup = field ? String(field.value || "").replace(/\s+/g, " ").trim() : "";
+        var lookupRef = parseChapter(rawLookup);
+        if (!lookupRef) return;
+        if (!applyTextLookup(lookupRef)) return;
+        hideRefMenu();
+        return;
+      }
+      if (act === "remove") {
+        removeAnyLookup();
+        return;
+      }
+      if (act === "open-ref" || act === "open-chapter") {
+        if (!applyOpenFirst(act)) return;
+        hideRefMenu();
+        return;
+      }
       var hit = refMenu._hit;
       hideRefMenu();
       if (!hit) return;
-      if (act === "remove" && hit.a) {
-        unwrapRef(hit.a);
-        return;
-      }
       if (act === "edit" && hit.a) {
         var rawEdit = hit.a.getAttribute("data-ref") || hit.a.textContent;
         var er = parseChapter(rawEdit);
@@ -2035,6 +2251,10 @@
   function showRefMenu(ev, hit) {
     var menu = ensureRefMenu();
     menu._hit = hit || { text: selectedText(), a: null };
+    var looked = (hit && hit.a) || linkAtEvent(ev);
+    if (looked && !menu._hit.a) menu._hit.a = looked;
+    menu._lookup = looked || menu._hit.a || null;
+    markLookup(menu._lookup);
     menu._bits = rhmBits(ev);
     menu._range = null;
     var sel = window.getSelection();
@@ -2043,6 +2263,7 @@
         menu._range = sel.getRangeAt(0).cloneRange();
       } catch (e) {}
     }
+    rememberLookupRange();
     menu.hidden = false;
     menu.style.visibility = "hidden";
     menu.style.left = "0px";
@@ -2056,6 +2277,7 @@
     menu.style.visibility = "";
     fillRhmFields(ev && ev.target);
     fillRhmListStart(menu._bits);
+    paintRhmOpen();
     restoreRhmRange();
     return true;
   }
@@ -2100,6 +2322,7 @@
       '<div class="ew-verse-bar ew-fn-bar">' +
       '<button type="button" class="ew-ch-prev" aria-label="Previous chapter">&lt;</button>' +
       '<strong class="ew-chapter-title"></strong>' +
+      '<span class="ew-rb-tr">NKJV</span>' +
       '<button type="button" class="ew-ch-next" aria-label="Next chapter">&gt;</button>' +
       '<button type="button" class="ew-ch-nkjv">NKJV</button>' +
       '<div class="ew-tr-pick ew-ch-tr">' +
@@ -2114,8 +2337,13 @@
       '<button type="button" class="ew-save" hidden>Save</button>' +
       '<button type="button" class="ew-save-close" hidden>Save and Close</button>' +
       '<button type="button" class="ew-chapter-x">Close</button>' +
+      '<button type="button" class="ew-rb-x" aria-label="Close">×</button>' +
       "</div>" +
       '<div class="ew-chapter-list"></div>' +
+      '<div class="ew-rb-foot">' +
+      '<button type="button" class="ew-rb-context">Context</button>' +
+      '<button type="button" class="ew-rb-close">Close</button>' +
+      "</div>" +
       "</div>";
     ensureFootnoteStyle();
     document.body.appendChild(chBox);
@@ -2232,6 +2460,18 @@
       if (dirty || chPick) cancelFootnote();
       else hide();
     });
+    rbClose = chBox.querySelector(".ew-rb-close");
+    [chBox.querySelector(".ew-rb-x"), rbClose].forEach(function (btn) {
+      btn.addEventListener("click", function (ev) {
+        ev.stopPropagation();
+        if (dirty || chPick) cancelFootnote();
+        else hide();
+      });
+    });
+    chBox.querySelector(".ew-rb-context").addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      expandRefBox();
+    });
     chapterBtn.addEventListener("click", function () {
       openChapter();
     });
@@ -2272,6 +2512,7 @@
       chPickBtn.addEventListener("click", function (ev) {
         ev.stopPropagation();
         if (!canEditVerses()) return;
+        if (refMode) expandRefBox();
         chPick = !chPick;
         if (chPick) {
           chStart = 0;
@@ -2398,6 +2639,7 @@
   }
   function hideChapter() {
     closeTrLists();
+    setRefMode(false);
     chPick = false;
     syncPickBtn();
     if (chBox) chBox.hidden = true;
@@ -2448,6 +2690,7 @@
     cancelBtn.hidden = false;
     cancelBtn.textContent = edit && (dirty || chPick) ? "Cancel" : "Close";
     cancelBtn.disabled = false;
+    if (rbClose) rbClose.textContent = cancelBtn.textContent;
     syncPref();
   }
   function syncTools() {
@@ -2832,6 +3075,22 @@
   }
   function sizeFootnoteList() {
     if (!chBox) return;
+    if (refMode) {
+      var rbWidth = "min(36rem, 92vw)";
+      chBox.style.setProperty("transform", "translateX(-50%)", "important");
+      chBox.style.setProperty("left", "50%", "important");
+      chBox.style.setProperty("top", "12vh", "important");
+      chBox.style.setProperty("width", rbWidth, "important");
+      chBox.style.setProperty("max-width", rbWidth, "important");
+      chBox.style.setProperty("height", "auto", "important");
+      chBox.style.setProperty("max-height", "76vh", "important");
+      if (chList) {
+        chList.style.setProperty("max-height", "none", "important");
+        chList.style.setProperty("height", "auto", "important");
+        chList.style.flex = "1 1 auto";
+      }
+      return;
+    }
     var portrait = window.matchMedia("(orientation: portrait)").matches;
     var width = portrait ? "80vw" : "60vw";
     chBox.style.setProperty("transform", "none", "important");
@@ -2890,6 +3149,8 @@
       chNkjv.textContent = extra ? extraBookName(currentRef) || "Extra-biblical" : "NKJV";
       chNkjv.classList.toggle("on", !extra && !other);
     }
+    var rbTr = chBox && chBox.querySelector(".ew-rb-tr");
+    if (rbTr) rbTr.textContent = extra ? extraBookName(currentRef) || "Extra-biblical" : "NKJV";
     if (chTrPick) chTrPick.hidden = extra;
     if (chTrNow) {
       chTrNow.hidden = extra;
@@ -2922,7 +3183,7 @@
   function cancelFootnote() {
     if (savedLink && linkSnap) {
       if (linkSnap.ref) savedLink.setAttribute("data-ref", linkSnap.ref);
-      savedLink.textContent = linkSnap.text || "";
+      if (linkSnap.html != null) savedLink.innerHTML = linkSnap.html;
       var host = savedLink.closest && savedLink.closest("[contenteditable='true']");
       if (host) host.dispatchEvent(new Event("input", { bubbles: true }));
     }
@@ -2964,7 +3225,21 @@
         "#ew-chapter.ew-fn-pop .ew-ch-row sup{color:#1f6f78;font-weight:700;padding-right:.25rem}" +
 
         "#ew-chapter.ew-fn-pop .ew-extra-note{color:#0a7a22;font-weight:700;margin:0 0 .6rem}" +
-        "#ew-verse{display:none!important}";
+        "#ew-verse{display:none!important}" +
+        "#ew-chapter.ew-fn-pop .ew-rb-tr,#ew-chapter.ew-fn-pop .ew-fn-bar .ew-rb-x,#ew-chapter.ew-fn-pop .ew-rb-foot{display:none!important}" +
+        "#ew-chapter.ew-refbox .ew-fn-bar .ew-ch-prev,#ew-chapter.ew-refbox .ew-fn-bar .ew-ch-next,#ew-chapter.ew-refbox .ew-fn-bar .ew-ch-nkjv,#ew-chapter.ew-refbox .ew-ch-tr,#ew-chapter.ew-refbox .ew-fn-bar .ew-chapter-x{display:none!important}" +
+        "#ew-chapter.ew-refbox .ew-fn-card{height:auto!important;max-height:76vh!important}" +
+        "#ew-chapter.ew-refbox .ew-fn-bar{margin:0 0 .5rem}" +
+        "#ew-chapter.ew-refbox .ew-chapter-title{font-weight:700}" +
+        "#ew-chapter.ew-refbox .ew-rb-tr{display:inline-block!important;font:600 12px/1.2 Arial,Helvetica,sans-serif;color:#5a6d75;white-space:nowrap}" +
+        "#ew-chapter.ew-refbox .ew-fn-bar .ew-rb-x{display:inline-block!important;margin-left:auto!important;padding:0 .15rem!important;border:0!important;background:transparent!important;color:#1b3a4b;font:700 22px/1 Arial,Helvetica,sans-serif!important}" +
+        "#ew-chapter.ew-refbox .ew-fn-bar .ew-fn-mod{margin-left:auto}" +
+        "#ew-chapter.ew-refbox .ew-fn-bar .ew-fn-mod~.ew-rb-x{margin-left:.2rem!important}" +
+        "#ew-chapter.ew-refbox .ew-ch-row:not(.hit),#ew-chapter.ew-refbox .ew-ch-gap{display:none!important}" +
+        "#ew-chapter.ew-refbox .ew-ch-row.hit,#ew-chapter.ew-refbox .ew-ch-hits p:not(.ew-ch-gap){background:transparent!important}" +
+        "#ew-chapter.ew-refbox .ew-rb-foot{display:flex!important;justify-content:space-between;align-items:center;gap:.5rem;margin:.6rem 0 0;flex:0 0 auto}" +
+        "#ew-chapter.ew-refbox .ew-rb-foot button{width:auto!important;min-width:0!important;margin:0!important;padding:.22rem .8rem!important;font:600 13px/1.2 Arial,Helvetica,sans-serif!important;white-space:nowrap;border:1px solid #c5d0d4;background:#fff;color:#1b3a4b;border-radius:4px;cursor:pointer}" +
+        "#ew-chapter.ew-refbox .ew-rb-foot button:hover{background:#e8eef6;color:#005eb8;border-color:#005eb8}";
     }
     document.body.appendChild(el);
   }
@@ -2977,6 +3252,24 @@
       var hit = noteRefForFn(fn);
       fn.classList.toggle("ew-extra", !!(hit && hit.ref && isExtraBook(hit.ref.book)));
     });
+  }
+  function setRefMode(on) {
+    refMode = !!on;
+    if (chBox) chBox.classList.toggle("ew-refbox", refMode);
+  }
+  function expandRefBox() {
+    if (!refMode) return;
+    setRefMode(false);
+    sizeFootnoteList();
+    var want = currentRef && !isExtraBook(currentRef.book) ? chosen() : "NKJV";
+    if (want !== chView && !dirty) {
+      chView = want;
+      paintVersionsBtn();
+      loadChapter();
+      return;
+    }
+    paintVersionsBtn();
+    scrollHitToMiddle();
   }
   function showPopup() {
     ensureBox();
@@ -3032,20 +3325,23 @@
     nkjvHtml = "";
     markClean();
   }
-  function lookupThenShow() {
+  function lookupThenShow(first) {
     ensureBox();
     linkSnap = savedLink
-      ? { ref: savedLink.getAttribute("data-ref") || "", text: savedLink.textContent || "" }
+      ? { ref: savedLink.getAttribute("data-ref") || "", html: savedLink.innerHTML || "" }
       : null;
     if (box) box.hidden = true;
     chPick = false;
     chStart = 0;
     chEnd = 0;
-    chView = currentRef && !isExtraBook(currentRef.book) ? chosen() : "NKJV";
+    var asRef = !!(currentRef && currentRef.vs1) && (first || openFirst(savedLink)) !== "chapter";
+    setRefMode(asRef);
+    chView = currentRef && !isExtraBook(currentRef.book) && !asRef ? chosen() : "NKJV";
     chBrowse = currentRef
       ? { book: currentRef.book, name: currentRef.name, ch: currentRef.ch1 || 1 }
       : null;
     chBox.hidden = false;
+    sizeFootnoteList();
     markExtraChrome();
     paintVersionsBtn();
     syncPickBtn();
@@ -3135,7 +3431,7 @@
           savedCopy = html;
           snapshot = html;
           if (savedLink) {
-            linkSnap = { ref: savedLink.getAttribute("data-ref") || "", text: savedLink.textContent || "" };
+            linkSnap = { ref: savedLink.getAttribute("data-ref") || "", html: savedLink.innerHTML || "" };
           }
           rememberSaved(currentRef.label, html);
           updateSavedLink();
@@ -3365,7 +3661,9 @@
         var ownTitle = String(term.getAttribute("data-title") || "").trim();
         var ownBody = String(term.getAttribute("data-body") || "");
         title.textContent = ownTitle || (g && g.title) || String(term.textContent || "").trim();
-        body.textContent = ownBody || (g && g.body) || "";
+        var rawBody = ownBody || (g && g.body) || "";
+        if (/<(?:b|i|u)\b/i.test(rawBody)) body.innerHTML = String(rawBody).replace(/\n/g, "<br>");
+        else body.textContent = rawBody;
       };
       var id = String(term.getAttribute("data-term") || "").trim().toLowerCase();
       paint(null);
@@ -3463,7 +3761,22 @@
       var inLong = ev.target.closest && ev.target.closest("#long-desc");
       if (!inIframe && !inLong) return;
       var col = ev.target.closest && ev.target.closest(".col");
-      if (col && (col.classList.contains("col-photo") || (col.querySelector && col.querySelector("img.col-pic")))) return;
+      if (col && (col.classList.contains("col-photo") || (col.querySelector && col.querySelector("img.col-pic")))) {
+        rememberLookupRange();
+        var photoMenu = ensureRefMenu();
+        var photoLink = linkAtEvent(ev);
+        photoMenu._hit = hitFromEvent(ev) || { text: selectedText(), a: null };
+        if (!photoMenu._hit.a && photoLink) photoMenu._hit.a = photoLink;
+        if (!photoLink) photoLink = photoMenu._hit.a || null;
+        photoMenu._lookup = photoLink;
+        markLookup(photoLink);
+        photoMenu._range = null;
+        var photoSel = window.getSelection();
+        if (photoSel && photoSel.rangeCount) {
+          try { photoMenu._range = photoSel.getRangeAt(0).cloneRange(); } catch (err) {}
+        }
+        return;
+      }
       ev.preventDefault();
       ev.stopPropagation();
       showRefMenu(ev, hitFromEvent(ev));
@@ -3494,9 +3807,32 @@
 
   window.ewRhmHit = function (ev) {
     var menu = ensureRefMenu();
+    var link = linkAtEvent(ev);
     menu._hit = hitFromEvent(ev) || { text: selectedText(), a: null };
+    if (!menu._hit.a && link) menu._hit.a = link;
+    menu._lookup = link || menu._hit.a || null;
+    markLookup(menu._lookup);
+  };
+  window.ewRhmOpenFirst = function () {
+    ensureRefMenu();
+    var a = rhmLink();
+    return a ? openFirst(a) : "";
+  };
+  window.ewRemoveLookup = function () {
+    return removeAnyLookup();
+  };
+  window.ewRememberLookup = rememberLookupRange;
+  window.ewTextLookup = function (raw) {
+    var ref = parseChapter(String(raw || "").replace(/\s+/g, " ").trim());
+    if (!ref) return false;
+    return applyTextLookup(ref);
   };
   window.ewRhmAct = function (act) {
+    if (act === "remove") return removeAnyLookup();
+    if (act === "open-ref" || act === "open-chapter") {
+      ensureRefMenu();
+      return applyOpenFirst(act);
+    }
     var menu = ensureRefMenu();
     var btn = menu.querySelector('[data-act="' + act + '"]');
     if (btn) btn.click();
