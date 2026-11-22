@@ -624,3 +624,61 @@
   ensureFnStyle();
   global.ewFootnotes = api;
 })(window);
+
+// 10 Minute Stories only (TMS order from John, 22 Nov 2026): the story's word count and reading time at the
+// foot of each story page. It is counted in the browser from the story text, so it stays right when the text
+// changes. Only the Story columns count: no footnotes, footnote markers or refs, pop-up notes (the hidden text
+// after an info mark), headings, row titles, Contents, Settings, pictures or captions.
+// Reading time = words / 150, rounded to the nearest minute, at least 1 min. Other sites and pages are untouched.
+(function () {
+  if (window.ewStoryLengthBound) return;
+  window.ewStoryLengthBound = true;
+  function storyPage() {
+    if (window.ewFolder !== "10-Minute-Stories") return false;
+    var last = String(location.pathname || "").split("/").pop() || "";
+    try {
+      last = decodeURIComponent(last);
+    } catch (e) {}
+    return /^\d+-/.test(last);
+  }
+  function storyWords() {
+    var n = 0;
+    var cols = document.querySelectorAll(".tab-panel .col:not(.col-footnotes):not(.col-photo) > .col-text");
+    Array.prototype.forEach.call(cols, function (src) {
+      if (src.closest(".describe-contents")) return;
+      var c = src.cloneNode(true);
+      Array.prototype.forEach.call(c.querySelectorAll(".bit.ew-info"), function (b) {
+        var s = b.nextElementSibling;
+        while (s) {
+          var next = s.nextElementSibling;
+          if (s.classList.contains("bit")) s.remove();
+          s = next;
+        }
+      });
+      var drop = ".ew-info, .fn, a.ref, h1, h2, h3, h4, h5, h6, .row-title, img, picture, video, audio, iframe, figure, figcaption, .col-pic-alt, button, script, style, br";
+      Array.prototype.forEach.call(c.querySelectorAll(drop), function (e) {
+        if (c.contains(e)) e.replaceWith(" ");
+      });
+      Array.prototype.forEach.call(c.querySelectorAll(".bit, p, div, li"), function (e) {
+        e.appendChild(document.createTextNode(" "));
+      });
+      String(c.textContent || "").split(/\s+/).forEach(function (w) {
+        if (/[0-9A-Za-z\u00C0-\u024F]/.test(w)) n++;
+      });
+    });
+    return n;
+  }
+  function paint() {
+    if (!storyPage() || document.querySelector(".ew-story-length")) return;
+    var n = storyWords();
+    if (!n) return;
+    var el = document.createElement("footer");
+    el.className = "date-updated ew-story-length";
+    el.textContent = n.toLocaleString("en-GB") + " words \u00b7 " + Math.max(1, Math.round(n / 150)) + " min read";
+    var upd = document.querySelector("footer.date-updated");
+    if (upd && upd.parentNode) upd.parentNode.insertBefore(el, upd);
+    else document.body.appendChild(el);
+  }
+  if (document.querySelector("footer.date-updated")) paint();
+  else document.addEventListener("DOMContentLoaded", paint);
+})();

@@ -392,7 +392,7 @@
     var vs1 = Number(m[3]);
     var ch2 = m[4] ? Number(m[4]) : ch1;
     var vs2 = m[5] ? Number(m[5]) : vs1;
-    return {
+    var out = {
       label: book[0] + " " + ch1 + ":" + vs1 + (ch2 !== ch1 || vs2 !== vs1 ? "-" + (ch2 !== ch1 ? ch2 + ":" : "") + vs2 : ""),
       book: book[1],
       name: book[0],
@@ -401,6 +401,25 @@
       ch2: ch2,
       vs2: vs2,
     };
+    // Translation code typed after the ref ("Deu 32:8 ESV"; John, 22 Nov 2026): keep it in the label so the
+    // ref is looked up as its own scriptures.json entry and opens in that translation with that code shown.
+    var tr = trAfterRef(String(raw || "").slice(m.index + m[0].length));
+    if (tr) {
+      out.tr = tr;
+      out.label += " " + tr;
+    }
+    return out;
+  }
+  // A known translation id (TRANSLATIONS, upper case) straight after a ref, or "". Refs without one are unchanged.
+  function trAfterRef(rest) {
+    var m = /^\s+([A-Z]{2,4})(?![A-Za-z0-9])/.exec(String(rest || ""));
+    if (!m) return "";
+    return TRANSLATIONS.some(function (t) { return t.id === m[1]; }) ? m[1] : "";
+  }
+  // The ref as shown in a title: the label without its translation code (the code is shown in the NKJV slot).
+  function refShown(ref) {
+    var s = (ref && ref.label) || "";
+    return ref && ref.tr && s.slice(-(ref.tr.length + 1)) === " " + ref.tr ? s.slice(0, -(ref.tr.length + 1)) : s;
   }
   function parseChapter(raw) {
     var full = parseRef(raw);
@@ -632,7 +651,7 @@
     });
   }
   function refLabel(ref) {
-    return ref.name + " " + ref.ch1 + ":" + ref.vs1 + (ref.ch2 !== ref.ch1 || ref.vs2 !== ref.vs1 ? "-" + (ref.ch2 !== ref.ch1 ? ref.ch2 + ":" : "") + vs2Safe(ref) : "");
+    return ref.name + " " + ref.ch1 + ":" + ref.vs1 + (ref.ch2 !== ref.ch1 || ref.vs2 !== ref.vs1 ? "-" + (ref.ch2 !== ref.ch1 ? ref.ch2 + ":" : "") + vs2Safe(ref) : "") + (ref.tr ? " " + ref.tr : "");
   }
   function holdRef(ref, raw) {
     currentRef = ref;
@@ -1015,8 +1034,8 @@
     currentRef.ch2 = currentRef.ch1;
     currentRef.raw = "";
     currentRef.label = refLabel(currentRef);
-    if (title) setAbbrTitle(title, currentRef.label, "NKJV");
-    if (chTitle) chTitle.textContent = currentRef.label;
+    if (title) setAbbrTitle(title, refShown(currentRef), currentRef.tr || "NKJV");
+    if (chTitle) chTitle.textContent = refShown(currentRef);
   }
   function updateSavedLink() {
     if (!savedLink || !currentRef || !currentRef.vs1) return;
@@ -2965,7 +2984,7 @@
     if (!chBrowse || !chList) return;
     var tr = chView || "NKJV";
     var heading = chBrowse.name + " " + chBrowse.ch;
-    if (sameChapter() && currentRef.label) heading = currentRef.label;
+    if (sameChapter() && currentRef.label) heading = refShown(currentRef);
     if (chTitle) chTitle.textContent = heading;
     syncChNav();
     paintVersionsBtn();
@@ -3165,7 +3184,7 @@
       chNkjv.classList.toggle("on", !extra && !other);
     }
     var rbTr = chBox && chBox.querySelector(".ew-rb-tr");
-    if (rbTr) rbTr.textContent = extra ? extraBookName(currentRef) || "Extra-biblical" : "NKJV";
+    if (rbTr) rbTr.textContent = extra ? extraBookName(currentRef) || "Extra-biblical" : (currentRef && currentRef.tr) || "NKJV";
     if (chTrPick) chTrPick.hidden = extra;
     if (chTrNow) {
       chTrNow.hidden = extra;
@@ -3276,7 +3295,7 @@
     if (!refMode) return;
     setRefMode(false);
     sizeFootnoteList();
-    var want = currentRef && !isExtraBook(currentRef.book) ? chosen() : "NKJV";
+    var want = currentRef && currentRef.tr ? currentRef.tr : currentRef && !isExtraBook(currentRef.book) ? chosen() : "NKJV";
     if (want !== chView && !dirty) {
       chView = want;
       paintVersionsBtn();
@@ -3292,8 +3311,8 @@
     markExtraChrome();
     setAbbrTitle(
       title,
-      currentRef && currentRef.vs1 ? currentRef.label : currentRef.name + " " + currentRef.ch1,
-      currentRef && isExtraBook(currentRef.book) ? "" : "NKJV"
+      currentRef && currentRef.vs1 ? refShown(currentRef) : currentRef.name + " " + currentRef.ch1,
+      currentRef && isExtraBook(currentRef.book) ? "" : currentRef.tr || "NKJV"
     );
     syncTools();
     syncPref();
@@ -3306,7 +3325,7 @@
       fetchStored(currentRef.label).catch(function () {
         return null;
       }),
-      loadPassage(currentRef, "NKJV"),
+      loadPassage(currentRef, currentRef.tr || "NKJV"),
     ])
       .then(function (pair) {
         var stored = pair[0];
@@ -3351,7 +3370,7 @@
     chEnd = 0;
     var asRef = !!(currentRef && currentRef.vs1) && (first || openFirst(savedLink)) !== "chapter";
     setRefMode(asRef);
-    chView = currentRef && !isExtraBook(currentRef.book) && !asRef ? chosen() : "NKJV";
+    chView = currentRef && currentRef.tr ? currentRef.tr : currentRef && !isExtraBook(currentRef.book) && !asRef ? chosen() : "NKJV";
     chBrowse = currentRef
       ? { book: currentRef.book, name: currentRef.name, ch: currentRef.ch1 || 1 }
       : null;
