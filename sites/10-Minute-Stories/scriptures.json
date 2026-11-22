@@ -203,8 +203,8 @@
     },
     {
       "reference": "Rev 19:11",
-      "text": "Rev 19:11\n11 Now I saw heaven opened, and behold, a white horse. And He who sat on him <i>was</i> called Faithful and True, and in righteousness He judges and makes war.",
-      "source": "nkjv"
+      "text": "Rev 19:11<br>11 Now I saw heaven opened, and behold, a <b>white horse</b>. <br>And He who sat on him <i>was</i> called <b>Faithful</b> and <b>True</b>, <br>and in <b>righteousness</b> He <b>judges</b> and <b>makes war</b>.",
+      "source": "edited"
     },
     {
       "reference": "Rev 20:2",
@@ -914,6 +914,21 @@
     {
       "reference": "Dan 10:13",
       "text": "Dan 10:13<br>13 <b>But the </b>prince of the kingdom of Persia withstood me twenty-one days; <br>and behold, <b>Michael</b>, one of the <b>chief princes</b>, came to help me, <br>for I had been left alone there with the kings of Persia.",
+      "source": "edited"
+    },
+    {
+      "reference": "Mat 24:30",
+      "text": "Mat 24:30<br>30 Then the sign of the <b>Son of Man </b>will appear in heaven, <br>and then all the <b>tribes</b> of the earth will <b>mourn</b>, <br>and they will see the <b>Son of Man</b> <b>coming on the clouds</b> of heaven <br>with <b>power</b> and <b>great</b> <b>glory</b>.",
+      "source": "edited"
+    },
+    {
+      "reference": "Rev 19:14",
+      "text": "Rev 19:14<br>14 And the <b>armies in heaven</b>, <br>clothed in fine linen, white and clean, <br><b>followed Him on white horses</b>.",
+      "source": "edited"
+    },
+    {
+      "reference": "1Co 15:52-53",
+      "text": "1Co 15:52-53<br>52 in a moment, in the <b>twinkling of an eye,</b> at the last trumpet. <br>For the trumpet will sound, <br>and <b>the dead will be raised incorruptible, and we shall be changed</b>.<br>53 For this corruptible must put on <b>incorruption</b>, <br>and this mortal must put on <b>immortality</b>.",
       "source": "edited"
     }
   ]
