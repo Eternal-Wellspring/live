@@ -74,8 +74,6 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .tab[data-sec="687"].active { border-bottom-color:#f6f7eb }
 .tab-panel[data-sec="687"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
 .end-sub-tabs[data-for="s0"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="687"], .end-sub-tabs[data-for="s0"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="687"].active, .end-sub-tabs[data-for="s0"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
 .tab[data-sec="688"], .tab-panel[data-sec="688"] .sub-tab, .end-sub-tabs[data-for="s1"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
 .tab[data-sec="688"] { background:#ffffff }
 .tab-panel[data-sec="688"] .sub-tab { background:#ffffff }
@@ -84,8 +82,6 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .tab[data-sec="688"].active { border-bottom-color:#f6f7eb }
 .tab-panel[data-sec="688"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
 .end-sub-tabs[data-for="s1"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="688"], .end-sub-tabs[data-for="s1"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="688"].active, .end-sub-tabs[data-for="s1"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
 .tab[data-sec="689"], .tab-panel[data-sec="689"] .sub-tab, .end-sub-tabs[data-for="s2"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
 .tab[data-sec="689"] { background:#ffffff }
 .tab-panel[data-sec="689"] .sub-tab { background:#ffffff }
@@ -94,18 +90,16 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .tab[data-sec="689"].active { border-bottom-color:#f6f7eb }
 .tab-panel[data-sec="689"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
 .end-sub-tabs[data-for="s2"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="689"], .end-sub-tabs[data-for="s2"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="689"].active, .end-sub-tabs[data-for="s2"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+body, button, input, select, textarea { font-family:Arial, Helvetica, sans-serif }
 .tab.active, .tab-panel .sub-tab.active { margin-bottom:-1px; position:relative; z-index:1 }
 .tab { border-radius:7px 7px 0 0 }
 .tab-panel { border-radius:0 7px 7px 0 }
 .tab-dock-end .tabs, .end-sub-tabs .sub-tabs { border-top:1px solid var(--line) }
-.tab-dock-end .tab { border-radius:0 0 7px 7px; border-top:0 }
-.tab-dock-end .tab, .end-sub-tabs .sub-tab { background:#ffffff }
-.tab-dock-end .tab.active { margin-top:-1px; margin-bottom:0; border-top-color:#f6f7eb; background:#f6f7eb }
+.end-sub-tabs .sub-tab { background:#ffffff }
 .end-sub-tabs .sub-tab { border-radius:0 0 7px 7px; border-top:0 }
 .end-sub-tabs .sub-tab.active { margin-top:-1px; border-top-color:#f6f7eb; background:#f6f7eb }
-.tab.tab-notes, .tab.tab-settings { background:#ffffff }
+.tabs .tab.tab-notes.tab-notes, .tabs .tab.tab-settings.tab-settings { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
+.tabs .tab.tab-notes.tab-notes, .tabs .tab.tab-settings.tab-settings { background:#ffffff }
 .col-title:empty { display:none; margin:0 }
 .para[data-para="659"] .col[data-col="660"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
 .para[data-para="659"] .col[data-col="660"] .col-text, .para[data-para="659"] .col[data-col="660"] .col-text .bit { line-height:1.2 }
@@ -400,7 +394,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .fn-keep{white-space:nowrap}
 .fn { font-size:1em; font-weight:700; line-height:inherit; vertical-align:baseline; cursor:pointer; color:var(--title); display:inline-block; position:relative; padding:0; white-space:pre }
 .fn-mark { font-size:.7em; font-weight:700; line-height:1; vertical-align:super }
-.fn-tip{display:none;position:absolute;left:0;bottom:calc(100% + .28rem);z-index:80;padding:.15rem .45rem;border:1px solid var(--line);background:#fff;color:var(--title);font:400 .85em Arial,Helvetica,sans-serif;white-space:nowrap;pointer-events:none}
+.fn-tip{display:none;position:absolute;left:0;bottom:calc(100% + .28rem);z-index:80;padding:.15rem .45rem;border:1px solid var(--line);background:#fff;color:var(--title);font-style:normal;font-weight:400;font-size:.85em;line-height:normal;font-family:inherit;white-space:nowrap;pointer-events:none}
 .fn:hover .fn-tip,.fn:focus .fn-tip{display:block}
 .fn{text-decoration:none!important}
 a.ref .fn,.col-footnotes .fn{text-decoration:none!important;display:inline-block;position:relative;white-space:pre}
@@ -503,7 +497,7 @@ a.site {
   border: 0;
   background: transparent;
   line-height: 1.1;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: inherit;
   font-size: calc(21px * var(--ew-font, 1));
   font-weight: 400;
   font-style: normal;
@@ -516,7 +510,11 @@ a.site {
   padding: 0;
   width: 100%;
   line-height: 1.1;
-  font: 400 calc(23px * var(--ew-font, 1)) / 1.1 Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: calc(23px * var(--ew-font, 1));
+  line-height: 1.1;
+  font-family: inherit;
   color: #004d97;
   text-align: center;
   background: transparent;
@@ -571,7 +569,11 @@ a.site {
   border: 1px solid #9aa8ae;
   background: #fff;
   color: #1b3a4b;
-  font: 700 0.82rem Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.82rem;
+  line-height: normal;
+  font-family: inherit;
   cursor: pointer;
 }
 #ew-full:hover { background: #e7ead8; }
@@ -605,7 +607,11 @@ html.ew-phone .who #page-title .title-sign { width: auto; margin: 0 0.15em; }
   border: 0;
   background: transparent;
   color: #5a6a72;
-  font: 400 13px/1.15 Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.15;
+  font-family: inherit;
   letter-spacing: 0.02em;
   text-decoration: none;
   white-space: nowrap;
@@ -767,7 +773,7 @@ html #ew-info-modal .ew-info-title, html #ew-info-modal .ew-info-x, html #ew-tex
     <div class="tab-dock"><div class="tabs tabs-contents-left"><button type="button" class="tab tab-contents-left" data-tab="s0" data-sec="687">Contents</button><button type="button" class="tab active" data-tab="s1" data-sec="688">Story</button><button type="button" class="tab tab-notes" data-notes-toggle="1">Footnotes</button><button type="button" class="tab tab-settings" data-settings-open="1">Settings</button></div></div>
   </div>
   <main data-page="157">
-    <div class="tab-panel" id="s0" data-sec="687"><div class="describe-contents contents-wrap"><div class="describe-line"><a href="index.html#s1">Home</a><div class="describe-note"></div></div><div class="describe-line"><a href="1-paradise-of-god-restored.html#s1">1. Paradise of God: Restored</a><div class="describe-note">God dwelt with Mankind until they rebelled. He will dwell in Paradise with us again.</div></div><div class="describe-line"><a href="2-sons-of-god-family-of-yahweh.html#s1" class="here">2. Sons of God: Family of Yahweh</a><div class="describe-note">Creation is waiting for God&#x27;s sons to reign over the nations.</div></div><div class="describe-line"><a href="3-feasts-of-god-timing-of-yahweh.html#s1">3. Feasts of God: Timing of Yahweh</a><div class="describe-note">The 8 Feasts of Yahweh prophesy the Day of the LORD, God Almighty</div></div><div class="describe-line"><a href="4-the-kingdom-of-god-fall-and-rise.html#s1">4. The Kingdom of God: Fall and Rise</a><div class="describe-note">God&#x27;s Kingdom: Lost and Restored - What fell down will be raised up.</div></div><div class="describe-line"><a href="5-wickedness-is-to-be-wiped-out.html#s1">5. Wickedness is to be Wiped Out!</a><div class="describe-note">God promised His family no sin or sorrow. He&#x27;s sending His Son to finish the job.</div></div><div class="describe-line"><a href="6-jesus-takes-the-crown-that-adam-lost.html#s1">6. Jesus takes the crown that Adam lost</a><div class="describe-note">Jesus is coming with the heavenly army to sit on His throne. Are you ready?</div></div></div></div><div class="tab-panel active" id="s1" data-sec="688"><div class="subsec" data-heading="662"><h2 class="edit-heading" data-heading="662">Two families of the sons of God</h2><div class="subsec-frame" data-heading="662"><div class="row-block" data-para="659"><div class="para" data-para="659"><div class="col" data-col="660" style="flex:1.0 1 0"><div class="col-text"><span class="bit">This page tells the story of God&#x27;s family, from the beginning of the Bible to the end. The Bible uses the phrase <span class="ew-term" tabindex="0" role="button" data-title="Sons of God" data-body="In the Old Testament, the sons of God are heavenly beings who stand before God.
+    <div class="tab-panel" id="s0" data-sec="687"><div class="describe-contents contents-wrap"><div class="describe-line"><a href="index.html#s1">Home</a><div class="describe-note"></div></div><div class="describe-line"><a href="1-paradise-of-god-restored.html#s1">1. Paradise of God: Restored</a><div class="describe-note">God dwelt with Mankind until they rebelled. He will dwell in Paradise with us again.</div></div><div class="describe-line"><a href="2-sons-of-god-family-of-yahweh.html#s1" class="here">2. Sons of God: Family of Yahweh</a><div class="describe-note">Creation is waiting for God&#x27;s sons to reign over the nations.</div></div><div class="describe-line"><a href="3-feasts-of-god-timing-of-yahweh.html#s1">3. Feasts of God: Timing of Yahweh</a><div class="describe-note">The 8 Feasts of Yahweh prophesy the Day of the LORD, God Almighty</div></div><div class="describe-line"><a href="4-the-kingdom-of-god-fall-and-rise.html#s1">4. The Kingdom of God: Fall and Rise</a><div class="describe-note">God&#x27;s Kingdom: Lost and Restored - What fell down will be raised up.</div></div><div class="describe-line"><a href="5-wickedness-is-to-be-wiped-out.html#s1">5. Wickedness is to be Wiped Out!</a><div class="describe-note">God promised His family no sin or sorrow. He&#x27;s sending His Son to finish the job.</div></div><div class="describe-line"><a href="6-abraham-inherits-the-world.html#s1">6. Abraham Inherits the World</a><div class="describe-note">Yahweh chooses Abraham to father the nation from which his seed reigns over the world.</div></div></div></div><div class="tab-panel active" id="s1" data-sec="688"><div class="subsec" data-heading="662"><h2 class="edit-heading" data-heading="662">Two families of the sons of God</h2><div class="subsec-frame" data-heading="662"><div class="row-block" data-para="659"><div class="para" data-para="659"><div class="col" data-col="660" style="flex:1.0 1 0"><div class="col-text"><span class="bit">This page tells the story of God&#x27;s family, from the beginning of the Bible to the end. The Bible uses the phrase <span class="ew-term" tabindex="0" role="button" data-title="Sons of God" data-body="In the Old Testament, the sons of God are heavenly beings who stand before God.
 Job 1:6 Job 38:7
 In the New Testament, the same title is given to all who believe in Christ.
 Gal 3:26">sons of God</span> for two groups. The first group is heavenly beings who stand in God&#x27;s presence.<span class="fn"> <span class="fn">1</span> </span>The second group is people on earth whom God takes as His own children.<span class="fn"> <span class="fn">2</span> </span>The story follows both groups. Some of the heavenly sons of God rebel, the first son of God on earth falls, and God then works through history to gather a family that will live with Him forever.</span><span class="bit">Before God made the world, God had already chosen a people to become His sons.<span class="fn"> <span class="fn">3</span> </span>When God laid the foundations of the earth, the heavenly sons of God shouted for joy.<span class="fn"> <span class="fn">4</span> </span>God then formed the first man, Adam, and the Gospel of Luke calls Adam a son of God.<span class="fn"> <span class="fn">5</span> </span>So God had one family of sons in heaven and the beginning of another on earth. God&#x27;s plan was to bring His whole family in heaven and on earth together under Christ.<span class="fn"> <span class="fn">6</span> </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="661" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Job 1:6">Job 1:6</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gal 3:26">Gal 3:26</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Eph 1:4-5">Eph 1:4-5</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Job 38:4-7">Job 38:4-7</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Luk 3:38">Luk 3:38</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Eph 1:10">Eph 1:10</a></span></div></div></div></div></div></div><div class="subsec" data-heading="667"><h2 class="edit-heading" data-heading="667">Eden: a son of God and the serpent rebel</h2><div class="subsec-frame" data-heading="667"><div class="row-block" data-para="664"><div class="para" data-para="664"><div class="col" data-col="665" style="flex:1.0 1 0"><div class="col-text"><span class="bit">God, whose personal name is Yahweh, placed Adam in a garden called Eden to work it and look after it.<span class="fn"> <span class="fn">1</span>  </span>A <span class="ew-term" tabindex="0" role="button" data-title="The serpent" data-body="The Hebrew word for serpent is nachash. Genesis says the serpent was more cunning than any beast of the field. Revelation names it that serpent of old, called the Devil and Satan.
@@ -1432,7 +1438,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
   });
   apply();
 })();
-</script><script>window.ewDefaults={"notes": true}</script><script>window.ewFolder="10-Minute-Stories"</script><script>
+</script><script>window.ewDefaults={"notes": false}</script><script>window.ewFolder="10-Minute-Stories"</script><script>
 (function(){
   if (window.ewDetailsBound) return;
   window.ewDetailsBound = true;

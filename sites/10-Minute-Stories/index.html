@@ -74,8 +74,6 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .tab[data-sec="953"].active { border-bottom-color:#f6f7eb }
 .tab-panel[data-sec="953"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
 .end-sub-tabs[data-for="s0"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="953"], .end-sub-tabs[data-for="s0"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="953"].active, .end-sub-tabs[data-for="s0"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
 .tab[data-sec="954"], .tab-panel[data-sec="954"] .sub-tab, .end-sub-tabs[data-for="s1"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
 .tab[data-sec="954"] { background:#ffffff }
 .tab-panel[data-sec="954"] .sub-tab { background:#ffffff }
@@ -84,8 +82,6 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .tab[data-sec="954"].active { border-bottom-color:#f6f7eb }
 .tab-panel[data-sec="954"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
 .end-sub-tabs[data-for="s1"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="954"], .end-sub-tabs[data-for="s1"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="954"].active, .end-sub-tabs[data-for="s1"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
 .tab[data-sec="s-set-p-home"], .tab-panel[data-sec="s-set-p-home"] .sub-tab, .end-sub-tabs[data-for="s2"] .sub-tab { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
 .tab[data-sec="s-set-p-home"] { background:#ffffff }
 .tab-panel[data-sec="s-set-p-home"] .sub-tab { background:#ffffff }
@@ -94,18 +90,16 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .tab[data-sec="s-set-p-home"].active { border-bottom-color:#f6f7eb }
 .tab-panel[data-sec="s-set-p-home"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
 .end-sub-tabs[data-for="s2"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
-.tab-dock-end .tab[data-sec="s-set-p-home"], .end-sub-tabs[data-for="s2"] .sub-tab { border-radius:0 0 7px 7px; border-width:0 1.0px 1.0px 1.0px }
-.tab-dock-end .tab[data-sec="s-set-p-home"].active, .end-sub-tabs[data-for="s2"] .sub-tab.active { border-top-color:#f6f7eb; border-bottom-color:#c5d0d4; margin-top:-1px; margin-bottom:0 }
+body, button, input, select, textarea { font-family:Arial, Helvetica, sans-serif }
 .tab.active, .tab-panel .sub-tab.active { margin-bottom:-1px; position:relative; z-index:1 }
 .tab { border-radius:7px 7px 0 0 }
 .tab-panel { border-radius:0 7px 7px 0 }
 .tab-dock-end .tabs, .end-sub-tabs .sub-tabs { border-top:1px solid var(--line) }
-.tab-dock-end .tab { border-radius:0 0 7px 7px; border-top:0 }
-.tab-dock-end .tab, .end-sub-tabs .sub-tab { background:#ffffff }
-.tab-dock-end .tab.active { margin-top:-1px; margin-bottom:0; border-top-color:#f6f7eb; background:#f6f7eb }
+.end-sub-tabs .sub-tab { background:#ffffff }
 .end-sub-tabs .sub-tab { border-radius:0 0 7px 7px; border-top:0 }
 .end-sub-tabs .sub-tab.active { margin-top:-1px; border-top-color:#f6f7eb; background:#f6f7eb }
-.tab.tab-notes, .tab.tab-settings { background:#ffffff }
+.tabs .tab.tab-notes.tab-notes, .tabs .tab.tab-settings.tab-settings { font-family:Arial, Helvetica, sans-serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
+.tabs .tab.tab-notes.tab-notes, .tabs .tab.tab-settings.tab-settings { background:#ffffff }
 .col-title:empty { display:none; margin:0 }
 .para[data-para="101"] .col[data-col="102"] { font-family:Arial, Helvetica, sans-serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
 .para[data-para="101"] .col[data-col="102"] .col-text, .para[data-para="101"] .col[data-col="102"] .col-text .bit { line-height:1.2 }
@@ -226,7 +220,7 @@ h2 { font-family:Arial, Helvetica, sans-serif; font-size:calc(19px * var(--ew-fo
 .fn-keep{white-space:nowrap}
 .fn { font-size:1em; font-weight:700; line-height:inherit; vertical-align:baseline; cursor:pointer; color:var(--title); display:inline-block; position:relative; padding:0; white-space:pre }
 .fn-mark { font-size:.7em; font-weight:700; line-height:1; vertical-align:super }
-.fn-tip{display:none;position:absolute;left:0;bottom:calc(100% + .28rem);z-index:80;padding:.15rem .45rem;border:1px solid var(--line);background:#fff;color:var(--title);font:400 .85em Arial,Helvetica,sans-serif;white-space:nowrap;pointer-events:none}
+.fn-tip{display:none;position:absolute;left:0;bottom:calc(100% + .28rem);z-index:80;padding:.15rem .45rem;border:1px solid var(--line);background:#fff;color:var(--title);font-style:normal;font-weight:400;font-size:.85em;line-height:normal;font-family:inherit;white-space:nowrap;pointer-events:none}
 .fn:hover .fn-tip,.fn:focus .fn-tip{display:block}
 .fn{text-decoration:none!important}
 a.ref .fn,.col-footnotes .fn{text-decoration:none!important;display:inline-block;position:relative;white-space:pre}
@@ -329,7 +323,7 @@ a.site {
   border: 0;
   background: transparent;
   line-height: 1.1;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: inherit;
   font-size: calc(21px * var(--ew-font, 1));
   font-weight: 400;
   font-style: normal;
@@ -342,7 +336,11 @@ a.site {
   padding: 0;
   width: 100%;
   line-height: 1.1;
-  font: 400 calc(23px * var(--ew-font, 1)) / 1.1 Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: calc(23px * var(--ew-font, 1));
+  line-height: 1.1;
+  font-family: inherit;
   color: #004d97;
   text-align: center;
   background: transparent;
@@ -397,7 +395,11 @@ a.site {
   border: 1px solid #9aa8ae;
   background: #fff;
   color: #1b3a4b;
-  font: 700 0.82rem Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.82rem;
+  line-height: normal;
+  font-family: inherit;
   cursor: pointer;
 }
 #ew-full:hover { background: #e7ead8; }
@@ -431,7 +433,11 @@ html.ew-phone .who #page-title .title-sign { width: auto; margin: 0 0.15em; }
   border: 0;
   background: transparent;
   color: #5a6a72;
-  font: 400 13px/1.15 Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.15;
+  font-family: inherit;
   letter-spacing: 0.02em;
   text-decoration: none;
   white-space: nowrap;
@@ -593,7 +599,7 @@ html #ew-info-modal .ew-info-title, html #ew-info-modal .ew-info-x, html #ew-tex
     <div class="tab-dock"><div class="tabs"><button type="button" class="tab tab-notes" data-notes-toggle="1">Footnotes</button><button type="button" class="tab tab-settings" data-settings-open="1">Settings</button></div></div>
   </div>
   <main data-page="950">
-    <div class="tab-panel active" id="s0" data-sec="985"><div class="subsec" data-heading="986"><div class="subsec-frame" data-heading="986"><div class="row-block" data-para="989"><h3 class="row-title" data-para="989">Contents</h3><div class="para describe-para" data-para="989"><div class="describe-contents contents-wrap"><div class="describe-line"><a href="1-paradise-of-god-restored.html#s1" contenteditable="false">1. Paradise of God: Restored</a><div class="describe-note">God dwelt with Mankind until they rebelled. He will dwell in Paradise with us again.</div></div><div class="describe-line"><a href="2-sons-of-god-family-of-yahweh.html#s1" contenteditable="false">2. Sons of God: Family of Yahweh</a><div class="describe-note">Creation is waiting for God&#x27;s sons to reign over the nations.</div></div><div class="describe-line"><a href="3-feasts-of-god-timing-of-yahweh.html#s1" contenteditable="false">3. Feasts of God: Timing of Yahweh</a><div class="describe-note">The 8 Feasts of Yahweh prophesy the Day of the LORD, God Almighty</div></div><div class="describe-line"><a href="4-the-kingdom-of-god-fall-and-rise.html#s1" contenteditable="false">4. The Kingdom of God: Fall and Rise</a><div class="describe-note">God&#x27;s Kingdom: Lost and Restored - What fell down will be raised up.</div></div><div class="describe-line"><a href="5-wickedness-is-to-be-wiped-out.html#s1" contenteditable="false">5. Wickedness is to be Wiped Out!</a><div class="describe-note">God promised His family no sin or sorrow. He&#x27;s sending His Son to finish the job.</div></div><div class="describe-line"><a href="6-jesus-takes-the-crown-that-adam-lost.html#s1" contenteditable="false">6. Jesus takes the crown that Adam lost</a><div class="describe-note">Jesus is coming with the heavenly army to sit on His throne. Are you ready?</div></div></div></div></div></div></div></div>
+    <div class="tab-panel active" id="s0" data-sec="985"><div class="subsec" data-heading="986"><div class="subsec-frame" data-heading="986"><div class="row-block" data-para="989"><h3 class="row-title" data-para="989">Contents</h3><div class="para describe-para" data-para="989"><div class="describe-contents contents-wrap"><div class="describe-line"><a href="1-paradise-of-god-restored.html#s1" contenteditable="false">1. Paradise of God: Restored</a><div class="describe-note">God dwelt with Mankind until they rebelled. He will dwell in Paradise with us again.</div></div><div class="describe-line"><a href="2-sons-of-god-family-of-yahweh.html#s1" contenteditable="false">2. Sons of God: Family of Yahweh</a><div class="describe-note">Creation is waiting for God&#x27;s sons to reign over the nations.</div></div><div class="describe-line"><a href="3-feasts-of-god-timing-of-yahweh.html#s1" contenteditable="false">3. Feasts of God: Timing of Yahweh</a><div class="describe-note">The 8 Feasts of Yahweh prophesy the Day of the LORD, God Almighty</div></div><div class="describe-line"><a href="4-the-kingdom-of-god-fall-and-rise.html#s1" contenteditable="false">4. The Kingdom of God: Fall and Rise</a><div class="describe-note">God&#x27;s Kingdom: Lost and Restored - What fell down will be raised up.</div></div><div class="describe-line"><a href="5-wickedness-is-to-be-wiped-out.html#s1" contenteditable="false">5. Wickedness is to be Wiped Out!</a><div class="describe-note">God promised His family no sin or sorrow. He&#x27;s sending His Son to finish the job.</div></div><div class="describe-line"><a href="6-abraham-inherits-the-world.html#s1" contenteditable="false">6. Abraham Inherits the World</a><div class="describe-note">Yahweh chooses Abraham to father the nation from which his seed reigns over the world.</div></div></div></div></div></div></div></div>
   </main>
   <div class="tab-dock-end"><div class="tabs"><button type="button" class="tab tab-notes" data-notes-toggle="1">Footnotes</button><button type="button" class="tab tab-settings" data-settings-open="1">Settings</button></div></div>
   
@@ -1164,7 +1170,7 @@ html #ew-info-modal .ew-info-title, html #ew-info-modal .ew-info-x, html #ew-tex
   });
   apply();
 })();
-</script><script>window.ewDefaults={"notes": true}</script><script>window.ewFolder="10-Minute-Stories"</script><script>
+</script><script>window.ewDefaults={"notes": false}</script><script>window.ewFolder="10-Minute-Stories"</script><script>
 (function(){
   if (window.ewDetailsBound) return;
   window.ewDetailsBound = true;

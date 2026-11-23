@@ -1,0 +1,11 @@
+{
+ "note": "Display-only suggestions for the Websites page Page fonts table (job 69, 23 Nov 2026). A page is listed only if every visible text element on its Develop page computes to one font family and it has no page font saved. Nothing here is saved to the page; choosing the font in the table saves it as normal.",
+ "checked": "2026-11-23 16:22 GMT",
+ "pages": {
+  "950": "Arial, Helvetica, sans-serif",
+  "720": "Arial, Helvetica, sans-serif",
+  "157": "Arial, Helvetica, sans-serif",
+  "808": "Arial, Helvetica, sans-serif",
+  "767": "Arial, Helvetica, sans-serif"
+ }
+}
