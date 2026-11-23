@@ -14,6 +14,7 @@
     s.textContent =
       "a.ref,.col a.ref,.col-text a.ref,.para a.ref{color:var(--title,#005eb8)!important;font-family:inherit!important;font-size:inherit!important;font-weight:inherit!important;font-style:inherit!important;text-decoration:underline;text-underline-offset:0.15em;cursor:pointer;white-space:normal;overflow-wrap:anywhere}" +
       ".fn-keep{white-space:nowrap}" +
+      ".fn-keep.fn-join::before{content:'\\2060'}" +
       ".col-footnotes .fn-keep{display:block;white-space:nowrap}" +
       ".col-footnotes .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}" +
       ".fn{font-size:1em;font-weight:700;line-height:inherit;vertical-align:baseline;cursor:pointer;color:var(--title,#005eb8);text-decoration:none!important;display:inline-block;position:relative;padding:0;white-space:pre}" +
@@ -260,20 +261,56 @@
     if (!fn || !fn.parentNode) return;
     if (fn.closest && fn.closest(".col-footnotes")) return;
     if (fn.parentNode.classList && fn.parentNode.classList.contains("fn-keep")) return;
-    var prev = fn.previousSibling;
+    var lead = fn.previousSibling;
+    if (lead && lead.nodeType === 1 && lead.classList && lead.classList.contains("fn-keep")) {
+      lead.appendChild(fn);
+      return;
+    }
     var wrap = document.createElement("span");
     wrap.className = "fn-keep";
-    if (prev && prev.nodeType === 3) {
-      var t = String(prev.nodeValue || "").replace(/\s+$/, "");
-      var m = t.match(/^(.*?)(\S+)$/);
-      if (m && m[2]) {
+    // Keep the marker on the line of the word before it, even when the end of that word
+    // sits in its own styled span, e.g. Him<span style="font-size:...">.</span>, and keep
+    // markers that follow each other (1 2 3) together with that word (job 56).
+    var prev = fn.previousSibling;
+    var first = true;
+    var steps = 0;
+    while (prev && steps++ < 8) {
+      var back = prev.previousSibling;
+      if (prev.nodeType === 3) {
+        var t = String(prev.nodeValue || "");
+        if (first) t = t.replace(/\s+$/, "");
+        var m = t.match(/^([\s\S]*?)(\S+)$/);
+        if (!m || !m[2]) {
+          if (first && !t && prev.parentNode) prev.parentNode.removeChild(prev);
+          break;
+        }
         prev.nodeValue = m[1];
-        if (!prev.nodeValue) prev.parentNode.removeChild(prev);
-        wrap.appendChild(document.createTextNode(m[2]));
+        wrap.insertBefore(document.createTextNode(m[2]), wrap.firstChild);
+        if (!prev.nodeValue && prev.parentNode) prev.parentNode.removeChild(prev);
+        if (m[1]) break;
+      } else if (prev.nodeType === 1 && fnGlueWhole(prev)) {
+        wrap.insertBefore(prev, wrap.firstChild);
+      } else {
+        if (prev.nodeType === 1 && fnEndsInWord(prev)) wrap.className = "fn-keep fn-join";
+        break;
       }
+      first = false;
+      prev = back;
     }
     fn.parentNode.insertBefore(wrap, fn);
     wrap.appendChild(fn);
+  }
+  function fnGlueWhole(el) {
+    if (!/^(SPAN|B|I|EM|STRONG|U|FONT|SMALL|SUB|SUP)$/.test(el.tagName)) return false;
+    if (el.classList && (el.classList.contains("fn") || el.classList.contains("fn-keep") || el.classList.contains("fn-tip"))) return false;
+    if (el.querySelector && el.querySelector(".fn, .fn-keep, a, br, img")) return false;
+    var t = String(el.textContent || "");
+    return !!t && !/\s/.test(t);
+  }
+  function fnEndsInWord(el) {
+    if (/^(BR|IMG|DIV|P)$/.test(el.tagName)) return false;
+    if (el.classList && (el.classList.contains("fn") || el.classList.contains("fn-keep"))) return false;
+    return /\S$/.test(String(el.textContent || ""));
   }
 
   function textAfterFnSkipRef(fn) {
