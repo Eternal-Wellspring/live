@@ -228,8 +228,8 @@
     },
     {
       "reference": "Isa 11:9",
-      "text": "Isa 11:9\n9 They shall not hurt nor destroy in all My holy mountain,\nFor the earth shall be full of the knowledge of Yahweh As the waters cover the sea.",
-      "source": "nkjv"
+      "text": "Isa 11:9<br>9 They shall not hurt nor destroy in all My holy mountain,<br>For the earth shall be full of the <b>knowledge of Yahweh </b><br><b>As the waters cover the sea</b>.",
+      "source": "edited"
     },
     {
       "reference": "1Co 15:24-26",
@@ -973,7 +973,7 @@
     },
     {
       "reference": "Isa 35:4-6",
-      "text": "Isa 35:4-6<br>4 Say to those who are fearful-hearted,<br>“Be strong, do not fear!<br>Behold, your God will come with <b>vengeance</b>,<br>With the <b>recompense</b> of God; He will <b>come</b> and <b>save</b> you.”<br>5 Then the eyes of the <b>blind</b> shall be opened,<br>And the ears of the <b>deaf</b> shall be unstopped.<br>6 Then the <b>lame</b> shall leap like a deer,<br>And the tongue of the <b>dumb</b> sing.<br>For <b>waters</b> shall burst forth in the wilderness,<br>And <b>streams</b> in the desert.",
+      "text": "Isa 35:4-6<br>4 Say to those who are fearful-hearted,<br>“Be strong, do not fear!<br>Behold, your God will come with <b>vengeance</b>,<br>With the <b>recompense</b> of God; <br>He will <b>come</b> and <b>save</b> you.”<br>5 Then the eyes of the <b>blind</b> shall be opened,<br>And the ears of the <b>deaf</b> shall be unstopped.<br>6 Then the <b>lame</b> shall leap like a deer,<br>And the tongue of the <b>dumb</b> sing.<br>For <b>waters</b> shall burst forth in the wilderness,<br>And <b>streams</b> in the desert.",
       "source": "edited"
     },
     {
@@ -1024,6 +1024,31 @@
     {
       "reference": "Deu 32:9",
       "text": "Deu 32:9<br>9 For Yahweh's portion is <b>His people</b>; <br>Jacob is the place of <b>His inheritance</b>.",
+      "source": "edited"
+    },
+    {
+      "reference": "1Th 4:16-17",
+      "text": "1Th 4:16-17<br>16 For the Lord Himself will descend from heaven with a shout, <br>with the voice of an archangel, and with the trumpet of God. <br>And the<b> dead in Christ will rise first</b>.<br>17 Then we who are <b>alive</b> and remain <br><b>shall be caught up together with them</b> <br>in the clouds <b>to meet the Lord </b>in the air. <br>And thus we shall <b>always be with the Lord</b>.",
+      "source": "edited"
+    },
+    {
+      "reference": "Rev 19:19",
+      "text": "Rev 19:19<br>19 And I saw the <b>beast</b>, the <b>kings of the earth</b>, and their <b>armies</b>, <br>gathered together to make <b>war</b> against Him <br>who <b>sat on the horse</b> and against His <b>army</b>.",
+      "source": "edited"
+    },
+    {
+      "reference": "Ezk 37:24",
+      "text": "Ezk 37:24<br>24 “<b>David My servant shall be king</b> over them, <br>and they shall all have <b>one shepherd</b>; <br>they shall also <b>walk</b> in <b>My judgments</b> <br>and <b>observe</b> My <b>statutes</b>, <br>and <b>do</b> them.",
+      "source": "edited"
+    },
+    {
+      "reference": "Zec 8:23",
+      "text": "Zec 8:23<br>23 “Thus says Yahweh of hosts: <br>‘In those days ten men <b>from every language of the nations </b><br>shall grasp the sleeve of a Jewish man, saying, <br>“<b>Let us go with you, for we have heard that God is with you</b>.” ’ ”",
+      "source": "edited"
+    },
+    {
+      "reference": "Gen 4:23",
+      "text": "Gen 4:23<br>23 Then La<b>m</b>ech said to his wives: <br>“Adah and Zillah, hear my <b>voice</b>; <br>Wives of Lamech, listen to my <b>speech</b>! <br>For I have <b>killed</b> a man for <b>wounding</b> me, <br>Even a young man for <b>hurting</b> me.",
       "source": "edited"
     }
   ]
