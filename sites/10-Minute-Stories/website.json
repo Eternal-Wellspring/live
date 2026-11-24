@@ -15,7 +15,303 @@
   "showOnLive": true,
   "numberContents": true,
   "showOnWeb": true,
-  "editedAt": 1795454568545,
+  "editedAt": 1795479322987,
   "homeType": "describe",
-  "tabsContentsLeft": true
+  "tabsContentsLeft": true,
+  "defaultFont": "Georgia, serif",
+  "formatFonts": {
+    "website": {
+      "1": {
+        "font": "Georgia, serif"
+      },
+      "2": {
+        "font": "Georgia, serif"
+      },
+      "3": {
+        "font": "Georgia, serif"
+      }
+    },
+    "book": {
+      "4": {
+        "font": "Georgia, serif"
+      }
+    },
+    "chapter": {
+      "5": {
+        "font": "Georgia, serif"
+      }
+    },
+    "prevChapter": {
+      "6": {
+        "font": "Georgia, serif"
+      }
+    },
+    "nextChapter": {
+      "7": {
+        "font": "Georgia, serif"
+      }
+    },
+    "information": {
+      "8": {
+        "font": "Georgia, serif"
+      }
+    },
+    "infoPopup": {
+      "9": {
+        "font": "Georgia, serif",
+        "titleFont": "Georgia, serif"
+      }
+    },
+    "popup": {
+      "10": {
+        "font": "Georgia, serif",
+        "titleFont": "Georgia, serif"
+      }
+    },
+    "textPopup": {
+      "11": {
+        "font": "Georgia, serif",
+        "titleFont": "Georgia, serif",
+        "bodyFont": "Georgia, serif"
+      }
+    },
+    "pageTitle": {
+      "12": {
+        "font": "Georgia, serif"
+      },
+      "13": {
+        "font": "Georgia, serif"
+      }
+    },
+    "section": {
+      "14": {
+        "font": "Georgia, serif"
+      },
+      "15": {
+        "font": "Georgia, serif"
+      },
+      "16": {
+        "font": "Georgia, serif"
+      }
+    },
+    "subsection": {
+      "17": {
+        "font": "Georgia, serif"
+      },
+      "18": {
+        "font": "Georgia, serif"
+      },
+      "19": {
+        "font": "Georgia, serif"
+      },
+      "22": {
+        "font": "Georgia, serif"
+      },
+      "20": {
+        "font": "Georgia, serif"
+      },
+      "21": {
+        "font": "Georgia, serif"
+      }
+    },
+    "rowTitle": {
+      "27": {
+        "font": "Georgia, serif"
+      },
+      "28": {
+        "font": "Georgia, serif"
+      },
+      "29": {
+        "font": "Georgia, serif"
+      },
+      "30": {
+        "font": "Georgia, serif"
+      },
+      "31": {
+        "font": "Georgia, serif"
+      },
+      "32": {
+        "font": "Georgia, serif"
+      },
+      "33": {
+        "font": "Georgia, serif"
+      }
+    },
+    "paragraph": {
+      "34": {
+        "font": "Georgia, serif"
+      },
+      "35": {
+        "font": "Georgia, serif"
+      },
+      "36": {
+        "font": "Georgia, serif"
+      },
+      "37": {
+        "font": "Georgia, serif"
+      },
+      "38": {
+        "font": "Georgia, serif"
+      },
+      "39": {
+        "font": "Georgia, serif"
+      },
+      "40": {
+        "font": "Georgia, serif"
+      },
+      "41": {
+        "font": "Georgia, serif"
+      },
+      "42": {
+        "font": "Georgia, serif"
+      }
+    },
+    "columnTitle": {
+      "43": {
+        "font": "Georgia, serif"
+      },
+      "44": {
+        "font": "Georgia, serif"
+      },
+      "45": {
+        "font": "Georgia, serif"
+      }
+    },
+    "column": {
+      "46": {
+        "font": "Georgia, serif"
+      },
+      "47": {
+        "font": "Georgia, serif"
+      },
+      "48": {
+        "font": "Georgia, serif"
+      },
+      "49": {
+        "font": "Georgia, serif"
+      },
+      "50": {
+        "font": "Georgia, serif"
+      },
+      "51": {
+        "font": "Georgia, serif"
+      },
+      "52": {
+        "font": "Georgia, serif"
+      },
+      "53": {
+        "font": "Georgia, serif"
+      },
+      "54": {
+        "font": "Georgia, serif"
+      },
+      "55": {
+        "font": "Georgia, serif"
+      },
+      "56": {
+        "font": "Georgia, serif"
+      },
+      "57": {
+        "font": "Georgia, serif"
+      },
+      "58": {
+        "font": "Georgia, serif"
+      },
+      "59": {
+        "font": "Georgia, serif"
+      },
+      "60": {
+        "font": "Georgia, serif"
+      },
+      "61": {
+        "font": "Georgia, serif"
+      }
+    },
+    "chapterVerses": {
+      "67": {
+        "font": "Georgia, serif"
+      }
+    },
+    "columnText": {
+      "46": {
+        "font": "Georgia, serif"
+      },
+      "47": {
+        "font": "Georgia, serif"
+      },
+      "48": {
+        "font": "Georgia, serif"
+      },
+      "49": {
+        "font": "Georgia, serif"
+      },
+      "50": {
+        "font": "Georgia, serif"
+      },
+      "51": {
+        "font": "Georgia, serif"
+      },
+      "52": {
+        "font": "Georgia, serif"
+      },
+      "53": {
+        "font": "Georgia, serif"
+      },
+      "54": {
+        "font": "Georgia, serif"
+      },
+      "55": {
+        "font": "Georgia, serif"
+      },
+      "56": {
+        "font": "Georgia, serif"
+      },
+      "57": {
+        "font": "Georgia, serif"
+      },
+      "58": {
+        "font": "Georgia, serif"
+      },
+      "59": {
+        "font": "Georgia, serif"
+      },
+      "60": {
+        "font": "Georgia, serif"
+      },
+      "61": {
+        "font": "Georgia, serif"
+      }
+    },
+    "subsectionBorder": {
+      "23": {
+        "font": "Georgia, serif"
+      },
+      "24": {
+        "font": "Georgia, serif"
+      },
+      "25": {
+        "font": "Georgia, serif"
+      },
+      "26": {
+        "font": "Georgia, serif"
+      }
+    },
+    "intext": {
+      "62": {
+        "font": "Georgia, serif"
+      },
+      "63": {
+        "font": "Georgia, serif"
+      },
+      "64": {
+        "font": "Georgia, serif"
+      },
+      "65": {
+        "font": "Georgia, serif"
+      },
+      "66": {
+        "font": "Georgia, serif"
+      }
+    }
+  }
 }

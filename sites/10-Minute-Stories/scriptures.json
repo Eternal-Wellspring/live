@@ -178,8 +178,8 @@
     },
     {
       "reference": "Heb 4:15",
-      "text": "Heb 4:15\n15 For we do not have a High Priest who cannot sympathize with our weaknesses, but was in all points tempted as we are, yet without sin.",
-      "source": "hfw"
+      "text": "Heb 4:15<br>15 For we do not have a High Priest who cannot sympathize with our weaknesses, but was in <b>all points tempted</b> as we are, <b>yet without sin</b>.",
+      "source": "edited"
     },
     {
       "reference": "1Co 5:7",
@@ -963,7 +963,7 @@
     },
     {
       "reference": "Deu 32:8 ESV",
-      "text": "Deu 32:8 ESV<br>8 When the Most High gave to the nations their inheritance, <br>when he <b>divided mankind</b>, <br>he fixed the <b>borders of the peoples </b><br>according to the number of the <b>sons of God</b>.",
+      "text": "Deu 32:8 ESV<br>8 When the Most High gave to the nations their<br>inheritance, when he <b>divided mankind,</b><br>he fixed the <b>borders of the</b> <b>peoples</b> <br>according to the number of the <b>sons of God.</b>",
       "source": "edited"
     },
     {
@@ -1005,6 +1005,26 @@
       "reference": "Rom 11:25",
       "text": "Rom 11:25\n25 For I do not desire, brethren, that you should be ignorant of this mystery, lest you should be wise in your own opinion, that blindness in part has happened to Israel until the fullness of the Gentiles has come in.",
       "source": "nkjv"
+    },
+    {
+      "reference": "Gen 17:5-6",
+      "text": "Gen 17:5-6<br>5 No longer shall your name be called <b>Abram</b>, <br>but your name shall be <b>Abraham</b>; <br>for I have made you a <b>father of many nations</b>.<br>6 I will make you exceedingly <b>fruitful</b>; <br>and I will make <b>nations</b> of you, <br>and <b>kings</b> shall come from you.",
+      "source": "edited"
+    },
+    {
+      "reference": "Isa 43:21",
+      "text": "Isa 43:21<br>21 <b>This people I have formed for Myself</b>; <br>They shall declare My praise.",
+      "source": "edited"
+    },
+    {
+      "reference": "1Pe 2:22",
+      "text": "1Pe 2:22<br>22 “Who committed <b>no sin</b>, <br>Nor was <b>deceit</b> found in His mouth”;",
+      "source": "edited"
+    },
+    {
+      "reference": "Deu 32:9",
+      "text": "Deu 32:9<br>9 For Yahweh's portion is <b>His people</b>; <br>Jacob is the place of <b>His inheritance</b>.",
+      "source": "edited"
     }
   ]
 }
