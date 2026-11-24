@@ -257,49 +257,196 @@
     if (n && n.nodeType === 1 && n.classList && n.classList.contains("ref")) keep.appendChild(n);
   }
 
+  function hasWordChar(s) {
+    return /[0-9A-Za-z]/.test(String(s || ""));
+  }
+
+  function keepHoldsWord(keep, fn) {
+    if (!keep) return false;
+    var t = "";
+    var n = keep.firstChild;
+    while (n) {
+      if (fn && (n === fn || (n.nodeType === 1 && n.contains && n.contains(fn)))) {
+        n = n.nextSibling;
+        continue;
+      }
+      if (n.nodeType === 1 && n.classList && (n.classList.contains("fn") || n.classList.contains("fn-tip"))) {
+        n = n.nextSibling;
+        continue;
+      }
+      t += n.textContent || "";
+      n = n.nextSibling;
+    }
+    return hasWordChar(t);
+  }
+
+  function isInlineGlueParent(el) {
+    if (!el || el.nodeType !== 1) return false;
+    if (!/^(SPAN|B|I|EM|STRONG|U|FONT|SMALL|SUB|SUP)$/.test(el.tagName)) return false;
+    if (el.classList && (el.classList.contains("fn") || el.classList.contains("fn-keep") || el.classList.contains("fn-tip") || el.classList.contains("bit") || el.classList.contains("col-text") || el.classList.contains("ref"))) return false;
+    return true;
+  }
+
+  function isHardStop(el) {
+    if (!el || el.nodeType !== 1) return true;
+    if (/^(DIV|P|BR|IMG|TABLE|TD|TH|LI|UL|OL|SECTION|ARTICLE|MAIN|BODY|HTML)$/.test(el.tagName)) return true;
+    if (el.classList && (el.classList.contains("bit") || el.classList.contains("col") || el.classList.contains("col-text") || el.classList.contains("para") || el.classList.contains("subsec") || el.classList.contains("subsec-frame") || el.classList.contains("row-block") || el.classList.contains("tab-panel"))) return true;
+    return false;
+  }
+
+  function peelWordFromTextNode(textNode) {
+    var t = String(textNode.nodeValue || "").replace(/\s+$/, "");
+    var m = t.match(/^([\s\S]*?)(\S+)$/);
+    if (!m || !m[2]) {
+      if (!String(textNode.nodeValue || "").replace(/\s+/g, "") && textNode.parentNode) textNode.parentNode.removeChild(textNode);
+      return null;
+    }
+    textNode.nodeValue = m[1];
+    if (!textNode.nodeValue && textNode.parentNode) textNode.parentNode.removeChild(textNode);
+    return { text: m[2], hasWord: hasWordChar(m[2]) };
+  }
+
+  function lastTextNode(el, skipFn) {
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+    var last = null;
+    var n;
+    while ((n = walker.nextNode())) {
+      if (skipFn && skipFn.contains && skipFn.contains(n)) continue;
+      if (n.parentElement && n.parentElement.closest && n.parentElement.closest(".fn, .fn-tip")) continue;
+      if (String(n.nodeValue || "").replace(/\s/g, "").length) last = n;
+    }
+    return last;
+  }
+
+  function peelLastWordFromElement(el, fn) {
+    var tn = lastTextNode(el, fn);
+    if (!tn) return null;
+    var peeled = peelWordFromTextNode(tn);
+    if (!peeled) return null;
+    var clone = el.cloneNode(false);
+    clone.appendChild(document.createTextNode(peeled.text));
+    if (!String(el.textContent || "").replace(/\s/g, "").length && !(el.querySelector && el.querySelector("img, br, .fn, .fn-keep"))) {
+      if (el.parentNode) el.parentNode.removeChild(el);
+    }
+    return { node: clone, hasWord: peeled.hasWord };
+  }
+
+  function splitContentAfterKeep(keep) {
+    var p = keep.parentNode;
+    if (!p) return;
+    var after = keep.nextSibling;
+    var meaningful = false;
+    var n = after;
+    while (n) {
+      if (n.nodeType === 1 || (n.nodeType === 3 && String(n.nodeValue || "").replace(/\s/g, "").length)) {
+        meaningful = true;
+        break;
+      }
+      n = n.nextSibling;
+    }
+    if (!meaningful) return;
+    var tail = p.cloneNode(false);
+    while (keep.nextSibling) tail.appendChild(keep.nextSibling);
+    if (p.parentNode) p.parentNode.insertBefore(tail, p.nextSibling);
+  }
+
+  function wrapKeepContentsInStyleClone(keep, styleEl) {
+    if (!keep || !styleEl || !isInlineGlueParent(styleEl)) return;
+    var clone = styleEl.cloneNode(false);
+    while (keep.firstChild) clone.appendChild(keep.firstChild);
+    keep.appendChild(clone);
+  }
+
+  function liftKeepToPeelSource(keep, sourceNode) {
+    var p = keep.parentNode;
+    if (!p || !sourceNode) return;
+    if (p.contains(sourceNode)) return;
+    if (!isInlineGlueParent(p)) return;
+    splitContentAfterKeep(keep);
+    wrapKeepContentsInStyleClone(keep, p);
+    var host = p.parentNode;
+    if (!host) return;
+    host.insertBefore(keep, p.nextSibling);
+    if (!p.hasChildNodes() || (!String(p.textContent || "").replace(/\s/g, "").length && !(p.querySelector && p.querySelector("img, br, .fn, .fn-keep")))) {
+      host.removeChild(p);
+    }
+  }
+
+  // Keep the marker on the line of the word before it, even when a font-size
+  // (or other inline) span sits between them, and even when only punctuation
+  // is in the same span as the marker (24 Nov, job 81).
   function glueFnToPrevWord(fn) {
     if (!fn || !fn.parentNode) return;
     if (fn.closest && fn.closest(".col-footnotes")) return;
-    if (fn.parentNode.classList && fn.parentNode.classList.contains("fn-keep")) return;
+    if (!fnDigits(fn)) return;
+
+    var keep = fn.parentNode.classList && fn.parentNode.classList.contains("fn-keep") ? fn.parentNode : null;
+    if (keep && keepHoldsWord(keep, fn)) return;
+
     var lead = fn.previousSibling;
-    if (lead && lead.nodeType === 1 && lead.classList && lead.classList.contains("fn-keep")) {
+    if (!keep && lead && lead.nodeType === 1 && lead.classList && lead.classList.contains("fn-keep")) {
       lead.appendChild(fn);
       return;
     }
-    var wrap = document.createElement("span");
-    wrap.className = "fn-keep";
-    // Keep the marker on the line of the word before it, even when the end of that word
-    // sits in its own styled span, e.g. Him<span style="font-size:...">.</span>, and keep
-    // markers that follow each other (1 2 3) together with that word (job 56).
-    var prev = fn.previousSibling;
-    var first = true;
+
+    if (!keep) {
+      keep = document.createElement("span");
+      keep.className = "fn-keep";
+      fn.parentNode.insertBefore(keep, fn);
+      keep.appendChild(fn);
+    }
+
     var steps = 0;
-    while (prev && steps++ < 8) {
-      var back = prev.previousSibling;
-      if (prev.nodeType === 3) {
-        var t = String(prev.nodeValue || "");
-        if (first) t = t.replace(/\s+$/, "");
-        var m = t.match(/^([\s\S]*?)(\S+)$/);
-        if (!m || !m[2]) {
-          if (first && !t && prev.parentNode) prev.parentNode.removeChild(prev);
-          break;
+    var from = keep;
+    while (steps++ < 16) {
+      var prev = from.previousSibling;
+      while (prev && prev.nodeType === 3 && !String(prev.nodeValue || "").replace(/\s+/g, "").length) {
+        var blank = prev;
+        prev = prev.previousSibling;
+        if (blank.parentNode) blank.parentNode.removeChild(blank);
+      }
+      if (!prev) {
+        if (from.parentNode && isInlineGlueParent(from.parentNode) && !isHardStop(from.parentNode)) {
+          from = from.parentNode;
+          continue;
         }
-        prev.nodeValue = m[1];
-        wrap.insertBefore(document.createTextNode(m[2]), wrap.firstChild);
-        if (!prev.nodeValue && prev.parentNode) prev.parentNode.removeChild(prev);
-        if (m[1]) break;
-      } else if (prev.nodeType === 1 && fnGlueWhole(prev)) {
-        wrap.insertBefore(prev, wrap.firstChild);
-      } else {
-        if (prev.nodeType === 1 && fnEndsInWord(prev)) wrap.className = "fn-keep fn-join";
         break;
       }
-      first = false;
-      prev = back;
+      if (prev.nodeType === 3) {
+        var host = prev.parentNode;
+        var peeled = peelWordFromTextNode(prev);
+        if (!peeled) break;
+        liftKeepToPeelSource(keep, host);
+        keep.insertBefore(document.createTextNode(peeled.text), keep.firstChild);
+        if (peeled.hasWord) return;
+        from = keep;
+        continue;
+      }
+      if (prev.nodeType === 1 && fnGlueWhole(prev)) {
+        var wholeWord = hasWordChar(prev.textContent || "");
+        liftKeepToPeelSource(keep, prev);
+        keep.insertBefore(prev, keep.firstChild);
+        if (wholeWord) return;
+        from = keep;
+        continue;
+      }
+      if (prev.nodeType === 1 && isInlineGlueParent(prev)) {
+        var part = peelLastWordFromElement(prev, fn);
+        if (!part) {
+          if (fnEndsInWord(prev)) keep.classList.add("fn-join");
+          break;
+        }
+        liftKeepToPeelSource(keep, prev);
+        keep.insertBefore(part.node, keep.firstChild);
+        if (part.hasWord) return;
+        from = keep;
+        continue;
+      }
+      if (prev.nodeType === 1 && fnEndsInWord(prev)) keep.classList.add("fn-join");
+      break;
     }
-    fn.parentNode.insertBefore(wrap, fn);
-    wrap.appendChild(fn);
   }
+
   function fnGlueWhole(el) {
     if (!/^(SPAN|B|I|EM|STRONG|U|FONT|SMALL|SUB|SUP)$/.test(el.tagName)) return false;
     if (el.classList && (el.classList.contains("fn") || el.classList.contains("fn-keep") || el.classList.contains("fn-tip"))) return false;

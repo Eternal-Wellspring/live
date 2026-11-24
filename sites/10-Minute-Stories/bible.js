@@ -1299,6 +1299,12 @@
       "#ew-ref-menu .ew-rhm-indent button{display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;padding:0;margin:0;border:1px solid #c5d0d4;border-radius:2px;background:#f4f7f8;color:#1b3a4b;font:700 1rem Arial,Helvetica,sans-serif;line-height:1;text-align:center;cursor:pointer;box-sizing:border-box}" +
       "#ew-ref-menu .ew-rhm-indent button:hover{background:#e4eaec;border-color:#9aa8ae}" +
       "#ew-ref-menu .ew-rhm-indent button:active{background:#d5dde0}" +
+      "#ew-ref-menu [hidden]{display:none!important}" +
+      "#ew-ref-menu .ew-rhm-align{display:grid;grid-template-columns:repeat(3,1.6rem);gap:0.2rem;padding:0.1rem 0.75rem 0.3rem}" +
+      "#ew-ref-menu .ew-rhm-align button{display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;padding:0;margin:0;border:1px solid #c5d0d4;border-radius:2px;background:#f4f7f8;color:#1b3a4b;font:700 0.95rem Arial,Helvetica,sans-serif;line-height:1;text-align:center;cursor:pointer;box-sizing:border-box}" +
+      "#ew-ref-menu .ew-rhm-align button:hover{background:#e4eaec;border-color:#9aa8ae}" +
+      "#ew-ref-menu .ew-rhm-align button.on{background:#e8eef6;color:#005eb8;border-color:#005eb8}" +
+      "#ew-ref-menu button.ew-rhm-align-clear:disabled{opacity:.45;cursor:default}" +
       "#ew-ref-menu .ew-rhm-list{display:flex;align-items:center;gap:0.25rem;padding:0.1rem 0.75rem 0.3rem}" +
       "#ew-ref-menu .ew-rhm-list button{display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;padding:0;margin:0;border:1px solid #c5d0d4;border-radius:2px;background:#f4f7f8;color:#1b3a4b;font:700 1rem Arial,Helvetica,sans-serif;line-height:1;text-align:center;cursor:pointer;box-sizing:border-box}" +
       "#ew-ref-menu .ew-rhm-list button:hover{background:#e4eaec;border-color:#9aa8ae}" +
@@ -1342,6 +1348,23 @@
         ".col.col-footnotes a.ref{white-space:nowrap}";
     }
     document.head.appendChild(s);
+  }
+  // 24 Nov 2026 (John): Align shows only for a column in the editor's page view.
+  function paintRhmAlign(menu, ev) {
+    var colEl = ev && ev.target && ev.target.closest ? ev.target.closest(".col") : null;
+    var paraEl = colEl && colEl.closest ? colEl.closest(".para") : null;
+    var inFrame = window.parent && window.parent !== window;
+    var cid = colEl ? colEl.getAttribute("data-col") || "" : "";
+    menu._col = inFrame && paraEl && cid ? { para: paraEl.getAttribute("data-para") || "", col: cid } : null;
+    var cur = menu._col ? colEl.getAttribute("data-align") || "" : "";
+    var parts = menu.querySelectorAll(".ew-rhm-align-title, .ew-rhm-align, .ew-rhm-align-clear");
+    for (var i = 0; i < parts.length; i++) parts[i].hidden = !menu._col;
+    var btns = menu.querySelectorAll("[data-col-align]");
+    for (var j = 0; j < btns.length; j++) {
+      var v = btns[j].getAttribute("data-col-align");
+      if (btns[j].classList) btns[j].classList.toggle("on", !!cur && v === cur);
+      if (v === "clear") btns[j].disabled = !cur;
+    }
   }
   function hideRefMenu() {
     if (refMenu) refMenu.hidden = true;
@@ -1454,7 +1477,21 @@
       "</div>" +
       '<button type="button" data-rhm="details">Additional Details</button>' +
       '<button type="button" data-rhm="info">Information</button>' +
-      '<button type="button" data-rhm="hidden-sub">Hidden-Sub-Section</button>';
+      '<button type="button" data-rhm="hidden-sub">Hidden-Sub-Section</button>' +
+      // 24 Nov 2026 (John): the column's own alignment (a local override, not the shared format).
+      '<div class="ew-ref-title ew-rhm-align-title">Align</div>' +
+      '<div class="ew-rhm-align">' +
+      '<button type="button" data-col-align="top-left" title="Top left" aria-label="Top left">↖</button>' +
+      '<button type="button" data-col-align="top-centre" title="Top centre" aria-label="Top centre">↑</button>' +
+      '<button type="button" data-col-align="top-right" title="Top right" aria-label="Top right">↗</button>' +
+      '<button type="button" data-col-align="middle-left" title="Middle left" aria-label="Middle left">←</button>' +
+      '<button type="button" data-col-align="middle-centre" title="Middle centre" aria-label="Middle centre">•</button>' +
+      '<button type="button" data-col-align="middle-right" title="Middle right" aria-label="Middle right">→</button>' +
+      '<button type="button" data-col-align="bottom-left" title="Bottom left" aria-label="Bottom left">↙</button>' +
+      '<button type="button" data-col-align="bottom-centre" title="Bottom centre" aria-label="Bottom centre">↓</button>' +
+      '<button type="button" data-col-align="bottom-right" title="Bottom right" aria-label="Bottom right">↘</button>' +
+      "</div>" +
+      '<button type="button" class="ew-rhm-align-clear" data-col-align="clear" title="Back to the format\'s own alignment">Clear alignment</button>';
     document.body.appendChild(refMenu);
     refMenu.addEventListener("mousedown", function (ev) {
       ev.stopPropagation();
@@ -1483,6 +1520,18 @@
           var t = refMenu.querySelector("#ew-rhm-color-text");
           if (t) t.value = "";
         }
+        return;
+      }
+      var alignBtn = ev.target.closest && ev.target.closest("[data-col-align]");
+      if (alignBtn) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        if (alignBtn.disabled) return;
+        var alignCol = refMenu._col;
+        if (alignCol && window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: "col-align", id: alignCol.para, col: alignCol.col, align: alignBtn.getAttribute("data-col-align") }, "*");
+        }
+        hideRefMenu();
         return;
       }
       var sizeBtn = ev.target.closest && ev.target.closest("[data-size]");
@@ -2322,6 +2371,7 @@
     menu._lookup = looked || menu._hit.a || null;
     markLookup(menu._lookup);
     menu._bits = rhmBits(ev);
+    paintRhmAlign(menu, ev);
     menu._range = null;
     var sel = window.getSelection();
     if (sel && sel.rangeCount) {
