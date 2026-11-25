@@ -14,6 +14,7 @@
     s.textContent =
       "a.ref,.col a.ref,.col-text a.ref,.para a.ref{color:var(--title,#005eb8)!important;font-family:inherit!important;font-size:inherit!important;font-weight:inherit!important;font-style:inherit!important;text-decoration:underline;text-underline-offset:0.15em;cursor:pointer;white-space:normal;overflow-wrap:anywhere}" +
       ".fn-keep{white-space:nowrap}" +
+      ".col-footnotes .fn.fn-off{display:none!important}" +
       ".fn-keep.fn-join::before{content:'\\2060'}" +
       ".col-footnotes .fn-keep{display:block;white-space:nowrap}" +
       ".col-footnotes .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}" +
@@ -44,10 +45,19 @@
   }
 
   function liftTypedFnsInPlain(text, allowed) {
+    // Never inside a footnote marker (25 Nov 2026): a marker's own number, padded with no-break spaces on
+    // screen, was wrapped again and saved as a marker inside a marker.
+    var spans = [];
     return String(text || "")
       .split(/(<[^>]+>)/)
       .map(function (part) {
-        if (!part || part.charAt(0) === "<") return part;
+        if (!part) return part;
+        if (part.charAt(0) === "<") {
+          if (/^<span\b/i.test(part)) spans.push(/\bclass\s*=\s*["'](?:[^"']*\s)?fn(?:\s[^"']*)?["']/i.test(part));
+          else if (/^<\/span\b/i.test(part)) spans.pop();
+          return part;
+        }
+        if (spans.indexOf(true) >= 0) return part;
         return part.replace(/(^|[\s.,;:!?])(\d{1,2})(?=\s)/g, function (m, pre, num) {
           var n = parseInt(num, 10);
           if (!allowed[n]) return m;
@@ -284,6 +294,8 @@
     if (!el || el.nodeType !== 1) return false;
     if (!/^(SPAN|B|I|EM|STRONG|U|FONT|SMALL|SUB|SUP)$/.test(el.tagName)) return false;
     if (el.classList && (el.classList.contains("fn") || el.classList.contains("fn-keep") || el.classList.contains("fn-tip") || el.classList.contains("bit") || el.classList.contains("col-text") || el.classList.contains("ref"))) return false;
+    // A Text Popup link is one link: keep-together never splits it (25 Nov 2026).
+    if (el.classList && el.classList.contains("ew-term")) return false;
     return true;
   }
 
@@ -321,6 +333,8 @@
   function peelLastWordFromElement(el, fn) {
     var tn = lastTextNode(el, fn);
     if (!tn) return null;
+    var term = tn.parentNode && tn.parentNode.closest ? tn.parentNode.closest(".ew-term") : null;
+    if (term && (term === el || el.contains(term))) return null;
     var peeled = peelWordFromTextNode(tn);
     if (!peeled) return null;
     var clone = el.cloneNode(false);
@@ -421,6 +435,11 @@
         if (peeled.hasWord) return;
         from = keep;
         continue;
+      }
+      if (prev.nodeType === 1 && prev.classList && prev.classList.contains("ew-term") && !fnGlueWhole(prev)) {
+        // A Text Popup link of several words is never split; a word joiner keeps the marker with it.
+        if (fnEndsInWord(prev)) keep.classList.add("fn-join");
+        break;
       }
       if (prev.nodeType === 1 && fnGlueWhole(prev)) {
         var wholeWord = hasWordChar(prev.textContent || "");
@@ -665,6 +684,50 @@
     }
   }
 
+  // The footnote numbers used in the row's text: its markers, and a number typed by hand as a marker
+  // (a whole number standing on its own, e.g. a coloured "1" after a sentence), which keeps its footnote numbered.
+  function storyNumbers(row, fnCol) {
+    var seen = {};
+    var cols = row.querySelectorAll(".col");
+    for (var c = 0; c < cols.length; c++) {
+      if (cols[c] === fnCol) continue;
+      var list = cols[c].querySelectorAll(".fn");
+      for (var j = 0; j < list.length; j++) {
+        var n = fnValue(list[j]);
+        if (n) seen[n] = true;
+      }
+      var walk = document.createTreeWalker(cols[c], NodeFilter.SHOW_TEXT, null);
+      var t;
+      var text = "";
+      while ((t = walk.nextNode())) {
+        if (t.parentNode && t.parentNode.closest && t.parentNode.closest(".fn, .fn-tip")) {
+          text += " ";
+          continue;
+        }
+        text += t.nodeValue || "";
+      }
+      var re = /(^|[\s\u00a0])(\d{1,2})(?=[\s\u00a0]|$)/g;
+      var m;
+      while ((m = re.exec(text))) seen[parseInt(m[2], 10)] = true;
+    }
+    return seen;
+  }
+
+  // Sir, 25 Nov 2026 (t288u): a footnote whose number has no marker in the row's text is shown without a
+  // number, in its place in the list. Only hides the number on screen; the text is not changed.
+  function hideUnmatchedNotes(row) {
+    var fnCol = row && row.querySelector && row.querySelector(".col-footnotes");
+    if (!fnCol) return;
+    var inStory = storyNumbers(row, fnCol);
+    var notes = fnCol.querySelectorAll(".fn");
+    for (var k = 0; k < notes.length; k++) {
+      var f = notes[k];
+      if (f.parentElement && f.parentElement.closest && f.parentElement.closest(".fn")) continue;
+      var v = fnValue(f);
+      f.classList.toggle("fn-off", !(v && inStory[v]));
+    }
+  }
+
   function renumberRow(row, full) {
     if (!row || renumbering) return;
     var fnCol = row.querySelector(".col-footnotes");
@@ -674,18 +737,16 @@
     renumbering = true;
     var caret = saveCaret(row);
     try {
+      // Hide the numbers that have no marker while every number is still the old one (t288u).
+      hideUnmatchedNotes(row);
       var items = [];
       for (var i = 0; i < refs.length; i++) {
         var a = refs[i];
         var fn = fnNodeForRef(a);
         items.push({ a: a, fn: fn, old: fnValue(fn) });
       }
-      var oldToNew = {};
-      items.forEach(function (item, idx) {
-        item.next = idx + 1;
-        if (item.old) oldToNew[item.old] = item.next;
-      });
       var story = [];
+      var inStory = storyNumbers(row, fnCol);
       var cols = row.querySelectorAll(".col");
       for (var c = 0; c < cols.length; c++) {
         if (cols[c] === fnCol) continue;
@@ -695,12 +756,19 @@
           if (n) story.push({ el: list[j], old: n });
         }
       }
+      // Sir, 25 Nov 2026 (t288u): a ref with no footnote number, or whose number has no marker in the text,
+      // stays where it is without a number; it is not given one and does not shift the later numbers.
+      var oldToNew = {};
+      var count = 0;
+      items.forEach(function (item) {
+        item.numbered = !!(item.fn && item.old && inStory[item.old]);
+        if (!item.numbered) return;
+        item.next = ++count;
+        oldToNew[item.old] = item.next;
+      });
       var tok = "\uE000";
       items.forEach(function (item) {
-        if (!item.fn) {
-          prependFootnote(item.a, item.next);
-          return;
-        }
+        if (!item.numbered) return;
         if (item.old !== item.next || !item.fn.querySelector(".fn-mark")) item.fn.textContent = tok + fnLabel(item.next);
       });
       story.forEach(function (s) {
@@ -780,6 +848,7 @@
     dedupeFootnoteRefs(root);
     watchFootnoteOrder();
     root.querySelectorAll(".para").forEach(function (row) {
+      hideUnmatchedNotes(row);
       renumberRow(row, true);
     });
     if (typeof api.titlePainter === "function") {

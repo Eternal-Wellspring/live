@@ -1432,6 +1432,7 @@
     refMenu.hidden = true;
     refMenu.innerHTML =
       '<div class="ew-ref-title">Popups</div>' +
+      '<button type="button" data-rhm="text-popup">Text Popup</button>' +
       '<button type="button" data-act="new">New</button>' +
       '<button type="button" data-act="remove">Remove</button>' +
       '<button type="button" data-act="footnote">Foot note</button>' +
@@ -1562,6 +1563,16 @@
         var startEl = refMenu.querySelector("#ew-rhm-list-start");
         var start = parseInt((startEl && startEl.value) || "1", 10);
         applyRhmList(listBtn.getAttribute("data-kind") || "none", start);
+        return;
+      }
+      // 25 Nov 2026 (John): Text Popup, first under Popups, same action as the edit-form menu.
+      var textPopBtn = ev.target.closest && ev.target.closest("[data-rhm='text-popup']");
+      if (textPopBtn) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        refMenu.hidden = true;
+        if (typeof window.ewInsertTextPopup === "function") window.ewInsertTextPopup(true);
+        else if (window.parent && window.parent !== window) window.parent.postMessage({ type: "insert-text-popup" }, "*");
         return;
       }
       var hiddenSubBtn = ev.target.closest && ev.target.closest("[data-rhm='hidden-sub']");
@@ -3641,6 +3652,8 @@
     var list = para.querySelectorAll(".fn");
     for (var i = 0; i < list.length; i++) {
       if (list[i] === fn) continue;
+      // A footnote with no marker in the text is shown without a number (Sir, 25 Nov 2026): never pair with it.
+      if (list[i].classList && list[i].classList.contains("fn-off")) continue;
       if (fnNumber(list[i]) !== num) continue;
       hit = refFromAroundFn(list[i]);
       if (hit) return hit;
@@ -3679,6 +3692,236 @@
       }
     }
   }
+
+
+  // Nested verse pop-ups (Sir, 25 Nov 2026). A scripture ref in a Text Popup's text shows as a link (same look
+  // as a Text Popup word). Clicking it opens that ref's verses in a new pop-up, placed just below the heading of
+  // the last pop-up opened and a little to the right, so every heading stays visible. Each pop-up keeps its own
+  // parent: its x closes it (and any pop-ups opened from it) and goes back to that parent. A click on any open
+  // pop-up brings it to the front, the others stay open. A click on the page outside them closes them all.
+  // Verse text comes from the site's saved scriptures (the same store the page refs use), with any missing
+  // verses filled from the Bible, NKJV with Yahweh unless the ref names a translation ("Deu 32:8 ESV").
+  // The links are display only: the Text Popup's saved text (data-body) is never changed.
+  var nestZ = 10;
+  var nestLast = null;
+  function nestLinkRefs(el) {
+    if (!el || !el.ownerDocument) return;
+    var doc = el.ownerDocument;
+    var walker = doc.createTreeWalker(el, 4, null);
+    var texts = [];
+    var n;
+    while ((n = walker.nextNode())) {
+      var up = n.parentNode;
+      if (up && up.closest && up.closest(".ew-nest-ref")) continue;
+      texts.push(n);
+    }
+    texts.forEach(function (t) {
+      var s = t.nodeValue || "";
+      var re = new RegExp(REF_RE.source, "gi");
+      var m;
+      var last = 0;
+      var frag = null;
+      while ((m = re.exec(s))) {
+        if (!ALIAS[m[1].toLowerCase()]) continue;
+        var end = m.index + m[0].length;
+        if (trAfterRef(s.slice(end))) end += /^\s+[A-Z]{2,4}/.exec(s.slice(end))[0].length;
+        re.lastIndex = end;
+        frag = frag || doc.createDocumentFragment();
+        if (m.index > last) frag.appendChild(doc.createTextNode(s.slice(last, m.index)));
+        var link = doc.createElement("span");
+        link.className = "ew-term ew-nest-ref";
+        link.setAttribute("role", "button");
+        link.setAttribute("tabindex", "0");
+        link.setAttribute("data-ref", s.slice(m.index, end).replace(/\s+/g, " "));
+        link.textContent = s.slice(m.index, end);
+        frag.appendChild(link);
+        last = end;
+      }
+      if (!frag) return;
+      if (last < s.length) frag.appendChild(doc.createTextNode(s.slice(last)));
+      t.parentNode.replaceChild(frag, t);
+    });
+  }
+  function nestVersesHtml(raw) {
+    var ref = parseRef(raw);
+    if (!ref || !ref.vs1) return Promise.resolve("");
+    var label = refLabel(ref);
+    return fetchStored(label)
+      .catch(function () {
+        return { found: false };
+      })
+      .then(function (st) {
+        var map = st && st.found && st.text ? verseMapFromHtml(storedHtml(st.text)) : {};
+        var one = ref.ch1 === ref.ch2;
+        var need = !Object.keys(map).length;
+        if (one) for (var v = ref.vs1; v <= ref.vs2; v++) if (!map[v]) need = true;
+        var more = need ? loadPassage(ref, ref.tr || "NKJV").catch(function () { return []; }) : Promise.resolve([]);
+        return more.then(function (verses) {
+          var lines = [];
+          if (one) {
+            addMissingVerses(map, verses);
+            for (var k = ref.vs1; k <= ref.vs2; k++) if (map[k]) lines.push(k + " " + map[k]);
+          } else if (st && st.found && Object.keys(map).length) {
+            Object.keys(map).map(Number).sort(function (a, b) { return a - b; }).forEach(function (k) {
+              lines.push(k + " " + map[k]);
+            });
+          } else {
+            (verses || []).forEach(function (x) {
+              lines.push(x.vs + " " + escTxt(x.text));
+            });
+          }
+          if (!lines.length) return "";
+          return (isExtraBook(ref.book) ? extraWarningHtml(ref) : "") + lines.join("\n\n");
+        });
+      });
+  }
+  function nestRaise(card) {
+    if (!card) return;
+    card.style.zIndex = String(++nestZ);
+    if (card.classList.contains("ew-nest-card")) nestLast = card;
+  }
+  function nestKids(card) {
+    return Array.prototype.filter.call(card.ownerDocument.querySelectorAll(".ew-nest-card"), function (c) {
+      return c._nestParent === card;
+    });
+  }
+  function nestClose(card) {
+    nestKids(card).forEach(nestClose);
+    if (card.parentNode) card.parentNode.removeChild(card);
+    if (nestLast === card) nestLast = null;
+  }
+  function nestCloseAll(doc) {
+    Array.prototype.forEach.call((doc || document).querySelectorAll(".ew-nest-card"), function (c) {
+      if (c.parentNode) c.parentNode.removeChild(c);
+    });
+    nestLast = null;
+  }
+  function nestPlace(card, anchor) {
+    var win = anchor.ownerDocument.defaultView || window;
+    var vw = win.innerWidth;
+    var vh = win.innerHeight;
+    var r = anchor.getBoundingClientRect();
+    var head = anchor.querySelector(".ew-text-title");
+    var hb = head ? head.getBoundingClientRect().bottom : r.top + 48;
+    var top = Math.round(hb + 6);
+    var left = Math.round(r.left + 24);
+    var width = Math.round(r.width);
+    if (left + width > vw - 6) width = Math.max(240, vw - 6 - left);
+    if (left + width > vw - 6) left = Math.max(6, vw - 6 - width);
+    if (top > vh - 140) top = Math.max(6, vh - 140);
+    card.style.position = "fixed";
+    card.style.margin = "0";
+    card.style.left = left + "px";
+    card.style.top = top + "px";
+    card.style.width = width + "px";
+    card.style.maxWidth = "none";
+    card.style.maxHeight = vh - top - 10 + "px";
+    card.style.display = "flex";
+    card.style.flexDirection = "column";
+    var body = card.querySelector(".ew-text-body");
+    if (body) {
+      body.style.maxHeight = "none";
+      body.style.minHeight = "0";
+      body.style.flex = "1 1 auto";
+      body.style.overflow = "auto";
+    }
+  }
+  function nestOpen(link) {
+    var doc = link.ownerDocument;
+    var modal = link.closest("#ew-text-modal");
+    var parentCard = link.closest(".ew-text-card");
+    if (!modal || !parentCard) return;
+    var raw = String(link.getAttribute("data-ref") || link.textContent || "").replace(/\s+/g, " ").trim();
+    var have = nestKids(parentCard).filter(function (c) {
+      return c._nestRef === raw;
+    })[0];
+    if (have) {
+      nestRaise(have);
+      return;
+    }
+    var anchor = nestLast && nestLast.parentNode === modal ? nestLast : parentCard;
+    var card = doc.createElement("div");
+    card.className = "ew-text-card ew-nest-card";
+    card.innerHTML =
+      '<button type="button" class="ew-text-x ew-nest-x" aria-label="Close">\u00d7</button><h2 class="ew-text-title"></h2><div class="ew-text-body"></div>';
+    card._nestParent = parentCard;
+    card._nestRef = raw;
+    card.querySelector(".ew-text-title").textContent = raw;
+    var body = card.querySelector(".ew-text-body");
+    body.textContent = "\u2026";
+    // Placed before it joins the pop-up layer, so the open pop-ups do not move while it is measured.
+    nestPlace(card, anchor);
+    modal.appendChild(card);
+    nestRaise(card);
+    nestVersesHtml(raw).then(function (html) {
+      if (!card.parentNode) return;
+      if (html) {
+        body.innerHTML = html;
+        nestLinkRefs(body);
+      } else body.textContent = "Could not open that passage.";
+    });
+  }
+  function nestBind(doc) {
+    if (!doc || doc.__ewNestBound) return;
+    doc.__ewNestBound = true;
+    doc.addEventListener(
+      "click",
+      function (ev) {
+        var t = ev.target;
+        if (!t || !t.closest) return;
+        var modal = t.closest("#ew-text-modal");
+        if (!modal) return;
+        if (t === modal) {
+          nestCloseAll(doc);
+          return;
+        }
+        var card = t.closest(".ew-text-card");
+        var link = t.closest(".ew-nest-ref");
+        if (link) {
+          ev.preventDefault();
+          ev.stopImmediatePropagation();
+          nestOpen(link);
+          return;
+        }
+        if (card && card.classList.contains("ew-nest-card")) {
+          ev.stopImmediatePropagation();
+          if (t.closest(".ew-nest-x")) {
+            ev.preventDefault();
+            var p = card._nestParent;
+            nestClose(card);
+            if (p && p.parentNode) nestRaise(p);
+            return;
+          }
+          nestRaise(card);
+          return;
+        }
+        if (card && t.closest(".ew-text-x")) {
+          nestCloseAll(doc);
+          return;
+        }
+        if (card) nestRaise(card);
+      },
+      true
+    );
+    doc.addEventListener(
+      "keydown",
+      function (ev) {
+        if (ev.key === "Escape") {
+          nestCloseAll(doc);
+          return;
+        }
+        var t = ev.target;
+        if (!t || !t.classList || !t.classList.contains("ew-nest-ref")) return;
+        if (ev.key !== "Enter" && ev.key !== " ") return;
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        nestOpen(t);
+      },
+      true
+    );
+  }
+  window.ewNest = { bind: nestBind, link: nestLinkRefs, closeAll: nestCloseAll, verses: nestVersesHtml };
+  nestBind(document);
 
   window.ewSpaceRefVerses = spaceRefVerses;
   if (window.ewOwnChapter) return;
@@ -3762,9 +4005,11 @@
     function closeTextModal() {
       var box = document.getElementById("ew-text-modal");
       if (box) box.classList.remove("open");
+      nestCloseAll(document);
     }
     function openTextModal(term) {
       if (!term) return;
+      nestCloseAll(document);
       var box = document.getElementById("ew-text-modal");
       if (!box) {
         box = document.createElement("div");
@@ -3785,6 +4030,7 @@
         var rawBody = ownBody || (g && g.body) || "";
         if (/<(?:b|i|u)\b/i.test(rawBody)) body.innerHTML = String(rawBody).replace(/\n/g, "<br>");
         else body.textContent = rawBody;
+        nestLinkRefs(body);
       };
       var id = String(term.getAttribute("data-term") || "").trim().toLowerCase();
       paint(null);
@@ -3824,7 +4070,7 @@
       "click",
       function (ev) {
         var term = ev.target.closest && ev.target.closest(".ew-term");
-        if (!term) return;
+        if (!term || term.classList.contains("ew-nest-ref")) return;
         ev.preventDefault();
         ev.stopPropagation();
         openTextModal(term);
@@ -3834,7 +4080,7 @@
     document.addEventListener("keydown", function (ev) {
       if (ev.key === "Escape") closeTextModal();
       var term = ev.target && ev.target.classList && ev.target.classList.contains("ew-term") ? ev.target : null;
-      if (!term) return;
+      if (!term || term.classList.contains("ew-nest-ref")) return;
       if (ev.key !== "Enter" && ev.key !== " ") return;
       ev.preventDefault();
       openTextModal(term);

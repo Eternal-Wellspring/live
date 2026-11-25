@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-GB" data-page="720">
+<html lang="en-GB" data-page="720" data-window="white">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -32,15 +32,15 @@
 .title-bar h1 { font-family:Georgia, serif; font-size:calc(26px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#005eb8; text-align:left }
 .title-bar h1 { border-width:0 !important }
 .tab, .sub-tab { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
-h2 { font-family:Georgia, serif; font-size:calc(19px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f6f78; margin-top:19px; margin-bottom:6px; text-align:left }
-.subsec-frame { font-family:Georgia, serif; font-weight:400; font-style:normal; text-align:left }
-.para { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#ffffff; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:10px; margin-top:10px; margin-bottom:10px; text-align:left; line-height:1.45; --para-gap:18px }
-.row-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:6px; text-align:left }
-.col-title:not(:empty) { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:6px; text-align:left }
-.col { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.45; --para-gap:18px }
-.col .col-text, .col .col-text .bit { line-height:1.45 }
+h2 { font-family:Georgia, serif; font-size:calc(19px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f6f78; background:white; margin-top:19px; margin-bottom:6px; text-align:left }
+.subsec-frame { font-family:Georgia, serif; font-weight:400; font-style:normal; background:white; text-align:left }
+.para { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:10px; margin-top:10px; margin-bottom:10px; text-align:left; line-height:1.3; --para-gap:18px }
+.row-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:white; margin-bottom:6px; text-align:left }
+.col-title:not(:empty) { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:white; margin-bottom:6px; text-align:left }
+.col { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; text-align:left; line-height:1.3; --para-gap:10px }
+.col .col-text, .col .col-text .bit { line-height:1.3 }
 .col .col-text { gap:0 }
-.col .col-text .bit { margin:0 0 18px }
+.col .col-text .bit { margin:0 0 10px }
 .col .col-text .bit:last-child { margin-bottom:0 }
 .col .col-text .bit { padding-left:0em }
 .col .col-text .bit.indent { padding-left:2em }
@@ -67,45 +67,46 @@ h2 { font-family:Georgia, serif; font-size:calc(19px * var(--ew-font, 1)); font-
 .ew-chapter-list, .ew-ch-row { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.25 }
 .page-nav, .page-nav .page-nav-word, .page-nav .page-nav-tip, .page-tools, .page-tools button { font-weight:400; font-family:Georgia, serif; font-size:9px; color:#5a6a72 }
 .tab[data-sec="721"], .tab-panel[data-sec="721"] .sub-tab, .end-sub-tabs[data-for="s0"] .sub-tab { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
-.tab[data-sec="721"] { background:#ffffff }
-.tab-panel[data-sec="721"] .sub-tab { background:#ffffff }
-.end-sub-tabs[data-for="s0"] .sub-tab { background:#ffffff }
-.tab[data-sec="721"].active, .tab-panel[data-sec="721"] { background:#f6f7eb }
-.tab[data-sec="721"].active { border-bottom-color:#f6f7eb }
-.tab-panel[data-sec="721"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
-.end-sub-tabs[data-for="s0"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab[data-sec="721"] { background:white }
+.tab-panel[data-sec="721"] .sub-tab { background:white }
+.end-sub-tabs[data-for="s0"] .sub-tab { background:white }
+.tab[data-sec="721"].active, .tab-panel[data-sec="721"] { background:white }
+.tab[data-sec="721"].active { border-bottom-color:white }
+.tab-panel[data-sec="721"] .sub-tab.active { background:white; border-bottom-color:white }
+.end-sub-tabs[data-for="s0"] .sub-tab.active { background:white; border-top-color:white }
+.tab[data-sec="721"][data-sec][data-tab]:not(.active) { background:white }
 .tab[data-sec="722"], .tab-panel[data-sec="722"] .sub-tab, .end-sub-tabs[data-for="s1"] .sub-tab { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
-.tab[data-sec="722"] { background:#ffffff }
-.tab-panel[data-sec="722"] .sub-tab { background:#ffffff }
-.end-sub-tabs[data-for="s1"] .sub-tab { background:#ffffff }
-.tab[data-sec="722"].active, .tab-panel[data-sec="722"] { background:#f6f7eb }
-.tab[data-sec="722"].active { border-bottom-color:#f6f7eb }
-.tab-panel[data-sec="722"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
-.end-sub-tabs[data-for="s1"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab[data-sec="722"] { background:white }
+.tab-panel[data-sec="722"] .sub-tab { background:white }
+.end-sub-tabs[data-for="s1"] .sub-tab { background:white }
+.tab[data-sec="722"].active, .tab-panel[data-sec="722"] { background:white }
+.tab[data-sec="722"].active { border-bottom-color:white }
+.tab-panel[data-sec="722"] .sub-tab.active { background:white; border-bottom-color:white }
+.end-sub-tabs[data-for="s1"] .sub-tab.active { background:white; border-top-color:white }
 .tab[data-sec="723"], .tab-panel[data-sec="723"] .sub-tab, .end-sub-tabs[data-for="s2"] .sub-tab { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
-.tab[data-sec="723"] { background:#ffffff }
-.tab-panel[data-sec="723"] .sub-tab { background:#ffffff }
-.end-sub-tabs[data-for="s2"] .sub-tab { background:#ffffff }
-.tab[data-sec="723"].active, .tab-panel[data-sec="723"] { background:#f6f7eb }
-.tab[data-sec="723"].active { border-bottom-color:#f6f7eb }
-.tab-panel[data-sec="723"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
-.end-sub-tabs[data-for="s2"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab[data-sec="723"] { background:white }
+.tab-panel[data-sec="723"] .sub-tab { background:white }
+.end-sub-tabs[data-for="s2"] .sub-tab { background:white }
+.tab[data-sec="723"].active, .tab-panel[data-sec="723"] { background:white }
+.tab[data-sec="723"].active { border-bottom-color:white }
+.tab-panel[data-sec="723"] .sub-tab.active { background:white; border-bottom-color:white }
+.end-sub-tabs[data-for="s2"] .sub-tab.active { background:white; border-top-color:white }
 body, button, input, select, textarea { font-family:Georgia, serif }
 .tab.active, .tab-panel .sub-tab.active { margin-bottom:-1px; position:relative; z-index:1 }
 .tab { border-radius:7px 7px 0 0 }
 .tab-panel { border-radius:0 7px 7px 0 }
 .tab-dock-end .tabs, .end-sub-tabs .sub-tabs { border-top:1px solid var(--line) }
-.end-sub-tabs .sub-tab { background:#ffffff }
+.end-sub-tabs .sub-tab { background:white }
 .end-sub-tabs .sub-tab { border-radius:0 0 7px 7px; border-top:0 }
-.end-sub-tabs .sub-tab.active { margin-top:-1px; border-top-color:#f6f7eb; background:#f6f7eb }
+.end-sub-tabs .sub-tab.active { margin-top:-1px; border-top-color:white; background:white }
 .tabs .tab.tab-notes.tab-notes, .tabs .tab.tab-settings.tab-settings { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
-.tabs .tab.tab-notes.tab-notes, .tabs .tab.tab-settings.tab-settings { background:#ffffff }
+.tabs .tab.tab-notes.tab-notes, .tabs .tab.tab-settings.tab-settings { background:white }
 .col-title:empty { display:none; margin:0 }
-.row-title[data-para="812"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:#d6d6d6; margin-bottom:6px; text-align:center }
-.para[data-para="812"] .col[data-col="814"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="812"] .col[data-col="814"] .col-text, .para[data-para="812"] .col[data-col="814"] .col-text .bit { line-height:1.2 }
+.row-title[data-para="812"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:white; margin-bottom:6px; text-align:center }
+.para[data-para="812"] .col[data-col="814"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="812"] .col[data-col="814"] .col-text, .para[data-para="812"] .col[data-col="814"] .col-text .bit { line-height:1.3 }
 .para[data-para="812"] .col[data-col="814"] .col-text { gap:0 }
-.para[data-para="812"] .col[data-col="814"] .col-text .bit { margin:0 0 7px }
+.para[data-para="812"] .col[data-col="814"] .col-text .bit { margin:0 0 10px }
 .para[data-para="812"] .col[data-col="814"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="812"] .col[data-col="814"] .col-text .bit { padding-left:0em }
 .para[data-para="812"] .col[data-col="814"] .col-text .bit.indent { padding-left:2em }
@@ -114,10 +115,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="812"] .col[data-col="814"] .col-text .bit.bullet::before, .para[data-para="812"] .col[data-col="814"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="812"] .col[data-col="814"] .col-text .bit.indent.bullet::before, .para[data-para="812"] .col[data-col="814"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="812"] .col[data-col="814"]{align-self:center}
-.para[data-para="812"] .col[data-col="815"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="812"] .col[data-col="815"] .col-text, .para[data-para="812"] .col[data-col="815"] .col-text .bit { line-height:1.2 }
+.para[data-para="812"] .col[data-col="815"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="812"] .col[data-col="815"] .col-text, .para[data-para="812"] .col[data-col="815"] .col-text .bit { line-height:1.3 }
 .para[data-para="812"] .col[data-col="815"] .col-text { gap:0 }
-.para[data-para="812"] .col[data-col="815"] .col-text .bit { margin:0 0 5px }
+.para[data-para="812"] .col[data-col="815"] .col-text .bit { margin:0 0 10px }
 .para[data-para="812"] .col[data-col="815"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="812"] .col[data-col="815"] .col-text .bit { padding-left:0em }
 .para[data-para="812"] .col[data-col="815"] .col-text .bit.indent { padding-left:2em }
@@ -131,11 +132,11 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="812"] .col[data-col="815"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="812"] .col[data-col="815"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="812"] .col[data-col="815"] a.ref{white-space:nowrap}
-.row-title[data-para="690"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:#d6d6d6; margin-bottom:6px; text-align:center }
-.para[data-para="690"] .col[data-col="692"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="690"] .col[data-col="692"] .col-text, .para[data-para="690"] .col[data-col="692"] .col-text .bit { line-height:1.2 }
+.row-title[data-para="690"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:white; margin-bottom:6px; text-align:center }
+.para[data-para="690"] .col[data-col="692"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="690"] .col[data-col="692"] .col-text, .para[data-para="690"] .col[data-col="692"] .col-text .bit { line-height:1.3 }
 .para[data-para="690"] .col[data-col="692"] .col-text { gap:0 }
-.para[data-para="690"] .col[data-col="692"] .col-text .bit { margin:0 0 7px }
+.para[data-para="690"] .col[data-col="692"] .col-text .bit { margin:0 0 10px }
 .para[data-para="690"] .col[data-col="692"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="690"] .col[data-col="692"] .col-text .bit { padding-left:0em }
 .para[data-para="690"] .col[data-col="692"] .col-text .bit.indent { padding-left:2em }
@@ -144,10 +145,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="690"] .col[data-col="692"] .col-text .bit.bullet::before, .para[data-para="690"] .col[data-col="692"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="690"] .col[data-col="692"] .col-text .bit.indent.bullet::before, .para[data-para="690"] .col[data-col="692"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="690"] .col[data-col="692"]{align-self:center}
-.para[data-para="690"] .col[data-col="694"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="690"] .col[data-col="694"] .col-text, .para[data-para="690"] .col[data-col="694"] .col-text .bit { line-height:1.2 }
+.para[data-para="690"] .col[data-col="694"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="690"] .col[data-col="694"] .col-text, .para[data-para="690"] .col[data-col="694"] .col-text .bit { line-height:1.3 }
 .para[data-para="690"] .col[data-col="694"] .col-text { gap:0 }
-.para[data-para="690"] .col[data-col="694"] .col-text .bit { margin:0 0 5px }
+.para[data-para="690"] .col[data-col="694"] .col-text .bit { margin:0 0 10px }
 .para[data-para="690"] .col[data-col="694"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="690"] .col[data-col="694"] .col-text .bit { padding-left:0em }
 .para[data-para="690"] .col[data-col="694"] .col-text .bit.indent { padding-left:2em }
@@ -161,11 +162,11 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="690"] .col[data-col="694"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="690"] .col[data-col="694"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="690"] .col[data-col="694"] a.ref{white-space:nowrap}
-.row-title[data-para="695"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:#d6d6d6; margin-bottom:6px; text-align:center }
-.para[data-para="695"] .col[data-col="696"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="695"] .col[data-col="696"] .col-text, .para[data-para="695"] .col[data-col="696"] .col-text .bit { line-height:1.2 }
+.row-title[data-para="695"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:white; margin-bottom:6px; text-align:center }
+.para[data-para="695"] .col[data-col="696"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="695"] .col[data-col="696"] .col-text, .para[data-para="695"] .col[data-col="696"] .col-text .bit { line-height:1.3 }
 .para[data-para="695"] .col[data-col="696"] .col-text { gap:0 }
-.para[data-para="695"] .col[data-col="696"] .col-text .bit { margin:0 0 7px }
+.para[data-para="695"] .col[data-col="696"] .col-text .bit { margin:0 0 10px }
 .para[data-para="695"] .col[data-col="696"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="695"] .col[data-col="696"] .col-text .bit { padding-left:0em }
 .para[data-para="695"] .col[data-col="696"] .col-text .bit.indent { padding-left:2em }
@@ -174,10 +175,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="695"] .col[data-col="696"] .col-text .bit.bullet::before, .para[data-para="695"] .col[data-col="696"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="695"] .col[data-col="696"] .col-text .bit.indent.bullet::before, .para[data-para="695"] .col[data-col="696"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="695"] .col[data-col="696"]{align-self:center}
-.para[data-para="695"] .col[data-col="697"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="695"] .col[data-col="697"] .col-text, .para[data-para="695"] .col[data-col="697"] .col-text .bit { line-height:1.2 }
+.para[data-para="695"] .col[data-col="697"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="695"] .col[data-col="697"] .col-text, .para[data-para="695"] .col[data-col="697"] .col-text .bit { line-height:1.3 }
 .para[data-para="695"] .col[data-col="697"] .col-text { gap:0 }
-.para[data-para="695"] .col[data-col="697"] .col-text .bit { margin:0 0 5px }
+.para[data-para="695"] .col[data-col="697"] .col-text .bit { margin:0 0 10px }
 .para[data-para="695"] .col[data-col="697"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="695"] .col[data-col="697"] .col-text .bit { padding-left:0em }
 .para[data-para="695"] .col[data-col="697"] .col-text .bit.indent { padding-left:2em }
@@ -191,11 +192,11 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="695"] .col[data-col="697"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="695"] .col[data-col="697"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="695"] .col[data-col="697"] a.ref{white-space:nowrap}
-.row-title[data-para="699"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:#d6d6d6; margin-bottom:6px; text-align:center }
-.para[data-para="699"] .col[data-col="700"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="699"] .col[data-col="700"] .col-text, .para[data-para="699"] .col[data-col="700"] .col-text .bit { line-height:1.2 }
+.row-title[data-para="699"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:white; margin-bottom:6px; text-align:center }
+.para[data-para="699"] .col[data-col="700"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="699"] .col[data-col="700"] .col-text, .para[data-para="699"] .col[data-col="700"] .col-text .bit { line-height:1.3 }
 .para[data-para="699"] .col[data-col="700"] .col-text { gap:0 }
-.para[data-para="699"] .col[data-col="700"] .col-text .bit { margin:0 0 7px }
+.para[data-para="699"] .col[data-col="700"] .col-text .bit { margin:0 0 10px }
 .para[data-para="699"] .col[data-col="700"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="699"] .col[data-col="700"] .col-text .bit { padding-left:0em }
 .para[data-para="699"] .col[data-col="700"] .col-text .bit.indent { padding-left:2em }
@@ -204,10 +205,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="699"] .col[data-col="700"] .col-text .bit.bullet::before, .para[data-para="699"] .col[data-col="700"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="699"] .col[data-col="700"] .col-text .bit.indent.bullet::before, .para[data-para="699"] .col[data-col="700"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="699"] .col[data-col="700"]{align-self:center}
-.para[data-para="699"] .col[data-col="701"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="699"] .col[data-col="701"] .col-text, .para[data-para="699"] .col[data-col="701"] .col-text .bit { line-height:1.2 }
+.para[data-para="699"] .col[data-col="701"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="699"] .col[data-col="701"] .col-text, .para[data-para="699"] .col[data-col="701"] .col-text .bit { line-height:1.3 }
 .para[data-para="699"] .col[data-col="701"] .col-text { gap:0 }
-.para[data-para="699"] .col[data-col="701"] .col-text .bit { margin:0 0 5px }
+.para[data-para="699"] .col[data-col="701"] .col-text .bit { margin:0 0 10px }
 .para[data-para="699"] .col[data-col="701"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="699"] .col[data-col="701"] .col-text .bit { padding-left:0em }
 .para[data-para="699"] .col[data-col="701"] .col-text .bit.indent { padding-left:2em }
@@ -221,11 +222,11 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="699"] .col[data-col="701"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="699"] .col[data-col="701"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="699"] .col[data-col="701"] a.ref{white-space:nowrap}
-.row-title[data-para="702"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:#d6d6d6; margin-bottom:6px; text-align:center }
-.para[data-para="702"] .col[data-col="703"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="702"] .col[data-col="703"] .col-text, .para[data-para="702"] .col[data-col="703"] .col-text .bit { line-height:1.2 }
+.row-title[data-para="702"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:white; margin-bottom:6px; text-align:center }
+.para[data-para="702"] .col[data-col="703"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="702"] .col[data-col="703"] .col-text, .para[data-para="702"] .col[data-col="703"] .col-text .bit { line-height:1.3 }
 .para[data-para="702"] .col[data-col="703"] .col-text { gap:0 }
-.para[data-para="702"] .col[data-col="703"] .col-text .bit { margin:0 0 7px }
+.para[data-para="702"] .col[data-col="703"] .col-text .bit { margin:0 0 10px }
 .para[data-para="702"] .col[data-col="703"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="702"] .col[data-col="703"] .col-text .bit { padding-left:0em }
 .para[data-para="702"] .col[data-col="703"] .col-text .bit.indent { padding-left:2em }
@@ -234,10 +235,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="702"] .col[data-col="703"] .col-text .bit.bullet::before, .para[data-para="702"] .col[data-col="703"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="702"] .col[data-col="703"] .col-text .bit.indent.bullet::before, .para[data-para="702"] .col[data-col="703"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="702"] .col[data-col="703"]{align-self:center}
-.para[data-para="702"] .col[data-col="704"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="702"] .col[data-col="704"] .col-text, .para[data-para="702"] .col[data-col="704"] .col-text .bit { line-height:1.2 }
+.para[data-para="702"] .col[data-col="704"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="702"] .col[data-col="704"] .col-text, .para[data-para="702"] .col[data-col="704"] .col-text .bit { line-height:1.3 }
 .para[data-para="702"] .col[data-col="704"] .col-text { gap:0 }
-.para[data-para="702"] .col[data-col="704"] .col-text .bit { margin:0 0 5px }
+.para[data-para="702"] .col[data-col="704"] .col-text .bit { margin:0 0 10px }
 .para[data-para="702"] .col[data-col="704"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="702"] .col[data-col="704"] .col-text .bit { padding-left:0em }
 .para[data-para="702"] .col[data-col="704"] .col-text .bit.indent { padding-left:2em }
@@ -251,11 +252,11 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="702"] .col[data-col="704"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="702"] .col[data-col="704"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="702"] .col[data-col="704"] a.ref{white-space:nowrap}
-.row-title[data-para="705"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:#d6d6d6; margin-bottom:6px; text-align:center }
-.para[data-para="705"] .col[data-col="706"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="705"] .col[data-col="706"] .col-text, .para[data-para="705"] .col[data-col="706"] .col-text .bit { line-height:1.2 }
+.row-title[data-para="705"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:white; margin-bottom:6px; text-align:center }
+.para[data-para="705"] .col[data-col="706"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="705"] .col[data-col="706"] .col-text, .para[data-para="705"] .col[data-col="706"] .col-text .bit { line-height:1.3 }
 .para[data-para="705"] .col[data-col="706"] .col-text { gap:0 }
-.para[data-para="705"] .col[data-col="706"] .col-text .bit { margin:0 0 7px }
+.para[data-para="705"] .col[data-col="706"] .col-text .bit { margin:0 0 10px }
 .para[data-para="705"] .col[data-col="706"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="705"] .col[data-col="706"] .col-text .bit { padding-left:0em }
 .para[data-para="705"] .col[data-col="706"] .col-text .bit.indent { padding-left:2em }
@@ -264,10 +265,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="705"] .col[data-col="706"] .col-text .bit.bullet::before, .para[data-para="705"] .col[data-col="706"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="705"] .col[data-col="706"] .col-text .bit.indent.bullet::before, .para[data-para="705"] .col[data-col="706"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="705"] .col[data-col="706"]{align-self:center}
-.para[data-para="705"] .col[data-col="707"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="705"] .col[data-col="707"] .col-text, .para[data-para="705"] .col[data-col="707"] .col-text .bit { line-height:1.2 }
+.para[data-para="705"] .col[data-col="707"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="705"] .col[data-col="707"] .col-text, .para[data-para="705"] .col[data-col="707"] .col-text .bit { line-height:1.3 }
 .para[data-para="705"] .col[data-col="707"] .col-text { gap:0 }
-.para[data-para="705"] .col[data-col="707"] .col-text .bit { margin:0 0 5px }
+.para[data-para="705"] .col[data-col="707"] .col-text .bit { margin:0 0 10px }
 .para[data-para="705"] .col[data-col="707"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="705"] .col[data-col="707"] .col-text .bit { padding-left:0em }
 .para[data-para="705"] .col[data-col="707"] .col-text .bit.indent { padding-left:2em }
@@ -281,11 +282,11 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="705"] .col[data-col="707"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="705"] .col[data-col="707"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="705"] .col[data-col="707"] a.ref{white-space:nowrap}
-.row-title[data-para="710"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:#d6d6d6; margin-bottom:6px; text-align:center }
-.para[data-para="710"] .col[data-col="711"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="710"] .col[data-col="711"] .col-text, .para[data-para="710"] .col[data-col="711"] .col-text .bit { line-height:1.2 }
+.row-title[data-para="710"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:white; margin-bottom:6px; text-align:center }
+.para[data-para="710"] .col[data-col="711"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="710"] .col[data-col="711"] .col-text, .para[data-para="710"] .col[data-col="711"] .col-text .bit { line-height:1.3 }
 .para[data-para="710"] .col[data-col="711"] .col-text { gap:0 }
-.para[data-para="710"] .col[data-col="711"] .col-text .bit { margin:0 0 7px }
+.para[data-para="710"] .col[data-col="711"] .col-text .bit { margin:0 0 10px }
 .para[data-para="710"] .col[data-col="711"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="710"] .col[data-col="711"] .col-text .bit { padding-left:0em }
 .para[data-para="710"] .col[data-col="711"] .col-text .bit.indent { padding-left:2em }
@@ -294,10 +295,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="710"] .col[data-col="711"] .col-text .bit.bullet::before, .para[data-para="710"] .col[data-col="711"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="710"] .col[data-col="711"] .col-text .bit.indent.bullet::before, .para[data-para="710"] .col[data-col="711"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="710"] .col[data-col="711"]{align-self:center}
-.para[data-para="710"] .col[data-col="712"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="710"] .col[data-col="712"] .col-text, .para[data-para="710"] .col[data-col="712"] .col-text .bit { line-height:1.2 }
+.para[data-para="710"] .col[data-col="712"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="710"] .col[data-col="712"] .col-text, .para[data-para="710"] .col[data-col="712"] .col-text .bit { line-height:1.3 }
 .para[data-para="710"] .col[data-col="712"] .col-text { gap:0 }
-.para[data-para="710"] .col[data-col="712"] .col-text .bit { margin:0 0 5px }
+.para[data-para="710"] .col[data-col="712"] .col-text .bit { margin:0 0 10px }
 .para[data-para="710"] .col[data-col="712"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="710"] .col[data-col="712"] .col-text .bit { padding-left:0em }
 .para[data-para="710"] .col[data-col="712"] .col-text .bit.indent { padding-left:2em }
@@ -311,11 +312,11 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="710"] .col[data-col="712"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="710"] .col[data-col="712"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="710"] .col[data-col="712"] a.ref{white-space:nowrap}
-.row-title[data-para="713"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:#d6d6d6; margin-bottom:6px; text-align:center }
-.para[data-para="713"] .col[data-col="714"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="713"] .col[data-col="714"] .col-text, .para[data-para="713"] .col[data-col="714"] .col-text .bit { line-height:1.2 }
+.row-title[data-para="713"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:white; margin-bottom:6px; text-align:center }
+.para[data-para="713"] .col[data-col="714"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="713"] .col[data-col="714"] .col-text, .para[data-para="713"] .col[data-col="714"] .col-text .bit { line-height:1.3 }
 .para[data-para="713"] .col[data-col="714"] .col-text { gap:0 }
-.para[data-para="713"] .col[data-col="714"] .col-text .bit { margin:0 0 7px }
+.para[data-para="713"] .col[data-col="714"] .col-text .bit { margin:0 0 10px }
 .para[data-para="713"] .col[data-col="714"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="713"] .col[data-col="714"] .col-text .bit { padding-left:0em }
 .para[data-para="713"] .col[data-col="714"] .col-text .bit.indent { padding-left:2em }
@@ -324,10 +325,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="713"] .col[data-col="714"] .col-text .bit.bullet::before, .para[data-para="713"] .col[data-col="714"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="713"] .col[data-col="714"] .col-text .bit.indent.bullet::before, .para[data-para="713"] .col[data-col="714"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="713"] .col[data-col="714"]{align-self:center}
-.para[data-para="713"] .col[data-col="715"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="713"] .col[data-col="715"] .col-text, .para[data-para="713"] .col[data-col="715"] .col-text .bit { line-height:1.2 }
+.para[data-para="713"] .col[data-col="715"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="713"] .col[data-col="715"] .col-text, .para[data-para="713"] .col[data-col="715"] .col-text .bit { line-height:1.3 }
 .para[data-para="713"] .col[data-col="715"] .col-text { gap:0 }
-.para[data-para="713"] .col[data-col="715"] .col-text .bit { margin:0 0 5px }
+.para[data-para="713"] .col[data-col="715"] .col-text .bit { margin:0 0 10px }
 .para[data-para="713"] .col[data-col="715"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="713"] .col[data-col="715"] .col-text .bit { padding-left:0em }
 .para[data-para="713"] .col[data-col="715"] .col-text .bit.indent { padding-left:2em }
@@ -341,11 +342,11 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="713"] .col[data-col="715"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="713"] .col[data-col="715"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="713"] .col[data-col="715"] a.ref{white-space:nowrap}
-.row-title[data-para="716"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:#d6d6d6; margin-bottom:6px; text-align:center }
-.para[data-para="716"] .col[data-col="717"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="716"] .col[data-col="717"] .col-text, .para[data-para="716"] .col[data-col="717"] .col-text .bit { line-height:1.2 }
+.row-title[data-para="716"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:700; font-style:normal; color:#ff4013; background:white; margin-bottom:6px; text-align:center }
+.para[data-para="716"] .col[data-col="717"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="716"] .col[data-col="717"] .col-text, .para[data-para="716"] .col[data-col="717"] .col-text .bit { line-height:1.3 }
 .para[data-para="716"] .col[data-col="717"] .col-text { gap:0 }
-.para[data-para="716"] .col[data-col="717"] .col-text .bit { margin:0 0 7px }
+.para[data-para="716"] .col[data-col="717"] .col-text .bit { margin:0 0 10px }
 .para[data-para="716"] .col[data-col="717"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="716"] .col[data-col="717"] .col-text .bit { padding-left:0em }
 .para[data-para="716"] .col[data-col="717"] .col-text .bit.indent { padding-left:2em }
@@ -354,10 +355,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="716"] .col[data-col="717"] .col-text .bit.bullet::before, .para[data-para="716"] .col[data-col="717"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="716"] .col[data-col="717"] .col-text .bit.indent.bullet::before, .para[data-para="716"] .col[data-col="717"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="716"] .col[data-col="717"]{align-self:center}
-.para[data-para="716"] .col[data-col="718"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="716"] .col[data-col="718"] .col-text, .para[data-para="716"] .col[data-col="718"] .col-text .bit { line-height:1.2 }
+.para[data-para="716"] .col[data-col="718"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="716"] .col[data-col="718"] .col-text, .para[data-para="716"] .col[data-col="718"] .col-text .bit { line-height:1.3 }
 .para[data-para="716"] .col[data-col="718"] .col-text { gap:0 }
-.para[data-para="716"] .col[data-col="718"] .col-text .bit { margin:0 0 5px }
+.para[data-para="716"] .col[data-col="718"] .col-text .bit { margin:0 0 10px }
 .para[data-para="716"] .col[data-col="718"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="716"] .col[data-col="718"] .col-text .bit { padding-left:0em }
 .para[data-para="716"] .col[data-col="718"] .col-text .bit.indent { padding-left:2em }
@@ -379,11 +380,11 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .fn{text-decoration:none!important}
 a.ref .fn,.col-footnotes .fn{text-decoration:none!important;display:inline-block;position:relative;white-space:pre}
 a.ref, .col a.ref, .col-text a.ref, .para a.ref { color:var(--title); font-family:inherit; font-size:inherit; font-weight:inherit; font-style:inherit; text-decoration:underline; white-space:normal; overflow-wrap:anywhere }
-html, body { background:#e9ebe6 !important }
-.page-frame { background:#f6f7eb }
+html, body { background:white !important }
+.page-frame { background:white }
 .stick-top { background:transparent }
 .tab-dock { background:transparent }
-.page-frame{max-width:none;width:auto;margin:1.25rem;border:1px solid #9aa8ae;box-sizing:border-box}
+.page-frame{max-width:none;width:auto;margin:1.25rem;border:0;box-sizing:border-box}
 @media (min-width:1040px){.page-frame{max-width:1000px;margin-left:auto;margin-right:auto}}
 .top,.title-bar,.tab-dock,.tab-dock-end,.end-sub-tabs,main{max-width:none;margin-left:0;margin-right:0;padding-left:1.2rem;padding-right:1.2rem;box-sizing:border-box}
 .top{display:block;border:0;padding-left:0;padding-right:0}
@@ -393,7 +394,7 @@ html, body { background:#e9ebe6 !important }
 .top .brand-row{display:grid;grid-template-columns:minmax(0,1fr);align-items:center;width:100%;max-width:none;margin:0;padding:0 7.5rem;box-sizing:border-box}
 .title-bar{padding-left:0;padding-right:0}
 .title-bar-inner{display:flex;align-items:center;justify-content:center;padding-left:1.2rem;padding-right:1.2rem;padding-top:0;padding-bottom:0;box-sizing:border-box}
-.page-nav-bar{display:flex;justify-content:space-between;align-items:center;width:100%;box-sizing:border-box;padding:0.28rem 1.6rem;background:#fff}
+.page-nav-bar{display:flex;justify-content:space-between;align-items:center;width:100%;box-sizing:border-box;padding:0.28rem 1.6rem;background:white}
 .ew-mark{position:absolute;left:0;top:0;bottom:0;display:flex;align-items:stretch;z-index:2;gap:0.45rem;max-height:100%;overflow:hidden;padding-left:1.2rem;text-align:left;box-sizing:border-box}
 .ew-mark img{display:block;height:100%;width:auto;max-height:100%;min-height:0;min-width:0;object-fit:contain;object-position:left center;flex:0 1 auto}
 .ew-words{font-size:calc(18px * var(--ew-font, 1));text-align:left;align-items:flex-start;align-self:center;justify-content:center}
@@ -711,7 +712,9 @@ html.ew-phone .who .site {
 /* "html" lifts these above the defaults bible.js adds while the page runs. */
 html #ew-info-modal .ew-info-title, html #ew-info-modal .ew-info-x, html #ew-text-modal .ew-text-title { color: var(--title, #005eb8); }
 </style>
-
+  <style id="ew-look">header.top,.head-banners,.page-nav-bar,.stick-top{background:white!important}
+.head-banners{border-bottom:1px solid #e3e8ec}
+</style>
 <!-- Google tag (gtag.js) -->
 <script>
 (function(){
@@ -753,11 +756,11 @@ html #ew-info-modal .ew-info-title, html #ew-info-modal .ew-info-x, html #ew-tex
     <div class="tab-dock"><div class="tabs tabs-contents-left"><button type="button" class="tab tab-contents-left" data-tab="s0" data-sec="721">Contents</button><button type="button" class="tab active" data-tab="s1" data-sec="722">Story</button><button type="button" class="tab tab-notes" data-notes-toggle="1">Footnotes</button><button type="button" class="tab tab-settings" data-settings-open="1">Settings</button></div></div>
   </div>
   <main data-page="720">
-    <div class="tab-panel" id="s0" data-sec="721"><div class="describe-contents contents-wrap"><div class="describe-line"><a href="index.html#s1">Home</a><div class="describe-note"></div></div><div class="describe-line"><a href="1-paradise-of-god-restored.html#s1" class="here">1. Paradise of God: Restored</a><div class="describe-note">God dwelt with Mankind until they rebelled. He will dwell in Paradise with us again.</div></div><div class="describe-line"><a href="2-sons-of-god-family-of-yahweh.html#s1">2. Sons of God: Family of Yahweh</a><div class="describe-note">Creation is waiting for God&#x27;s sons to reign over the nations.</div></div><div class="describe-line"><a href="3-feasts-of-god-timing-of-yahweh.html#s1">3. Feasts of God: Timing of Yahweh</a><div class="describe-note">The 8 Feasts of Yahweh prophesy the Day of the LORD, God Almighty</div></div><div class="describe-line"><a href="4-the-kingdom-of-god-fall-and-rise.html#s1">4. The Kingdom of God: Fall and Rise</a><div class="describe-note">God&#x27;s Kingdom: Lost and Restored - What fell down will be raised up.</div></div><div class="describe-line"><a href="5-wickedness-is-to-be-wiped-out.html#s1">5. Wickedness is to be Wiped Out!</a><div class="describe-note">God promised His family no sin or sorrow. He&#x27;s sending His Son to finish the job.</div></div><div class="describe-line"><a href="6-abraham-inherits-the-world.html#s0">6. Abraham Inherits the World</a><div class="describe-note">Yahweh chooses Abraham to father His nation from which his seed reigns over the world.</div></div></div></div><div class="tab-panel active" id="s1" data-sec="722"><div class="subsec" data-heading="956"><h2 class="edit-heading" data-heading="956">Introduction</h2><div class="subsec-frame" data-heading="956"><div class="row-block" data-para="812"><h3 class="row-title" data-para="812">What this story is about</h3><div class="para" data-para="812"><div class="col" data-col="814" style="flex:1.0 1 0"><div class="col-text"><span class="bit">​1. God created a very good world where mankind lived with Him.<br>2. Mankind rebelled and the mankind was separated from God.<br>3. God will return and live with mankind once more.</span><span class="bit">The story actually begins before the world even existed.</span></div></div></div></div></div></div><div class="subsec" data-heading="698"><h2 class="edit-heading" data-heading="698">1. Paradise</h2><div class="subsec-frame" data-heading="698"><div class="row-block" data-para="690"><h3 class="row-title" data-para="690">Before creation</h3><div class="para" data-para="690"><div class="col" data-col="692" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Before God made anything, He already had a purpose. He wanted to live among His people and be their God.<span class="fn"> <span class="fn">2</span> </span>God also knew that people would sin, and that their sin would separate them from Him.<span class="fn"> <span class="fn">3</span> </span>So, before He made the world, God planned a way to bring them back to Himself: a perfect, spotless sacrifice to deal with their sin. The apostle Peter explains that God chose Christ for this sacrifice before the world was made, and that Christ was revealed in these last times, the final age that began when Christ came.<span class="fn"> <span class="fn">4</span> </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="694" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Eph 1:4-5" data-open="chapter">Eph 1:4-5</a> <a class="ref" href="#ref" data-ref="Lev 26:12">Lev 26:12</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Isa 59:2">Isa 59:2</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="1Pe 1:19-20">1Pe 1:19-20</a></span></div></div></div></div><div class="row-block" data-para="695"><h3 class="row-title" data-para="695">God&#x27;s Word creates</h3><div class="para" data-para="695"><div class="col" data-col="696" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Then God started by creating. God spoke, and light came into being.<span class="fn"> <span class="fn">1</span>  </span>God planted a garden in a place called Eden, put the first man, Adam, there, and set the tree of life in the middle of the garden.<span class="fn"> <span class="fn">2</span>  </span>Whoever ate from the tree of life would live forever.<span class="fn"> <span class="fn">3</span>  </span>God gave Adam and his wife, Eve, rule over the earth and told them to have children and fill the earth. God looked at everything He had made and saw that it was very good.<span class="fn"> <span class="fn">4</span>  </span>People lived with God, and the world was whole.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="697" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 1:3">Gen 1:3</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gen 2:8-9">Gen 2:8-9</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Gen 3:22">Gen 3:22</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Gen 1:28-31">Gen 1:28-31</a></span></div></div></div></div></div></div><div class="subsec" data-heading="708"><h2 class="edit-heading" data-heading="708">2. The Fall</h2><div class="subsec-frame" data-heading="708"><div class="row-block" data-para="699"><h3 class="row-title" data-para="699">Adam and Eve disobey</h3><div class="para" data-para="699"><div class="col" data-col="700" style="flex:1.0 1 0"><div class="col-text"><span class="bit">God gave Adam one rule. Adam could eat from any tree in the garden except the tree of the knowledge of good and evil, and God warned that if Adam ate from that tree he would surely die.<span class="fn"> <span class="fn">1</span>  </span>Adam and Eve ate from that tree, and then they hid from God, whose personal name is Yahweh.<span class="fn"> <span class="fn">2</span>  </span>Yahweh God sent Adam out of the garden, away from the tree of life.<span class="fn"> <span class="fn">3</span>  </span>The ground was cursed and grew thorns and thistles, and people would have to work hard for their food until they died and their bodies returned to the dust.<span class="fn"> <span class="fn">4</span>  </span>This is the break that the rest of the story sets out to repair. People were shut out from God&#x27;s presence, and death had entered the world.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="701" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 2:17">Gen 2:17</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gen 3:6-8">Gen 3:6-8</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Gen 3:23-24">Gen 3:23-24</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Gen 3:17-19">Gen 3:17-19</a></span></div></div></div></div><div class="row-block" data-para="702"><h3 class="row-title" data-para="702">Mankind keeps rebelling</h3><div class="para" data-para="702"><div class="col" data-col="703" style="flex:1.0 1 0"><div class="col-text"><span class="bit">The break spread. Adam&#x27;s son Cain murdered his brother Abel.<span class="fn"> <span class="fn">1</span>  </span>Heavenly beings called the sons of God took wives from among women on earth,<span class="fn"> <span class="fn">2</span> </span>and the earth was filled with violence.<span class="fn"> <span class="fn">3</span>  </span>Yahweh sent a great flood on the earth, though He saved Noah and his family.<span class="fn"> <span class="fn">4</span>  </span>After the Flood, people at a place called Babel built a tower to make a name for themselves, so that they would not be scattered over the earth.<span class="fn"> <span class="fn">5</span>  </span>Yahweh scattered them across the whole earth anyway.<span class="fn"> <span class="fn">6</span> </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="704" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 4:8">Gen 4:8</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gen 6:2">Gen 6:2</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Gen 6:11">Gen 6:11</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Gen 7:1-4">Gen 7:1-4</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Gen 11:4">Gen 11:4</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Gen 11:8">Gen 11:8</a></span></div></div></div></div><div class="row-block" data-para="705"><h3 class="row-title" data-para="705">A nation, and a nation exiled</h3><div class="para" data-para="705"><div class="col" data-col="706" style="flex:1.0 1 0"><div class="col-text"><span class="bit">God then made a fresh start with one family. Yahweh chose the descendants of a man named Abraham to be His own people, the nation of Israel.<span class="fn"> <span class="fn">1</span>  </span>Yahweh came down on Mount Sinai in fire and met with Israel there.<span class="fn"> <span class="fn">2</span>  </span>Yahweh told Israel to build a tabernacle, a large tent, so that He could live among them.<span class="fn"> <span class="fn">3</span>  </span>Yahweh&#x27;s presence stayed in the innermost room, behind a <span class="ew-term" tabindex="0" role="button" data-title="Veil" data-body="The veil was the curtain that closed off the Most Holy Place in the tabernacle and temple, where God’s presence dwelt.
-Exo 26:33">veil</span>.<span class="fn"> <span class="fn">4</span>  </span>Only the high priest could go behind the veil, only once a year, and never without the blood of a sacrifice, an animal killed to cover the people&#x27;s sins.<span class="fn"> <span class="fn">5</span>  </span>Later a permanent temple in Jerusalem took the place of the tent. So God lived among His people again, but sin still kept them at a distance. Israel kept turning to idols.<span class="fn"> <span class="fn">6</span>  </span>The glory of Yahweh, the visible sign of His presence, left the temple,<span class="fn"> <span class="fn">7</span> </span>and the people were taken away into exile in Babylon.<span class="fn"> <span class="fn">8</span> </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="707" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Deu 7:6">Deu 7:6</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Exo 19:18">Exo 19:18</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Exo 25:8">Exo 25:8</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Lev 16:2">Lev 16:2</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Heb 9:7">Heb 9:7</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Ezk 8:10">Ezk 8:10</a></span><span class="bit"><span class="fn">7 </span><a class="ref" href="#ref" data-ref="Ezk 10:18">Ezk 10:18</a></span><span class="bit"><span class="fn">8 </span><a class="ref" href="#ref" data-ref="2Ki 25:11">2Ki 25:11</a></span></div></div></div></div></div></div><div class="subsec" data-heading="719"><h2 class="edit-heading" data-heading="719">3. Paradise Restored</h2><div class="subsec-frame" data-heading="719"><div class="row-block" data-para="710"><h3 class="row-title" data-para="710">The promised Seed comes</h3><div class="para" data-para="710"><div class="col" data-col="711" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Then the repair began. In Eden, God had promised that a Seed, a descendant of the woman, would crush the serpent.<span class="fn"> <span class="fn">1</span>  </span>At the time God had set, the promised Seed was born of a woman.<span class="fn"> <span class="fn">2</span>  </span>The promised Seed was Jesus, the Son of God, who became a human being and lived among people.<span class="fn"> <span class="fn">3</span>  </span>Jesus faced every kind of temptation people face, yet Jesus never sinned.<span class="fn"> <span class="fn">4</span>  </span>Passover was the night in Egypt when the blood of a lamb protected Israel&#x27;s homes from death. Jesus died as the Passover lamb, the sacrifice God had planned before creation.<span class="fn"> <span class="fn">5</span>  </span>Jesus rose from the dead as the <span class="ew-term" tabindex="0" role="button" data-title="Firstfruits" data-body="The firstfruits was the first sheaf of the harvest, waved before Yahweh. Christ is the firstfruits of those raised from the dead.
-Lev 23:10-11 1Co 15:20">firstfruits</span>, the first of everyone God will raise.<span class="fn"> <span class="fn">6</span>  </span>When Jesus died, the veil in the temple, the curtain that kept people out of God&#x27;s presence, was torn in two.<span class="fn"> <span class="fn">7</span>  </span>The way back to God was open.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="712" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 3:15">Gen 3:15</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gal 4:4">Gal 4:4</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Jhn 1:14">Jhn 1:14</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Heb 4:15">Heb 4:15</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="1Co 5:7">1Co 5:7</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="1Co 15:20">1Co 15:20</a></span><span class="bit"><span class="fn">7 </span><a class="ref" href="#ref" data-ref="Mat 27:51">Mat 27:51</a></span></div></div></div></div><div class="row-block" data-para="713"><h3 class="row-title" data-para="713">The King returns</h3><div class="para" data-para="713"><div class="col" data-col="714" style="flex:1.0 1 0"><div class="col-text"><span class="bit">The story is not finished yet. The prophet Zechariah saw Yahweh coming with all His holy ones.<span class="fn"> <span class="fn">1</span>  </span>Revelation shows Christ, the King God promised, coming to judge and fight with justice.<span class="fn"> <span class="fn">2</span>  </span>Christ will bind <span class="ew-term" tabindex="0" role="button" data-title="The serpent of old" data-body="The serpent of old is the serpent of Eden, which Revelation names as the Devil and Satan.
-Rev 12:9 Rev 20:2">the serpent of old</span>, the Devil,<span class="fn"> <span class="fn">3</span> </span>and God will bring the people of Israel back into their own land.<span class="fn"> <span class="fn">4</span>  </span>Christ will reign for a <span class="ew-term" tabindex="0" role="button" data-title="Thousand years" data-body="The thousand years is the reign of Christ with His saints. Revelation 20 names it six times.
-Rev 20:2-7">thousand years</span>,<span class="fn"> <span class="fn">5</span> </span>the nations will learn Yahweh&#x27;s ways,<span class="fn"> <span class="fn">6</span> </span>and the whole earth will know Yahweh as fully as water fills the sea.<span class="fn"> <span class="fn">7</span> </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="715" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Zec 14:5">Zec 14:5</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Rev 19:11">Rev 19:11</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Rev 20:2">Rev 20:2</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Ezk 37:21">Ezk 37:21</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Rev 20:4">Rev 20:4</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Isa 2:3">Isa 2:3</a></span><span class="bit"><span class="fn">7 </span><a class="ref" href="#ref" data-ref="Isa 11:9">Isa 11:9</a></span></div></div></div></div><div class="row-block" data-para="716"><h3 class="row-title" data-para="716">God lives with His people</h3><div class="para" data-para="716"><div class="col" data-col="717" style="flex:1.0 1 0"><div class="col-text"><span class="bit">When every enemy, including death, has been put under Christ&#x27;s feet, Christ hands the kingdom to God the Father.<span class="fn"> <span class="fn">1</span>  </span>A new city, the New Jerusalem, comes down out of heaven to a renewed earth, and God makes His home with people.<span class="fn"> <span class="fn">2</span>  </span>The curse that began in Eden is gone, God&#x27;s servants see God&#x27;s face, and the tree of life stands again.<span class="fn"> <span class="fn">3</span>  </span>The serpent is gone for good.<span class="fn"> <span class="fn">4</span>  </span>What God purposed before creation has come true: God lives among His people as their God.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="718" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="1Co 15:24-26">1Co 15:24-26</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Rev 21:1-3">Rev 21:1-3</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Rev 22:2-4">Rev 22:2-4</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Rev 20:10">Rev 20:10</a></span></div></div></div></div></div></div></div>
+    <div class="tab-panel" id="s0" data-sec="721"><div class="describe-contents contents-wrap"><div class="describe-line"><a href="index.html#s1">Home</a><div class="describe-note"></div></div><div class="describe-line"><a href="1-paradise-of-god-restored.html#s1" class="here">1. Paradise of God: Restored</a><div class="describe-note">God dwelt with Mankind until they rebelled. He will dwell in Paradise with us again.</div></div><div class="describe-line"><a href="2-sons-of-god-family-of-yahweh.html#s1">2. Sons of God: Family of Yahweh</a><div class="describe-note">Creation is waiting for God&#x27;s sons to reign over the nations.</div></div><div class="describe-line"><a href="3-feasts-of-god-timing-of-yahweh.html#s1">3. Feasts of God: Timing of Yahweh</a><div class="describe-note">The 8 Feasts of Yahweh prophesy the Day of the LORD, God Almighty</div></div><div class="describe-line"><a href="4-the-kingdom-of-god-fall-and-rise.html#s1">4. The Kingdom of God: Fall and Rise</a><div class="describe-note">God&#x27;s Kingdom: Lost and Restored - What fell down will be raised up.</div></div><div class="describe-line"><a href="5-wickedness-is-to-be-wiped-out.html#s1">5. Wickedness is to be Wiped Out!</a><div class="describe-note">God promised His family no sin or sorrow. He&#x27;s sending His Son to finish the job.</div></div><div class="describe-line"><a href="6-abraham-inherits-the-world.html#s0">6. Abraham Inherits the World</a><div class="describe-note">Yahweh chooses Abraham to father His nation from which his seed reigns over the world.</div></div></div></div><div class="tab-panel active" id="s1" data-sec="722"><div class="subsec" data-heading="956"><h2 class="edit-heading" data-heading="956">Introduction</h2><div class="subsec-frame" data-heading="956"><div class="row-block" data-para="812"><h3 class="row-title" data-para="812">What this story is about</h3><div class="para" data-para="812"><div class="col" data-col="814" style="flex:1.0 1 0"><div class="col-text"><span class="bit">​1. God created a very good world where mankind lived with Him.<br>2. Mankind rebelled and the mankind was separated from God.<br>3. God will return and live with mankind once more.</span><span class="bit">The story actually begins before the world even existed.</span></div></div></div></div></div></div><div class="subsec" data-heading="698"><h2 class="edit-heading" data-heading="698">1. Paradise</h2><div class="subsec-frame" data-heading="698"><div class="row-block" data-para="690"><h3 class="row-title" data-para="690">Before creation</h3><div class="para" data-para="690"><div class="col" data-col="692" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Before God made anything, He already had a purpose. He wanted to live among His people and be their God.<span class="fn"> 2 </span>God also knew that people would sin, and that their sin would separate them from Him.<span class="fn"> 3 </span>So, before He made the world, God planned a way to bring them back to Himself: a perfect, spotless sacrifice to deal with their sin. The apostle Peter explains that God chose Christ for this sacrifice before the world was made, and that Christ was revealed in these last times, the final age that began when Christ came.<span class="fn"> 4 </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="694" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Eph 1:4-5" data-open="chapter">Eph 1:4-5</a> <a class="ref" href="#ref" data-ref="Lev 26:12">Lev 26:12</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Isa 59:2">Isa 59:2</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="1Pe 1:19-20">1Pe 1:19-20</a></span></div></div></div></div><div class="row-block" data-para="695"><h3 class="row-title" data-para="695">God&#x27;s Word creates</h3><div class="para" data-para="695"><div class="col" data-col="696" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Then God started by creating. God spoke, and light came into being.<span class="fn"> 1  </span>God planted a garden in a place called Eden, put the first man, Adam, there, and set the tree of life in the middle of the garden.<span class="fn"> 2  </span>Whoever ate from the tree of life would live forever.<span class="fn"> 3  </span>God gave Adam and his wife, Eve, rule over the earth and told them to have children and fill the earth. God looked at everything He had made and saw that it was very good.<span class="fn"> 4  </span>People lived with God, and the world was whole.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="697" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 1:3">Gen 1:3</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gen 2:8-9">Gen 2:8-9</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Gen 3:22">Gen 3:22</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Gen 1:28-31">Gen 1:28-31</a></span></div></div></div></div></div></div><div class="subsec" data-heading="708"><h2 class="edit-heading" data-heading="708">2. The Fall</h2><div class="subsec-frame" data-heading="708"><div class="row-block" data-para="699"><h3 class="row-title" data-para="699">Adam and Eve disobey</h3><div class="para" data-para="699"><div class="col" data-col="700" style="flex:1.0 1 0"><div class="col-text"><span class="bit">God gave Adam one rule. Adam could eat from any tree in the garden except the tree of the knowledge of good and evil, and God warned that if Adam ate from that tree he would surely die.<span class="fn"> 1  </span>Adam and Eve ate from that tree, and then they hid from God, whose personal name is Yahweh.<span class="fn"> 2  </span>Yahweh God sent Adam out of the garden, away from the tree of life.<span class="fn"> 3  </span>The ground was cursed and grew thorns and thistles, and people would have to work hard for their food until they died and their bodies returned to the dust.<span class="fn"> 4  </span>This is the break that the rest of the story sets out to repair. People were shut out from God&#x27;s presence, and death had entered the world.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="701" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 2:17">Gen 2:17</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gen 3:6-8">Gen 3:6-8</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Gen 3:23-24">Gen 3:23-24</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Gen 3:17-19">Gen 3:17-19</a></span></div></div></div></div><div class="row-block" data-para="702"><h3 class="row-title" data-para="702">Mankind keeps rebelling</h3><div class="para" data-para="702"><div class="col" data-col="703" style="flex:1.0 1 0"><div class="col-text"><span class="bit">The break spread. Adam&#x27;s son Cain murdered his brother Abel.<span class="fn"> 1  </span>Heavenly beings called the sons of God took wives from among women on earth,<span class="fn"> 2 </span>and the earth was filled with violence.<span class="fn"> 3  </span>Yahweh sent a great flood on the earth, though He saved Noah and his family.<span class="fn"> 4  </span>After the Flood, people at a place called Babel built a tower to make a name for themselves, so that they would not be scattered over the earth.<span class="fn"> 5  </span>Yahweh scattered them across the whole earth anyway.<span class="fn"> 6 </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="704" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 4:8">Gen 4:8</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gen 6:2">Gen 6:2</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Gen 6:11">Gen 6:11</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Gen 7:1-4">Gen 7:1-4</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Gen 11:4">Gen 11:4</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Gen 11:8">Gen 11:8</a></span></div></div></div></div><div class="row-block" data-para="705"><h3 class="row-title" data-para="705">A nation, and a nation exiled</h3><div class="para" data-para="705"><div class="col" data-col="706" style="flex:1.0 1 0"><div class="col-text"><span class="bit">God then made a fresh start with one family. Yahweh chose the descendants of a man named Abraham to be His own people, the nation of Israel.<span class="fn"> 1  </span>Yahweh came down on Mount Sinai in fire and met with Israel there.<span class="fn"> 2  </span>Yahweh told Israel to build a tabernacle, a large tent, so that He could live among them.<span class="fn"> 3  </span>Yahweh&#x27;s presence stayed in the innermost room, behind a <span class="ew-term" tabindex="0" role="button" data-title="Veil" data-body="The veil was the curtain that closed off the Most Holy Place in the tabernacle and temple, where God’s presence dwelt.
+Exo 26:33">veil</span>.<span class="fn"> 4  </span>Only the high priest could go behind the veil, only once a year, and never without the blood of a sacrifice, an animal killed to cover the people&#x27;s sins.<span class="fn"> 5  </span>Later a permanent temple in Jerusalem took the place of the tent. So God lived among His people again, but sin still kept them at a distance. Israel kept turning to idols.<span class="fn"> 6  </span>The glory of Yahweh, the visible sign of His presence, left the temple,<span class="fn"> 7 </span>and the people were taken away into exile in Babylon.<span class="fn"> 8 </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="707" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Deu 7:6">Deu 7:6</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Exo 19:18">Exo 19:18</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Exo 25:8">Exo 25:8</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Lev 16:2">Lev 16:2</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Heb 9:7">Heb 9:7</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Ezk 8:10">Ezk 8:10</a></span><span class="bit"><span class="fn">7 </span><a class="ref" href="#ref" data-ref="Ezk 10:18">Ezk 10:18</a></span><span class="bit"><span class="fn">8 </span><a class="ref" href="#ref" data-ref="2Ki 25:11">2Ki 25:11</a></span></div></div></div></div></div></div><div class="subsec" data-heading="719"><h2 class="edit-heading" data-heading="719">3. Paradise Restored</h2><div class="subsec-frame" data-heading="719"><div class="row-block" data-para="710"><h3 class="row-title" data-para="710">The promised Seed comes</h3><div class="para" data-para="710"><div class="col" data-col="711" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Then the repair began. In Eden, God had promised that a Seed, a descendant of the woman, would crush the serpent.<span class="fn"> 1  </span>At the time God had set, the promised Seed was born of a woman.<span class="fn"> 2  </span>The promised Seed was Jesus, the Son of God, who became a human being and lived among people.<span class="fn"> 3  </span>Jesus faced every kind of temptation people face, yet Jesus never sinned.<span class="fn"> 4  </span>Passover was the night in Egypt when the blood of a lamb protected Israel&#x27;s homes from death. Jesus died as the Passover lamb, the sacrifice God had planned before creation.<span class="fn"> 5  </span>Jesus rose from the dead as the <span class="ew-term" tabindex="0" role="button" data-title="Firstfruits" data-body="The firstfruits was the first sheaf of the harvest, waved before Yahweh. Christ is the firstfruits of those raised from the dead.
+Lev 23:10-11 1Co 15:20">firstfruits</span>, the first of everyone God will raise.<span class="fn"> 6  </span>When Jesus died, the veil in the temple, the curtain that kept people out of God&#x27;s presence, was torn in two.<span class="fn"> 7  </span>The way back to God was open.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="712" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 3:15">Gen 3:15</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gal 4:4">Gal 4:4</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Jhn 1:14">Jhn 1:14</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Heb 4:15">Heb 4:15</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="1Co 5:7">1Co 5:7</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="1Co 15:20">1Co 15:20</a></span><span class="bit"><span class="fn">7 </span><a class="ref" href="#ref" data-ref="Mat 27:51">Mat 27:51</a></span></div></div></div></div><div class="row-block" data-para="713"><h3 class="row-title" data-para="713">The King returns</h3><div class="para" data-para="713"><div class="col" data-col="714" style="flex:1.0 1 0"><div class="col-text"><span class="bit">The story is not finished yet. The prophet Zechariah saw Yahweh coming with all His holy ones.<span class="fn"> 1  </span>Revelation shows Christ, the King God promised, coming to judge and fight with justice.<span class="fn"> 2  </span>Christ will bind <span class="ew-term" tabindex="0" role="button" data-title="The serpent of old" data-body="The serpent of old is the serpent of Eden, which Revelation names as the Devil and Satan.
+Rev 12:9 Rev 20:2">the serpent of old</span>, the Devil,<span class="fn"> 3 </span>and God will bring the people of Israel back into their own land.<span class="fn"> 4  </span>Christ will reign for a <span class="ew-term" tabindex="0" role="button" data-title="Thousand years" data-body="The thousand years is the reign of Christ with His saints. Revelation 20 names it six times.
+Rev 20:2-7">thousand years</span>,<span class="fn"> 5 </span>the nations will learn Yahweh&#x27;s ways,<span class="fn"> 6 </span>and the whole earth will know Yahweh as fully as water fills the sea.<span class="fn"> 7 </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="715" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Zec 14:5">Zec 14:5</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Rev 19:11">Rev 19:11</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Rev 20:2">Rev 20:2</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Ezk 37:21">Ezk 37:21</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Rev 20:4">Rev 20:4</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Isa 2:3">Isa 2:3</a></span><span class="bit"><span class="fn">7 </span><a class="ref" href="#ref" data-ref="Isa 11:9">Isa 11:9</a></span></div></div></div></div><div class="row-block" data-para="716"><h3 class="row-title" data-para="716">God lives with His people</h3><div class="para" data-para="716"><div class="col" data-col="717" style="flex:1.0 1 0"><div class="col-text"><span class="bit">When every enemy, including death, has been put under Christ&#x27;s feet, Christ hands the kingdom to God the Father.<span class="fn"> 1  </span>A new city, the New Jerusalem, comes down out of heaven to a renewed earth, and God makes His home with people.<span class="fn"> 2  </span>The curse that began in Eden is gone, God&#x27;s servants see God&#x27;s face, and the tree of life stands again.<span class="fn"> 3  </span>The serpent is gone for good.<span class="fn"> 4  </span>What God purposed before creation has come true: God lives among His people as their God.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="718" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="1Co 15:24-26">1Co 15:24-26</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Rev 21:1-3">Rev 21:1-3</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Rev 22:2-4">Rev 22:2-4</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Rev 20:10">Rev 20:10</a></span></div></div></div></div></div></div></div>
   </main>
   <div class="tab-dock-end"><div class="tabs tabs-contents-left"><button type="button" class="tab tab-contents-left" data-tab="s0" data-sec="721">Contents</button><button type="button" class="tab active" data-tab="s1" data-sec="722">Story</button><button type="button" class="tab tab-notes" data-notes-toggle="1">Footnotes</button><button type="button" class="tab tab-settings" data-settings-open="1">Settings</button></div></div>
   
@@ -1425,7 +1428,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
   });
   apply();
 })();
-</script><script>window.ewDefaults={"notes": true}</script><script>window.ewFolder="10-Minute-Stories"</script><script>
+</script><script>window.ewDefaults={"notes": false}</script><script>window.ewFolder="10-Minute-Stories"</script><script>
 (function(){
   if (window.ewDetailsBound) return;
   window.ewDetailsBound = true;
@@ -1466,7 +1469,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
     setOpen(btn, !btn.classList.contains("open"));
   });
 })();
-</script><script>window.EW_GLOSSARY_SRC="glossary.json?v=52ae54a5";</script><script src="footnotes.js?v=711d126f"></script><script defer src="bible.js?v=bd830daf"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
+</script><script>window.EW_GLOSSARY_SRC="glossary.json?v=52ae54a5";</script><script src="footnotes.js?v=fe5a0771"></script><script defer src="bible.js?v=12d5bb20"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
 (function(){
   var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   var last = "";
@@ -1496,6 +1499,110 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
   }
   document.addEventListener("ew-page-swap", fill);
   fill();
+})();
+</script><script>
+(function(){
+  // Narrow windows (25 Nov 2026, Sir): a tab whose name wraps shrinks to its widest line; if the row still
+  // does not fit, Footnotes goes above Settings; if it still does not fit, the tabs wrap onto more rows.
+  // Nothing changes when every name fits on one line.
+  if (window.ewTabFitBound) return;
+  window.ewTabFitBound = true;
+  var d = document;
+  function px(v){ return parseFloat(v) || 0; }
+  function lines(t){
+    var r = d.createRange(), rs, rows = [], i, j, q, hit;
+    r.selectNodeContents(t);
+    rs = r.getClientRects();
+    for (i = 0; i < rs.length; i++) {
+      q = rs[i];
+      if (!q.width) continue;
+      hit = null;
+      for (j = 0; j < rows.length; j++) if (Math.abs(rows[j].top - q.top) < 2) { hit = rows[j]; break; }
+      if (hit) { hit.l = Math.min(hit.l, q.left); hit.r = Math.max(hit.r, q.right); }
+      else rows.push({ top: q.top, l: q.left, r: q.right });
+    }
+    return rows;
+  }
+  function shrink(bar){
+    for (var pass = 0; pass < 3; pass++) {
+      var changed = false;
+      bar.querySelectorAll(".tab").forEach(function(t){
+        if (t.style.width || !t.getClientRects().length) return;
+        var rows = lines(t);
+        if (rows.length < 2) return;
+        var w = 0;
+        rows.forEach(function(x){ w = Math.max(w, x.r - x.l); });
+        var cs = getComputedStyle(t);
+        var add = cs.boxSizing === "border-box" ? px(cs.paddingLeft) + px(cs.paddingRight) + px(cs.borderLeftWidth) + px(cs.borderRightWidth) : 0;
+        var nw = Math.min(Math.ceil(w + add + 1), Math.ceil(t.getBoundingClientRect().width));
+        t.style.width = nw + "px";
+        t.classList.add("tab-fit");
+        if (lines(t).length !== rows.length) { clear(t); return; }
+        changed = true;
+      });
+      if (!changed) break;
+    }
+  }
+  function clear(t){
+    t.style.width = "";
+    t.classList.remove("tab-fit");
+    if (!t.getAttribute("style")) t.removeAttribute("style");
+  }
+  function over(bar){ return bar.scrollWidth > bar.clientWidth + 1; }
+  function unfit(bar){
+    bar.querySelectorAll(".tab-fit").forEach(clear);
+  }
+  function reset(bar){
+    unfit(bar);
+    bar.classList.remove("tabs-wrap");
+    var st = bar.querySelector(":scope > .tab-stack");
+    if (st) {
+      while (st.firstChild) bar.insertBefore(st.firstChild, st);
+      bar.removeChild(st);
+    }
+  }
+  function fit(bar){
+    reset(bar);
+    if (!bar.getClientRects().length) return;
+    shrink(bar);
+    if (!over(bar)) return;
+    var n = bar.querySelector(":scope > .tab-notes"), s = bar.querySelector(":scope > .tab-settings");
+    if (n && s) {
+      var st = d.createElement("span");
+      st.className = "tab-stack";
+      bar.insertBefore(st, n);
+      st.appendChild(n);
+      st.appendChild(s);
+      unfit(bar);
+      shrink(bar);
+      if (!over(bar)) return;
+    }
+    // Keep the names wrapped as they are now, and let the tabs go onto more rows.
+    bar.classList.add("tabs-wrap");
+    shrink(bar);
+  }
+  var last = "";
+  function all(force){
+    var key = (d.documentElement.clientWidth || 0) + "|" + (d.documentElement.style.getPropertyValue("--ew-font") || "");
+    if (!force && key === last) return;
+    last = key;
+    d.querySelectorAll(".tabs").forEach(fit);
+  }
+  var queued = false;
+  function soon(force){
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(function(){ queued = false; all(force); });
+  }
+  window.addEventListener("resize", function(){ soon(false); });
+  window.addEventListener("orientationchange", function(){ soon(true); });
+  window.addEventListener("load", function(){ soon(true); });
+  d.addEventListener("ew-page-swap", function(){ soon(true); });
+  if (d.fonts && d.fonts.ready) d.fonts.ready.then(function(){ soon(true); });
+  if (window.MutationObserver) new MutationObserver(function(){ soon(false); }).observe(d.documentElement, { attributes: true, attributeFilter: ["style"] });
+  if (d.readyState === "loading") d.addEventListener("DOMContentLoaded", function(){ all(true); });
+  else all(true);
+  window.ewFitTabs = function(){ all(true); };
 })();
 </script>
 </body>

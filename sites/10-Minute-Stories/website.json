@@ -15,7 +15,7 @@
   "showOnLive": true,
   "numberContents": true,
   "showOnWeb": true,
-  "editedAt": 1795554442313,
+  "editedAt": 1795617596188,
   "homeType": "describe",
   "tabsContentsLeft": true,
   "defaultFont": "Georgia, serif",
@@ -313,5 +313,11 @@
         "font": "Georgia, serif"
       }
     }
-  }
+  },
+  "lineHeight": "1.3",
+  "pageColour": "white",
+  "maxWidth": "1000",
+  "windowColour": "white",
+  "textColour": "black",
+  "defaultsPerPage": true
 }

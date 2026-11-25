@@ -113,8 +113,8 @@
     },
     {
       "reference": "Gen 6:11",
-      "text": "Gen 6:11\n11 The earth also was corrupt before God, and the earth was filled with violence.",
-      "source": "nkjv"
+      "text": "Gen 6:11<br>11 The earth also was <b>corrupt</b> before God, <br>and the earth was <b>filled</b> with <b>violence</b>.",
+      "source": "edited"
     },
     {
       "reference": "Gen 7:1-4",
@@ -643,8 +643,8 @@
     },
     {
       "reference": "Gen 11:7",
-      "text": "Gen 11:7\n7 Come, let Us go down and there confuse their language, that they may not understand one another’s speech.”",
-      "source": "nkjv"
+      "text": "Gen 11:7<br>7 Come, let Us go down and there <b>confuse their language</b>, <br>that they may not understand one another’s speech.”",
+      "source": "edited"
     },
     {
       "reference": "Zep 3:9",
@@ -728,13 +728,13 @@
     },
     {
       "reference": "Rev 22:3",
-      "text": "Rev 22:3\n3 And there shall be no more curse, but the throne of God and of the Lamb shall be in it, and His servants shall serve Him.",
-      "source": "nkjv"
+      "text": "Rev 22:3<br>3 And there shall be no more <b>curse</b>, <br>but the <b>throne</b> <b>of</b> <b>God</b> and of the <b>Lamb</b> shall be in it, <br>and His servants shall serve Him.",
+      "source": "edited"
     },
     {
       "reference": "Rev 21:4",
-      "text": "Rev 21:4\n4 And God will wipe away every tear from their eyes; there shall be no more death, nor sorrow, nor crying. There shall be no more pain, for the former things have passed away.”",
-      "source": "nkjv"
+      "text": "Rev 21:4<br>4 And God will wipe away every <b>tear</b> from their eyes; <br>there shall be no more <b>death</b>, nor <b>sorrow</b>, nor <b>crying</b>. <br>There shall be no more <b>pain</b>, <br>for the former things have <b>passed</b> <b>away</b>.”",
+      "source": "edited"
     },
     {
       "reference": "Gen 3:8",
@@ -913,7 +913,7 @@
     },
     {
       "reference": "Dan 10:13",
-      "text": "Dan 10:13<br>13 <b>But the </b>prince of the kingdom of Persia withstood me twenty-one days; <br>and behold, <b>Michael</b>, one of the <b>chief princes</b>, came to help me, <br>for I had been left alone there with the kings of Persia.",
+      "text": "Dan 10:13<br>13 <b>But the prince</b> of the <b>kingdom</b> of <b>Persia</b><br>withstood me twenty-one days; and behold, <b>Michael</b>,<br>one of the <b>chief princes</b>, came to help me,<br>for I had been left alone there with the <b>kings of Persia</b>.",
       "source": "edited"
     },
     {
@@ -963,7 +963,7 @@
     },
     {
       "reference": "Deu 32:8 ESV",
-      "text": "Deu 32:8 ESV<br>8 When the Most High gave to the nations their<br>inheritance, when he <b>divided mankind,</b><br>he fixed the <b>borders of the</b> <b>peoples</b> <br>according to the number of the <b>sons of God.</b>",
+      "text": "Deu 32:8 ESV<br>8 When the Most High gave to the <b>nations</b> their<br>inheritance, when he <b>divided mankind,</b><br>he fixed the <b>borders of the peoples</b><br>according to the number of the <b>sons of God.</b>",
       "source": "edited"
     },
     {
@@ -1069,6 +1069,46 @@
     {
       "reference": "Gal 3:29",
       "text": "Gal 3:29<br>29 And if you are <b>Christ's</b>, <br>then you are <b>Abraham's seed</b>, <br>and <b>heirs</b> according to the <b>promise</b>.",
+      "source": "edited"
+    },
+    {
+      "reference": "Rom 4:16",
+      "text": "Rom 4:16<br>16 Therefore it is of <b>faith</b> that it might be according to <b>grace</b>, <br>so that the <b>promise</b> might be sure to <b>all the seed</b>, <br>not only to those who are of the law, <br>but also to those who are of the <b>faith of Abraham</b>, <br>who is the <b>father of us all.</b>",
+      "source": "edited"
+    },
+    {
+      "reference": "Gen 22:18",
+      "text": "Gen 22:18<br>18 <b>In your seed </b>all the <b>nations</b> of the <b>earth</b> shall be <b>blessed</b>, <br>because you have <b>obeyed</b> <b>My</b> <b>voice</b>.”",
+      "source": "edited"
+    },
+    {
+      "reference": "Zec 2:10-11",
+      "text": "Zec 2:10-11<br>10 “Sing and <b>rejoice</b>, O daughter of Zion! <br>For behold, I am<b> coming</b> and I will <b>dwell</b> in your midst,” says <b>Yahweh</b>.<br>11 “<b>Many</b> <b>nations</b> shall be joined to <b>Yahweh</b> in that day, <br>and they shall become <b>My</b> <b>people</b>. <br>And I will <b>dwell</b> in your midst. <br>Then you will know that Yahweh of hosts has sent Me to you.",
+      "source": "edited"
+    },
+    {
+      "reference": "Gen 6:9",
+      "text": "Gen 6:9<br>9 This is the genealogy of Noah. <br>Noah was a just man, perfect in his generations. <br>Noah walked with God.",
+      "source": "edited"
+    },
+    {
+      "reference": "Gen 9:1",
+      "text": "Gen 9:1<br>1 So God blessed <b>Noah</b> and his <b>sons</b>, and said to them: <br>“Be <b>fruitful</b> and <b>multiply</b>, and <b>fill the earth</b>.",
+      "source": "edited"
+    },
+    {
+      "reference": "Gen 12:1-2",
+      "text": "Gen 12:1-2<br>1 Now Yahweh had said to Abram: <br>“<b>Get out of your country</b>, <br>From your family and from your father’s house, <br>To a <b>land</b> that I will show you.<br>2 I will make you a <b>great nation</b>; <br>I will bless you and make your <b>name great</b>; <br>And you shall be a <b>blessing</b>.",
+      "source": "edited"
+    },
+    {
+      "reference": "Gen 12:2",
+      "text": "Gen 12:2<br>2 I will make you a great nation;<br>I will bless you And make your <b>name great</b>;<br>And you shall be a blessing.",
+      "source": "edited"
+    },
+    {
+      "reference": "Gen 12:3",
+      "text": "Gen 12:3<br>3 I will bless those who bless you, <br>And I will curse him who curses you; <br>And in you all the families of the earth shall be blessed.”",
       "source": "edited"
     }
   ]

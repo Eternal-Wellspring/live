@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-GB" data-page="808">
+<html lang="en-GB" data-page="808" data-window="white">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -32,15 +32,15 @@
 .title-bar h1 { font-family:Georgia, serif; font-size:calc(26px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#005eb8; text-align:left }
 .title-bar h1 { border-width:0 !important }
 .tab, .sub-tab { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
-h2 { font-family:Georgia, serif; font-size:calc(19px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f6f78; margin-top:19px; margin-bottom:6px; text-align:left }
-.subsec-frame { font-family:Georgia, serif; font-weight:400; font-style:normal; text-align:left }
-.para { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#ffffff; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:10px; margin-top:10px; margin-bottom:10px; text-align:left; line-height:1.45; --para-gap:18px }
-.row-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:6px; text-align:left }
-.col-title:not(:empty) { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:6px; text-align:left }
-.col { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.45; --para-gap:18px }
-.col .col-text, .col .col-text .bit { line-height:1.45 }
+h2 { font-family:Georgia, serif; font-size:calc(19px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f6f78; background:white; margin-top:19px; margin-bottom:6px; text-align:left }
+.subsec-frame { font-family:Georgia, serif; font-weight:400; font-style:normal; background:white; text-align:left }
+.para { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:10px; margin-top:10px; margin-bottom:10px; text-align:left; line-height:1.3; --para-gap:18px }
+.row-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:white; margin-bottom:6px; text-align:left }
+.col-title:not(:empty) { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:white; margin-bottom:6px; text-align:left }
+.col { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; text-align:left; line-height:1.3; --para-gap:10px }
+.col .col-text, .col .col-text .bit { line-height:1.3 }
 .col .col-text { gap:0 }
-.col .col-text .bit { margin:0 0 18px }
+.col .col-text .bit { margin:0 0 10px }
 .col .col-text .bit:last-child { margin-bottom:0 }
 .col .col-text .bit { padding-left:0em }
 .col .col-text .bit.indent { padding-left:2em }
@@ -67,44 +67,45 @@ h2 { font-family:Georgia, serif; font-size:calc(19px * var(--ew-font, 1)); font-
 .ew-chapter-list, .ew-ch-row { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.25 }
 .page-nav, .page-nav .page-nav-word, .page-nav .page-nav-tip, .page-tools, .page-tools button { font-weight:400; font-family:Georgia, serif; font-size:9px; color:#5a6a72 }
 .tab[data-sec="809"], .tab-panel[data-sec="809"] .sub-tab, .end-sub-tabs[data-for="s0"] .sub-tab { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
-.tab[data-sec="809"] { background:#ffffff }
-.tab-panel[data-sec="809"] .sub-tab { background:#ffffff }
-.end-sub-tabs[data-for="s0"] .sub-tab { background:#ffffff }
-.tab[data-sec="809"].active, .tab-panel[data-sec="809"] { background:#f6f7eb }
-.tab[data-sec="809"].active { border-bottom-color:#f6f7eb }
-.tab-panel[data-sec="809"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
-.end-sub-tabs[data-for="s0"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab[data-sec="809"] { background:white }
+.tab-panel[data-sec="809"] .sub-tab { background:white }
+.end-sub-tabs[data-for="s0"] .sub-tab { background:white }
+.tab[data-sec="809"].active, .tab-panel[data-sec="809"] { background:white }
+.tab[data-sec="809"].active { border-bottom-color:white }
+.tab-panel[data-sec="809"] .sub-tab.active { background:white; border-bottom-color:white }
+.end-sub-tabs[data-for="s0"] .sub-tab.active { background:white; border-top-color:white }
+.tab[data-sec="809"][data-sec][data-tab]:not(.active) { background:white }
 .tab[data-sec="810"], .tab-panel[data-sec="810"] .sub-tab, .end-sub-tabs[data-for="s1"] .sub-tab { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
-.tab[data-sec="810"] { background:#ffffff }
-.tab-panel[data-sec="810"] .sub-tab { background:#ffffff }
-.end-sub-tabs[data-for="s1"] .sub-tab { background:#ffffff }
-.tab[data-sec="810"].active, .tab-panel[data-sec="810"] { background:#f6f7eb }
-.tab[data-sec="810"].active { border-bottom-color:#f6f7eb }
-.tab-panel[data-sec="810"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
-.end-sub-tabs[data-for="s1"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab[data-sec="810"] { background:white }
+.tab-panel[data-sec="810"] .sub-tab { background:white }
+.end-sub-tabs[data-for="s1"] .sub-tab { background:white }
+.tab[data-sec="810"].active, .tab-panel[data-sec="810"] { background:white }
+.tab[data-sec="810"].active { border-bottom-color:white }
+.tab-panel[data-sec="810"] .sub-tab.active { background:white; border-bottom-color:white }
+.end-sub-tabs[data-for="s1"] .sub-tab.active { background:white; border-top-color:white }
 .tab[data-sec="811"], .tab-panel[data-sec="811"] .sub-tab, .end-sub-tabs[data-for="s2"] .sub-tab { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
-.tab[data-sec="811"] { background:#ffffff }
-.tab-panel[data-sec="811"] .sub-tab { background:#ffffff }
-.end-sub-tabs[data-for="s2"] .sub-tab { background:#ffffff }
-.tab[data-sec="811"].active, .tab-panel[data-sec="811"] { background:#f6f7eb }
-.tab[data-sec="811"].active { border-bottom-color:#f6f7eb }
-.tab-panel[data-sec="811"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
-.end-sub-tabs[data-for="s2"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab[data-sec="811"] { background:white }
+.tab-panel[data-sec="811"] .sub-tab { background:white }
+.end-sub-tabs[data-for="s2"] .sub-tab { background:white }
+.tab[data-sec="811"].active, .tab-panel[data-sec="811"] { background:white }
+.tab[data-sec="811"].active { border-bottom-color:white }
+.tab-panel[data-sec="811"] .sub-tab.active { background:white; border-bottom-color:white }
+.end-sub-tabs[data-for="s2"] .sub-tab.active { background:white; border-top-color:white }
 body, button, input, select, textarea { font-family:Georgia, serif }
 .tab.active, .tab-panel .sub-tab.active { margin-bottom:-1px; position:relative; z-index:1 }
 .tab { border-radius:7px 7px 0 0 }
 .tab-panel { border-radius:0 7px 7px 0 }
 .tab-dock-end .tabs, .end-sub-tabs .sub-tabs { border-top:1px solid var(--line) }
-.end-sub-tabs .sub-tab { background:#ffffff }
+.end-sub-tabs .sub-tab { background:white }
 .end-sub-tabs .sub-tab { border-radius:0 0 7px 7px; border-top:0 }
-.end-sub-tabs .sub-tab.active { margin-top:-1px; border-top-color:#f6f7eb; background:#f6f7eb }
+.end-sub-tabs .sub-tab.active { margin-top:-1px; border-top-color:white; background:white }
 .tabs .tab.tab-notes.tab-notes, .tabs .tab.tab-settings.tab-settings { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
-.tabs .tab.tab-notes.tab-notes, .tabs .tab.tab-settings.tab-settings { background:#ffffff }
+.tabs .tab.tab-notes.tab-notes, .tabs .tab.tab-settings.tab-settings { background:white }
 .col-title:empty { display:none; margin:0 }
-.para[data-para="771"] .col[data-col="772"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="771"] .col[data-col="772"] .col-text, .para[data-para="771"] .col[data-col="772"] .col-text .bit { line-height:1.2 }
+.para[data-para="771"] .col[data-col="772"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="771"] .col[data-col="772"] .col-text, .para[data-para="771"] .col[data-col="772"] .col-text .bit { line-height:1.3 }
 .para[data-para="771"] .col[data-col="772"] .col-text { gap:0 }
-.para[data-para="771"] .col[data-col="772"] .col-text .bit { margin:0 0 7px }
+.para[data-para="771"] .col[data-col="772"] .col-text .bit { margin:0 0 10px }
 .para[data-para="771"] .col[data-col="772"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="771"] .col[data-col="772"] .col-text .bit { padding-left:0em }
 .para[data-para="771"] .col[data-col="772"] .col-text .bit.indent { padding-left:2em }
@@ -113,10 +114,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="771"] .col[data-col="772"] .col-text .bit.bullet::before, .para[data-para="771"] .col[data-col="772"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="771"] .col[data-col="772"] .col-text .bit.indent.bullet::before, .para[data-para="771"] .col[data-col="772"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="771"] .col[data-col="772"]{align-self:center}
-.para[data-para="771"] .col[data-col="773"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="771"] .col[data-col="773"] .col-text, .para[data-para="771"] .col[data-col="773"] .col-text .bit { line-height:1.2 }
+.para[data-para="771"] .col[data-col="773"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="771"] .col[data-col="773"] .col-text, .para[data-para="771"] .col[data-col="773"] .col-text .bit { line-height:1.3 }
 .para[data-para="771"] .col[data-col="773"] .col-text { gap:0 }
-.para[data-para="771"] .col[data-col="773"] .col-text .bit { margin:0 0 5px }
+.para[data-para="771"] .col[data-col="773"] .col-text .bit { margin:0 0 10px }
 .para[data-para="771"] .col[data-col="773"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="771"] .col[data-col="773"] .col-text .bit { padding-left:0em }
 .para[data-para="771"] .col[data-col="773"] .col-text .bit.indent { padding-left:2em }
@@ -130,10 +131,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="771"] .col[data-col="773"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="771"] .col[data-col="773"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="771"] .col[data-col="773"] a.ref{white-space:nowrap}
-.para[data-para="775"] .col[data-col="776"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="775"] .col[data-col="776"] .col-text, .para[data-para="775"] .col[data-col="776"] .col-text .bit { line-height:1.2 }
+.para[data-para="775"] .col[data-col="776"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="775"] .col[data-col="776"] .col-text, .para[data-para="775"] .col[data-col="776"] .col-text .bit { line-height:1.3 }
 .para[data-para="775"] .col[data-col="776"] .col-text { gap:0 }
-.para[data-para="775"] .col[data-col="776"] .col-text .bit { margin:0 0 7px }
+.para[data-para="775"] .col[data-col="776"] .col-text .bit { margin:0 0 10px }
 .para[data-para="775"] .col[data-col="776"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="775"] .col[data-col="776"] .col-text .bit { padding-left:0em }
 .para[data-para="775"] .col[data-col="776"] .col-text .bit.indent { padding-left:2em }
@@ -142,10 +143,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="775"] .col[data-col="776"] .col-text .bit.bullet::before, .para[data-para="775"] .col[data-col="776"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="775"] .col[data-col="776"] .col-text .bit.indent.bullet::before, .para[data-para="775"] .col[data-col="776"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="775"] .col[data-col="776"]{align-self:center}
-.para[data-para="775"] .col[data-col="777"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="775"] .col[data-col="777"] .col-text, .para[data-para="775"] .col[data-col="777"] .col-text .bit { line-height:1.2 }
+.para[data-para="775"] .col[data-col="777"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="775"] .col[data-col="777"] .col-text, .para[data-para="775"] .col[data-col="777"] .col-text .bit { line-height:1.3 }
 .para[data-para="775"] .col[data-col="777"] .col-text { gap:0 }
-.para[data-para="775"] .col[data-col="777"] .col-text .bit { margin:0 0 5px }
+.para[data-para="775"] .col[data-col="777"] .col-text .bit { margin:0 0 10px }
 .para[data-para="775"] .col[data-col="777"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="775"] .col[data-col="777"] .col-text .bit { padding-left:0em }
 .para[data-para="775"] .col[data-col="777"] .col-text .bit.indent { padding-left:2em }
@@ -159,10 +160,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="775"] .col[data-col="777"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="775"] .col[data-col="777"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="775"] .col[data-col="777"] a.ref{white-space:nowrap}
-.para[data-para="778"] .col[data-col="779"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="778"] .col[data-col="779"] .col-text, .para[data-para="778"] .col[data-col="779"] .col-text .bit { line-height:1.2 }
+.para[data-para="778"] .col[data-col="779"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="778"] .col[data-col="779"] .col-text, .para[data-para="778"] .col[data-col="779"] .col-text .bit { line-height:1.3 }
 .para[data-para="778"] .col[data-col="779"] .col-text { gap:0 }
-.para[data-para="778"] .col[data-col="779"] .col-text .bit { margin:0 0 7px }
+.para[data-para="778"] .col[data-col="779"] .col-text .bit { margin:0 0 10px }
 .para[data-para="778"] .col[data-col="779"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="778"] .col[data-col="779"] .col-text .bit { padding-left:0em }
 .para[data-para="778"] .col[data-col="779"] .col-text .bit.indent { padding-left:2em }
@@ -171,10 +172,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="778"] .col[data-col="779"] .col-text .bit.bullet::before, .para[data-para="778"] .col[data-col="779"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="778"] .col[data-col="779"] .col-text .bit.indent.bullet::before, .para[data-para="778"] .col[data-col="779"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="778"] .col[data-col="779"]{align-self:center}
-.para[data-para="778"] .col[data-col="780"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="778"] .col[data-col="780"] .col-text, .para[data-para="778"] .col[data-col="780"] .col-text .bit { line-height:1.2 }
+.para[data-para="778"] .col[data-col="780"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="778"] .col[data-col="780"] .col-text, .para[data-para="778"] .col[data-col="780"] .col-text .bit { line-height:1.3 }
 .para[data-para="778"] .col[data-col="780"] .col-text { gap:0 }
-.para[data-para="778"] .col[data-col="780"] .col-text .bit { margin:0 0 5px }
+.para[data-para="778"] .col[data-col="780"] .col-text .bit { margin:0 0 10px }
 .para[data-para="778"] .col[data-col="780"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="778"] .col[data-col="780"] .col-text .bit { padding-left:0em }
 .para[data-para="778"] .col[data-col="780"] .col-text .bit.indent { padding-left:2em }
@@ -188,10 +189,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="778"] .col[data-col="780"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="778"] .col[data-col="780"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="778"] .col[data-col="780"] a.ref{white-space:nowrap}
-.para[data-para="781"] .col[data-col="782"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="781"] .col[data-col="782"] .col-text, .para[data-para="781"] .col[data-col="782"] .col-text .bit { line-height:1.2 }
+.para[data-para="781"] .col[data-col="782"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="781"] .col[data-col="782"] .col-text, .para[data-para="781"] .col[data-col="782"] .col-text .bit { line-height:1.3 }
 .para[data-para="781"] .col[data-col="782"] .col-text { gap:0 }
-.para[data-para="781"] .col[data-col="782"] .col-text .bit { margin:0 0 7px }
+.para[data-para="781"] .col[data-col="782"] .col-text .bit { margin:0 0 10px }
 .para[data-para="781"] .col[data-col="782"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="781"] .col[data-col="782"] .col-text .bit { padding-left:0em }
 .para[data-para="781"] .col[data-col="782"] .col-text .bit.indent { padding-left:2em }
@@ -200,10 +201,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="781"] .col[data-col="782"] .col-text .bit.bullet::before, .para[data-para="781"] .col[data-col="782"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="781"] .col[data-col="782"] .col-text .bit.indent.bullet::before, .para[data-para="781"] .col[data-col="782"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="781"] .col[data-col="782"]{align-self:center}
-.para[data-para="781"] .col[data-col="783"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="781"] .col[data-col="783"] .col-text, .para[data-para="781"] .col[data-col="783"] .col-text .bit { line-height:1.2 }
+.para[data-para="781"] .col[data-col="783"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="781"] .col[data-col="783"] .col-text, .para[data-para="781"] .col[data-col="783"] .col-text .bit { line-height:1.3 }
 .para[data-para="781"] .col[data-col="783"] .col-text { gap:0 }
-.para[data-para="781"] .col[data-col="783"] .col-text .bit { margin:0 0 5px }
+.para[data-para="781"] .col[data-col="783"] .col-text .bit { margin:0 0 10px }
 .para[data-para="781"] .col[data-col="783"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="781"] .col[data-col="783"] .col-text .bit { padding-left:0em }
 .para[data-para="781"] .col[data-col="783"] .col-text .bit.indent { padding-left:2em }
@@ -217,10 +218,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="781"] .col[data-col="783"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="781"] .col[data-col="783"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="781"] .col[data-col="783"] a.ref{white-space:nowrap}
-.para[data-para="784"] .col[data-col="785"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="784"] .col[data-col="785"] .col-text, .para[data-para="784"] .col[data-col="785"] .col-text .bit { line-height:1.2 }
+.para[data-para="784"] .col[data-col="785"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="784"] .col[data-col="785"] .col-text, .para[data-para="784"] .col[data-col="785"] .col-text .bit { line-height:1.3 }
 .para[data-para="784"] .col[data-col="785"] .col-text { gap:0 }
-.para[data-para="784"] .col[data-col="785"] .col-text .bit { margin:0 0 7px }
+.para[data-para="784"] .col[data-col="785"] .col-text .bit { margin:0 0 10px }
 .para[data-para="784"] .col[data-col="785"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="784"] .col[data-col="785"] .col-text .bit { padding-left:0em }
 .para[data-para="784"] .col[data-col="785"] .col-text .bit.indent { padding-left:2em }
@@ -229,10 +230,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="784"] .col[data-col="785"] .col-text .bit.bullet::before, .para[data-para="784"] .col[data-col="785"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="784"] .col[data-col="785"] .col-text .bit.indent.bullet::before, .para[data-para="784"] .col[data-col="785"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="784"] .col[data-col="785"]{align-self:center}
-.para[data-para="784"] .col[data-col="786"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="784"] .col[data-col="786"] .col-text, .para[data-para="784"] .col[data-col="786"] .col-text .bit { line-height:1.2 }
+.para[data-para="784"] .col[data-col="786"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="784"] .col[data-col="786"] .col-text, .para[data-para="784"] .col[data-col="786"] .col-text .bit { line-height:1.3 }
 .para[data-para="784"] .col[data-col="786"] .col-text { gap:0 }
-.para[data-para="784"] .col[data-col="786"] .col-text .bit { margin:0 0 5px }
+.para[data-para="784"] .col[data-col="786"] .col-text .bit { margin:0 0 10px }
 .para[data-para="784"] .col[data-col="786"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="784"] .col[data-col="786"] .col-text .bit { padding-left:0em }
 .para[data-para="784"] .col[data-col="786"] .col-text .bit.indent { padding-left:2em }
@@ -246,10 +247,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="784"] .col[data-col="786"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="784"] .col[data-col="786"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="784"] .col[data-col="786"] a.ref{white-space:nowrap}
-.para[data-para="788"] .col[data-col="789"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="788"] .col[data-col="789"] .col-text, .para[data-para="788"] .col[data-col="789"] .col-text .bit { line-height:1.2 }
+.para[data-para="788"] .col[data-col="789"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="788"] .col[data-col="789"] .col-text, .para[data-para="788"] .col[data-col="789"] .col-text .bit { line-height:1.3 }
 .para[data-para="788"] .col[data-col="789"] .col-text { gap:0 }
-.para[data-para="788"] .col[data-col="789"] .col-text .bit { margin:0 0 7px }
+.para[data-para="788"] .col[data-col="789"] .col-text .bit { margin:0 0 10px }
 .para[data-para="788"] .col[data-col="789"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="788"] .col[data-col="789"] .col-text .bit { padding-left:0em }
 .para[data-para="788"] .col[data-col="789"] .col-text .bit.indent { padding-left:2em }
@@ -258,10 +259,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="788"] .col[data-col="789"] .col-text .bit.bullet::before, .para[data-para="788"] .col[data-col="789"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="788"] .col[data-col="789"] .col-text .bit.indent.bullet::before, .para[data-para="788"] .col[data-col="789"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="788"] .col[data-col="789"]{align-self:center}
-.para[data-para="788"] .col[data-col="790"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="788"] .col[data-col="790"] .col-text, .para[data-para="788"] .col[data-col="790"] .col-text .bit { line-height:1.2 }
+.para[data-para="788"] .col[data-col="790"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="788"] .col[data-col="790"] .col-text, .para[data-para="788"] .col[data-col="790"] .col-text .bit { line-height:1.3 }
 .para[data-para="788"] .col[data-col="790"] .col-text { gap:0 }
-.para[data-para="788"] .col[data-col="790"] .col-text .bit { margin:0 0 5px }
+.para[data-para="788"] .col[data-col="790"] .col-text .bit { margin:0 0 10px }
 .para[data-para="788"] .col[data-col="790"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="788"] .col[data-col="790"] .col-text .bit { padding-left:0em }
 .para[data-para="788"] .col[data-col="790"] .col-text .bit.indent { padding-left:2em }
@@ -275,10 +276,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="788"] .col[data-col="790"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="788"] .col[data-col="790"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="788"] .col[data-col="790"] a.ref{white-space:nowrap}
-.para[data-para="792"] .col[data-col="794"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="792"] .col[data-col="794"] .col-text, .para[data-para="792"] .col[data-col="794"] .col-text .bit { line-height:1.2 }
+.para[data-para="792"] .col[data-col="794"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="792"] .col[data-col="794"] .col-text, .para[data-para="792"] .col[data-col="794"] .col-text .bit { line-height:1.3 }
 .para[data-para="792"] .col[data-col="794"] .col-text { gap:0 }
-.para[data-para="792"] .col[data-col="794"] .col-text .bit { margin:0 0 7px }
+.para[data-para="792"] .col[data-col="794"] .col-text .bit { margin:0 0 10px }
 .para[data-para="792"] .col[data-col="794"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="792"] .col[data-col="794"] .col-text .bit { padding-left:0em }
 .para[data-para="792"] .col[data-col="794"] .col-text .bit.indent { padding-left:2em }
@@ -287,10 +288,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="792"] .col[data-col="794"] .col-text .bit.bullet::before, .para[data-para="792"] .col[data-col="794"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="792"] .col[data-col="794"] .col-text .bit.indent.bullet::before, .para[data-para="792"] .col[data-col="794"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="792"] .col[data-col="794"]{align-self:center}
-.para[data-para="792"] .col[data-col="796"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="792"] .col[data-col="796"] .col-text, .para[data-para="792"] .col[data-col="796"] .col-text .bit { line-height:1.2 }
+.para[data-para="792"] .col[data-col="796"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="792"] .col[data-col="796"] .col-text, .para[data-para="792"] .col[data-col="796"] .col-text .bit { line-height:1.3 }
 .para[data-para="792"] .col[data-col="796"] .col-text { gap:0 }
-.para[data-para="792"] .col[data-col="796"] .col-text .bit { margin:0 0 5px }
+.para[data-para="792"] .col[data-col="796"] .col-text .bit { margin:0 0 10px }
 .para[data-para="792"] .col[data-col="796"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="792"] .col[data-col="796"] .col-text .bit { padding-left:0em }
 .para[data-para="792"] .col[data-col="796"] .col-text .bit.indent { padding-left:2em }
@@ -304,10 +305,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="792"] .col[data-col="796"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="792"] .col[data-col="796"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="792"] .col[data-col="796"] a.ref{white-space:nowrap}
-.para[data-para="798"] .col[data-col="799"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="798"] .col[data-col="799"] .col-text, .para[data-para="798"] .col[data-col="799"] .col-text .bit { line-height:1.2 }
+.para[data-para="798"] .col[data-col="799"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="798"] .col[data-col="799"] .col-text, .para[data-para="798"] .col[data-col="799"] .col-text .bit { line-height:1.3 }
 .para[data-para="798"] .col[data-col="799"] .col-text { gap:0 }
-.para[data-para="798"] .col[data-col="799"] .col-text .bit { margin:0 0 7px }
+.para[data-para="798"] .col[data-col="799"] .col-text .bit { margin:0 0 10px }
 .para[data-para="798"] .col[data-col="799"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="798"] .col[data-col="799"] .col-text .bit { padding-left:0em }
 .para[data-para="798"] .col[data-col="799"] .col-text .bit.indent { padding-left:2em }
@@ -316,10 +317,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="798"] .col[data-col="799"] .col-text .bit.bullet::before, .para[data-para="798"] .col[data-col="799"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="798"] .col[data-col="799"] .col-text .bit.indent.bullet::before, .para[data-para="798"] .col[data-col="799"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="798"] .col[data-col="799"]{align-self:center}
-.para[data-para="798"] .col[data-col="800"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="798"] .col[data-col="800"] .col-text, .para[data-para="798"] .col[data-col="800"] .col-text .bit { line-height:1.2 }
+.para[data-para="798"] .col[data-col="800"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="798"] .col[data-col="800"] .col-text, .para[data-para="798"] .col[data-col="800"] .col-text .bit { line-height:1.3 }
 .para[data-para="798"] .col[data-col="800"] .col-text { gap:0 }
-.para[data-para="798"] .col[data-col="800"] .col-text .bit { margin:0 0 5px }
+.para[data-para="798"] .col[data-col="800"] .col-text .bit { margin:0 0 10px }
 .para[data-para="798"] .col[data-col="800"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="798"] .col[data-col="800"] .col-text .bit { padding-left:0em }
 .para[data-para="798"] .col[data-col="800"] .col-text .bit.indent { padding-left:2em }
@@ -333,10 +334,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="798"] .col[data-col="800"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="798"] .col[data-col="800"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="798"] .col[data-col="800"] a.ref{white-space:nowrap}
-.para[data-para="803"] .col[data-col="805"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="803"] .col[data-col="805"] .col-text, .para[data-para="803"] .col[data-col="805"] .col-text .bit { line-height:1.2 }
+.para[data-para="803"] .col[data-col="805"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="803"] .col[data-col="805"] .col-text, .para[data-para="803"] .col[data-col="805"] .col-text .bit { line-height:1.3 }
 .para[data-para="803"] .col[data-col="805"] .col-text { gap:0 }
-.para[data-para="803"] .col[data-col="805"] .col-text .bit { margin:0 0 7px }
+.para[data-para="803"] .col[data-col="805"] .col-text .bit { margin:0 0 10px }
 .para[data-para="803"] .col[data-col="805"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="803"] .col[data-col="805"] .col-text .bit { padding-left:0em }
 .para[data-para="803"] .col[data-col="805"] .col-text .bit.indent { padding-left:2em }
@@ -345,10 +346,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="803"] .col[data-col="805"] .col-text .bit.bullet::before, .para[data-para="803"] .col[data-col="805"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="803"] .col[data-col="805"] .col-text .bit.indent.bullet::before, .para[data-para="803"] .col[data-col="805"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="803"] .col[data-col="805"]{align-self:center}
-.para[data-para="803"] .col[data-col="806"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="803"] .col[data-col="806"] .col-text, .para[data-para="803"] .col[data-col="806"] .col-text .bit { line-height:1.2 }
+.para[data-para="803"] .col[data-col="806"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="803"] .col[data-col="806"] .col-text, .para[data-para="803"] .col[data-col="806"] .col-text .bit { line-height:1.3 }
 .para[data-para="803"] .col[data-col="806"] .col-text { gap:0 }
-.para[data-para="803"] .col[data-col="806"] .col-text .bit { margin:0 0 5px }
+.para[data-para="803"] .col[data-col="806"] .col-text .bit { margin:0 0 10px }
 .para[data-para="803"] .col[data-col="806"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="803"] .col[data-col="806"] .col-text .bit { padding-left:0em }
 .para[data-para="803"] .col[data-col="806"] .col-text .bit.indent { padding-left:2em }
@@ -370,11 +371,11 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .fn{text-decoration:none!important}
 a.ref .fn,.col-footnotes .fn{text-decoration:none!important;display:inline-block;position:relative;white-space:pre}
 a.ref, .col a.ref, .col-text a.ref, .para a.ref { color:var(--title); font-family:inherit; font-size:inherit; font-weight:inherit; font-style:inherit; text-decoration:underline; white-space:normal; overflow-wrap:anywhere }
-html, body { background:#e9ebe6 !important }
-.page-frame { background:#f6f7eb }
+html, body { background:white !important }
+.page-frame { background:white }
 .stick-top { background:transparent }
 .tab-dock { background:transparent }
-.page-frame{max-width:none;width:auto;margin:1.25rem;border:1px solid #9aa8ae;box-sizing:border-box}
+.page-frame{max-width:none;width:auto;margin:1.25rem;border:0;box-sizing:border-box}
 @media (min-width:1040px){.page-frame{max-width:1000px;margin-left:auto;margin-right:auto}}
 .top,.title-bar,.tab-dock,.tab-dock-end,.end-sub-tabs,main{max-width:none;margin-left:0;margin-right:0;padding-left:1.2rem;padding-right:1.2rem;box-sizing:border-box}
 .top{display:block;border:0;padding-left:0;padding-right:0}
@@ -384,7 +385,7 @@ html, body { background:#e9ebe6 !important }
 .top .brand-row{display:grid;grid-template-columns:minmax(0,1fr);align-items:center;width:100%;max-width:none;margin:0;padding:0 7.5rem;box-sizing:border-box}
 .title-bar{padding-left:0;padding-right:0}
 .title-bar-inner{display:flex;align-items:center;justify-content:center;padding-left:1.2rem;padding-right:1.2rem;padding-top:0;padding-bottom:0;box-sizing:border-box}
-.page-nav-bar{display:flex;justify-content:space-between;align-items:center;width:100%;box-sizing:border-box;padding:0.28rem 1.6rem;background:#fff}
+.page-nav-bar{display:flex;justify-content:space-between;align-items:center;width:100%;box-sizing:border-box;padding:0.28rem 1.6rem;background:white}
 .ew-mark{position:absolute;left:0;top:0;bottom:0;display:flex;align-items:stretch;z-index:2;gap:0.45rem;max-height:100%;overflow:hidden;padding-left:1.2rem;text-align:left;box-sizing:border-box}
 .ew-mark img{display:block;height:100%;width:auto;max-height:100%;min-height:0;min-width:0;object-fit:contain;object-position:left center;flex:0 1 auto}
 .ew-words{font-size:calc(18px * var(--ew-font, 1));text-align:left;align-items:flex-start;align-self:center;justify-content:center}
@@ -702,7 +703,9 @@ html.ew-phone .who .site {
 /* "html" lifts these above the defaults bible.js adds while the page runs. */
 html #ew-info-modal .ew-info-title, html #ew-info-modal .ew-info-x, html #ew-text-modal .ew-text-title { color: var(--title, #005eb8); }
 </style>
-
+  <style id="ew-look">header.top,.head-banners,.page-nav-bar,.stick-top{background:white!important}
+.head-banners{border-bottom:1px solid #e3e8ec}
+</style>
 <!-- Google tag (gtag.js) -->
 <script>
 (function(){
@@ -745,10 +748,10 @@ html #ew-info-modal .ew-info-title, html #ew-info-modal .ew-info-x, html #ew-tex
   </div>
   <main data-page="808">
     <div class="tab-panel" id="s0" data-sec="809"><div class="describe-contents contents-wrap"><div class="describe-line"><a href="index.html#s1">Home</a><div class="describe-note"></div></div><div class="describe-line"><a href="1-paradise-of-god-restored.html#s1">1. Paradise of God: Restored</a><div class="describe-note">God dwelt with Mankind until they rebelled. He will dwell in Paradise with us again.</div></div><div class="describe-line"><a href="2-sons-of-god-family-of-yahweh.html#s1">2. Sons of God: Family of Yahweh</a><div class="describe-note">Creation is waiting for God&#x27;s sons to reign over the nations.</div></div><div class="describe-line"><a href="3-feasts-of-god-timing-of-yahweh.html#s1" class="here">3. Feasts of God: Timing of Yahweh</a><div class="describe-note">The 8 Feasts of Yahweh prophesy the Day of the LORD, God Almighty</div></div><div class="describe-line"><a href="4-the-kingdom-of-god-fall-and-rise.html#s1">4. The Kingdom of God: Fall and Rise</a><div class="describe-note">God&#x27;s Kingdom: Lost and Restored - What fell down will be raised up.</div></div><div class="describe-line"><a href="5-wickedness-is-to-be-wiped-out.html#s1">5. Wickedness is to be Wiped Out!</a><div class="describe-note">God promised His family no sin or sorrow. He&#x27;s sending His Son to finish the job.</div></div><div class="describe-line"><a href="6-abraham-inherits-the-world.html#s0">6. Abraham Inherits the World</a><div class="describe-note">Yahweh chooses Abraham to father His nation from which his seed reigns over the world.</div></div></div></div><div class="tab-panel active" id="s1" data-sec="810"><div class="subsec" data-heading="774"><h2 class="edit-heading" data-heading="774">His appointed times</h2><div class="subsec-frame" data-heading="774"><div class="row-block" data-para="771"><div class="para" data-para="771"><div class="col" data-col="772" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Long ago, after God, whose personal name is Yahweh, brought the people of Israel out of slavery in Egypt, Yahweh gave them a calendar of seven yearly feasts. A feast was a holy day or week when the people stopped their ordinary work and gathered to worship. Yahweh called these feasts His own appointed times, set days for <span class="ew-term" tabindex="0" role="button" data-title="Holy convocations" data-body="Holy convocations were sacred assemblies, days when Israel gathered before Yahweh and did no customary work.
-Lev 23:7-8">holy convocations</span>.<span class="fn"> <span class="fn">1</span> </span>Four feasts fell in spring and early summer, and three fell in autumn. This page walks through the feasts in the order of the year. Like the pictures in a stained-glass window, the feasts show what Yahweh is doing in history. The apostle Paul says the feasts are a shadow of things to come, and that the reality is found in Christ.<span class="fn"> <span class="fn">2</span> </span>The spring feasts point to what Christ has already done. The autumn feasts point to what is still to come.</span><span class="bit"><i>The stained-glass picture is from hisfinishedwork.com, chapter 4 Takeaways.</i></span><span class="bit ew-info" contenteditable="false" role="button" tabindex="0" aria-expanded="false" data-label="The seven feasts at a glance"><span class="ew-info-mark" aria-hidden="true">ⓘ</span> The seven feasts at a glance</span><span class="bit numbered" data-n="1">Passover: first month, fourteenth day.<br><a class="ref" href="#ref" data-ref="Lev 23:5">Lev 23:5</a></span><span class="bit numbered" data-n="2">Unleavened Bread: first month, fifteenth day, for seven days.<br><a class="ref" href="#ref" data-ref="Lev 23:6">Lev 23:6</a></span><span class="bit numbered" data-n="3">Firstfruits: the day after the Sabbath.<br><a class="ref" href="#ref" data-ref="Lev 23:10-11">Lev 23:10-11</a></span><span class="bit numbered" data-n="4">Weeks (Pentecost): fifty days later.<br><a class="ref" href="#ref" data-ref="Lev 23:15-16">Lev 23:15-16</a></span><span class="bit numbered" data-n="5">Trumpets: seventh month, first day.<br><a class="ref" href="#ref" data-ref="Lev 23:24">Lev 23:24</a></span><span class="bit numbered" data-n="6">Day of Atonement: seventh month, tenth day.<br><a class="ref" href="#ref" data-ref="Lev 23:27">Lev 23:27</a></span><span class="bit numbered" data-n="7">Tabernacles: seventh month, fifteenth day, for seven days.<br><a class="ref" href="#ref" data-ref="Lev 23:34">Lev 23:34</a></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="773" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Lev 23:2">Lev 23:2</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Col 2:16-17">Col 2:16-17</a></span></div></div></div></div></div></div><div class="subsec" data-heading="787"><h2 class="edit-heading" data-heading="787">Spring: what has been fulfilled</h2><div class="subsec-frame" data-heading="787"><div class="row-block" data-para="775"><h3 class="row-title" data-para="775">Passover</h3><div class="para" data-para="775"><div class="col" data-col="776" style="flex:1.0 1 0"><div class="col-text"><span class="bit">The first feast is Passover. On the night Yahweh freed Israel from Egypt, each family killed a lamb and painted its blood on the doorframe of the house. When Yahweh saw the blood, He passed over that house and spared it.<span class="fn"> <span class="fn">1</span>  </span>Yahweh did not let the destroyer enter the houses marked with blood.<span class="fn"> <span class="fn">2</span>  </span>Paul calls Christ the Passover lamb, sacrificed for His people.<span class="fn"> <span class="fn">3</span>  </span>A sacrifice was an animal killed in worship to deal with sin. People made right with God through Christ&#x27;s blood will be saved from God&#x27;s anger through Christ.<span class="fn"> <span class="fn">4</span> </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="777" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Exo 12:13">Exo 12:13</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Exo 12:23">Exo 12:23</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="1Co 5:7">1Co 5:7</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Rom 5:9">Rom 5:9</a></span></div></div></div></div><div class="row-block" data-para="778"><h3 class="row-title" data-para="778">Unleavened Bread</h3><div class="para" data-para="778"><div class="col" data-col="779" style="flex:1.0 1 0"><div class="col-text"><span class="bit">The Feast of Unleavened Bread began the day after Passover and lasted seven days. Leaven is yeast, which makes dough rise. Israel left Egypt in such haste that their bread had no time to rise.<span class="fn"> <span class="fn">1</span>  </span>Paul uses leaven as a picture of sin that spreads through a whole life. Paul tells believers to clear out the old leaven of malice and wickedness and to keep the feast with honesty and truth.<span class="fn"> <span class="fn">2</span> </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="780" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Exo 12:39">Exo 12:39</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="1Co 5:7-8">1Co 5:7-8</a></span></div></div></div></div><div class="row-block" data-para="781"><h3 class="row-title" data-para="781">Firstfruits</h3><div class="para" data-para="781"><div class="col" data-col="782" style="flex:1.0 1 0"><div class="col-text"><span class="bit">The Feast of Firstfruits came on the day after the Sabbath, the weekly day of rest. When the harvest began, the priest waved the <span class="ew-term" tabindex="0" role="button" data-title="Firstfruits" data-body="The firstfruits was the first sheaf of the harvest. It was brought to the priest and waved before Yahweh before any of the harvest was eaten.
-Lev 23:10-14">first sheaf</span> of grain before Yahweh.<span class="fn"> <span class="fn">1</span>  </span>Christ rose from the dead as the firstfruits, the first of all who have died to be raised, and a sign that the rest will follow.<span class="fn"> <span class="fn">2</span> </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="783" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Lev 23:10-11">Lev 23:10-11</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="1Co 15:20">1Co 15:20</a></span></div></div></div></div><div class="row-block" data-para="784"><h3 class="row-title" data-para="784">Pentecost (Weeks)</h3><div class="para" data-para="784"><div class="col" data-col="785" style="flex:1.0 1 0"><div class="col-text"><span class="bit">The Feast of Weeks came fifty days after Firstfruits, so the feast is also called Pentecost, from the Greek word for fiftieth. Israel counted the fifty days and then brought a new offering of grain to Yahweh.<span class="fn"> <span class="fn">1</span>  </span>Long before, Israel had reached Mount Sinai in the third month after leaving Egypt,<span class="fn"> <span class="fn">2</span> </span>and Yahweh came down on the mountain in fire, with the sound of a trumpet, to give Israel His law.<span class="fn"> <span class="fn">3</span>  </span>When the Day of Pentecost came after Jesus rose from the dead, God&#x27;s Holy Spirit came on Jesus&#x27; followers with something like flames of fire.<span class="fn"> <span class="fn">4</span>  </span>Yahweh had promised that one day He would write His law on His people&#x27;s hearts.<span class="fn"> <span class="fn">5</span>  </span>Paul says the Spirit writes on human hearts, not on tablets of stone like the law at Sinai.<span class="fn"> <span class="fn">6</span>  </span>Scripture does not tie Sinai or the heart-written law to the day of Pentecost in so many words. That link is an <span class="ew-term" tabindex="0" role="button" data-title="Inference" data-body="An inference is a conclusion drawn from the verses rather than stated by them in so many words. It is marked so you can weigh it for yourself.">Inference</span>.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="786" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Lev 23:15-16">Lev 23:15-16</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Exo 19:1">Exo 19:1</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Exo 19:16-18">Exo 19:16-18</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Act 2:1-4">Act 2:1-4</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Jer 31:33">Jer 31:33</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="2Co 3:3">2Co 3:3</a></span></div></div></div></div></div></div><div class="subsec" data-heading="801"><h2 class="edit-heading" data-heading="801">Autumn: what is still to come</h2><div class="subsec-frame" data-heading="801"><div class="row-block" data-para="788"><h3 class="row-title" data-para="788">Trumpets</h3><div class="para" data-para="788"><div class="col" data-col="789" style="flex:1.0 1 0"><div class="col-text"><span class="bit">After the summer harvest came the autumn feasts. The Feast of Trumpets fell on the first day of the seventh month, a day of rest and remembrance marked by blowing trumpets.<span class="fn"> <span class="fn">1</span>  </span>Paul writes that the Lord Jesus Himself will come down from heaven with the sound of God&#x27;s trumpet.<span class="fn"> <span class="fn">2</span>  </span>At the last trumpet the dead will be raised, never to decay again.<span class="fn"> <span class="fn">3</span>  </span>Scripture does not name these events as the fulfilment of the feast. The link is an inference drawn from the trumpet.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="790" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Lev 23:24">Lev 23:24</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="1Th 4:16">1Th 4:16</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="1Co 15:52">1Co 15:52</a></span></div></div></div></div><div class="row-block" data-para="792"><h3 class="row-title" data-para="792">Day of Atonement</h3><div class="para" data-para="792"><div class="col" data-col="794" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Ten days later came the Day of Atonement. Atonement means covering sin so that people can be made right with God. On this one day each year, the high priest went behind the veil, the curtain that closed off the innermost room of God&#x27;s house, and the high priest always took blood with him.<span class="fn"> <span class="fn">1</span>  </span>The high priest also confessed Israel&#x27;s sins over a live <span class="ew-term" tabindex="0" role="button" data-title="The goat" data-body="On the Day of Atonement the high priest laid both hands on the head of a live goat, confessed Israel’s sins over it, and sent it into the wilderness
-Lev 16:21-22">goat</span>, and the goat carried those sins away into the wilderness.<span class="fn"> <span class="fn">2</span>  </span>Christ entered the Most Holy Place once, for all time, with His own blood.<span class="fn"> <span class="fn">3</span>  </span>The prophet Zechariah says Israel will one day look on the One they pierced and will mourn,<span class="fn"> <span class="fn">4</span> </span>and a fountain will be opened to wash away their sin.<span class="fn"> <span class="fn">5</span>  </span>Zechariah does not name the Day of Atonement. The link is drawn from the mourning and cleansing.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="796" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Heb 9:7">Heb 9:7</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Lev 16:21-22">Lev 16:21-22</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Heb 9:12">Heb 9:12</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Zec 12:10">Zec 12:10</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Zec 13:1">Zec 13:1</a></span></div></div></div></div><div class="row-block" data-para="798"><h3 class="row-title" data-para="798">Tabernacles</h3><div class="para" data-para="798"><div class="col" data-col="799" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Five days later came the Feast of Tabernacles, the last feast of the year. For seven days Israel lived in <span class="ew-term" tabindex="0" role="button" data-title="Booths" data-body="Booths were temporary shelters of branches. They reminded Israel that Yahweh made them dwell in booths when He brought them out of Egypt.
-Lev 23:42-43">booths</span> and rejoiced before Yahweh.<span class="fn"> <span class="fn">1</span>  </span>The booths reminded Israel of the shelters they lived in after Yahweh brought them out of Egypt. The Gospel of John says that Jesus, the Son of God, became a human being and lived among people, like God pitching His tent among them.<span class="fn"> <span class="fn">2</span>  </span>In the coming kingdom, the nations will go up to Jerusalem year by year to worship the King and keep the Feast of Tabernacles.<span class="fn"> <span class="fn">3</span>  </span>At the very end of the Bible, a loud voice from heaven announces that God now makes His home with people.<span class="fn"> <span class="fn">4</span> </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="800" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Lev 23:40-42">Lev 23:40-42</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Jhn 1:14">Jhn 1:14</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Zec 14:16">Zec 14:16</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Rev 21:3">Rev 21:3</a></span></div></div></div></div></div></div><div class="subsec" data-heading="807"><h2 class="edit-heading" data-heading="807">The calendar is the story</h2><div class="subsec-frame" data-heading="807"><div class="row-block" data-para="803"><div class="para" data-para="803"><div class="col" data-col="805" style="flex:1.0 1 0"><div class="col-text"><span class="bit">So Israel&#x27;s calendar tells the whole story in a single year. The year opens with a lamb&#x27;s blood that saves God&#x27;s people from death in Egypt,<span class="fn"> <span class="fn">1</span> </span>and the year closes with a feast that remembers God bringing His people out to live with Him.<span class="fn"> <span class="fn">2</span>  </span>The Bible runs the same way, from God&#x27;s rescue of His people to God living with His people forever on a renewed earth.<span class="fn"> <span class="fn">3</span> </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="806" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Exo 12:13">Exo 12:13</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Lev 23:42-43">Lev 23:42-43</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Rev 21:1-3">Rev 21:1-3</a></span></div></div></div></div></div></div></div>
+Lev 23:7-8">holy convocations</span>.<span class="fn"> 1 </span>Four feasts fell in spring and early summer, and three fell in autumn. This page walks through the feasts in the order of the year. Like the pictures in a stained-glass window, the feasts show what Yahweh is doing in history. The apostle Paul says the feasts are a shadow of things to come, and that the reality is found in Christ.<span class="fn"> 2 </span>The spring feasts point to what Christ has already done. The autumn feasts point to what is still to come.</span><span class="bit"><i>The stained-glass picture is from hisfinishedwork.com, chapter 4 Takeaways.</i></span><span class="bit ew-info" contenteditable="false" role="button" tabindex="0" aria-expanded="false" data-label="The seven feasts at a glance"><span class="ew-info-mark" aria-hidden="true">ⓘ</span> The seven feasts at a glance</span><span class="bit numbered" data-n="1">Passover: first month, fourteenth day.<br><a class="ref" href="#ref" data-ref="Lev 23:5">Lev 23:5</a></span><span class="bit numbered" data-n="2">Unleavened Bread: first month, fifteenth day, for seven days.<br><a class="ref" href="#ref" data-ref="Lev 23:6">Lev 23:6</a></span><span class="bit numbered" data-n="3">Firstfruits: the day after the Sabbath.<br><a class="ref" href="#ref" data-ref="Lev 23:10-11">Lev 23:10-11</a></span><span class="bit numbered" data-n="4">Weeks (Pentecost): fifty days later.<br><a class="ref" href="#ref" data-ref="Lev 23:15-16">Lev 23:15-16</a></span><span class="bit numbered" data-n="5">Trumpets: seventh month, first day.<br><a class="ref" href="#ref" data-ref="Lev 23:24">Lev 23:24</a></span><span class="bit numbered" data-n="6">Day of Atonement: seventh month, tenth day.<br><a class="ref" href="#ref" data-ref="Lev 23:27">Lev 23:27</a></span><span class="bit numbered" data-n="7">Tabernacles: seventh month, fifteenth day, for seven days.<br><a class="ref" href="#ref" data-ref="Lev 23:34">Lev 23:34</a></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="773" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Lev 23:2">Lev 23:2</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Col 2:16-17">Col 2:16-17</a></span></div></div></div></div></div></div><div class="subsec" data-heading="787"><h2 class="edit-heading" data-heading="787">Spring: what has been fulfilled</h2><div class="subsec-frame" data-heading="787"><div class="row-block" data-para="775"><h3 class="row-title" data-para="775">Passover</h3><div class="para" data-para="775"><div class="col" data-col="776" style="flex:1.0 1 0"><div class="col-text"><span class="bit">The first feast is Passover. On the night Yahweh freed Israel from Egypt, each family killed a lamb and painted its blood on the doorframe of the house. When Yahweh saw the blood, He passed over that house and spared it.<span class="fn"> 1  </span>Yahweh did not let the destroyer enter the houses marked with blood.<span class="fn"> 2  </span>Paul calls Christ the Passover lamb, sacrificed for His people.<span class="fn"> 3  </span>A sacrifice was an animal killed in worship to deal with sin. People made right with God through Christ&#x27;s blood will be saved from God&#x27;s anger through Christ.<span class="fn"> 4 </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="777" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Exo 12:13">Exo 12:13</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Exo 12:23">Exo 12:23</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="1Co 5:7">1Co 5:7</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Rom 5:9">Rom 5:9</a></span></div></div></div></div><div class="row-block" data-para="778"><h3 class="row-title" data-para="778">Unleavened Bread</h3><div class="para" data-para="778"><div class="col" data-col="779" style="flex:1.0 1 0"><div class="col-text"><span class="bit">The Feast of Unleavened Bread began the day after Passover and lasted seven days. Leaven is yeast, which makes dough rise. Israel left Egypt in such haste that their bread had no time to rise.<span class="fn"> 1  </span>Paul uses leaven as a picture of sin that spreads through a whole life. Paul tells believers to clear out the old leaven of malice and wickedness and to keep the feast with honesty and truth.<span class="fn"> 2 </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="780" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Exo 12:39">Exo 12:39</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="1Co 5:7-8">1Co 5:7-8</a></span></div></div></div></div><div class="row-block" data-para="781"><h3 class="row-title" data-para="781">Firstfruits</h3><div class="para" data-para="781"><div class="col" data-col="782" style="flex:1.0 1 0"><div class="col-text"><span class="bit">The Feast of Firstfruits came on the day after the Sabbath, the weekly day of rest. When the harvest began, the priest waved the <span class="ew-term" tabindex="0" role="button" data-title="Firstfruits" data-body="The firstfruits was the first sheaf of the harvest. It was brought to the priest and waved before Yahweh before any of the harvest was eaten.
+Lev 23:10-14">first sheaf</span> of grain before Yahweh.<span class="fn"> 1  </span>Christ rose from the dead as the firstfruits, the first of all who have died to be raised, and a sign that the rest will follow.<span class="fn"> 2 </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="783" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Lev 23:10-11">Lev 23:10-11</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="1Co 15:20">1Co 15:20</a></span></div></div></div></div><div class="row-block" data-para="784"><h3 class="row-title" data-para="784">Pentecost (Weeks)</h3><div class="para" data-para="784"><div class="col" data-col="785" style="flex:1.0 1 0"><div class="col-text"><span class="bit">The Feast of Weeks came fifty days after Firstfruits, so the feast is also called Pentecost, from the Greek word for fiftieth. Israel counted the fifty days and then brought a new offering of grain to Yahweh.<span class="fn"> 1  </span>Long before, Israel had reached Mount Sinai in the third month after leaving Egypt,<span class="fn"> 2 </span>and Yahweh came down on the mountain in fire, with the sound of a trumpet, to give Israel His law.<span class="fn"> 3  </span>When the Day of Pentecost came after Jesus rose from the dead, God&#x27;s Holy Spirit came on Jesus&#x27; followers with something like flames of fire.<span class="fn"> 4  </span>Yahweh had promised that one day He would write His law on His people&#x27;s hearts.<span class="fn"> 5  </span>Paul says the Spirit writes on human hearts, not on tablets of stone like the law at Sinai.<span class="fn"> 6  </span>Scripture does not tie Sinai or the heart-written law to the day of Pentecost in so many words. That link is an <span class="ew-term" tabindex="0" role="button" data-title="Inference" data-body="An inference is a conclusion drawn from the verses rather than stated by them in so many words. It is marked so you can weigh it for yourself.">Inference</span>.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="786" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Lev 23:15-16">Lev 23:15-16</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Exo 19:1">Exo 19:1</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Exo 19:16-18">Exo 19:16-18</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Act 2:1-4">Act 2:1-4</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Jer 31:33">Jer 31:33</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="2Co 3:3">2Co 3:3</a></span></div></div></div></div></div></div><div class="subsec" data-heading="801"><h2 class="edit-heading" data-heading="801">Autumn: what is still to come</h2><div class="subsec-frame" data-heading="801"><div class="row-block" data-para="788"><h3 class="row-title" data-para="788">Trumpets</h3><div class="para" data-para="788"><div class="col" data-col="789" style="flex:1.0 1 0"><div class="col-text"><span class="bit">After the summer harvest came the autumn feasts. The Feast of Trumpets fell on the first day of the seventh month, a day of rest and remembrance marked by blowing trumpets.<span class="fn"> 1  </span>Paul writes that the Lord Jesus Himself will come down from heaven with the sound of God&#x27;s trumpet.<span class="fn"> 2  </span>At the last trumpet the dead will be raised, never to decay again.<span class="fn"> 3  </span>Scripture does not name these events as the fulfilment of the feast. The link is an inference drawn from the trumpet.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="790" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Lev 23:24">Lev 23:24</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="1Th 4:16">1Th 4:16</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="1Co 15:52">1Co 15:52</a></span></div></div></div></div><div class="row-block" data-para="792"><h3 class="row-title" data-para="792">Day of Atonement</h3><div class="para" data-para="792"><div class="col" data-col="794" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Ten days later came the Day of Atonement. Atonement means covering sin so that people can be made right with God. On this one day each year, the high priest went behind the veil, the curtain that closed off the innermost room of God&#x27;s house, and the high priest always took blood with him.<span class="fn"> 1  </span>The high priest also confessed Israel&#x27;s sins over a live <span class="ew-term" tabindex="0" role="button" data-title="The goat" data-body="On the Day of Atonement the high priest laid both hands on the head of a live goat, confessed Israel’s sins over it, and sent it into the wilderness
+Lev 16:21-22">goat</span>, and the goat carried those sins away into the wilderness.<span class="fn"> 2  </span>Christ entered the Most Holy Place once, for all time, with His own blood.<span class="fn"> 3  </span>The prophet Zechariah says Israel will one day look on the One they pierced and will mourn,<span class="fn"> 4 </span>and a fountain will be opened to wash away their sin.<span class="fn"> 5  </span>Zechariah does not name the Day of Atonement. The link is drawn from the mourning and cleansing.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="796" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Heb 9:7">Heb 9:7</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Lev 16:21-22">Lev 16:21-22</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Heb 9:12">Heb 9:12</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Zec 12:10">Zec 12:10</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Zec 13:1">Zec 13:1</a></span></div></div></div></div><div class="row-block" data-para="798"><h3 class="row-title" data-para="798">Tabernacles</h3><div class="para" data-para="798"><div class="col" data-col="799" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Five days later came the Feast of Tabernacles, the last feast of the year. For seven days Israel lived in <span class="ew-term" tabindex="0" role="button" data-title="Booths" data-body="Booths were temporary shelters of branches. They reminded Israel that Yahweh made them dwell in booths when He brought them out of Egypt.
+Lev 23:42-43">booths</span> and rejoiced before Yahweh.<span class="fn"> 1  </span>The booths reminded Israel of the shelters they lived in after Yahweh brought them out of Egypt. The Gospel of John says that Jesus, the Son of God, became a human being and lived among people, like God pitching His tent among them.<span class="fn"> 2  </span>In the coming kingdom, the nations will go up to Jerusalem year by year to worship the King and keep the Feast of Tabernacles.<span class="fn"> 3  </span>At the very end of the Bible, a loud voice from heaven announces that God now makes His home with people.<span class="fn"> 4 </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="800" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Lev 23:40-42">Lev 23:40-42</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Jhn 1:14">Jhn 1:14</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Zec 14:16">Zec 14:16</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Rev 21:3">Rev 21:3</a></span></div></div></div></div></div></div><div class="subsec" data-heading="807"><h2 class="edit-heading" data-heading="807">The calendar is the story</h2><div class="subsec-frame" data-heading="807"><div class="row-block" data-para="803"><div class="para" data-para="803"><div class="col" data-col="805" style="flex:1.0 1 0"><div class="col-text"><span class="bit">So Israel&#x27;s calendar tells the whole story in a single year. The year opens with a lamb&#x27;s blood that saves God&#x27;s people from death in Egypt,<span class="fn"> 1 </span>and the year closes with a feast that remembers God bringing His people out to live with Him.<span class="fn"> 2  </span>The Bible runs the same way, from God&#x27;s rescue of His people to God living with His people forever on a renewed earth.<span class="fn"> 3 </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="806" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Exo 12:13">Exo 12:13</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Lev 23:42-43">Lev 23:42-43</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Rev 21:1-3">Rev 21:1-3</a></span></div></div></div></div></div></div></div>
   </main>
   <div class="tab-dock-end"><div class="tabs tabs-contents-left"><button type="button" class="tab tab-contents-left" data-tab="s0" data-sec="809">Contents</button><button type="button" class="tab active" data-tab="s1" data-sec="810">Story</button><button type="button" class="tab tab-notes" data-notes-toggle="1">Footnotes</button><button type="button" class="tab tab-settings" data-settings-open="1">Settings</button></div></div>
   
@@ -1416,7 +1419,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
   });
   apply();
 })();
-</script><script>window.ewDefaults={"notes": true}</script><script>window.ewFolder="10-Minute-Stories"</script><script>
+</script><script>window.ewDefaults={"notes": false}</script><script>window.ewFolder="10-Minute-Stories"</script><script>
 (function(){
   if (window.ewDetailsBound) return;
   window.ewDetailsBound = true;
@@ -1457,7 +1460,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
     setOpen(btn, !btn.classList.contains("open"));
   });
 })();
-</script><script>window.EW_GLOSSARY_SRC="glossary.json?v=52ae54a5";</script><script src="footnotes.js?v=711d126f"></script><script defer src="bible.js?v=bd830daf"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
+</script><script>window.EW_GLOSSARY_SRC="glossary.json?v=52ae54a5";</script><script src="footnotes.js?v=fe5a0771"></script><script defer src="bible.js?v=12d5bb20"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
 (function(){
   var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   var last = "";
@@ -1487,6 +1490,110 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
   }
   document.addEventListener("ew-page-swap", fill);
   fill();
+})();
+</script><script>
+(function(){
+  // Narrow windows (25 Nov 2026, Sir): a tab whose name wraps shrinks to its widest line; if the row still
+  // does not fit, Footnotes goes above Settings; if it still does not fit, the tabs wrap onto more rows.
+  // Nothing changes when every name fits on one line.
+  if (window.ewTabFitBound) return;
+  window.ewTabFitBound = true;
+  var d = document;
+  function px(v){ return parseFloat(v) || 0; }
+  function lines(t){
+    var r = d.createRange(), rs, rows = [], i, j, q, hit;
+    r.selectNodeContents(t);
+    rs = r.getClientRects();
+    for (i = 0; i < rs.length; i++) {
+      q = rs[i];
+      if (!q.width) continue;
+      hit = null;
+      for (j = 0; j < rows.length; j++) if (Math.abs(rows[j].top - q.top) < 2) { hit = rows[j]; break; }
+      if (hit) { hit.l = Math.min(hit.l, q.left); hit.r = Math.max(hit.r, q.right); }
+      else rows.push({ top: q.top, l: q.left, r: q.right });
+    }
+    return rows;
+  }
+  function shrink(bar){
+    for (var pass = 0; pass < 3; pass++) {
+      var changed = false;
+      bar.querySelectorAll(".tab").forEach(function(t){
+        if (t.style.width || !t.getClientRects().length) return;
+        var rows = lines(t);
+        if (rows.length < 2) return;
+        var w = 0;
+        rows.forEach(function(x){ w = Math.max(w, x.r - x.l); });
+        var cs = getComputedStyle(t);
+        var add = cs.boxSizing === "border-box" ? px(cs.paddingLeft) + px(cs.paddingRight) + px(cs.borderLeftWidth) + px(cs.borderRightWidth) : 0;
+        var nw = Math.min(Math.ceil(w + add + 1), Math.ceil(t.getBoundingClientRect().width));
+        t.style.width = nw + "px";
+        t.classList.add("tab-fit");
+        if (lines(t).length !== rows.length) { clear(t); return; }
+        changed = true;
+      });
+      if (!changed) break;
+    }
+  }
+  function clear(t){
+    t.style.width = "";
+    t.classList.remove("tab-fit");
+    if (!t.getAttribute("style")) t.removeAttribute("style");
+  }
+  function over(bar){ return bar.scrollWidth > bar.clientWidth + 1; }
+  function unfit(bar){
+    bar.querySelectorAll(".tab-fit").forEach(clear);
+  }
+  function reset(bar){
+    unfit(bar);
+    bar.classList.remove("tabs-wrap");
+    var st = bar.querySelector(":scope > .tab-stack");
+    if (st) {
+      while (st.firstChild) bar.insertBefore(st.firstChild, st);
+      bar.removeChild(st);
+    }
+  }
+  function fit(bar){
+    reset(bar);
+    if (!bar.getClientRects().length) return;
+    shrink(bar);
+    if (!over(bar)) return;
+    var n = bar.querySelector(":scope > .tab-notes"), s = bar.querySelector(":scope > .tab-settings");
+    if (n && s) {
+      var st = d.createElement("span");
+      st.className = "tab-stack";
+      bar.insertBefore(st, n);
+      st.appendChild(n);
+      st.appendChild(s);
+      unfit(bar);
+      shrink(bar);
+      if (!over(bar)) return;
+    }
+    // Keep the names wrapped as they are now, and let the tabs go onto more rows.
+    bar.classList.add("tabs-wrap");
+    shrink(bar);
+  }
+  var last = "";
+  function all(force){
+    var key = (d.documentElement.clientWidth || 0) + "|" + (d.documentElement.style.getPropertyValue("--ew-font") || "");
+    if (!force && key === last) return;
+    last = key;
+    d.querySelectorAll(".tabs").forEach(fit);
+  }
+  var queued = false;
+  function soon(force){
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(function(){ queued = false; all(force); });
+  }
+  window.addEventListener("resize", function(){ soon(false); });
+  window.addEventListener("orientationchange", function(){ soon(true); });
+  window.addEventListener("load", function(){ soon(true); });
+  d.addEventListener("ew-page-swap", function(){ soon(true); });
+  if (d.fonts && d.fonts.ready) d.fonts.ready.then(function(){ soon(true); });
+  if (window.MutationObserver) new MutationObserver(function(){ soon(false); }).observe(d.documentElement, { attributes: true, attributeFilter: ["style"] });
+  if (d.readyState === "loading") d.addEventListener("DOMContentLoaded", function(){ all(true); });
+  else all(true);
+  window.ewFitTabs = function(){ all(true); };
 })();
 </script>
 </body>

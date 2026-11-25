@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-GB" data-page="157">
+<html lang="en-GB" data-page="157" data-window="white">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -32,15 +32,15 @@
 .title-bar h1 { font-family:Georgia, serif; font-size:calc(26px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#005eb8; text-align:left }
 .title-bar h1 { border-width:0 !important }
 .tab, .sub-tab { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
-h2 { font-family:Georgia, serif; font-size:calc(19px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f6f78; margin-top:19px; margin-bottom:6px; text-align:left }
-.subsec-frame { font-family:Georgia, serif; font-weight:400; font-style:normal; text-align:left }
-.para { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:#ffffff; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:10px; margin-top:10px; margin-bottom:10px; text-align:left; line-height:1.45; --para-gap:18px }
-.row-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:6px; text-align:left }
-.col-title:not(:empty) { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; margin-bottom:6px; text-align:left }
-.col { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.45; --para-gap:18px }
-.col .col-text, .col .col-text .bit { line-height:1.45 }
+h2 { font-family:Georgia, serif; font-size:calc(19px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1f6f78; background:white; margin-top:19px; margin-bottom:6px; text-align:left }
+.subsec-frame { font-family:Georgia, serif; font-weight:400; font-style:normal; background:white; text-align:left }
+.para { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 1.0px 1.0px; padding:10px; margin-top:10px; margin-bottom:10px; text-align:left; line-height:1.3; --para-gap:18px }
+.row-title { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:white; margin-bottom:6px; text-align:left }
+.col-title:not(:empty) { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:white; margin-bottom:6px; text-align:left }
+.col { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; text-align:left; line-height:1.3; --para-gap:10px }
+.col .col-text, .col .col-text .bit { line-height:1.3 }
 .col .col-text { gap:0 }
-.col .col-text .bit { margin:0 0 18px }
+.col .col-text .bit { margin:0 0 10px }
 .col .col-text .bit:last-child { margin-bottom:0 }
 .col .col-text .bit { padding-left:0em }
 .col .col-text .bit.indent { padding-left:2em }
@@ -67,44 +67,45 @@ h2 { font-family:Georgia, serif; font-size:calc(19px * var(--ew-font, 1)); font-
 .ew-chapter-list, .ew-ch-row { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; text-align:left; line-height:1.25 }
 .page-nav, .page-nav .page-nav-word, .page-nav .page-nav-tip, .page-tools, .page-tools button { font-weight:400; font-family:Georgia, serif; font-size:9px; color:#5a6a72 }
 .tab[data-sec="687"], .tab-panel[data-sec="687"] .sub-tab, .end-sub-tabs[data-for="s0"] .sub-tab { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
-.tab[data-sec="687"] { background:#ffffff }
-.tab-panel[data-sec="687"] .sub-tab { background:#ffffff }
-.end-sub-tabs[data-for="s0"] .sub-tab { background:#ffffff }
-.tab[data-sec="687"].active, .tab-panel[data-sec="687"] { background:#f6f7eb }
-.tab[data-sec="687"].active { border-bottom-color:#f6f7eb }
-.tab-panel[data-sec="687"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
-.end-sub-tabs[data-for="s0"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab[data-sec="687"] { background:white }
+.tab-panel[data-sec="687"] .sub-tab { background:white }
+.end-sub-tabs[data-for="s0"] .sub-tab { background:white }
+.tab[data-sec="687"].active, .tab-panel[data-sec="687"] { background:white }
+.tab[data-sec="687"].active { border-bottom-color:white }
+.tab-panel[data-sec="687"] .sub-tab.active { background:white; border-bottom-color:white }
+.end-sub-tabs[data-for="s0"] .sub-tab.active { background:white; border-top-color:white }
+.tab[data-sec="687"][data-sec][data-tab]:not(.active) { background:white }
 .tab[data-sec="688"], .tab-panel[data-sec="688"] .sub-tab, .end-sub-tabs[data-for="s1"] .sub-tab { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
-.tab[data-sec="688"] { background:#ffffff }
-.tab-panel[data-sec="688"] .sub-tab { background:#ffffff }
-.end-sub-tabs[data-for="s1"] .sub-tab { background:#ffffff }
-.tab[data-sec="688"].active, .tab-panel[data-sec="688"] { background:#f6f7eb }
-.tab[data-sec="688"].active { border-bottom-color:#f6f7eb }
-.tab-panel[data-sec="688"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
-.end-sub-tabs[data-for="s1"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab[data-sec="688"] { background:white }
+.tab-panel[data-sec="688"] .sub-tab { background:white }
+.end-sub-tabs[data-for="s1"] .sub-tab { background:white }
+.tab[data-sec="688"].active, .tab-panel[data-sec="688"] { background:white }
+.tab[data-sec="688"].active { border-bottom-color:white }
+.tab-panel[data-sec="688"] .sub-tab.active { background:white; border-bottom-color:white }
+.end-sub-tabs[data-for="s1"] .sub-tab.active { background:white; border-top-color:white }
 .tab[data-sec="689"], .tab-panel[data-sec="689"] .sub-tab, .end-sub-tabs[data-for="s2"] .sub-tab { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
-.tab[data-sec="689"] { background:#ffffff }
-.tab-panel[data-sec="689"] .sub-tab { background:#ffffff }
-.end-sub-tabs[data-for="s2"] .sub-tab { background:#ffffff }
-.tab[data-sec="689"].active, .tab-panel[data-sec="689"] { background:#f6f7eb }
-.tab[data-sec="689"].active { border-bottom-color:#f6f7eb }
-.tab-panel[data-sec="689"] .sub-tab.active { background:#f6f7eb; border-bottom-color:#f6f7eb }
-.end-sub-tabs[data-for="s2"] .sub-tab.active { background:#f6f7eb; border-top-color:#f6f7eb }
+.tab[data-sec="689"] { background:white }
+.tab-panel[data-sec="689"] .sub-tab { background:white }
+.end-sub-tabs[data-for="s2"] .sub-tab { background:white }
+.tab[data-sec="689"].active, .tab-panel[data-sec="689"] { background:white }
+.tab[data-sec="689"].active { border-bottom-color:white }
+.tab-panel[data-sec="689"] .sub-tab.active { background:white; border-bottom-color:white }
+.end-sub-tabs[data-for="s2"] .sub-tab.active { background:white; border-top-color:white }
 body, button, input, select, textarea { font-family:Georgia, serif }
 .tab.active, .tab-panel .sub-tab.active { margin-bottom:-1px; position:relative; z-index:1 }
 .tab { border-radius:7px 7px 0 0 }
 .tab-panel { border-radius:0 7px 7px 0 }
 .tab-dock-end .tabs, .end-sub-tabs .sub-tabs { border-top:1px solid var(--line) }
-.end-sub-tabs .sub-tab { background:#ffffff }
+.end-sub-tabs .sub-tab { background:white }
 .end-sub-tabs .sub-tab { border-radius:0 0 7px 7px; border-top:0 }
-.end-sub-tabs .sub-tab.active { margin-top:-1px; border-top-color:#f6f7eb; background:#f6f7eb }
+.end-sub-tabs .sub-tab.active { margin-top:-1px; border-top-color:white; background:white }
 .tabs .tab.tab-notes.tab-notes, .tabs .tab.tab-settings.tab-settings { font-family:Georgia, serif; font-size:calc(16px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; border-style:solid; border-color:#c5d0d4; border-width:1.0px 1.0px 0px 1.0px; padding:6px; text-align:left }
-.tabs .tab.tab-notes.tab-notes, .tabs .tab.tab-settings.tab-settings { background:#ffffff }
+.tabs .tab.tab-notes.tab-notes, .tabs .tab.tab-settings.tab-settings { background:white }
 .col-title:empty { display:none; margin:0 }
-.para[data-para="659"] .col[data-col="660"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="659"] .col[data-col="660"] .col-text, .para[data-para="659"] .col[data-col="660"] .col-text .bit { line-height:1.2 }
+.para[data-para="659"] .col[data-col="660"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="659"] .col[data-col="660"] .col-text, .para[data-para="659"] .col[data-col="660"] .col-text .bit { line-height:1.3 }
 .para[data-para="659"] .col[data-col="660"] .col-text { gap:0 }
-.para[data-para="659"] .col[data-col="660"] .col-text .bit { margin:0 0 7px }
+.para[data-para="659"] .col[data-col="660"] .col-text .bit { margin:0 0 10px }
 .para[data-para="659"] .col[data-col="660"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="659"] .col[data-col="660"] .col-text .bit { padding-left:0em }
 .para[data-para="659"] .col[data-col="660"] .col-text .bit.indent { padding-left:2em }
@@ -113,10 +114,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="659"] .col[data-col="660"] .col-text .bit.bullet::before, .para[data-para="659"] .col[data-col="660"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="659"] .col[data-col="660"] .col-text .bit.indent.bullet::before, .para[data-para="659"] .col[data-col="660"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="659"] .col[data-col="660"]{align-self:center}
-.para[data-para="659"] .col[data-col="661"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="659"] .col[data-col="661"] .col-text, .para[data-para="659"] .col[data-col="661"] .col-text .bit { line-height:1.2 }
+.para[data-para="659"] .col[data-col="661"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="659"] .col[data-col="661"] .col-text, .para[data-para="659"] .col[data-col="661"] .col-text .bit { line-height:1.3 }
 .para[data-para="659"] .col[data-col="661"] .col-text { gap:0 }
-.para[data-para="659"] .col[data-col="661"] .col-text .bit { margin:0 0 5px }
+.para[data-para="659"] .col[data-col="661"] .col-text .bit { margin:0 0 10px }
 .para[data-para="659"] .col[data-col="661"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="659"] .col[data-col="661"] .col-text .bit { padding-left:0em }
 .para[data-para="659"] .col[data-col="661"] .col-text .bit.indent { padding-left:2em }
@@ -130,10 +131,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="659"] .col[data-col="661"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="659"] .col[data-col="661"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="659"] .col[data-col="661"] a.ref{white-space:nowrap}
-.para[data-para="664"] .col[data-col="665"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="664"] .col[data-col="665"] .col-text, .para[data-para="664"] .col[data-col="665"] .col-text .bit { line-height:1.2 }
+.para[data-para="664"] .col[data-col="665"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="664"] .col[data-col="665"] .col-text, .para[data-para="664"] .col[data-col="665"] .col-text .bit { line-height:1.3 }
 .para[data-para="664"] .col[data-col="665"] .col-text { gap:0 }
-.para[data-para="664"] .col[data-col="665"] .col-text .bit { margin:0 0 7px }
+.para[data-para="664"] .col[data-col="665"] .col-text .bit { margin:0 0 10px }
 .para[data-para="664"] .col[data-col="665"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="664"] .col[data-col="665"] .col-text .bit { padding-left:0em }
 .para[data-para="664"] .col[data-col="665"] .col-text .bit.indent { padding-left:2em }
@@ -142,10 +143,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="664"] .col[data-col="665"] .col-text .bit.bullet::before, .para[data-para="664"] .col[data-col="665"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="664"] .col[data-col="665"] .col-text .bit.indent.bullet::before, .para[data-para="664"] .col[data-col="665"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="664"] .col[data-col="665"]{align-self:center}
-.para[data-para="664"] .col[data-col="666"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="664"] .col[data-col="666"] .col-text, .para[data-para="664"] .col[data-col="666"] .col-text .bit { line-height:1.2 }
+.para[data-para="664"] .col[data-col="666"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="664"] .col[data-col="666"] .col-text, .para[data-para="664"] .col[data-col="666"] .col-text .bit { line-height:1.3 }
 .para[data-para="664"] .col[data-col="666"] .col-text { gap:0 }
-.para[data-para="664"] .col[data-col="666"] .col-text .bit { margin:0 0 5px }
+.para[data-para="664"] .col[data-col="666"] .col-text .bit { margin:0 0 10px }
 .para[data-para="664"] .col[data-col="666"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="664"] .col[data-col="666"] .col-text .bit { padding-left:0em }
 .para[data-para="664"] .col[data-col="666"] .col-text .bit.indent { padding-left:2em }
@@ -159,10 +160,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="664"] .col[data-col="666"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="664"] .col[data-col="666"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="664"] .col[data-col="666"] a.ref{white-space:nowrap}
-.para[data-para="668"] .col[data-col="669"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="668"] .col[data-col="669"] .col-text, .para[data-para="668"] .col[data-col="669"] .col-text .bit { line-height:1.2 }
+.para[data-para="668"] .col[data-col="669"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="668"] .col[data-col="669"] .col-text, .para[data-para="668"] .col[data-col="669"] .col-text .bit { line-height:1.3 }
 .para[data-para="668"] .col[data-col="669"] .col-text { gap:0 }
-.para[data-para="668"] .col[data-col="669"] .col-text .bit { margin:0 0 7px }
+.para[data-para="668"] .col[data-col="669"] .col-text .bit { margin:0 0 10px }
 .para[data-para="668"] .col[data-col="669"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="668"] .col[data-col="669"] .col-text .bit { padding-left:0em }
 .para[data-para="668"] .col[data-col="669"] .col-text .bit.indent { padding-left:2em }
@@ -171,10 +172,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="668"] .col[data-col="669"] .col-text .bit.bullet::before, .para[data-para="668"] .col[data-col="669"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="668"] .col[data-col="669"] .col-text .bit.indent.bullet::before, .para[data-para="668"] .col[data-col="669"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="668"] .col[data-col="669"]{align-self:center}
-.para[data-para="668"] .col[data-col="670"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="668"] .col[data-col="670"] .col-text, .para[data-para="668"] .col[data-col="670"] .col-text .bit { line-height:1.2 }
+.para[data-para="668"] .col[data-col="670"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="668"] .col[data-col="670"] .col-text, .para[data-para="668"] .col[data-col="670"] .col-text .bit { line-height:1.3 }
 .para[data-para="668"] .col[data-col="670"] .col-text { gap:0 }
-.para[data-para="668"] .col[data-col="670"] .col-text .bit { margin:0 0 5px }
+.para[data-para="668"] .col[data-col="670"] .col-text .bit { margin:0 0 10px }
 .para[data-para="668"] .col[data-col="670"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="668"] .col[data-col="670"] .col-text .bit { padding-left:0em }
 .para[data-para="668"] .col[data-col="670"] .col-text .bit.indent { padding-left:2em }
@@ -188,10 +189,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="668"] .col[data-col="670"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="668"] .col[data-col="670"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="668"] .col[data-col="670"] a.ref{white-space:nowrap}
-.para[data-para="672"] .col[data-col="673"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="672"] .col[data-col="673"] .col-text, .para[data-para="672"] .col[data-col="673"] .col-text .bit { line-height:1.2 }
+.para[data-para="672"] .col[data-col="673"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="672"] .col[data-col="673"] .col-text, .para[data-para="672"] .col[data-col="673"] .col-text .bit { line-height:1.3 }
 .para[data-para="672"] .col[data-col="673"] .col-text { gap:0 }
-.para[data-para="672"] .col[data-col="673"] .col-text .bit { margin:0 0 7px }
+.para[data-para="672"] .col[data-col="673"] .col-text .bit { margin:0 0 10px }
 .para[data-para="672"] .col[data-col="673"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="672"] .col[data-col="673"] .col-text .bit { padding-left:0em }
 .para[data-para="672"] .col[data-col="673"] .col-text .bit.indent { padding-left:2em }
@@ -200,10 +201,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="672"] .col[data-col="673"] .col-text .bit.bullet::before, .para[data-para="672"] .col[data-col="673"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="672"] .col[data-col="673"] .col-text .bit.indent.bullet::before, .para[data-para="672"] .col[data-col="673"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="672"] .col[data-col="673"]{align-self:center}
-.para[data-para="672"] .col[data-col="674"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="672"] .col[data-col="674"] .col-text, .para[data-para="672"] .col[data-col="674"] .col-text .bit { line-height:1.2 }
+.para[data-para="672"] .col[data-col="674"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="672"] .col[data-col="674"] .col-text, .para[data-para="672"] .col[data-col="674"] .col-text .bit { line-height:1.3 }
 .para[data-para="672"] .col[data-col="674"] .col-text { gap:0 }
-.para[data-para="672"] .col[data-col="674"] .col-text .bit { margin:0 0 5px }
+.para[data-para="672"] .col[data-col="674"] .col-text .bit { margin:0 0 10px }
 .para[data-para="672"] .col[data-col="674"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="672"] .col[data-col="674"] .col-text .bit { padding-left:0em }
 .para[data-para="672"] .col[data-col="674"] .col-text .bit.indent { padding-left:2em }
@@ -217,10 +218,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="672"] .col[data-col="674"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="672"] .col[data-col="674"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="672"] .col[data-col="674"] a.ref{white-space:nowrap}
-.para[data-para="133"] .col[data-col="675"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="133"] .col[data-col="675"] .col-text, .para[data-para="133"] .col[data-col="675"] .col-text .bit { line-height:1.2 }
+.para[data-para="133"] .col[data-col="675"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="133"] .col[data-col="675"] .col-text, .para[data-para="133"] .col[data-col="675"] .col-text .bit { line-height:1.3 }
 .para[data-para="133"] .col[data-col="675"] .col-text { gap:0 }
-.para[data-para="133"] .col[data-col="675"] .col-text .bit { margin:0 0 7px }
+.para[data-para="133"] .col[data-col="675"] .col-text .bit { margin:0 0 10px }
 .para[data-para="133"] .col[data-col="675"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="133"] .col[data-col="675"] .col-text .bit { padding-left:0em }
 .para[data-para="133"] .col[data-col="675"] .col-text .bit.indent { padding-left:2em }
@@ -229,10 +230,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="133"] .col[data-col="675"] .col-text .bit.bullet::before, .para[data-para="133"] .col[data-col="675"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="133"] .col[data-col="675"] .col-text .bit.indent.bullet::before, .para[data-para="133"] .col[data-col="675"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="133"] .col[data-col="675"]{align-self:center}
-.para[data-para="133"] .col[data-col="135"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="133"] .col[data-col="135"] .col-text, .para[data-para="133"] .col[data-col="135"] .col-text .bit { line-height:1.2 }
+.para[data-para="133"] .col[data-col="135"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="133"] .col[data-col="135"] .col-text, .para[data-para="133"] .col[data-col="135"] .col-text .bit { line-height:1.3 }
 .para[data-para="133"] .col[data-col="135"] .col-text { gap:0 }
-.para[data-para="133"] .col[data-col="135"] .col-text .bit { margin:0 0 5px }
+.para[data-para="133"] .col[data-col="135"] .col-text .bit { margin:0 0 10px }
 .para[data-para="133"] .col[data-col="135"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="133"] .col[data-col="135"] .col-text .bit { padding-left:0em }
 .para[data-para="133"] .col[data-col="135"] .col-text .bit.indent { padding-left:2em }
@@ -246,10 +247,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="133"] .col[data-col="135"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="133"] .col[data-col="135"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="133"] .col[data-col="135"] a.ref{white-space:nowrap}
-.para[data-para="137"] .col[data-col="677"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="137"] .col[data-col="677"] .col-text, .para[data-para="137"] .col[data-col="677"] .col-text .bit { line-height:1.2 }
+.para[data-para="137"] .col[data-col="677"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="137"] .col[data-col="677"] .col-text, .para[data-para="137"] .col[data-col="677"] .col-text .bit { line-height:1.3 }
 .para[data-para="137"] .col[data-col="677"] .col-text { gap:0 }
-.para[data-para="137"] .col[data-col="677"] .col-text .bit { margin:0 0 7px }
+.para[data-para="137"] .col[data-col="677"] .col-text .bit { margin:0 0 10px }
 .para[data-para="137"] .col[data-col="677"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="137"] .col[data-col="677"] .col-text .bit { padding-left:0em }
 .para[data-para="137"] .col[data-col="677"] .col-text .bit.indent { padding-left:2em }
@@ -258,10 +259,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="137"] .col[data-col="677"] .col-text .bit.bullet::before, .para[data-para="137"] .col[data-col="677"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="137"] .col[data-col="677"] .col-text .bit.indent.bullet::before, .para[data-para="137"] .col[data-col="677"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="137"] .col[data-col="677"]{align-self:center}
-.para[data-para="137"] .col[data-col="678"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="137"] .col[data-col="678"] .col-text, .para[data-para="137"] .col[data-col="678"] .col-text .bit { line-height:1.2 }
+.para[data-para="137"] .col[data-col="678"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="137"] .col[data-col="678"] .col-text, .para[data-para="137"] .col[data-col="678"] .col-text .bit { line-height:1.3 }
 .para[data-para="137"] .col[data-col="678"] .col-text { gap:0 }
-.para[data-para="137"] .col[data-col="678"] .col-text .bit { margin:0 0 5px }
+.para[data-para="137"] .col[data-col="678"] .col-text .bit { margin:0 0 10px }
 .para[data-para="137"] .col[data-col="678"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="137"] .col[data-col="678"] .col-text .bit { padding-left:0em }
 .para[data-para="137"] .col[data-col="678"] .col-text .bit.indent { padding-left:2em }
@@ -275,10 +276,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="137"] .col[data-col="678"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="137"] .col[data-col="678"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="137"] .col[data-col="678"] a.ref{white-space:nowrap}
-.para[data-para="680"] .col[data-col="681"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="680"] .col[data-col="681"] .col-text, .para[data-para="680"] .col[data-col="681"] .col-text .bit { line-height:1.2 }
+.para[data-para="680"] .col[data-col="681"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="680"] .col[data-col="681"] .col-text, .para[data-para="680"] .col[data-col="681"] .col-text .bit { line-height:1.3 }
 .para[data-para="680"] .col[data-col="681"] .col-text { gap:0 }
-.para[data-para="680"] .col[data-col="681"] .col-text .bit { margin:0 0 7px }
+.para[data-para="680"] .col[data-col="681"] .col-text .bit { margin:0 0 10px }
 .para[data-para="680"] .col[data-col="681"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="680"] .col[data-col="681"] .col-text .bit { padding-left:0em }
 .para[data-para="680"] .col[data-col="681"] .col-text .bit.indent { padding-left:2em }
@@ -287,10 +288,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="680"] .col[data-col="681"] .col-text .bit.bullet::before, .para[data-para="680"] .col[data-col="681"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="680"] .col[data-col="681"] .col-text .bit.indent.bullet::before, .para[data-para="680"] .col[data-col="681"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="680"] .col[data-col="681"]{align-self:center}
-.para[data-para="680"] .col[data-col="143"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="680"] .col[data-col="143"] .col-text, .para[data-para="680"] .col[data-col="143"] .col-text .bit { line-height:1.2 }
+.para[data-para="680"] .col[data-col="143"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="680"] .col[data-col="143"] .col-text, .para[data-para="680"] .col[data-col="143"] .col-text .bit { line-height:1.3 }
 .para[data-para="680"] .col[data-col="143"] .col-text { gap:0 }
-.para[data-para="680"] .col[data-col="143"] .col-text .bit { margin:0 0 5px }
+.para[data-para="680"] .col[data-col="143"] .col-text .bit { margin:0 0 10px }
 .para[data-para="680"] .col[data-col="143"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="680"] .col[data-col="143"] .col-text .bit { padding-left:0em }
 .para[data-para="680"] .col[data-col="143"] .col-text .bit.indent { padding-left:2em }
@@ -304,10 +305,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="680"] .col[data-col="143"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="680"] .col[data-col="143"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="680"] .col[data-col="143"] a.ref{white-space:nowrap}
-.para[data-para="145"] .col[data-col="682"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="145"] .col[data-col="682"] .col-text, .para[data-para="145"] .col[data-col="682"] .col-text .bit { line-height:1.2 }
+.para[data-para="145"] .col[data-col="682"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="145"] .col[data-col="682"] .col-text, .para[data-para="145"] .col[data-col="682"] .col-text .bit { line-height:1.3 }
 .para[data-para="145"] .col[data-col="682"] .col-text { gap:0 }
-.para[data-para="145"] .col[data-col="682"] .col-text .bit { margin:0 0 7px }
+.para[data-para="145"] .col[data-col="682"] .col-text .bit { margin:0 0 10px }
 .para[data-para="145"] .col[data-col="682"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="145"] .col[data-col="682"] .col-text .bit { padding-left:0em }
 .para[data-para="145"] .col[data-col="682"] .col-text .bit.indent { padding-left:2em }
@@ -316,10 +317,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="145"] .col[data-col="682"] .col-text .bit.bullet::before, .para[data-para="145"] .col[data-col="682"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="145"] .col[data-col="682"] .col-text .bit.indent.bullet::before, .para[data-para="145"] .col[data-col="682"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="145"] .col[data-col="682"]{align-self:center}
-.para[data-para="145"] .col[data-col="147"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="145"] .col[data-col="147"] .col-text, .para[data-para="145"] .col[data-col="147"] .col-text .bit { line-height:1.2 }
+.para[data-para="145"] .col[data-col="147"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="145"] .col[data-col="147"] .col-text, .para[data-para="145"] .col[data-col="147"] .col-text .bit { line-height:1.3 }
 .para[data-para="145"] .col[data-col="147"] .col-text { gap:0 }
-.para[data-para="145"] .col[data-col="147"] .col-text .bit { margin:0 0 5px }
+.para[data-para="145"] .col[data-col="147"] .col-text .bit { margin:0 0 10px }
 .para[data-para="145"] .col[data-col="147"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="145"] .col[data-col="147"] .col-text .bit { padding-left:0em }
 .para[data-para="145"] .col[data-col="147"] .col-text .bit.indent { padding-left:2em }
@@ -333,10 +334,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="145"] .col[data-col="147"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="145"] .col[data-col="147"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="145"] .col[data-col="147"] a.ref{white-space:nowrap}
-.para[data-para="149"] .col[data-col="683"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="149"] .col[data-col="683"] .col-text, .para[data-para="149"] .col[data-col="683"] .col-text .bit { line-height:1.2 }
+.para[data-para="149"] .col[data-col="683"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="149"] .col[data-col="683"] .col-text, .para[data-para="149"] .col[data-col="683"] .col-text .bit { line-height:1.3 }
 .para[data-para="149"] .col[data-col="683"] .col-text { gap:0 }
-.para[data-para="149"] .col[data-col="683"] .col-text .bit { margin:0 0 7px }
+.para[data-para="149"] .col[data-col="683"] .col-text .bit { margin:0 0 10px }
 .para[data-para="149"] .col[data-col="683"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="149"] .col[data-col="683"] .col-text .bit { padding-left:0em }
 .para[data-para="149"] .col[data-col="683"] .col-text .bit.indent { padding-left:2em }
@@ -345,10 +346,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="149"] .col[data-col="683"] .col-text .bit.bullet::before, .para[data-para="149"] .col[data-col="683"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="149"] .col[data-col="683"] .col-text .bit.indent.bullet::before, .para[data-para="149"] .col[data-col="683"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="149"] .col[data-col="683"]{align-self:center}
-.para[data-para="149"] .col[data-col="684"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="149"] .col[data-col="684"] .col-text, .para[data-para="149"] .col[data-col="684"] .col-text .bit { line-height:1.2 }
+.para[data-para="149"] .col[data-col="684"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="149"] .col[data-col="684"] .col-text, .para[data-para="149"] .col[data-col="684"] .col-text .bit { line-height:1.3 }
 .para[data-para="149"] .col[data-col="684"] .col-text { gap:0 }
-.para[data-para="149"] .col[data-col="684"] .col-text .bit { margin:0 0 5px }
+.para[data-para="149"] .col[data-col="684"] .col-text .bit { margin:0 0 10px }
 .para[data-para="149"] .col[data-col="684"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="149"] .col[data-col="684"] .col-text .bit { padding-left:0em }
 .para[data-para="149"] .col[data-col="684"] .col-text .bit.indent { padding-left:2em }
@@ -362,10 +363,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="149"] .col[data-col="684"] .fn-keep{display:block;white-space:nowrap}
 .para[data-para="149"] .col[data-col="684"] .bit .fn-keep+.fn-keep{margin-top:var(--para-gap,0px)}
 .para[data-para="149"] .col[data-col="684"] a.ref{white-space:nowrap}
-.para[data-para="153"] .col[data-col="686"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#000000; background:transparent; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.2; --para-gap:7px }
-.para[data-para="153"] .col[data-col="686"] .col-text, .para[data-para="153"] .col[data-col="686"] .col-text .bit { line-height:1.2 }
+.para[data-para="153"] .col[data-col="686"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; padding:5px; margin-top:0px; margin-bottom:0px; text-align:left; line-height:1.3; --para-gap:10px }
+.para[data-para="153"] .col[data-col="686"] .col-text, .para[data-para="153"] .col[data-col="686"] .col-text .bit { line-height:1.3 }
 .para[data-para="153"] .col[data-col="686"] .col-text { gap:0 }
-.para[data-para="153"] .col[data-col="686"] .col-text .bit { margin:0 0 7px }
+.para[data-para="153"] .col[data-col="686"] .col-text .bit { margin:0 0 10px }
 .para[data-para="153"] .col[data-col="686"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="153"] .col[data-col="686"] .col-text .bit { padding-left:0em }
 .para[data-para="153"] .col[data-col="686"] .col-text .bit.indent { padding-left:2em }
@@ -374,10 +375,10 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .para[data-para="153"] .col[data-col="686"] .col-text .bit.bullet::before, .para[data-para="153"] .col[data-col="686"] .col-text .bit.numbered::before { left:0em }
 .para[data-para="153"] .col[data-col="686"] .col-text .bit.indent.bullet::before, .para[data-para="153"] .col[data-col="686"] .col-text .bit.indent.numbered::before { left:2em }
 .para[data-para="153"] .col[data-col="686"]{align-self:center}
-.para[data-para="153"] .col[data-col="155"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:#1b3a4b; background:transparent; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.2; --para-gap:5px }
-.para[data-para="153"] .col[data-col="155"] .col-text, .para[data-para="153"] .col[data-col="155"] .col-text .bit { line-height:1.2 }
+.para[data-para="153"] .col[data-col="155"] { font-family:Georgia, serif; font-size:calc(18px * var(--ew-font, 1)); font-weight:400; font-style:normal; color:black; background:white; border-style:solid; border-color:#919191; border-width:0px 0px 0px 1.0px; padding:0px; margin-top:0px; margin-bottom:0px; text-align:center; line-height:1.3; --para-gap:10px }
+.para[data-para="153"] .col[data-col="155"] .col-text, .para[data-para="153"] .col[data-col="155"] .col-text .bit { line-height:1.3 }
 .para[data-para="153"] .col[data-col="155"] .col-text { gap:0 }
-.para[data-para="153"] .col[data-col="155"] .col-text .bit { margin:0 0 5px }
+.para[data-para="153"] .col[data-col="155"] .col-text .bit { margin:0 0 10px }
 .para[data-para="153"] .col[data-col="155"] .col-text .bit:last-child { margin-bottom:0 }
 .para[data-para="153"] .col[data-col="155"] .col-text .bit { padding-left:0em }
 .para[data-para="153"] .col[data-col="155"] .col-text .bit.indent { padding-left:2em }
@@ -399,11 +400,11 @@ body, button, input, select, textarea { font-family:Georgia, serif }
 .fn{text-decoration:none!important}
 a.ref .fn,.col-footnotes .fn{text-decoration:none!important;display:inline-block;position:relative;white-space:pre}
 a.ref, .col a.ref, .col-text a.ref, .para a.ref { color:var(--title); font-family:inherit; font-size:inherit; font-weight:inherit; font-style:inherit; text-decoration:underline; white-space:normal; overflow-wrap:anywhere }
-html, body { background:#e9ebe6 !important }
-.page-frame { background:#f6f7eb }
+html, body { background:white !important }
+.page-frame { background:white }
 .stick-top { background:transparent }
 .tab-dock { background:transparent }
-.page-frame{max-width:none;width:auto;margin:1.25rem;border:1px solid #9aa8ae;box-sizing:border-box}
+.page-frame{max-width:none;width:auto;margin:1.25rem;border:0;box-sizing:border-box}
 @media (min-width:1040px){.page-frame{max-width:1000px;margin-left:auto;margin-right:auto}}
 .top,.title-bar,.tab-dock,.tab-dock-end,.end-sub-tabs,main{max-width:none;margin-left:0;margin-right:0;padding-left:1.2rem;padding-right:1.2rem;box-sizing:border-box}
 .top{display:block;border:0;padding-left:0;padding-right:0}
@@ -413,7 +414,7 @@ html, body { background:#e9ebe6 !important }
 .top .brand-row{display:grid;grid-template-columns:minmax(0,1fr);align-items:center;width:100%;max-width:none;margin:0;padding:0 7.5rem;box-sizing:border-box}
 .title-bar{padding-left:0;padding-right:0}
 .title-bar-inner{display:flex;align-items:center;justify-content:center;padding-left:1.2rem;padding-right:1.2rem;padding-top:0;padding-bottom:0;box-sizing:border-box}
-.page-nav-bar{display:flex;justify-content:space-between;align-items:center;width:100%;box-sizing:border-box;padding:0.28rem 1.6rem;background:#fff}
+.page-nav-bar{display:flex;justify-content:space-between;align-items:center;width:100%;box-sizing:border-box;padding:0.28rem 1.6rem;background:white}
 .ew-mark{position:absolute;left:0;top:0;bottom:0;display:flex;align-items:stretch;z-index:2;gap:0.45rem;max-height:100%;overflow:hidden;padding-left:1.2rem;text-align:left;box-sizing:border-box}
 .ew-mark img{display:block;height:100%;width:auto;max-height:100%;min-height:0;min-width:0;object-fit:contain;object-position:left center;flex:0 1 auto}
 .ew-words{font-size:calc(18px * var(--ew-font, 1));text-align:left;align-items:flex-start;align-self:center;justify-content:center}
@@ -731,7 +732,9 @@ html.ew-phone .who .site {
 /* "html" lifts these above the defaults bible.js adds while the page runs. */
 html #ew-info-modal .ew-info-title, html #ew-info-modal .ew-info-x, html #ew-text-modal .ew-text-title { color: var(--title, #005eb8); }
 </style>
-
+  <style id="ew-look">header.top,.head-banners,.page-nav-bar,.stick-top{background:white!important}
+.head-banners{border-bottom:1px solid #e3e8ec}
+</style>
 <!-- Google tag (gtag.js) -->
 <script>
 (function(){
@@ -776,15 +779,15 @@ html #ew-info-modal .ew-info-title, html #ew-info-modal .ew-info-x, html #ew-tex
     <div class="tab-panel" id="s0" data-sec="687"><div class="describe-contents contents-wrap"><div class="describe-line"><a href="index.html#s1">Home</a><div class="describe-note"></div></div><div class="describe-line"><a href="1-paradise-of-god-restored.html#s1">1. Paradise of God: Restored</a><div class="describe-note">God dwelt with Mankind until they rebelled. He will dwell in Paradise with us again.</div></div><div class="describe-line"><a href="2-sons-of-god-family-of-yahweh.html#s1" class="here">2. Sons of God: Family of Yahweh</a><div class="describe-note">Creation is waiting for God&#x27;s sons to reign over the nations.</div></div><div class="describe-line"><a href="3-feasts-of-god-timing-of-yahweh.html#s1">3. Feasts of God: Timing of Yahweh</a><div class="describe-note">The 8 Feasts of Yahweh prophesy the Day of the LORD, God Almighty</div></div><div class="describe-line"><a href="4-the-kingdom-of-god-fall-and-rise.html#s1">4. The Kingdom of God: Fall and Rise</a><div class="describe-note">God&#x27;s Kingdom: Lost and Restored - What fell down will be raised up.</div></div><div class="describe-line"><a href="5-wickedness-is-to-be-wiped-out.html#s1">5. Wickedness is to be Wiped Out!</a><div class="describe-note">God promised His family no sin or sorrow. He&#x27;s sending His Son to finish the job.</div></div><div class="describe-line"><a href="6-abraham-inherits-the-world.html#s0">6. Abraham Inherits the World</a><div class="describe-note">Yahweh chooses Abraham to father His nation from which his seed reigns over the world.</div></div></div></div><div class="tab-panel active" id="s1" data-sec="688"><div class="subsec" data-heading="662"><h2 class="edit-heading" data-heading="662">Two families of the sons of God</h2><div class="subsec-frame" data-heading="662"><div class="row-block" data-para="659"><div class="para" data-para="659"><div class="col" data-col="660" style="flex:1.0 1 0"><div class="col-text"><span class="bit">This page tells the story of God&#x27;s family, from the beginning of the Bible to the end. The Bible uses the phrase <span class="ew-term" tabindex="0" role="button" data-title="Sons of God" data-body="In the Old Testament, the sons of God are heavenly beings who stand before God.
 Job 1:6 Job 38:7
 In the New Testament, the same title is given to all who believe in Christ.
-Gal 3:26">sons of God</span> for two groups. The first group is heavenly beings who stand in God&#x27;s presence.<span class="fn"> <span class="fn">1</span> </span>The second group is people on earth whom God takes as His own children.<span class="fn"> <span class="fn">2</span> </span>The story follows both groups. Some of the heavenly sons of God rebel, the first son of God on earth falls, and God then works through history to gather a family that will live with Him forever.</span><span class="bit">Before God made the world, God had already chosen a people to become His sons.<span class="fn"> <span class="fn">3</span> </span>When God laid the foundations of the earth, the heavenly sons of God shouted for joy.<span class="fn"> <span class="fn">4</span> </span>God then formed the first man, Adam, and the Gospel of Luke calls Adam a son of God.<span class="fn"> <span class="fn">5</span> </span>So God had one family of sons in heaven and the beginning of another on earth. God&#x27;s plan was to bring His whole family in heaven and on earth together under Christ.<span class="fn"> <span class="fn">6</span> </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="661" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Job 1:6">Job 1:6</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gal 3:26">Gal 3:26</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Eph 1:4-5">Eph 1:4-5</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Job 38:4-7">Job 38:4-7</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Luk 3:38">Luk 3:38</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Eph 1:10">Eph 1:10</a></span></div></div></div></div></div></div><div class="subsec" data-heading="667"><h2 class="edit-heading" data-heading="667">Eden: a son of God and the serpent rebel</h2><div class="subsec-frame" data-heading="667"><div class="row-block" data-para="664"><div class="para" data-para="664"><div class="col" data-col="665" style="flex:1.0 1 0"><div class="col-text"><span class="bit">God, whose personal name is Yahweh, placed Adam in a garden called Eden to work it and look after it.<span class="fn"> <span class="fn">1</span>  </span>A <span class="ew-term" tabindex="0" role="button" data-title="The serpent" data-body="The Hebrew word for serpent is nachash. Genesis says the serpent was more cunning than any beast of the field. Revelation names it that serpent of old, called the Devil and Satan.
-Gen 3:1 Rev 12:9">serpent</span> in the garden contradicted God and told the woman, Eve, that eating the fruit of the one forbidden tree would make her like God. Eve ate the fruit, Adam ate it too, and both of them hid from Yahweh God.<span class="fn"> <span class="fn">2</span>  </span>Yahweh sent Adam and Eve out of the garden, and heavenly guards called <span class="ew-term" tabindex="0" role="button" data-title="Cherubim" data-body="Cherubim are heavenly beings who guard the presence of God. Later, two golden cherubim were set over the mercy seat in the tabernacle.
-Exo 25:18-22">cherubim</span> blocked the way back to the tree of life.<span class="fn"> <span class="fn">3</span>  </span>So the first son of God on earth lost his home with God.</span><span class="bit">Yahweh did not leave the matter there. Yahweh told the serpent that a <span class="ew-term" tabindex="0" role="button" data-title="Seed" data-body="Seed means a descendant. In Genesis 3:15 the NKJV prints Seed with a capital S because it reads the promise as pointing to one Person. Paul says the Seed promised to Abraham is Christ.
-Gen 3:15 Gal 3:16">Seed</span>, a descendant of the woman, would one day crush the serpent&#x27;s head, while the serpent would wound the Seed&#x27;s heel.<span class="fn"> <span class="fn">4</span>  </span>The book of Revelation later names the serpent as the Devil, also called Satan.<span class="fn"> <span class="fn">5</span>  </span>The apostle Paul says the promised Seed is Christ, who was born of a woman.<span class="fn"> <span class="fn">6</span>  </span>Genesis itself does not name the Seed, so the reader has to wait for the rest of the story.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="666" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 2:15">Gen 2:15</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gen 3:5-8">Gen 3:5-8</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Gen 3:23-24">Gen 3:23-24</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Gen 3:15">Gen 3:15</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Rev 12:9">Rev 12:9</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Gal 3:16">Gal 3:16</a> <a class="ref" href="#ref" data-ref="Gal 4:4">Gal 4:4</a></span></div></div></div></div></div></div><div class="subsec" data-heading="671"><h2 class="edit-heading" data-heading="671">The Flood: the sons of God rebel</h2><div class="subsec-frame" data-heading="671"><div class="row-block" data-para="668"><div class="para" data-para="668"><div class="col" data-col="669" style="flex:1.0 1 0"><div class="col-text"><span class="bit">As the number of people on earth grew, the heavenly sons of God saw the daughters of men and took any of them they wanted as wives.<span class="fn"> <span class="fn">1</span>  </span>Genesis tells this in only a few words. The apostle Peter adds that some angels sinned and that God cast those angels down into darkness to wait for judgement.<span class="fn"> <span class="fn">2</span>  </span>Jude adds that some angels left the place God had given them.<span class="fn"> <span class="fn">3</span>  </span>Neither Peter nor Jude names Genesis 6, so linking their words to Genesis 6 is a conclusion drawn from the verses. In those days giants lived on the earth, and Yahweh saw that people thought about nothing but evil, all the time.<span class="fn"> <span class="fn">4</span>  </span>God sent a great flood on the world that had turned against Him, but God saved Noah and his family.<span class="fn"> <span class="fn">5</span> </span></span><span class="bit ew-info" contenteditable="false" role="button" tabindex="0" aria-expanded="false" data-label="Who are the sons of God?"><span class="ew-info-mark" aria-hidden="true">ⓘ</span> Who are the sons of God?</span><span class="bit">In Job the phrase sons of God is used of heavenly beings.<br><a class="ref" href="#ref" data-ref="Job 1:6">Job 1:6</a> <a class="ref" href="#ref" data-ref="Job 2:1">Job 2:1</a> <a class="ref" href="#ref" data-ref="Job 38:7">Job 38:7</a></span><span class="bit">Genesis 6 uses it of those who took wives from the daughters of men. Many Christians read these sons of God as men of Seth’s line instead.<br><a class="ref" href="#ref" data-ref="Gen 6:2">Gen 6:2</a> <a class="ref" href="#ref" data-ref="Gen 6:4">Gen 6:4</a></span><span class="bit">In Deuteronomy 32:8 the ESV follows a Dead Sea Scroll and the Septuagint. It says God fixed the borders of the nations according to the number of the sons of God.<br><a class="ref" href="#ref" data-ref="Deu 32:8">Deu 32:8</a></span><span class="bit">In the New Testament the title belongs to those led by the Spirit and to all who believe.<br><a class="ref" href="#ref" data-ref="Rom 8:14">Rom 8:14</a> <a class="ref" href="#ref" data-ref="Gal 3:26">Gal 3:26</a></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="670" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 6:1-2">Gen 6:1-2</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="2Pe 2:4">2Pe 2:4</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Jude 6">Jude 6</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Gen 6:4-5">Gen 6:4-5</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="2Pe 2:5">2Pe 2:5</a></span></div></div></div></div></div></div><div class="subsec" data-heading="132"><h2 class="edit-heading" data-heading="132">Babel: the nations are given to the sons of God</h2><div class="subsec-frame" data-heading="132"><div class="row-block" data-para="672"><div class="para" data-para="672"><div class="col" data-col="673" style="flex:1.0 1 0"><div class="col-text"><span class="bit">After the Flood, people gathered on a plain and began to build a city with a tower, so that they could make a name for themselves.<span class="fn"> <span class="fn">1</span>  </span>Yahweh confused their language so that they could no longer understand one another, and Yahweh scattered them over the whole earth.<span class="fn"> <span class="fn">2</span>  </span>Moses later sang that the <span class="ew-term" tabindex="0" role="button" data-title="Most High" data-body="Most High is a title of God as ruler over all nations and all powers.
-Gen 14:19 Dan 4:17">Most High</span> gave each scattered nation its land and set the borders of the nations by the number of the sons of God, but Yahweh kept the people of Jacob, Israel, as His own.<span class="fn"> <span class="fn">3</span>  </span>The ESV, an English translation, reads &quot;sons of God&quot; in this verse, following a Dead Sea Scroll and the Septuagint, an ancient Greek translation of the Old Testament. The NKJV follows the standard Hebrew text, which reads &quot;children of Israel&quot;. Moses warned Israel not to worship the <span class="ew-term" tabindex="0" role="button" data-title="Host of heaven" data-body="The host of heaven is the sun, moon and stars, and the heavenly powers linked with them, which the nations worshipped.
-Deu 4:19 Deu 17:3">host of heaven</span>, which Yahweh had given to the other nations.<span class="fn"> <span class="fn">4</span>  </span>So the other nations were handed over to lesser powers, and only Israel was kept as Yahweh&#x27;s own. Later in the story the nations are brought back.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="674" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 11:4">Gen 11:4</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gen 11:9">Gen 11:9</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Deu 32:8-9">Deu 32:8-9</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Deu 4:19">Deu 4:19</a></span></div></div></div></div></div></div><div class="subsec" data-heading="676"><h2 class="edit-heading" data-heading="676">God creates His own nation of sons</h2><div class="subsec-frame" data-heading="676"><div class="row-block" data-para="133"><div class="para" data-para="133"><div class="col" data-col="675" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Yahweh then began to build a family of sons on earth. Yahweh called a man named Abraham and promised that every family on earth would be blessed through him.<span class="fn"> <span class="fn">1</span>  </span>Abraham&#x27;s descendants became the nation of Israel. After Israel had been slaves in Egypt, Yahweh brought them out and told them that they would be His own treasured people and a nation of priests,<span class="fn"> <span class="fn">2</span> </span>a people who worshipped no other god.<span class="fn"> <span class="fn">3</span>  </span>Even so, Israel turned away from Yahweh and offered sacrifices, animals killed as gifts of worship, to demons and to foreign gods.<span class="fn"> <span class="fn">4</span>  </span>Because of this, the glory of Yahweh, the visible sign of His presence, left the temple in Jerusalem.<span class="fn"> <span class="fn">5</span>  </span>The northern kingdom of Israel was taken captive to Assyria,<span class="fn"> <span class="fn">6</span> </span>and the southern kingdom of Judah was later taken captive to Babylon.<span class="fn"> <span class="fn">7</span>  </span>God&#x27;s family of sons on earth had failed, just as Adam had failed.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="135" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 12:1-3">Gen 12:1-3</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Exo 19:5-6">Exo 19:5-6</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Exo 20:3">Exo 20:3</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Deu 32:17">Deu 32:17</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Ezk 10:18">Ezk 10:18</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="2Ki 17:6">2Ki 17:6</a></span><span class="bit"><span class="fn">7 </span><a class="ref" href="#ref" data-ref="2Ki 25:11">2Ki 25:11</a></span></div></div></div></div></div></div><div class="subsec" data-heading="679"><h2 class="edit-heading" data-heading="679">The sons of God are judged</h2><div class="subsec-frame" data-heading="679"><div class="row-block" data-para="137"><div class="para" data-para="137"><div class="col" data-col="677" style="flex:1.0 1 0"><div class="col-text"><span class="bit">While God&#x27;s sons on earth failed, the heavenly powers over the nations failed too. Psalm 82 describes a scene in heaven. God takes His place in the <span class="ew-term" tabindex="0" role="button" data-title="Congregation of the mighty" data-body="The ESV translates this phrase as the divine council. It is God’s assembly of heavenly beings, the gods (elohim) whom God judges.
-Psa 82:1 Psa 82:6">congregation of the mighty</span>, an assembly of heavenly beings, and judges the gods there.<span class="fn"> <span class="fn">1</span>  </span>The word for God here is Elohim in Hebrew, not Yahweh. God calls these gods sons of the Most High, yet tells them that they will die like men. The psalm ends by asking God to rise up and judge the earth, because all the nations belong to God.<span class="fn"> <span class="fn">2</span>  </span>So the heavenly sons of God who were given the nations at Babel will lose them, and the nations will return to God.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="678" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Psa 82:1">Psa 82:1</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Psa 82:6-8">Psa 82:6-8</a></span></div></div></div></div></div></div><div class="subsec" data-heading="144"><h2 class="edit-heading" data-heading="144">The Son of God brings many sons</h2><div class="subsec-frame" data-heading="144"><div class="row-block" data-para="680"><div class="para" data-para="680"><div class="col" data-col="681" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Then the promised Seed came. The Son of God was born as a human being, and people saw His glory as the Father&#x27;s only Son.<span class="fn"> <span class="fn">1</span>  </span>This Son is Jesus, also called Christ, a title that means the anointed one, the King God had promised. God&#x27;s aim was to bring many sons to glory. God made Jesus perfect through suffering, and Jesus is glad to call those sons His brothers.<span class="fn"> <span class="fn">2</span>  </span>The Son of God came to undo the Devil&#x27;s work.<span class="fn"> <span class="fn">3</span>  </span>When Jesus died on the cross, He stripped the ruling spiritual powers of their weapons.<span class="fn"> <span class="fn">4</span>  </span>The serpent&#x27;s end is now certain. God will soon crush Satan under the feet of God&#x27;s people,<span class="fn"> <span class="fn">5</span> </span>and the Devil will finally be thrown into the lake of fire.<span class="fn"> <span class="fn">6</span>  </span>The promise made in Eden, that the Seed would crush the serpent&#x27;s head, is being kept.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="143" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Jhn 1:14">Jhn 1:14</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Heb 2:10-11">Heb 2:10-11</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="1Jn 3:8">1Jn 3:8</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Col 2:15">Col 2:15</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Rom 16:20">Rom 16:20</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Rev 20:10">Rev 20:10</a></span></div></div></div></div></div></div><div class="subsec" data-heading="148"><h2 class="edit-heading" data-heading="148">Adopted sons of God</h2><div class="subsec-frame" data-heading="148"><div class="row-block" data-para="145"><div class="para" data-para="145"><div class="col" data-col="682" style="flex:1.0 1 0"><div class="col-text"><span class="bit">What Adam lost, Christ gives back. Everyone who receives Christ is given the right to become a child of God.<span class="fn"> <span class="fn">1</span>  </span>All who believe are sons of God through faith in Christ Jesus, and in Christ it makes no difference whether a person is a Jew or a Greek.<span class="fn"> <span class="fn">2</span>  </span>This includes you, the reader. The Father loves His people so much that He calls them His children.<span class="fn"> <span class="fn">3</span>  </span>God&#x27;s Holy Spirit makes believers God&#x27;s adopted children, so believers call God <span class="ew-term" tabindex="0" role="button" data-title="Abba" data-body="Abba is Aramaic for Father. Jesus prayed ‘Abba, Father’ in Gethsemane.
-Mrk 14:36">Abba</span>, which means Father. As God&#x27;s children, believers will also inherit what God has promised.<span class="fn"> <span class="fn">4</span>  </span>God marks believers with the promised Holy Spirit, who guarantees that inheritance.<span class="fn"> <span class="fn">5</span>  </span>Until Christ returns, believers struggle against <span class="ew-term" tabindex="0" role="button" data-title="Principalities and powers" data-body="Principalities and powers are ranks of spiritual rulers in the heavenly places. Christ disarmed them at the Cross.
-Col 2:15">principalities and powers</span>, the rebel rulers in the heavenly places.<span class="fn"> <span class="fn">6</span>  </span>Yet none of these powers can cut believers off from God&#x27;s love in Christ Jesus.<span class="fn"> <span class="fn">7</span> </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="147" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Jhn 1:12">Jhn 1:12</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gal 3:26-28">Gal 3:26-28</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="1Jn 3:1">1Jn 3:1</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Rom 8:15-17">Rom 8:15-17</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Eph 1:13-14">Eph 1:13-14</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Eph 6:12">Eph 6:12</a></span><span class="bit"><span class="fn">7 </span><a class="ref" href="#ref" data-ref="Rom 8:38-39">Rom 8:38-39</a></span></div></div></div></div></div></div><div class="subsec" data-heading="685"><h2 class="edit-heading" data-heading="685">The revealing of the sons of God</h2><div class="subsec-frame" data-heading="685"><div class="row-block" data-para="149"><div class="para" data-para="149"><div class="col" data-col="683" style="flex:1.0 1 0"><div class="col-text"><span class="bit">The adopted sons of God are not yet seen for who they are. All creation is waiting eagerly for the day when God reveals His sons.<span class="fn"> <span class="fn">1</span>  </span>When Christ appears, believers will be like Christ.<span class="fn"> <span class="fn">2</span>  </span>Those who stayed faithful to Christ will live and reign with Him.<span class="fn"> <span class="fn">3</span>  </span>The prophet Daniel saw that God would give the kingdom to His holy people.<span class="fn"> <span class="fn">4</span>  </span>God gave Adam rule over the earth, and Adam lost it.<span class="fn"> <span class="fn">5</span>  </span>Now the sons of God in Christ receive the kingdom.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="684" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Rom 8:19">Rom 8:19</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="1Jn 3:2">1Jn 3:2</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Rev 20:4">Rev 20:4</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Dan 7:27">Dan 7:27</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Gen 1:28">Gen 1:28</a></span></div></div></div></div></div></div><div class="subsec" data-heading="156"><h2 class="edit-heading" data-heading="156">One family of the sons of God</h2><div class="subsec-frame" data-heading="156"><div class="row-block" data-para="153"><div class="para" data-para="153"><div class="col" data-col="686" style="flex:1.0 1 0"><div class="col-text"><span class="bit">The story ends where God always meant it to end. God makes His home with His people on a renewed earth,<span class="fn"> <span class="fn">1</span> </span>and His people see His face.<span class="fn"> <span class="fn">2</span>  </span>The tree of life, which Adam lost in Eden, stands again in God&#x27;s garden, called Paradise.<span class="fn"> <span class="fn">3</span>  </span>God&#x27;s whole family in heaven and on earth takes its name from God,<span class="fn"> <span class="fn">4</span> </span>and that family is gathered into one in Christ, just as God planned before the world began.<span class="fn"> <span class="fn">5</span> </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="155" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Rev 21:1-3">Rev 21:1-3</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Rev 22:4">Rev 22:4</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Rev 2:7">Rev 2:7</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Eph 3:15">Eph 3:15</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Eph 1:10">Eph 1:10</a></span></div></div></div></div></div></div></div>
+Gal 3:26">sons of God</span> for two groups. The first group is heavenly beings who stand in God&#x27;s presence.<span class="fn"> 1 </span>The second group is people on earth whom God takes as His own children.<span class="fn"> 2 </span>The story follows both groups. Some of the heavenly sons of God rebel, the first son of God on earth falls, and God then works through history to gather a family that will live with Him forever.</span><span class="bit">Before God made the world, God had already chosen a people to become His sons.<span class="fn"> 3 </span>When God laid the foundations of the earth, the heavenly sons of God shouted for joy.<span class="fn"> 4 </span>God then formed the first man, Adam, and the Gospel of Luke calls Adam a son of God.<span class="fn"> 5 </span>So God had one family of sons in heaven and the beginning of another on earth. God&#x27;s plan was to bring His whole family in heaven and on earth together under Christ.<span class="fn"> 6 </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="661" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Job 1:6">Job 1:6</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gal 3:26">Gal 3:26</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Eph 1:4-5">Eph 1:4-5</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Job 38:4-7">Job 38:4-7</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Luk 3:38">Luk 3:38</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Eph 1:10">Eph 1:10</a></span></div></div></div></div></div></div><div class="subsec" data-heading="667"><h2 class="edit-heading" data-heading="667">Eden: a son of God and the serpent rebel</h2><div class="subsec-frame" data-heading="667"><div class="row-block" data-para="664"><div class="para" data-para="664"><div class="col" data-col="665" style="flex:1.0 1 0"><div class="col-text"><span class="bit">God, whose personal name is Yahweh, placed Adam in a garden called Eden to work it and look after it.<span class="fn"> 1  </span>A <span class="ew-term" tabindex="0" role="button" data-title="The serpent" data-body="The Hebrew word for serpent is nachash. Genesis says the serpent was more cunning than any beast of the field. Revelation names it that serpent of old, called the Devil and Satan.
+Gen 3:1 Rev 12:9">serpent</span> in the garden contradicted God and told the woman, Eve, that eating the fruit of the one forbidden tree would make her like God. Eve ate the fruit, Adam ate it too, and both of them hid from Yahweh God.<span class="fn"> 2  </span>Yahweh sent Adam and Eve out of the garden, and heavenly guards called <span class="ew-term" tabindex="0" role="button" data-title="Cherubim" data-body="Cherubim are heavenly beings who guard the presence of God. Later, two golden cherubim were set over the mercy seat in the tabernacle.
+Exo 25:18-22">cherubim</span> blocked the way back to the tree of life.<span class="fn"> 3  </span>So the first son of God on earth lost his home with God.</span><span class="bit">Yahweh did not leave the matter there. Yahweh told the serpent that a <span class="ew-term" tabindex="0" role="button" data-title="Seed" data-body="Seed means a descendant. In Genesis 3:15 the NKJV prints Seed with a capital S because it reads the promise as pointing to one Person. Paul says the Seed promised to Abraham is Christ.
+Gen 3:15 Gal 3:16">Seed</span>, a descendant of the woman, would one day crush the serpent&#x27;s head, while the serpent would wound the Seed&#x27;s heel.<span class="fn"> 4  </span>The book of Revelation later names the serpent as the Devil, also called Satan.<span class="fn"> 5  </span>The apostle Paul says the promised Seed is Christ, who was born of a woman.<span class="fn"> 6  </span>Genesis itself does not name the Seed, so the reader has to wait for the rest of the story.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="666" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 2:15">Gen 2:15</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gen 3:5-8">Gen 3:5-8</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Gen 3:23-24">Gen 3:23-24</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Gen 3:15">Gen 3:15</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Rev 12:9">Rev 12:9</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Gal 3:16">Gal 3:16</a> <a class="ref" href="#ref" data-ref="Gal 4:4">Gal 4:4</a></span></div></div></div></div></div></div><div class="subsec" data-heading="671"><h2 class="edit-heading" data-heading="671">The Flood: the sons of God rebel</h2><div class="subsec-frame" data-heading="671"><div class="row-block" data-para="668"><div class="para" data-para="668"><div class="col" data-col="669" style="flex:1.0 1 0"><div class="col-text"><span class="bit">As the number of people on earth grew, the heavenly sons of God saw the daughters of men and took any of them they wanted as wives.<span class="fn"> 1  </span>Genesis tells this in only a few words. The apostle Peter adds that some angels sinned and that God cast those angels down into darkness to wait for judgement.<span class="fn"> 2  </span>Jude adds that some angels left the place God had given them.<span class="fn"> 3  </span>Neither Peter nor Jude names Genesis 6, so linking their words to Genesis 6 is a conclusion drawn from the verses. In those days giants lived on the earth, and Yahweh saw that people thought about nothing but evil, all the time.<span class="fn"> 4  </span>God sent a great flood on the world that had turned against Him, but God saved Noah and his family.<span class="fn"> 5 </span></span><span class="bit ew-info" contenteditable="false" role="button" tabindex="0" aria-expanded="false" data-label="Who are the sons of God?"><span class="ew-info-mark" aria-hidden="true">ⓘ</span> Who are the sons of God?</span><span class="bit">In Job the phrase sons of God is used of heavenly beings.<br><a class="ref" href="#ref" data-ref="Job 1:6">Job 1:6</a> <a class="ref" href="#ref" data-ref="Job 2:1">Job 2:1</a> <a class="ref" href="#ref" data-ref="Job 38:7">Job 38:7</a></span><span class="bit">Genesis 6 uses it of those who took wives from the daughters of men. Many Christians read these sons of God as men of Seth’s line instead.<br><a class="ref" href="#ref" data-ref="Gen 6:2">Gen 6:2</a> <a class="ref" href="#ref" data-ref="Gen 6:4">Gen 6:4</a></span><span class="bit">In Deuteronomy 32:8 the ESV follows a Dead Sea Scroll and the Septuagint. It says God fixed the borders of the nations according to the number of the sons of God.<br><a class="ref" href="#ref" data-ref="Deu 32:8">Deu 32:8</a></span><span class="bit">In the New Testament the title belongs to those led by the Spirit and to all who believe.<br><a class="ref" href="#ref" data-ref="Rom 8:14">Rom 8:14</a> <a class="ref" href="#ref" data-ref="Gal 3:26">Gal 3:26</a></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="670" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 6:1-2">Gen 6:1-2</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="2Pe 2:4">2Pe 2:4</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Jude 6">Jude 6</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Gen 6:4-5">Gen 6:4-5</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="2Pe 2:5">2Pe 2:5</a></span></div></div></div></div></div></div><div class="subsec" data-heading="132"><h2 class="edit-heading" data-heading="132">Babel: the nations are given to the sons of God</h2><div class="subsec-frame" data-heading="132"><div class="row-block" data-para="672"><div class="para" data-para="672"><div class="col" data-col="673" style="flex:1.0 1 0"><div class="col-text"><span class="bit">After the Flood, people gathered on a plain and began to build a city with a tower, so that they could make a name for themselves.<span class="fn"> 1  </span>Yahweh confused their language so that they could no longer understand one another, and Yahweh scattered them over the whole earth.<span class="fn"> 2  </span>Moses later sang that the <span class="ew-term" tabindex="0" role="button" data-title="Most High" data-body="Most High is a title of God as ruler over all nations and all powers.
+Gen 14:19 Dan 4:17">Most High</span> gave each scattered nation its land and set the borders of the nations by the number of the sons of God, but Yahweh kept the people of Jacob, Israel, as His own.<span class="fn"> 3  </span>The ESV, an English translation, reads &quot;sons of God&quot; in this verse, following a Dead Sea Scroll and the Septuagint, an ancient Greek translation of the Old Testament. The NKJV follows the standard Hebrew text, which reads &quot;children of Israel&quot;. Moses warned Israel not to worship the <span class="ew-term" tabindex="0" role="button" data-title="Host of heaven" data-body="The host of heaven is the sun, moon and stars, and the heavenly powers linked with them, which the nations worshipped.
+Deu 4:19 Deu 17:3">host of heaven</span>, which Yahweh had given to the other nations.<span class="fn"> 4  </span>So the other nations were handed over to lesser powers, and only Israel was kept as Yahweh&#x27;s own. Later in the story the nations are brought back.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="674" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 11:4">Gen 11:4</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gen 11:9">Gen 11:9</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Deu 32:8-9">Deu 32:8-9</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Deu 4:19">Deu 4:19</a></span></div></div></div></div></div></div><div class="subsec" data-heading="676"><h2 class="edit-heading" data-heading="676">God creates His own nation of sons</h2><div class="subsec-frame" data-heading="676"><div class="row-block" data-para="133"><div class="para" data-para="133"><div class="col" data-col="675" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Yahweh then began to build a family of sons on earth. Yahweh called a man named Abraham and promised that every family on earth would be blessed through him.<span class="fn"> 1  </span>Abraham&#x27;s descendants became the nation of Israel. After Israel had been slaves in Egypt, Yahweh brought them out and told them that they would be His own treasured people and a nation of priests,<span class="fn"> 2 </span>a people who worshipped no other god.<span class="fn"> 3  </span>Even so, Israel turned away from Yahweh and offered sacrifices, animals killed as gifts of worship, to demons and to foreign gods.<span class="fn"> 4  </span>Because of this, the glory of Yahweh, the visible sign of His presence, left the temple in Jerusalem.<span class="fn"> 5  </span>The northern kingdom of Israel was taken captive to Assyria,<span class="fn"> 6 </span>and the southern kingdom of Judah was later taken captive to Babylon.<span class="fn"> 7  </span>God&#x27;s family of sons on earth had failed, just as Adam had failed.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="135" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Gen 12:1-3">Gen 12:1-3</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Exo 19:5-6">Exo 19:5-6</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Exo 20:3">Exo 20:3</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Deu 32:17">Deu 32:17</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Ezk 10:18">Ezk 10:18</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="2Ki 17:6">2Ki 17:6</a></span><span class="bit"><span class="fn">7 </span><a class="ref" href="#ref" data-ref="2Ki 25:11">2Ki 25:11</a></span></div></div></div></div></div></div><div class="subsec" data-heading="679"><h2 class="edit-heading" data-heading="679">The sons of God are judged</h2><div class="subsec-frame" data-heading="679"><div class="row-block" data-para="137"><div class="para" data-para="137"><div class="col" data-col="677" style="flex:1.0 1 0"><div class="col-text"><span class="bit">While God&#x27;s sons on earth failed, the heavenly powers over the nations failed too. Psalm 82 describes a scene in heaven. God takes His place in the <span class="ew-term" tabindex="0" role="button" data-title="Congregation of the mighty" data-body="The ESV translates this phrase as the divine council. It is God’s assembly of heavenly beings, the gods (elohim) whom God judges.
+Psa 82:1 Psa 82:6">congregation of the mighty</span>, an assembly of heavenly beings, and judges the gods there.<span class="fn"> 1  </span>The word for God here is Elohim in Hebrew, not Yahweh. God calls these gods sons of the Most High, yet tells them that they will die like men. The psalm ends by asking God to rise up and judge the earth, because all the nations belong to God.<span class="fn"> 2  </span>So the heavenly sons of God who were given the nations at Babel will lose them, and the nations will return to God.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="678" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Psa 82:1">Psa 82:1</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Psa 82:6-8">Psa 82:6-8</a></span></div></div></div></div></div></div><div class="subsec" data-heading="144"><h2 class="edit-heading" data-heading="144">The Son of God brings many sons</h2><div class="subsec-frame" data-heading="144"><div class="row-block" data-para="680"><div class="para" data-para="680"><div class="col" data-col="681" style="flex:1.0 1 0"><div class="col-text"><span class="bit">Then the promised Seed came. The Son of God was born as a human being, and people saw His glory as the Father&#x27;s only Son.<span class="fn"> 1  </span>This Son is Jesus, also called Christ, a title that means the anointed one, the King God had promised. God&#x27;s aim was to bring many sons to glory. God made Jesus perfect through suffering, and Jesus is glad to call those sons His brothers.<span class="fn"> 2  </span>The Son of God came to undo the Devil&#x27;s work.<span class="fn"> 3  </span>When Jesus died on the cross, He stripped the ruling spiritual powers of their weapons.<span class="fn"> 4  </span>The serpent&#x27;s end is now certain. God will soon crush Satan under the feet of God&#x27;s people,<span class="fn"> 5 </span>and the Devil will finally be thrown into the lake of fire.<span class="fn"> 6  </span>The promise made in Eden, that the Seed would crush the serpent&#x27;s head, is being kept.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="143" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Jhn 1:14">Jhn 1:14</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Heb 2:10-11">Heb 2:10-11</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="1Jn 3:8">1Jn 3:8</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Col 2:15">Col 2:15</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Rom 16:20">Rom 16:20</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Rev 20:10">Rev 20:10</a></span></div></div></div></div></div></div><div class="subsec" data-heading="148"><h2 class="edit-heading" data-heading="148">Adopted sons of God</h2><div class="subsec-frame" data-heading="148"><div class="row-block" data-para="145"><div class="para" data-para="145"><div class="col" data-col="682" style="flex:1.0 1 0"><div class="col-text"><span class="bit">What Adam lost, Christ gives back. Everyone who receives Christ is given the right to become a child of God.<span class="fn"> 1  </span>All who believe are sons of God through faith in Christ Jesus, and in Christ it makes no difference whether a person is a Jew or a Greek.<span class="fn"> 2  </span>This includes you, the reader. The Father loves His people so much that He calls them His children.<span class="fn"> 3  </span>God&#x27;s Holy Spirit makes believers God&#x27;s adopted children, so believers call God <span class="ew-term" tabindex="0" role="button" data-title="Abba" data-body="Abba is Aramaic for Father. Jesus prayed ‘Abba, Father’ in Gethsemane.
+Mrk 14:36">Abba</span>, which means Father. As God&#x27;s children, believers will also inherit what God has promised.<span class="fn"> 4  </span>God marks believers with the promised Holy Spirit, who guarantees that inheritance.<span class="fn"> 5  </span>Until Christ returns, believers struggle against <span class="ew-term" tabindex="0" role="button" data-title="Principalities and powers" data-body="Principalities and powers are ranks of spiritual rulers in the heavenly places. Christ disarmed them at the Cross.
+Col 2:15">principalities and powers</span>, the rebel rulers in the heavenly places.<span class="fn"> 6  </span>Yet none of these powers can cut believers off from God&#x27;s love in Christ Jesus.<span class="fn"> 7 </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="147" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Jhn 1:12">Jhn 1:12</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Gal 3:26-28">Gal 3:26-28</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="1Jn 3:1">1Jn 3:1</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Rom 8:15-17">Rom 8:15-17</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Eph 1:13-14">Eph 1:13-14</a></span><span class="bit"><span class="fn">6 </span><a class="ref" href="#ref" data-ref="Eph 6:12">Eph 6:12</a></span><span class="bit"><span class="fn">7 </span><a class="ref" href="#ref" data-ref="Rom 8:38-39">Rom 8:38-39</a></span></div></div></div></div></div></div><div class="subsec" data-heading="685"><h2 class="edit-heading" data-heading="685">The revealing of the sons of God</h2><div class="subsec-frame" data-heading="685"><div class="row-block" data-para="149"><div class="para" data-para="149"><div class="col" data-col="683" style="flex:1.0 1 0"><div class="col-text"><span class="bit">The adopted sons of God are not yet seen for who they are. All creation is waiting eagerly for the day when God reveals His sons.<span class="fn"> 1  </span>When Christ appears, believers will be like Christ.<span class="fn"> 2  </span>Those who stayed faithful to Christ will live and reign with Him.<span class="fn"> 3  </span>The prophet Daniel saw that God would give the kingdom to His holy people.<span class="fn"> 4  </span>God gave Adam rule over the earth, and Adam lost it.<span class="fn"> 5  </span>Now the sons of God in Christ receive the kingdom.</span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="684" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Rom 8:19">Rom 8:19</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="1Jn 3:2">1Jn 3:2</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Rev 20:4">Rev 20:4</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Dan 7:27">Dan 7:27</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Gen 1:28">Gen 1:28</a></span></div></div></div></div></div></div><div class="subsec" data-heading="156"><h2 class="edit-heading" data-heading="156">One family of the sons of God</h2><div class="subsec-frame" data-heading="156"><div class="row-block" data-para="153"><div class="para" data-para="153"><div class="col" data-col="686" style="flex:1.0 1 0"><div class="col-text"><span class="bit">The story ends where God always meant it to end. God makes His home with His people on a renewed earth,<span class="fn"> 1 </span>and His people see His face.<span class="fn"> 2  </span>The tree of life, which Adam lost in Eden, stands again in God&#x27;s garden, called Paradise.<span class="fn"> 3  </span>God&#x27;s whole family in heaven and on earth takes its name from God,<span class="fn"> 4 </span>and that family is gathered into one in Christ, just as God planned before the world began.<span class="fn"> 5 </span></span></div></div><div class="col-split col-footnotes-split" data-split="0"></div><div class="col col-footnotes" data-col="155" style="flex:0 0 auto"><div class="col-text"><span class="bit"><span class="fn">1 </span><a class="ref" href="#ref" data-ref="Rev 21:1-3">Rev 21:1-3</a></span><span class="bit"><span class="fn">2 </span><a class="ref" href="#ref" data-ref="Rev 22:4">Rev 22:4</a></span><span class="bit"><span class="fn">3 </span><a class="ref" href="#ref" data-ref="Rev 2:7">Rev 2:7</a></span><span class="bit"><span class="fn">4 </span><a class="ref" href="#ref" data-ref="Eph 3:15">Eph 3:15</a></span><span class="bit"><span class="fn">5 </span><a class="ref" href="#ref" data-ref="Eph 1:10">Eph 1:10</a></span></div></div></div></div></div></div></div>
   </main>
   <div class="tab-dock-end"><div class="tabs tabs-contents-left"><button type="button" class="tab tab-contents-left" data-tab="s0" data-sec="687">Contents</button><button type="button" class="tab active" data-tab="s1" data-sec="688">Story</button><button type="button" class="tab tab-notes" data-notes-toggle="1">Footnotes</button><button type="button" class="tab tab-settings" data-settings-open="1">Settings</button></div></div>
   
@@ -1452,7 +1455,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
   });
   apply();
 })();
-</script><script>window.ewDefaults={"notes": true}</script><script>window.ewFolder="10-Minute-Stories"</script><script>
+</script><script>window.ewDefaults={"notes": false}</script><script>window.ewFolder="10-Minute-Stories"</script><script>
 (function(){
   if (window.ewDetailsBound) return;
   window.ewDetailsBound = true;
@@ -1493,7 +1496,7 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
     setOpen(btn, !btn.classList.contains("open"));
   });
 })();
-</script><script>window.EW_GLOSSARY_SRC="glossary.json?v=52ae54a5";</script><script src="footnotes.js?v=711d126f"></script><script defer src="bible.js?v=bd830daf"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
+</script><script>window.EW_GLOSSARY_SRC="glossary.json?v=52ae54a5";</script><script src="footnotes.js?v=fe5a0771"></script><script defer src="bible.js?v=12d5bb20"></script><script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments);};</script><script defer src="/_vercel/speed-insights/script.js"></script><script>
 (function(){
   var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   var last = "";
@@ -1523,6 +1526,110 @@ window.addEventListener("load", function(){ window.scrollTo(0, 0); });
   }
   document.addEventListener("ew-page-swap", fill);
   fill();
+})();
+</script><script>
+(function(){
+  // Narrow windows (25 Nov 2026, Sir): a tab whose name wraps shrinks to its widest line; if the row still
+  // does not fit, Footnotes goes above Settings; if it still does not fit, the tabs wrap onto more rows.
+  // Nothing changes when every name fits on one line.
+  if (window.ewTabFitBound) return;
+  window.ewTabFitBound = true;
+  var d = document;
+  function px(v){ return parseFloat(v) || 0; }
+  function lines(t){
+    var r = d.createRange(), rs, rows = [], i, j, q, hit;
+    r.selectNodeContents(t);
+    rs = r.getClientRects();
+    for (i = 0; i < rs.length; i++) {
+      q = rs[i];
+      if (!q.width) continue;
+      hit = null;
+      for (j = 0; j < rows.length; j++) if (Math.abs(rows[j].top - q.top) < 2) { hit = rows[j]; break; }
+      if (hit) { hit.l = Math.min(hit.l, q.left); hit.r = Math.max(hit.r, q.right); }
+      else rows.push({ top: q.top, l: q.left, r: q.right });
+    }
+    return rows;
+  }
+  function shrink(bar){
+    for (var pass = 0; pass < 3; pass++) {
+      var changed = false;
+      bar.querySelectorAll(".tab").forEach(function(t){
+        if (t.style.width || !t.getClientRects().length) return;
+        var rows = lines(t);
+        if (rows.length < 2) return;
+        var w = 0;
+        rows.forEach(function(x){ w = Math.max(w, x.r - x.l); });
+        var cs = getComputedStyle(t);
+        var add = cs.boxSizing === "border-box" ? px(cs.paddingLeft) + px(cs.paddingRight) + px(cs.borderLeftWidth) + px(cs.borderRightWidth) : 0;
+        var nw = Math.min(Math.ceil(w + add + 1), Math.ceil(t.getBoundingClientRect().width));
+        t.style.width = nw + "px";
+        t.classList.add("tab-fit");
+        if (lines(t).length !== rows.length) { clear(t); return; }
+        changed = true;
+      });
+      if (!changed) break;
+    }
+  }
+  function clear(t){
+    t.style.width = "";
+    t.classList.remove("tab-fit");
+    if (!t.getAttribute("style")) t.removeAttribute("style");
+  }
+  function over(bar){ return bar.scrollWidth > bar.clientWidth + 1; }
+  function unfit(bar){
+    bar.querySelectorAll(".tab-fit").forEach(clear);
+  }
+  function reset(bar){
+    unfit(bar);
+    bar.classList.remove("tabs-wrap");
+    var st = bar.querySelector(":scope > .tab-stack");
+    if (st) {
+      while (st.firstChild) bar.insertBefore(st.firstChild, st);
+      bar.removeChild(st);
+    }
+  }
+  function fit(bar){
+    reset(bar);
+    if (!bar.getClientRects().length) return;
+    shrink(bar);
+    if (!over(bar)) return;
+    var n = bar.querySelector(":scope > .tab-notes"), s = bar.querySelector(":scope > .tab-settings");
+    if (n && s) {
+      var st = d.createElement("span");
+      st.className = "tab-stack";
+      bar.insertBefore(st, n);
+      st.appendChild(n);
+      st.appendChild(s);
+      unfit(bar);
+      shrink(bar);
+      if (!over(bar)) return;
+    }
+    // Keep the names wrapped as they are now, and let the tabs go onto more rows.
+    bar.classList.add("tabs-wrap");
+    shrink(bar);
+  }
+  var last = "";
+  function all(force){
+    var key = (d.documentElement.clientWidth || 0) + "|" + (d.documentElement.style.getPropertyValue("--ew-font") || "");
+    if (!force && key === last) return;
+    last = key;
+    d.querySelectorAll(".tabs").forEach(fit);
+  }
+  var queued = false;
+  function soon(force){
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(function(){ queued = false; all(force); });
+  }
+  window.addEventListener("resize", function(){ soon(false); });
+  window.addEventListener("orientationchange", function(){ soon(true); });
+  window.addEventListener("load", function(){ soon(true); });
+  d.addEventListener("ew-page-swap", function(){ soon(true); });
+  if (d.fonts && d.fonts.ready) d.fonts.ready.then(function(){ soon(true); });
+  if (window.MutationObserver) new MutationObserver(function(){ soon(false); }).observe(d.documentElement, { attributes: true, attributeFilter: ["style"] });
+  if (d.readyState === "loading") d.addEventListener("DOMContentLoaded", function(){ all(true); });
+  else all(true);
+  window.ewFitTabs = function(){ all(true); };
 })();
 </script>
 </body>
